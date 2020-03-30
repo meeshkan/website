@@ -7,6 +7,7 @@ module.exports = {
     title: `Meeshkan Website`,
     description: `The website supporting meeshkan as a project`,
     author: `@meeshkanML`,
+    siteUrl: `https://meeshkan.com`,
     ogImage: ``,
   },
   plugins: [
