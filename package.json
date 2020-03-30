@@ -1,0 +1,48 @@
+{
+  "name": "meeshkan-website",
+  "version": "0.0.1",
+  "description": "The website supporting meeshkan as a project.",
+  "private": true,
+  "repository": "https://github.com/meeshkan/website",
+  "author": "Meeshkan team <@meeskanML>",
+  "dependencies": {
+    "@chakra-ui/core": "^0.7.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@types/react": "^16.0.0",
+    "emotion-theming": "^10.0.27",
+    "gatsby": "^2.19.45",
+    "gatsby-image": "^2.2.44",
+    "gatsby-plugin-google-analytics": "^2.2.2",
+    "gatsby-plugin-manifest": "^2.2.48",
+    "gatsby-plugin-offline": "^3.0.41",
+    "gatsby-plugin-react-helmet": "^3.1.24",
+    "gatsby-plugin-sharp": "^2.4.13",
+    "gatsby-plugin-sitemap": "^2.3.1",
+    "gatsby-source-filesystem": "^2.1.56",
+    "gatsby-transformer-sharp": "^2.3.19",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "develop": "gatsby develop",
+    "prodserve": "gatsby build && gatsby serve",
+    "cleandev": "rm -rf node_modules .cache && yarn && gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "serve": "gatsby serve",
+    "build": "gatsby build",
+    "clean": "gatsby clean"
+  },
+  "bugs": {
+    "url": "https://github.com/meeshkan/website/issues"
+  }
+}
