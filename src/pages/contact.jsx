@@ -14,7 +14,7 @@ const ContactPage = () => {
   return (
     <Box maxW="750px" mx="auto" py={16} px={[4, 4, 8, 12]}>
       <Heading
-        as="h2"
+        as="h1"
         lineHeight="shorter"
         fontWeight={900}
         textAlign="center"
