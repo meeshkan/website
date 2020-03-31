@@ -33,9 +33,8 @@ const ContactPage = () => {
         <Box>
           <FormLabel htmlFor="name">Name</FormLabel>
           <Input
-            type="name"
-            name="name"
-            aria-describedby="name-helper-text"
+            type="text"
+            id="name"
             size="lg"
             mb={4}
           />
@@ -44,32 +43,30 @@ const ContactPage = () => {
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             type="email"
-            name="email"
-            aria-describedby="email-helper-text"
+            id="email"
             size="lg"
             mb={4}
             is
           />
         </Box>
         <Box>
-          <FormLabel>Message</FormLabel>
+          <FormLabel htmlFor="message">Message</FormLabel>
           <Textarea
-            type="message"
-            name="message"
+            id="message"
             resize="none"
             size="lg"
             mb={4}
           />
         </Box>
         <Box>
-          <FormLabel>Which company are you from?</FormLabel>
+          <FormLabel htmlFor="website">Which company are you from?</FormLabel>
           <InputGroup mb={8} size="lg">
             <InputLeftAddon children="https://" />
             <Input
               roundedRight="md"
               roundedLeft="0"
-              type="webiste"
-              name="website"
+              type="url"
+              id="website"
               placeholder="company-site"
             />
           </InputGroup>
