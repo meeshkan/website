@@ -39,8 +39,7 @@ const IndexPage = () => (
         <input type="hidden" name="form-name" value="schedule-demo-home" />
         <Input
           type="email"
-          name="email"
-          aria-describedby="email-helper-text"
+          aria-label="Enter your business email"
           borderRadius="sm"
           maxW="400px"
           mr={4}
@@ -130,6 +129,8 @@ const IndexPage = () => (
           <Link
             as={GatsbyLink}
             to="/meeshkan/"
+            aria-label="Learn more about Meeshkan"
+            aria-label="Learn more about Meeshkan"
             color="blue.500"
             fontWeight={600}
           >
@@ -141,7 +142,7 @@ const IndexPage = () => (
             Unmock helps you test API integrations by creating effective
             simulations of external APIs and microservices.
           </Text>
-          <Link as={GatsbyLink} to="/unmock/" color="blue.500" fontWeight={600}>
+          <Link as={GatsbyLink} to="/unmock/" aria-label="Learn more about Unmock" color="blue.500" fontWeight={600}>
             Learn more ->
           </Link>
         </Card>
@@ -152,6 +153,8 @@ const IndexPage = () => (
           <Link
             as={GatsbyLink}
             to="/jaymock/"
+            aria-label="Learn more about jaymock"
+            aria-label="Learn more about jaymock"
             color="blue.500"
             fontWeight={600}
           >

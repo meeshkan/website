@@ -13,7 +13,7 @@ export function Navigation() {
       py={4}
       mb={6}
     >
-      <Link to="/" alt="Meeshkan home">
+      <Link to="/" aria-label="Meeshkan home">
         <Icon name="Logo" color="red.500" h={6} w="auto" />
       </Link>
       <Stack isInline>
