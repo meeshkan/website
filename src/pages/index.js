@@ -1,7 +1,8 @@
 import React from "react"
 import SEO from "../components/seo"
-import { Heading, Box, Input, Button, Stack, Text, Link } from "@chakra-ui/core"
+import { Heading, Box, Input, Button, Text, Link, Grid } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
+import { Card } from "../components/molecules/card"
 
 const IndexPage = () => (
   <>
@@ -9,7 +10,7 @@ const IndexPage = () => (
     <Box maxW="1200px" mx="auto" mt={16} mb={12}>
       <Heading
         as="h1"
-        fontSize="5xl"
+        fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
         mb={12}
         color="gray.900"
@@ -34,6 +35,7 @@ const IndexPage = () => (
           maxW="400px"
           mr={4}
           placeholder="Business email"
+          isRequired
         />
         <Button
           variantColor="red"
@@ -57,7 +59,14 @@ const IndexPage = () => (
       >
         What does Meeshkan do?
       </Heading>
-      <Stack isInline spacing={6}>
+      <Grid
+        templateColumns={[
+          "repeat(auto-fill, 1fr)",
+          "reapeat(auto-fill, 1fr)",
+          "repeat(3, 1fr)",
+        ]}
+        gap={6}
+      >
         <Box>
           <Heading
             as="h3"
@@ -101,7 +110,7 @@ const IndexPage = () => (
             Finally, use this schema to create a mock server of an API.
           </Text>
         </Box>
-      </Stack>
+      </Grid>
     </Box>
     <Box maxW="1200px" mx="auto" py={12}>
       <Heading
@@ -114,8 +123,15 @@ const IndexPage = () => (
       >
         Where is the Meeshkan Algorithim used?
       </Heading>
-      <Stack isInline spacing={6} p={4} mx="auto">
-        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
+      <Grid
+        templateColumns={[
+          "repeat(auto-fill, 1fr)",
+          "reapeat(auto-fill, 1fr)",
+          "repeat(3, 1fr)",
+        ]}
+        gap={6}
+      >
+        <Card>
           <Heading
             as="h3"
             color="gray.900"
@@ -137,8 +153,8 @@ const IndexPage = () => (
           >
             Learn more ->
           </Link>
-        </Box>
-        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
+        </Card>
+        <Card>
           <Heading
             as="h3"
             color="gray.900"
@@ -155,8 +171,8 @@ const IndexPage = () => (
           <Link as={GatsbyLink} to="/unmock/" color="blue.500" fontWeight={600}>
             Learn more ->
           </Link>
-        </Box>
-        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
+        </Card>
+        <Card>
           <Heading
             as="h3"
             color="gray.900"
@@ -177,8 +193,8 @@ const IndexPage = () => (
           >
             Learn more ->
           </Link>
-        </Box>
-      </Stack>
+        </Card>
+      </Grid>
     </Box>
   </>
 )

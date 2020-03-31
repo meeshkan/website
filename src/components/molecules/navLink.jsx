@@ -10,7 +10,9 @@ const NavLink = ({ text, path, ...props }) => (
     to={path}
     color="gray.700"
     fontWeight={600}
+    lineHeight="normal"
     _active={{ color: "gray.900", fontWeight: 900 }}
+    _focus={{ color: "gray.900", fontWeight: 900 }}
   >
     {text}
   </Button>

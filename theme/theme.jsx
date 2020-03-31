@@ -18,8 +18,8 @@ const customTheme = {
     mono: "Fira Code, monospace",
   },
   fontSizes: {
-    xs: "12px",
-    sm: "14px",
+    xs: "8px",
+    sm: "12px",
     md: "16px",
     lg: "18px",
     xl: "20px",

@@ -4,7 +4,7 @@ import { Stack, Icon } from "@chakra-ui/core"
 import NavLink from "../molecules/navLink"
 
 const Navigation = () => (
-  <Stack isInline justify="space-between" py={4}>
+  <Stack isInline justify="space-between" align="center" py={4}>
     <Link to="/" alt="Meeshkan home">
       <Icon name="Logo" color="red.500" h={6} w="auto" />
     </Link>
