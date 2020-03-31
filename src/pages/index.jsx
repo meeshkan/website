@@ -1,6 +1,15 @@
 import React from "react"
 import SEO from "../components/seo"
-import { Heading, Box, Input, Button, Text, Link, Grid } from "@chakra-ui/core"
+import {
+  Heading,
+  Box,
+  Input,
+  Button,
+  Text,
+  Link,
+  Grid,
+  Flex,
+} from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import { Card } from "../components/molecules/card"
 import { Section } from "../components/organisims/section"
@@ -150,6 +159,28 @@ const IndexPage = () => (
           </Link>
         </Card>
       </Grid>
+    </Section>
+
+    <Section>
+      <Flex
+        bg="gray.900"
+        borderRadius="sm"
+        justify="center"
+        align="center"
+        p={6}
+      >
+        <Text color="white" fontWeight={900} fontSize="xl" mr={6}>
+          Think you have a better use-case?
+        </Text>
+        <Button
+          as={GatsbyLink}
+          to="/contact/"
+          variantColor="red"
+          fontWeight={900}
+        >
+          Get in touch
+        </Button>
+      </Flex>
     </Section>
   </>
 )
