@@ -130,6 +130,7 @@ const IndexPage = () => (
             as={GatsbyLink}
             to="/meeshkan/"
             aria-label="Learn more about Meeshkan"
+            aria-label="Learn more about Meeshkan"
             color="blue.500"
             fontWeight={600}
           >
@@ -152,6 +153,7 @@ const IndexPage = () => (
           <Link
             as={GatsbyLink}
             to="/jaymock/"
+            aria-label="Learn more about jaymock"
             aria-label="Learn more about jaymock"
             color="blue.500"
             fontWeight={600}
