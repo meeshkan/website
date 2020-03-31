@@ -113,16 +113,7 @@ const IndexPage = () => (
         ]}
         gap={6}
       >
-        <Card>
-          <Heading
-            as="h3"
-            color="gray.900"
-            fontSize="2xl"
-            fontWeight={900}
-            mb={4}
-          >
-            Meeshkan
-          </Heading>
+        <Card heading="Meeshkan" link="/meeshkan/">
           <Text mb={4}>
             Building OpenAPI specifications from HTTP recordings and a place to
             store the HTTP traffic logs.
@@ -136,16 +127,7 @@ const IndexPage = () => (
             Learn more ->
           </Link>
         </Card>
-        <Card>
-          <Heading
-            as="h3"
-            color="gray.900"
-            fontSize="2xl"
-            fontWeight={900}
-            mb={4}
-          >
-            Unmock
-          </Heading>
+        <Card heading="Unmock" link="/unmock/">
           <Text mb={4}>
             Unmock helps you test API integrations by creating effective
             simulations of external APIs and microservices.
@@ -154,16 +136,7 @@ const IndexPage = () => (
             Learn more ->
           </Link>
         </Card>
-        <Card>
-          <Heading
-            as="h3"
-            color="gray.900"
-            fontSize="2xl"
-            fontWeight={900}
-            mb={4}
-          >
-            Jaymock
-          </Heading>
+        <Card heading="Jaymock" link="/jaymock/">
           <Text mb={4}>
             Tiny API mocking microservice for generating fake JSON data.
           </Text>
