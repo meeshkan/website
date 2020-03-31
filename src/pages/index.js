@@ -114,14 +114,8 @@ const IndexPage = () => (
       >
         Where is the Meeshkan Algorithim used?
       </Heading>
-      <Stack
-        isInline
-        spacing={6}
-        backgroundColor="gray.50"
-        borderRadius="sm"
-        p={4}
-      >
-        <Box>
+      <Stack isInline spacing={6} p={4} mx="auto">
+        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
           <Heading
             as="h3"
             color="gray.900"
@@ -144,7 +138,7 @@ const IndexPage = () => (
             Learn more ->
           </Link>
         </Box>
-        <Box>
+        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
           <Heading
             as="h3"
             color="gray.900"
@@ -162,7 +156,7 @@ const IndexPage = () => (
             Learn more ->
           </Link>
         </Box>
-        <Box>
+        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
           <Heading
             as="h3"
             color="gray.900"
