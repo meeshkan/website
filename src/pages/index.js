@@ -3,11 +3,12 @@ import SEO from "../components/seo"
 import { Heading, Box, Input, Button, Text, Link, Grid } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import { Card } from "../components/molecules/card"
+import { Section } from "../components/organisims/section"
 
 const IndexPage = () => (
   <>
     <SEO pageTitle="Home" />
-    <Box maxW="1200px" mx="auto" mt={16} mb={12}>
+    <Section>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
@@ -46,19 +47,9 @@ const IndexPage = () => (
           Schedule a demo
         </Button>
       </form>
-    </Box>
+    </Section>
 
-    <Box maxW="1200px" mx="auto" py={12}>
-      <Heading
-        as="h2"
-        color="gray.900"
-        fontSize="3xl"
-        fontWeight={900}
-        textAlign="center"
-        mb={12}
-      >
-        What does Meeshkan do?
-      </Heading>
+    <Section heading="What does Meeshkan do?">
       <Grid
         templateColumns={[
           "repeat(auto-fill, 1fr)",
@@ -111,18 +102,9 @@ const IndexPage = () => (
           </Text>
         </Box>
       </Grid>
-    </Box>
-    <Box maxW="1200px" mx="auto" py={12}>
-      <Heading
-        as="h2"
-        color="gray.900"
-        fontSize="3xl"
-        fontWeight={900}
-        textAlign="center"
-        mb={12}
-      >
-        Where is the Meeshkan Algorithim used?
-      </Heading>
+    </Section>
+
+    <Section heading="Where is the Meeshkan Algorithim used?">
       <Grid
         templateColumns={[
           "repeat(auto-fill, 1fr)",
@@ -195,7 +177,7 @@ const IndexPage = () => (
           </Link>
         </Card>
       </Grid>
-    </Box>
+    </Section>
   </>
 )
 
