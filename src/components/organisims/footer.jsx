@@ -56,7 +56,7 @@ export function Footer() {
               Not salesforce
             </Link>
           </Stack>
-          <Stack my={4} w={["100%", "50%", "33%"]}>
+          {/*<Stack my={4} w={["100%", "50%", "33%"]}>
             <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
               Use-cases
             </Heading>
@@ -75,7 +75,7 @@ export function Footer() {
             <Link as={GatsbyLink} to="/use-case/api-uptime-healthcare/">
               Uptime preventative healthcare
             </Link>
-          </Stack>
+          </Stack> */}
         </Flex>
         <Divider borderColor="gray.300" mb={4} mt={4} />
         <Flex justifyContent="space-between" align="center">
