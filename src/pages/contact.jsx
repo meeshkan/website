@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/core"
 import { Section } from "../components/organisims/section"
 
-export const ContactPage = () => (
+const ContactPage = () => (
   <Section>
     <Heading
       as="h1"
@@ -67,3 +67,5 @@ export const ContactPage = () => (
     </form>
   </Section>
 )
+
+export default ContactPage

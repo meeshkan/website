@@ -1,8 +1,12 @@
 import React from "react"
 import { Section } from "../organisims/section"
 import { Heading } from "@chakra-ui/core"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { graphql } from "gatsby"
 
-const BlogPost = ({ title }) => {
+const BlogPost = ({ data /*pageContext*/ }) => {
+  const { frontmatter, body } = data.mdx
+  // const { previous, next } = pageContext
   return (
     <Section>
       <Heading
@@ -12,10 +16,24 @@ const BlogPost = ({ title }) => {
         mb={12}
         color="gray.900"
       >
-        {title || "Hello world"}
+        {frontmatter.title}
       </Heading>
+      <p>{frontmatter.date}</p>
+      <MDXRenderer>{body}</MDXRenderer>
     </Section>
   )
 }
+
+export const query = graphql`
+  query PostsBySlug($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
+      body
+      frontmatter {
+        title
+        date(formatString: "YYYY MMMM Do")
+      }
+    }
+  }
+`
 
 export default BlogPost
