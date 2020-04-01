@@ -2,7 +2,7 @@ import React from "react"
 import { Box, Heading, Link } from "@chakra-ui/core"
 
 export const Section = ({ children, heading, anchor }) => (
-  <Box maxW="1200px" mx="auto" py={12}>
+  <Box as="section" maxW="1200px" mx="auto" py={12}>
     {heading ? (
       <Link id={anchor}>
         <Heading
