@@ -112,7 +112,7 @@ const IndexPage = () => (
       </Grid>
     </Section>
 
-    <Section heading="Where is the Meeshkan Algorithim used?">
+    <Section heading="Where is the Meeshkan Algorithim used?" anchor="projects">
       <Grid
         templateColumns={[
           "repeat(auto-fill, 1fr)",
@@ -142,7 +142,13 @@ const IndexPage = () => (
             Unmock helps you test API integrations by creating effective
             simulations of external APIs and microservices.
           </Text>
-          <Link as={GatsbyLink} to="/unmock/" aria-label="Learn more about Unmock" color="blue.500" fontWeight={600}>
+          <Link
+            as={GatsbyLink}
+            to="/unmock/"
+            aria-label="Learn more about Unmock"
+            color="blue.500"
+            fontWeight={600}
+          >
             Learn more ->
           </Link>
         </Card>
