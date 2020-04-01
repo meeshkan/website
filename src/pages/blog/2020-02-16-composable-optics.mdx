@@ -1,6 +1,7 @@
 ---
-title:  Introduction to composable optics with monocle-ts
+title: Introduction to composable optics with monocle-ts
 description: With io-ts, Elvis and Metallica.
+slug: intro-to-composable-optics-with-monocle-ts
 author: Kimmo Sääskilahti
 authorLink: https://dev.to/ksaaskil
 date: 2020-02-16
@@ -26,16 +27,16 @@ The code for this tutorial can be found in the [monocle-ts](https://github.com/k
 
 ```ts
 interface HobbyI {
-  name: string;
+  name: string
 }
 ```
 
 The way to define this in `io-ts` is as follows:
 
 ```ts
-import * as t from "io-ts";
-const HobbyT = t.interface({ name: t.string });
-type Hobby = t.TypeOf<typeof HobbyT>; // Static type
+import * as t from "io-ts"
+const HobbyT = t.interface({ name: t.string })
+type Hobby = t.TypeOf<typeof HobbyT> // Static type
 ```
 
 I use the `T` extension to mark `io-ts` types. It's important to notice that the `HobbyT` is an object and not a type: it remembers its properties even after the `TypeScript` code is transpiled to JavaScript. Therefore, one can use the `HobbyT` object at _run-time_ to check if objects are actually valid hobbies or not.
@@ -46,28 +47,28 @@ I use the `T` extension to mark `io-ts` types. It's important to notice that the
 
 ```ts
 it("accepts an valid hobby object as HobbyT", () => {
-  const isHobby = HobbyT.is({ name: "Photographing corgis" });
-  expect(isHobby).toBe(true);
-});
+  const isHobby = HobbyT.is({ name: "Photographing corgis" })
+  expect(isHobby).toBe(true)
+})
 it("does not accept an invalid hobby object as HobbyT", () => {
-  const isHobby = HobbyT.is({ name: 66 });
-  expect(isHobby).toBe(false);
-});
+  const isHobby = HobbyT.is({ name: 66 })
+  expect(isHobby).toBe(false)
+})
 ```
 
 For more stringent validation and error messages, you can use `decode`:
 
 ```ts
-import { isLeft, isRight } from "fp-ts/lib/Either";
+import { isLeft, isRight } from "fp-ts/lib/Either"
 
 it("can decode a hobby from valid input", () => {
-  const maybeHobby = HobbyT.decode({ name: "Petting corgis" });
-  expect(isRight(maybeHobby)).toBe(true);
-});
+  const maybeHobby = HobbyT.decode({ name: "Petting corgis" })
+  expect(isRight(maybeHobby)).toBe(true)
+})
 it("does not decode a hobby from invalid input", () => {
-  const maybeHobby = HobbyT.decode({ name: 67 });
-  expect(isLeft(maybeHobby)).toBe(true);
-});
+  const maybeHobby = HobbyT.decode({ name: 67 })
+  expect(isLeft(maybeHobby)).toBe(true)
+})
 ```
 
 `decode` method returns an [Either](https://gcanti.github.io/fp-ts/modules/Either.ts.html) object, whose value can be "left" or "right" corresponding to either failure or success, respectively. If there's an error, the either contains a "left" of `t.Errors` type defined as follows:
@@ -85,11 +86,11 @@ const PersonT = t.interface({
   firstName: t.string,
   age: t.number,
   hobbies: t.array(HobbyT),
-});
-type Person = t.TypeOf<typeof PersonT>;
+})
+type Person = t.TypeOf<typeof PersonT>
 
-const BandT = t.interface({ name: t.string, members: t.array(PersonT) });
-type Band = t.TypeOf<typeof BandT>;
+const BandT = t.interface({ name: t.string, members: t.array(PersonT) })
+type Band = t.TypeOf<typeof BandT>
 ```
 
 `Person` is an object with `firstName`, `age` and an array of hobbies. A band is an object with `name` and `members`, where `members` is a list of persons.
@@ -105,7 +106,7 @@ const elvis: Person = {
       name: "singing",
     },
   ],
-};
+}
 
 const metallica: Band = {
   name: "Metallica",
@@ -131,7 +132,7 @@ const metallica: Band = {
       age: 55,
     },
   ],
-};
+}
 ```
 
 Elvis is a single person and Metallica is a band with five members.
@@ -152,7 +153,7 @@ We see that the constructor takes `get` and `set` functions as input arguments. 
 Lenses can be created with [`Lens.fromProp`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#fromprop-static-method) function. Here's a full example of a lens `personToName` of type `Lens<Person, string>`:
 
 ```ts
-const personToName: Lens<Person, string> = Lens.fromProp<Person>()("firstName");
+const personToName: Lens<Person, string> = Lens.fromProp<Person>()("firstName")
 ```
 
 Type signature `Lens<Person, string>` means that the lens operates on objects of type `Person` and targets a field of type `string`. `Lens.fromProp` requires explicitly setting the type variable `Person`, but it can infer the type `string` from the type of the field to zoom into (`firstName`). Other ways to create lenses from scratch are the static [`fromPath`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#frompath-static-method), [`fromProps`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#fromprops-static-method) and [`fromNullableProp`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#fromnullableprop-static-method) methods of the `Lens` class. You can also use [`LensFromPath`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#lensfrompath-interface).
@@ -160,18 +161,18 @@ Type signature `Lens<Person, string>` means that the lens operates on objects of
 The lens getter `(p: Person) => string` can be accessed via `get` property:
 
 ```ts
-const getName: (p: Person) => string = (p: Person) => personToName.get(p);
-expect(getName(elvis)).toEqual("Elvis");
+const getName: (p: Person) => string = (p: Person) => personToName.get(p)
+expect(getName(elvis)).toEqual("Elvis")
 ```
 
 Here's how you could use the `personToName.set` as a setter:
 
 ```ts
-const setName: (newName: string) => (p: Person) => Person = personToName.set;
-const setJillAsName: (p: Person) => Person = setName("Jill");
-const modified: Person = setJillAsName(elvis);
-expect(modified).toHaveProperty("firstName", "Jill");
-expect(elvis).toHaveProperty("firstName", "Elvis"); // Unchanged
+const setName: (newName: string) => (p: Person) => Person = personToName.set
+const setJillAsName: (p: Person) => Person = setName("Jill")
+const modified: Person = setJillAsName(elvis)
+expect(modified).toHaveProperty("firstName", "Jill")
+expect(elvis).toHaveProperty("firstName", "Elvis") // Unchanged
 ```
 
 Note that `elvis` object remains intact as the setter does not modify its input.
@@ -179,12 +180,12 @@ Note that `elvis` object remains intact as the setter does not modify its input.
 With the `modify` method you can create a setter that modifies fields with the given function:
 
 ```ts
-const upperCase = (s: string): string => s.toUpperCase();
+const upperCase = (s: string): string => s.toUpperCase()
 const upperCasePersonName: (p: Person) => Person = personToName.modify(
   upperCase
-);
-const elvisUpperCased = upperCasePersonName(elvis);
-expect(elvisUpperCased).toHaveProperty("firstName", "ELVIS");
+)
+const elvisUpperCased = upperCasePersonName(elvis)
+expect(elvisUpperCased).toHaveProperty("firstName", "ELVIS")
 ```
 
 This all nice and good, but the true power of optics becomes clear when you start to compose them. We'll see examples of this soon when introducing new optics.
@@ -210,18 +211,18 @@ Remember we defined our band type as follows:
 
 ```ts
 type Band = {
-  name: string;
-  members: Person[];
-};
+  name: string
+  members: Person[]
+}
 ```
 
 Assume that we already have our `members` field of type `Band`, and now we want to access the first member. A function returning the first value of an array is typically called `head`. The type signature for `head` should then be `Optional<Array<Person>, Person>`. The constructor first takes a `getOption` method of type `(persons: Person[]) => Option<Person>`. Here's how we'd safely get the first member of the band:
 
 ```ts
-import { some, none } from "fp-ts/lib/Option";
+import { some, none } from "fp-ts/lib/Option"
 
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
-  personArray.length === 0 ? none : some(personArray[0]);
+  personArray.length === 0 ? none : some(personArray[0])
 ```
 
 The helper functions `none` and `some` allow creating options with empty and non-empty values, respectively.
@@ -231,7 +232,7 @@ Now we need to define the `set` function for our `Optional<Array<Person>, Person
 ```ts
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
   ps: Person[]
-) => (ps.length === 0 ? [] : [p, ...ps.slice(1)]);
+) => (ps.length === 0 ? [] : [p, ...ps.slice(1)])
 ```
 
 It's very important to notice here what `set` does _not_ do. First, it does not add the given person to the array if the array is empty. `Optional` should only work as a setter when the target value would be non-empty. If the target value is empty, the setter should be no-op. Second, `set` does not prepend given person to the array but replaces the old value with the new value, therefore keeping the length of the list intact.
@@ -250,24 +251,24 @@ Now we're ready to define `head` zooming into the first value of an array of per
 
 ```ts
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
-  personArray.length === 0 ? none : some(personArray[0]);
+  personArray.length === 0 ? none : some(personArray[0])
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
   ps: Person[]
-) => (ps.length === 0 ? [] : [p, ...ps.slice(1)]);
+) => (ps.length === 0 ? [] : [p, ...ps.slice(1)])
 const head: Optional<Array<Person>, Person> = new Optional<
   Array<Person>,
   Person
->(getOption, set);
+>(getOption, set)
 ```
 
 To apply our new Optional on a band, let's compose it with the `members` Lens:
 
 ```ts
-const membersLens = Lens.fromProp<Band>()("members");
+const membersLens = Lens.fromProp<Band>()("members")
 
 const bandToFirstMember: Optional<Band, Person> = membersLens.composeOptional(
   head
-);
+)
 ```
 
 We've written our first optics composition! Compositions are written with `composeX` methods of optics.
@@ -281,7 +282,7 @@ expect(bandToFirstMember.getOption(metallica)).toEqual(
       firstName: "James",
     })
   )
-);
+)
 ```
 
 The `getOption` returns the first member of the band wrapped in `Option` as expected. Let's try it on an empty band:
@@ -290,27 +291,27 @@ The `getOption` returns the first member of the band wrapped in `Option` as expe
 const bandWithNoMembers: Band = {
   name: "Unknown",
   members: [],
-};
-expect(bandToFirstMember.getOption(bandWithNoMembers)).toEqual(none);
+}
+expect(bandToFirstMember.getOption(bandWithNoMembers)).toEqual(none)
 ```
 
 In this case `getOption` returns a `none` as expected. Let's go even further and compose `bandToFirstMember` with a lens zooming into the `firstName` property and use it to modify the name:
 
 ```ts
-const nameLens = Lens.fromProp<Person>()("firstName");
+const nameLens = Lens.fromProp<Person>()("firstName")
 const nameOptional: Optional<Band, string> = bandToFirstMember.composeLens(
   nameLens
-);
+)
 
-const upperCase = (s: string): string => s.toUpperCase();
+const upperCase = (s: string): string => s.toUpperCase()
 
-const upperCaseFirstBandMemberName = nameOptional.modify(upperCase);
+const upperCaseFirstBandMemberName = nameOptional.modify(upperCase)
 
 expect(upperCaseFirstBandMemberName(metallica).members).toContainEqual(
   expect.objectContaining({
     firstName: "JAMES",
   })
-);
+)
 ```
 
 See the test file in [the accompanying repository](https://github.com/ksaaskil/functional-programming-examples/blob/master/monocle-ts) for an example optic zooming into the oldest member of the band.

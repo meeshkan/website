@@ -1,6 +1,7 @@
 ---
 title: Setting up the alex.js language linter in your project
 description: A practical how-to for linting polarizing language in your Markdown files.
+slug: setting-up-alexjs-linter
 date: 2019-11-11
 author: Carolyn Stransky
 authorLink: https://twitter.com/carolstran
@@ -15,7 +16,8 @@ tags:
 
 As a linter, alex can be used as a command-line tool, an IDE integration or configured directly into your project's workflow. For this tutorial, we'll focus on the latter: Your project's workflow.
 
-⚠️ Prerequisites: 
+⚠️ Prerequisites:
+
 - [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) installed
 - A project with a [`package.json` file](https://docs.npmjs.com/creating-a-package-json-file)
 
@@ -32,6 +34,7 @@ _Any line beginning with ❇️ is an example from the [Unmock documentation](ht
 - [Special thanks](#thanks)
 
 <a name="install-alex"></a>
+
 ## Install alex as a dependency
 
 Run one of these commands in your terminal, depending on if you're using npm or yarn:
@@ -53,6 +56,7 @@ You should now be able to see alex as a dependency in your `package.json` file.
 ```
 
 <a name="config"></a>
+
 ## Create and configure `.alexrc.js`
 
 To configure alex using JavaScript, create an `.alexrc.js` file in the root directory of your project:
@@ -71,8 +75,8 @@ With the `allow` field, you can identify an array of rules (the words flagged as
 
 ```javascript
 exports.allow = [
-    "hostesses-hosts" // name of the rule you want to allow
-];
+  "hostesses-hosts", // name of the rule you want to allow
+]
 ```
 
 ❇️ While it's considered by alex as gendered language, `hostesses-hosts` is allowed for Unmock because the concept of specifying network hosts is frequently referenced in our docs.
@@ -81,25 +85,25 @@ exports.allow = [
 
 The `noBinary` field is a boolean with the default set to `false`.
 
-On the default setting, alex will flag the sentence `He must satisfy the function's preconditions` as an error because `He` is gendered language. But it sees gendered pairs, like `he or she` as OK. So the sentence `He or she must satisfy the function's preconditions` wouldn't be considered an error. 
+On the default setting, alex will flag the sentence `He must satisfy the function's preconditions` as an error because `He` is gendered language. But it sees gendered pairs, like `he or she` as OK. So the sentence `He or she must satisfy the function's preconditions` wouldn't be considered an error.
 
 Switching `noBinary` to `true` will also flag those pairs.
 
 ```javascript
-exports.noBinary = true;
+exports.noBinary = true
 ```
 
-❇️ We changed `noBinary` to `true` in our configuration file for Unmock because we want to eliminate all uses of gendered language. 
+❇️ We changed `noBinary` to `true` in our configuration file for Unmock because we want to eliminate all uses of gendered language.
 
 ### `profanitySureness`
 
 Set with a number between 0-2, the `profanitySureness` field uses [cuss](https://github.com/words/cuss) to determine how likely a word or phrase is profanity.
 
 ```javascript
-exports.profanitySureness = 1;
+exports.profanitySureness = 1
 ```
 
-❇️ When linting the Unmock docs, we set `profanitySureness = 1` instead of the default `0` to catch the two highest levels. 
+❇️ When linting the Unmock docs, we set `profanitySureness = 1` instead of the default `0` to catch the two highest levels.
 
 The way we see it...
 
@@ -113,14 +117,15 @@ likely - `2`: ... I can't write any of them here because I'll get in trouble. So
 
 ### Configuring alex without JavaScript
 
-This configuration can also be done in a standard `rc` file or using YAML. 
+This configuration can also be done in a standard `rc` file or using YAML.
 
 🔗 [Configuration - alex documentation](https://github.com/get-alex/alex#configuration)
 
 <a name="ignore"></a>
+
 ## Set up `.alexignore` (optional)
 
-If you have specific files that you don't want alex to lint, you can create an `.alexignore` file in the root directory of your project: 
+If you have specific files that you don't want alex to lint, you can create an `.alexignore` file in the root directory of your project:
 
 ```
 touch .alexignore
@@ -138,6 +143,7 @@ docs/code-of-conduct.md
 🔗 [Ignoring files - alex documentation](https://github.com/get-alex/alex#ignoring-files)
 
 <a name="lint-script"></a>
+
 ## Add linting script to `package.json`
 
 In the `"scripts"` section of your `package.json` file, add a linting script with the `alex` command.
@@ -157,7 +163,7 @@ In the `"scripts"` section of your `package.json` file, add a linting script wit
 
 ❇️ Because we're already linting Unmock with [eslint](https://eslint.org/), we named the script `lint-language` to distinguish each process.
 
-Depending on where your `package.json` is located relative to the files you need linted, your script will vary. 
+Depending on where your `package.json` is located relative to the files you need linted, your script will vary.
 
 For example, if the `package.json` for the [Unmock documentation](https://github.com/unmock/unmock.github.io) was located at the root and we only wanted to lint the files in the `docs/` directory, the script would look like...
 
@@ -171,9 +177,10 @@ For example, if the `package.json` for the [Unmock documentation](https://github
 🔗 [Workflow - alex documentation](https://github.com/get-alex/alex#workflow)
 
 <a name="lint-ci"></a>
+
 ## Add linting script to your CI configuration (optional)
 
-You can also add alex to your continuous integration workflow. 
+You can also add alex to your continuous integration workflow.
 
 ### CircleCI
 
@@ -198,7 +205,7 @@ jobs:
 
 ```
 
-As a step in your test sequence (example from [Unmock](https://github.com/unmock/unmock.github.io/blob/source/.circleci/config.yml#L39-L51)). The benefit being that it will execute faster than in its own job.   
+As a step in your test sequence (example from [Unmock](https://github.com/unmock/unmock.github.io/blob/source/.circleci/config.yml#L39-L51)). The benefit being that it will execute faster than in its own job.
 
 ```yaml
 jobs:
@@ -219,13 +226,15 @@ You can also configure alex to work with Travis or other CI tools.
 🔗 [Workflow - alex documentation](https://github.com/get-alex/alex#workflow)
 
 <a name="alex-unmock"></a>
+
 ## alex && Unmock
 
-Thanks to Abdelrahman Ashraf (@theashraf), we now have [alex linting our entire documentation website](https://github.com/unmock/unmock.github.io/pull/41) and [all of the pre-existing issues fixed](https://github.com/unmock/unmock.github.io/pull/44) for Unmock. 
+Thanks to Abdelrahman Ashraf (@theashraf), we now have [alex linting our entire documentation website](https://github.com/unmock/unmock.github.io/pull/41) and [all of the pre-existing issues fixed](https://github.com/unmock/unmock.github.io/pull/44) for Unmock.
 
 Next move: Follow these steps to set up alex in all of our open source repos 🚀
 
 <a name="thanks"></a>
+
 ## Special thanks
 
 This tutorial was inspired by a tweet from [Rick Hanlon](https://twitter.com/rickhanlonii/status/1183790093770940416) who recently [integrated alex with the React Native documentation](https://github.com/facebook/react-native-website/pull/1337). He also reviewed this article before I hit publish! Thanks Ricky ✨

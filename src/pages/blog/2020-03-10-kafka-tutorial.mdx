@@ -1,9 +1,10 @@
 ---
 title: Building a real-time HTTP traffic stream with Apache Kafka
 description: A practical how-to guide and example application for building automated OpenAPI specifications.
+slug: building-a-real-time-http-traffic-stream-with-apache-kafka
 author: Kimmo Sääskilahti
 authorLink: https://dev.to/ksaaskil
-tags: 
+tags:
   - tutorial
   - kafka
   - node
@@ -17,12 +18,14 @@ This article focuses on building a real-time pipeline for streaming HTTP traffic
 Kafka (short for Apache Kafka) is a high-performance distributed streaming platform. It's often used to centralize log management and to decouple data sources from data sinks. Kafka is a good choice for streaming data because it can ingest data from various sources at huge volumes. It's also tailor-made for real-time use cases, such as sending alerts of DoS attacks. Kafka also has [various connectors](https://docs.confluent.io/current/connect/managing/connectors.html) for sending data to other services for further analysis. For example: Amazon S3, Azure Blob Storage, ElasticSearch, or HDFS.
 
 ⚠️ Prerequisites:
+
 - [Node.js](https://nodejs.org/en/) >= 8.0 and optionally [yarn](https://classic.yarnpkg.com/en/docs/install/)
 - Either [Docker](https://docs.docker.com/) or [Kafka](https://kafka.apache.org/quickstart#quickstart_download)
-- [Python](https://www.python.org/) 3.6.0+ 
+- [Python](https://www.python.org/) 3.6.0+
 - [pip](https://pip.pypa.io/en/stable/installing/)
 
 ✅ Steps:
+
 1. [Creating a Node.js server](#creating-a-nodejs-server)
 1. [Preparing Kafka](#preparing-kafka)
 1. [Creating an OpenAPI specification from recordings](#creating-an-openapi-specification-from-recordings)
@@ -61,79 +64,80 @@ We'll create a RESTful server with [Express](https://expressjs.com/) and record 
 ```
 
 To log HTTP traffic from Express to Kafka, we'll need:
+
 1. Middleware converting Express requests and responses to HTTP Types objects. The [@meeshkanml/express-middleware](https://github.com/Meeshkan/express-middleware) package handles this.
-1. A transport sending the HTTP Types objects to Kafka. This is provided by [http-types-kafka](https://github.com/meeshkan/http-types-kafka-node). 
+1. A transport sending the HTTP Types objects to Kafka. This is provided by [http-types-kafka](https://github.com/meeshkan/http-types-kafka-node).
 
 We'll see how to put these together below.
 
 Our server is defined in [src/index.ts](https://github.com/meeshkan/meeshkan-express-kafka-demo/blob/master/src/index.ts). The entry point to the program is the `main()` function defined as follows:
 
 ```ts
-const KAFKA_TOPIC = "http_recordings";
+const KAFKA_TOPIC = "http_recordings"
 const KAFKA_CONFIG: KafkaConfig = {
   brokers: ["localhost:9092"],
-};
+}
 
 const main = async () => {
   const httpTypesKafkaProducer = HttpTypesKafkaProducer.create({
     kafkaConfig: KAFKA_CONFIG,
     topic: KAFKA_TOPIC,
-  });
+  })
 
   const kafkaExchangeTransport = async (exchange: HttpExchange) => {
-    debugLog("Sending an exchange to Kafka");
-    await httpTypesKafkaProducer.send(exchange);
-  };
+    debugLog("Sending an exchange to Kafka")
+    await httpTypesKafkaProducer.send(exchange)
+  }
 
-  const app = buildApp(kafkaExchangeTransport);
+  const app = buildApp(kafkaExchangeTransport)
 
   // Prepare
-  await kafkaTransport.connect();
+  await kafkaTransport.connect()
 
   app.listen(PORT, "localhost", () => {
-    console.log(`Listening at port ${PORT}`);
-  });
-  app.on("close", () => console.log("Closing express"));
-};
+    console.log(`Listening at port ${PORT}`)
+  })
+  app.on("close", () => console.log("Closing express"))
+}
 
-main();
+main()
 ```
 
 Here, we're first creating a Kafka producer by defining the Kafka topic to write to and the list of brokers (consisting only of `localhost:9092`). `http-types-kafka` is a wrapper around [kafkajs](https://github.com/tulios/kafkajs) and `KafkaConfig` is defined in `kafkajs`. `kafkaExchangeTransport` is a function taking a `HttpExchange` object and returning a promise.
 
- In our case, this promise is defined as:
+In our case, this promise is defined as:
 
 ```ts
 const kafkaExchangeTransport = async (exchange: HttpExchange) => {
-  debugLog("Sending an exchange to Kafka");
-  await httpTypesKafkaProducer.send(exchange);
-};
+  debugLog("Sending an exchange to Kafka")
+  await httpTypesKafkaProducer.send(exchange)
+}
 ```
 
 The Express `app` is defined in the `buildApp` function. This function is also in the `src/index.ts` and looks like:
 
 ```ts
-import httpTypesExpressMiddleware from "@meeshkanml/express-middleware";
+import httpTypesExpressMiddleware from "@meeshkanml/express-middleware"
 
 const buildApp = (
   exchangeTransport: (exchange: HttpExchange) => Promise<void>
 ) => {
-  const app = express();
+  const app = express()
 
-  app.use(express.json());
+  app.use(express.json())
 
   const kafkaExchangeMiddleware = httpTypesExpressMiddleware({
     transports: [exchangeTransport],
-  });
+  })
 
-  app.use(kafkaExchangeMiddleware);
+  app.use(kafkaExchangeMiddleware)
 
-  const userStore = new UserStore();
+  const userStore = new UserStore()
 
-  app.use("/users", usersRouter(userStore));
+  app.use("/users", usersRouter(userStore))
 
-  return app;
-};
+  return app
+}
 ```
 
 Here, we're using `express.json()` middleware to parse request bodies as JSON. Express middleware for logging API traffic is created with the `httpTypesExpressMiddleware` imported from the `@meeshkanml/express-middleware` package. The object takes a list of transports as an argument, so we could also send our logs to other destinations such as a local file.
@@ -143,33 +147,33 @@ The actual user-facing API of our server is mounted on the `/users` route define
 ```ts
 // Representation of user
 interface User {
-  id: string;
-  name: string;
-  email: string;
+  id: string
+  name: string
+  email: string
 }
 
 interface CreateUserInput {
-  name: string;
-  email: string;
+  name: string
+  email: string
 }
 
 class UserStore {
-  private readonly users: Record<string, User> = {};
+  private readonly users: Record<string, User> = {}
   constructor() {}
 
   getUserById(userId: string): User | undefined {
-    return this.users[userId];
+    return this.users[userId]
   }
 
   createUser(userInput: CreateUserInput): User {
-    const userId = uuidv4();
+    const userId = uuidv4()
     const user: User = {
       id: userId,
       name: userInput.name,
       email: userInput.email,
-    };
-    this.users[userId] = user;
-    return user;
+    }
+    this.users[userId] = user
+    return user
   }
 }
 ```
@@ -180,40 +184,40 @@ User requests are handled by our server as follows:
 
 ```ts
 const usersRouter = (userStore: UserStore): express.Router => {
-  const router = express.Router();
+  const router = express.Router()
 
   router.post("/", (req: express.Request, res: express.Response) => {
     // Create a new user
-    let userInput: CreateUserInput;
-    debugLog("Incoming post user", req.body);
+    let userInput: CreateUserInput
+    debugLog("Incoming post user", req.body)
     try {
-      userInput = parseCreateUserInput(req.body);
+      userInput = parseCreateUserInput(req.body)
     } catch (err) {
-      debugLog("Bad request", err, req.body);
-      return res.sendStatus(400);
+      debugLog("Bad request", err, req.body)
+      return res.sendStatus(400)
     }
-    const newUser = userStore.createUser(userInput);
+    const newUser = userStore.createUser(userInput)
     // Set Location for client-navigation
-    res.location(`users/${newUser.id}`);
-    return res.json(newUser);
-  });
+    res.location(`users/${newUser.id}`)
+    return res.json(newUser)
+  })
 
   router.get("/:userId", (req: express.Request, res: express.Response) => {
     // Get user by ID
-    const userId = req.params.userId;
+    const userId = req.params.userId
     if (typeof userId !== "string") {
-      return res.sendStatus(400);
+      return res.sendStatus(400)
     }
-    const maybeUser = userStore.getUserById(userId);
+    const maybeUser = userStore.getUserById(userId)
     if (maybeUser) {
-      return res.json(maybeUser);
+      return res.json(maybeUser)
     } else {
-      return res.sendStatus(404);
+      return res.sendStatus(404)
     }
-  });
+  })
 
-  return router;
-};
+  return router
+}
 ```
 
 The router exposes `POST /` and `GET /:userId` routes for creating and fetching users, respectively. Remember the router is mounted to `/users`, so the routes translate to `POST /users` and `GET /users/:userId` routes at top-level.
@@ -224,7 +228,7 @@ Fetching a user is similar. The user ID given in the route must be a string, aft
 
 ## Preparing Kafka
 
-Before starting our server, we need to start Kafka. 
+Before starting our server, we need to start Kafka.
 
 If you prefer to install Kafka on your own machine, you can follow the instructions in [Kafka Quick Start](https://kafka.apache.org/quickstart). Alternatively, you can use Docker. Our [demo repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo) has a Docker Compose file [docker-compose.yml](https://github.com/meeshkan/meeshkan-express-kafka-demo/blob/master/docker-compose.yml). This file starts a single instance of [Zookeeper](https://zookeeper.apache.org/), a centralized service for maintaining configuration information, and a single instance of Kafka. The Docker Compose file has been copied from the [kafka-stack-docker-compose repository](https://github.com/simplesteph/kafka-stack-docker-compose) with small modifications.
 
@@ -358,8 +362,8 @@ $ docker-compose down
 
 To summarize, we created an Express server running in Node.js and added a middleware logging all HTTP exchanges to Apache Kafka. We also saw how to use [`meeshkan`](https://github.com/meeshkan/meeshkan) to create an OpenAPI specification of our server.
 
-If you haven't tried it yourself yet, you can [follow the steps of this article in our GitHub repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo). 
+If you haven't tried it yourself yet, you can [follow the steps of this article in our GitHub repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo).
 
-[`meeshkan`](https://github.com/meeshkan/meeshkan) is still under development, so we very much appreciate any feedback. Feel free to comment below or [try our tutorial](https://github.com/meeshkan/meeshkan-tutorial/). 
+[`meeshkan`](https://github.com/meeshkan/meeshkan) is still under development, so we very much appreciate any feedback. Feel free to comment below or [try our tutorial](https://github.com/meeshkan/meeshkan-tutorial/).
 
 Thank you for reading!

@@ -1,6 +1,7 @@
 ---
-title:  Mocking the internet in a CircleCI pipeline 
+title: Mocking the internet in a CircleCI pipeline
 description: How to test code with network calls in CircleCI.
+slug: mocking-the-internet
 author: Mike Solomon
 authorLink: https://dev.to/mikesol
 date: 2019-12-06
@@ -32,17 +33,12 @@ To use unmock in-code, you write an unmock spec for the network calls you are ma
 
 ```js
 // hello.test.js
-const {
-  default: unmock,
-  transform,
-  runner,
-  u
-} = require("unmock");
-const { withCodes } = transform; 
-const axios = require("axios");
+const { default: unmock, transform, runner, u } = require("unmock")
+const { withCodes } = transform
+const axios = require("axios")
 
 function fetchDataFromService() {
-  return axios.get("https://api.unmock.io").then(res => res.data);
+  return axios.get("https://api.unmock.io").then(res => res.data)
 }
 
 unmock
@@ -50,32 +46,35 @@ unmock
   .get("/")
   .reply(200, {
     id: u.number({ minimum: 0 }),
-    username: u.opt(u.string())
+    username: u.opt(u.string()),
   })
-  .reply(400, "Not Authorized");
+  .reply(400, "Not Authorized")
 
 describe("hello endpoint", () => {
-  let helloService;
+  let helloService
 
   beforeAll(() => {
-    helloService = unmock.on().services.hello;
-  });
+    helloService = unmock.on().services.hello
+  })
 
   afterAll(() => {
-    unmock.off();
-  });
+    unmock.off()
+  })
 
   beforeEach(() => {
-    helloService.reset();
-  });
+    helloService.reset()
+  })
 
-  test("should return valid JSON", runner(async () => {
-    helloService.state.transform(withCodes(200));
-    const responseBody = await fetchDataFromService();
-    expect(responseBody.id).toBeDefined();
-    expect(typeof responseBody.hello === "number").toBe(true);
-  }));
-});
+  test(
+    "should return valid JSON",
+    runner(async () => {
+      helloService.state.transform(withCodes(200))
+      const responseBody = await fetchDataFromService()
+      expect(responseBody.id).toBeDefined()
+      expect(typeof responseBody.hello === "number").toBe(true)
+    })
+  )
+})
 ```
 
 You can see several other examples like this in the [unmock examples](https://github.com/unmock/unmock-examples) and [unmock koans](https://github.com/unmock/unmock-ts-koans).
@@ -140,7 +139,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: 'circleci/golang:1.12'
+      - image: "circleci/golang:1.12"
     steps:
       - checkout
       - run: go mod download

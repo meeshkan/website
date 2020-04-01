@@ -1,6 +1,7 @@
 ---
 title: Announcing Meeshkan, a new tool for mocking HTTP APIs
 description: A coming-out party for the world's greatest API mocking tool that no one has ever heard of. Yet.
+slug: announcing-meeshkan
 author: Mike Solomon
 authorLink: https://dev.to/mikesol
 tags:
@@ -11,23 +12,23 @@ tags:
 
 [Meeshkan](https://github.com/meeshkan/meeshkan) is a tool that mocks HTTP APIs for use in sandboxes as well as for automated and exploratory testing. It uses a combination of API definitions, recorded traffic and code to make crafting mocks as enjoyable as possible. We launched it in January of this year, and we think you're going to _love it_.
 
-In this article, I'll present a high-level overview of what Meeshkan is.  By the time you're done reading, I hope you have a good sense of the problem Meeshkan solves and the reason we're so excited about building it.  I also hope this article entices you to [check out our GitHub and try Meeshkan out](https://github.com/meeshkan/meeshkan).
+In this article, I'll present a high-level overview of what Meeshkan is. By the time you're done reading, I hope you have a good sense of the problem Meeshkan solves and the reason we're so excited about building it. I also hope this article entices you to [check out our GitHub and try Meeshkan out](https://github.com/meeshkan/meeshkan).
 
 ## Table of Contents
 
-* [How does Meeshkan work?](#how-does-meeshkan-work)
-* [Who should use Meeshkan?](#who-should-use-meeshkan)
-* [Why did we build Meeshkan?](#why-did-we-build-meeshkan)
-* [What is our goal?](#what-is-our-goal)
-* [How can you be part of the journey?](#how-can-you-be-part-of-the-journey)
-* [What does Meeshkan mean?](#what-does-meeshkan-mean)
-* [How can I stay updated?](#how-can-i-stay-updated)
-* [Is meeshkan.com broken?](#is-meeshkancom-broken)
-* [Where can I learn more about Meeshkan?](#where-can-i-learn-more-about-meeshkan)
+- [How does Meeshkan work?](#how-does-meeshkan-work)
+- [Who should use Meeshkan?](#who-should-use-meeshkan)
+- [Why did we build Meeshkan?](#why-did-we-build-meeshkan)
+- [What is our goal?](#what-is-our-goal)
+- [How can you be part of the journey?](#how-can-you-be-part-of-the-journey)
+- [What does Meeshkan mean?](#what-does-meeshkan-mean)
+- [How can I stay updated?](#how-can-i-stay-updated)
+- [Is meeshkan.com broken?](#is-meeshkancom-broken)
+- [Where can I learn more about Meeshkan?](#where-can-i-learn-more-about-meeshkan)
 
 ## How does Meeshkan work?
 
-The main Meeshkan workflow is **collect, build, and mock.** Meeshkan starts by **collecting**  recordings of server traffic and OpenAPI specs for a service. Then, Meeshkan uses this information to **build** a unified schema that describes how the API works. Finally, Meeshkan uses this schema to **mock** a service's behavior.
+The main Meeshkan workflow is **collect, build, and mock.** Meeshkan starts by **collecting** recordings of server traffic and OpenAPI specs for a service. Then, Meeshkan uses this information to **build** a unified schema that describes how the API works. Finally, Meeshkan uses this schema to **mock** a service's behavior.
 
 You can explore this entire flow in detail in our [meeshkan-tutorial](https://github.com/meeshkan/meeshkan-tutorial) repo.
 
@@ -36,6 +37,7 @@ You can explore this entire flow in detail in our [meeshkan-tutorial](https://gi
 Anyone that makes a REST API call from their codebase could benefit from Meeshkan. This is because, at some point, you'll want to write a test where that API is called. Instead of calling the real API, it may make sense to use a mock. That's where we come in.
 
 There are several products and projects on the market that compete with Meeshkan:
+
 - [wiremock](https://github.com/tomakehurst/wiremock)
 - [hoverfly](https://github.com/SpectoLabs/hoverfly)
 - [prism](https://github.com/stoplightio/prism)
@@ -55,7 +57,7 @@ Doing this required us to federate around ten separate repos under the banner of
 
 ## What is our goal?
 
-When developers are empowered with mocks, they can build and ship with more confidence. Mocks of systems allow developers to experiment,  prototype, and test. In many other disciplines (music, architecture, weather), the mock (rehearsal, model, simulation) has become an established and essential part of the workflow. Despite all the advances in programming over the past decade, we have a long way to go with mocks. As a result, integrated systems break easily and are clunky to build. We want to fix that.
+When developers are empowered with mocks, they can build and ship with more confidence. Mocks of systems allow developers to experiment, prototype, and test. In many other disciplines (music, architecture, weather), the mock (rehearsal, model, simulation) has become an established and essential part of the workflow. Despite all the advances in programming over the past decade, we have a long way to go with mocks. As a result, integrated systems break easily and are clunky to build. We want to fix that.
 
 Eventually, we want Meeshkan to be able to learn from any machine-to-machine communication. Then, in a matter of seconds, it will be able to create an up-to-date, realistic mock of all parties to the communication based on how they interact with each other. It is not that different from Natural Language Processing projects that look to recreate human writing or speech - except we recreate machine communication.
 
@@ -64,6 +66,7 @@ Eventually, we want Meeshkan to be able to learn from any machine-to-machine com
 Almost all of our work is open-source. We make money by building and maintaining sandbox servers for clients. To pull this off, we need to have the most vetted, battle-tested tooling on the market. We believe that open-source is the only way to get there.
 
 All contributions are welcome, including:
+
 - Tweeting us [@MeeshkanML](https://twitter.com/MeeshkanML) as you are discovering and using the tool. Any feedback is appreciated!
 - Reporting an [issue](https://github.com/meeshkan/meeshkan/issues). This could be a feature request, a question, or a bug report.
 - Writing a short article on [dev.to](https://dev.to) about your experience using Meeshkan.
@@ -72,7 +75,7 @@ All contributions are welcome, including:
 
 We're looking forward to hearing your ideas as well.
 
-We realize, and are grateful for, the fact that your contributions to  Meeshkan will help us in our engagements with clients. We hope that, in return, you feel like a valued member of our community and that you learn from our team of engineers.
+We realize, and are grateful for, the fact that your contributions to Meeshkan will help us in our engagements with clients. We hope that, in return, you feel like a valued member of our community and that you learn from our team of engineers.
 
 ## What does Meeshkan mean?
 
@@ -101,6 +104,7 @@ I proposed to the [creator of 11ty](https://twitter.com/MeeshkanML/status/123012
 ## Where can I learn more about Meeshkan?
 
 Here are some resources to learn more about Meeshkan:
+
 - [Try the meeshkan-tutorial](https://github.com/meeshkan/meeshkan-tutorial).
 - [Check out our README](https://github.com/meeshkan/meeshkan).
 - [Read our articles](https://dev.to/meeshkan).
