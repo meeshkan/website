@@ -26,33 +26,33 @@ const BlogPost = ({ data, pageContext }) => {
         <MDXRenderer>{body}</MDXRenderer>
 
         <Stack isInline spacing={6} justify="center" mt={12} fontWeight="700">
-          {previous !== null ? (
-            <Button
-              as={Link}
-              to={`/blog/${previous.frontmatter.slug}/`}
-              aria-label={`Read the blog: ${previous.frontmatter.title}.`}
-              leftIcon="arrow-back"
-            >
-              Previous post
-            </Button>
-          ) : (
-            <Button isDisabled leftIcon="arrow-back">
-              Previous post
-            </Button>
-          )}
-
           {next !== null ? (
             <Button
               as={Link}
               to={`/blog/${next.frontmatter.slug}/`}
               aria-label={`Read the blog: ${next.frontmatter.title}.`}
-              rightIcon="arrow-forward"
+              leftIcon="arrow-back"
             >
               Next post
             </Button>
           ) : (
-            <Button isDisabled rightIcon="arrow-forward">
+            <Button isDisabled leftIcon="arrow-back">
               Next post
+            </Button>
+          )}
+
+          {previous !== null ? (
+            <Button
+              as={Link}
+              to={`/blog/${previous.frontmatter.slug}/`}
+              aria-label={`Read the blog: ${previous.frontmatter.title}.`}
+              rightIcon="arrow-forward"
+            >
+              Previous post
+            </Button>
+          ) : (
+            <Button isDisabled rightIcon="arrow-forward">
+              Previous post
             </Button>
           )}
         </Stack>
