@@ -1,15 +1,6 @@
 import React from "react"
 import SEO from "../components/seo"
-import {
-  Heading,
-  Box,
-  Input,
-  Button,
-  Text,
-  Link,
-  Grid,
-  Flex,
-} from "@chakra-ui/core"
+import { Heading, Box, Input, Button, Text, Grid, Flex } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import { Card } from "../components/molecules/card"
 import { Section } from "../components/organisims/section"
@@ -122,49 +113,39 @@ const IndexPage = () => (
         ]}
         gap={6}
       >
-        <Card heading="Meeshkan" link="/meeshkan/">
-          <Text mb={4}>
-            Building OpenAPI specifications from HTTP recordings and a place to
-            store the HTTP traffic logs.
-          </Text>
-          <Link
-            as={GatsbyLink}
-            to="/meeshkan/"
-            aria-label="Learn more about Meeshkan"
-            color="blue.500"
-            fontWeight={600}
-          >
+        <Card
+          heading="Meeshkan"
+          link="/meeshkan/"
+          label="Learn more about Meeshkan"
+          body="Building OpenAPI specifications from HTTP recordings and a place to
+            store the HTTP traffic logs."
+        >
+          <Text color="blue.500" mt={4} fontWeight={600}>
             Learn more ->
-          </Link>
+          </Text>
         </Card>
-        <Card heading="Unmock" link="/unmock/">
-          <Text mb={4}>
-            Unmock helps you test API integrations by creating effective
-            simulations of external APIs and microservices.
-          </Text>
-          <Link
-            as={GatsbyLink}
-            to="/unmock/"
-            aria-label="Learn more about Unmock"
-            color="blue.500"
-            fontWeight={600}
-          >
+
+        <Card
+          heading="Unmock"
+          link="/unmock/"
+          body="Unmock helps you test API integrations by creating effective
+            simulations of external APIs and microservices."
+          label="Learn more about Unmock"
+        >
+          <Text color="blue.500" mt={4} fontWeight={600}>
             Learn more ->
-          </Link>
+          </Text>
         </Card>
-        <Card heading="Jaymock" link="/jaymock/">
-          <Text mb={4}>
-            Tiny API mocking microservice for generating fake JSON data.
-          </Text>
-          <Link
-            as={GatsbyLink}
-            to="/jaymock/"
-            aria-label="Learn more about jaymock"
-            color="blue.500"
-            fontWeight={600}
-          >
+
+        <Card
+          heading="Jaymock"
+          link="/jaymock/"
+          body="Tiny API mocking microservice for generating fake JSON data."
+          label="Learn more about jaymock"
+        >
+          <Text color="blue.500" mt={4} fontWeight={600}>
             Learn more ->
-          </Link>
+          </Text>
         </Card>
       </Grid>
     </Section>

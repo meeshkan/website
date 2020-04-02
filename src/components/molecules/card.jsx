@@ -2,13 +2,14 @@ import React from "react"
 import { Box, Heading, Text } from "@chakra-ui/core"
 import { Link } from "gatsby"
 
-export const Card = ({ children, heading, body, link }) => {
+export const Card = ({ children, heading, body, link, label }) => {
   return (
     <>
       {link ? (
         <Box
           as={Link}
           to={link}
+          aria-label={label}
           borderRadius="sm"
           backgroundColor="gray.50"
           p={6}

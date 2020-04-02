@@ -30,9 +30,8 @@ const BlogHome = ({ data }) => {
               heading={frontmatter.title}
               body={excerpt}
               link={`/blog/${frontmatter.slug}/`}
-            >
-              {/* <p>{frontmatter.date}</p> */}
-            </Card>
+              label={`Read the blog: ${frontmatter.title}.`}
+            />
           ))}
         </Grid>
       </Section>
