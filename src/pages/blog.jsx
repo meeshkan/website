@@ -2,11 +2,17 @@ import React from "react"
 import { Heading, Grid, Avatar, Stack, Text } from "@chakra-ui/core"
 import { Section } from "../components/organisims/section"
 import { graphql } from "gatsby"
-import { Card } from "../components/molecules/card"
+import { Card } from "../components/atoms/card"
+import SEO from "../components/molecules/seo"
 
 const BlogHome = ({ data }) => {
   return (
     <>
+      <SEO
+        pageTitle="Blog"
+        pageDescription="We’re experts in Machine Learning and APIs. Why keep it to ourselves?"
+        pageUrl="https://meeshkan.com/blog/"
+      />
       <Section>
         <Heading
           as="h1"

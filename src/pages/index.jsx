@@ -1,13 +1,18 @@
 import React from "react"
-import SEO from "../components/seo"
+import SEO from "../components/molecules/seo"
 import { Heading, Box, Input, Button, Text, Grid, Flex } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
-import { Card } from "../components/molecules/card"
+import { Card } from "../components/atoms/card"
 import { Section } from "../components/organisims/section"
 
 const IndexPage = () => (
   <>
-    <SEO pageTitle="Home" />
+    <SEO
+      pageTitle="Home"
+      pageDescription="Meeshkan has built a Machine Learning Algorithim that helps you break and fix
+        your apps."
+      pageUrl="https://meeshkan.com/"
+    />
     <Section>
       <Heading
         as="h1"

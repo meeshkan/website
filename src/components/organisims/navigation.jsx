@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Stack, Icon } from "@chakra-ui/core"
-import NavLink from "../molecules/navLink"
+import NavLink from "../atoms/navLink"
 
 export function Navigation() {
   return (

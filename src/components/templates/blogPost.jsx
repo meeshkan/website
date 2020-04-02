@@ -4,7 +4,7 @@ import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
-import mdxComponents from "../organisims/mdxComponents"
+import mdxComponents from "../molecules/mdxComponents"
 import { Link } from "gatsby"
 
 const BlogPost = ({ data, pageContext }) => {
