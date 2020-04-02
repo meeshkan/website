@@ -6,12 +6,18 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
 import mdxComponents from "../molecules/mdxComponents"
 import { Link } from "gatsby"
+import SEO from "../molecules/seo"
 
 const BlogPost = ({ data, pageContext }) => {
   const { frontmatter, body } = data.mdx
   const { previous, next } = pageContext
   return (
     <MDXProvider components={mdxComponents}>
+      <SEO
+        pageTitle={frontmatter.title}
+        pageDescription={frontmatter.excerpt}
+        pageUrl={`/blog/${frontmatter.slug}/`}
+      />
       <Section>
         <Heading
           as="h1"
@@ -82,6 +88,7 @@ export const query = graphql`
   query PostsBySlug($slug: String!) {
     mdx(frontmatter: { slug: { eq: $slug } }) {
       body
+      excerpt(pruneLength: 80)
       frontmatter {
         title
         date(formatString: "Do MMM YYYY")

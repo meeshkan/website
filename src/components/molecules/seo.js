@@ -1,8 +1,8 @@
 import React from "react"
-import { graphql, useStaticQuery, withPrefix } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { Helmet } from "react-helmet"
 
-function SEO({ children, pageDescription, pageTitle, pageUrl, image }) {
+function SEO({ children, pageDescription, pageTitle, pageUrl, pageImage }) {
   const {
     site: {
       siteMetadata: {
@@ -47,7 +47,7 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, image }) {
           property="og:title"
           content={`${pageTitle || siteDescription} | ${siteTitle}`}
         />
-        <meta property="og:image" content={withPrefix(image || baseOG)} />
+        <meta property="og:image" content={pageImage || baseOG} />
 
         <meta
           property="twitter:title"
@@ -55,9 +55,9 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, image }) {
         />
         <meta
           property="twitter:card"
-          content={image ? "summary_large_media" : "summary"}
+          content={pageImage ? "summary_large_media" : "summary"}
         />
-        <meta property="twitter:image" content={withPrefix(image || baseOG)} />
+        <meta property="twitter:image" content={pageImage || baseOG} />
       </Helmet>
       {children}
     </React.Fragment>

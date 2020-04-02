@@ -1,5 +1,5 @@
 import React from "react"
-import { Heading, Grid, Avatar, Stack, Text } from "@chakra-ui/core"
+import { Heading, Grid, Avatar, Stack, Text, Flex } from "@chakra-ui/core"
 import { Section } from "../components/organisims/section"
 import { graphql } from "gatsby"
 import { Card } from "../components/atoms/card"
@@ -34,19 +34,32 @@ const BlogHome = ({ data }) => {
           {data.allMdx.nodes.map(({ excerpt, frontmatter, id }) => (
             <Card
               key={id}
-              heading={frontmatter.title}
+              heading={frontmatter.title.slice(0, 45)}
               body={excerpt}
               link={`/blog/${frontmatter.slug}/`}
               label={`Read the blog: ${frontmatter.title}.`}
             >
-              <Stack isInline align="center" spacing={3} mt={4}>
-                <Avatar
-                  name={frontmatter.author.name}
-                  src={frontmatter.author.avatar.childImageSharp.fluid.src}
-                  size="sm"
-                />
-                <Text>{frontmatter.author.name}</Text>
-              </Stack>
+              <Flex
+                align="center"
+                justify="space-between"
+                mt={4}
+                mx="auto"
+                pos="absolute"
+                bottom={4}
+                right={6}
+                left={6}
+              >
+                <Stack isInline align="center" spacing={3}>
+                  <Avatar
+                    name={frontmatter.author.name}
+                    src={frontmatter.author.avatar.childImageSharp.fluid.src}
+                    size="sm"
+                  />
+                  <Text fontWeight={700}>{frontmatter.author.name}</Text>
+                </Stack>
+
+                <Text>{frontmatter.date}</Text>
+              </Flex>
             </Card>
           ))}
         </Grid>

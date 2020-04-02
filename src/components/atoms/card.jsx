@@ -13,6 +13,7 @@ export const Card = ({ children, heading, body, link, label }) => {
           borderRadius="sm"
           backgroundColor="gray.50"
           p={6}
+          position="relative"
         >
           {heading ? (
             <Heading
@@ -25,7 +26,7 @@ export const Card = ({ children, heading, body, link, label }) => {
               {heading}
             </Heading>
           ) : null}
-          <Text>{body}</Text>
+          <Text mb={6}>{body}</Text>
           {children}
         </Box>
       ) : (
