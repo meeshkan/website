@@ -1,14 +1,15 @@
 import React from "react"
 import { Section } from "../organisims/section"
-import { Heading } from "@chakra-ui/core"
+import { Heading, Stack, Button, StatNumber, DarkMode } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
 import mdxComponents from "../organisims/mdxComponents"
+import { Link } from "gatsby"
 
-const BlogPost = ({ data /*pageContext*/ }) => {
+const BlogPost = ({ data, pageContext }) => {
   const { frontmatter, body } = data.mdx
-  // const { previous, next } = pageContext
+  const { previous, next } = pageContext
   return (
     <MDXProvider components={mdxComponents}>
       <Section>
@@ -21,8 +22,40 @@ const BlogPost = ({ data /*pageContext*/ }) => {
         >
           {frontmatter.title}
         </Heading>
-        <p>{frontmatter.date}</p>
+        <StatNumber>{frontmatter.date}</StatNumber>
         <MDXRenderer>{body}</MDXRenderer>
+
+        <Stack isInline spacing={6} justify="center" mt={12} fontWeight="700">
+          {previous !== null ? (
+            <Button
+              as={Link}
+              to={`/blog/${previous.frontmatter.slug}/`}
+              aria-label={`Read the blog: ${previous.frontmatter.title}.`}
+              leftIcon="arrow-back"
+            >
+              Previous post
+            </Button>
+          ) : (
+            <Button isDisabled leftIcon="arrow-back">
+              Previous post
+            </Button>
+          )}
+
+          {next !== null ? (
+            <Button
+              as={Link}
+              to={`/blog/${next.frontmatter.slug}/`}
+              aria-label={`Read the blog: ${next.frontmatter.title}.`}
+              rightIcon="arrow-forward"
+            >
+              Next post
+            </Button>
+          ) : (
+            <Button isDisabled rightIcon="arrow-forward">
+              Next post
+            </Button>
+          )}
+        </Stack>
       </Section>
     </MDXProvider>
   )

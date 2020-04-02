@@ -10,9 +10,50 @@ import {
   Divider,
   Code,
   Callout,
+  PseudoBox,
 } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import CodeBlock from "./codeBlock"
+
+const DocsHeading = props => (
+  <Heading
+    mb={4}
+    mt={6}
+    css={{
+      "&[id]": {
+        pointerEvents: "none",
+      },
+      "&[id]:before": {
+        display: "block",
+        height: " 6rem",
+        marginTop: "-6rem",
+        visibility: "hidden",
+        content: `""`,
+      },
+      "&[id]:hover a": { opacity: 1 },
+    }}
+    {...props}
+  >
+    <Box pointerEvents="auto">
+      {props.children}
+      {props.id && (
+        <PseudoBox
+          aria-label="anchor"
+          as="a"
+          color="cyan.500"
+          fontWeight="normal"
+          outline="none"
+          _focus={{ opacity: 1, boxShadow: "outline" }}
+          opacity="0"
+          ml={2}
+          href={`#${props.id}`}
+        >
+          #
+        </PseudoBox>
+      )}
+    </Box>
+  </Heading>
+)
 
 const components = {
   h1: props => (
@@ -28,29 +69,24 @@ const components = {
     </Heading>
   ),
   h2: props => (
-    <Heading {...props} as="h2">
-      {props.children}
-    </Heading>
+    <DocsHeading
+      as="h2"
+      fontSize="3xl"
+      fontWeight="900"
+      {...props}
+    ></DocsHeading>
   ),
   h3: props => (
-    <Heading {...props} as="h3">
-      {props.children}
-    </Heading>
+    <DocsHeading as="h3" fontSize="2xl" fontWeight="800" {...props} />
   ),
   h4: props => (
-    <Heading {...props} as="h4">
-      {props.children}
-    </Heading>
+    <DocsHeading as="h4" fontSize="lg" fontWeight="700" {...props} />
   ),
   h5: props => (
-    <Heading {...props} as="h5">
-      {props.children}
-    </Heading>
+    <DocsHeading as="h5" fontSize="md" fontWeight="600" {...props} />
   ),
   h6: props => (
-    <Heading {...props} as="h6">
-      {props.children}
-    </Heading>
+    <DocsHeading as="h6" fontSize="sm" fontWeight="500" {...props} />
   ),
   p: props => (
     <Text as="p" mt={4} lineHeight="tall" {...props}>

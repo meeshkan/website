@@ -14,7 +14,7 @@ export const liveEditorStyle = {
   marginBottom: 32,
   marginTop: 32,
   overflowX: "auto",
-  borderRadius: 4,
+  borderRadius: 2,
 }
 
 export const liveErrorStyle = {

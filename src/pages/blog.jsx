@@ -31,7 +31,7 @@ const BlogHome = ({ data }) => {
               body={excerpt}
               link={`/blog/${frontmatter.slug}/`}
             >
-              <p>{frontmatter.date}</p>
+              {/* <p>{frontmatter.date}</p> */}
             </Card>
           ))}
         </Grid>
@@ -48,7 +48,7 @@ export const query = graphql`
         excerpt(pruneLength: 80)
         frontmatter {
           title
-          date
+          date(formatString: "YYYY MMMM Do")
           slug
         }
       }
