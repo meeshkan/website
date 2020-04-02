@@ -1,6 +1,6 @@
 import React from "react"
 import { Section } from "../organisims/section"
-import { Heading, Stack, Button, StatNumber } from "@chakra-ui/core"
+import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
@@ -22,7 +22,24 @@ const BlogPost = ({ data, pageContext }) => {
         >
           {frontmatter.title}
         </Heading>
-        <StatNumber>{frontmatter.date}</StatNumber>
+        <Flex
+          align="center"
+          justify="space-between"
+          mb={6}
+          maxW="500px"
+          mx="auto"
+        >
+          <Stack isInline align="center" spacing={4}>
+            <Avatar
+              name={frontmatter.author.name}
+              src={frontmatter.author.avatar.childImageSharp.fluid.src}
+              size="sm"
+            />
+            <Text fontWeight={700}>{frontmatter.author.name}</Text>
+          </Stack>
+
+          <Text>{frontmatter.date}</Text>
+        </Flex>
         <MDXRenderer>{body}</MDXRenderer>
 
         <Stack isInline spacing={6} justify="center" mt={12} fontWeight="700">
@@ -67,7 +84,19 @@ export const query = graphql`
       body
       frontmatter {
         title
-        date(formatString: "YYYY MMMM Do")
+        date(formatString: "Do MMM YYYY")
+        author {
+          avatar {
+            childImageSharp {
+              fluid {
+                src
+              }
+            }
+          }
+          name
+          bio
+          authorLink
+        }
       }
     }
   }

@@ -6,11 +6,14 @@ module.exports = {
   siteMetadata: {
     title: `Meeshkan Website`,
     description: `The website supporting meeshkan as a project`,
-    image: `/OGimage.png`,
+    baseOG: `https://media.graphcms.com/vdCWflSaePa3QyqMPUfQ`,
     siteUrl: `https://meeshkan.com`,
     siteLanguage: `en-US`,
     siteLocale: `en_us`,
     author: `@meeshkanML`,
+  },
+  mapping: {
+    "Mdx.frontmatter.author": "AuthorYaml",
   },
   plugins: [
     `gatsby-plugin-sitemap`,
@@ -27,6 +30,13 @@ module.exports = {
       options: {
         name: `posts`,
         path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/data`,
       },
     },
     {
@@ -66,6 +76,21 @@ module.exports = {
           `Inter\:100,200,300,400,500,600,700,800,900`,
         ],
         display: "swap",
+      },
+    },
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 650,
+              quality: 80,
+            },
+          },
+        ],
       },
     },
   ],

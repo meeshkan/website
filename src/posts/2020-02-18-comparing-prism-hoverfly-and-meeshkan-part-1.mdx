@@ -2,8 +2,7 @@
 title: Comparing Prism, Hoverfly, and Meeshkan - Part 1
 description: An article comparing three mocking frameworks
 slug: comparing-prism-hoverfly-and-meeshkan-part-1
-author: Mike Solomon
-authorLink: https://dev.to/mikesol
+author: mike
 date: 2020-02-18
 tags:
   - api
@@ -21,7 +20,7 @@ At Meeshkan, we reverse engineer software. Our mission is to build a tool that c
 
 We have recently begun to open-source more of our stack as we get closer to achieving our mission. In doing so, we've come up against some strong incumbents such as Prism and Hoverfly. In this article, I'd like to present both of those tools to our new open-source project [Meeshkan](https://github.com/meeshkan/meeshkan).
 
-# Prism
+## Prism
 
 Prism is an open-source component of the [stoplight.io](https://stoplight.io) stack. Stoplight is, in my experience, the best editor for building OpenAPI specifications. The UI is gorgeous. If you are authoring an OpenAPI spec and don't like writing YAML or JSON, you should try Spotlight.
 
@@ -35,7 +34,7 @@ Prism will create a server that mocks all of the endpoints of your OpenAPI spec.
 
 **Conclusion:**: Prism is a great tool to turn an OpenAPI spec into a mock server.
 
-# Hoverfly
+## Hoverfly
 
 Hoverfly creates a mock server based on recordings of a live service.
 
@@ -66,7 +65,7 @@ Hoverfly is extensible through a middleware system that communicates through `st
 
 **Conclusion:** Hoverfly is a good tool when you need to serve back recordings of an API for testing.
 
-# Meeshkan
+## Meeshkan
 
 If Hoverfly and Prism had a baby, it would be Meeshkan. Meeshkan allows developers to build a mock server from recordings and OpenAPI specs. It exposes a Python API for building a persistance layer behind mocks. We also use it to tie together ML models to simulate realistic server traffic.
 
