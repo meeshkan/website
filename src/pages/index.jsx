@@ -26,6 +26,7 @@ const IndexPage = () => (
       </Heading>
       <Flex
         as="form"
+        direction={["column", "column", "row"]}
         justify="center"
         name="Schedule Demo Home"
         data-netlify="true"
@@ -39,7 +40,8 @@ const IndexPage = () => (
           aria-label="Enter your business email"
           borderRadius="sm"
           maxW="400px"
-          mr={4}
+          mr={[0, 0, 4]}
+          mb={[4, 4, 0]}
           placeholder="Business email"
           isRequired
         />
@@ -158,12 +160,20 @@ const IndexPage = () => (
     <Section>
       <Flex
         bg="gray.900"
+        direction={["column", "column", "row"]}
         borderRadius="sm"
         justify="center"
         align="center"
         p={6}
       >
-        <Text color="white" fontWeight={900} fontSize="xl" mr={6}>
+        <Text
+          color="white"
+          fontWeight={900}
+          fontSize="xl"
+          mr={[0, 0, 6]}
+          mb={[6, 6, 0]}
+          textAlign="center"
+        >
           Think you have a better use-case?
         </Text>
         <Button
