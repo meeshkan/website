@@ -10,12 +10,10 @@ exports.createPages = ({ actions, graphql }) => {
       allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
         nodes {
           id
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 140)
           frontmatter {
             title
             date
-          }
-          fields {
             slug
           }
         }
@@ -34,10 +32,11 @@ exports.createPages = ({ actions, graphql }) => {
       const next = index === 0 ? null : posts[index - 1]
 
       createPage({
-        path: post.fields.slug,
+        path: `/blog/${post.frontmatter.slug}/`,
         component: blogPost,
         context: {
-          slug: post.fields.slug,
+          post,
+          slug: post.frontmatter.slug,
           previous,
           next,
         },
@@ -46,24 +45,24 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
 
-  if (node.internal.type === `Mdx`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value: `/${value}/`,
-    })
+//   if (node.internal.type === `Mdx`) {
+//     const value = createFilePath({ node, getNode })
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
+//     })
 
-    createNodeField({
-      name: `editLink`,
-      node,
-      value: `https://github.com/meeshkan/website/edit/authoring${node.fileAbsolutePath.replace(
-        __dirname,
-        ""
-      )}`,
-    })
-  }
-}
+//     createNodeField({
+//       name: `editLink`,
+//       node,
+//       value: `https://github.com/meeshkan/website/edit/authoring${node.fileAbsolutePath.replace(
+//         __dirname,
+//         ""
+//       )}`,
+//     })
+//   }
+// }
