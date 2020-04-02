@@ -6,9 +6,11 @@ module.exports = {
   siteMetadata: {
     title: `Meeshkan Website`,
     description: `The website supporting meeshkan as a project`,
-    author: `@meeshkanML`,
+    image: `/OGimage.png`,
     siteUrl: `https://meeshkan.com`,
-    ogImage: ``,
+    siteLanguage: `en-US`,
+    siteLocale: `en_us`,
+    author: `@meeshkanML`,
   },
   plugins: [
     `gatsby-plugin-sitemap`,
@@ -24,7 +26,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/pages/blog`,
+        path: `${__dirname}/src/posts`,
       },
     },
     {
@@ -54,6 +56,16 @@ module.exports = {
         head: true,
         anonymize: true,
         pageTransitionDelay: 0,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Fira Code\:400,700`,
+          `Inter\:100,200,300,400,500,600,700,800,900`,
+        ],
+        display: "swap",
       },
     },
   ],

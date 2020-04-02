@@ -1,28 +1,9 @@
 import React from "react"
 import { Heading } from "@chakra-ui/core"
 import { Section } from "../components/organisims/section"
-import { useStaticQuery, graphql } from "gatsby"
 import { Card } from "../components/molecules/card"
 
 const BlogHome = () => {
-  const { data } = useStaticQuery(
-    graphql`
-      query SITE_INDEX_QUERY {
-        allMdx {
-          nodes {
-            id
-            excerpt(pruneLength: 250)
-            frontmatter {
-              title
-              date
-            }
-          }
-        }
-      }
-    `
-  )
-
-  console.log(data.allMdx)
   return (
     <>
       <Section>

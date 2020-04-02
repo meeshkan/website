@@ -28,8 +28,9 @@ const IndexPage = () => (
         We’ve built a Machine Learning Algorithim that helps you break and fix
         your apps.
       </Heading>
-      <form
-        style={{ display: "flex", justifyContent: "center" }}
+      <Flex
+        as="form"
+        justify="center"
         name="Schedule Demo Home"
         data-netlify="true"
         method="post"
@@ -54,7 +55,7 @@ const IndexPage = () => (
         >
           Schedule a demo
         </Button>
-      </form>
+      </Flex>
     </Section>
 
     <Section heading="What does Meeshkan do?">

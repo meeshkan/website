@@ -1,5 +1,4 @@
 import React from "react"
-import "./layout.css"
 import { Navigation } from "../organisims/navigation"
 import { Footer } from "../organisims/footer"
 import { Stack } from "@chakra-ui/core"
