@@ -25,8 +25,9 @@ const BlogHome = ({ data }) => {
           ]}
           gap={6}
         >
-          {data.allMdx.nodes.map(({ excerpt, frontmatter }) => (
+          {data.allMdx.nodes.map(({ excerpt, frontmatter, id }) => (
             <Card
+              key={id}
               heading={frontmatter.title}
               body={excerpt}
               link={`/blog/${frontmatter.slug}/`}
