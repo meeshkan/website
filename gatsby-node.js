@@ -44,25 +44,3 @@ exports.createPages = ({ actions, graphql }) => {
     })
   })
 }
-
-// exports.onCreateNode = ({ node, actions, getNode }) => {
-//   const { createNodeField } = actions
-
-//   if (node.internal.type === `Mdx`) {
-//     const value = createFilePath({ node, getNode })
-//     createNodeField({
-//       name: `slug`,
-//       node,
-//       value,
-//     })
-
-//     createNodeField({
-//       name: `editLink`,
-//       node,
-//       value: `https://github.com/meeshkan/website/edit/authoring${node.fileAbsolutePath.replace(
-//         __dirname,
-//         ""
-//       )}`,
-//     })
-//   }
-// }
