@@ -1,6 +1,14 @@
 import React from "react"
 import { Section } from "../organisims/section"
-import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
+import {
+  Heading,
+  Stack,
+  Button,
+  Flex,
+  Avatar,
+  AvatarGroup,
+  Text,
+} from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
@@ -31,21 +39,24 @@ const BlogPost = ({ data, pageContext }) => {
         <Flex
           align="center"
           justify="space-between"
+          maxW={448}
           mb={6}
-          maxW="500px"
           mx="auto"
         >
-          <Stack isInline align="center" spacing={4}>
-            <Avatar
-              name={frontmatter.author.name}
-              src={frontmatter.author.avatar.childImageSharp.fluid.src}
-              size="sm"
-            />
-            <Text fontWeight={700}>{frontmatter.author.name}</Text>
-          </Stack>
-
-          <Text>{frontmatter.date}</Text>
+          {frontmatter.authors.map(author => (
+            <Stack isInline align="center" spacing={4}>
+              <Avatar
+                name={author.name}
+                src={author.avatar.childImageSharp.fluid.src}
+                size="sm"
+              />
+              <Text fontWeight={700}>{author.name}</Text>
+            </Stack>
+          ))}
         </Flex>
+        <Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
+          {frontmatter.date}
+        </Text>
         <MDXRenderer>{body}</MDXRenderer>
 
         <Stack isInline spacing={6} justify="center" mt={12} fontWeight="700">
@@ -56,11 +67,11 @@ const BlogPost = ({ data, pageContext }) => {
               aria-label={`Read the blog: ${next.frontmatter.title}.`}
               leftIcon="arrow-back"
             >
-              Next post
+              Newer post
             </Button>
           ) : (
             <Button isDisabled leftIcon="arrow-back">
-              Next post
+              Older post
             </Button>
           )}
 
@@ -71,11 +82,11 @@ const BlogPost = ({ data, pageContext }) => {
               aria-label={`Read the blog: ${previous.frontmatter.title}.`}
               rightIcon="arrow-forward"
             >
-              Previous post
+              Newer post
             </Button>
           ) : (
             <Button isDisabled rightIcon="arrow-forward">
-              Previous post
+              Older post
             </Button>
           )}
         </Stack>
@@ -92,7 +103,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "Do MMM YYYY")
-        author {
+        authors {
           avatar {
             childImageSharp {
               fluid {

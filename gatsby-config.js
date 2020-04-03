@@ -13,7 +13,7 @@ module.exports = {
     author: `@meeshkanML`,
   },
   mapping: {
-    "Mdx.frontmatter.author": "AuthorYaml",
+    "Mdx.frontmatter.authors": "AuthorYaml",
   },
   plugins: [
     `gatsby-plugin-sitemap`,

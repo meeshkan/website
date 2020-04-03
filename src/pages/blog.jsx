@@ -1,5 +1,5 @@
 import React from "react"
-import { Heading, Grid, Avatar, Stack, Text, Flex } from "@chakra-ui/core"
+import { Heading, Grid, Avatar, AvatarGroup, Text, Flex } from "@chakra-ui/core"
 import { Section } from "../components/organisims/section"
 import { graphql } from "gatsby"
 import { Card } from "../components/atoms/card"
@@ -49,14 +49,15 @@ const BlogHome = ({ data }) => {
                 right={6}
                 left={6}
               >
-                <Stack isInline align="center" spacing={3}>
-                  <Avatar
-                    name={frontmatter.author.name}
-                    src={frontmatter.author.avatar.childImageSharp.fluid.src}
-                    size="sm"
-                  />
-                  <Text fontWeight={700}>{frontmatter.author.name}</Text>
-                </Stack>
+                <AvatarGroup max={2} size="sm">
+                  {frontmatter.authors.map(author => (
+                    <Avatar
+                      name={author.name}
+                      src={author.avatar.childImageSharp.fluid.src}
+                      size="sm"
+                    />
+                  ))}
+                </AvatarGroup>
 
                 <Text>{frontmatter.date}</Text>
               </Flex>
@@ -76,9 +77,9 @@ export const query = graphql`
         excerpt(pruneLength: 80)
         frontmatter {
           title
-          date(formatString: "Do MMM YYYY")
+          date(formatString: "Do MMM")
           slug
-          author {
+          authors {
             avatar {
               childImageSharp {
                 fluid {
