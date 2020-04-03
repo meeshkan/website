@@ -27,10 +27,10 @@ export function Footer() {
             >
               Contact
             </Link>
-            <Link as={GatsbyLink} to="/" aria-label="About the Meeshkan team">
+            {/* <Link as={GatsbyLink} to="/" aria-label="About the Meeshkan team">
               About us
             </Link>
-            {/* <Link
+            <Link
               as={GatsbyLink}
               to="/privacy/"
               aria-label="Meeshkan's privacy statement"
@@ -111,7 +111,7 @@ export function Footer() {
         </Flex>
         <Divider borderColor="gray.300" mb={4} mt={4} />
         <Flex justifyContent="space-between" align="center">
-          <GatsbyLink to="/" alt="Meeshkan homepage">
+          <GatsbyLink to="/" aria-label="Meeshkan homepage">
             <Icon name="Logo" color="red.500" size={6} w="auto" />
           </GatsbyLink>
           <Stack isInline d={["none", "flex"]}>

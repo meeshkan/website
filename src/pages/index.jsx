@@ -122,7 +122,7 @@ const IndexPage = () => (
       >
         <Card
           heading="Meeshkan"
-          link="/meeshkan/"
+          link="https://github.com/meeshkan/meeshkan"
           label="Learn more about Meeshkan"
           body="Building OpenAPI specifications from HTTP recordings and a place to
             store the HTTP traffic logs."
@@ -134,9 +134,8 @@ const IndexPage = () => (
 
         <Card
           heading="Unmock"
-          link="/unmock/"
-          body="Unmock helps you test API integrations by creating effective
-            simulations of external APIs and microservices."
+          link="https://github.com/meeshkan/unmock-js"
+          body="A library that helps fuzz test external APIs and microservices."
           label="Learn more about Unmock"
         >
           <Text color="blue.500" mt={4} fontWeight={600}>
@@ -146,7 +145,7 @@ const IndexPage = () => (
 
         <Card
           heading="Jaymock"
-          link="/jaymock/"
+          link="https://github.com/meeshkan/jaymock/"
           body="Tiny API mocking microservice for generating fake JSON data."
           label="Learn more about jaymock"
         >
@@ -182,7 +181,7 @@ const IndexPage = () => (
           mb={[6, 6, 0]}
           textAlign="center"
         >
-          Think you have a better use-case?
+          Think you have a better use case?
         </Text>
         <Button
           as={GatsbyLink}
