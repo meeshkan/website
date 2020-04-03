@@ -10,10 +10,9 @@ import {
   Code,
   Callout,
   PseudoBox,
-  Link as ChakraLink,
 } from "@chakra-ui/core"
-import { Link as GatsbyLink } from "gatsby"
 import CodeBlock from "./codeBlock"
+import { UniversalLink } from "../atoms/UniversalLink"
 
 const DocsHeading = props => (
   <Heading
@@ -54,24 +53,6 @@ const DocsHeading = props => (
     </Box>
   </Heading>
 )
-
-const Link = ({ children, to, ...props }) => {
-  const internal = /^\/(?!\/)/.test(to)
-
-  // Use Gatsby Link for internal links, and <a> for others
-  if (internal) {
-    return (
-      <ChakraLink as={GatsbyLink} to={to} color="blue.500" {...props}>
-        {children}
-      </ChakraLink>
-    )
-  }
-  return (
-    <ChakraLink href={to} color="blue.500" {...props} isExternal>
-      {children}
-    </ChakraLink>
-  )
-}
 
 const components = {
   h1: props => (
@@ -129,7 +110,7 @@ const components = {
     <Code variantColor="cyan" fontSize="inherit" {...props} />
   ),
   hr: props => <Divider borderColor="gray.100" my={6} {...props} />,
-  a: props => <Link {...props} />,
+  a: props => <UniversalLink color="blue.500" {...props} />,
   img: props => <Image {...props} rounded="sm" />,
   pre: props => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
   code: CodeBlock,

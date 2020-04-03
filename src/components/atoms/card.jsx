@@ -1,13 +1,13 @@
 import React from "react"
 import { Box, Heading, Text } from "@chakra-ui/core"
-import { Link } from "gatsby"
+import { UniversalLink } from "./UniversalLink"
 
 export const Card = ({ children, heading, body, link, label }) => {
   return (
     <>
       {link ? (
         <Box
-          as={Link}
+          as={UniversalLink}
           to={link}
           aria-label={label}
           borderRadius="sm"
