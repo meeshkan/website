@@ -43,6 +43,7 @@ const IndexPage = () => (
           mr={[0, 0, 4]}
           mb={[4, 4, 0]}
           placeholder="Business email"
+          maxW={["full", "full", "400px"]}
           isRequired
         />
         <Button
@@ -138,7 +139,15 @@ const IndexPage = () => (
           body="A library that helps fuzz test external APIs and microservices."
           label="Learn more about Unmock"
         >
-          <Text color="blue.500" mt={4} fontWeight={600}>
+          <Text
+            color="blue.500"
+            mt={4}
+            fontWeight={600}
+            pos="absolute"
+            bottom={6}
+            right={6}
+            left={6}
+          >
             Learn more ->
           </Text>
         </Card>
