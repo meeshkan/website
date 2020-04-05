@@ -19,7 +19,7 @@ export const Card = ({ children, heading, body, link, label }) => {
             <Heading
               as="h3"
               color="gray.900"
-              fontSize="2xl"
+              fontSize="xl"
               fontWeight={900}
               mb={4}
             >

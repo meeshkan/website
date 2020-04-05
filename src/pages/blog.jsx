@@ -34,7 +34,7 @@ const BlogHome = ({ data }) => {
           {data.allMdx.nodes.map(({ excerpt, frontmatter, id }) => (
             <Card
               key={id}
-              heading={frontmatter.title.slice(0, 45)}
+              heading={frontmatter.title.slice(0, 60) + `...`}
               body={excerpt}
               link={`/blog/${frontmatter.slug}/`}
               label={`Read the blog: ${frontmatter.title}.`}
@@ -49,15 +49,25 @@ const BlogHome = ({ data }) => {
                 right={6}
                 left={6}
               >
-                <AvatarGroup max={2} size="sm">
-                  {frontmatter.authors.map(author => (
-                    <Avatar
-                      name={author.name}
-                      src={author.avatar.childImageSharp.fluid.src}
-                      size="sm"
-                    />
-                  ))}
-                </AvatarGroup>
+                {frontmatter.authors.length > 1 ? (
+                  <AvatarGroup max={2} size="sm">
+                    {frontmatter.authors.map(author => (
+                      <Avatar
+                        name={author.name}
+                        src={author.avatar.childImageSharp.fluid.src}
+                        size="sm"
+                      />
+                    ))}
+                  </AvatarGroup>
+                ) : (
+                  <Avatar
+                    name={frontmatter.authors[0].name}
+                    src={
+                      frontmatter.authors[0].avatar.childImageSharp.fluid.src
+                    }
+                    size="sm"
+                  />
+                )}
 
                 <Text>{frontmatter.date}</Text>
               </Flex>
