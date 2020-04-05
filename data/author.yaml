@@ -18,3 +18,13 @@
   avatar: avatars/kenna.png
   authorLink: https://twitter.com/kenzsmutz
   bio: Head of Operations
+- id: nikolaos
+  name: Nikolaos Kamarinakis
+  avatar: avatars/nikolaos.png
+  authorLink: https://nikolaskama.me/
+  bio: Developer in Residence
+- id: maria
+  name: Maria Malitckaya
+  avatar: avatars/maria.png
+  authorLink: https://medium.com/@maria.malitckaya
+  bio: Data Scientist
