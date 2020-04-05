@@ -6,9 +6,14 @@ module.exports = {
   siteMetadata: {
     title: `Meeshkan Website`,
     description: `The website supporting meeshkan as a project`,
-    author: `@meeshkanML`,
+    baseOG: `https://media.graphcms.com/vdCWflSaePa3QyqMPUfQ`,
     siteUrl: `https://meeshkan.com`,
-    ogImage: ``,
+    siteLanguage: `en-US`,
+    siteLocale: `en_us`,
+    author: `@meeshkanML`,
+  },
+  mapping: {
+    "Mdx.frontmatter.authors": "AuthorYaml",
   },
   plugins: [
     `gatsby-plugin-sitemap`,
@@ -23,8 +28,21 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`,
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/data`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
       },
     },
     `gatsby-transformer-sharp`,
@@ -48,6 +66,31 @@ module.exports = {
         head: true,
         anonymize: true,
         pageTransitionDelay: 0,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Fira Code\:400,700`,
+          `Inter\:100,200,300,400,500,600,700,800,900`,
+        ],
+        display: "swap",
+      },
+    },
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 650,
+              quality: 80,
+            },
+          },
+        ],
       },
     },
   ],

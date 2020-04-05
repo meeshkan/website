@@ -1,7 +1,46 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`)
 
-// You can delete this file if you're not using it
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions
+  const blogPost = path.resolve("src/components/templates/blogPost.jsx")
+
+  return graphql(`
+    {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+        nodes {
+          id
+          excerpt(pruneLength: 140)
+          frontmatter {
+            title
+            date
+            slug
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors
+    }
+
+    const posts = result.data.allMdx.nodes
+
+    // create page for each mdx file
+    posts.forEach((post, index) => {
+      const previous = index === posts.length - 1 ? null : posts[index + 1]
+      const next = index === 0 ? null : posts[index - 1]
+
+      createPage({
+        path: `/blog/${post.frontmatter.slug}/`,
+        component: blogPost,
+        context: {
+          post,
+          slug: post.frontmatter.slug,
+          previous,
+          next,
+        },
+      })
+    })
+  })
+}
