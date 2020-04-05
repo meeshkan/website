@@ -1,14 +1,6 @@
 import React from "react"
 import { Section } from "../organisims/section"
-import {
-  Heading,
-  Stack,
-  Button,
-  Flex,
-  Avatar,
-  AvatarGroup,
-  Text,
-} from "@chakra-ui/core"
+import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"

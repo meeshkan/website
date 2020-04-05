@@ -39,7 +39,6 @@ const IndexPage = () => (
           type="email"
           aria-label="Enter your business email"
           borderRadius="sm"
-          maxW="400px"
           mr={[0, 0, 4]}
           mb={[4, 4, 0]}
           placeholder="Business email"
