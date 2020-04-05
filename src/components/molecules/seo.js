@@ -39,6 +39,8 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, pageImage }) {
         <meta name="description" content={pageDescription || siteDescription} />
 
         <meta property="og:url" content={pageUrl || siteUrl} />
+        {pageUrl && <link rel="canonical" href={pageUrl} />}
+
         <meta
           property="og:description"
           content={pageDescription || siteDescription}

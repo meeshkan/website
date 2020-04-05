@@ -16,7 +16,7 @@ const BlogPost = ({ data, pageContext }) => {
       <SEO
         pageTitle={frontmatter.title}
         pageDescription={frontmatter.excerpt}
-        pageUrl={`/blog/${frontmatter.slug}/`}
+        pageUrl={`/blog/${frontmatter.canonicalURL || frontmatter.slug}/`}
       />
       <Section>
         <Heading
@@ -28,23 +28,28 @@ const BlogPost = ({ data, pageContext }) => {
         >
           {frontmatter.title}
         </Heading>
-        <Flex
-          align="center"
-          justify="space-between"
-          maxW={448}
-          mb={6}
-          mx="auto"
-        >
-          {frontmatter.authors.map(author => (
-            <Stack isInline align="center" spacing={4}>
+        <Flex align="center" justify="center" maxW={500} mb={6} mx="auto">
+          {frontmatter.authors.length > 1 ? (
+            frontmatter.authors.map(author => (
+              <Stack isInline align="center" spacing={4} mx={4}>
+                <Avatar
+                  name={author.name}
+                  src={author.avatar.childImageSharp.fluid.src}
+                  size="sm"
+                />
+                <Text fontWeight={700}>{author.name}</Text>
+              </Stack>
+            ))
+          ) : (
+            <Stack isInline align="center" justify="center" spacing={4}>
               <Avatar
-                name={author.name}
-                src={author.avatar.childImageSharp.fluid.src}
+                name={frontmatter.authors[0].name}
+                src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
                 size="sm"
               />
-              <Text fontWeight={700}>{author.name}</Text>
+              <Text fontWeight={700}>{frontmatter.authors[0].name}</Text>
             </Stack>
-          ))}
+          )}
         </Flex>
         <Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
           {frontmatter.date}
@@ -107,6 +112,7 @@ export const query = graphql`
           bio
           authorLink
         }
+        canonicalURL
       }
     }
   }
