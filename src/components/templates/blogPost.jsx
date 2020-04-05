@@ -63,7 +63,7 @@ const BlogPost = ({ data, pageContext }) => {
             </Button>
           ) : (
             <Button isDisabled leftIcon="arrow-back">
-              Older post
+              Newer post
             </Button>
           )}
 
@@ -74,7 +74,7 @@ const BlogPost = ({ data, pageContext }) => {
               aria-label={`Read the blog: ${previous.frontmatter.title}.`}
               rightIcon="arrow-forward"
             >
-              Newer post
+              Older post
             </Button>
           ) : (
             <Button isDisabled rightIcon="arrow-forward">
