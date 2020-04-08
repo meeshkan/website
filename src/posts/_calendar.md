@@ -45,10 +45,6 @@ Every piece of content is 20% actual creation and 80% distribution. Which is unf
 
 Ideally, everything we publish will be shared on the [Meeshkan Twitter account](https://twitter.com/meeshkanml?lang=en) and [Meeshkan LinkedIn page](https://www.linkedin.com/company/meeshkan/). The top articles will be shared through [our newsletter](https://www.subscribepage.com/meeshkan) whenever we figure that out.
 
-### Submitting articles to external publications
-
-Sometimes it makes sense to try to get our articles published in external publications. In these cases, we'll look at the publication's requirements for submitted articles and adjust the procress accordingly. For now, we track our submissions on [EXTERNAL.md](./_external.md)
-
 ## Our content workflow
 
 Like good nerds, we have a kanban board for this! It's a [GitHub project board called Content Plan](https://github.com/orgs/meeshkan/projects/3) and the lanes are divided like so:
@@ -86,3 +82,13 @@ Writing is hard, particularly if you're not writing in your native language. But
 
 - [Grammarly](https://www.grammarly.com)
 - [Hemingway App](hemingwayapp.com/)
+
+## Submitting articles to external publications
+
+Sometimes it makes sense to try to get our articles published in external publications. In these cases, we'll look at the publication's requirements for submitted articles and adjust the procress accordingly.
+
+Sometimes, we try to get our content published in external publications! And then we track those here in a handy table.
+
+| Date Submitted | Article                                        | Author | Publication                                             | Writing Guidelines                                                                     | Accepted           | Rejected | Date Published | Link                                                                                            |
+| -------------- | ---------------------------------------------- | ------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ | -------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria  | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
