@@ -11,6 +11,7 @@ const NavLink = ({ text, path, ...props }) => (
     color="gray.700"
     fontWeight={600}
     lineHeight="normal"
+    rounded="sm"
     _active={{ color: "gray.900", fontWeight: 900 }}
     _focus={{ color: "gray.900", fontWeight: 900 }}
   >
