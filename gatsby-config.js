@@ -29,7 +29,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/src/blog/posts`,
       },
     },
     {
@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: [`.mdx`, `.md`],
+        extensions: [`.mdx`],
       },
     },
     `gatsby-transformer-sharp`,
