@@ -196,6 +196,7 @@ const IndexPage = () => (
           to="/contact/"
           variantColor="red"
           fontWeight={900}
+          rounded="sm"
         >
           Get in touch
         </Button>
