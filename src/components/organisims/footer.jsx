@@ -117,26 +117,29 @@ export function Footer() {
           <Stack isInline d={["none", "flex"]}>
             <IconButton
               as={Link}
+              variant="ghost"
               isExternal
               href="https://twitter.com/MeeshkanML"
               icon="twitter"
-              isRound
+              rounded="sm"
               color="gray.500"
             />
             <IconButton
               as={Link}
+              variant="ghost"
               isExternal
               href="https://www.linkedin.com/company/meeshkan/"
               icon="linkedin"
-              isRound
+              rounded="sm"
               color="gray.500"
             />
             <IconButton
               as={Link}
+              variant="ghost"
               isExternal
               href="https://github.com/meeshkan"
               icon="github"
-              isRound
+              rounded="sm"
               color="gray.500"
             />
           </Stack>
