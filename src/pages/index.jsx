@@ -9,7 +9,7 @@ const IndexPage = () => (
   <>
     <SEO
       pageTitle="Home"
-      pageDescription="Meeshkan has built a Machine Learning Algorithim that helps you break and fix
+      pageDescription="Meeshkan has built a Machine Learning Algorithm that helps you break and fix
         your apps."
       pageUrl="https://meeshkan.com/"
     />
@@ -21,7 +21,7 @@ const IndexPage = () => (
         mb={12}
         color="gray.900"
       >
-        We’ve built a Machine Learning Algorithim that helps you break and fix
+        We’ve built a Machine Learning Algorithm that helps you break and fix
         your apps.
       </Heading>
       <Flex
@@ -111,7 +111,7 @@ const IndexPage = () => (
       </Grid>
     </Section>
 
-    <Section heading="Where is the Meeshkan Algorithim used?" anchor="projects">
+    <Section heading="Where is the Meeshkan Algorithm used?" anchor="projects">
       <Grid
         templateColumns={[
           "repeat(auto-fill, 1fr)",
