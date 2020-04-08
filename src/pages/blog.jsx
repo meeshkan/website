@@ -31,11 +31,11 @@ const BlogHome = ({ data }) => {
           ]}
           gap={6}
         >
-          {data.allMdx.nodes.map(({ excerpt, frontmatter, id }) => (
+          {data.allMdx.nodes.map(({ frontmatter, id }) => (
             <Card
               key={id}
-              heading={frontmatter.title.slice(0, 60) + `...`}
-              body={excerpt}
+              heading={frontmatter.title}
+              body={frontmatter.description}
               link={`/blog/${frontmatter.slug}/`}
               label={`Read the blog: ${frontmatter.title}.`}
             >
@@ -84,9 +84,9 @@ export const query = graphql`
     allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       nodes {
         id
-        excerpt(pruneLength: 80)
         frontmatter {
           title
+          description
           date(formatString: "Do MMM")
           slug
           authors {
