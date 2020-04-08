@@ -49,7 +49,7 @@ const BlogHome = ({ data }) => {
                 right={6}
                 left={6}
               >
-                {frontmatter.authors.length > 1 ? (
+                {frontmatter.authors.length >= 1 ? (
                   <AvatarGroup max={2} size="sm">
                     {frontmatter.authors.map(author => (
                       <Avatar
