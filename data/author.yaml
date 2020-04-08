@@ -28,3 +28,8 @@
   avatar: avatars/maria.png
   authorLink: https://medium.com/@maria.malitckaya
   bio: Data Scientist
+- id: fredi
+  name: Fredrik Fornwall
+  avatar: avatars/fredrik.png
+  authorLink: https://dev.to/fornwall
+  bio: Open Source Engineer
