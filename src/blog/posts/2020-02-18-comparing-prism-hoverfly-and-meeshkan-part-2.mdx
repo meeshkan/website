@@ -1,7 +1,7 @@
 ---
-title: Comparing Prism, Hoverfly, and Meeshkan - Part 2
+title: Comparing Prism, Hoverfly, and Mem - Part 2
 description: An article comparing three mocking frameworks
-slug: comparing-prism-hoverfly-and-meeshkan-part-2
+slug: comparing-prism-hoverfly-and-mem-part-2
 authors: ["mike"]
 date: 2020-02-18
 tags:
@@ -11,12 +11,12 @@ tags:
   - testing
 ---
 
-_This is the second article of a two-part series comparing Prism, Hoverfly, and Meeshkan. This article focuses on using all three tools to build a mock of the github API v3, whereas the [first article](https://dev.to/meeshkan/comparing-prism-hoverfly-and-meeshkan-part-1-27g6) focuses on a high level comparison of the tools._
+_This is the second article of a two-part series comparing Prism, Hoverfly, and Mem. This article focuses on using all three tools to build a mock of the github API v3, whereas the [first article](https://meeshkan.com/blog/comparing-prism-hoverfly-and-mem-part-1/) focuses on a high level comparison of the tools._
 
 ![Meeshkan team](https://cdn.filestackcontent.com/AZvPNtU2oRLCcNYkJFCAAz/resize=width:1000/https://dev-to-uploads.s3.amazonaws.com/i/2ek2wxex4koaks7v2msf.jpg)
-_Team Meeshkan busy building Meeshkan._
+_Team Meeshkan busy building Mem._
 
-In the [previous article](https://dev.to/meeshkan/comparing-prism-hoverfly-and-meeshkan-part-1-27g6), we saw how to create a Prism server from an OpenAPI spec. We also saw how Hoverfly can play back recordings of server traffic. Lastly, we saw how Meeshkan blends OpenAPI specs and recordings into a mock server.
+In the [previous article](https://meeshkan.com/blog/comparing-prism-hoverfly-and-mem-part-1/), we saw how to create a Prism server from an OpenAPI spec. We also saw how Hoverfly can play back recordings of server traffic. Lastly, we saw how Mem blends OpenAPI specs and recordings into a mock server.
 
 In this article, we will examine how all three tools can mock the Stripe API.
 
@@ -242,9 +242,9 @@ Running our curl request again, we get the recorded response. w00t! Here's a sho
 
 This is the basic flow in Hoverfly. For small APIs, I find this to be a compelling approach. For larger APIs with more complex behavior, OpenAPI-based mocks tend to perform better. This is because the spec will likely contain more outcomes and endpoints than you would see in the wild.
 
-# Meeshkan
+# Mem
 
-The first step in creating a Meeshkan mock is the same as the Prism mock - we download the OpenAPI spec.
+The first step in creating a Mem mock is the same as the Prism mock - we download the OpenAPI spec.
 
 ```bash
 $ wget https://github.com/stripe/openapi/blob/master/openapi/spec3.yaml?raw=true
@@ -256,10 +256,10 @@ We'll create a folder called `stripe-mock`, where we will move the spec.
 $ mkdir stripe-spec && mv spec3.yaml ./stripe-spec
 ```
 
-Already here, we can start Meeshkan in server mode an examine some results.
+Already here, we can start Mem in server mode an examine some results.
 
 ```bash
-$ meeshkan mock -a ./stripe-spec
+$ mem mock -a ./stripe-spec
 $ curl -i -X GET http://localhost:8000/v1/clients
 ```
 
@@ -285,13 +285,13 @@ We can see in the gist below that the result is an array of mock users built usi
 
 Now, let's enrich the spec with the same set of recordings we made when building our Hoverfly mock. Blending an OpenAPI spec with recorded server traffic has two main advantages:
 
-- it allows Meeshkan to pick up on features of the spec not present in the recordings and vice versa.
+- it allows Mem to pick up on features of the spec not present in the recordings and vice versa.
 - you can alternate between serving rote recordings and synthetic data.
 
 For example, let's record a call to `/v1/customers` as we did in the previous example.
 
 ```bash
-$ meeshkan record --log_dir ./stripe-logs
+$ mem record --log_dir ./stripe-logs
 $ curl -u **redacted** http://localhost:8500/https/api.stripe.com/v1/customers
 $ curl http://localhost:8000/https/api.stripe.com/v1/customers # leave out the key
 $ curl -u **redacted** http://localhost:8000/https/api.stripe.com/v1/customers # include the key
@@ -306,16 +306,16 @@ $ curl -u **redacted** -X DELETE http://localhost:8000/https/api.stripe.com/v1/c
 Now, let's build a spec using this mock. We'll use `gen` mode. That means that if our mock runs into a customer it hasn't recorded, it will create a mock customer on the fly.
 
 ```bash
-$ meeshkan build -i ./stripe-logs/ --mode gen -o build
-$ meeshkan mock -s build/
+$ mem build -i ./stripe-logs/ --mode gen -o build
+$ mem mock -s build/
 $ curl http://localhost:8500/v1/customers -u **redacted**
 $ curl http://localhost:8500/v1/customers/cus_x410fdsfxfs -u **redacted**
 ```
 
 ## Conclusion
 
-In this article, we saw how three mocking tools - Prism, Hoverfly and Meeshkan - can create a mock of the Stripe API. I hope that, in going through this, you got a sense of the differences between the three tools. In short:
+In this article, we saw how three mocking tools - Prism, Hoverfly and Mem - can create a mock of the Stripe API. I hope that, in going through this, you got a sense of the differences between the three tools. In short:
 
 - Prism can create a mock of an OpenAPI spec
 - Hoverfly can serve back recordings
-- Meeshkan can serve a mix of recordings and synthetic data
+- Mem can serve a mix of recordings and synthetic data

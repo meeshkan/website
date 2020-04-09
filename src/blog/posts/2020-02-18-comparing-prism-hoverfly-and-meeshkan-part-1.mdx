@@ -1,7 +1,7 @@
 ---
-title: Comparing Prism, Hoverfly, and Meeshkan - Part 1
+title: Comparing Prism, Hoverfly, and Mem - Part 1
 description: An article comparing three mocking frameworks
-slug: comparing-prism-hoverfly-and-meeshkan-part-1
+slug: comparing-prism-hoverfly-and-mem-part-1
 authors: ["mike"]
 date: 2020-02-18
 tags:
@@ -11,14 +11,14 @@ tags:
   - testing
 ---
 
-_This is the first article of a two-part series comparing Prism, Hoverfly, and Meeshkan. This article presents a high-level comparison. The [second one](https://dev.to/meeshkan/comparing-prism-hoverfly-and-meeshkan-part-2-139i) shows they can be used with a specific API._
+_This is the first article of a two-part series comparing Prism, Hoverfly, and Mem. This article presents a high-level comparison. The [second one](https://meeshkan.com/blog/comparing-prism-hoverfly-and-mem-part-2/) shows they can be used with a specific API._
 
 ![Meeshkan team](https://cdn.filestackcontent.com/AZvPNtU2oRLCcNYkJFCAAz/resize=width:1000/https://dev-to-uploads.s3.amazonaws.com/i/bni2ip09m23dml1nozod.jpg)
 _Our team during a brief, spontaneous moment of levity._
 
-At Meeshkan, we reverse engineer software. Our mission is to build a tool that can clone even the most complex systems with a high degree of accuracy.
+At Mem, we reverse engineer software. Our mission is to build a tool that can clone even the most complex systems with a high degree of accuracy.
 
-We have recently begun to open-source more of our stack as we get closer to achieving our mission. In doing so, we've come up against some strong incumbents such as Prism and Hoverfly. In this article, I'd like to present both of those tools to our new open-source project [Meeshkan](https://github.com/meeshkan/meeshkan).
+We have recently begun to open-source more of our stack as we get closer to achieving our mission. In doing so, we've come up against some strong incumbents such as Prism and Hoverfly. In this article, I'd like to present both of those tools to our new open-source project [Mem](https://github.com/meeshkan/mem).
 
 ## Prism
 
@@ -65,15 +65,15 @@ Hoverfly is extensible through a middleware system that communicates through `st
 
 **Conclusion:** Hoverfly is a good tool when you need to serve back recordings of an API for testing.
 
-## Meeshkan
+## Mem
 
-If Hoverfly and Prism had a baby, it would be Meeshkan. Meeshkan allows developers to build a mock server from recordings and OpenAPI specs. It exposes a Python API for building a persistance layer behind mocks. We also use it to tie together ML models to simulate realistic server traffic.
+If Hoverfly and Prism had a baby, it would be Mem. Mem allows developers to build a mock server from recordings and OpenAPI specs. It exposes a Python API for building a persistance layer behind mocks. We also use it to tie together ML models to simulate realistic server traffic.
 
-Meeshkan ingests recordings in the [`http-types`](https://github.com/meeshkan/http-types) format. You can build these Meeshkan recordings using middleware or a proxy. For example, let's say that we have an `express` server and want to do our recording from that. We can use the [Meeshkan `express` middleware](https://github.com/meeshkan/express-middleware) to save recordings.
+Mem ingests recordings in the [`http-types`](https://github.com/meeshkan/http-types) format. You can build these Mem recordings using middleware or a proxy. For example, let's say that we have an `express` server and want to do our recording from that. We can use the [Mem `express` middleware](https://github.com/meeshkan/express-middleware) to save recordings.
 
 ```javascript
 app.use(
-  meeshkan({
+  mem({
     transport: S3Transport({
       bucket: "my-recording-bucket",
       key: "/ myservice",
@@ -83,29 +83,29 @@ app.use(
 )
 ```
 
-It's also possible to use Meeshkan as a reverse proxy for recording.
+It's also possible to use Mem as a reverse proxy for recording.
 
 ```bash
-$ meeshkan record --log_dir ./logs
+$ mem record --log_dir ./logs
 $ curl http://localhost:8000/http/echo.jsontest.com/a/b
 ```
 
-Then, we use `meeshkan build` to turn these recordings into an OpenAPI spec. In the example below, we mix the recordings with a preexisting spec. The result is an enhanced OpenAPI spec.
+Then, we use `mem build` to turn these recordings into an OpenAPI spec. In the example below, we mix the recordings with a preexisting spec. The result is an enhanced OpenAPI spec.
 
 ```bash
-$ meeshkan build --mode replay -i recording.json -a spec.yml -o enhanced_spec
+$ mem build --mode replay -i recording.json -a spec.yml -o enhanced_spec
 ```
 
-If you use `gen` mode, then Meeshkan will infer a spec from recordings instead of serving them rote.
+If you use `gen` mode, then Mem will infer a spec from recordings instead of serving them rote.
 
 ```bash
-$ meeshkan build --mode gen -i recording.json -a spec.yml -o enhanced_spec
+$ mem build --mode gen -i recording.json -a spec.yml -o enhanced_spec
 ```
 
-Like Hoverfly and Prism, Meeshkan can be started in server mode.
+Like Hoverfly and Prism, Mem can be started in server mode.
 
 ```bash
-$ meeshkan mock -i enhanced_spec/
+$ mem mock -i enhanced_spec/
 ```
 
-**Conclusion:** Meeshkan blends together recordings and OpenAPI specs into an enhanced OpenAPI spec. We'd love to hear your feedback on our [GitHub issues page](https://github.com/meeshkan/meeshkan/issues).
+**Conclusion:** Mem blends together recordings and OpenAPI specs into an enhanced OpenAPI spec. We'd love to hear your feedback on our [GitHub issues page](https://github.com/meeshkan/mem/issues).
