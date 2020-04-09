@@ -1,8 +1,8 @@
 # 📅 Meeshkan Content Calendar
 
-Welcome to our content-calendar repository!
+Welcome to our blog!
 
-The dream is that this will be a place to hold all of our content-related work for Meeshkan 💫 Right now though, it's more of vague idea of when/where we'll publish things in the pipeline and instructions for how to submit new articles or ideas.
+This README walks through everything you need to know to publish an article on the [Meeshkan blog](https://meeshkan.com/blog/) 💫 
 
 ## What's in this document
 
@@ -11,8 +11,8 @@ The dream is that this will be a place to hold all of our content-related work f
   - [Distributing content](#distributing-content)
   - [Submitting articles to external publications](#submitting-articles-to-external-publications)
 - [Our content workflow](#our-content-workflow)
-- [I have an idea!](#i-have-an-idea)
-  - [Submitting your article](#submitting-a-new-article)
+- [Submitting your article](#submitting-a-new-article)
+  - [Frontmatter data](#frontmatter-data)
 - [Tools for writers](#tools-for-writers)
   - [English](#english)
 
@@ -23,7 +23,7 @@ The dream is that this will be a place to hold all of our content-related work f
 | Friday 17.04    | Property-based Testing for JS devs                         | Carolyn           |         |        |                                                                                                 |
 | Tuesday 14.04   | OP Bank Tutorial                                           | Nikolay           |         |        |                                                                                                 |
 | Saturday 11.04  | Telemetry in Open Source - Part 2                          | Carolyn           |         |        |                                                                                                 |
-| Wednesday 08.04 | Word embeddings with code2vec, GloVe and spaCy             | Maria             |         |        |                                                                                                 |
+| Wednesday 08.04 | Word embeddings with code2vec, GloVe and spaCy             | Maria             |         |   ✔️     |                                                                                                 |
 | Monday 06.04    | Property-based testing - Part 1                            | Fredrik & Carolyn | ✔️      | ✔️     |                                                                                                 |
 | Friday 03.04    | Vanity announcement                                        | Nikolaos          | ✔️      | ✔️     |                                                                                                 |
 | Thursday 02.04  | Word embeddings with code2vec, GloVe and spaCy             | Maria             | ✔️      |        |                                                                                                 |
@@ -37,7 +37,7 @@ The dream is that this will be a place to hold all of our content-related work f
 
 ## Where does Meeshkan content live?
 
-All of our content is published on the [Meeshkan blog](http://meeshkan.com/blog/). In most cases, technical articles will also be posted on the [Meeshkan DEV page](https://dev.to/meeshkan/) using a [canonical url](https://yoast.com/rel-canonical/) pointing back to the blog.
+All of our content is published on the [Meeshkan blog](http://meeshkan.com/blog/). In most cases, technical articles will also be posted on the [Meeshkan DEV page](https://dev.to/meeshkan/) with a [`canonical_url`](https://yoast.com/rel-canonical/) variable pointing back to the blog.
 
 ### Distributing content
 
@@ -45,34 +45,58 @@ Every piece of content is 20% actual creation and 80% distribution. Which is unf
 
 Ideally, everything we publish will be shared on the [Meeshkan Twitter account](https://twitter.com/meeshkanml?lang=en) and [Meeshkan LinkedIn page](https://www.linkedin.com/company/meeshkan/). The top articles will be shared through [our newsletter](https://www.subscribepage.com/meeshkan) whenever we figure that out.
 
+### Submitting articles to external publications
+
+Sometimes it makes sense to try to get our articles published in external publications. In these cases, we'll look at the publication's requirements for submitted articles and adjust the procress accordingly.
+
+Submissions are tracked here in this handy table:
+
+| Date Submitted | Article                                        | Author | Publication                                             | Writing Guidelines                                                                     | Accepted           | Rejected | Date Published | Link                                                                                            |
+| -------------- | ---------------------------------------------- | ------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ | -------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria  | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
+| 01.04          | Telemetry in Open Source - Part 1 | Carolyn  | [DZone](https://dzone.com/) | [Become a DZone Contributor](https://dzone.com/pages/contribute) |  |          |        |    |
+| 09.04          | A Beginner's Guide to PBT | Fredrik & Carolyn  | [DZone](https://dzone.com/) | [Become a DZone Contributor](https://dzone.com/pages/contribute) |  |          |        |    |
+
 ## Our content workflow
 
-Like good nerds, we have a kanban board for this! It's a [GitHub project board called Content Plan](https://github.com/orgs/meeshkan/projects/3) and the lanes are divided like so:
+Like good nerds, we have a kanban board and tickets for this! Everything's in Linear, but here's an overview of how the process works:
 
-- **Ideas**: Submitted issues that haven't been started yet.
-- **Development Needed**: Started articles that need any development work or changes to the product before it can be published.
-- **Writing in Progress**: There are no blockers and the article is currently being written.
-- **Ready for Review**: Draft is done, the PR is open - waiting for Carolyn to review.
-- **Draft in Review**: Author and Carolyn are working together to make it niiiiiice.
-- **Ready to Publish**: PR is merged into this repo and a PR is open on the [Meeshkan website](https://github.com/Meeshkan/worlds-greatest-website).
-- **Published**: It's live on the website! And anywhere else we want to publish it.
-- **Promoted**: We did that [distribution thing](#distributing-content) mentioned earlier.
-
-## I have an idea!
-
-That's really great, we want to hear it and almost definitely publish it. Please [open an issue](https://github.com/meeshkan/content-calendar/issues) describing your content idea. We'll use this issue to track the progress throughout, so try to make it as detailed as possible.
-
-Some points to include:
-
-- A short description of what the article will be about
-- Why you want to write it
-- Who the intended audience is
+- **Have an idea**: Talk to Carolyn about it or open a ticket on Linear.
+- **Write your article**: If you run into any blockers, comment in the Linear ticket. If additional development needs to be done before publishing, create a subtask in the Linear ticket. Feel free to reach out to Carolyn any time for help. 
+- **Open a PR**: Follow the instructions below to add your article to the blog.
+- **Review**: You and Carolyn will work together to make your article niiiiiice.
+- **Publish**: Your PR was merged! It's up on the website! Celebrate 🎉
+- **Distribute**: Once your article is on the blog, you can publish it on other platforms as long as there is a canonical url linking back to the original post. 
+- **Promote**: Share your article on social media (if you want).
 
 ### Submitting a new article
 
-If you have an article that you want to publish, please [open a pull request](https://github.com/meeshkan/content-calendar/pulls) adding your article to the `drafts` directory. Your article should be a markdown file.
+Before beginning to write your article, please open a ticket in the `Content Creation` Linear project with the `Blog` label.
 
-Your PR should link to the [issue you previously created](#i-have-an-idea) or include a short description of what the article is about, why you wrote it and who the intended audience is.
+After you have a draft ready, follow the steps below to get your article published:
+1. In a branch named after your ticket ID, add your article to the `./blog/posts` directory of this repo. Make sure that is has the appropriate [Frontmatter data](#frontmatter-data).
+1. Open a PR and in the description, include a short description of what the article is about, why you wrote it and who the intended audience is. Add Carolyn as a reviewer.
+
+After that, you'll work together with Carolyn to get your article published.
+
+### Frontmatter data
+
+Every article needs to have Frontmatter data at the top with the following information:
+
+```
+---
+title: 
+description: 
+date:
+authors: [""]
+tags:
+  - 
+  - 
+  - 
+---
+```
+
+For the `authors` variable, please refer to [`./data/author.yaml`](https://github.com/meeshkan/website/blob/master/data/author.yaml) and use your ID or add yourself. 
 
 ## Tools for writers
 
@@ -82,13 +106,4 @@ Writing is hard, particularly if you're not writing in your native language. But
 
 - [Grammarly](https://www.grammarly.com)
 - [Hemingway App](hemingwayapp.com/)
-
-## Submitting articles to external publications
-
-Sometimes it makes sense to try to get our articles published in external publications. In these cases, we'll look at the publication's requirements for submitted articles and adjust the procress accordingly.
-
-Sometimes, we try to get our content published in external publications! And then we track those here in a handy table.
-
-| Date Submitted | Article                                        | Author | Publication                                             | Writing Guidelines                                                                     | Accepted           | Rejected | Date Published | Link                                                                                            |
-| -------------- | ---------------------------------------------- | ------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ | -------- | -------------- | ----------------------------------------------------------------------------------------------- |
-| 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria  | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
+- [Headline Analyzer](https://coschedule.com/headline-analyzer)
