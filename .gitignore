@@ -10,3 +10,6 @@ public
 
 # Yarn
 yarn-error.log
+
+# Other
+.DS_Store
