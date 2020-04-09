@@ -37,6 +37,7 @@ const IndexPage = () => (
         <input type="hidden" name="form-name" value="schedule-demo-home" />
         <Input
           type="email"
+          name="email"
           aria-label="Enter your business email"
           borderRadius="sm"
           mr={[0, 0, 4]}

@@ -46,14 +46,14 @@ const ContactPage = () => (
           <FormLabel htmlFor="name" fontWeight={700}>
             Name
           </FormLabel>
-          <Input type="text" id="name" mb={4} rounded="sm" />
+          <Input type="text" name="name" id="name" mb={4} rounded="sm" />
         </FormControl>
 
         <FormControl isRequired w="100%">
           <FormLabel htmlFor="email" fontWeight={700}>
             Email
           </FormLabel>
-          <Input type="email" id="email" mb={4} rounded="sm" />
+          <Input type="email" name="email" id="email" mb={4} rounded="sm" />
         </FormControl>
 
         <FormControl w="100%">
@@ -66,6 +66,7 @@ const ContactPage = () => (
               roundedRight="sm"
               roundedLeft="0"
               type="url"
+              name="website"
               id="website"
               placeholder="company-site"
             />
@@ -75,7 +76,13 @@ const ContactPage = () => (
           <FormLabel htmlFor="message" fontWeight={700}>
             Message
           </FormLabel>
-          <Textarea id="message" resize="none" mb={4} rounded="sm" />
+          <Textarea
+            id="message"
+            name="message"
+            resize="none"
+            mb={4}
+            rounded="sm"
+          />
         </FormControl>
 
         <Button
