@@ -256,7 +256,7 @@ def test_base32_crockford(input_int):
       assert base32_crockford.decode(base32_crockford.encode(input_int)) == input_int
 ```
 
-Because this decoding scheme only works for non-negative integers, you need to specify the _generation strategy_ of your input data. That's why, in this example, `some.integers(min_value=0)` is added to the `@given` decorator. It restricts Hypothesis to only generate integers with a minium value of zero.
+Because this decoding scheme only works for non-negative integers, you need to specify the _generation strategy_ of your input data. That's why, in this example, `some.integers(min_value=0)` is added to the `@given` decorator. It restricts Hypothesis to only generate integers with a minimum value of zero.
 
 Once again, the test passes 🎉
 
@@ -266,7 +266,7 @@ Sometimes, you can get the desired solution through a naive, unpractical way tha
 
 For example, consider counting the number of set bits in an (arbitrary sized) integer, where you have an optimized solution from the [pygmp2](https://gmpy2.readthedocs.io/en/latest/) library.
 
-Let's compare this with a slower solution that converts the integer to a binary string (using the [bin](https://docs.python.org/3/library/functions.html#bin) function in the Python standard library) and then counts the occurences of the string `"1"` inside of it:
+Let's compare this with a slower solution that converts the integer to a binary string (using the [bin](https://docs.python.org/3/library/functions.html#bin) function in the Python standard library) and then counts the occurrences of the string `"1"` inside of it:
 
 ```python
 # test_gmpy_popcount.py
