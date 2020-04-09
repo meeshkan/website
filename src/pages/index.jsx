@@ -122,9 +122,9 @@ const IndexPage = () => (
         gap={6}
       >
         <Card
-          heading="Meeshkan"
-          link="https://github.com/meeshkan/meeshkan"
-          label="Learn more about Meeshkan"
+          heading="Mem"
+          link="https://github.com/meeshkan/mem"
+          label="Learn more about Mem"
           body="Building OpenAPI specifications from HTTP recordings and a place to
             store the HTTP traffic logs."
         >
