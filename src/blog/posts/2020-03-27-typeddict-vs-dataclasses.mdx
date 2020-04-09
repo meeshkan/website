@@ -10,7 +10,7 @@ tags:
   - beginners
 ---
 
-We recently migrated our [Meeshkan](https://github.com/meeshkan/meeshkan) product from Python [`TypedDict`](https://www.python.org/dev/peps/pep-0589/) to [`dataclasses`](https://docs.python.org/3/library/dataclasses.html). This article explains why. We'll start with a general overview of types in Python. Then, we'll walk through the difference between the two typing strategies with examples. By the end, you should have the information you need to choose the one that's the best fit for your Python project.
+We recently migrated our [Mem](https://github.com/meeshkan/mem) product from Python [`TypedDict`](https://www.python.org/dev/peps/pep-0589/) to [`dataclasses`](https://docs.python.org/3/library/dataclasses.html). This article explains why. We'll start with a general overview of types in Python. Then, we'll walk through the difference between the two typing strategies with examples. By the end, you should have the information you need to choose the one that's the best fit for your Python project.
 
 ## Table of Contents
 
@@ -365,7 +365,7 @@ Person(name='Larry', age=25, car='Kia Spectra')
 
 ## Migrating from `TypedDict` to `dataclasses`
 
-You may have guessed by now, but generally, we prefer duck typing over classes. For this reason, we're very enthusiastic about `TypedDict`. That said, in [Meeshkan](https://github.com/meeshkan/meeshkan), we migrated from `TypedDict` to `dataclasses` for several reasons. Throughout the rest of this article, we'll explain why we made the move.
+You may have guessed by now, but generally, we prefer duck typing over classes. For this reason, we're very enthusiastic about `TypedDict`. That said, in [Mem](https://github.com/meeshkan/mem), we migrated from `TypedDict` to `dataclasses` for several reasons. Throughout the rest of this article, we'll explain why we made the move.
 
 The two reasons we migrated from `TypedDict` to `dataclasses` are matching and validation:
 
@@ -402,7 +402,7 @@ print(i_am_old(Comet(name="Spacey", age=1000))) # False
 
 In Python, `isinstance` can discriminate between union types. This is critical for most real-world programs that support several types.
 
-In [Meeshkan](https://github.com/meeshkan/meeshkan), we work with union types all the time in [OpenAPI](https://www.openapis.org/). For example, most object specifications can be a `Schema` _or_ a `Reference` to a schema. All over our codebase, you'll see `isinstance(r, Reference)` to make this distinction.
+In [Mem](https://github.com/meeshkan/mem), we work with union types all the time in [OpenAPI](https://www.openapis.org/). For example, most object specifications can be a `Schema` _or_ a `Reference` to a schema. All over our codebase, you'll see `isinstance(r, Reference)` to make this distinction.
 
 `TypedDict` doesn't work with `isinstance` - and for good reason. Under the hood, `isinistance` looks up the class name of the Python object. That's a very fast operation. With duck typing, you'd have to inspect the whole object to see if "it's a duck." While this is fast for small objects, it is too slow for large objects like OpenAPI specifications. The `isinstance` pattern has sped up our code _a lot_.
 
@@ -451,7 +451,7 @@ def to_person(d: dict) -> Person:
 
 The above `to_person` will raise an error, whereas the `TypedDict` version won't. This means that, when an error arises, it will happen later down the line. These types of errors are much harder to debug.
 
-When we changed from `TypedDict` to `dataclasses` in [Meeshkan](https://github.com/meeshkan/meeshkan), some tests started to fail. Looking them over, we realized that they never should have succeeded. Their success was due to the use of `cast`, whereas the `class` approach surfaced several bugs.
+When we changed from `TypedDict` to `dataclasses` in [Mem](https://github.com/meeshkan/mem), some tests started to fail. Looking them over, we realized that they never should have succeeded. Their success was due to the use of `cast`, whereas the `class` approach surfaced several bugs.
 
 <a name="conclusion"></a>
 

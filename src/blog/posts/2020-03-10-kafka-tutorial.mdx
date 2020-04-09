@@ -31,7 +31,7 @@ Kafka (short for Apache Kafka) is a high-performance distributed streaming platf
 1. [Creating an OpenAPI specification from recordings](#creating-an-openapi-specification-from-recordings)
 1. [Conclusion](#conclusion)
 
-All of the code and instructions for this tutorial can be found in the [`meeshkan-express-kafka-demo` GitHub repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo).
+All of the code and instructions for this tutorial can be found in the [`mem-express-kafka-demo` GitHub repository](https://github.com/Meeshkan/mem-express-kafka-demo).
 
 ## Creating a Node.js server
 
@@ -70,7 +70,7 @@ To log HTTP traffic from Express to Kafka, we'll need:
 
 We'll see how to put these together below.
 
-Our server is defined in [src/index.ts](https://github.com/meeshkan/meeshkan-express-kafka-demo/blob/master/src/index.ts). The entry point to the program is the `main()` function defined as follows:
+Our server is defined in [src/index.ts](https://github.com/meeshkan/mem-express-kafka-demo/blob/master/src/index.ts). The entry point to the program is the `main()` function defined as follows:
 
 ```ts
 const KAFKA_TOPIC = "http_recordings"
@@ -230,7 +230,7 @@ Fetching a user is similar. The user ID given in the route must be a string, aft
 
 Before starting our server, we need to start Kafka.
 
-If you prefer to install Kafka on your own machine, you can follow the instructions in [Kafka Quick Start](https://kafka.apache.org/quickstart). Alternatively, you can use Docker. Our [demo repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo) has a Docker Compose file [docker-compose.yml](https://github.com/meeshkan/meeshkan-express-kafka-demo/blob/master/docker-compose.yml). This file starts a single instance of [Zookeeper](https://zookeeper.apache.org/), a centralized service for maintaining configuration information, and a single instance of Kafka. The Docker Compose file has been copied from the [kafka-stack-docker-compose repository](https://github.com/simplesteph/kafka-stack-docker-compose) with small modifications.
+If you prefer to install Kafka on your own machine, you can follow the instructions in [Kafka Quick Start](https://kafka.apache.org/quickstart). Alternatively, you can use Docker. Our [demo repository](https://github.com/meeshkan/mem-express-kafka-demo) has a Docker Compose file [docker-compose.yml](https://github.com/meeshkan/mem-express-kafka-demo/blob/master/docker-compose.yml). This file starts a single instance of [Zookeeper](https://zookeeper.apache.org/), a centralized service for maintaining configuration information, and a single instance of Kafka. The Docker Compose file has been copied from the [kafka-stack-docker-compose repository](https://github.com/simplesteph/kafka-stack-docker-compose) with small modifications.
 
 Using Docker Compose, we can use the command line to start the Kafka cluster by running:
 
@@ -303,21 +303,21 @@ Our Kafka console consumer should print HTTP exchanges line by line, showing we'
 
 ## Creating an OpenAPI specification from recordings
 
-To show a potential use case for our HTTP recordings, we'll use the recordings to create an [OpenAPI specification](https://swagger.io/specification/). This will be done using the [`meeshkan`](https://github.com/Meeshkan/meeshkan) Python tool. Our OpenAPI specification will then act as a contract - specifying the API endpoints and what data they consume or produce. It can be used for documentation or testing.
+To show a potential use case for our HTTP recordings, we'll use the recordings to create an [OpenAPI specification](https://swagger.io/specification/). This will be done using the [`mem`](https://github.com/meeshkan/mem) Python tool. Our OpenAPI specification will then act as a contract - specifying the API endpoints and what data they consume or produce. It can be used for documentation or testing.
 
-To get started, install `meeshkan` from [PyPI](https://pypi.org/project/meeshkan/):
+To get started, install `mem` from [PyPI](https://pypi.org/project/mem/):
 
 ```bash
-$ pip install meeshkan
+$ pip install mem
 ```
 
 To create an OpenAPI specification to the directory `my_spec/`, run the following command:
 
 ```bash
-$ meeshkan build --source kafka -o my_spec
+$ mem build --source kafka -o my_spec
 ```
 
-`meeshkan` will update the OpenAPI specification in memory whenever new data arrives in `http_recordings` topic. Stop `meeshkan` with `Ctrl+C` and the specification is written to `my_spec` directory with an `openapi.json` as follows:
+`mem` will update the OpenAPI specification in memory whenever new data arrives in `http_recordings` topic. Stop `mem` with `Ctrl+C` and the specification is written to `my_spec` directory with an `openapi.json` as follows:
 
 ```json
 {
@@ -360,10 +360,10 @@ $ docker-compose down
 
 ## Conclusion
 
-To summarize, we created an Express server running in Node.js and added a middleware logging all HTTP exchanges to Apache Kafka. We also saw how to use [`meeshkan`](https://github.com/meeshkan/meeshkan) to create an OpenAPI specification of our server.
+To summarize, we created an Express server running in Node.js and added a middleware logging all HTTP exchanges to Apache Kafka. We also saw how to use [`mem`](https://github.com/meeshkan/mem) to create an OpenAPI specification of our server.
 
-If you haven't tried it yourself yet, you can [follow the steps of this article in our GitHub repository](https://github.com/Meeshkan/meeshkan-express-kafka-demo).
+If you haven't tried it yourself yet, you can [follow the steps of this article in our GitHub repository](https://github.com/Meeshkan/mem-express-kafka-demo).
 
-[`meeshkan`](https://github.com/meeshkan/meeshkan) is still under development, so we very much appreciate any feedback. Feel free to comment below or [try our tutorial](https://github.com/meeshkan/meeshkan-tutorial/).
+[`mem`](https://github.com/meeshkan/mem) is still under development, so we very much appreciate any feedback. Feel free to comment below or [try our tutorial](https://github.com/meeshkan/mem#tutorial).
 
 Thank you for reading!
