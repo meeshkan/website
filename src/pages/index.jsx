@@ -1,16 +1,7 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
-import {
-  Heading,
-  Input,
-  Button,
-  Text,
-  Grid,
-  Flex,
-  Badge,
-} from "@chakra-ui/core"
+import { Heading, Input, Button, Text, Flex, Badge } from "@chakra-ui/core"
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
-import { Card } from "../components/atoms/card"
 import { SingleSection } from "../components/organisims/singleSection"
 import { DoubleSection } from "../components/organisims/doubleSection"
 import Img from "gatsby-image"
@@ -91,14 +82,14 @@ const IndexPage = () => {
           as="form"
           direction={["column", "column", "row"]}
           justify="center"
-          name="schedule-demo-home"
+          name="request-beta-1"
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
           mb={12}
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="schedule-demo-home" />
+          <input type="hidden" name="form-name" value="request-beta-1" />
           <Input
             type="email"
             name="email"
@@ -139,67 +130,45 @@ const IndexPage = () => {
       </DoubleSection>
 
       <SingleSection
-        heading="Where is the Meeshkan Algorithm used?"
-        anchor="projects"
+        heading="Automate resiliency testing with the Meeshkan web app"
+        text="Using targeted, stateful, model-based property-based testing, and mocking your app’s dependencies - Meeshkan gives you confidence in your app’s resilience."
       >
-        <Grid
-          templateColumns={[
-            "repeat(auto-fill, 1fr)",
-            "reapeat(auto-fill, 1fr)",
-            "repeat(3, 1fr)",
-          ]}
-          gap={6}
+        <Text textAlign="center" color="gray.500" mb={4}>
+          Getting set up is as fast as authorizing GitHub.
+        </Text>
+        <Flex
+          as="form"
+          direction={["column", "column", "row"]}
+          justify="center"
+          name="request-beta-2"
+          data-netlify="true"
+          method="post"
+          data-netlify-honeypot="bot-field"
+          mb={12}
         >
-          <Card
-            heading="Meeshkan"
-            link="https://github.com/meeshkan/meeshkan"
-            label="Learn more about Meeshkan"
-            body="Building OpenAPI specifications from HTTP recordings and a place to
-            store the HTTP traffic logs."
+          <input type="hidden" name="bot-field" />
+          <input type="hidden" name="form-name" value="request-beta-2" />
+          <Input
+            type="email"
+            name="email"
+            aria-label="Enter your business email"
+            borderRadius="sm"
+            mr={[0, 0, 4]}
+            mb={[4, 4, 0]}
+            placeholder="Your email"
+            fontWeight={500}
+            maxW={["full", "full", "400px"]}
+            isRequired
+          />
+          <Button
+            variantColor="red"
+            borderRadius="sm"
+            fontWeight={900}
+            type="submit"
           >
-            <Text color="blue.500" mt={4} fontWeight={600}>
-              Learn more ->
-            </Text>
-          </Card>
-
-          <Card
-            heading="Unmock"
-            link="https://github.com/meeshkan/unmock-js"
-            body="A library that helps fuzz test external APIs and microservices."
-            label="Learn more about Unmock"
-          >
-            <Text
-              color="blue.500"
-              mt={4}
-              fontWeight={600}
-              pos="absolute"
-              bottom={6}
-              right={6}
-              left={6}
-            >
-              Learn more ->
-            </Text>
-          </Card>
-
-          <Card
-            heading="Jaymock"
-            link="https://github.com/meeshkan/jaymock/"
-            body="Tiny API mocking microservice for generating fake JSON data."
-            label="Learn more about jaymock"
-          >
-            <Text
-              color="blue.500"
-              mt={4}
-              fontWeight={600}
-              pos="absolute"
-              bottom={6}
-              right={6}
-              left={6}
-            >
-              Learn more ->
-            </Text>
-          </Card>
-        </Grid>
+            Request beta access
+          </Button>
+        </Flex>
       </SingleSection>
 
       <SingleSection>

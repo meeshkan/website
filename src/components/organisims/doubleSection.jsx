@@ -46,7 +46,7 @@ export const DoubleSection = ({
             )}
           </Heading>
         ) : null}
-        <Text fontSize="2xl">{text}</Text>
+        {text ? <Text fontSize="2xl">{text}</Text> : null}
       </Box>
     </Grid>
   </Box>
