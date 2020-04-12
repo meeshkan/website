@@ -1,6 +1,15 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
-import { Heading, Box, Input, Button, Text, Grid, Flex } from "@chakra-ui/core"
+import {
+  Heading,
+  Box,
+  Input,
+  Button,
+  Text,
+  Grid,
+  Flex,
+  Badge,
+} from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import { Card } from "../components/atoms/card"
 import { Section } from "../components/organisims/section"
@@ -14,21 +23,45 @@ const IndexPage = () => (
       pageUrl="https://meeshkan.com/"
     />
     <Section>
+      <Flex justify="center" mb={3}>
+        <Badge
+          variantColor="cyan"
+          letterSpacing="widest"
+          fontSize="14px"
+          fontWeight={600}
+          rounded="sm"
+          padding="0px 4px"
+          minH="auto"
+        >
+          MEESHKAN - PRIVATE BETA
+        </Badge>
+      </Flex>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
-        mb={12}
+        mb={6}
         color="gray.900"
+        fontWeight={900}
       >
-        We’ve built a Machine Learning Algorithm that helps you break and fix
-        your apps.
+        Automatic testing for any app.
       </Heading>
+      <Text
+        textAlign="center"
+        fontSize="2xl"
+        lineHeight="short"
+        mb={6}
+        color="gray.700"
+      >
+        Stop feeling guilty for not writing tests. Meeshkan automatically
+        writes, executes, and reports on a collection of highly impactful tests
+        that are guaranteed to squash bugs and improve your code.
+      </Text>
       <Flex
         as="form"
         direction={["column", "column", "row"]}
         justify="center"
-        name="Schedule Demo Home"
+        name="schedule-demo-home"
         data-netlify="true"
         method="post"
         data-netlify-honeypot="bot-field"
@@ -42,7 +75,8 @@ const IndexPage = () => (
           borderRadius="sm"
           mr={[0, 0, 4]}
           mb={[4, 4, 0]}
-          placeholder="Business email"
+          placeholder="Your email"
+          fontWeight={500}
           maxW={["full", "full", "400px"]}
           isRequired
         />
@@ -52,7 +86,7 @@ const IndexPage = () => (
           fontWeight={900}
           type="submit"
         >
-          Schedule a demo
+          Request beta access
         </Button>
       </Flex>
     </Section>
