@@ -9,6 +9,7 @@ import {
   Badge,
   FormControl,
   FormLabel,
+  Box,
 } from "@chakra-ui/core"
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisims/singleSection"
@@ -68,6 +69,13 @@ const IndexPage = () => {
             }
           }
         }
+        testFailure: file(relativePath: { eq: "testFailureLight.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 458, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     `
   )
@@ -101,6 +109,8 @@ const IndexPage = () => {
           mb={6}
           color="gray.900"
           fontWeight={900}
+          letterSpacing="wide"
+          lineHeight="short"
         >
           Automatic testing for any app.
         </Heading>
@@ -117,7 +127,7 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
-          action="/success"
+          action="/success/"
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
@@ -185,7 +195,7 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
-          action="/success"
+          action="/success/"
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
@@ -262,25 +272,31 @@ const IndexPage = () => {
         <Img fluid={data.vulnerability.childImageSharp.fluid} />
       </DoubleSection>
 
-      <SingleSection>
-        <Flex
-          bg="gray.900"
-          direction={["column", "column", "row"]}
-          borderRadius="sm"
-          justify="center"
-          align="center"
-          p={6}
+      <Box
+        as="section"
+        bg="gray.900"
+        borderRadius="sm"
+        my={16}
+        mx="auto"
+        maxW={1200}
+        position="relative"
+        px={6}
+        py={12}
+      >
+        <Heading
+          as="h2"
+          color="white"
+          fontSize="3xl"
+          fontWeight={900}
+          mb={6}
+          lineHeight="short"
+          letterSpacing="wide"
+          ml={[0, 0, 0, 440, 522]}
+          textAlign={["center", "center", "center", "end"]}
         >
-          <Text
-            color="white"
-            fontWeight={900}
-            fontSize="xl"
-            mr={[0, 0, 6]}
-            mb={[6, 6, 0]}
-            textAlign="center"
-          >
-            Think you have a better use case?
-          </Text>
+          How would automated resiliency testing work for your organization?
+        </Heading>
+        <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
             as={GatsbyLink}
             to="/contact/"
@@ -288,10 +304,21 @@ const IndexPage = () => {
             fontWeight={900}
             rounded="sm"
           >
-            Get in touch
+            Schedule a demo
           </Button>
         </Flex>
-      </SingleSection>
+        <Box
+          maxW="458px"
+          pos="absolute"
+          left={0}
+          right={0}
+          bottom={0}
+          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+          display={["none", "none", "none", "block"]}
+        >
+          <Img fluid={data.testFailure.childImageSharp.fluid} />
+        </Box>
+      </Box>
     </>
   )
 }

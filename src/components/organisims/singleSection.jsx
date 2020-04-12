@@ -12,6 +12,7 @@ export const SingleSection = ({ children, heading, anchor, text, props }) => (
         textAlign="center"
         mb={6}
         letterSpacing="wide"
+        lineHeight="short"
       >
         {anchor ? (
           <Link id={anchor} _hover={{ textDecoration: "none", cursor: "auto" }}>
@@ -23,7 +24,7 @@ export const SingleSection = ({ children, heading, anchor, text, props }) => (
       </Heading>
     ) : null}
     {text ? (
-      <Text fontSize="2xl" textAlign="center" mb={12}>
+      <Text fontSize="2xl" textAlign="center" mb={12} lineHeight="short">
         {text}
       </Text>
     ) : null}

@@ -47,6 +47,7 @@ export const DoubleSection = ({
             fontWeight={900}
             mb={4}
             letterSpacing="wide"
+            lineHeight="short"
           >
             {anchor ? (
               <Link
@@ -60,7 +61,11 @@ export const DoubleSection = ({
             )}
           </Heading>
         ) : null}
-        {text ? <Text fontSize={["lg", "xl", "2xl"]}>{text}</Text> : null}
+        {text ? (
+          <Text fontSize={["lg", "xl", "2xl"]} lineHeight="short">
+            {text}
+          </Text>
+        ) : null}
       </Box>
     </Grid>
   </Box>
