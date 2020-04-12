@@ -19,7 +19,11 @@ export const DoubleSection = ({
       gap={14}
       gridAutoFlow="dense"
     >
-      {reverse ? <Box gridColumn="2">{children}</Box> : <Box>{children}</Box>}
+      {reverse ? (
+        <Box gridColumn={["1", "1", "2"]}> {children}</Box>
+      ) : (
+        <Box>{children}</Box>
+      )}
       <Box>
         {heading ? (
           <Heading
