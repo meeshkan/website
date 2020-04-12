@@ -9,7 +9,6 @@ import {
   Badge,
   FormControl,
   FormLabel,
-  Box,
 } from "@chakra-ui/core"
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisims/singleSection"
@@ -35,6 +34,34 @@ const IndexPage = () => {
           }
         }
         coverage: file(relativePath: { eq: "coverage.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        authorize: file(relativePath: { eq: "githubAuthorize.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        test: file(relativePath: { eq: "testLog.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        resolution: file(relativePath: { eq: "resolutionDialog.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        vulnerability: file(relativePath: { eq: "vulnerability.png" }) {
           childImageSharp {
             fluid(maxWidth: 400, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -200,6 +227,40 @@ const IndexPage = () => {
           </Button>
         </Flex>
       </SingleSection>
+
+      <DoubleSection
+        badge="Step 1"
+        heading="GitHub authorization"
+        text="In less time than it takes to drink a cup of coffee, authorize GitHub, choose a repo to test, and choose your base configuration."
+      >
+        <Img fluid={data.authorize.childImageSharp.fluid} />
+      </DoubleSection>
+
+      <DoubleSection
+        reverse={true}
+        badge="Step 2"
+        heading="Analyze and test your app"
+        text="Confirm the spec we've auto-generated for your service is correct. Then run the targeted property-based tests automatically generated from that spec."
+      >
+        <Img fluid={data.test.childImageSharp.fluid} />
+      </DoubleSection>
+
+      <DoubleSection
+        badge="Step 3"
+        heading="Resolve conflicts"
+        text="In a guided flow, mock any third-party dependencies that couldn’t be auto-mocked by Meeshkan, such as databases."
+      >
+        <Img fluid={data.resolution.childImageSharp.fluid} />
+      </DoubleSection>
+
+      <DoubleSection
+        reverse={true}
+        badge="Step 4"
+        heading="Fix vulnerabilities in your app"
+        text="When tests fail, your configuration can block a branch from merging and direct a developer to the point of failure. In the future, we’ll provide fix suggestions."
+      >
+        <Img fluid={data.vulnerability.childImageSharp.fluid} />
+      </DoubleSection>
 
       <SingleSection>
         <Flex
