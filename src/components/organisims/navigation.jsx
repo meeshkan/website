@@ -18,7 +18,7 @@ export function Navigation() {
       </Link>
       <Stack isInline>
         <NavLink text="Blog" path="/blog/" />
-        <NavLink text="Projects" path="/#projects" />
+        {/* <NavLink text="Pricing" path="/pricing/" /> */}
         {/* <NavLink text="Docs" path="/docs/" /> */}
       </Stack>
     </Stack>
