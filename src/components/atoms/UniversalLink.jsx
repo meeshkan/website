@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from "gatsby"
 import { Link as ChakraLink } from "@chakra-ui/core"
 
 export const UniversalLink = ({ children, to, ...props }) => {
-  const internal = /^\/(?!\/|\#)/.test(to)
+  const internal = /^\/(?!\/|#)/.test(to)
 
   // Use Gatsby Link for internal links, and <a> for others
   if (internal) {

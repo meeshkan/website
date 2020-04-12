@@ -1,5 +1,5 @@
 import React from "react"
-import { Section } from "../organisims/section"
+import { SingleSection } from "../organisims/singleSection"
 import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -18,7 +18,7 @@ const BlogPost = ({ data, pageContext }) => {
         pageDescription={frontmatter.excerpt}
         pageUrl={`/blog/${frontmatter.canonicalURL || frontmatter.slug}/`}
       />
-      <Section>
+      <SingleSection>
         <Heading
           as="h1"
           fontSize={["3xl", "4xl", "5xl"]}
@@ -87,7 +87,7 @@ const BlogPost = ({ data, pageContext }) => {
             </Button>
           )}
         </Stack>
-      </Section>
+      </SingleSection>
     </MDXProvider>
   )
 }

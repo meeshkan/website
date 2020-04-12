@@ -1,13 +1,13 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
-import { Section } from "../components/organisims/section"
+import { SingleSection } from "../components/organisims/singleSection"
 import { Link } from "gatsby"
 
 const NotFoundPage = () => (
   <>
     <SEO title="404: Not found" pageUrl="https://meeshkan.com/404/" />
-    <Section>
+    <SingleSection>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
@@ -31,7 +31,7 @@ const NotFoundPage = () => (
           Go back home
         </Button>
       </Flex>
-    </Section>
+    </SingleSection>
   </>
 )
 

@@ -10,7 +10,7 @@ import {
   FormControl,
   Box,
 } from "@chakra-ui/core"
-import { Section } from "../components/organisims/section"
+import { SingleSection } from "../components/organisims/singleSection"
 import SEO from "../components/molecules/seo"
 
 const ContactPage = () => (
@@ -20,7 +20,7 @@ const ContactPage = () => (
       pageDescription="Get in contact with us!"
       pageUrl="https://meeshkan.com/contact/"
     />
-    <Section>
+    <SingleSection>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
@@ -96,7 +96,7 @@ const ContactPage = () => (
           Submit
         </Button>
       </Box>
-    </Section>
+    </SingleSection>
   </>
 )
 
