@@ -26,12 +26,14 @@ const ContactPage = () => (
         fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
         mb={12}
+        fontWeight={900}
         color="gray.900"
       >
         Get in contact with us!
       </Heading>
       <Box
         as="form"
+        action="/success"
         maxW="750px"
         mx="auto"
         name="contact"

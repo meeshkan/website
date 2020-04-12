@@ -13,13 +13,13 @@ const NotFoundPage = () => (
         fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
         mb={12}
-        color="gray.900"
         fontWeight={900}
+        color="gray.900"
       >
-        Not found.
+        Success!
       </Heading>
       <Text textAlign="center" mb={6}>
-        You just hit a route that doesn&#39;t exist... the sadness.
+        We've recieved your form submission and will be back to you, shortly!
       </Text>
       <Flex justify="center">
         <Button

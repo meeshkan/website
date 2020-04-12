@@ -1,6 +1,16 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
-import { Heading, Input, Button, Text, Flex, Badge } from "@chakra-ui/core"
+import {
+  Heading,
+  Input,
+  Button,
+  Text,
+  Flex,
+  Badge,
+  FormControl,
+  FormLabel,
+  Box,
+} from "@chakra-ui/core"
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisims/singleSection"
 import { DoubleSection } from "../components/organisims/doubleSection"
@@ -80,6 +90,7 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
+          action="/success"
           direction={["column", "column", "row"]}
           justify="center"
           name="request-beta-1"
@@ -136,8 +147,9 @@ const IndexPage = () => {
         <Text textAlign="center" color="gray.500" mb={4}>
           Getting set up is as fast as authorizing GitHub.
         </Text>
-        <Flex
+        <Box
           as="form"
+          action="/success"
           direction={["column", "column", "row"]}
           justify="center"
           name="request-beta-2"
@@ -148,27 +160,31 @@ const IndexPage = () => {
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="request-beta-2" />
-          <Input
-            type="email"
-            name="email"
-            aria-label="Enter your business email"
-            borderRadius="sm"
-            mr={[0, 0, 4]}
-            mb={[4, 4, 0]}
-            placeholder="Your email"
-            fontWeight={500}
-            maxW={["full", "full", "400px"]}
-            isRequired
-          />
+          <FormControl isRequired>
+            <FormLabel htmlFor="email" fontWeight={700}>
+              Email
+            </FormLabel>
+            <Input
+              type="email"
+              name="email"
+              aria-label="Enter your business email"
+              borderRadius="sm"
+              mr={[0, 0, 4]}
+              mb={[4, 4, 0]}
+              placeholder="Your email"
+              fontWeight={500}
+              maxW={["full", "full", "400px"]}
+            />
+          </FormControl>
           <Button
             variantColor="red"
             borderRadius="sm"
-            fontWeight={900}
+            fontWeight={700}
             type="submit"
           >
             Request beta access
           </Button>
-        </Flex>
+        </Box>
       </SingleSection>
 
       <SingleSection>

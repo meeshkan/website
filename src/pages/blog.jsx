@@ -20,6 +20,7 @@ const BlogHome = ({ data }) => {
           textAlign="center"
           mb={12}
           color="gray.900"
+          fontWeight={900}
         >
           We’re experts in Machine Learning and APIs. Why keep it to ourselves?
         </Heading>
