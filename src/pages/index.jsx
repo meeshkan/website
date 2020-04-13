@@ -168,14 +168,20 @@ const IndexPage = () => {
             Request beta access
           </Button>
         </Flex>
-        <Img fluid={data.dash.childImageSharp.fluid} />
+        <Img
+          fluid={data.dash.childImageSharp.fluid}
+          alt="A dashboard screenshot of the Meeshkan web app."
+        />
       </SingleSection>
 
       <DoubleSection
         heading="90% of the code used by your app isn’t written by your team"
         text="3rd party dependencies are the backbone of modern applications. The lack of testing these APIs like the rest of your app is a vulnerability."
       >
-        <Img fluid={data.map.childImageSharp.fluid} />
+        <Img
+          fluid={data.map.childImageSharp.fluid}
+          alt="A dependency map with logos of several companies showing how your app uses other code bases."
+        />
       </DoubleSection>
 
       <DoubleSection
@@ -183,7 +189,10 @@ const IndexPage = () => {
         heading="Increase the coverage that your QA devs test."
         text="Testing with Meeshkan reaches parts of your app that aren’t reached with traditional testing infrastructure. QA devs can now be more confident in their coverage."
       >
-        <Img fluid={data.coverage.childImageSharp.fluid} />
+        <Img
+          fluid={data.coverage.childImageSharp.fluid}
+          alt="2 compared bar graphs showing that using Meeshkan covers 95% of your app, and the traditional unit, integration, e2e covers 60%."
+        />
       </DoubleSection>
 
       <SingleSection
@@ -243,7 +252,10 @@ const IndexPage = () => {
         heading="GitHub authorization"
         text="In less time than it takes to drink a cup of coffee, authorize GitHub, choose a repo to test, and choose your base configuration."
       >
-        <Img fluid={data.authorize.childImageSharp.fluid} />
+        <Img
+          fluid={data.authorize.childImageSharp.fluid}
+          alt="A screenshot of authorizing Meeshkan with Github"
+        />
       </DoubleSection>
 
       <DoubleSection
@@ -252,7 +264,10 @@ const IndexPage = () => {
         heading="Analyze and test your app"
         text="Confirm the spec we've auto-generated for your service is correct. Then run the targeted property-based tests automatically generated from that spec."
       >
-        <Img fluid={data.test.childImageSharp.fluid} />
+        <Img
+          fluid={data.test.childImageSharp.fluid}
+          alt="An illustration of the test log using pieces of the Meeshkan web app."
+        />
       </DoubleSection>
 
       <DoubleSection
@@ -260,7 +275,10 @@ const IndexPage = () => {
         heading="Resolve conflicts"
         text="In a guided flow, mock any third-party dependencies that couldn’t be auto-mocked by Meeshkan, such as databases."
       >
-        <Img fluid={data.resolution.childImageSharp.fluid} />
+        <Img
+          fluid={data.resolution.childImageSharp.fluid}
+          alt="A screenshot of the resolution dialog from the Meeshkan web app."
+        />
       </DoubleSection>
 
       <DoubleSection
@@ -269,7 +287,10 @@ const IndexPage = () => {
         heading="Fix vulnerabilities in your app"
         text="When tests fail, your configuration can block a branch from merging and direct a developer to the point of failure. In the future, we’ll provide fix suggestions."
       >
-        <Img fluid={data.vulnerability.childImageSharp.fluid} />
+        <Img
+          fluid={data.vulnerability.childImageSharp.fluid}
+          alt="An illustration of a bug found using pieces of the Meeshkan web app."
+        />
       </DoubleSection>
 
       <Box
@@ -300,6 +321,7 @@ const IndexPage = () => {
           <Button
             as={GatsbyLink}
             to="/contact/"
+            aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             fontWeight={900}
             rounded="sm"
@@ -316,7 +338,10 @@ const IndexPage = () => {
           boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
           display={["none", "none", "none", "block"]}
         >
-          <Img fluid={data.testFailure.childImageSharp.fluid} />
+          <Img
+            fluid={data.testFailure.childImageSharp.fluid}
+            alt="A screenshot of the test failure page in the Meeshkan website."
+          />
         </Box>
       </Box>
     </>
