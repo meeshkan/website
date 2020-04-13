@@ -209,7 +209,7 @@ mock _ AskLength = pure $ TellLength 0
 
 ## Cleanup
 
-Cleanup is the only function that exists within the monad in which the system is executing, and it is called after each series of commands is done.  As we don't need any cleanup, we can just write an empty function in the `IO` monadic context.
+Cleanup, like the semantics, exists within the monad in which the system is executing, and it is called after each series of commands is executed.  As we don't need any cleanup for our queue, we can just write an empty function in the `IO` monadic context.
 
 ```
 cleanup :: model Concrete -> IO ()
