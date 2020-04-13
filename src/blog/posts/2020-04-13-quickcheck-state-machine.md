@@ -10,7 +10,7 @@ tags:
   - haskell
 ---
 
-Property-based testing is a testing technique where you make assertions about a system's output with respect to its input. For example, if the input to a system is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees the author from coming up with input data - instead, the author defines the relationship between input and output and the test runner takes care verifies that the relationship holds.
+Property-based testing is a testing technique where you make assertions about a system's output with respect to its input. For example, if the input to a system is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees the author from having to come up with input data - instead, the author defines relationships between the system's input and output and the test runner verifies that the relationships hold.
 
 Stateful property-based testing (SPBT) is used when the system under test retains a state between subsequent interactions. This is true, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is is *stateful* property of the database.
 
