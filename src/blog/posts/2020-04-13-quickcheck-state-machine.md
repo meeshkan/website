@@ -18,9 +18,9 @@ There are several different libraries in several different languages for SPBT. I
 
 1. It is written in Haskell, which means you get access to Haskell's rock-solid type safety and fast performance.
 1. Its opinionated structure splits SPBT into component parts, which helped my learning process.
-1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine` uses the state machine, for example, to make really nice logs after the test is run.
-1. Fine-grained control of generation and shrinking is possible. This allows you to do more targeted testing.
-1. Its use of the type constructors `Symbolic` and `Concrete` allow you to generate commands (the `Symbolic` space) without actually running the state machine (the `Concrete` space).
+1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine`'s function `prettyCommands` uses the state machine, for example, to make really nice logs after the test is run.
+1. Fine-grained control of [generation](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:8) and [shrinking](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:6) is possible. This allows you to do more targeted testing.
+1. Its use of the kind signatures `Symbolic` and `Concrete` allow you to generate commands (the `Symbolic` kind) without actually running the state machine (the `Concrete` kind).
 1. It can test parallel execution to find bugs arising from race conditions.
 
 This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
@@ -31,7 +31,7 @@ The system under test will be a FIFO queue of integers that uses the file system
 
 The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
 
-Importantly, all three need to be polymorphic in accepting a type constructor `(Type -> Type)` as the generic type `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different type constructors: `Symbolic` and `Concrete`. `Symbolic` is used by `quickcheck-state-machine` to generate series of commands from a state machine whereas `Concrete` is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
+Importantly, all three need to be polymorphic in accepting a kind signature `(Type -> Type)` as the generic type `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different kind signatures: `Symbolic` and `Concrete`. The `Symbolic` kind is used by `quickcheck-state-machine` to generate series of commands from a state machine whereas the `Concrete` kind is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
 
 For example, the data type `IORef` (a mutable memory address) only ever exists in the `IO` monadic context, so if it is part of a model, a command, or a response, we could never use a the model, command, or response outside of the `IO` context. This would make generating commands more difficult - in general, we want our state machine's command generation to be pure. To solve this, `quickcheck-state-machine` would hold a symbolic reference to an `IORef` when the state machine is generating commands whereas we need to hold an concrete `IORef` in when running the test.
 
@@ -100,7 +100,7 @@ lengthQueue fname = do
 
 ## Initializing the model
 
-The first thing we need to do for our state machine is initialize the model.  The initializer function needs to be polymorphic for both the `Symbolic` and `Concrete` constructors.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
+The first thing we need to do for our state machine is initialize the model.  The initializer function needs to be polymorphic as it will eventually accept both the `Symbolic` and `Concrete` kinds.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
 
 ```haskell
 initModel :: Model r
@@ -109,7 +109,7 @@ initModel = Model []
 
 ## Transitions
 
-The next thing we need to do for our state machine is create transitions.  The transitions will execute in both the `Symbolic` and `Concrete` space because they are used to both generate commands and apply the state machine, so the function needs to remain polymorphic.
+The next thing we need to do for our state machine is create transitions.  The transitions will execute for both the `Symbolic` and `Concrete` kinds because they are used to both generate commands and apply the state machine, so the function needs to remain polymorphic.
 
 The transition function takes a model, a command, and a response and returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
@@ -126,7 +126,7 @@ transition m AskLength (TellLength _) = m
 
 Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
 
-Because the pre-condition is only used when generating lists of programs, it does not need to use concrete values, and so it does not need to be polymorphic and exists only in the `Symbolic` space.
+Because the pre-condition is only used when generating lists of programs, it does not need to use concrete values, and so it does not need to be polymorphic and exists only for the `Symbolic` kind.
 
 In this model, every command can be executed irrespective of the state, so we return `Top`.
 
@@ -139,7 +139,7 @@ precondition _ _ = Top
 
 Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other APIs, like hypothesis, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
-Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` space.
+Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` kind.
 
 Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model if it is useful when evaluating the response, as we do below.
 
@@ -162,7 +162,7 @@ invariant = Nothing
 
 ## Generator
 
-In my opinion, the generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  Here, we use the `oneof` combinator, which generates commands with a uniform distribution.  Because we are in the command generation phase, the `Symbolic` type constructor is used.
+In my opinion, the generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  Here, we use the `oneof` combinator, which generates commands with a uniform distribution.  Because we are in the command generation phase, the `Symbolic` kind signature is used.
 
 ```haskell
 generator :: Model Symbolic -> Maybe (Gen (Command Symbolic))
@@ -181,7 +181,7 @@ shrinker _ _             = []
 
 ## Semantics
 
-Semantics take a command in the `Concrete` space (meaning when the tests are actually executing) and returns the result of the execution in the monadic context (here `IO`). As our implementation of the FIFO queue is tightly coupled with the state machine, the semantics of the test is relatively straightforward.
+Semantics take a command using the `Concrete` kind, which signifies that it is used only when the tests are actually executing, and returns the result of the execution in the monadic context (here `IO`). As our implementation of the FIFO queue is tightly coupled with the state machine, the semantics of the test is relatively straightforward.
 
 ```haskell
 semantics :: String -> Command Concrete -> IO (Response Concrete)
@@ -198,7 +198,7 @@ semantics fname AskLength = do
 
 ## Mock
 
-Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. It's purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` type constructor). It is the foil to [Semantics](#semantics), which creates the real commands during text execution mode. The content of the responses are just thrown away, as all the library is figuring out is what commands lead to what responses.  I'm not a Haskell guru, but I'm pretty sure this sort of thing can be done automatically in Haskell with a bit of elbow grease. However, as it's pretty straightforward to generate garbage responses based on commands, it does not feel too burdensome.  One nice thing about it is that, if you want to, you can create a full-fledged mock of your model, although then you'd need to return non-dummy values.
+Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. It's purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` kind signature). It is the foil to [Semantics](#semantics), which creates the real commands during text execution mode. The content of the responses are just thrown away, as all the library is figuring out is what commands lead to what responses.  I'm not a Haskell guru, but I'm pretty sure this sort of thing can be done automatically in Haskell with a bit of elbow grease. However, as it's pretty straightforward to generate garbage responses based on commands, it does not feel too burdensome.  One nice thing about it is that, if you want to, you can create a full-fledged mock of your model, although then you'd need to return non-dummy values.
 
 ```haskell
 mock :: Model Symbolic -> Command Symbolic -> GenSym (Response Symbolic)
@@ -240,7 +240,7 @@ newRand = do
   return i
 ```
 
-Then, we define the property. `forAllCommands` uses a state machine to generate the commands (this is a state machine that will only run in the `Symbolic` space, not the `Concrete` one, so it won't ever touch `IO`) as well as an lower bound for the number of commands in a sequence. We use `Nothing` for the upper bound, meaning no upper bound. The last argument to `forAllCommands` is a function that accepts a sequence of commands and returns a monadic property. Monadic properties are defined in `QuickCheck.Monadic` and can be used whenever a property exists in a monadic context.  The conventience method `monadicIO` can be used to define properties in the `IO` context, and `run` lifts the result of the monadic execution to the `PropertyM` context, which is `QuickCheck`'s type for a monadic property.  So, the sequence below is:
+Then, we define the property. `forAllCommands` uses a state machine to generate the commands (this is a state machine that will only run for the `Symbolic` kind, not the `Concrete` kind, so it won't ever touch `IO`) as well as an lower bound for the number of commands in a sequence. We use `Nothing` for the upper bound, meaning no upper bound. The last argument to `forAllCommands` is a function that accepts a sequence of commands and returns a monadic property. Monadic properties are defined in `QuickCheck.Monadic` and can be used whenever a property exists in a monadic context.  The conventience method `monadicIO` can be used to define properties in the `IO` context, and `run` lifts the result of the monadic execution to the `PropertyM` context, which is `QuickCheck`'s type for a monadic property.  So, the sequence below is:
 
 1. We create a new random number and lift it to the `PropertyM` monadic context.
 1. We create a file name using this number.
