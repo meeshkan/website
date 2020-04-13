@@ -17,8 +17,8 @@ Stateful property-based testing (SPBT) is used when the system under test retain
 There are several different libraries in several different languages for SPBT. In this article, I will use [`quickcheck-state-machine`](https://github.com/advancedtelematic/quickcheck-state-machine). I like `quickcheck-state-machine` for several reasons:
 
 1. It is written in Haskell, which means you get access to Haskell's rock-solid type safety and fast performance.
-1. It's opinionated structure splits SPBT into component parts, which helped m learning process.
-1. An intermediary step is building a state machine, which can be manipulated outside of the test. `quickcheck-state-machine` uses the state machine, for example, to make really nice logs after the test is run.
+1. Its opinionated structure splits SPBT into component parts, which helped my learning process.
+1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine` uses the state machine, for example, to make really nice logs after the test is run.
 1. Fine-grained control of generation and shrinking is possible. This allows you to do more targeted testing.
 1. Its use of the type constructors `Symbolic` and `Concrete` allow you to generate commands (the `Symbolic` space) without actually running the state machine (the `Concrete` space).
 1. It can test parallel execution to find bugs arising from race conditions.
