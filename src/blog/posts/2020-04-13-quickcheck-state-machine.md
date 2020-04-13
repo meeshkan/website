@@ -421,4 +421,4 @@ PostconditionFailed "PredicateC (51 :/= 50)" /= Ok
 
 ### Advanced
 
-In the implementation of the queue, we use the funtion [`withFile`]() for all file-based IO. Haskell also has the functions [`writeFile`]() and [`readFile`](). Try using these instead and you'll hit a nasty bug! Can you anticipate what the bug will be? Once you run into the bug, was your guess right? How does this bug show the difference between `withFile` vs `writeFile` and `readFile`?
+In the implementation of the queue, we use the funtion [`withFile`](https://hackage.haskell.org/package/base-4.12.0.0/docs/System-IO.html#g:5) for all file-based IO. Haskell also has the functions [`writeFile`](https://hackage.haskell.org/package/base-4.12.0.0/docs/System-IO.html#g:7) and [`readFile`](https://hackage.haskell.org/package/base-4.12.0.0/docs/System-IO.html#g:7). Try using these instead and you'll hit a nasty bug! Can you anticipate what the bug will be? Once you run into the bug, was your guess right? How does this bug show the difference between `withFile` vs `writeFile` and `readFile`?
