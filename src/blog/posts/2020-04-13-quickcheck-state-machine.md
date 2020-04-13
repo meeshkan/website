@@ -100,7 +100,7 @@ lengthQueue fname = do
 
 ## Initializing the model
 
-The first thing we need to do for our state machine is initialize the model.  The initializer function needs to be polymorphic as it will eventually accept both the `Symbolic` and `Concrete` HKTs.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
+The first thing we need to do for our state machine is initialize the model. The initializer function needs to be polymorphic as it will eventually accept the `Symbolic` and `Concrete` HKTs depending on if we are in generation or execution mode.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
 
 ```haskell
 initModel :: Model r
@@ -109,7 +109,7 @@ initModel = Model []
 
 ## Transitions
 
-The next thing we need to do for our state machine is create transitions.  The transitions will execute for both the `Symbolic` and `Concrete` HKTs because they are used to both generate commands and apply the state machine, so the function needs to remain polymorphic.
+The next thing we need to do for our state machine is create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
 
 The transition function takes a model, a command, and a response and returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
@@ -137,7 +137,7 @@ precondition _ _ = Top
 
 ## Postconditions
 
-Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other APIs, like hypothesis, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
+Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
 Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` HKT.
 
