@@ -176,7 +176,7 @@ Like in `QuickCheck`, the shrinker takes a value and returns an array of new val
 ```haskell
 shrinker :: Model Symbolic -> Command Symbolic -> [Command Symbolic]
 shrinker _ (Push x) = [ Push x' | x' <- shrink x ]
-shrinker _ _             = []
+shrinker _ _  = []
 ```
 
 ## Semantics
@@ -198,7 +198,7 @@ semantics fname AskLength = do
 
 ## Mock
 
-Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. It's purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates the real commands during text execution mode. The content of the responses are just thrown away, as all the library is figuring out is what commands lead to what responses.  I'm not a Haskell guru, but I'm pretty sure this sort of thing can be done automatically in Haskell with a bit of elbow grease. However, as it's pretty straightforward to generate garbage responses based on commands, it does not feel too burdensome.  One nice thing about it is that, if you want to, you can create a full-fledged mock of your model, although then you'd need to return non-dummy values.
+Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. Its purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates the real commands during text execution mode. The content of the responses are just thrown away, as all the library uses `mock` for is to figure out what commands lead to what responses.  I'm not a Haskell guru, but I'm pretty sure this sort of thing can be done automatically in Haskell with a bit of elbow grease. However, as it's pretty straightforward to generate garbage responses based on commands, it does not feel too burdensome.  One nice thing about it is that, if you want to, you can create a full-fledged mock of your model, although then you'd need to return non-dummy values.
 
 ```haskell
 mock :: Model Symbolic -> Command Symbolic -> GenSym (Response Symbolic)
