@@ -20,7 +20,7 @@ There are several different libraries in several different languages for SPBT. I
 1. Its opinionated structure splits SPBT into component parts, which helped my learning process.
 1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine`'s function `prettyCommands` uses the state machine, for example, to make really nice logs after the test is run.
 1. Fine-grained control of [generation](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:8) and [shrinking](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:6) is possible. This allows you to do more targeted testing.
-1. Its use of the higher-kinded types (HKTs) `Symbolic` and `Concrete` allow you to generate commands (the `Symbolic` HKT) without actually running the state machine (the `Concrete` HKT).
+1. Its use of the higher-kinded types (HKTs) `Symbolic` and `Concrete` allow you to extract commands from a state machine using the `Symbolic` HKT) and then run it using the `Concrete` HKT. 
 1. It can test parallel execution to find bugs arising from race conditions.
 
 This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
@@ -31,11 +31,11 @@ The system under test will be a FIFO queue of integers that uses the file system
 
 The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
 
-Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` to generate series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
+Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
 
-For example, the data type `IORef` (a mutable memory address) only ever exists in the `IO` monadic context, so if it is part of a model, a command, or a response, we could never use a the model, command, or response outside of the `IO` context. This would make generating commands more difficult - in general, we want our state machine's command generation to be pure. To solve this, `quickcheck-state-machine` would hold a symbolic reference to an `IORef` when the state machine is generating commands whereas we need to hold an concrete `IORef` in when running the test.
+For example, the data type `IORef` (a mutable memory address) only ever exists in the `IO` monadic context, so if it is part of a model, a command, or a response, we could never generate the model, command, or response outside of the `IO` context. This would make manipulating the state machine more difficult - in general, we want our state machine's command generation to be non-monadic, which guarantees it won't have side effects. To solve this, `quickcheck-state-machine` uses `Symbolic` to hold a reference to an `IORef` when the state machine is generating commands whereas it uses `Concrete` to hold an actual `IORef`  when it running a test.
 
-That being said, in this example, there are no variables unique to a monadic context in the model, command or response, so we never need to use `r` in the definitions.
+That being said, in this example, there are no variables unique to a monadic context in the model, command or response, so we never need to use `r` in the definitions. To see a slightly more advanced example that uses a variable that only exists in a monadic context, check out the [`quickcheck-state-machine` README](https://github.com/advancedtelematic/quickcheck-state-machine/blob/master/README.md).
 
 ```haskell
 data Model (r :: Type -> Type) = Model [Int] deriving (Show, Eq, Generic)
@@ -58,9 +58,9 @@ data Response (r :: Type -> Type)
 
 Let's unpack what's going on here. The `Model` is an array of integers that we'll use to simulate a FIFO queue. There are three `Command`s - we can `Push` an integer onto the queue, `Pop` something off of the queue (either nothing or an integer), and `AskLength` to the queue. The `Response`s to these three commands are confirming that a value has been `Pushed`, telling us the integer that has been `Popped` and `TellLength`.
 
-It is not necessary to have a one-to-one correspondance between commands and responses. Haskell's pattern matching will allow us to define functions for any valid command/response pair.
+It is not necessary to have a one-to-one correspondance between commands and responses. Haskell's pattern matching will allow us to define the function for any valid command/response pair.
 
-The calls to `deriving` are not necessary for now, but they become necessary when the state machine is used in a property-based test. For example, `ToExpr` and `Generic` allow for pretty printing to the console, and `Rank2.Traversable` allows something to be iterated over. I found this to be the trickiest parts of the `quickcheck-state-machine` API, as there is currently no way to know this aside from reading the tests. This tutorial provides the necessary boilerplate to get the state machine up and running in PBT.
+The calls to `deriving` are not necessary for now, but they become necessary when the state machine is used in a property-based test. For example, `ToExpr` and `Generic` allow for pretty printing to the console, and `Rank2.Traversable` allows the commands to be iterated over. I found this to be the trickiest part of the `quickcheck-state-machine` API, as there is currently no way to know this aside from reading the tests. My recommendation would be to copy-and-paste the language extensions and `deriving` clauses from the [finished tutorial's GitHub page](https://github.com/meeshkan/quickcheck-state-machine-example) when building your own state machine.
 
 ## Defining our queue
 
