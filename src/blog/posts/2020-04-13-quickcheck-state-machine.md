@@ -1,0 +1,424 @@
+---
+title: Stateful Property-Based Testing with QuickCheck State Machine
+description: A gentle introduction to QuickCheck State Machine
+date: 2020-04-13
+authors: ["Mike Solomon"]
+tags:
+  - testing
+  - tutorial
+  - advanced
+  - haskell
+---
+
+Property-based testing is a testing technique where you make assertions about a system's output with respect to its input. For example, if the input to a system is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees the author from coming up with input data - instead, the author defines the relationship between input and output and the test runner takes care verifies that the relationship holds.
+
+Stateful property-based testing (SPBT) is used when the system under test retains a state between subsequent interactions. This is true, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is is *stateful* property of the database.
+
+There are several different libraries in several different languages for SPBT. In this article, I will do a brief tutorial using [`quickcheck-state-machine`](https://github.com/advancedtelematic/quickcheck-state-machine). I like `quickcheck-state-machine` for several reasons:
+
+1. It is written in Haskell, which means you get access to Haskell's rock-solid type safety and fast performance.
+1. It's opinionated structure splits SPBT into component parts, which helped m learning process.
+1. An intermediary step is building a state machine, which can be manipulated outside of the test. `quickcheck-state-machine` uses the state machine, for example, to make really nice logs after the test is run.
+1. Fine-grained control of generation and shrinking is possible. This allows you to do more targeted testing.
+1. Its use of the type constructors `Symbolic` and `Concrete` allow you to generate commands (the `Symbolic` space) without actually running the state machine (the `Concrete` space).
+1. It can test parallel execution to find bugs arising from race conditions.
+
+This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
+
+The system under test will be a FIFO queue of integers that uses the file system to store entries.
+
+## Model, Command, Response
+
+The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
+
+Importantly, all three need to be polymorphic in accepting a type constructor `(Type -> Type)` as the generic type `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different type constructors: `Symbolic` and `Concrete`. `Symbolic` is used by `quickcheck-state-machine` to generate series of commands from a state machine whereas `Concrete` is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
+
+For example, the data type `IORef` (a mutable memory address) only ever exists in the `IO` monadic context, so if it is part of a model, a command, or a response, we could never use a the model, command, or response outside of the `IO` context. This would make generating commands more difficult - in general, we want our state machine's command generation to be pure. To solve this, `quickcheck-state-machine` would hold a symbolic reference to an `IORef` when the state machine is generating commands whereas we need to hold an concrete `IORef` in when running the test.
+
+That being said, in this example, there are no variables unique to a monadic context in the model, command or response, so we never need to use `r` in the definitions.
+
+```haskell
+data Model (r :: Type -> Type) = Model [Int] deriving (Show, Eq, Generic)
+deriving anyclass instance ToExpr (Model Concrete)
+
+data Command (r :: Type -> Type)
+  = Push Int
+  | Pop
+  | AskLength
+  deriving stock (Eq, Show, Generic1)
+  deriving anyclass (Rank2.Functor, Rank2.Foldable, Rank2.Traversable, CommandNames)
+
+data Response (r :: Type -> Type)
+  = Pushed
+  | Popped (Maybe Int)
+  | TellLength Int
+  deriving stock (Show, Generic1)
+  deriving anyclass (Rank2.Foldable)
+```
+
+Let's unpack what's going on here. The `Model` is an array of integers that we'll use to simulate a FIFO queue. There are three `Command`s - we can `Push` an integer onto the queue, `Pop` something off of the queue (either nothing or an integer), and `AskLength` to the queue. The `Response`s to these three commands are confirming that a value has been `Pushed`, telling us the integer that has been `Popped` and `TellLength`.
+
+It is not necessary to have a one-to-one correspondance between commands and responses. Haskell's pattern matching will allow us to define functions for any valid command/response pair.
+
+The calls to `deriving` are not necessary for now, but they become necessary when the state machine is used in a property-based test. For example, `ToExpr` and `Generic` allow for pretty printing to the console, and `Rank2.Traversable` allows something to be iterated over. I found this to be the trickiest parts of the `quickcheck-state-machine` API, as there is currently no way to know this aside from reading the tests. This tutorial provides the necessary boilerplate to get the state machine up and running in PBT.
+
+## Defining our queue
+
+Here is a FIFO queue for integers that reads and writes the queue to the file system, with each integer separated by a colon.
+
+```haskell
+pushToQueue :: String -> Int -> IO ()
+pushToQueue fname x = do
+    fe <- doesFileExist fname
+    if (not fe) then do
+            withFile fname WriteMode $ \handle -> hPutStr handle $ show x -- write the number
+        else do
+            txt <- withFile fname ReadMode $ \handle -> hGetLine handle
+            let split = splitOn ":" txt
+            withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" (show x : split) -- append the number to the beginning of the string
+
+popFromQueue :: String -> IO (Maybe Int)
+popFromQueue fname = do
+    fe <- doesFileExist fname
+    if (not fe) then return $ Nothing else do
+        txt <- withFile fname ReadMode $ \handle -> hGetLine handle
+        let split = splitOn ":" txt
+        if (length split == 1) then
+                removeFile fname -- remove the file if queue is empty
+            else
+                withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" $ init split -- remove the last element
+        return $ if null split then Nothing else Just (read (last split) :: Int)
+
+lengthQueue :: String -> IO Int
+lengthQueue fname = do
+    fe <- doesFileExist fname
+    if (not fe) then return 0 else do
+        txt <- withFile fname ReadMode $ \handle -> hGetLine handle
+        let split = splitOn ":" txt
+        return $ length split
+```
+
+## Initializing the model
+
+The first thing we need to do for our state machine is initialize the model.  The initializer function needs to be polymorphic for both the `Symbolic` and `Concrete` constructors.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
+
+```haskell
+initModel :: Model r
+initModel = Model []
+```
+
+## Transitions
+
+The next thing we need to do for our state machine is create transitions.  The transitions will execute in both the `Symbolic` and `Concrete` space because they are used to both generate commands and apply the state machine, so the function needs to remain polymorphic.
+
+The transition function takes a model, a command, and a response and returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
+
+In the implementation below, we make our own FIFO queue with `Pop` and `Push`, and `AskLength` will return the length of the model.
+
+```haskell
+transition :: Model r -> Command r -> Response r -> Model r
+transition (Model m) (Push x) Pushed = Model (x : m)
+transition (Model m) Pop (Popped _) = Model (if null m then m else init m)
+transition m AskLength (TellLength _) = m
+```
+
+## Preconditions
+
+Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
+
+Because the pre-condition is only used when generating lists of programs, it does not need to use concrete values, and so it does not need to be polymorphic and exists only in the `Symbolic` space.
+
+In this model, every command can be executed irrespective of the state, so we return `Top`.
+
+```haskell
+precondition :: Model Symbolic -> Command Symbolic -> Logic
+precondition _ _ = Top
+```
+
+## Postconditions
+
+Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other APIs, like hypothesis, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
+
+Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` space.
+
+Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model if it is useful when evaluating the response, as we do below.
+
+
+```haskell
+postcondition :: Model Concrete -> Command Concrete -> Response Concrete -> Logic
+postcondition mod cmd@(Push x) resp = x .== head m'
+  where Model m' = transition mod cmd resp
+postcondition (Model m) Pop (Popped x) = x .== if null m then Nothing else Just $ last m
+postcondition (Model m) AskLength (TellLength x) = length m .== x
+```
+
+## Invariants
+
+Invariants take a model and assert that the model is always in a certain state, irrespective of the command and response.  Because they are expensive to run (they run after every step in the state machine), `quickcheck-state-machine` uses a `Maybe` to allow for no invariants to be returned. As there is no invariant behavior we want to see in this model, we can just return `Nothing`.
+
+```haskell
+invariant = Nothing
+```
+
+## Generator
+
+In my opinion, the generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  Here, we use the `oneof` combinator, which generates commands with a uniform distribution.  Because we are in the command generation phase, the `Symbolic` type constructor is used.
+
+```haskell
+generator :: Model Symbolic -> Maybe (Gen (Command Symbolic))
+generator _ = Just $ oneof [(pure Pop), (Push <$> arbitrary), (pure AskLength)]
+```
+
+## Shrinker
+
+Like in `QuickCheck`, the shrinker takes a value and returns an array of new values to test. Most `QuickCheck` programs never use the shrinker directly, but here, we use it to specify what does and doesn't need to be shrunk. This allows the generation to move really fast through values that have no logical relationship.  For example, below, we only apply the shrinker to numbers pushed onto the stack, as we want to test if the size of the numbers matters.  In all other places, there is no shrinker used.
+
+```haskell
+shrinker :: Model Symbolic -> Command Symbolic -> [Command Symbolic]
+shrinker _ (Push x) = [ Push x' | x' <- shrink x ]
+shrinker _ _             = []
+```
+
+## Semantics
+
+Semantics take a command in the `Concrete` space (meaning when the tests are actually executing) and returns the result of the execution in the monadic context (here `IO`). As our implementation of the FIFO queue is tightly coupled with the state machine, the semantics of the test is relatively straightforward.
+
+```haskell
+semantics :: String -> Command Concrete -> IO (Response Concrete)
+semantics fname (Push x) = do
+    pushToQueue fname x
+    return Pushed
+semantics fname Pop = do
+    val <- popFromQueue fname
+    return $ Popped val
+semantics fname AskLength = do
+    val <- lengthQueue fname
+    return $ TellLength val
+```
+
+## Mock
+
+Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. It's purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` type constructor). It is the foil to [Semantics](#semantics), which creates the real commands during text execution mode. The content of the responses are just thrown away, as all the library is figuring out is what commands lead to what responses.  I'm not a Haskell guru, but I'm pretty sure this sort of thing can be done automatically in Haskell with a bit of elbow grease. However, as it's pretty straightforward to generate garbage responses based on commands, it does not feel too burdensome.  One nice thing about it is that, if you want to, you can create a full-fledged mock of your model, although then you'd need to return non-dummy values.
+
+```haskell
+mock :: Model Symbolic -> Command Symbolic -> GenSym (Response Symbolic)
+mock _ (Push _) = pure Pushed
+mock _ Pop = pure $ Popped Nothing
+mock _ AskLength = pure $ TellLength 0
+```
+
+## Cleanup
+
+Cleanup is the only function that exists within the monad in which the system is executing, and it is called after each series of commands is done.  As we don't need any cleanup, we can just write an empty function in the `IO` monadic context.
+
+```
+cleanup :: model Concrete -> IO ()
+cleanup _ = return ()
+```
+
+## Building the state machine
+
+Now that we have all of the ingredients, we can build our state machine. Because the system under test takes one argument, we also pass that argument to the state machine.
+
+```haskell
+sm :: String -> StateMachine Model Command IO Response
+sm s = StateMachine initModel transition precondition postcondition
+      invariant generator shrinker (semantics s) mock cleanup
+```
+
+## Testing
+
+Now for the fun part, let's run our tests!
+
+First, we will want each test to execute in its own FIFO queue, which means a different file for each queue. I chose the pcg unique random number generator to accomplish this, which guarantees each number generated will be unique during the run of a program.
+
+```haskell
+newRand :: IO Int
+newRand = do
+  g <- create
+  i <- uniform g
+  return i
+```
+
+Then, we define the property. `forAllCommands` uses a state machine to generate the commands (this is a state machine that will only run in the `Symbolic` space, not the `Concrete` one, so it won't ever touch `IO`) as well as an lower bound for the number of commands in a sequence. We use `Nothing` for the upper bound, meaning no upper bound. The last argument to `forAllCommands` is a function that accepts a sequence of commands and returns a monadic property. Monadic properties are defined in `QuickCheck.Monadic` and can be used whenever a property exists in a monadic context.  The conventience method `monadicIO` can be used to define properties in the `IO` context, and `run` lifts the result of the monadic execution to the `PropertyM` context, which is `QuickCheck`'s type for a monadic property.  So, the sequence below is:
+
+1. We create a new random number and lift it to the `PropertyM` monadic context.
+1. We create a file name using this number.
+1. We create a state machine using this filename.
+1. We call `runCommands` from `quickcheck-state-machine`, which already executes in the `PropertyM` context, so there is no need to prefix it with `run`.
+1. We use `quickcheck-state-machine`'s pretty printer `prettyCommands` on the histogram generated by run result.
+
+```haskell
+
+state_machine_properties :: Property
+state_machine_properties = forAllCommands (sm "") Nothing $ \cmds -> monadicIO $ do
+  id <- run newRand
+  let fname = "queues/queue" <> (show id) <> ".txt"
+  let sm' = sm fname
+  (hist, _model, res) <- runCommands sm' cmds
+  prettyCommands sm' hist (checkCommandNames cmds (res === Ok))
+```
+
+Lastly, we execute the test, creating the `queues` directory if it does not exist yet.
+
+```haskell
+main :: IO ()
+main = do
+    createDirectoryIfMissing False "queues"
+    quickCheck state_machine_properties
+```
+
+When we run `stack test` from the command line, we see the following.
+
+```bash
+quickcheck-state-machine-tutorial> test (suite: quickcheck-state-machine-tutorial-test)
+
++++ OK, passed 100 tests.
+
+Commands (264 in total):
+33.7% Pop
+33.7% Push
+32.6% AskLength
+
+quickcheck-state-machine-tutorial> Test suite quickcheck-state-machine-tutorial-test passed
+Completed 2 action(s).
+```
+
+And voila! Our tests pass.
+
+## GitHub repo
+
+All of this is on the github repo ['meeshkan/quickcheck-state-machine-tutorial'](https://github.com/meeshkan/quickcheck-state-machine-tutorial).
+
+## Follow up exercises
+
+Here are three follow up exercises you can do to test out your QuickCheck-fu!
+
+### Novice
+
+Let's create a bug in the queue! In the implementation of the fifo queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
+
+### Intermediate
+
+Now create a new bug where the queue stops accepting new values once there are 50 values. You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it.  There are two ways you can find the bug (you'll need to do a combination of both):
+- Increase the number of times quickcheck runs
+- Change the generator so that the frequency of push is greater than the frequency of pop. For inspiration, check out [QuickCheck generator combinators](https://hackage.haskell.org/package/QuickCheck-2.13.2/docs/Test-QuickCheck.html#g:9) and see if there is one that allows certain outcomes to happen with greater frequency than others.
+- Change the lower bound in `forAllCommands` from `Nothing` to something a bit higher.
+
+Note that this may take a long time to run depending on your parameters because of the shrinker. The shrinker will try to find a specific range of values to produce the bug, but because the bug is not linked to the specific value, it will not be able to meaningfully shrink.
+
+For example, here is an excerpt of console output that would happen if you are able to provoke the bug. Here, we see that the postcondition for `AskLength` failed at the barrier of 50 results in the queue, and because we used those `deriving` statements before, we get the best pretty-printing for property-based testing I've ever seen!
+
+```bash
+Model [+0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0]
+
+   == AskLength ==> TellLength 50 [ 0 ]
+
+Model [0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0
+      ,0]
+
+PostconditionFailed "PredicateC (51 :/= 50)" /= Ok
+```
+
+### Advanced
+
+In the implementation of the queue, we use the funtion [`withFile`]() for all file-based IO. Haskell also has the functions [`writeFile`]() and [`readFile`](). Try using these instead and you'll hit a nasty bug! Can you anticipate what the bug will be? Once you run into the bug, was your guess right? How does this bug show the difference between `withFile` vs `writeFile` and `readFile`?
