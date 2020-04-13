@@ -87,6 +87,7 @@ Every article needs to have Frontmatter data at the top with the following infor
 ---
 title: 
 description: 
+slug: short-name-snake-cased
 date:
 authors: [""]
 tags:
