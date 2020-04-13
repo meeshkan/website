@@ -75,7 +75,8 @@ pushToQueue fname x = do
         else do
             txt <- withFile fname ReadMode $ \handle -> hGetLine handle
             let split = splitOn ":" txt
-            withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" (show x : split) -- append the number to the beginning of the string
+            -- append the number to the beginning of the string
+            withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" (show x : split)
 
 popFromQueue :: String -> IO (Maybe Int)
 popFromQueue fname = do
@@ -84,9 +85,11 @@ popFromQueue fname = do
         txt <- withFile fname ReadMode $ \handle -> hGetLine handle
         let split = splitOn ":" txt
         if (length split == 1) then
-                removeFile fname -- remove the file if queue is empty
+                -- remove the file if queue is empty
+                removeFile fname
             else
-                withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" $ init split -- remove the last element
+                -- remove the last element
+                withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" $ init split
         return $ if null split then Nothing else Just (read (last split) :: Int)
 
 lengthQueue :: String -> IO Int
