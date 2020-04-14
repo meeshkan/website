@@ -4,9 +4,9 @@ import { Heading, Text, Button, Flex } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisims/singleSection"
 import { Link } from "gatsby"
 
-const NotFoundPage = () => (
+const SuccessPage = () => (
   <>
-    <SEO title="404: Not found" pageUrl="https://meeshkan.com/404/" />
+    <SEO title="Success" pageUrl="https://meeshkan.com/success/" />
     <SingleSection>
       <Heading
         as="h1"
@@ -36,4 +36,4 @@ const NotFoundPage = () => (
   </>
 )
 
-export default NotFoundPage
+export default SuccessPage
