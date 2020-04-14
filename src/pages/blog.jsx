@@ -1,6 +1,6 @@
 import React from "react"
 import { Heading, Grid, Avatar, AvatarGroup, Text, Flex } from "@chakra-ui/core"
-import { Section } from "../components/organisims/section"
+import { SingleSection } from "../components/organisims/singleSection"
 import { graphql } from "gatsby"
 import { Card } from "../components/atoms/card"
 import SEO from "../components/molecules/seo"
@@ -13,13 +13,14 @@ const BlogHome = ({ data }) => {
         pageDescription="We’re experts in Machine Learning and APIs. Why keep it to ourselves?"
         pageUrl="https://meeshkan.com/blog/"
       />
-      <Section>
+      <SingleSection>
         <Heading
           as="h1"
           fontSize={["3xl", "4xl", "5xl"]}
           textAlign="center"
           mb={12}
           color="gray.900"
+          fontWeight={900}
         >
           We’re experts in Machine Learning and APIs. Why keep it to ourselves?
         </Heading>
@@ -74,7 +75,7 @@ const BlogHome = ({ data }) => {
             </Card>
           ))}
         </Grid>
-      </Section>
+      </SingleSection>
     </>
   )
 }

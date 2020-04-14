@@ -4,7 +4,6 @@ import { Link as ChakraLink } from "@chakra-ui/core"
 
 export const UniversalLink = ({ children, to, ...props }) => {
   const internal = /^\/(?!\/|#)/.test(to)
-  console.log(internal)
   // Use Gatsby Link for internal links, and <a> for others
   if (internal) {
     return (
