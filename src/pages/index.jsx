@@ -112,7 +112,7 @@ const IndexPage = () => {
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automatic testing for any app.
+          Automatic testing for any app
         </Heading>
         <Text
           textAlign="center"
@@ -122,8 +122,8 @@ const IndexPage = () => {
           color="gray.700"
         >
           Stop feeling guilty for not writing tests. Meeshkan automatically
-          writes, executes, and reports on a collection of highly impactful
-          tests that are guaranteed to squash bugs and improve your code.
+          writes, executes, and reports on a collection of 
+          tests guaranteed to squash bugs and improve your code.
         </Text>
         <Flex
           as="form"
@@ -176,7 +176,7 @@ const IndexPage = () => {
 
       <DoubleSection
         heading="90% of the code used by your app isn’t written by your team"
-        text="3rd party dependencies are the backbone of modern applications. The lack of testing these APIs like the rest of your app is a vulnerability."
+        text="Third-party dependencies are the backbone of modern applications. The lack of testing these APIs is a vulnerability."
       >
         <Img
           fluid={data.map.childImageSharp.fluid}
@@ -250,7 +250,7 @@ const IndexPage = () => {
       <DoubleSection
         badge="Step 1"
         heading="GitHub authorization"
-        text="In less time than it takes to drink a cup of coffee, authorize GitHub, choose a repo to test, and choose your base configuration."
+        text="Authorize GitHub, choose a repo to test, and choose your base configuration. All in less time than it takes to drink a cup of coffee."
       >
         <Img
           fluid={data.authorize.childImageSharp.fluid}
