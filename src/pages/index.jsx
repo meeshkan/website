@@ -10,8 +10,9 @@ import {
   FormControl,
   FormLabel,
   Box,
+  Link as ChakraLink,
 } from "@chakra-ui/core"
-import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisims/singleSection"
 import { DoubleSection } from "../components/organisims/doubleSection"
 import Img from "gatsby-image"
@@ -69,9 +70,9 @@ const IndexPage = () => {
             }
           }
         }
-        testFailure: file(relativePath: { eq: "testFailureLight.png" }) {
+        testFailure: file(relativePath: { eq: "testFailureDark.png" }) {
           childImageSharp {
-            fluid(maxWidth: 458, quality: 100) {
+            fluid(quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -122,8 +123,8 @@ const IndexPage = () => {
           color="gray.700"
         >
           Stop feeling guilty for not writing tests. Meeshkan automatically
-          writes, executes, and reports on a collection of 
-          tests guaranteed to squash bugs and improve your code.
+          writes, executes, and reports on a collection of tests guaranteed to
+          squash bugs and improve your code.
         </Text>
         <Flex
           as="form"
@@ -186,8 +187,8 @@ const IndexPage = () => {
 
       <DoubleSection
         reverse={true}
-        heading="Increase the coverage that your QA devs test."
-        text="Testing with Meeshkan reaches parts of your app that aren’t reached with traditional testing infrastructure. QA devs can now be more confident in their coverage."
+        heading="Increase the coverage that your developers test."
+        text="Testing with Meeshkan covers parts of your app that aren’t reached with traditional testing infrastructure. QA devs can now be more confident in their coverage."
       >
         <Img
           fluid={data.coverage.childImageSharp.fluid}
@@ -197,7 +198,7 @@ const IndexPage = () => {
 
       <SingleSection
         heading="Automate resiliency testing with the Meeshkan web app"
-        text="Using targeted, stateful, model-based property-based testing, and mocking your app’s dependencies - Meeshkan gives you confidence in your app’s resilience."
+        text="Using targeted, property-based testing and mocking your app’s dependencies - Meeshkan gives you confidence in your app’s resilience."
       >
         <Text textAlign="center" color="gray.500" mb={4}>
           Getting set up is as fast as authorizing GitHub.
@@ -262,7 +263,7 @@ const IndexPage = () => {
         reverse={true}
         badge="Step 2"
         heading="Analyze and test your app"
-        text="Confirm the spec we've auto-generated for your service is correct. Then run the targeted property-based tests automatically generated from that spec."
+        text="Confirm the specification we've auto-generated for your service is correct. Then run the targeted property-based tests, automatically generated from that."
       >
         <Img
           fluid={data.test.childImageSharp.fluid}
@@ -319,8 +320,11 @@ const IndexPage = () => {
         </Heading>
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
-            as={GatsbyLink}
-            to="/contact/"
+            as={ChakraLink}
+            target="_blan"
+            rel="noopener noreferrer"
+            _hover={{ textDecoration: "none", backgroundColor: "red.600" }}
+            href="https://meetings.hubspot.com/makenna"
             aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             fontWeight={900}
@@ -330,7 +334,7 @@ const IndexPage = () => {
           </Button>
         </Flex>
         <Box
-          maxW="458px"
+          maxW="550px"
           pos="absolute"
           left={0}
           right={0}
