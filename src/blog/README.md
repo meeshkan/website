@@ -20,9 +20,10 @@ This README walks through everything you need to know to publish an article on t
 
 | Date            | Article                                                    | Author ✍️         | Blog 🔖 | DEV 📓 | [Other ↗️](.EXTERNAL.md)                                                                        |
 | --------------- | ---------------------------------------------------------- | ----------------- | ------- | ------ | ----------------------------------------------------------------------------------------------- |
-| Friday 17.04    | Property-based Testing for JS devs                         | Carolyn           |         |        |                                                                                                 |
-| Tuesday 14.04   | OP Bank Tutorial                                           | Nikolay           |         |        |                                                                                                 |
-| Saturday 11.04  | Telemetry in Open Source - Part 2                          | Carolyn           |         |        |                                                                                                 |
+| Wednesday 22.04    | Property-based Testing for JS devs                         | Carolyn           |         |        |                                                                                                 |
+| Monday 20.04   | OP Bank Tutorial                                           | Nikolay           |         |        |                                                                                                 |
+| Friday 17.04   | Stateful property-based testing with QuickCheck State Machine  | Mike           |         |        |                                                                                                 |
+| Tuesday 14.04  | Telemetry in Open Source - Part 2                          | Carolyn           |    ✔️     |    ✔️    |                                                                                                 |
 | Wednesday 08.04 | Word embeddings with code2vec, GloVe and spaCy             | Maria             |         |   ✔️     |                                                                                                 |
 | Monday 06.04    | Property-based testing - Part 1                            | Fredrik & Carolyn | ✔️      | ✔️     |                                                                                                 |
 | Friday 03.04    | Vanity announcement                                        | Nikolaos          | ✔️      | ✔️     |                                                                                                 |
@@ -54,8 +55,7 @@ Submissions are tracked here in this handy table:
 | Date Submitted | Article                                        | Author | Publication                                             | Writing Guidelines                                                                     | Accepted           | Rejected | Date Published | Link                                                                                            |
 | -------------- | ---------------------------------------------- | ------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ | -------- | -------------- | ----------------------------------------------------------------------------------------------- |
 | 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria  | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
-| 01.04          | Telemetry in Open Source - Part 1 | Carolyn  | [DZone](https://dzone.com/) | [Become a DZone Contributor](https://dzone.com/pages/contribute) |  |          |        |    |
-| 09.04          | A Beginner's Guide to PBT | Fredrik & Carolyn  | [DZone](https://dzone.com/) | [Become a DZone Contributor](https://dzone.com/pages/contribute) |  |          |        |    |
+| 09.04          | A Beginner's Guide to PBT | Fredrik & Carolyn  | [DZone](https://dzone.com/) | [Become a DZone Contributor](https://dzone.com/pages/contribute) |  |    :x:      |        |    |
 
 ## Our content workflow
 
@@ -87,6 +87,7 @@ Every article needs to have Frontmatter data at the top with the following infor
 ---
 title: 
 description: 
+slug:
 date:
 authors: [""]
 tags:
@@ -96,7 +97,13 @@ tags:
 ---
 ```
 
-For the `authors` variable, please refer to [`./data/author.yaml`](https://github.com/meeshkan/website/blob/master/data/author.yaml) and use your ID or add yourself. 
+Here's what to consider for each field:
+* `title`: Try to keep this 9 words or less. You can use [Headline Analyzer](https://coschedule.com/headline-analyzer) to check for SEO as well.
+* `description`: A short sentence previewing the blog post. This shows up under the title on our [blog homepage](https://meeshkan.com/blog).
+* `slug`: A kebab-case string based on the title (example: `oss-telemetry-part-1`).
+* `date`: The date the post will be published on, written in `YYYY-MM-DD` format.
+* `authors`: Please refer to [`./data/author.yaml`](https://github.com/meeshkan/website/blob/master/data/author.yaml) and use your `id` or add yourself. If there's more than one author, please separate these `id`s by commas.
+* `tags`: Minimum of 1 and maximum of 4. If you're stuck, you can reference the [Top 100 tags on DEV](https://dev.to/tags).
 
 ## Tools for writers
 
