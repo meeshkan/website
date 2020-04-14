@@ -15,7 +15,7 @@ tags:
 
 As a linter, alex can be used as a command-line tool, an IDE integration or configured directly into your project's workflow. For this tutorial, we'll focus on the latter: Your project's workflow.
 
-⚠️ Prerequisites:
+## ⚠️ Prerequisites:
 
 - [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) installed
 - A project with a [`package.json` file](https://docs.npmjs.com/creating-a-package-json-file)
@@ -38,14 +38,14 @@ _Any line beginning with ❇️ is an example from the [Unmock documentation](ht
 
 Run one of these commands in your terminal, depending on if you're using npm or yarn:
 
-```
+```bash
 npm install alex --save-dev
 yarn add alex --dev
 ```
 
 You should now be able to see alex as a dependency in your `package.json` file.
 
-```
+```json
 {
   "devDependencies": {
     "alex": "^8.0.0",
@@ -60,7 +60,7 @@ You should now be able to see alex as a dependency in your `package.json` file.
 
 To configure alex using JavaScript, create an `.alexrc.js` file in the root directory of your project:
 
-```
+```bash
 touch .alexrc.js
 ```
 
@@ -126,13 +126,13 @@ This configuration can also be done in a standard `rc` file or using YAML.
 
 If you have specific files that you don't want alex to lint, you can create an `.alexignore` file in the root directory of your project:
 
-```
+```bash
 touch .alexignore
 ```
 
 To prevent a file from being linted, identify the path in your newly created `.alexignore`:
 
-```
+```json
 # The Code of Conduct includes descriptions of harassment so it's not linted
 docs/code-of-conduct.md
 ```
@@ -147,7 +147,7 @@ docs/code-of-conduct.md
 
 In the `"scripts"` section of your `package.json` file, add a linting script with the `alex` command.
 
-```
+```json
 {
   "scripts": {
     ...
@@ -166,7 +166,7 @@ Depending on where your `package.json` is located relative to the files you need
 
 For example, if the `package.json` for the [Unmock documentation](https://github.com/unmock/unmock.github.io) was located at the root and we only wanted to lint the files in the `docs/` directory, the script would look like...
 
-```
+```json
 "scripts": {
   ...
   "lint-language": "alex ./docs/",

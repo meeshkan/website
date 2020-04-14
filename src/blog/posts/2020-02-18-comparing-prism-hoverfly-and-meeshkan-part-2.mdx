@@ -20,7 +20,7 @@ In the [previous article](https://dev.to/meeshkan/comparing-prism-hoverfly-and-m
 
 In this article, we will examine how all three tools can mock the Stripe API.
 
-# Prism
+## Prism
 
 To mock the Stripe API with Prism, we first download the Stripe V3 OpenAPI spec.
 
@@ -87,7 +87,7 @@ Now, when we query `/pets`, we get the following result.
 
 **Conclusion:** Prism will create an out-of-the-box mock for many APIs. Although it struggled with Stripe, it works for most OpenAPI specs. It also has helpful logs.
 
-# Hoverfly
+## Hoverfly
 
 To create a Hoverfly mock, we first have to record the calls to the API we would like to mock. I'll use my Stripe test account, where I've created three mock customers. For example, here is the information for a customer named Jane Doe.
 
@@ -242,7 +242,7 @@ Running our curl request again, we get the recorded response. w00t! Here's a sho
 
 This is the basic flow in Hoverfly. For small APIs, I find this to be a compelling approach. For larger APIs with more complex behavior, OpenAPI-based mocks tend to perform better. This is because the spec will likely contain more outcomes and endpoints than you would see in the wild.
 
-# Meeshkan
+## Meeshkan
 
 The first step in creating a Meeshkan mock is the same as the Prism mock - we download the OpenAPI spec.
 

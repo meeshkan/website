@@ -24,7 +24,7 @@ The code for this tutorial can be found in the [monocle-ts](https://github.com/k
 
 `io-ts` is a run-time type system. It allows you to add run-time type-checking to those pesky `Any` objects you get from external sources like user inputs, files, or databases. Let's consider a simple `Hobby` interface defined as follows:
 
-```ts
+```tsx
 interface HobbyI {
   name: string
 }
@@ -32,7 +32,7 @@ interface HobbyI {
 
 The way to define this in `io-ts` is as follows:
 
-```ts
+```tsx
 import * as t from "io-ts"
 const HobbyT = t.interface({ name: t.string })
 type Hobby = t.TypeOf<typeof HobbyT> // Static type
@@ -57,7 +57,7 @@ it("does not accept an invalid hobby object as HobbyT", () => {
 
 For more stringent validation and error messages, you can use `decode`:
 
-```ts
+```tsx
 import { isLeft, isRight } from "fp-ts/lib/Either"
 
 it("can decode a hobby from valid input", () => {
@@ -72,7 +72,7 @@ it("does not decode a hobby from invalid input", () => {
 
 `decode` method returns an [Either](https://gcanti.github.io/fp-ts/modules/Either.ts.html) object, whose value can be "left" or "right" corresponding to either failure or success, respectively. If there's an error, the either contains a "left" of `t.Errors` type defined as follows:
 
-```ts
+```tsx
 export interface Errors extends Array<ValidationError> {}
 ```
 
@@ -80,7 +80,7 @@ Validation errors can be printed with, for example, the [PathReporter](https://g
 
 Here are the rest of the types we'll need:
 
-```ts
+```tsx
 const PersonT = t.interface({
   firstName: t.string,
   age: t.number,
@@ -96,7 +96,7 @@ type Band = t.TypeOf<typeof BandT>
 
 We also define a few objects we'll work with:
 
-```ts
+```tsx
 const elvis: Person = {
   firstName: "Elvis",
   age: 100,
@@ -140,7 +140,7 @@ Elvis is a single person and Metallica is a band with five members.
 
 We'll start with [Lens](https://gcanti.github.io/monocle-ts/modules/index.ts.html#lens-class), which is a composable getter and setter. As customary in functional programming, we start by looking at the type signature to understand what's going on:
 
-```ts
+```tsx
 export class Lens<S, A> {
   constructor(readonly get: (s: S) => A, readonly set: (a: A) => (s: S) => S) { ... }
   ...
@@ -151,7 +151,7 @@ We see that the constructor takes `get` and `set` functions as input arguments. 
 
 Lenses can be created with [`Lens.fromProp`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#fromprop-static-method) function. Here's a full example of a lens `personToName` of type `Lens<Person, string>`:
 
-```ts
+```tsx
 const personToName: Lens<Person, string> = Lens.fromProp<Person>()("firstName")
 ```
 
@@ -159,14 +159,14 @@ Type signature `Lens<Person, string>` means that the lens operates on objects of
 
 The lens getter `(p: Person) => string` can be accessed via `get` property:
 
-```ts
+```tsx
 const getName: (p: Person) => string = (p: Person) => personToName.get(p)
 expect(getName(elvis)).toEqual("Elvis")
 ```
 
 Here's how you could use the `personToName.set` as a setter:
 
-```ts
+```tsx
 const setName: (newName: string) => (p: Person) => Person = personToName.set
 const setJillAsName: (p: Person) => Person = setName("Jill")
 const modified: Person = setJillAsName(elvis)
@@ -178,7 +178,7 @@ Note that `elvis` object remains intact as the setter does not modify its input.
 
 With the `modify` method you can create a setter that modifies fields with the given function:
 
-```ts
+```tsx
 const upperCase = (s: string): string => s.toUpperCase()
 const upperCasePersonName: (p: Person) => Person = personToName.modify(
   upperCase
@@ -193,7 +193,7 @@ This all nice and good, but the true power of optics becomes clear when you star
 
 [`Optional`](https://gcanti.github.io/monocle-ts/modules/index.ts.html#optional-class) is an optic for zooming into values that may not exist. The signature is as follows:
 
-```ts
+```tsx
 export class Optional<S, A> {
   constructor(readonly getOption: (s: S) => Option<A>, readonly set: (a: A) => (s: S) => S) { ... }
   ...
@@ -208,7 +208,7 @@ For practice purposes, let's construct an `Optional` from scratch. We create an 
 
 Remember we defined our band type as follows:
 
-```ts
+```tsx
 type Band = {
   name: string
   members: Person[]
@@ -217,7 +217,7 @@ type Band = {
 
 Assume that we already have our `members` field of type `Band`, and now we want to access the first member. A function returning the first value of an array is typically called `head`. The type signature for `head` should then be `Optional<Array<Person>, Person>`. The constructor first takes a `getOption` method of type `(persons: Person[]) => Option<Person>`. Here's how we'd safely get the first member of the band:
 
-```ts
+```tsx
 import { some, none } from "fp-ts/lib/Option"
 
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
@@ -228,7 +228,7 @@ The helper functions `none` and `some` allow creating options with empty and non
 
 Now we need to define the `set` function for our `Optional<Array<Person>, Person>`. The required signature is `set: (p: Person) => (ps: Person[]) => Person[]`. What is `set` supposed to do? It should set a person as the first member of the array if the array is not empty. Here's our implementation:
 
-```ts
+```tsx
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
   ps: Person[]
 ) => (ps.length === 0 ? [] : [p, ...ps.slice(1)])
@@ -248,7 +248,7 @@ If our `set` function from above added `(p: Person)` to an empty array, the seco
 
 Now we're ready to define `head` zooming into the first value of an array of persons. Here's the full definition:
 
-```ts
+```tsx
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
   personArray.length === 0 ? none : some(personArray[0])
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
@@ -262,7 +262,7 @@ const head: Optional<Array<Person>, Person> = new Optional<
 
 To apply our new Optional on a band, let's compose it with the `members` Lens:
 
-```ts
+```tsx
 const membersLens = Lens.fromProp<Band>()("members")
 
 const bandToFirstMember: Optional<Band, Person> = membersLens.composeOptional(
@@ -274,7 +274,7 @@ We've written our first optics composition! Compositions are written with `compo
 
 Let's ensure our composed optic works as a getter for a band containing members:
 
-```ts
+```tsx
 expect(bandToFirstMember.getOption(metallica)).toEqual(
   some(
     expect.objectContaining({
@@ -286,7 +286,7 @@ expect(bandToFirstMember.getOption(metallica)).toEqual(
 
 The `getOption` returns the first member of the band wrapped in `Option` as expected. Let's try it on an empty band:
 
-```ts
+```tsx
 const bandWithNoMembers: Band = {
   name: "Unknown",
   members: [],
@@ -296,7 +296,7 @@ expect(bandToFirstMember.getOption(bandWithNoMembers)).toEqual(none)
 
 In this case `getOption` returns a `none` as expected. Let's go even further and compose `bandToFirstMember` with a lens zooming into the `firstName` property and use it to modify the name:
 
-```ts
+```tsx
 const nameLens = Lens.fromProp<Person>()("firstName")
 const nameOptional: Optional<Band, string> = bandToFirstMember.composeLens(
   nameLens

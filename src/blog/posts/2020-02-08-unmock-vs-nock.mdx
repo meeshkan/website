@@ -12,7 +12,7 @@ tags:
 
 When we built `unmock`, we took a lot of inspiration from `nock`, and we often get asked what the difference is between the two libraries. Here's a brief explanation with some examples.
 
-# Why mock?
+## Why mock?
 
 Mocking is used mostly in tests when the code you want to test relies on a REST API call, like a call to a third-party service or an internal microservice. A **mock** is a stand-in for software, like a service or database or library, that captures a small portion of the original's functionality while being simpler to maintain and access than its real counterpart. When testing code involving a REET API, it's usually a good idea to mock the API in order to avoid making a network call from your tests. There are four main advantages of mocking instead of making a network call.
 
@@ -23,7 +23,7 @@ Mocking is used mostly in tests when the code you want to test relies on a REST 
 
 Both [`unmock`](https://github.com/Meeshkan/unmock) and [`nock`](https://github.com/nock/nock) allow you to override REST endpoints with mocks.
 
-# Installation
+## Installation
 
 You can install both `unomck` and `nock` using NPM or yarn.
 
@@ -39,7 +39,7 @@ $ npm install --save-dev @types/nock // or yarn add -D @types/nock
 
 `unmock` is written in typescript, so no additional installation is needed.
 
-# Fixed mocks
+## Fixed mocks
 
 Here's how you mock an endpoint with fixed data in both `unmock` and `nock`. By "fixed data", I mean data that is entirely deterministic and doesn't change from test to test. The two examples below use `jest`.
 
@@ -108,7 +108,7 @@ Truth be told, I'm not a fan of fixed mocks. In my opinion, the issue with using
 
 One solution to this problem is to use **dynamic mocks**.
 
-# Dynamic mocks
+## Dynamic mocks
 
 Let's rewrite the example above in `unmock` to use dynamic mocks. Dynamic mocking is not possible in `nock`.
 
@@ -137,11 +137,11 @@ test("Minors are correctly identified in users array", async () => {
 
 Not only is the test shorter - it conveys our intent with greater clarity. We expect that, for every user in the list, they will be flagged as minor if their age is less than 18. Furthermore, we expect our API to return an array of user objects with a `string` name and `integer` age. For more on the `u.` sytanx in `unmock`, check out the [documentation](https://www.unmock.io/docs/unmock#poet).
 
-## Remarks
+### Remarks
 
 While dynamic mocks are useful, they are limited to a single test case. What if the code has a bug when there are zero users? 100 users? Users in various orders of age? Dynamic mocks take us half way there - to cross the bridge fully, we need **fuzz testing**.
 
-# Fuzzing
+## Fuzzing
 
 `unmock` is most powerful when used with the `runner`. Let's use the same test above, adding the `runner` right after the string defining the test.
 
@@ -173,7 +173,7 @@ The only change in the code above from the previous example is that we have adde
 
 You can check out the `runner` [documentation](https://www.unmock.io/docs/fuzz) for more information. We are currently actively developing the runner to better explore common corner cases and to support more test frameworks, like `mocha`, `tap` and `ava`.
 
-# Conclusion
+## Conclusion
 
 `unmock` and `nock` are both frameworks for mocking REST APIs in JavaScript. They have similar APIs and are both useful for mocking with static mocks. If you would like to use dynamic mocks and a runner, `unmock` may be a good fit. In addition to these features, `unmock` contains [spies](https://www.unmock.io/docs/expectations#spying) that provide information about data coming into and going out of the REST APIs you consume. It also has a [functional API](https://www.unmock.io/docs/setting-state) for tweaking responses in case you need to narrow the range of possible outcomes produced by the runner.
 
