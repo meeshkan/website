@@ -1,6 +1,15 @@
 import React from "react"
 import { Section } from "../organisims/section"
-import { Heading, Stack, Button, Flex, Avatar, Text } from "@chakra-ui/core"
+import {
+  Heading,
+  Stack,
+  Button,
+  Grid,
+  Avatar,
+  Text,
+  Link as ChakraLink,
+  Box,
+} from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
@@ -28,16 +37,32 @@ const BlogPost = ({ data, pageContext }) => {
         >
           {frontmatter.title}
         </Heading>
-        <Flex align="center" justify="center" maxW={500} mb={6} mx="auto">
+        <Grid
+          display={["grid", "flex-grid", "flex-grid"]}
+          gap={6}
+          maxW={600}
+          mb={6}
+        >
           {frontmatter.authors.length > 1 ? (
             frontmatter.authors.map(author => (
               <Stack isInline align="center" spacing={4} mx={4}>
                 <Avatar
                   name={author.name}
                   src={author.avatar.childImageSharp.fluid.src}
-                  size="sm"
+                  size="md"
                 />
-                <Text fontWeight={700}>{author.name}</Text>
+                <Box>
+                  <Text
+                    as={ChakraLink}
+                    href={author.authorLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    fontWeight={700}
+                  >
+                    {author.name}
+                  </Text>
+                  <Text>{author.bio}</Text>
+                </Box>
               </Stack>
             ))
           ) : (
@@ -45,12 +70,23 @@ const BlogPost = ({ data, pageContext }) => {
               <Avatar
                 name={frontmatter.authors[0].name}
                 src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
-                size="sm"
+                size="md"
               />
-              <Text fontWeight={700}>{frontmatter.authors[0].name}</Text>
+              <Box>
+                <Text
+                  as={ChakraLink}
+                  href={frontmatter.authors[0].authorLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  fontWeight={700}
+                >
+                  {frontmatter.authors[0].name}
+                </Text>
+                <Text>{frontmatter.authors[0].bio}</Text>
+              </Box>
             </Stack>
           )}
-        </Flex>
+        </Grid>
         <Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
           {frontmatter.date}
         </Text>
