@@ -4,22 +4,22 @@ import { Heading, Text, Button, Flex } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisims/singleSection"
 import { Link } from "gatsby"
 
-const NotFoundPage = () => (
+const SuccessPage = () => (
   <>
-    <SEO title="404: Not found" pageUrl="https://meeshkan.com/404/" />
+    <SEO title="Success" pageUrl="https://meeshkan.com/success/" />
     <SingleSection>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
         mb={12}
-        color="gray.900"
         fontWeight={900}
+        color="gray.900"
       >
-        Not found.
+        Success!
       </Heading>
       <Text textAlign="center" mb={6}>
-        You just hit a route that doesn&#39;t exist... the sadness.
+        We've recieved your form submission and will be back to you, shortly!
       </Text>
       <Flex justify="center">
         <Button
@@ -36,4 +36,4 @@ const NotFoundPage = () => (
   </>
 )
 
-export default NotFoundPage
+export default SuccessPage

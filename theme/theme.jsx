@@ -70,6 +70,7 @@ const customTheme = {
     "10": "3rem",
     "11": "3.5rem",
     "12": "4rem",
+    "14": "5rem",
     "16": "6rem",
     "20": "8rem",
     "24": "11rem",
