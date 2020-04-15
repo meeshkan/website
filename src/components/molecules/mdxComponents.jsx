@@ -13,6 +13,8 @@ import {
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
+// import { ReactPlayer } from "react-player"
+import Video from "../atoms/video"
 
 const DocsHeading = props => (
   <>
@@ -143,6 +145,7 @@ const components = {
     <Box as="th" p={2} fontWeight="semibold" fontSize="sm" {...props} />
   ),
   thematicBreak: props => <Box height={6} {...props} />,
+  Video,
 }
 
 export default components
