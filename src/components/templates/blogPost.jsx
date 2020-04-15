@@ -38,10 +38,12 @@ const BlogPost = ({ data, pageContext }) => {
           {frontmatter.title}
         </Heading>
         <Grid
-          display={["grid", "flex-grid", "flex-grid"]}
+          display={["grid", "grid", "flex", "flex"]}
+          justifyContent="center"
           gap={6}
           maxW={600}
           mb={6}
+          mx="auto"
         >
           {frontmatter.authors.length > 1 ? (
             frontmatter.authors.map(author => (
