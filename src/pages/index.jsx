@@ -100,7 +100,7 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - PRIVATE BETA
+            MEESHKAN - PRIVATE ALPHA
           </Badge>
         </Flex>
         <Heading
@@ -132,14 +132,14 @@ const IndexPage = () => {
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-beta-1"
+          name="request-alpha-1"
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
           mb={12}
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-beta-1" />
+          <input type="hidden" name="form-name" value="request-alpha-1" />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -166,7 +166,7 @@ const IndexPage = () => {
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request beta access
+            Request alpha access
           </Button>
         </Flex>
         <Img
@@ -209,14 +209,14 @@ const IndexPage = () => {
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-beta-2"
+          name="request-alpha-2"
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
           mb={12}
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-beta-2" />
+          <input type="hidden" name="form-name" value="request-alpha-2" />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -243,7 +243,7 @@ const IndexPage = () => {
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request beta access
+            Request alpha access
           </Button>
         </Flex>
       </SingleSection>
