@@ -15,43 +15,41 @@ import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
 
 const DocsHeading = props => (
-  <Heading
-    mb={4}
-    mt={6}
-    css={{
-      "&[id]": {
-        pointerEvents: "none",
-      },
-      "&[id]:before": {
-        display: "block",
-        height: " 6rem",
-        marginTop: "-6rem",
-        visibility: "hidden",
-        content: `""`,
-      },
-      "&[id]:hover a": { opacity: 1 },
-    }}
-    {...props}
-  >
-    <Box pointerEvents="auto">
-      {props.children}
-      {props.id && (
-        <PseudoBox
-          aria-label="anchor"
-          as="a"
-          color="cyan.500"
-          fontWeight="normal"
-          outline="none"
-          _focus={{ opacity: 1, boxShadow: "outline" }}
-          opacity="0"
-          ml={2}
-          href={`#${props.id}`}
-        >
-          #
-        </PseudoBox>
-      )}
-    </Box>
-  </Heading>
+  <>
+    <Heading
+      mb={4}
+      mt={6}
+      letterSpacing="wide"
+      id={props.id}
+      css={{
+        "&[id]:before": {
+          display: "block",
+          height: " 6rem",
+          marginTop: "-6rem",
+          visibility: "hidden",
+          content: `""`,
+        },
+        "&[id]:hover a": { opacity: 1 },
+      }}
+      pointerEvents="auto"
+      {...props}
+    >
+      <a href={`#${props.id}`}>{props.children}</a>
+      <PseudoBox
+        aria-label="anchor"
+        as="a"
+        color="blue.500"
+        fontWeight="normal"
+        outline="none"
+        _focus={{ opacity: 1, boxShadow: "outline" }}
+        opacity="0"
+        ml={2}
+        href={`#${props.id}`}
+      >
+        #
+      </PseudoBox>
+    </Heading>
+  </>
 )
 
 const components = {
@@ -63,6 +61,7 @@ const components = {
       textAlign="center"
       mb={12}
       color="gray.900"
+      fontWeight={900}
     >
       {props.children}
     </Heading>
