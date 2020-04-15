@@ -26,7 +26,7 @@ The sample application shows a random cat fact fetched from the [Cat Facts API](
 
 Code for the app contains a single component defined in [App.tsx](https://github.com/unmock/unmock-react-native-example/blob/master/src/App.tsx). At high-level, we define the `App` component like this:
 
-```ts
+```tsx
 const App = () => {
   /* React hooks */
   const [shownFact, setFact] = useState('');
@@ -53,7 +53,7 @@ We use `useState` from React hooks for managing the state of `shownFact`, `err`,
 
 The `refreshFact` function refreshes the cat fact shown to the user:
 
-```ts
+```tsx
 const refreshFact = async () => {
   try {
     setLoading(true)
@@ -70,7 +70,7 @@ const refreshFact = async () => {
 
 This function sets the component state and uses `fetchFact` function for the network call. The `fetchFact` function uses [Fetch API](https://facebook.github.io/react-native/docs/network) provided by React Native:
 
-```ts
+```tsx
 const CAT_FACT_URL =
   "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1"
 
@@ -89,7 +89,7 @@ We parse the body by first parsing a JSON and extract the cat fact from the `tex
 
 Application component renders content based on the values of `loading` and `err`:
 
-```jsx
+```tsx
 {
   loading ? (
     <Text style={styles.loading} testID="loading">
@@ -117,14 +117,14 @@ Note that we also give the components [testID](https://facebook.github.io/react-
 
 File [App.test.tsx](https://github.com/unmock/unmock-react-native-example/blob/master/__tests__/App.test.tsx) contains the tests. The first step in the tests is to fill in `fetch` (not available in Node.js) with [node-fetch](https://www.npmjs.com/package/node-fetch):
 
-```ts
+```tsx
 // @ts-ignore
 global.fetch = require("node-fetch")
 ```
 
 In the `beforeAll` block, we switch on Unmock with `unmock.on()`. Then we add rules for intercepting all outgoing traffic for the Cat Facts API URL:
 
-```ts
+```tsx
 beforeAll(() => {
   unmock.on()
   unmock
@@ -141,7 +141,7 @@ In the behaviour for status code 200, we specify that the API should return a JS
 
 Before each test, we reset the state of `unmock` so that the tests remain decoupled:
 
-```ts
+```tsx
 beforeEach(() => {
   unmock.reset()
 })
@@ -151,7 +151,7 @@ beforeEach(() => {
 
 The first test ensures that when the API returns a cat fact, the app contains the correct element:
 
-```ts
+```tsx
 it("renders the fact block when API succeeds", async () => {
   const api = unmock.services["catFactApi"]
   api.state(transform.withCodes(200))
@@ -167,7 +167,7 @@ Here we first set the API to always return 200, simulating success. We then use 
 
 Second test for success ensures that when user clicks the button, the app fetches a new fact from the API. We simulate button press with the `fireEvent` from `react-native-testing-library`:
 
-```ts
+```tsx
 it("renders new fact after clicking the button", async () => {
   const api = unmock.services["catFactApi"]
   api.state(transform.withCodes(200))
@@ -190,7 +190,7 @@ Here we again use `waitForElement` like above. This time we wait for an element 
 
 Test for failure proceeds as the test for success. we change the API to return status code 500, render the app, and wait for the element with `testID="error"` to show up.
 
-```ts
+```tsx
 it("renders error when the API fails", async () => {
   const api = unmock.services["catFactApi"]
   api.state(transform.withCodes(500))

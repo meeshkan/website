@@ -43,6 +43,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`],
+        rehypePlugins: [require("rehype-slug")],
       },
     },
     `gatsby-transformer-sharp`,

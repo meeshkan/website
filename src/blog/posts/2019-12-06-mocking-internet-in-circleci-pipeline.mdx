@@ -19,7 +19,7 @@ None of this would be an issue if your code never interacted with the Internet, 
 
 Enter [unmock](https://www.github.com/unmock/unmock-js), an open source project on a mission to build a high-quality mock of the entire internet. The whole darn thing. You can put the mock wherever you want, but for the purposes of this article, we'd recommend putting it in your CircleCI pipeline as a stand-in for network calls. Here's how!
 
-# Option 1 — in-code mock
+## Option 1 — in-code mock
 
 If you are a newbie to CI/CD and for small projects or small tests, we recommend using the in-code version of unmock. The in-code version, as the name suggests, activates and configures unmock right in your test files as you write your tests. There is no need to maintain a separate repository, and all of your mocking decisions are present directly in your code.
 
@@ -30,7 +30,7 @@ In this section, we will focus on in-code mocks using [unmock-js](https://www.gi
 
 To use unmock in-code, you write an unmock spec for the network calls you are making and then use the runner to run the test multiple times. Here is the anatomy of a typical unmock test.
 
-```js
+```javascript
 // hello.test.js
 const { default: unmock, transform, runner, u } = require("unmock")
 const { withCodes } = transform
@@ -124,7 +124,7 @@ We also have a full-fledged example of the orb on GitHub. Happy forking!
 
 So, to summarize, use the in-code mock when you want a quick and effective way to author resilient tests. To learn more about the various features of unmock, you can [check out the docs](https://www.unmock.io/docs/introduction).
 
-# Option 2 — Unmock server
+## Option 2 — Unmock server
 
 Unmock server is a great fit for people that are a bit more comfortable with DevOps and for teams coding against an API in several projects. In `unmock-server`, the definition of the external service is made in a separate repo to the repo under test and is pulled into your CI/CD pipeline as a MITM proxy that intercepts network calls and serves back unmocked goodness. Another advantage of this approach compared to the in-code approach is that it frees you from including unmock as a development dependency in your projects, which means that when unmock is no longer the flavor of the week, you can migrate away from us to whatever the next cool thing is.
 
@@ -160,6 +160,6 @@ workflows:
 
 In the example below, our project is written in [go-lang](https://github.com/unmock/golang-example), and unmock server is started and stopped before our tests run. We can also pass `unmock-server` configuration options, ie the `code 200` set with `unmock/set`. A full example on how to integrate unmock server with a CircleCI project is available on GitHub for your forking pleasure.
 
-# Unmock and CircleCI for the win!
+## Unmock and CircleCI for the win!
 
 Whether you use Option 1 or Option 2, both will help you test those corners of your code that deal with network calls and all their unpredictability. [Yoni Goldberg](http://github.com/goldbergyoni), one of our favorite testing gurus, recently conducted a poll that revealed that unpredictable results from networking as well as logical bugs in code that dealt with these results are among the major sources of headaches in modern programming. There are two solutions - Advil and unmock, and only one of them is free. We hope to see you using the unmock orb on CircleCI, and if you have any questions, reach out on our [gitter](https://gitter.im/unmock/community). While we always mock the internet, we will never mock you, and you are more than welcome!

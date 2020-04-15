@@ -16,7 +16,7 @@ I've been arranging a lot of things over the past two years as the CEO of Meeshk
 
 In this article, I'll discuss two facets of this project — the arrangement in LilyPond and the MIDI swing hack (written in Scheme). In doing so, I hope everyone finds a useful stocking stuffer. Ho ho ho!
 
-# LilyPond
+## LilyPond
 
 Created by two Dutch musicians in 1996, GNU [LilyPond](https://lilypond.org) is one of my favorite FOSS projects. It is currently maintained by a passionate and vibrant community of musicians and music enthusiasts.
 
@@ -50,7 +50,7 @@ myScore = \new ChoralStaff << % or PianoStaff, or whatever
 
 Start with a version number, then the music and optionally lyrics, then smoosh everything together into a score, then provide options for typesetting and for the MIDI if needed. Even though LilyPond's documentation is second to none, top-level organization of LilyPond files is a pain for newbies, and I find that pilfering other people's stuff is the best way to avoid tedious gotchyas and get that "wow" effect of a score on first compile. To see a few more use cases in vocal music, you can check out the repo for [Sit Ozfårs Wysr](https://github.com/mikesol/saw). If you're a pianist, Google Keith O'Hara. If you're doing orchestral music, check out Werner Lemberg. Contemporary music? [Trevor Bača](http://abjad.mbrsi.org/). Check out these people's open-source scores, use them to make your own, and write great things!
 
-# It Don't Mean a Thing If It Ain't Got That…
+## It Don't Mean a Thing If It Ain't Got That…
 
 Swing.
 
@@ -107,6 +107,6 @@ naturalizeMusic =
 
 In LilyPond, a score is represented as a Lisp list containing an arboreal structure of musical information. In the example above, `naturalizeMusic` is the top-level entry point that behaves like a LaTeX macro. Then, the function `naturalize` is a recursive function that acts on lists of elements, individual notes, and individual pitches of notes, drilling down through the tree until it gets to pitches. In the case of _Let It Snow!_, I do the same thing with [rhythms](https://github.com/Meeshkan/let-it-snow/blob/ebc4702e8f7cd1f6d3a80d4dc4fbab632ed56d77/let-it-snow.ly#L884). You can use the same strategy it with articulations, dynamics, or slurs, and the general pattern will always be the same. Lastly, `naturalize-pitch` actually does the heavy lifting on the pitches. In my version, the [`swing-duration`](https://github.com/Meeshkan/let-it-snow/blob/ebc4702e8f7cd1f6d3a80d4dc4fbab632ed56d77/let-it-snow.ly#L851) function acts on a single duration, making it swing if it is contains an eighth note and otherwise leaving it untouched. The result is unswung tuplets and swung eighth notes coexisting in the same MIDI. w00t!
 
-# Parting Shot
+## Parting Shot
 
 Enjoy _Let It Snow!_ The supporting materials talked about in this article are for anyone wishing to do their own arranging, coding, singing, or mixing. A big thank you to Timo Mäkelä for the editing and mixing, [Jiffel](https://www.jiffel.com/) for the facility, [Bill Hare](http://billhare.tv) for mixing and mastering, Juuso Westerlund, and shout outs to Gustav Schulman, Maria Schulman and Matti Kari for helping find great locations for filming. I wish you all Happy Holidays and a Happy Roaring 20s!

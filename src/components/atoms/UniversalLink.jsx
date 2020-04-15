@@ -3,9 +3,11 @@ import { Link as GatsbyLink } from "gatsby"
 import { Link as ChakraLink } from "@chakra-ui/core"
 
 export const UniversalLink = ({ children, to, ...props }) => {
-  const internal = /^\/(?!\/|#)/.test(to)
+  const isInternal = to => /^\/(?!\/)/.test(to)
+  const isHash = to => /^#/.test(to)
+  
   // Use Gatsby Link for internal links, and <a> for others
-  if (internal) {
+  if (isInternal(to) || isHash(to)) {
     return (
       <ChakraLink
         as={GatsbyLink}
@@ -24,7 +26,7 @@ export const UniversalLink = ({ children, to, ...props }) => {
         color="inherit"
         _hover={{ textDecoration: "none" }}
         {...props}
-        isExternal
+        // isExternal
       >
         {children}
       </ChakraLink>
