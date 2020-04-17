@@ -170,7 +170,9 @@ invariant = Nothing
 
 ## Generator
 
-In my opinion, the generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  Here, we use the `oneof` combinator, which generates commands with a uniform distribution.  Because we are in the command generation phase, the `Symbolic` HKT is used.
+The generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  
+
+Here, we use the `oneof` combinator, which generates commands with a uniform distribution.  Because we are in the command generation phase, the `Symbolic` HKT is used:
 
 ```haskell
 generator :: Model Symbolic -> Maybe (Gen (Command Symbolic))
