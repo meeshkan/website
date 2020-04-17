@@ -191,7 +191,7 @@ shrinker _ _  = []
 
 ## Semantics
 
-Semantics take a command using the `Concrete` HKT, which signifies that it is used only when the tests are actually executing, and returns the result of the execution in the monadic context (here `IO`). As our implementation of the FIFO queue is tightly coupled with the state machine, the semantics of the test is relatively straightforward.
+Semantics take a command using the `Concrete` HKT, which signifies that it is used only when the tests are actually executing, and returns the result of the execution in the monadic context (here `IO`).
 
 ```haskell
 semantics :: String -> Command Concrete -> IO (Response Concrete)
@@ -208,7 +208,9 @@ semantics fname AskLength = do
 
 ## Mock
 
-Mock is the only part of the `quickcheck-state-machine` API that I think needs a little love. Its purpose is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates `Concrete` responses from real commands during text execution mode. The content of the mock responses are just thrown away, as all the library uses `mock` for is to create a `Response` used to effetuate a transition between states.  One nice thing about `mock` is that, if you want to, you can create a full-fledged mock of your model, and this can be useful if you'd like to use SPBT to generate `(Comamnd Response)` pairs that can be used to induce a spec of the model (ie to induce a JSON schema or an OpenAPI spec).
+The purpose of Mock is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates `Concrete` responses from real commands during text execution mode. The content of the mock responses is thrown away, as all the library uses `mock` for is to create a `Response` used to effectuate a transition between states.  
+
+One nice thing about `mock` is that, if you want to, you can create a full-fledged mock of your model, and this can be useful if you'd like to use SPBT to generate `(Comamnd Response)` pairs that can be used to induce a spec of the model (ie to induce a JSON schema or an OpenAPI spec).
 
 ```haskell
 mock :: Model Symbolic -> Command Symbolic -> GenSym (Response Symbolic)
