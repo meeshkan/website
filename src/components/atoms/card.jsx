@@ -42,6 +42,7 @@ export const Card = ({ children, heading, body, link, label }) => {
               {heading}
             </Heading>
           ) : null}
+          <Text mb={6}>{body}</Text>
           {children}
         </Box>
       )}

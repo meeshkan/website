@@ -27,9 +27,14 @@ export function Footer() {
             >
               Contact
             </Link>
-            {/* <Link as={GatsbyLink} to="/" aria-label="About the Meeshkan team">
+            <Link
+              as={GatsbyLink}
+              to="/about/"
+              aria-label="About the Meeshkan team"
+            >
               About us
             </Link>
+            {/*
             <Link
               as={GatsbyLink}
               to="/privacy/"
