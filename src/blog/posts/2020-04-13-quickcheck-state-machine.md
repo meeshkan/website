@@ -232,7 +232,9 @@ cleanup _ = return ()
 
 ## Building the state machine
 
-Now that I have all of the ingredients, I can build my state machine. Because the system under test takes one argument, I also pass that argument to the state machine.
+Now that I have all of the ingredients, I can build my state machine.
+
+Because the system under test takes one argument, I also pass that argument to the state machine.
 
 ```haskell
 sm :: String -> StateMachine Model Command IO Response
@@ -288,7 +290,7 @@ main = do
     quickCheck state_machine_properties
 ```
 
-When I run `stack test` from the command line, I see the following.
+When I run `stack test` from the command line, I see the following:
 
 ```bash
 quickcheck-state-machine-tutorial> test (suite: quickcheck-state-machine-tutorial-test)
@@ -316,16 +318,20 @@ Here are three follow up exercises you can do to expand your understanding of `q
 
 ### Novice
 
-Let's create a bug in the queue! In the implementation of the FIFO queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
+Let's create a bug in the queue! 
+
+In the implementation of the FIFO queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
 
 ### Intermediate
 
-Now create a new bug where the queue stops accepting new values once there are 50 values. You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it.  There are three ways you can find the bug, all of which can work in tandem:
+Create a new bug where the queue stops accepting new values once there are 50 values. 
+
+You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it. There are three ways you can find the bug:
 - Increase the number of times [QuickCheck](https://hackage.haskell.org/package/QuickCheck-2.14) runs
 - Change the generator so that the frequency of push is greater than the frequency of pop. For inspiration, check out [QuickCheck generator combinators](https://hackage.haskell.org/package/QuickCheck-2.13.2/docs/Test-QuickCheck.html#g:9) and see if there is one that allows certain outcomes to happen with greater frequency than others.
 - Change the lower bound in `forAllCommands` from `Nothing` to something a bit higher.
 
-Note that this may take a long time to run depending on your parameters because of the shrinker. The shrinker will try to find a specific range of values to produce the bug, but because the bug is not linked to the specific value, it will not be able to meaningfully shrink.
+This may take a long time to run depending on your parameters because of the shrinker. The shrinker will try to find a specific range of values to produce the bug, but because the bug is not linked to the specific value, it won't be able to meaningfully shrink.
 
 For example, here is an excerpt of console output that would happen if you are able to provoke the bug. Here, I see that the postcondition for `AskLength` failed at the barrier of 50 results in the queue.
 
