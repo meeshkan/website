@@ -127,7 +127,7 @@ transition m AskLength (TellLength _) = m
 
 ## Preconditions
 
-Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
+Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite, the precondition is never satisfied. The `Logic` type contains various boolean operators that can be applied to the model and command. The outcome of the operator determines if the precondition is satisfied or not.
 
 Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
