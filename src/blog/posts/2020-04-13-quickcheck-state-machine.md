@@ -312,7 +312,7 @@ All of this is on the github repo ['meeshkan/quickcheck-state-machine-example'](
 
 ## Follow up exercises
 
-Here are three follow up exercises you can do to test out your QuickCheck-fu!
+Here are three follow up exercises you can do to expand your understanding of `quickcheck-state-machine` and SPBT!
 
 ### Novice
 
