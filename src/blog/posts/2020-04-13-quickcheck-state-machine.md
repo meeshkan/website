@@ -129,7 +129,7 @@ transition m AskLength (TellLength _) = m
 
 Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
 
-Because the pre-condition is only used when generating lists of programs, it does not need to use concrete values, and so it does not need to be polymorphic and exists only for the `Symbolic` HKT.
+Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
 In this model, every command can be executed irrespective of the state, so we return `Top`.
 
