@@ -58,13 +58,12 @@ Let's unpack what's going on here. The `Model` is an array of integers that we'l
 
 It is not necessary to have a one-to-one correspondance between commands and responses. Haskell's pattern matching will allow us to define the function for any valid command/response pair.
 
-The calls to `deriving` are not necessary for now, but they become necessary when the state machine is used in a property-based test. For example, `ToExpr` and `Generic` allow for pretty printing to the console, and `Rank2.Traversable` allows the commands to be iterated over. I found this to be the trickiest part of the `quickcheck-state-machine` API, as there is currently no way to know this aside from reading the tests. My recommendation would be to copy-and-paste the language extensions and `deriving` clauses from the [finished tutorial's GitHub page](https://github.com/meeshkan/quickcheck-state-machine-example) when building your own state machine.
-
-## Defining my queue
+## Defining the queue
 
 Here is a FIFO queue for integers that reads and writes the queue to the file system. Each integer is separated by a colon:
 
 ```haskell
+-- push to the head of the queue
 pushToQueue :: String -> Int -> IO ()
 pushToQueue fname x = do
     fe <- doesFileExist fname
@@ -76,6 +75,7 @@ pushToQueue fname x = do
             -- append the number to the beginning of the string
             withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" (show x : split)
 
+-- pop from the back of the queue
 popFromQueue :: String -> IO (Maybe Int)
 popFromQueue fname = do
     fe <- doesFileExist fname
@@ -90,6 +90,7 @@ popFromQueue fname = do
                 withFile fname WriteMode $ \handle -> hPutStr handle $ intercalate ":" $ init split
         return $ if null split then Nothing else Just (read (last split) :: Int)
 
+-- get the length of the queue
 lengthQueue :: String -> IO Int
 lengthQueue fname = do
     fe <- doesFileExist fname
