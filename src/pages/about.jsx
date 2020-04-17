@@ -90,7 +90,7 @@ const AboutUsPage = () => {
             <Image
               src={Mike}
               size={80}
-              aria-describedby="Mike's headshot"
+              alt="Mike's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
@@ -113,7 +113,7 @@ const AboutUsPage = () => {
             <Image
               src={Kenna}
               size={80}
-              aria-describedby="Makenna's headshot"
+              alt="Makenna's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
@@ -136,7 +136,7 @@ const AboutUsPage = () => {
             <Image
               src={Nik}
               size={80}
-              aria-describedby="Nikolay's headshot"
+              alt="Nikolay's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
@@ -159,7 +159,7 @@ const AboutUsPage = () => {
             <Image
               src={Car}
               size={80}
-              aria-describedby="Carolyn's headshot"
+              alt="Carolyn's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
@@ -182,7 +182,7 @@ const AboutUsPage = () => {
             <Image
               src={Fredi}
               size={80}
-              aria-describedby="Fredrik's headshot"
+              alt="Fredrik's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
@@ -205,7 +205,7 @@ const AboutUsPage = () => {
             <Image
               src={Maria}
               size={80}
-              aria-describedby="Maria's headshot"
+              alt="Maria's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
