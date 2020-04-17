@@ -90,7 +90,7 @@ const AboutUsPage = () => {
             <Image
               src={Mike}
               size={80}
-              aria-describedby="Mike's headshot"
+              alt="Mike's headshot"
               rounded="sm"
               mx="auto"
               mb={4}
