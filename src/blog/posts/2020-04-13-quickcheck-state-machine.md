@@ -64,7 +64,7 @@ The calls to `deriving` are not necessary for now, but they become necessary whe
 
 ## Defining our queue
 
-Here is a FIFO queue for integers that reads and writes the queue to the file system, with each integer separated by a colon.
+Here is a FIFO queue for integers that reads and writes the queue to the file system. Each integer is separated by a colon:
 
 ```haskell
 pushToQueue :: String -> Int -> IO ()
