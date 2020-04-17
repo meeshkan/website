@@ -29,7 +29,7 @@ The system under test will be a [FIFO queue](https://en.wikipedia.org/wiki/Queue
 
 ## Model, Command, Response
 
-The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
+The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types. One represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
 
 Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
 
