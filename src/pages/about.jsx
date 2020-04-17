@@ -8,6 +8,7 @@ import { Card } from "../components/atoms/card"
 
 import Mike from "../../data/avatars/mike.png"
 import Kenna from "../../data/avatars/kenna.png"
+import Car from "../../data/avatars/carolyn.png"
 import Nik from "../../data/avatars/nikolay.png"
 import Fredi from "../../data/avatars/fredrik.png"
 import Maria from "../../data/avatars/maria.png"
@@ -152,6 +153,29 @@ const AboutUsPage = () => {
             </Text>
             <Text fontWeight={500} textAlign="center">
               Head of Data Science
+            </Text>
+          </Card>
+          <Card>
+            <Image
+              src={Car}
+              size={80}
+              aria-describedby="Carolyn's headshot"
+              rounded="sm"
+              mx="auto"
+              mb={4}
+            />
+            <Text
+              fontSize="xl"
+              fontWeight={900}
+              letterSpacing="wide"
+              color="gray.900"
+              textAlign="center"
+              mb={2}
+            >
+              Carolyn Stransky
+            </Text>
+            <Text fontWeight={500} textAlign="center">
+              Open Source Engineer
             </Text>
           </Card>
           <Card>
