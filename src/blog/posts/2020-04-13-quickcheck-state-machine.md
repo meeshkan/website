@@ -322,7 +322,9 @@ In the implementation of the FIFO queue, instead of adding the number to the hea
 
 ### Intermediate
 
-Now create a new bug where the queue stops accepting new values once there are 50 values. You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it.  There are two ways you can find the bug (you'll need to do a combination of both):
+Create a new bug where the queue stops accepting new values once there are 50 values. 
+
+You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it. There are two ways you can find the bug (you'll need to do a combination of both):
 - Increase the number of times [QuickCheck](https://hackage.haskell.org/package/QuickCheck-2.14) runs
 - Change the generator so that the frequency of push is greater than the frequency of pop. For inspiration, check out [QuickCheck generator combinators](https://hackage.haskell.org/package/QuickCheck-2.13.2/docs/Test-QuickCheck.html#g:9) and see if there is one that allows certain outcomes to happen with greater frequency than others.
 - Change the lower bound in `forAllCommands` from `Nothing` to something a bit higher.
