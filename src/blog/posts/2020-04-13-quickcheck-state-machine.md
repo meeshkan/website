@@ -21,7 +21,7 @@ There are libraries available in several different languages for SPBT. In this a
 1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine`'s function `prettyCommands` uses the state machine, for example, to make really nice logs after the test is run.
 1. Fine-grained control of [generation](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:8) and [shrinking](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:6) is possible. This allows you to do more targeted testing.
 1. Its use of the [higher-kinded types (HKTs)](https://www.stephanboyer.com/post/115/higher-rank-and-higher-kinded-types) `Symbolic` and `Concrete`. It allows you to extract commands from a state machine using the `Symbolic` HKT and then run it using the `Concrete` HKT. 
-1. It can test parallel execution to find bugs arising from race conditions.
+1. It can test the parallel execution pf commands to find bugs arising from race conditions.
 
 This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
 
