@@ -112,9 +112,9 @@ initModel = Model []
 
 ## Transitions
 
-The next thing we need to do for our state machine is create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
+The next thing we need to do for our state machine is to create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
 
-The transition function takes a model, a command, and a response and returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
+The transition function takes a model, a command, and a response. It then returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
 In the implementation below, we make our own FIFO queue with `Pop` and `Push`, and `AskLength` will return the length of the model.
 
@@ -129,9 +129,9 @@ transition m AskLength (TellLength _) = m
 
 Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
 
-Because the pre-condition is only used when generating lists of programs, it does not need to use concrete values, and so it does not need to be polymorphic and exists only for the `Symbolic` HKT.
+Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
-In this model, every command can be executed irrespective of the state, so we return `Top`.
+In this model, every command can be executed irrespective of the state. So we return `Top`:
 
 ```haskell
 precondition :: Model Symbolic -> Command Symbolic -> Logic
@@ -140,9 +140,9 @@ precondition _ _ = Top
 
 ## Postconditions
 
-Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
+Postconditions are where the correctness of the response is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
-Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` HKT.
+Postconditions only are checked when the state machine is actually running. This means they only exist in the `Concrete` HKT.
 
 Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below.
 
