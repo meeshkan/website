@@ -64,7 +64,7 @@ The calls to `deriving` are not necessary for now, but they become necessary whe
 
 ## Defining our queue
 
-Here is a FIFO queue for integers that reads and writes the queue to the file system, with each integer separated by a colon.
+Here is a FIFO queue for integers that reads and writes the queue to the file system. Each integer is separated by a colon:
 
 ```haskell
 pushToQueue :: String -> Int -> IO ()
@@ -116,7 +116,7 @@ The next thing we need to do for our state machine is to create transitions.  Th
 
 The transition function takes a model, a command, and a response. It then returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
-In the implementation below, we make our own FIFO queue with `Pop` and `Push`, and `AskLength` will return the length of the model.
+In the implementation below, we make our own FIFO queue with `Pop` and `Push`. Then `AskLength` will return the length of the model:
 
 ```haskell
 transition :: Model r -> Command r -> Response r -> Model r
@@ -127,7 +127,7 @@ transition m AskLength (TellLength _) = m
 
 ## Preconditions
 
-Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite - namely that the precondition is never saisfied. The `Logic` type contains various boolean operators that can be applied to the model and command, and the outcome of the operator determines if the precondition is satisfied or not.
+Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite, the precondition is never satisfied. The `Logic` type contains various boolean operators that can be applied to the model and command. The outcome of the operator determines if the precondition is satisfied or not.
 
 Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
@@ -144,7 +144,7 @@ Postconditions are where the correctness of the response is asserted. I like thi
 
 Postconditions only are checked when the state machine is actually running. This means they only exist in the `Concrete` HKT.
 
-Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below.
+Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below:
 
 
 ```haskell
