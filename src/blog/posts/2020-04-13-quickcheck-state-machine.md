@@ -131,7 +131,7 @@ Preconditions are guards that apply to certain commands based on the current sta
 
 Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
-In this model, every command can be executed irrespective of the state, so we return `Top`.
+In this model, every command can be executed irrespective of the state. So we return `Top`:
 
 ```haskell
 precondition :: Model Symbolic -> Command Symbolic -> Logic
