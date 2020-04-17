@@ -29,9 +29,11 @@ As the `quickcheck-state-machine` library is under active development, the API i
 
 ## Model, Command, Response
 
-The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
+The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types. One represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
 
-Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in monadic contexts (like `IORef`, which can only be created in the `IO` monad), the distinction is important.
+All three need to be polymorphic in accepting an HKT with the signature `(Type -> Type)`, which I'll call `r`. This polymorphism will never be used directly. But it is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. 
+
+The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine. In contrast, the `Concrete` HKT is used when the state machine is executing. In models that can be created in pure contexts like the one below, this distinction is not useful. But when models use types that only exist in monadic contexts, the distinction is important.
 
 ```haskell
 data Model (r :: Type -> Type) = Model [Int] deriving (Show, Eq, Generic)
