@@ -70,6 +70,7 @@ const AboutUsPage = () => {
         </Heading>
 
         <Img
+          alt=""
           fluid={data.team.childImageSharp.fluid}
           style={{
             borderRadius: 2,
