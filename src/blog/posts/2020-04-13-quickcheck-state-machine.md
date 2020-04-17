@@ -176,7 +176,9 @@ generator _ = Just $ oneof [(pure Pop), (Push <$> arbitrary), (pure AskLength)]
 
 ## Shrinker
 
-Like in `QuickCheck`, the shrinker takes a value and returns an array of new values to test. Most `QuickCheck` programs never use the shrinker directly, but here, we use it to specify what does and doesn't need to be shrunk. This allows the generation to move really fast through values that have no logical relationship.  For example, below, we only apply the shrinker to numbers pushed onto the stack, as we want to test if the size of the numbers matters.  In all other places, there is no shrinker used.
+Like in `QuickCheck`, the shrinker takes a value and returns an array of new values to test. Most `QuickCheck` programs never use the shrinker directly, but here, we use it to specify what does and doesn't need to be shrunk. This allows the generation to move fast through values that have no logical relationship.  
+
+For example, below, we only apply the shrinker to numbers pushed onto the stack, as we want to test if the size of the numbers matters.  In all other places, there is no shrinker used:
 
 ```haskell
 shrinker :: Model Symbolic -> Command Symbolic -> [Command Symbolic]
