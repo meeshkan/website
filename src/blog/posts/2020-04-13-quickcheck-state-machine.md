@@ -312,6 +312,17 @@ And voila! Our tests pass.
 
 All of this is on the github repo ['meeshkan/quickcheck-state-machine-example'](https://github.com/meeshkan/quickcheck-state-machine-example).
 
+## Conclusion
+
+Stateful property based testing is a great way to find bugs in stateful systems. SPBT exists in several other frameworks as well:
+
+- [hypothesis](https://hypothesis.works/) in Python and Java
+- [fast-check](https://github.com/dubzzz/fast-check) in JavaScript, TypeScript and PureScript
+- [proper](https://github.com/proper-testing/proper) in Erlang and Elixir
+- [FsCheck](https://fscheck.github.io/FsCheck/) in F# and C#
+
+I hope you find this technique useful! If you'd like your repos to benefit from _automatic SPBT_, I will take this opportunity to **shamelessly plug the Meeshkan alpha on [meeshkan.com](https://meeshkan.com)**.
+
 ## Follow up exercises
 
 Here are three follow up exercises you can do to expand your understanding of `quickcheck-state-machine` and SPBT!
