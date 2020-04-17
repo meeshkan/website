@@ -12,9 +12,9 @@ tags:
 
 Property-based testing is a technique where you make assertions about a system's output with respect to its input. For example, if the input to a system (a function, a server, etc) is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees you from having to come up with input data. Instead, you define relationships between the system's input and output. Then the test runner verifies that the relationships hold.
 
-Stateful property-based testing (SPBT) is used when the system under test retains a state. This is the case, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is a *stateful* property of the database.
+**Stateful property-based testing (SPBT)** is another technique for when the tested system retains a state. This is the case, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is a *stateful* property of the database.
 
-There are several different libraries in several different languages for SPBT. In this article, I will use [`quickcheck-state-machine`](https://github.com/advancedtelematic/quickcheck-state-machine). I like `quickcheck-state-machine` for several reasons:
+There are libraries available in several different languages for SPBT. In this article, I will use [`quickcheck-state-machine`](https://github.com/advancedtelematic/quickcheck-state-machine). I like `quickcheck-state-machine` for many reasons:
 
 1. It is written in Haskell, which means you get access to Haskell's rock-solid type safety and fast performance.
 1. Its opinionated structure splits SPBT into component parts, which helped my learning process.
