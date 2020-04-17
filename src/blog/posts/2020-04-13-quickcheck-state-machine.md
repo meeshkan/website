@@ -140,7 +140,7 @@ precondition _ _ = Top
 
 ## Postconditions
 
-Postconditions are where the correctness of the resposne is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
+Postconditions are where the correctness of the response is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
 Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` HKT.
 
