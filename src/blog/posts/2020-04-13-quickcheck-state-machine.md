@@ -327,7 +327,7 @@ Now create a new bug where the queue stops accepting new values once there are 5
 - Change the generator so that the frequency of push is greater than the frequency of pop. For inspiration, check out [QuickCheck generator combinators](https://hackage.haskell.org/package/QuickCheck-2.13.2/docs/Test-QuickCheck.html#g:9) and see if there is one that allows certain outcomes to happen with greater frequency than others.
 - Change the lower bound in `forAllCommands` from `Nothing` to something a bit higher.
 
-Note that this may take a long time to run depending on your parameters because of the shrinker. The shrinker will try to find a specific range of values to produce the bug, but because the bug is not linked to the specific value, it will not be able to meaningfully shrink.
+This may take a long time to run depending on your parameters because of the shrinker. The shrinker will try to find a specific range of values to produce the bug, but because the bug is not linked to the specific value, it won't be able to meaningfully shrink.
 
 For example, here is an excerpt of console output that would happen if you are able to provoke the bug. Here, I see that the postcondition for `AskLength` failed at the barrier of 50 results in the queue, and because I used those `deriving` statements before, I get the best pretty-printing for property-based testing I've ever seen!
 
