@@ -76,6 +76,12 @@ const AboutUsPage = () => {
             height: 350,
           }}
         />
+        <Text mt={4} lineHeight="tall">
+          Our product has changed a few times, but our vision of building a fake
+          version of the internet, hasn't. We began as a group of researchers,
+          and that is still heavily engrained into our culture despite also now
+          considering ourselves a software company.
+        </Text>
       </SingleSection>
       <SingleSection heading="Our team">
         <Grid
