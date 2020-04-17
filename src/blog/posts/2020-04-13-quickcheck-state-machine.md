@@ -1,6 +1,6 @@
 ---
-title: Stateful Property-Based Testing with QuickCheck State Machine
-description: A gentle introduction to QuickCheck State Machine
+title: Stateful property-based testing with QuickCheck State Machine
+description: A gentle introduction to quickcheck-state-machine, a Haskell library for testing stateful programs.
 date: 2020-04-13
 authors: ["mike"]
 tags:
