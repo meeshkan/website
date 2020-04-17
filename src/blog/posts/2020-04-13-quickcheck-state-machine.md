@@ -103,7 +103,7 @@ lengthQueue fname = do
 
 ## Initializing the model
 
-The first step in creating our state machine is to initialize the model. The initializer function needs to be polymorphic as it will eventually accept the `Symbolic` and `Concrete` HKTs depending on if we are in generation or execution mode.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array, which is automatically polymorphic in both contexts.
+The first step in creating our state machine is to initialize the model. The initializer function needs to be polymorphic as it will eventually accept the `Symbolic` and `Concrete` HKTs depending on if we are in generation or execution mode.  In this case, as we are using an array as the underlying model, the logical initializer is an empty array.
 
 ```haskell
 initModel :: Model r
