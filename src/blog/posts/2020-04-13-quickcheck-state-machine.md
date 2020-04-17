@@ -56,7 +56,7 @@ data Response (r :: Type -> Type)
 
 Let's unpack what's going on here. The `Model` is an array of integers that we'll use to simulate a FIFO queue. There are three `Command`s - you can `Push` an integer onto the queue, `Pop` something off of the queue (either nothing or an integer), and `AskLength` to the queue. The `Response`s to these three commands are confirming that a value has been `Pushed`, telling us the integer that has been `Popped` and `TellLength`.
 
-It is not necessary to have a one-to-one correspondance between commands and responses. Haskell's pattern matching will allow us to define the function for any valid command/response pair.
+It isn't necessary to have a one-to-one correspondence between commands and responses. Haskell's pattern matching will allow us to define the function for any valid command/response pair.
 
 ## Defining the queue
 
