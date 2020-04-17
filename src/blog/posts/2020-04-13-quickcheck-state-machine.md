@@ -116,7 +116,7 @@ The next thing we need to do for our state machine is to create transitions.  Th
 
 The transition function takes a model, a command, and a response. It then returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
-In the implementation below, we make our own FIFO queue with `Pop` and `Push`, and `AskLength` will return the length of the model.
+In the implementation below, we make our own FIFO queue with `Pop` and `Push`. Then `AskLength` will return the length of the model:
 
 ```haskell
 transition :: Model r -> Command r -> Response r -> Model r
