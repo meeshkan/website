@@ -10,7 +10,7 @@ tags:
   - haskell
 ---
 
-Property-based testing is a technique where you make assertions about a system's output with respect to its input. For example, if the input to a system is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees you from having to come up with input data. instead, you define relationships between the system's input and output. Then the test runner verifies that the relationships hold.
+Property-based testing is a technique where you make assertions about a system's output with respect to its input. For example, if the input to a system (a function, a server, etc) is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees you from having to come up with input data. Instead, you define relationships between the system's input and output. Then the test runner verifies that the relationships hold.
 
 Stateful property-based testing (SPBT) is used when the system under test retains a state. This is the case, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is a *stateful* property of the database.
 
@@ -25,7 +25,7 @@ There are several different libraries in several different languages for SPBT. I
 
 This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
 
-The system under test will be a FIFO queue of integers that uses the file system to store entries.
+The system under test will be a [FIFO queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) of integers that uses the file system to store entries.
 
 ## Model, Command, Response
 
