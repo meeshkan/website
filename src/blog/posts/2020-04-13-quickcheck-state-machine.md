@@ -112,7 +112,7 @@ initModel = Model []
 
 ## Transitions
 
-The next thing we need to do for our state machine is create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
+The next thing we need to do for our state machine is to create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
 
 The transition function takes a model, a command, and a response and returns the underlying model after the command has been applied. We can think of the model as transitioning from one state to the next.
 
