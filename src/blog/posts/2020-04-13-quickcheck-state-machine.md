@@ -149,9 +149,12 @@ Note that the model passed to the postcondition function is the one **before** t
 
 ```haskell
 postcondition :: Model Concrete -> Command Concrete -> Response Concrete -> Logic
+-- if we have pushed, assert the pushed element is at the head of the new model
 postcondition mod cmd@(Push x) resp = x .== head m'
   where Model m' = transition mod cmd resp
+-- if we have popped, assert that the popped element is at the end of the old model 
 postcondition (Model m) Pop (Popped x) = x .== if null m then Nothing else Just $ last m
+-- the length of the model and the length of the SUT should always be aligned
 postcondition (Model m) AskLength (TellLength x) = length m .== x
 ```
 
