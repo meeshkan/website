@@ -157,7 +157,9 @@ postcondition (Model m) AskLength (TellLength x) = length m .== x
 
 ## Invariants
 
-Invariants take a model and assert that the model is always in a certain state, irrespective of the command and response.  Because they are expensive to run (they run after every step in the state machine), `quickcheck-state-machine` uses a `Maybe` to allow for no invariants to be returned. As there is no invariant behavior we want to see in this model, we can just return `Nothing`.
+Invariants take a model and assert that the model is always in a certain state, irrespective of the command and response. Invariants also run after every step in the state machine, which makes them expensive to run. Because of this, `quickcheck-state-machine` uses a `Maybe` to allow for no invariants to be returned. 
+
+As there is no invariant behavior we want to see in this model, we can return `Nothing`:
 
 ```haskell
 invariant = Nothing
