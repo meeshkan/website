@@ -248,16 +248,24 @@ const AboutUsPage = () => {
           ]}
           gap={6}
         >
-          <Box as={Link} href="https://thenordicweb.com/">
+          <Box
+            as={Link}
+            aria-label="Nordic web website"
+            href="https://thenordicweb.com/"
+          >
             <Img fluid={data.nordic.childImageSharp.fluid} />
           </Box>
-          <Box as={Link} href="https://connectventures.co/">
+          <Box
+            as={Link}
+            href="https://connectventures.co/"
+            aria-label="connect ventures website"
+          >
             <Img
               fluid={data.connect.childImageSharp.fluid}
               style={{ maxWidth: 200 }}
             />
           </Box>
-          <Box as={Link} href="https://tiny.vc/">
+          <Box as={Link} href="https://tiny.vc/" aria-label="Tiny VC website">
             <Img
               fluid={data.tiny.childImageSharp.fluid}
               style={{ maxWidth: 156 }}
@@ -266,6 +274,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://www.nordicmakers.vc/"
+            aria-label="Nordic makers website"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -275,6 +284,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="http://www.firstfellow.com/"
+            aria-label="First fellow partners website"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -284,6 +294,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://www.linkedin.com/in/aliomar/?originalSubdomain=fi"
+            aria-label="Angel Ali Omar's linkedin"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -293,6 +304,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://futuristic.vc/"
+            aria-label="Futuristic VC website"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -302,6 +314,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://www.linkedin.com/in/aribackholm"
+            aria-label="Angel Ari Backholm's linkedin"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -311,6 +324,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://www.linkedin.com/in/okitag"
+            aria-label="Angel Oki Tåg's linkedin"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
@@ -320,6 +334,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             href="https://www.linkedin.com/in/jermyap/"
+            aria-label="Angel Jeremy Yap's linkedin"
             color="gray.700"
             fontSize="xl"
             fontWeight={900}
