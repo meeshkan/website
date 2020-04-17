@@ -23,19 +23,15 @@ There are libraries available in several different languages for SPBT. In this a
 1. Its use of the [higher-kinded types (HKTs)](https://www.stephanboyer.com/post/115/higher-rank-and-higher-kinded-types) `Symbolic` and `Concrete`. It allows you to extract commands from a state machine using the `Symbolic` HKT and then run it using the `Concrete` HKT. 
 1. It can test the parallel execution pf commands to find bugs arising from race conditions.
 
-This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. As the library is under active development, the API is subject to change, and I will do my best to revise this article as the API changes.
+This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. The system under test will be a [FIFO queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) of integers that uses the file system to store entries.
 
-The system under test will be a [FIFO queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) of integers that uses the file system to store entries.
+As the `quickcheck-state-machine` library is under active development, the API is subject to change. I will do my best to revise this article as the API changes.
 
 ## Model, Command, Response
 
 The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types: one represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
 
-Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in certain monadic contexts, the distinction is important.
-
-For example, the data type `IORef` (a mutable memory address) only ever exists in the `IO` monadic context, so if it is part of a model, a command, or a response, we could never generate the model, command, or response outside of the `IO` context. This would make manipulating the state machine more difficult - in general, we want our state machine's command generation to be non-monadic, which guarantees it won't have side effects. To solve this, `quickcheck-state-machine` uses `Symbolic` to hold a reference to an `IORef` when the state machine is generating commands whereas it uses `Concrete` to hold an actual `IORef`  when it running a test.
-
-That being said, in this example, there are no variables unique to a monadic context in the model, command or response, so we never need to use `r` in the definitions. To see a slightly more advanced example that uses a variable that only exists in a monadic context, check out the [`quickcheck-state-machine` README](https://github.com/advancedtelematic/quickcheck-state-machine/blob/master/README.md).
+Importantly, all three need to be polymorphic in accepting a HKT with signature `(Type -> Type)` which we call `r`. This polymorphism will never be used directly, but is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine whereas the `Concrete` HKT is used when the state machine is executing. In simple models like the one below, this distinction is not useful, but when models use types that only exist in monadic contexts (like `IORef`, which can only be created in the `IO` monad), the distinction is important.
 
 ```haskell
 data Model (r :: Type -> Type) = Model [Int] deriving (Show, Eq, Generic)
