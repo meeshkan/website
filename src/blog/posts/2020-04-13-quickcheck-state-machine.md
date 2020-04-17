@@ -316,7 +316,9 @@ Here are three follow up exercises you can do to test out your QuickCheck-fu!
 
 ### Novice
 
-Let's create a bug in the queue! In the implementation of the FIFO queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
+Let's create a bug in the queue! 
+
+In the implementation of the FIFO queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
 
 ### Intermediate
 
