@@ -1,6 +1,7 @@
 ---
 title: Stateful property-based testing with QuickCheck State Machine
 description: A gentle introduction to quickcheck-state-machine, a Haskell library for testing stateful programs.
+slug: quick-check-state-machine
 date: 2020-04-17
 authors: ["mike"]
 tags:
@@ -12,7 +13,7 @@ tags:
 
 Property-based testing is a technique where you make assertions about a system's output with respect to its input. For example, if the input to a system (a function, a server, etc) is two numbers, property-based testing could assert that the output of the system should be the sum of these numbers. This type of testing frees you from having to come up with input data. Instead, you define relationships between the system's input and output. Then the test runner verifies that the relationships hold.
 
-**Stateful property-based testing (SPBT)** is another technique for when the tested system retains a state. This is the case, for example, when the system is a database or a queue or a file.  If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is a *stateful* property of the database.
+**Stateful property-based testing (SPBT)** is another technique for when the tested system retains a state. This is the case, for example, when the system is a database or a queue or a file. If I write an entry to a database and then list all entries in the database, I would expect the entry I wrote to be part of the list. That is a _stateful_ property of the database.
 
 There are libraries available in several different languages for SPBT. In this article, I will use [`quickcheck-state-machine`](https://github.com/advancedtelematic/quickcheck-state-machine). I like `quickcheck-state-machine` for many reasons:
 
@@ -20,18 +21,18 @@ There are libraries available in several different languages for SPBT. In this a
 1. Its opinionated structure splits SPBT into component parts, which helped my learning process.
 1. It builds a state machine, which can be manipulated outside of the test. `quickcheck-state-machine`'s function `prettyCommands` uses the state machine, for example, to make really nice logs after the test is run.
 1. Fine-grained control of [generation](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:8) and [shrinking](https://hackage.haskell.org/package/QuickCheck-2.14/docs/Test-QuickCheck.html#g:6) is possible. This allows you to do more targeted testing.
-1. Its use of the [higher-kinded types (HKTs)](https://www.stephanboyer.com/post/115/higher-rank-and-higher-kinded-types) `Symbolic` and `Concrete`. It allows you to extract commands from a state machine using the `Symbolic` HKT and then run it using the `Concrete` HKT. 
+1. Its use of the [higher-kinded types (HKTs)](https://www.stephanboyer.com/post/115/higher-rank-and-higher-kinded-types) `Symbolic` and `Concrete`. It allows you to extract commands from a state machine using the `Symbolic` HKT and then run it using the `Concrete` HKT.
 1. It can test the parallel execution pf commands to find bugs arising from race conditions.
 
-This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. The system under test will be a [FIFO queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) of integers that uses the file system to store entries.
+This article shows how to use `quickcheck-state-machine` to build a state machine and use it for SPBT. It uses version `0.7.0` of `quickcheck-state-machine`. The system under test will be a [FIFO queue](<https://en.wikipedia.org/wiki/Queue_(abstract_data_type)>) of integers that uses the file system to store entries.
 
 As the `quickcheck-state-machine` library is under active development, the API is subject to change. I will do my best to revise this article as the API changes.
 
 ## Model, Command, Response
 
-The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types. One represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands. 
+The fundamental building blocks of a state machine built with `quickcheck-state-machine` come in three types. One represents a model of the system, one represents the commands that can be issued to the system and one represents responses to the commands.
 
-All three need to be polymorphic in accepting an HKT with the signature `(Type -> Type)`, which I'll call `r`. This polymorphism will never be used directly. But it is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`. 
+All three need to be polymorphic in accepting an HKT with the signature `(Type -> Type)`, which I'll call `r`. This polymorphism will never be used directly. But it is used by `quickcheck-state-machine` internally to inject two different HKTs: `Symbolic` and `Concrete`.
 
 The `Symbolic` HKT is used by `quickcheck-state-machine` when generating a series of commands from a state machine. In contrast, the `Concrete` HKT is used when the state machine is executing. In models that can be created in pure contexts like the one below, this distinction is not useful. But when models use types that only exist in monadic contexts, the distinction is important.
 
@@ -102,7 +103,7 @@ lengthQueue fname = do
 
 ## Initializing the model
 
-The first step in creating my state machine is to initialize the model. The initializer function needs to be polymorphic as it will eventually accept the `Symbolic` and `Concrete` HKTs depending on if you are in generation or execution mode.  In this case, as I am using an array as the underlying model, the logical initializer is an empty array.
+The first step in creating my state machine is to initialize the model. The initializer function needs to be polymorphic as it will eventually accept the `Symbolic` and `Concrete` HKTs depending on if you are in generation or execution mode. In this case, as I am using an array as the underlying model, the logical initializer is an empty array.
 
 ```haskell
 initModel :: Model r
@@ -111,7 +112,7 @@ initModel = Model []
 
 ## Transitions
 
-The next thing I need to do for my state machine is to create transitions.  The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
+The next thing I need to do for my state machine is to create transitions. The transitions are used to both generate commands and execute the tests, so the function needs to remain polymorphic.
 
 The transition function takes a model, a command, and a response. It then returns the underlying model after the command has been applied. You can think of the model as transitioning from one state to the next.
 
@@ -126,7 +127,7 @@ transition m AskLength (TellLength _) = m
 
 ## Preconditions
 
-Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied.  `Bot` is the opposite, the precondition is never satisfied. The `Logic` type contains various boolean operators that can be applied to the model and command. The outcome of the operator determines if the precondition is satisfied or not.
+Preconditions are guards that apply to certain commands based on the current state. `Top` represents the precondition always being satisfied. `Bot` is the opposite, the precondition is never satisfied. The `Logic` type contains various boolean operators that can be applied to the model and command. The outcome of the operator determines if the precondition is satisfied or not.
 
 Because the pre-condition is only used when generating lists of programs, it doesn't need to use concrete values. So it doesn't need to be polymorphic and exists only for the `Symbolic` HKT.
 
@@ -139,19 +140,18 @@ precondition _ _ = Top
 
 ## Postconditions
 
-Postconditions are where the correctness of the response is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
+Postconditions are where the correctness of the response is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read. In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
 Postconditions only are checked when the state machine is actually running. This means they only exist in the `Concrete` HKT.
 
 Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as I do below:
-
 
 ```haskell
 postcondition :: Model Concrete -> Command Concrete -> Response Concrete -> Logic
 -- after a push, assert the pushed element is at the head of the new model
 postcondition mod cmd@(Push x) resp = x .== head m'
   where Model m' = transition mod cmd resp
--- after a pop, assert that the popped element is at the end of the old model 
+-- after a pop, assert that the popped element is at the end of the old model
 postcondition (Model m) Pop (Popped x) = x .== if null m then Nothing else Just $ last m
 -- the length of the model and the length of the SUT should always be aligned
 postcondition (Model m) AskLength (TellLength x) = length m .== x
@@ -159,7 +159,7 @@ postcondition (Model m) AskLength (TellLength x) = length m .== x
 
 ## Invariants
 
-Invariants take a model and assert that the model is always in a certain state, irrespective of the command and response. Invariants also run after every step in the state machine, which makes them expensive to run. Because of this, `quickcheck-state-machine` uses a `Maybe` to allow for no invariants to be returned. 
+Invariants take a model and assert that the model is always in a certain state, irrespective of the command and response. Invariants also run after every step in the state machine, which makes them expensive to run. Because of this, `quickcheck-state-machine` uses a `Maybe` to allow for no invariants to be returned.
 
 As there is no invariant behavior I want to see in this model, I can return `Nothing`:
 
@@ -169,9 +169,9 @@ invariant = Nothing
 
 ## Generator
 
-The generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.  
+The generator is one of the places that `quickcheck-state-machine` really shines. You create generators using `QuickCheck` combinators, so any existing `QuickCheck` custom combinators can be repurposed for `quickcheck-state-machine`.
 
-Here, I use the `oneof` combinator, which generates commands with a uniform distribution.  Because I am in the command generation phase, the `Symbolic` HKT is used:
+Here, I use the `oneof` combinator, which generates commands with a uniform distribution. Because I am in the command generation phase, the `Symbolic` HKT is used:
 
 ```haskell
 generator :: Model Symbolic -> Maybe (Gen (Command Symbolic))
@@ -180,9 +180,9 @@ generator _ = Just $ oneof [(pure Pop), (Push <$> arbitrary), (pure AskLength)]
 
 ## Shrinker
 
-Like in `QuickCheck`, the shrinker takes a value and returns an array of new values to test. Most `QuickCheck` programs never use the shrinker directly, but here, I use it to specify what does and doesn't need to be shrunk. This allows the generation to move fast through values that have no logical relationship.  
+Like in `QuickCheck`, the shrinker takes a value and returns an array of new values to test. Most `QuickCheck` programs never use the shrinker directly, but here, I use it to specify what does and doesn't need to be shrunk. This allows the generation to move fast through values that have no logical relationship.
 
-For example, below, I only apply the shrinker to numbers pushed onto the stack, as I want to test if the size of the numbers matters.  In all other places, there is no shrinker used:
+For example, below, I only apply the shrinker to numbers pushed onto the stack, as I want to test if the size of the numbers matters. In all other places, there is no shrinker used:
 
 ```haskell
 shrinker :: Model Symbolic -> Command Symbolic -> [Command Symbolic]
@@ -209,7 +209,7 @@ semantics fname AskLength = do
 
 ## Mock
 
-The purpose of Mock is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates `Concrete` responses from real commands during text execution mode. The content of the mock responses is thrown away, as all the library uses `mock` for is to create a `Response` used to effectuate a transition between states.  
+The purpose of Mock is to generate dummy responses when the state machine is in command generation mode (thus the `Symbolic` HKT). It is the foil to [Semantics](#semantics), which creates `Concrete` responses from real commands during text execution mode. The content of the mock responses is thrown away, as all the library uses `mock` for is to create a `Response` used to effectuate a transition between states.
 
 One nice thing about `mock` is that, if you want to, you can create a full-fledged mock of your model, and this can be useful if you'd like to use SPBT to generate `(Comamnd Response)` pairs that can be used to induce a spec of the model (ie to induce a JSON schema or an OpenAPI spec).
 
@@ -222,7 +222,7 @@ mock _ AskLength = pure $ TellLength 0
 
 ## Cleanup
 
-Cleanup, like the semantics, exists within the monad that the system is executing. It's called after each series of commands is executed.  
+Cleanup, like the semantics, exists within the monad that the system is executing. It's called after each series of commands is executed.
 
 Since I don't need any cleanup for our queue, I can write an empty function in the `IO` monadic context:
 
@@ -257,11 +257,11 @@ newRand = do
   return i
 ```
 
-Then, I define the property. 
+Then, I define the property.
 
 `forAllCommands` uses a state machine in its first argument to generate the commands. This is a state machine that will only run for the `Symbolic` HKT, not the `Concrete` HKT, so it won't ever touch `IO`. The next argument is a lower bound for the number of commands in a sequence. I use `Nothing` for the lower bound, meaning no lower bound.
 
-The last argument to `forAllCommands` is a function that accepts a sequence of commands and returns a monadic property. Monadic properties are defined in `QuickCheck.Monadic` and can be used whenever a property exists in a monadic context.  The convenience method `monadicIO` can be used to define properties in the `IO` context, and `run` lifts the result of the monadic execution to the `PropertyM` context. `PropertyM` is `QuickCheck`'s monad transformer, and in our case we are transforming the `IO` monad. To learn more about monadic transformations, [`mtl`](https://hackage.haskell.org/package/mtl-2.2.2) is a great place to start.
+The last argument to `forAllCommands` is a function that accepts a sequence of commands and returns a monadic property. Monadic properties are defined in `QuickCheck.Monadic` and can be used whenever a property exists in a monadic context. The convenience method `monadicIO` can be used to define properties in the `IO` context, and `run` lifts the result of the monadic execution to the `PropertyM` context. `PropertyM` is `QuickCheck`'s monad transformer, and in our case we are transforming the `IO` monad. To learn more about monadic transformations, [`mtl`](https://hackage.haskell.org/package/mtl-2.2.2) is a great place to start.
 
 So, the sequence below is:
 
@@ -330,15 +330,16 @@ Here are three follow up exercises you can do to expand your understanding of `q
 
 ### Novice
 
-Let's create a bug in the queue! 
+Let's create a bug in the queue!
 
 In the implementation of the FIFO queue, instead of adding the number to the head via `show x : split`, add it to the tail using `split ++ [show x]`. See if it's caught.
 
 ### Intermediate
 
-Create a new bug where the queue stops accepting new values once there are 50 values. 
+Create a new bug where the queue stops accepting new values once there are 50 values.
 
 You can do this in the `pushToQueue` function. If you run the tests as-is, you won't find it. There are three ways you can find the bug:
+
 - Increase the number of times [QuickCheck](https://hackage.haskell.org/package/QuickCheck-2.14) runs
 - Change the generator so that the frequency of push is greater than the frequency of pop. For inspiration, check out [QuickCheck generator combinators](https://hackage.haskell.org/package/QuickCheck-2.13.2/docs/Test-QuickCheck.html#g:9) and see if there is one that allows certain outcomes to happen with greater frequency than others.
 - Change the lower bound in `forAllCommands` from `Nothing` to something a bit higher.
