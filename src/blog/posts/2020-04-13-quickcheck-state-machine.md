@@ -144,7 +144,7 @@ Postconditions are where the correctness of the response is asserted. I like thi
 
 Postconditions only are checked when the state machine is actually running. This means they only exist in the `Concrete` HKT.
 
-Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below.
+Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below:
 
 
 ```haskell
