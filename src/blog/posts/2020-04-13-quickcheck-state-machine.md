@@ -142,7 +142,7 @@ precondition _ _ = Top
 
 Postconditions are where the correctness of the response is asserted. I like this API because it provides a one-stop-shop for all assertions. In other SPBT libraries, it is easy to litter assertions all over the place, which makes the code more difficult to read.  In `quickcheck-state-machine`, the only checks for correct behavior are in the postconditions.
 
-Postconditions only are checked when the state machine is actually running, and thus only exist in the `Concrete` HKT.
+Postconditions only are checked when the state machine is actually running. This means they only exist in the `Concrete` HKT.
 
 Note that the model passed to the postcondition function is the one **before** the command executes. It is often useful to apply the transition to the model when evaluating the response, as we do below.
 
