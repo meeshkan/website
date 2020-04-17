@@ -1,5 +1,5 @@
 import React from "react"
-import { Heading, Grid, Text, Image } from "@chakra-ui/core"
+import { Heading, Grid, Text, Image, Box, Link } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisims/singleSection"
 import SEO from "../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
@@ -19,6 +19,27 @@ const AboutUsPage = () => {
         team: file(relativePath: { eq: "teamGroup.jpg" }) {
           childImageSharp {
             fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        nordic: file(relativePath: { eq: "nordicWebLogo.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 150, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        connect: file(relativePath: { eq: "connectVenturesLogo.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 150, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        tiny: file(relativePath: { eq: "tinyVCLogo.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 150, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -218,9 +239,99 @@ const AboutUsPage = () => {
         </Grid>
       </SingleSection>
 
+      <SingleSection heading="Our investors">
+        <Grid
+          templateColumns={[
+            "repeat(auto-fill, 1fr)",
+            "reapeat(2, 1fr)",
+            "repeat(3, 1fr)",
+          ]}
+          gap={6}
+        >
+          <Box as={Link} href="https://thenordicweb.com/">
+            <Img fluid={data.nordic.childImageSharp.fluid} />
+          </Box>
+          <Box as={Link} href="https://connectventures.co/">
+            <Img
+              fluid={data.connect.childImageSharp.fluid}
+              style={{ maxWidth: 200 }}
+            />
+          </Box>
+          <Box as={Link} href="https://tiny.vc/">
+            <Img
+              fluid={data.tiny.childImageSharp.fluid}
+              style={{ maxWidth: 156 }}
+            />
+          </Box>
+          <Box
+            as={Link}
+            href="https://www.nordicmakers.vc/"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Nordic Makers
+          </Box>
+          <Box
+            as={Link}
+            href="http://www.firstfellow.com/"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            First Fellow Partners
+          </Box>
+          <Box
+            as={Link}
+            href="https://www.linkedin.com/in/aliomar/?originalSubdomain=fi"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Ali Omar
+          </Box>
+          <Box
+            as={Link}
+            href="https://futuristic.vc/"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Futuristic.vc
+          </Box>
+          <Box
+            as={Link}
+            href="https://www.linkedin.com/in/aribackholm"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Ari Backholm
+          </Box>
+          <Box
+            as={Link}
+            href="https://www.linkedin.com/in/okitag"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Oki Tåg
+          </Box>
+          <Box
+            as={Link}
+            href="https://www.linkedin.com/in/jermyap/"
+            color="gray.700"
+            fontSize="xl"
+            fontWeight={900}
+          >
+            Jeremy Yap
+          </Box>
+        </Grid>
+      </SingleSection>
+
       <SingleSection heading="What does Meeshkan mean?">
         <Text mt={4} lineHeight="tall">
-          Meeshkan is a Hebrew word (ןכשמ) that loosely translates to
+          Meeshkan is a Hebrew word (משכן) that loosely translates to
           tabernacle. It's the portable temple that the Israelites built during
           the Exodus from Egypt. It served as a stand-in for the larger one they
           were to build in Jerusalem.
