@@ -2,7 +2,7 @@
 title: Stateful Property-Based Testing with QuickCheck State Machine
 description: A gentle introduction to QuickCheck State Machine
 date: 2020-04-13
-authors: ["Mike Solomon"]
+authors: ["mike"]
 tags:
   - testing
   - tutorial
