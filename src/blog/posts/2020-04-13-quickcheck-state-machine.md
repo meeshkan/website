@@ -244,7 +244,7 @@ sm s = StateMachine initModel transition precondition postcondition
 
 Now for the fun part, let's run my tests!
 
-First, I  want each test to execute in its own FIFO queue, which means a different file for each queue. I chose the pcg unique random number generator to accomplish this, which guarantees each number generated will be unique during the run of a program.
+First, I want each test to execute in its own FIFO queue, which means a different file for each queue. I chose the pcg unique random number generator to accomplish this. This guarantees that each number generated will be unique during the run of a program.
 
 ```haskell
 newRand :: IO Int
