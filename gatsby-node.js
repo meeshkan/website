@@ -7,7 +7,10 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx(
+        filter: { frontmatter: { published: { eq: true } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+        ) {
         nodes {
           id
           excerpt(pruneLength: 140)
@@ -15,6 +18,7 @@ exports.createPages = ({ actions, graphql }) => {
             title
             date
             slug
+            published
           }
         }
       }
