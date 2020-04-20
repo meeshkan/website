@@ -82,7 +82,10 @@ const BlogHome = ({ data }) => {
 
 export const query = graphql`
   query SITE_INDEX_QUERY {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      filter: { frontmatter: { published: { eq: true } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       nodes {
         id
         frontmatter {
@@ -90,6 +93,7 @@ export const query = graphql`
           description
           date(formatString: "Do MMM")
           slug
+          published
           authors {
             avatar {
               childImageSharp {
