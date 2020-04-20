@@ -34,6 +34,13 @@ export function Footer() {
             >
               About us
             </Link>
+            <Link
+              as={GatsbyLink}
+              to="/terms-and-conditions/"
+              aria-label="Terms and conditions of the Meeshkan product"
+            >
+              ToC
+            </Link>
             {/*
             <Link
               as={GatsbyLink}
@@ -68,9 +75,6 @@ export function Footer() {
             >
               Unmock
             </Link>
-            {/* <Link as={GatsbyLink} to="/about-us/">
-              Meeshkan
-            </Link> */}
             <Link
               isExternal
               href="https://jaymock.now.sh/"
@@ -93,26 +97,6 @@ export function Footer() {
               Not salesforce
             </Link>
           </Stack>
-          {/*<Stack my={4} w={["100%", "50%", "33%"]}>
-            <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
-              Use-cases
-            </Heading>
-            <Link as={GatsbyLink} to="/use-case/api-sandbox/">
-              API Sanbox as a service
-            </Link>
-            <Link as={GatsbyLink} to="/use-case/fuzz-test/">
-              Fuzz test APIs
-            </Link>
-            <Link as={GatsbyLink} to="/use-case/white-hat-phishing/">
-              White-hat phishing
-            </Link>
-            <Link as={GatsbyLink} to="/use-case/api-coverage-monitor/">
-              API Coverage monitor
-            </Link>
-            <Link as={GatsbyLink} to="/use-case/api-uptime-healthcare/">
-              Uptime preventative healthcare
-            </Link>
-          </Stack> */}
         </Flex>
         <Divider borderColor="gray.300" mb={4} mt={4} />
         <Flex justifyContent="space-between" align="center">
