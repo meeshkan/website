@@ -10,7 +10,7 @@ exports.createPages = ({ actions, graphql }) => {
       allMdx(
         filter: { frontmatter: { published: { eq: true } } }
         sort: { fields: [frontmatter___date], order: DESC }
-        ) {
+      ) {
         nodes {
           id
           excerpt(pruneLength: 140)
