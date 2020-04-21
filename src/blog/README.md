@@ -20,6 +20,10 @@ This README walks through everything you need to know to publish an article on t
 
 | Date            | Article                                                       | Author ✍️         | Blog 🔖 | DEV 📓 | [Other ↗️](.EXTERNAL.md)                                                                        |
 | --------------- | ------------------------------------------------------------- | ----------------- | ------- | ------ | ----------------------------------------------------------------------------------------------- |
+| Monday 25.05    | Attending your own workshop (pleasework)                    | Mike              |         |        |                                                                                                 |
+| Monday 18.05    | Optics in TypeScript (pleasework)                    | Mike              |         |        |                                                                                                 |
+| Monday 11.05    | Introducing Wall (pleasework)                    | Mike              |         |        |                                                                                                 |
+| Monday 04.05    | Kotlin tests and user stories (pleasework)                    | Mike              |         |        |                                                                                                 |
 | Monday 27.04    | Extension types in TypeScript (pleasework)                    | Mike              |         |        |                                                                                                 |
 | Friday 24.04    | Property-based Testing for JS devs                            | Carolyn           |         |        |                                                                                                 |
 | Wednesday 22.04 | Introduction to Properties-Driven Development                 | Kimmo             |         |        |                                                                                                 |
