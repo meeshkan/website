@@ -1,7 +1,7 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisims/singleSection"
+import { SingleSection } from "../components/organisms/singleSection"
 import { Link } from "gatsby"
 
 const NotFoundPage = () => (

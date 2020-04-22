@@ -1,6 +1,6 @@
 import React from "react"
-import { Navigation } from "../organisims/navigation"
-import { Footer } from "../organisims/footer"
+import { Navigation } from "../organisms/navigation"
+import { Footer } from "../organisms/footer"
 import { Stack } from "@chakra-ui/core"
 import "./layout.css"
 

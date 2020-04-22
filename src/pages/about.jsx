@@ -1,6 +1,6 @@
 import React from "react"
 import { Heading, Grid, Text, Image, Box, Link } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisims/singleSection"
+import { SingleSection } from "../components/organisms/singleSection"
 import SEO from "../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
