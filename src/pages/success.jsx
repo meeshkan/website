@@ -1,7 +1,11 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
+<<<<<<< HEAD
 import { SingleSection } from "../components/organisms/singleSection"
+=======
+import { SingleSection } from "../components/organisims/singleSection.tsx"
+>>>>>>> [MEM-298] Initial TypeScript setup
 import { Link } from "gatsby"
 
 const SuccessPage = () => (

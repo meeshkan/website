@@ -10,7 +10,11 @@ import {
   FormControl,
   Box,
 } from "@chakra-ui/core"
+<<<<<<< HEAD
 import { SingleSection } from "../components/organisms/singleSection"
+=======
+import { SingleSection } from "../components/organisims/singleSection.tsx"
+>>>>>>> [MEM-298] Initial TypeScript setup
 import SEO from "../components/molecules/seo"
 
 const ContactPage = () => (

@@ -79,6 +79,7 @@ module.exports = {
         display: "swap",
       },
     },
+    `gatsby-plugin-typescript`,
     `gatsby-transformer-yaml`,
     {
       resolve: `gatsby-transformer-remark`,

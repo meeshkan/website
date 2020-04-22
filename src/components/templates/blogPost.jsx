@@ -1,5 +1,5 @@
 import React from "react"
-import { SingleSection } from "../organisms/singleSection"
+import { SingleSection } from "../organisms/singleSection.tsx"
 import { Heading, Stack, Button, Grid, Avatar, Text, Link as ChakraLink, Box } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
