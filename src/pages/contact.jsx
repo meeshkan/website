@@ -10,7 +10,7 @@ import {
   FormControl,
   Box,
 } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisms/singleSection"
+import { SingleSection } from "../components/organisms/singleSection.tsx"
 import SEO from "../components/molecules/seo"
 
 const ContactPage = () => (

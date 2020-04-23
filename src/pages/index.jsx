@@ -13,8 +13,8 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
-import { SingleSection } from "../components/organisms/singleSection"
-import { DoubleSection } from "../components/organisms/doubleSection"
+import { SingleSection } from "../components/organisms/singleSection.tsx"
+import { DoubleSection } from "../components/organisms/doubleSection.tsx"
 import Img from "gatsby-image"
 
 const IndexPage = () => {
