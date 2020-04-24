@@ -15,7 +15,7 @@ const BlogPost = ({ data, pageContext }) => {
     <MDXProvider components={mdxComponents}>
       <SEO
         pageTitle={frontmatter.title}
-        pageDescription={frontmatter.excerpt}
+        pageDescription={frontmatter.description}
         pageUrl={`/blog/${frontmatter.canonicalURL || frontmatter.slug}/`}
       />
       <SingleSection>
@@ -128,6 +128,7 @@ export const query = graphql`
       excerpt(pruneLength: 80)
       frontmatter {
         title
+        description
         date(formatString: "Do MMM YYYY")
         authors {
           avatar {
