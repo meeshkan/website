@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Meeshkan Website`,
-    description: `The website supporting meeshkan as a project`,
+    description: `Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in private beta and accepting applications.`,
     baseOG: `https://media.graphcms.com/vdCWflSaePa3QyqMPUfQ`,
     siteUrl: `https://meeshkan.com`,
     siteLanguage: `en-US`,
