@@ -20,26 +20,27 @@ This README walks through everything you need to know to publish an article on t
 
 | Date            | Article                                                       | Author ✍️         | Blog 🔖 | DEV 📓 | [Other ↗️](.EXTERNAL.md)                                                                        |
 | --------------- | ------------------------------------------------------------- | ----------------- | ------- | ------ | ----------------------------------------------------------------------------------------------- |
-| Monday 25.05    | Attending your own workshop (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Monday 18.05    | Optics in TypeScript (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Monday 11.05    | Introducing Wall (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Monday 04.05    | Kotlin tests and user stories (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Monday 27.04    | Extension types in TypeScript (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Friday 24.04    | Property-based Testing for JS devs                            | Carolyn           |         |        |                                                                                                 |
-| Wednesday 22.04 | Introduction to Properties-Driven Development                 | Kimmo             |         |        |                                                                                                 |
-| Friday 17.04    | Stateful property-based testing with QuickCheck State Machine | Mike              | ✔️      | ✔️     |                                                                                                 |
-| Tuesday 14.04   | Telemetry in Open Source - Part 2                             | Carolyn           | ✔️      | ✔️     |                                                                                                 |
-| Wednesday 08.04 | Word embeddings with code2vec, GloVe and spaCy                | Maria             |         | ✔️     |                                                                                                 |
-| Monday 06.04    | Property-based testing - Part 1                               | Fredrik & Carolyn | ✔️      | ✔️     |                                                                                                 |
-| Friday 03.04    | Vanity announcement                                           | Nikolaos          | ✔️      | ✔️     |                                                                                                 |
-| Thursday 02.04  | Word embeddings with code2vec, GloVe and spaCy                | Maria             | ✔️      |        |                                                                                                 |
-| Friday 27.03    | TypedDict vs Dataclass in Python                              | Mike              | ✔️      | ✔️     |                                                                                                 |
-| Wednesday 18.03 | Telemetry in Open Source - Part 1                             | Carolyn           | ✔️      | ✔️     |                                                                                                 |
+| Tuesday 02.06    | Attending your own workshop (pleasework)                    | Mike              |         |        |       |
+| Wednesday 27.05    | Optics in TypeScript (pleasework)                    | Mike              |         |        |   |
+| Monday 18.05    | Introducing Wall (pleasework)                    | Mike              |         |        |                                                                                                 |
+| Tuesday 12.05    | Kotlin tests and user stories (pleasework)                    | Mike              |         |        |          |
+| Thursday 07.05    | Property-based Testing for JS devs                            | Carolyn           |         |        |     |
+| Monday 04.05    | OP Bank Tutorial                           | Nikolay           |         |        |                 |
+| Monday 27.04 | Introduction to Properties-Driven Development                 | Kimmo             |   ✔️      |        |       |
+| Friday 24.04    | Extension types in TypeScript (pleasework)                    | Mike              |  ✔️       |        |         |
+| Friday 17.04    | Stateful property-based testing with QuickCheck State Machine | Mike              | ✔️      | ✔️     |         |
+| Tuesday 14.04   | Telemetry in Open Source - Part 2                             | Carolyn           | ✔️      | ✔️     |     |
+| Wednesday 08.04 | Word embeddings with code2vec, GloVe and spaCy                | Maria             |         | ✔️     |       |
+| Monday 06.04    | Property-based testing - Part 1                               | Fredrik & Carolyn | ✔️      | ✔️     |           |
+| Friday 03.04    | Vanity announcement                                           | Nikolaos          | ✔️      | ✔️     |       |
+| Thursday 02.04  | Word embeddings with code2vec, GloVe and spaCy                | Maria             | ✔️      |        |          |
+| Friday 27.03    | TypedDict vs Dataclass in Python                              | Mike              | ✔️      | ✔️     |         |
+| Wednesday 18.03 | Telemetry in Open Source - Part 1                             | Carolyn           | ✔️      | ✔️     |         |
 | Wednesday 18.03 | Word embeddings with code2vec, GloVe and spaCy                | Maria             |         |        | [✔️](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
-| Friday 13.03    | On-device mocking of REST APIs in React Native                | Mike              | ✔️      | ✔️     |                                                                                                 |
-| Tuesday 10.03   | Building a real-time HTTP traffic stream with Apache Kafka    | Kimmo             | ✔️      | ✔️     |                                                                                                 |
-| Monday 02.03    | Getting started with Meeshkan                                 | Mike              | ✔️      | ✔️     |                                                                                                 |
-| Friday 28.02    | Announcing Meeshkan, a new tool for mocking HTTP APIs         | Mike              | ✔️      | ✔️     |                                                                                                 |
+| Friday 13.03    | On-device mocking of REST APIs in React Native                | Mike              | ✔️      | ✔️     |            |
+| Tuesday 10.03   | Building a real-time HTTP traffic stream with Apache Kafka    | Kimmo             | ✔️      | ✔️     |     |
+| Monday 02.03    | Getting started with Meeshkan                                 | Mike              | ✔️      | ✔️     |       |
+| Friday 28.02    | Announcing Meeshkan, a new tool for mocking HTTP APIs         | Mike              | ✔️      | ✔️     |       |
 
 ## Where does Meeshkan content live?
 
