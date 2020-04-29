@@ -20,7 +20,7 @@ const DocsHeading = props => (
   <>
     <Heading
       mb={4}
-      mt={6}
+      mt={8}
       letterSpacing="wide"
       id={props.id}
       css={{
@@ -64,6 +64,7 @@ const components = {
       mb={12}
       color="gray.900"
       fontWeight={900}
+      mt={4}
     >
       {props.children}
     </Heading>

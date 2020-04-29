@@ -6,6 +6,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Code,
 } from "@chakra-ui/core"
 
 const DocsNavigation = () => {
@@ -15,12 +16,23 @@ const DocsNavigation = () => {
       isInline
       justify="space-between"
       align="center"
+      bg="white"
       py={4}
       px={6}
-      // mb={6}
+      pos="sticky"
+      top={0}
     >
-      <Link to="/" aria-label="Meeshkan home">
+      <Link
+        to="/"
+        aria-label="Meeshkan home"
+        style={{ display: "flex", alignContent: "center" }}
+      >
         <Icon name="Logo" color="red.500" h={6} w="auto" />
+        <Link to="/docs/">
+          <Code ml={3} variantColor="cyan" fontWeight={900}>
+            Docs
+          </Code>
+        </Link>
       </Link>
       <Stack isInline>
         <InputGroup size="sm" minW={200}>

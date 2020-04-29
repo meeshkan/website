@@ -1,20 +1,15 @@
 ---
-title: Example
-slug: example
+title: Introduction
 ---
 
-## Hello World!
+# Introduction
 
-Is this working? This is an example
+We're stoked you are an early adopter, trying out Meeshkan. Here are some concepts to help you understand what is happening behind the scenes, and what you can expect.
 
-```tsx
-const example = () => (
-  <>
-    <Stack minH="90vh" px={6} spacing={0}>
-      <Navigation />
-      <main>{children}</main>
-    </Stack>
-    <Footer />
-  </>
-)
-```
+## What Meeshkan does
+
+Meeshkan is a Machine Learning powered API / third-party dependency, testing and mocking tool. Once you install the app, Meeshkan will run on a weekly basis, submitting issues to your repo when bugs are found.
+
+## What happens after installation?
+
+After installation, we'll run property based tests on your repo, weekly. If no bugs were found, you won't hear from us. If we did find a bug, the Meeshkan bot will post an issue to your repo and tag the installer.

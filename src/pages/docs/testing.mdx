@@ -1,0 +1,40 @@
+---
+title: Testing
+---
+
+# Testing
+
+Testing is the core of what Meeshkan does. Here are some of the processes and details that you might need to know about these tests.
+
+**Table of Contents:**
+
+- [Test running](#running)
+- [Test frequency](#frequency)
+- [Test reporting](#reporting)
+- [Test fixing](#fixing)
+
+## Running
+
+Meeshkan uses your OpenAPI specification to understand what should be expected as inputs and outputs. The OpenAPI specification provides the framework for Meeshkan to then run property-based tests on your project.
+
+## Frequency
+
+Meeshkan during alpha is run on a weekly basis on your project's repository. Property-based testing is very resource intensive and therefore will be done conservatively. We will be introducing a paid plan with higher frequencies, soon. [Let us know](/contact/) if you're interested in this.
+
+## Reporting
+
+We're currently experimenting with the most effective way to report bugs. Meeshkan defaults to notifiying of bugs via issues submitted on your repository. Other options we are exploring include email digests, slack notifications, and branch checks.
+
+## Fixing
+
+In a few cases, Meeshkan is able to suggest a fix in context with the bug being reported. This is a sparse feature at the moment and is not in full use, however will be actively developed in the future.
+
+## Testing FAQ
+
+<!-- - [What is the quality of the tests that are run?]() -->
+
+**Why is my test taking so long?**
+Property-based testing is very resource intensive. It's normal during alpha for tests to take anywhere from 2-7 hours. After alpha, we will be offering a paid plan with greater enviroment capabilities to speed up this testing time.
+
+**Where can I see the results of my tests?**
+Results currently are submitted as issues to your repo. The Meeshkan team is currently working on a webapp, as well as branch checks to show visual feedback of your tests. From the webapp, a log of each individual test will be shown.
