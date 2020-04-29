@@ -29,7 +29,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/blog/posts`,
+        path: `${__dirname}/src/blog/posts/`,
       },
     },
     {
@@ -40,10 +40,20 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `docs`,
+        path: `${__dirname}/src/pages/docs/`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`],
         rehypePlugins: [require("rehype-slug")],
+        defaultLayouts: {
+          default: require.resolve("./src/components/templates/docsLayout.tsx"),
+        },
       },
     },
     `gatsby-transformer-sharp`,

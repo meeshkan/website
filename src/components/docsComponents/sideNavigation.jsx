@@ -1,8 +1,7 @@
-import { Box, Heading, Icon, useColorMode, Button } from "@chakra-ui/core"
 import React from "react"
+import { Box, Heading } from "@chakra-ui/core"
 import items from "./items"
 import { ComponentLink, stringToUrl, TopNavLink } from "./navLink"
-import { Link } from "gatsby"
 
 const topNavLinks = ["Theme"]
 
@@ -22,56 +21,16 @@ export const SideNavContent = ({
   contentHeight = "calc(100vh)",
   ...props
 }) => {
-  const { colorMode } = useColorMode()
   return (
-    <Box
-      position="relative"
-      overflowY="auto"
-      borderRightWidth="1px"
-      borderRightColor={`mode.${colorMode}.cardBG`}
-      {...props}
-    >
+    <Box position="relative" overflowY="auto" bg="gray.900" {...props}>
       <Box
         as="nav"
         top="0"
         height={contentHeight}
-        aria-label="Main navigation"
-        fontSize="sm"
-        px={[8, 8, 8, 12]}
-        py={4}
+        aria-label="Docs navigation"
+        px={[6, 6, 6, 8]}
       >
-        <Link
-          to="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Icon
-            name="Logo"
-            color={`mode.${colorMode}.logo`}
-            // size={10}
-            w={32}
-            h="40px"
-            mt={0}
-            mr={3}
-            display={["none", "none", "flex"]}
-          />
-          <Link to="/docs/">
-            <Button
-              size="sm"
-              fontWeight="700"
-              h="24px"
-              px={2}
-              letterSpacing="tighter"
-              display={["none", "none", "flex"]}
-            >
-              docs
-            </Button>
-          </Link>
-        </Link>
-
-        <Box mt={10} mb={8}>
+        <Box mb={8}>
           <TopNavLink href="/docs/">Docs Introduction</TopNavLink>
           {topNavLinks.map(link => (
             <TopNavLink key={link} pathName={pathName} href={stringToUrl(link)}>
@@ -81,7 +40,7 @@ export const SideNavContent = ({
         </Box>
 
         <Box mb="10">
-          <NavGroupHeading>Components</NavGroupHeading>
+          <NavGroupHeading>Topics</NavGroupHeading>
           {items.map(link => (
             <ComponentLink
               key={link}

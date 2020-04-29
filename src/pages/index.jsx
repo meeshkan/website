@@ -16,6 +16,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection.tsx"
 import { DoubleSection } from "../components/organisms/doubleSection.tsx"
 import Img from "gatsby-image"
+import Layout from "../components/templates/layout"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -82,7 +83,7 @@ const IndexPage = () => {
   )
 
   return (
-    <>
+    <Layout>
       <SEO
         pageTitle="Home"
         pageDescription="Meeshkan has built a Machine Learning Algorithm that helps you break and fix
@@ -348,7 +349,7 @@ const IndexPage = () => {
           />
         </Box>
       </Box>
-    </>
+    </Layout>
   )
 }
 

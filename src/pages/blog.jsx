@@ -4,10 +4,11 @@ import { SingleSection } from "../components/organisms/singleSection.tsx"
 import { graphql } from "gatsby"
 import { Card } from "../components/atoms/card"
 import SEO from "../components/molecules/seo"
+import Layout from "../components/templates/layout"
 
 const BlogHome = ({ data }) => {
   return (
-    <>
+    <Layout>
       <SEO
         pageTitle="Blog"
         pageDescription="We’re experts in Machine Learning and APIs. Why keep it to ourselves?"
@@ -76,7 +77,7 @@ const BlogHome = ({ data }) => {
           ))}
         </Grid>
       </SingleSection>
-    </>
+    </Layout>
   )
 }
 

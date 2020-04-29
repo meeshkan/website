@@ -1,77 +1,32 @@
 import React from "react"
-import PropTypes from "prop-types"
-import { Link as GatsbyLink } from "gatsby"
-
-import {
-  Divider,
-  Stack,
-  Button,
-  Box,
-  useColorMode,
-  Link,
-  Badge,
-} from "@chakra-ui/core"
+import { Box } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
-import MDXComponents from "../molecules/MDXComponents"
-// import SideNav from "../docsComponents/SideNav"
-import { Navigation } from "../organisms/navigation"
-
-import "./layout.css"
-
-const Main = props => <Box as="main" minH="90vh" mx="auto" {...props} />
-
-const Footer = props => {
-  const { colorMode } = useColorMode()
-  return (
-    <footer {...props}>
-      <Divider borderColor={`mode.${colorMode}.cardBG`} />
-      <Stack isInline justify="center">
-        <GatsbyLink to="/about-me/">
-          <Button variant="ghost">About</Button>
-        </GatsbyLink>
-        {/* <Button variant="ghost">Release History</Button> */}
-        <Link href="https://github.com/kenzoBenzo/personal-portfolio">
-          <Button variant="ghost">Contribute</Button>
-        </Link>
-        <Button variant="ghost">
-          Roadmap
-          <Badge fontSize="10px" ml={2} variantColor="primary">
-            soon
-          </Badge>
-        </Button>
-      </Stack>
-    </footer>
-  )
-}
+import MDXComponents from "../molecules/mdxComponents"
+import SideNav from "../docsComponents/sideNavigation"
+import DocsNavigation from "../docsComponents/docsNavigation"
 
 type LayoutProps = {
   children: Object
 }
 
-const Layout = ({ children }: LayoutProps) => {
-  const { colorMode } = useColorMode()
+const DocsLayout = ({ children }: LayoutProps) => {
   return (
     <MDXProvider components={MDXComponents}>
-      <Box backgroundColor={`mode.${colorMode}.background`}>
+      <DocsNavigation />
+      <Box>
         <SideNav
           display={["none", null, "block"]}
           maxWidth="18rem"
           width="full"
         />
-        <Box
-          pl={[0, null, "18rem"]}
-          backgroundColor={`mode.${colorMode}.background`}
-          py={2}
-        >
-          <Navigation />
-          <Main maxWidth="46rem" pt={8} px={5}>
+        <Box pl={[0, null, "18rem"]} backgroundColor="gray.50" py={2}>
+          <Box as="main" minH="100vh" mx="auto" maxWidth="46rem" pt={6} px={5}>
             {children}
-          </Main>
-          <Footer />
+          </Box>
         </Box>
       </Box>
     </MDXProvider>
   )
 }
 
-export default Layout
+export default DocsLayout

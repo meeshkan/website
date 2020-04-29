@@ -1,4 +1,4 @@
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require("gatsby-source-filesystem")
 const path = require(`path`)
 
 exports.createPages = ({ actions, graphql }) => {
@@ -25,7 +25,7 @@ exports.createPages = ({ actions, graphql }) => {
     }
   `).then(result => {
     if (result.errors) {
-      throw result.errors
+      reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
     }
 
     const posts = result.data.allMdx.nodes
