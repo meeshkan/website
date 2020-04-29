@@ -38,6 +38,8 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, pageImage }) {
         <title>{pageTitle || siteDescription}</title>
         <meta name="description" content={pageDescription || siteDescription} />
 
+        <meta name="google-site-verification" content="x_u9LXn82cn5TO9Q7XMK6i1JF7mhDzdUuCRWX3jFQXc" />
+
         <meta property="og:url" content={pageUrl || siteUrl} />
         {pageUrl && <link rel="canonical" href={pageUrl} />}
 
