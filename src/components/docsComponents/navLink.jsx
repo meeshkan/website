@@ -1,4 +1,4 @@
-import { Box, PseudoBox, useColorMode } from "@chakra-ui/core"
+import { Box, PseudoBox, Heading } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import React, { cloneElement, forwardRef } from "react"
 import useLocation from "../../hooks/Location"
@@ -6,7 +6,6 @@ import PropTypes from "prop-types"
 
 const NavLink = ({ children, href, ...props }) => {
   let isActive = false
-
   let location = useLocation()
 
   if (location.location.pathname === href) {
@@ -30,7 +29,6 @@ export const stringToUrl = (str, path = "/docs/") => {
 }
 
 export const SideNavLink = forwardRef(({ children, icon, ...props }, ref) => {
-  const { colorMode } = useColorMode()
   return (
     <PseudoBox
       ref={ref}
@@ -38,14 +36,13 @@ export const SideNavLink = forwardRef(({ children, icon, ...props }, ref) => {
       display="flex"
       cursor="pointer"
       align="center"
-      px={3}
+      fontSize="lg"
+      px={2}
       py="1"
       transition="all 0.2s"
-      fontSize="sm"
-      fontWeight="500"
+      fontWeight={700}
       outline="none"
       _focus={{ shadow: "outline" }}
-      color={`mode.${colorMode}.text`}
       _notFirst={{ mt: 1 }}
       {...props}
     >
@@ -56,10 +53,9 @@ export const SideNavLink = forwardRef(({ children, icon, ...props }, ref) => {
 })
 
 export const TopNavLink = forwardRef(({ href, ...props }, ref) => {
-  const { colorMode } = useColorMode()
   const hoverColor = { light: "gray.900", dark: "gray.50" }
-  const activeColor = { light: "purple.500", dark: "purple.200" }
-  const activeBg = { light: "purple.50", dark: "purple.800" }
+  const activeColor = { light: "cyan.500", dark: "cyan.200" }
+  const activeBg = { light: "cyan.50", dark: "cyan.800" }
   return (
     <NavLink href={href}>
       {isActive => (
@@ -67,13 +63,13 @@ export const TopNavLink = forwardRef(({ href, ...props }, ref) => {
           ref={ref}
           aria-current={isActive ? "page" : undefined}
           _hover={{
-            color: hoverColor[colorMode],
+            color: hoverColor,
             transform: "translateX(2px)",
           }}
           {...(isActive && {
-            bg: activeBg[colorMode],
-            rounded: "md",
-            color: activeColor[colorMode],
+            bg: activeBg.dark,
+            rounded: "sm",
+            color: activeColor.dark,
             _hover: {
               transform: "translateX(2px)",
             },
@@ -86,11 +82,21 @@ export const TopNavLink = forwardRef(({ href, ...props }, ref) => {
   )
 })
 
-export const ComponentLink = forwardRef(({ href, ...props }, ref) => {
-  const { colorMode } = useColorMode()
+export const NavGroupHeading = props => (
+  <Heading
+    color="gray.300"
+    fontSize="md"
+    letterSpacing="wide"
+    mb={2}
+    textTransform="uppercase"
+    {...props}
+  />
+)
+
+export const ItemLink = forwardRef(({ href, ...props }, ref) => {
   const hoverColor = { light: "gray.900", dark: "gray.50" }
-  const activeColor = { light: "purple.500", dark: "purple.200" }
-  const activeBg = { light: "purple.50", dark: "purple.800" }
+  const activeColor = { light: "cyan.500", dark: "cyan.500" }
+  const activeBg = { light: "cyan.50", dark: "gray.800" }
 
   return (
     <NavLink href={href}>
@@ -98,14 +104,15 @@ export const ComponentLink = forwardRef(({ href, ...props }, ref) => {
         <SideNavLink
           ref={ref}
           aria-current={isActive ? "page" : undefined}
+          color="gray.300"
           _hover={{
-            color: hoverColor[colorMode],
+            color: hoverColor.dark,
             transform: "translateX(2px)",
           }}
           {...(isActive && {
-            bg: activeBg[colorMode],
-            rounded: "md",
-            color: activeColor[colorMode],
+            bg: activeBg.dark,
+            rounded: "sm",
+            color: activeColor.dark,
             _hover: {
               transform: "translateX(2px)",
             },
@@ -118,6 +125,6 @@ export const ComponentLink = forwardRef(({ href, ...props }, ref) => {
   )
 })
 
-ComponentLink.propTypes = {
+ItemLink.propTypes = {
   href: PropTypes.node.isRequired,
 }

@@ -1,2 +1,2 @@
-const items = ["Example", "Badge", "Button", "Input", "Text", "Toggle"]
+const items = ["Introduction", "Getting started", "Test reporting"]
 export default items
