@@ -41,14 +41,15 @@ export function Footer() {
             >
               ToC
             </Link>
-            {/*
+
             <Link
               as={GatsbyLink}
-              to="/privacy/"
-              aria-label="Meeshkan's privacy statement"
+              to="/docs/"
+              aria-label="Meeshkan's documentation"
             >
-              Privacy
+              Docs
             </Link>
+            {/*
             <Link
               as={GatsbyLink}
               to="/imprint/"
