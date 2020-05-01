@@ -5,6 +5,7 @@ import SEO from "../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import { Card } from "../components/atoms/card"
+import Layout from "../components/templates/layout"
 
 import Mike from "../../data/avatars/mike.png"
 import Kenna from "../../data/avatars/kenna.png"
@@ -49,7 +50,7 @@ const AboutUsPage = () => {
     `
   )
   return (
-    <>
+    <Layout>
       <SEO
         pageTitle="About the Meeshkan team"
         pageDescription="Details about the Meeshkan team, what we stand for, the name origin, and our investors."
@@ -396,7 +397,7 @@ const AboutUsPage = () => {
           doing.
         </Text>
       </SingleSection>
-    </>
+    </Layout>
   )
 }
 

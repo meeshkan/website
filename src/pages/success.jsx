@@ -3,9 +3,10 @@ import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection.tsx"
 import { Link } from "gatsby"
+import Layout from "../components/templates/layout"
 
 const SuccessPage = () => (
-  <>
+  <Layout>
     <SEO title="Success" pageUrl="https://meeshkan.com/success/" />
     <SingleSection>
       <Heading
@@ -33,7 +34,7 @@ const SuccessPage = () => (
         </Button>
       </Flex>
     </SingleSection>
-  </>
+  </Layout>
 )
 
 export default SuccessPage

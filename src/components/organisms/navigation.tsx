@@ -11,7 +11,7 @@ export function Navigation() {
       justify="space-between"
       align="center"
       py={4}
-      mb={6}
+      // mb={6}
     >
       <Link to="/" aria-label="Meeshkan home">
         <Icon name="Logo" color="red.500" h={6} w="auto" />
@@ -19,7 +19,7 @@ export function Navigation() {
       <Stack isInline>
         <NavLink text="Blog" path="/blog/" />
         {/* <NavLink text="Pricing" path="/pricing/" /> */}
-        {/* <NavLink text="Docs" path="/docs/" /> */}
+        <NavLink text="Docs" path="/docs/" />
       </Stack>
     </Stack>
   )

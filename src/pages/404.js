@@ -3,9 +3,10 @@ import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection.tsx"
 import { Link } from "gatsby"
+import Layout from "../components/templates/layout"
 
 const NotFoundPage = () => (
-  <>
+  <Layout>
     <SEO title="404: Not found" pageUrl="https://meeshkan.com/404/" />
     <SingleSection>
       <Heading
@@ -33,7 +34,7 @@ const NotFoundPage = () => (
         </Button>
       </Flex>
     </SingleSection>
-  </>
+  </Layout>
 )
 
 export default NotFoundPage

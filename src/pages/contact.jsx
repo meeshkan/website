@@ -12,9 +12,10 @@ import {
 } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection.tsx"
 import SEO from "../components/molecules/seo"
+import Layout from "../components/templates/layout"
 
 const ContactPage = () => (
-  <>
+  <Layout>
     <SEO
       pageTitle="Contact"
       pageDescription="Get in contact with us!"
@@ -99,7 +100,7 @@ const ContactPage = () => (
         </Button>
       </Box>
     </SingleSection>
-  </>
+  </Layout>
 )
 
 export default ContactPage
