@@ -46,6 +46,13 @@ const AboutUsPage = () => {
             }
           }
         }
+        system: file(relativePath: { eq: "systemOneLogo.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 150, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     `
   )
@@ -282,18 +289,31 @@ const AboutUsPage = () => {
         >
           <Box
             as={Link}
-            aria-label="Nordic web website"
-            href="https://thenordicweb.com/"
-          >
-            <Img fluid={data.nordic.childImageSharp.fluid} />
-          </Box>
-          <Box
-            as={Link}
             href="https://connectventures.co/"
             aria-label="connect ventures website"
           >
             <Img
               fluid={data.connect.childImageSharp.fluid}
+              style={{ maxWidth: 200 }}
+            />
+          </Box>
+          <Box
+            as={Link}
+            href="http://www.systemone.vc/"
+            aria-label="System One VC website"
+          >
+            <Img
+              fluid={data.system.childImageSharp.fluid}
+              style={{ maxWidth: 200 }}
+            />
+          </Box>
+          <Box
+            as={Link}
+            aria-label="Nordic web website"
+            href="https://thenordicweb.com/"
+          >
+            <Img
+              fluid={data.nordic.childImageSharp.fluid}
               style={{ maxWidth: 200 }}
             />
           </Box>
