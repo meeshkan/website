@@ -60,7 +60,6 @@ const components = {
       {...props}
       as="h1"
       fontSize={["3xl", "4xl", "5xl"]}
-      textAlign="center"
       mb={12}
       color="gray.900"
       fontWeight={900}
