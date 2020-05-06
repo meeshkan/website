@@ -59,7 +59,7 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, pageImage }) {
         />
         <meta
           property="twitter:card"
-          content={pageImage ? "summary_large_media" : "summary"}
+          content={pageImage ? "summary_large_image" : "summary"}
         />
         <meta property="twitter:image" content={pageImage || baseOG} />
       </Helmet>
