@@ -190,7 +190,7 @@ const AboutUsPage = () => {
               Carolyn Stransky
             </Text>
             <Text fontWeight={500} textAlign="center">
-              Open Source Engineer
+              Software Engineer
             </Text>
           </Card>
           <Card>
