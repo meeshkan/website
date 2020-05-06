@@ -28,6 +28,7 @@ const BlogPost = ({ data, pageContext }) => {
           pageTitle={frontmatter.title}
           pageDescription={frontmatter.description}
           pageUrl={`/blog/${frontmatter.canonicalURL || frontmatter.slug}/`}
+          pageImage={frontmatter.pageImage}
         />
         <SingleSection>
           <Heading
@@ -142,6 +143,7 @@ export const query = graphql`
         title
         description
         date(formatString: "Do MMM YYYY")
+        pageImage
         authors {
           avatar {
             childImageSharp {
