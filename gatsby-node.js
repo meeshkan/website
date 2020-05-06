@@ -2,16 +2,8 @@ const { createFilePath } = require("gatsby-source-filesystem")
 const path = require(`path`)
 
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage, createRedirect } = actions
+  const { createPage } = actions
   const blogPost = path.resolve("src/components/templates/blogPost.jsx")
-
-  createRedirect({
-    fromPath: "/docs/",
-    toPath: "/docs/introduction/",
-    force: true,
-    isPermanent: true,
-    redirectInBrowser: true,
-  })
 
   return graphql(`
     {

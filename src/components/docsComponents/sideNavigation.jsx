@@ -17,6 +17,7 @@ export const SideNavContent = ({
         aria-label="Docs navigation"
         px={6}
       >
+        <ItemLink key="Getting Started" pathName="/docs/" href="/docs/">Getting started</ItemLink>
         {items.map(link => (
           <ItemLink key={link} pathName={pathName} href={stringToUrl(link)}>
             {link}
