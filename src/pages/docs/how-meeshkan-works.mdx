@@ -11,7 +11,7 @@ Testing is the core of what Meeshkan does and it's important that we're transpar
 
 ## Running the tests
 
-Meeshkan uses an [OpenAPI specification](https://swagger.io/specification/) to understand your project's expected inputs and outputs. This OpenAPI specification provides a framework for Meeshkan to generate test properties. From there, Meeshkan runs [property-based tests](#what-is-property-based-testing) on your project.
+Meeshkan uses an [OpenAPI specification](https://swagger.io/specification/) to understand your project's expected inputs and outputs. This OpenAPI specification provides a framework for Meeshkan to generate test properties. From there, Meeshkan runs [property-based tests](/docs/how-meeshkan-works/#what-is-property-based-testing) on your project.
 
 If you don't already have an OpenAPI specification, we can generate one for you with our [HTTP Mocking Toolkit (HMT)](https://github.com/meeshkan/hmt). HMT collects recordings of server traffic and generates a [JSON Lines](http://jsonlines.org/) file based on the logs. It then builds an OpenAPI schema from that file.
 
