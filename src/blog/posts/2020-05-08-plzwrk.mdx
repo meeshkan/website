@@ -1,0 +1,183 @@
+---
+title: plzwrk - A Haskell front-end framework
+description: Build type-safe, blazingly fast webapps using plzwrk, Asterius and Haskell.
+slug: plzwrk
+date: 2020-03-27
+authors: ["mike"]
+published: true
+tags:
+  - haskell
+  - web
+  - frontend
+---
+
+I really like programming in Haskell. When I learned about [Asterius](https://github.com/tweag/asterius), a Haskell-to-Webassembly compiler, I thought it'd be fun to create a small front-end framework that inspired by my favorite JS frontend frameworks like React and Vue.
+
+Voilà [plzwrk](https://github.com/meeshkan/plzwrk). I've used it to build a couple [toy websites](https://github.com/meeshkan/plzwrk) and I must say the process has been quite delightful! Here, I'd like to present a brief overview of plzwrk. If you're a frontend dev, I hope you give it a try!
+
+# A hello world in plzwrk
+
+Here it is!
+
+```haskell
+{-# LANGUAGE QuasiQuotes       #-}
+
+import           Web.Framework.Plzwrk
+import           Web.Framework.Plzwrk.Asterius
+
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let element = [hsx|<p>Hello world!</p>|]
+  plzwrk'_ element browser
+```
+
+Let's unpack what's going on.
+
+On the first line, we are creating a browser. `plzwrk` is designed so that it can work with any representation of a browser using the [`Browserful`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Browserful.hs) type. `plzwrk` ships with two browser representations - one backed by [Asterius](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/Asterius.hs#L34) (which we use above) - and a [mock](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/MockJSVal.hs#L648) one that is useful for testing.
+
+On the second line, we create our element to be inserted into the DOM. `plzwrk` has two ways to input the dom:
+
+- `hsx`, which is like `jsx`.
+- tag functions like `div` and `img` from [`Web.Framework.Plzwrk.Tag`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Tag.hs).
+
+If you've used frameworks like [React](https://reactjs.org/) or [Vue](https://vuejs.org/) before, `hsx` will probably be more comfortable.  If you're more familiar with [PureScript](https://www.purescript.org/) or [Elm](https://elm-lang.org/), then working with tag functions will feel familiar. The second line using tag functions would be `let dom = p__ "Hello world!"`.
+
+I personally like working with `hsx` when I start from a copy-and-paste of HTML, and I like using the tag functions when building from scratch. When using tag functions, the function `toHTML` can be used to export an `HTML` representation.
+
+The third and last line sends the element and the browser to `plzwrk` for [rendering](https://plzwrk-hello-world.surge.sh).
+
+## Composing elements
+
+Here's how you add an element in another element in `plzwrk`:
+
+```haskell
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let element = [hsx|<p>Hello world!</p>|]
+  let bigger = [hsx|<div style="background-color:red">
+    #el{take 10 $ repeat element}#
+  </div>
+  |]
+  plzwrk'_ bigger browser
+```
+
+This takes our "Hello world!" and repeats it 10 times using Haskell's standard `take/repeat` pattern.
+
+`#el{}#` is a `plzwrk` mixin that means "element list". `plzwrk` currently has four mixins:
+
+- `el` is a list of elements
+- `e` is a single element
+- `t` is a single piece of text, either in the body of an element or as an attribute
+- `c` is a callback that one would supply to `click` or `input`
+
+Let's use them all in the example below:
+
+```haskell
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let who = "world"
+  let mystyle = "background-color:red"
+  let element = [hsx|<p>Hello #t{who}#</p>|]
+  let bigger = [hsx|<div click=#c{(\e s -> return $ (consoleLog browser) "clicked")}# style=#t{mystyle}#>
+    #el{take 10 $ repeat element}#
+    #e{element}
+  </div>
+  |]
+  plzwrk'_ bigger browser
+```
+
+In the lambda function `#c{(\e s -> return $ (consoleLog browser) "clicked")}#`, we see two arguments passed to the listener: `e` is an event and `s` is the state. Speaking of state, let's see how `plzwrk` handles state!
+
+## Stateful elements
+
+`plzwrk` uses a novel approach to state management. All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a tag function like `div'` or `img'` (again, note the apostrophe).
+
+```haskell
+let elt = (\name -> [hsx|<p>#t{name}</p>|])
+```
+
+Here, we do not say anything about the state to which name belongs - all we are saying is that the function accepts one argument called name.
+
+When it is time to render using `plzwrk`, we compose `elt` with a getter from a state that will hydrate name.
+
+```
+browser <- asteriusBrowser
+data Person = Person { _name :: String }
+let elt = (\name -> [hsx|<p>#t{name}</p>|])
+plzwrk' (elt <$> _name) (Person "Stacey") browser
+```
+
+Of course, this is not particularly useful, but when it's linked to event listeners, it becomes more powerful.
+
+```
+browser <- asteriusBrowser
+data Person = Person { _name :: String }
+let elt = (\name -> [hsx|<div>
+  <p>#t{name}</p>
+  <button click=#c{(\_ s -> s { _name = "Bob" })}>Change name</button>
+</div>|])
+plzwrk' (elt <$> _name) (Person "Stacey") browser
+```
+
+Now, when we click the "Change name" button, the name will change from "Stacey" to "Bob" in the UI.
+
+What's powerful about this method is that the element does not need to know anything about the state when it is created - all it needs to know is how to get and set something called `_name` in a hypothetical object.  This allows elements to declaritively state their dependencies and leave it to the implementation of the state to provide these dependencies.
+
+What's even more powerful is, because of the way applicative functors work in Haskell, the state can intervene at arbitrary levels of the element. For example, a stateful object can be nested within another one, and `plzwrk` will take care of making sure the state flows through the whole element to hydrate it.
+
+```haskell
+
+data Person = Person { _name :: String, _age :: Int }
+
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let who = "world"
+  let mystyle = "background-color:red"
+  let element = (\age -> [hsx'|<p>You are #t{show age} years old</p>|]) <$> _age
+  let bigger = (\name age -> [hsx'|<div click=#c{(\e s -> return $ (consoleLog browser) "clicked")}# style=#t{mystyle}#>
+    <p>#t{name}#</p>
+    #el{take age $ repeat element}#
+    #e{element}
+  </div>
+  |]) <$> _name <*> _age
+  plzwrk' (bigger $ Person "Joe" 42) browser
+```
+
+In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (ie no accidentally making a network call from the dom construction function) and allows for maximum flexibiltiy in working with the state.
+
+## Other features
+
+Here are some nifty features in `plzwrk`:
+
+- Supports [server-side rendering](https://github.com/meeshkan/plzwrk#server-side-rendering) like nextjs and nuxtjs
+- Small core library size with less than 500 lines of code with high test coverage
+- Well-documented
+
+But the niftiest of all is what `plzwrk` is built on: it is written in Haskell and uses the Asterius compiler to run blazingly fast Webassembly.
+
+## Getting started with plzwrk
+
+`plzwrk` uses [Asterius](https://github.com/tweag/asterius) as its backend for web development. Compiling an application using `plzwrk` is no different than compiling an application using `ahc-cabal` and `ahc-dist` as described in the [Asterius documentation](https://asterius.netlify.app) with **one caveat**. You **must** use `--constraint "plzwrk +plzwrk-enable-asterius"` when running `ahc-cabal`.
+
+A minimal flow is shown below, mostly copied from the asterius documentation. It assumes that you have a cabal-buildable project in the `pwd`. Note the use of the `--constraint "plzwrk +plzwrk-enable-asterius"` flag in the `ahc-cabal` step.
+
+```bash
+username@hostname:~/my-dir$ docker run --rm -it -v $(pwd):/project -w /project terrorjack/asterius
+asterius@hostname:/project$ ahc-cabal v2-update
+asterius@hostname:/project$ ahc-cabal new-install --constraint "plzwrk +plzwrk-enable-asterius" --installdir <inst-dir> <exec-name>
+asterius@hostname:/project$ cd <inst-dir> && ahc-dist --input-exe <exec-name> --browser --bundle
+```
+
+## Roadmap
+
+If and when I get time, I'd love to add the following features to `plzwrk`:
+
+- A [`nodemon`](https://nodemon.io/) configuration for JIT recompiling
+- An in-browser debug mode
+- An easier setup for using `plzwrk` with libraries like [`yesod`](https://www.yesodweb.com/) or [`scotty`](https://hackage.haskell.org/package/scotty) when rendered on the server.
+
+Thanks for checking out `plzwrk`! I'm looking forward to seeing what people build with it.
