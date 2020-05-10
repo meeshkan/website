@@ -96,7 +96,7 @@ const CodeBlock = ({
     language,
     code: editorCode,
     transformCode: code =>
-      "/** @jsx tsx mdx JSON graphql python bash yaml scheme latex */" + code,
+      "/** @jsx tsx mdx JSON graphql python bash yaml scheme latex haskell */" + code,
     scope: {
       ...Chakra,
       ...Formik,
