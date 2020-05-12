@@ -4,6 +4,7 @@ import { MDXProvider } from "@mdx-js/react"
 import MDXComponents from "../molecules/mdxComponents"
 import SideNav from "../docsComponents/sideNavigation"
 import DocsNavigation from "../docsComponents/docsNavigation"
+import SEO from "../../components/molecules/seo"
 
 type LayoutProps = {
   children: Object
@@ -12,6 +13,11 @@ type LayoutProps = {
 const DocsLayout = ({ children }: LayoutProps) => {
   return (
     <MDXProvider components={MDXComponents}>
+      <SEO
+        pageTitle="Docs"
+        pageDescription="Documentation to guide you through the Meeshkan core concepts."
+        pageUrl="https://meeshkan.com/docs/"
+      >
       <DocsNavigation />
       <Box>
         <SideNav
@@ -25,6 +31,7 @@ const DocsLayout = ({ children }: LayoutProps) => {
           </Box>
         </Box>
       </Box>
+      </SEO>
     </MDXProvider>
   )
 }
