@@ -17,11 +17,10 @@ Table of Contents
 - [A hello world in plzwrk](#a-hello-world-in-plzwrk)
 - [Composing elements](#composing-elements)
 - [Stateful elements](#stateful-elements)
-- [Other features](#other-features)
 - [Getting started with plzwrk](#getting-started-with-plzwrk)
-- [Roadmap](#roadmap)
+- [Thanks](#thanks)
 
-I really like programming in Haskell. When I learned about [Asterius](https://github.com/tweag/asterius), a Haskell-to-WebAssembly compiler, I thought it'd be fun to create a small frontend framework inspired by JavaScript frameworks like [Vue](https://vuejs.org/).
+I really like programming in Haskell. When I learned about [Asterius](https://github.com/tweag/asterius), a Haskell-to-WebAssembly compiler, I thought it'd be fun to create a small frontend library to build websites that are compiled with Asterius.
 
 Voilà [plzwrk](https://github.com/meeshkan/plzwrk). I've used it to build a couple [toy websites](https://github.com/meeshkan/plzwrk) and I must say the process has been quite delightful! In this article, I'd like to present a brief overview of plzwrk. If you're a frontend dev, I hope you give it a try!
 
@@ -49,13 +48,11 @@ On the first line of the function `main`, we are creating a browser.  `plzwrk` s
 On the second line of `main`, we create our element to be inserted into the DOM. `plzwrk` has two ways to insert elements into the dom:
 
 - `hsx`, which is similar to [`jsx`](https://reactjs.org/docs/introducing-jsx.html).
-- tag functions like `div` and `img` from [`Web.Framework.Plzwrk.Tag`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Tag.hs).
+- functions like `div` and `img` from [`Web.Framework.Plzwrk.Tag`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Tag.hs) that correspond to HTML tags (ie `div` creates a `<div></div>` tag).
 
-If you've used frameworks like [React](https://reactjs.org/) or [Vue](https://vuejs.org/) before, `hsx` will probably be more comfortable.  If you're more familiar with [PureScript](https://www.purescript.org/) or [Elm](https://elm-lang.org/), then working with tag functions will feel familiar. The second line using tag functions would be `let dom = p__ "Hello world!"`.
+If you've used `jsx` or templating languages like nunjucks before, `hsx` will probably be more comfortable.  If you're more familiar with [PureScript](https://www.purescript.org/) or [Elm](https://elm-lang.org/), then working with functions like `div` and `img` will feel familiar. The second line of `main` using functions would be `let dom = p__ "Hello world!"`.
 
-I personally like working with `hsx` when I start from a copy-and-paste of HTML, and I like using the tag functions when building from scratch. When using tag functions, the function `toHTML` can be used to export an `HTML` representation.
-
-The third and last line sends the element and the browser to `plzwrk` for [rendering](https://plzwrk-hello-world.surge.sh).
+The third and last line sends the element and the browser to `plzwrk` for rendering. [Here's how it looks](https://plzwrk-hello-world.surge.sh).
 
 # Composing elements
 
@@ -67,15 +64,15 @@ main = do
   browser <- asteriusBrowser
   let element = [hsx|<p>Hello world!</p>|]
   let bigger = [hsx|<div style="background-color:red">
-    #el{take 10 $ repeat element}#
+    #el{replicate 10 element}#
   </div>
   |]
   plzwrk'_ bigger browser
 ```
 
-This takes our "Hello world!" and repeats it 10 times using Haskell's standard `take/repeat` pattern.
+This takes our "Hello world!" and repeats it 10 times.
 
-`#el{}#` is a `plzwrk` mixin that means "element list". `plzwrk` currently has four mixins:
+`#el{}#` tells `hsx` to expect a list of elements between the curly brackets. `hsx` currently has four types of Haskell values that it can accept in curly brackets:
 
 - `el` is a list of elements
 - `e` is a single element
@@ -103,7 +100,7 @@ In the lambda function `#c{(\e s -> return $ (consoleLog browser) "clicked")}#`,
 
 # Stateful elements
 
-`plzwrk` uses a novel approach to state management. All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a tag function like `div'` or `img'` (again, note the apostrophe).
+`plzwrk` uses a novel approach to state management. All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a function like `div'` or `img'` (again, note the apostrophe).
 
 ```haskell
 let elt = (\name -> [hsx|<p>#t{name}</p>|])
@@ -159,16 +156,6 @@ main = do
 
 In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (ie no accidentally making a network call from the dom construction function) and allows for maximum flexibiltiy in working with the state.
 
-# Other features
-
-Here are some nifty features in `plzwrk`:
-
-- Supports [server-side rendering](https://github.com/meeshkan/plzwrk#server-side-rendering) like nextjs and nuxtjs
-- Small core library size with less than 500 lines of code with high test coverage
-- Well-documented
-
-But the niftiest of all is what `plzwrk` is built on: it is written in Haskell and uses the Asterius compiler to run blazingly fast Webassembly.
-
 # Getting started with plzwrk
 
 `plzwrk` uses [Asterius](https://github.com/tweag/asterius) as its backend for web development. Compiling an application using `plzwrk` is no different than compiling an application using `ahc-cabal` and `ahc-dist` as described in the [Asterius documentation](https://asterius.netlify.app) with **one caveat**. You **must** use `--constraint "plzwrk +plzwrk-enable-asterius"` when running `ahc-cabal`.
@@ -176,18 +163,10 @@ But the niftiest of all is what `plzwrk` is built on: it is written in Haskell a
 A minimal flow is shown below, mostly copied from the asterius documentation. It assumes that you have a cabal-buildable project in the `pwd`. Note the use of the `--constraint "plzwrk +plzwrk-enable-asterius"` flag in the `ahc-cabal` step.
 
 ```bash
-username@hostname:~/my-dir$ docker run --rm -it -v $(pwd):/project -w /project terrorjack/asterius
-asterius@hostname:/project$ ahc-cabal v2-update
-asterius@hostname:/project$ ahc-cabal new-install --constraint "plzwrk +plzwrk-enable-asterius" --installdir <inst-dir> <exec-name>
-asterius@hostname:/project$ cd <inst-dir> && ahc-dist --input-exe <exec-name> --browser --bundle
+username@hostname:~/my-dir$ docker run --rm -it -v $(pwd):/project -w /project meeshkan/plzwrk
+asterius@hostname:/project$ ahc-link --input-hs Main.hs --browser --bundle
 ```
 
-# Roadmap
+# Thanks
 
-If and when I get time, I'd love to add the following features to `plzwrk`:
-
-- A [`nodemon`](https://nodemon.io/) configuration for JIT recompiling
-- An in-browser debug mode
-- An easier setup for using `plzwrk` with libraries like [`yesod`](https://www.yesodweb.com/) or [`scotty`](https://hackage.haskell.org/package/scotty) when rendered on the server.
-
-Thanks for checking out `plzwrk`! I'm looking forward to seeing what people build with it.
+Thanks for checking out `plzwrk`! I'm looking forward to seeing what people build with it. If you've built something with `plzwrk` and would like to show it off in the README, if you would like to see any features or if you spot a bug, please [file an issue](https://github.com/meeshkan/plzwrk/issues) on GitHub!
