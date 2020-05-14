@@ -88,43 +88,52 @@ main = do
   let who = "world"
   let mystyle = "background-color:red"
   let element = [hsx|<p>Hello #t{who}#</p>|]
-  let bigger = [hsx|<div click=#c{(\e s -> return $ (consoleLog browser) "clicked")}# style=#t{mystyle}#>
-    #el{take 10 $ repeat element}#
-    #e{element}
+  let bigger = [hsx|<div click=#c{(\e s -> (consoleLogS browser) "clicked")}# style=#t{mystyle}#>
+    #el{replicate 10 element}#
+    #e{element}#
   </div>
   |]
   plzwrk'_ bigger browser
 ```
 
-In the lambda function `#c{(\e s -> return $ (consoleLog browser) "clicked")}#`, we see two arguments passed to the listener: `e` is an event and `s` is the state. Speaking of state, let's see how `plzwrk` handles state!
+In the lambda function `#c{(\e s -> return $ (consoleLogS browser) "clicked")}#`, we see two arguments passed to the listener: `e` is an event and `s` is the state. Speaking of state, let's see how `plzwrk` handles state!
 
 # Stateful elements
 
 All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a function like `div'` or `img'` (again, note the apostrophe).
 
 ```haskell
-let elt = (\name -> [hsx'|<p>#t{name}</p>|])
+let elt = (\name -> [hsx'|<p>#t{name}#</p>|])
 ```
 
 When it is time to render using `plzwrk`, we compose `elt` with a getter from a state that will hydrate name.
 
 ```haskell
-browser <- asteriusBrowser
-data Person = Person { _name :: String }
-let elt = (\name -> [hsx|<p>#t{name}</p>|])
-plzwrk' (elt <$> _name) (Person "Stacey") browser
+newtype Person = Person { _name :: String }
+
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let elt = (\name -> [hsx'|<p>#t{name}#</p>|])
+  plzwrk' (elt <$> _name) (Person "Stacey") browser
 ```
+
+You can see the above example live [here](https://plzwrk-hello-world-state.surge.sh).
 
 All event listeners in `plzwrk` return a modified state, and this modified state is then used to update the DOM.
 
-```
-browser <- asteriusBrowser
-data Person = Person { _name :: String }
-let elt = (\name -> [hsx|<div>
-  <p>#t{name}</p>
-  <button click=#c{(\_ s -> s { _name = "Bob" })}>Change name</button>
-</div>|])
-plzwrk' (elt <$> _name) (Person "Stacey") browser
+```haskell
+
+newtype Person = Person { _name :: String }
+
+main :: IO ()
+main = do
+  browser <- asteriusBrowser
+  let elt = (\name -> [hsx'|<div>
+    <p>#t{name}#</p>
+    <button click=#c{(\_ s -> return $ Person "Bob")}#>Change name</button>
+  </div>|])
+  plzwrk' (elt <$> _name) (Person "Stacey") browser
 ```
 
 When we click the "Change name" button, the name will change from "Stacey" to "Bob" in the UI.
@@ -138,17 +147,17 @@ data Person = Person { _name :: String, _age :: Int }
 main :: IO ()
 main = do
   browser <- asteriusBrowser
-  let who = "world"
-  let mystyle = "background-color:red"
-  let element = (\age -> [hsx'|<p>You are #t{show age} years old</p>|]) <$> _age
-  let bigger = (\name age -> [hsx'|<div click=#c{(\e s -> return $ (consoleLog browser) "clicked")}# style=#t{mystyle}#>
+  let mystyle = "background-color:pink"
+  let element = (\age -> [hsx'|<p>You are #t{show age}# years old</p>|]) <$> _age
+  let bigger = (\name age -> [hsx'|<div style=#t{mystyle}#>
     <p>#t{name}#</p>
-    #el{take age $ repeat element}#
-    #e{element}
+    #el{replicate age element}#
+    #e{element}#
   </div>
   |]) <$> _name <*> _age
-  plzwrk' (bigger $ Person "Joe" 42) browser
+  plzwrk' bigger (Person "Joe" 42) browser
 ```
+You can see the above example live [here](https://plzwrk-hello-world-repeat.surge.sh).
 
 In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (i.e. no accidentally making a network call from the DOM construction function) and allows for maximum flexibility in working with the state.
 
