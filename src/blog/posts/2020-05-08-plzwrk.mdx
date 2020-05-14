@@ -1,15 +1,25 @@
 ---
-title: plzwrk - A Haskell front-end framework
-description: Build type-safe, blazingly fast webapps using plzwrk, Asterius and Haskell.
+title: Introducing plzwrk - A Haskell front-end framework
+description: 'Build type-safe webapps using plzwrk, Asterius and Haskell.'
 slug: plzwrk
-date: 2020-03-27
-authors: ["mike"]
+date: 2020-05-14T00:00:00.000Z
+authors:
+  - mike
 published: true
 tags:
   - haskell
-  - web
+  - webdev
   - frontend
 ---
+
+Table of Contents
+
+- [A hello world in plzwrk](#a-hello-world-in-plzwrk)
+- [Composing elements](#composing-elements)
+- [Stateful elements](#stateful-elements)
+- [Other features](#other-features)
+- [Getting started with plzwrk](#getting-started-with-plzwrk)
+- [Roadmap](#roadmap)
 
 I really like programming in Haskell. When I learned about [Asterius](https://github.com/tweag/asterius), a Haskell-to-Webassembly compiler, I thought it'd be fun to create a small front-end framework that inspired by my favorite JS frontend frameworks like React and Vue.
 
@@ -34,9 +44,9 @@ main = do
 
 Let's unpack what's going on.
 
-On the first line, we are creating a browser. `plzwrk` is designed so that it can work with any representation of a browser using the [`Browserful`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Browserful.hs) type. `plzwrk` ships with two browser representations - one backed by [Asterius](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/Asterius.hs#L34) (which we use above) - and a [mock](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/MockJSVal.hs#L648) one that is useful for testing.
+On the first line of the function `main`, we are creating a browser.  `plzwrk` ships with two browser representations - one backed by [Asterius](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/Asterius.hs#L34) (which we use above) - and a [mock](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/MockJSVal.hs#L648) one that is useful for testing.
 
-On the second line, we create our element to be inserted into the DOM. `plzwrk` has two ways to input the dom:
+On the second line of `main`, we create our element to be inserted into the DOM. `plzwrk` has two ways to insert elements into the dom:
 
 - `hsx`, which is like `jsx`.
 - tag functions like `div` and `img` from [`Web.Framework.Plzwrk.Tag`](https://github.com/meeshkan/plzwrk/blob/master/src/Web/Framework/Plzwrk/Tag.hs).
@@ -47,7 +57,7 @@ I personally like working with `hsx` when I start from a copy-and-paste of HTML,
 
 The third and last line sends the element and the browser to `plzwrk` for [rendering](https://plzwrk-hello-world.surge.sh).
 
-## Composing elements
+# Composing elements
 
 Here's how you add an element in another element in `plzwrk`:
 
@@ -91,7 +101,7 @@ main = do
 
 In the lambda function `#c{(\e s -> return $ (consoleLog browser) "clicked")}#`, we see two arguments passed to the listener: `e` is an event and `s` is the state. Speaking of state, let's see how `plzwrk` handles state!
 
-## Stateful elements
+# Stateful elements
 
 `plzwrk` uses a novel approach to state management. All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a tag function like `div'` or `img'` (again, note the apostrophe).
 
@@ -149,7 +159,7 @@ main = do
 
 In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (ie no accidentally making a network call from the dom construction function) and allows for maximum flexibiltiy in working with the state.
 
-## Other features
+# Other features
 
 Here are some nifty features in `plzwrk`:
 
@@ -159,7 +169,7 @@ Here are some nifty features in `plzwrk`:
 
 But the niftiest of all is what `plzwrk` is built on: it is written in Haskell and uses the Asterius compiler to run blazingly fast Webassembly.
 
-## Getting started with plzwrk
+# Getting started with plzwrk
 
 `plzwrk` uses [Asterius](https://github.com/tweag/asterius) as its backend for web development. Compiling an application using `plzwrk` is no different than compiling an application using `ahc-cabal` and `ahc-dist` as described in the [Asterius documentation](https://asterius.netlify.app) with **one caveat**. You **must** use `--constraint "plzwrk +plzwrk-enable-asterius"` when running `ahc-cabal`.
 
@@ -172,7 +182,7 @@ asterius@hostname:/project$ ahc-cabal new-install --constraint "plzwrk +plzwrk-e
 asterius@hostname:/project$ cd <inst-dir> && ahc-dist --input-exe <exec-name> --browser --bundle
 ```
 
-## Roadmap
+# Roadmap
 
 If and when I get time, I'd love to add the following features to `plzwrk`:
 
