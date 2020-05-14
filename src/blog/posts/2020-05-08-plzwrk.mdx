@@ -150,7 +150,7 @@ main = do
   plzwrk' (bigger $ Person "Joe" 42) browser
 ```
 
-In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (ie no accidentally making a network call from the dom construction function) and allows for maximum flexibiltiy in working with the state.
+In this example, the phrase "You are 42 years old" will be printed 42 times. Both `element` and `bigger` are composed with getters from a state. This is similar to the strategy used in [Redux](https://redux.js.org/) with one caveat - instead of passing setters to elements, we pass the entire state to event handlers. This keeps the actual elements pure (i.e. no accidentally making a network call from the DOM construction function) and allows for maximum flexibility in working with the state.
 
 # Getting started with plzwrk
 
