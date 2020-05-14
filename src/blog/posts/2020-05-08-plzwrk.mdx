@@ -74,10 +74,10 @@ This takes our "Hello world!" and repeats it 10 times.
 
 `#el{}#` tells `hsx` to expect a list of elements between the curly brackets. `hsx` currently has four types of Haskell values that it can accept in curly brackets:
 
-- `el` is a list of elements
-- `e` is a single element
-- `t` is a single piece of text, either in the body of an element or as an attribute
-- `c` is a callback that one would supply to `click` or `input`
+- `el` is a list of elements.
+- `e` is a single element.
+- `t` is a single piece of text, either in the body of an element or as an attribute.
+- `c` is a callback that one would supply to `click` or `input`.
 
 Let's use them all in the example below:
 
@@ -100,24 +100,22 @@ In the lambda function `#c{(\e s -> return $ (consoleLog browser) "clicked")}#`,
 
 # Stateful elements
 
-`plzwrk` uses a novel approach to state management. All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a function like `div'` or `img'` (again, note the apostrophe).
+All elements that accept arguments from a state are created with `hsx'` (note the apostrophe) or with a function like `div'` or `img'` (again, note the apostrophe).
 
 ```haskell
-let elt = (\name -> [hsx|<p>#t{name}</p>|])
+let elt = (\name -> [hsx'|<p>#t{name}</p>|])
 ```
-
-Here, we do not say anything about the state to which name belongs - all we are saying is that the function accepts one argument called name.
 
 When it is time to render using `plzwrk`, we compose `elt` with a getter from a state that will hydrate name.
 
-```
+```haskell
 browser <- asteriusBrowser
 data Person = Person { _name :: String }
 let elt = (\name -> [hsx|<p>#t{name}</p>|])
 plzwrk' (elt <$> _name) (Person "Stacey") browser
 ```
 
-Of course, this is not particularly useful, but when it's linked to event listeners, it becomes more powerful.
+All event listeners in `plzwrk` return a modified state, and this modified state is then used to update the DOM.
 
 ```
 browser <- asteriusBrowser
@@ -129,11 +127,9 @@ let elt = (\name -> [hsx|<div>
 plzwrk' (elt <$> _name) (Person "Stacey") browser
 ```
 
-Now, when we click the "Change name" button, the name will change from "Stacey" to "Bob" in the UI.
+When we click the "Change name" button, the name will change from "Stacey" to "Bob" in the UI.
 
-What's powerful about this method is that the element does not need to know anything about the state when it is created - all it needs to know is how to get and set something called `_name` in a hypothetical object.  This allows elements to declaritively state their dependencies and leave it to the implementation of the state to provide these dependencies.
-
-What's even more powerful is, because of the way applicative functors work in Haskell, the state can intervene at arbitrary levels of the element. For example, a stateful object can be nested within another one, and `plzwrk` will take care of making sure the state flows through the whole element to hydrate it.
+The pattern above allows elements to declaritively state their dependencies and leave it to the implementation of the state to provide these dependencies. For example, `elt` accepts any string as a name, and it is only when we call `elt <$> _name` that we link it to the `Person` type.
 
 ```haskell
 
