@@ -113,6 +113,7 @@ const PricingPage = () => {
             title="Personal"
             price="$0"
             yesFeatures={[
+              "Management dashboard",
               "Public GitHub repositories",
               "1 test per day",
               "5 teammates",
@@ -124,11 +125,14 @@ const PricingPage = () => {
             title="Professional"
             price="Coming soon!"
             yesFeatures={[
+              "Management dashboard",
               "Private GitHub repositories",
-              "Unlimited tests",
+              "Unlimited test hours",
               "Unlimited teammates",
               "GitLab & Bitbucket",
               "Mock  & test history",
+              "Custom build pipelines",
+              "Resolution suggestions",
             ]}
             hasCTA={false}
           />
