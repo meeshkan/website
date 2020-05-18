@@ -2,12 +2,21 @@ import React from "react"
 import { Box, Heading, Text } from "@chakra-ui/core"
 import { UniversalLink } from "./UniversalLink"
 
-export const Card = ({ children, heading, body, link, label }) => {
+type CardProps = {
+  children?: Object
+  heading?: string
+  body?: string
+  link?: string
+  label?: string
+}
+
+export const Card = ({ children, heading, body, link, label }: CardProps) => {
   return (
     <>
       {link ? (
         <Box
           as={UniversalLink}
+          // @ts-ignore
           to={link}
           aria-label={label}
           borderRadius="sm"
@@ -26,7 +35,7 @@ export const Card = ({ children, heading, body, link, label }) => {
               {heading}
             </Heading>
           ) : null}
-          <Text mb={6}>{body}</Text>
+          {body ? <Text mb={6}>{body}</Text> : null}
           {children}
         </Box>
       ) : (
@@ -42,7 +51,7 @@ export const Card = ({ children, heading, body, link, label }) => {
               {heading}
             </Heading>
           ) : null}
-          <Text mb={6}>{body}</Text>
+          {body ? <Text mb={6}>{body}</Text> : null}
           {children}
         </Box>
       )}

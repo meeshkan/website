@@ -89,6 +89,32 @@ const iconPaths = {
     ),
     viewBox: "0 0 18 14",
   },
+  checkmark: {
+    path: (
+      <path
+        d="M12 6L8 12L6 9.95604M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    ),
+    viewBox: "0 0 18 18",
+  },
+  xmark: {
+    path: (
+      <path
+        d="M6 12L9 9M9 9L12 6M9 9L12 12M9 9L6 6M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+        stroke="currentColor"
+        fill="none"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+    viewBox: "0 0 18 18",
+  },
 }
 
 export default iconPaths

@@ -29,6 +29,13 @@ export function Footer() {
             </Link>
             <Link
               as={GatsbyLink}
+              to="/pricing/"
+              aria-label="Meeshkan product pricing"
+            >
+              Pricing
+            </Link>
+            <Link
+              as={GatsbyLink}
               to="/about/"
               aria-label="About the Meeshkan team"
             >
