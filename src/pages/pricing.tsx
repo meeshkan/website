@@ -9,10 +9,12 @@ import {
   Button,
   Input,
   FormControl,
+  Link as ChakraLink,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
+import { Link } from "gatsby"
 
 type PricingProps = {
   title: string
@@ -104,10 +106,26 @@ const PricingCard = ({
 const PricingPage = () => {
   return (
     <Layout>
-      <SingleSection
-        heading="Meeshkan Pricing"
-        text="While we are still in private alpha, Meeshkan is free to use. If you need larger limits, please reach out to explore a custom solution."
-      >
+      <SingleSection>
+        <Heading
+          as="h1"
+          color="gray.900"
+          fontSize="3xl"
+          fontWeight={900}
+          textAlign="center"
+          mb={6}
+          letterSpacing="wide"
+          lineHeight="short"
+        >
+          Meeshkan Pricing
+        </Heading>
+        <Text fontSize="2xl" textAlign="center" mb={12} lineHeight="short">
+          While we are still in private alpha, Meeshkan is free to use. If you
+          need larger limits,{" "}
+          <ChakraLink as={Link} to="/contact/" color="blue.500">
+            please reach out to explore a custom solution.
+          </ChakraLink>
+        </Text>
         <SimpleGrid columns={2} spacing={8}>
           <PricingCard
             title="Personal"
