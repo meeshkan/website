@@ -20,13 +20,13 @@ This README walks through everything you need to know to publish an article on t
 
 | Date            | Article                                                       | Author ✍️         | Blog 🔖 | DEV 📓 | [Other ↗️](.EXTERNAL.md)                                                                        |
 | --------------- | ------------------------------------------------------------- | ----------------- | ------- | ------ | ----------------------------------------------------------------------------------------------- |
-| Tuesday 02.06    | Attending your own workshop (pleasework)                    | Mike              |         |        |       |
-| Wednesday 27.05    | Optics in TypeScript (pleasework)                    | Mike              |         |        |   |
-| Monday 18.05    | Introducing Wall (pleasework)                    | Mike              |         |        |                                                                                                 |
-| Tuesday 12.05    | Kotlin tests and user stories (pleasework)                    | Mike              |         |        |          |
-| Thursday 07.05    | Property-based Testing for JS devs                            | Carolyn           |         |        |     |
-| Monday 04.05    | OP Bank Tutorial                           | Nikolay           |         |        |                 |
-| Monday 27.04 | Introduction to Properties-Driven Development                 | Kimmo             |   ✔️      |        |       |
+| TBD    | Attending your own workshop (pleasework)                    | Mike              |         |        |       |
+| TBD   | Optics in TypeScript (pleasework)                    | Mike              |         |        |   |
+| TBD    | Introducing Wall (pleasework)                    | Mike              |         |        |                                                                                                 |
+| TBD    | Kotlin tests and user stories (pleasework)                    | Mike              |         |        |          |
+| Thursday 14.05    | Introducing plzwrk                           | Mike           |     ✔️    |    ✔️    |                 |
+| Wednesday 06.05    | OP Bank Tutorial                           | Nikolay           |     ✔️    |    ✔️    |                 |
+| Monday 27.04 | Introduction to Properties-Driven Development                 | Kimmo             |   ✔️      |    ✔️    |       |
 | Friday 24.04    | Extension types in TypeScript (pleasework)                    | Mike              |  ✔️       |        |         |
 | Friday 17.04    | Stateful property-based testing with QuickCheck State Machine | Mike              | ✔️      | ✔️     |         |
 | Tuesday 14.04   | Telemetry in Open Source - Part 2                             | Carolyn           | ✔️      | ✔️     |     |
@@ -35,7 +35,7 @@ This README walks through everything you need to know to publish an article on t
 | Friday 03.04    | Vanity announcement                                           | Nikolaos          | ✔️      | ✔️     |       |
 | Thursday 02.04  | Word embeddings with code2vec, GloVe and spaCy                | Maria             | ✔️      |        |          |
 | Friday 27.03    | TypedDict vs Dataclass in Python                              | Mike              | ✔️      | ✔️     |         |
-| Wednesday 18.03 | Telemetry in Open Source - Part 1                             | Carolyn           | ✔️      | ✔️     |         |
+| Wednesday 18.03 | Telemetry in Open Source - Part 1                             | Carolyn           | ✔️      | ✔️     |   ✔️      |
 | Wednesday 18.03 | Word embeddings with code2vec, GloVe and spaCy                | Maria             |         |        | [✔️](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
 | Friday 13.03    | On-device mocking of REST APIs in React Native                | Mike              | ✔️      | ✔️     |            |
 | Tuesday 10.03   | Building a real-time HTTP traffic stream with Apache Kafka    | Kimmo             | ✔️      | ✔️     |     |
@@ -60,8 +60,10 @@ Submissions are tracked here in this handy table:
 
 | Date Submitted | Article                                        | Author            | Publication                                             | Writing Guidelines                                                                     | Accepted           | Rejected | Date Published | Link                                                                                            |
 | -------------- | ---------------------------------------------- | ----------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ | -------- | -------------- | ----------------------------------------------------------------------------------------------- |
-| 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria             | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |
-| 09.04          | A Beginner's Guide to PBT                      | Fredrik & Carolyn | [DZone](https://dzone.com/)                             | [Become a DZone Contributor](https://dzone.com/pages/contribute)                       |                    | :x:      |                |                                                                                                 |
+| 18.05          | Six questions to answer before implementing a telemetry feature     | Carolyn | [DZone](https://dzone.com/)                             | [Become a DZone Contributor](https://dzone.com/pages/contribute)   |     |       |       18.05   |        |
+| 10.04          | Understanding Telemetry Features in Open-Source Software                      | Carolyn | [DZone](https://dzone.com/)                             | [Become a DZone Contributor](https://dzone.com/pages/contribute)                       |         :white_check_mark:           |       |       18.05         |         [🔗](https://dzone.com/articles/understanding-telemetry-features-in-open-source-so)                                                                                        |
+| 09.04          | A Beginner's Guide to PBT                      | Fredrik & Carolyn | [DZone](https://dzone.com/)                             | [Become a DZone Contributor](https://dzone.com/pages/contribute)                       |                    | :x:      |                | 
+| 16.03          | Word embeddings with code2vec, GloVe and spaCy | Maria             | [Towards Data Science](https://towardsdatascience.com/) | [Write for Towards Data Science](https://towardsdatascience.com/questions-96667b06af5) | :white_check_mark: |          | 18.03          | [🔗](https://towardsdatascience.com/word-embeddings-with-code2vec-glove-and-spacy-5b26420bf632) |                                                                                                |
 
 ## Our content workflow
 
