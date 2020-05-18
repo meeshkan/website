@@ -15,6 +15,7 @@ import { Card } from "../components/atoms/card"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import { Link } from "gatsby"
+import SEO from "../components/molecules/seo"
 
 type PricingProps = {
   title: string
@@ -22,7 +23,6 @@ type PricingProps = {
   yesFeatures?: Array<string>
   noFeatures?: Array<string>
   hasCTA: boolean
-  CTAlink?: string
 }
 
 const PricingCard = ({
@@ -31,7 +31,6 @@ const PricingCard = ({
   yesFeatures,
   noFeatures,
   hasCTA,
-  CTAlink,
 }: PricingProps) => (
   <Card>
     <Heading
@@ -106,6 +105,11 @@ const PricingCard = ({
 const PricingPage = () => {
   return (
     <Layout>
+      <SEO
+        pageTitle="Pricing"
+        pageDescription="Pricing tiers for using the automated testing tool, Meeshkan."
+        pageUrl="https://meeshkan.com/pricing/"
+      />
       <SingleSection>
         <Heading
           as="h1"
