@@ -14,6 +14,8 @@ import Nik from "../../data/avatars/nikolay.png"
 import Fredi from "../../data/avatars/fredrik.png"
 import Maria from "../../data/avatars/maria.png"
 
+import systemOne from "../static/System.One_Moderat_Wordmark.svg"
+
 const AboutUsPage = () => {
   const data = useStaticQuery(
     graphql`
@@ -40,13 +42,6 @@ const AboutUsPage = () => {
           }
         }
         tiny: file(relativePath: { eq: "tinyVCLogo.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 150, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        system: file(relativePath: { eq: "systemOneLogo.png" }) {
           childImageSharp {
             fluid(maxWidth: 150, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -302,10 +297,7 @@ const AboutUsPage = () => {
             href="http://www.systemone.vc/"
             aria-label="System One VC website"
           >
-            <Img
-              fluid={data.system.childImageSharp.fluid}
-              style={{ maxWidth: 200 }}
-            />
+            <Image src={systemOne} alt="system one vc logo" maxW="200px" />
           </Box>
           <Box
             as={Link}
