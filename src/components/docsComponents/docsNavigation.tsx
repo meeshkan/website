@@ -53,7 +53,11 @@ const DocsNavigation = () => {
           <InputLeftElement
             children={<Icon name="search" color="gray.300" />}
           />
-          <Input type="search" placeholder="Search" />
+          <Input
+            type="search"
+            placeholder="Search"
+            className="algolia-search-bar"
+          />
         </InputGroup>
       </Stack>
       {/* Mobile Nav | Button & Menu Drawer */}
