@@ -16,11 +16,11 @@ If you have any questions, you can always [contact us for support](/contact/).
 
 ## What does Meeshkan do?
 
-Meeshkan is a machine learning-powered testing and mocking tool. It's built to handle APIs and third-party dependencies. 
+Meeshkan is a machine learning-powered testing and mocking tool. It's built to handle APIs and third-party dependencies.
 
 Once installed, Meeshkan runs weekly and submits issues to your repository when it finds bugs.
 
-## Authorizing Meeshkan on GitHub 
+## Authorizing Meeshkan on GitHub
 
 To run the tests, Meeshkan must gain permission to access your repository code. To do this, we use an [OAuth app](https://developer.github.com/apps/differences-between-apps/).
 
@@ -45,9 +45,11 @@ After this, you'll land on our success page <span role="img" aria-label="party p
 
 ## How Meeshkan reports bugs
 
-Meeshkan runs weekly [property-based tests](/docs/how-meeshkan-works/#what-is-property-based-testing) on your repository and reports any bugs discovered in the process. 
+Meeshkan runs [property-based tests](/docs/how-meeshkan-works/#what-is-property-based-testing) on your repository and reports any bugs discovered in the process.
 
-When Meeshkan finds a bug, the GitHub bot will post an issue to your repository and tag whoever installed Meeshkan. This issue will outline which command found the bug, the response, and, in some cases, a [suggestion for how to resolve it](/docs/how-meeshkan-works/#suggested-fixes).
+When Meeshkan finds a bug, your Meeshkan testing branch check will link to the test in question. This issue will outline which command found the bug, the response, and, in some cases, a [suggestion for how to resolve it](/docs/how-meeshkan-works/#suggested-fixes).
+
+![Test failure page](https://media.graphcms.com/1cB1gX9SvSestn25tohj)
 
 If no bugs were found, you won't hear anything.
 
