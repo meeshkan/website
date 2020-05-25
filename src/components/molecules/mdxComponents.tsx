@@ -13,16 +13,21 @@ import {
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
-// import { ReactPlayer } from "react-player"
 import Video from "../atoms/video"
 
-const DocsHeading = props => (
+type DocsHeadingProps = {
+  id: string
+  children: Object
+}
+
+const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
   <>
     <Heading
       mb={4}
       mt={8}
       letterSpacing="wide"
-      id={props.id}
+      id={id}
+      // @ts-ignore
       css={{
         "&[id]:before": {
           display: "block",
@@ -36,7 +41,7 @@ const DocsHeading = props => (
       pointerEvents="auto"
       {...props}
     >
-      <a href={`#${props.id}`}>{props.children}</a>
+      <a href={`#${id}`}>{children}</a>
       <PseudoBox
         aria-label="anchor"
         as="a"
@@ -44,9 +49,10 @@ const DocsHeading = props => (
         fontWeight="normal"
         outline="none"
         _focus={{ opacity: 1, boxShadow: "outline" }}
-        opacity="0"
+        opacity={0}
         ml={2}
-        href={`#${props.id}`}
+        // @ts-ignore
+        href={`#${id}`}
       >
         #
       </PseudoBox>

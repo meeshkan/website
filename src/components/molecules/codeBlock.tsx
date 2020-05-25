@@ -78,6 +78,14 @@ const EditableNotice = props => {
   )
 }
 
+type CodeBlockProps = {
+  className?: string
+  live?: Boolean
+  isManual?: boolean
+  render?: Boolean
+  children?: string
+}
+
 const CodeBlock = ({
   className,
   live = true,
@@ -85,7 +93,7 @@ const CodeBlock = ({
   render,
   children,
   ...props
-}) => {
+}: CodeBlockProps) => {
   const [editorCode, setEditorCode] = useState(children.trim())
 
   const language = className && className.replace(/language-/, "")
