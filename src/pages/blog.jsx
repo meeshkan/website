@@ -11,7 +11,7 @@ const BlogHome = ({ data }) => {
     <Layout>
       <SEO
         pageTitle="Blog"
-        pageDescription="We’re experts in Machine Learning and APIs. Why keep it to ourselves?"
+        pageDescription="We’re experts in Automated Testing and APIs. Why keep it to ourselves?"
         pageUrl="https://meeshkan.com/blog/"
       />
       <SingleSection>
@@ -23,7 +23,7 @@ const BlogHome = ({ data }) => {
           color="gray.900"
           fontWeight={900}
         >
-          We’re experts in Machine Learning and APIs. Why keep it to ourselves?
+          We’re experts in Automated Testing and APIs. Why keep it to ourselves?
         </Heading>
         <Grid
           templateColumns={[
