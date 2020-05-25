@@ -66,6 +66,7 @@ const DocsNavigation = () => {
           ref={btnRef}
           rounded="sm"
           variant="link"
+          // @ts-ignore
           icon="hamburger"
           onClick={onOpen}
         />
