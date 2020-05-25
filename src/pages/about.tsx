@@ -1,6 +1,6 @@
 import React from "react"
 import { Heading, Grid, Text, Image, Box, Link } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisms/singleSection.tsx"
+import { SingleSection } from "../components/organisms/singleSection"
 import SEO from "../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
@@ -284,6 +284,7 @@ const AboutUsPage = () => {
         >
           <Box
             as={Link}
+            // @ts-ignore
             href="https://connectventures.co/"
             aria-label="connect ventures website"
           >
@@ -294,6 +295,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="http://www.systemone.vc/"
             aria-label="System One VC website"
           >
@@ -302,6 +304,7 @@ const AboutUsPage = () => {
           <Box
             as={Link}
             aria-label="Nordic web website"
+            // @ts-ignore
             href="https://thenordicweb.com/"
           >
             <Img
@@ -309,7 +312,12 @@ const AboutUsPage = () => {
               style={{ maxWidth: 200 }}
             />
           </Box>
-          <Box as={Link} href="https://tiny.vc/" aria-label="Tiny VC website">
+          <Box
+            as={Link}
+            // @ts-ignore
+            href="https://tiny.vc/"
+            aria-label="Tiny VC website"
+          >
             <Img
               fluid={data.tiny.childImageSharp.fluid}
               style={{ maxWidth: 156 }}
@@ -317,6 +325,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://www.nordicmakers.vc/"
             aria-label="Nordic makers website"
             color="gray.700"
@@ -327,6 +336,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="http://www.firstfellow.com/"
             aria-label="First fellow partners website"
             color="gray.700"
@@ -337,6 +347,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://www.linkedin.com/in/aliomar/?originalSubdomain=fi"
             aria-label="Angel Ali Omar's linkedin"
             color="gray.700"
@@ -347,6 +358,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://futuristic.vc/"
             aria-label="Futuristic VC website"
             color="gray.700"
@@ -357,6 +369,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://www.linkedin.com/in/aribackholm"
             aria-label="Angel Ari Backholm's linkedin"
             color="gray.700"
@@ -367,6 +380,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://www.linkedin.com/in/okitag"
             aria-label="Angel Oki Tåg's linkedin"
             color="gray.700"
@@ -377,6 +391,7 @@ const AboutUsPage = () => {
           </Box>
           <Box
             as={Link}
+            // @ts-ignore
             href="https://www.linkedin.com/in/jermyap/"
             aria-label="Angel Jeremy Yap's linkedin"
             color="gray.700"

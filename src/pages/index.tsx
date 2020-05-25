@@ -13,8 +13,8 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
-import { SingleSection } from "../components/organisms/singleSection.tsx"
-import { DoubleSection } from "../components/organisms/doubleSection.tsx"
+import { SingleSection } from "../components/organisms/singleSection"
+import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
 
@@ -129,6 +129,7 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
+          // @ts-ignore
           action="/success/"
           direction={["column", "column", "row"]}
           justify="center"
@@ -206,6 +207,7 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
+          // @ts-ignore
           action="/success/"
           direction={["column", "column", "row"]}
           justify="center"
@@ -322,7 +324,8 @@ const IndexPage = () => {
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
             as={ChakraLink}
-            target="_blan"
+            // @ts-ignore
+            target="_blank"
             rel="noopener noreferrer"
             _hover={{ textDecoration: "none", backgroundColor: "red.600" }}
             href="https://meetings.hubspot.com/makenna"

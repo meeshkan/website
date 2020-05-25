@@ -1,30 +1,35 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
 import { Heading, Text, Button, Flex } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisms/singleSection.tsx"
+import { SingleSection } from "../components/organisms/singleSection"
 import { Link } from "gatsby"
 import Layout from "../components/templates/layout"
 
-const NotFoundPage = () => (
+const SuccessPage = () => (
   <Layout>
-    <SEO title="404: Not found" pageUrl="https://meeshkan.com/404/" />
+    <SEO
+      pageTitle="Success"
+      pageDescription="You've successfully filled out a form on the Meeshkan website. Rad. We'll be with you shortly."
+      pageUrl="https://meeshkan.com/success/"
+    />
     <SingleSection>
       <Heading
         as="h1"
         fontSize={["3xl", "4xl", "5xl"]}
         textAlign="center"
         mb={12}
-        color="gray.900"
         fontWeight={900}
+        color="gray.900"
       >
-        Not found.
+        Success!
       </Heading>
       <Text textAlign="center" mb={6}>
-        You just hit a route that doesn&#39;t exist... the sadness.
+        We've recieved your form submission and will be back to you, shortly!
       </Text>
       <Flex justify="center">
         <Button
           as={Link}
+          // @ts-ignore
           to="/"
           rounded="sm"
           variantColor="red"
@@ -37,4 +42,4 @@ const NotFoundPage = () => (
   </Layout>
 )
 
-export default NotFoundPage
+export default SuccessPage
