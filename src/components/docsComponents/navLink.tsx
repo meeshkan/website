@@ -1,7 +1,7 @@
 import { Box, PseudoBox, Heading } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
-import React, { forwardRef, Children } from "react"
-import useLocation from "../../hooks/Location"
+import React, { forwardRef } from "react"
+import { useLocation } from "@reach/router"
 
 type NavLinkProps = {
   children: any
@@ -12,7 +12,7 @@ const NavLink = ({ children, href, ...props }: NavLinkProps) => {
   let isActive = false
   let location = useLocation()
 
-  if (location.location.pathname === href) {
+  if (location.pathname === href) {
     isActive = true
   } else {
     isActive = false
