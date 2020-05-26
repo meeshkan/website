@@ -86,8 +86,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         pageTitle="Home"
-        pageDescription="Meeshkan has built a Machine Learning Algorithm that helps you break and fix
-        your apps."
+        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in private beta and accepting applications."
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>
