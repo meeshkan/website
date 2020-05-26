@@ -1,15 +1,24 @@
 import React from "react"
 import { Box, Heading, Link, Grid, Text, Code } from "@chakra-ui/core"
 
+type DoubleSectionProps = {
+  children: Object
+  heading?: string
+  anchor?: string
+  text?: string
+  reverse?: boolean
+  badge?: string
+}
+
 export const DoubleSection = ({
   children,
   heading,
   anchor,
   text,
-  props,
   reverse,
   badge,
-}) => (
+  ...props
+}: DoubleSectionProps) => (
   <Box as="section" maxW="1000px" mx="auto" py={12} {...props}>
     <Grid
       templateColumns={[

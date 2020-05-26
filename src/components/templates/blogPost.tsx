@@ -1,5 +1,5 @@
 import React from "react"
-import { SingleSection } from "../organisms/singleSection.tsx"
+import { SingleSection } from "../organisms/singleSection"
 import {
   Heading,
   Stack,
@@ -16,9 +16,14 @@ import { graphql } from "gatsby"
 import mdxComponents from "../molecules/mdxComponents"
 import { Link } from "gatsby"
 import SEO from "../molecules/seo"
-import Layout from "../templates/layout"
+import Layout from "./layout"
 
-const BlogPost = ({ data, pageContext }) => {
+type BlogPostProps = {
+  data: any // type of object errors 🤔
+  pageContext: any // type of object errors 🤔
+}
+
+const BlogPost = ({ data, pageContext }: BlogPostProps) => {
   const { frontmatter, body } = data.mdx
   const { previous, next } = pageContext
   return (
@@ -80,6 +85,7 @@ const BlogPost = ({ data, pageContext }) => {
                 <Box>
                   <Text
                     as={ChakraLink}
+                    // @ts-ignore
                     href={frontmatter.authors[0].authorLink}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -101,6 +107,7 @@ const BlogPost = ({ data, pageContext }) => {
             {next !== null ? (
               <Button
                 as={Link}
+                // @ts-ignore
                 to={`/blog/${next.frontmatter.slug}/`}
                 aria-label={`Read the blog: ${next.frontmatter.title}.`}
                 leftIcon="arrow-back"
@@ -116,6 +123,7 @@ const BlogPost = ({ data, pageContext }) => {
             {previous !== null ? (
               <Button
                 as={Link}
+                // @ts-ignore
                 to={`/blog/${previous.frontmatter.slug}/`}
                 aria-label={`Read the blog: ${previous.frontmatter.title}.`}
                 rightIcon="arrow-forward"
