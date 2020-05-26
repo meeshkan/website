@@ -50,7 +50,7 @@ All of our content is published on the [Meeshkan blog](http://meeshkan.com/blog/
 
 Every piece of content is 20% actual creation and 80% distribution. Which is unfortunate for us because this is our weakest area :sweat_smile: We're working on it though!
 
-Ideally, everything we publish will be shared on the [Meeshkan Twitter account](https://twitter.com/meeshkanml?lang=en) and [Meeshkan LinkedIn page](https://www.linkedin.com/company/meeshkan/). The top articles will be shared through [our newsletter](https://www.subscribepage.com/meeshkan) whenever we figure that out.
+Ideally, everything we publish will be shared on the [Meeshkan Twitter account](https://twitter.com/meeshkan?lang=en) and [Meeshkan LinkedIn page](https://www.linkedin.com/company/meeshkan/). The top articles will be shared through [our newsletter](https://www.subscribepage.com/meeshkan) whenever we figure that out.
 
 ### Submitting articles to external publications
 

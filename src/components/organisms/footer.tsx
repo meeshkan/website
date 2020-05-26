@@ -106,7 +106,7 @@ export function Footer() {
               as={Link}
               variant="ghost"
               isExternal
-              href="https://twitter.com/MeeshkanML"
+              href="https://twitter.com/meeshkan"
               // @ts-ignore
               icon="twitter"
               rounded="sm"
