@@ -31,20 +31,20 @@ Because my boss likes Haskell 🤷‍♀️
 I'm joking (mostly). My boss does have an affinity for functional programming and he's more proficient and comfortable in this type of workflow. But we've realized that, while the learning curve is steep for those of us only familiar with JavaScript, adopting functional programming practices has improved our web application for a variety reasons. 
 
 _Productivity_
-* **Descriptive errors** - When we see logs in the console, it's rarely `undefined` or `null`. This helps for more efficient debugging.
-* **Less code** - Functional programming takes care of many patterns that would be boilerplate.
+* **Descriptive errors** - When we see logs in the console, it's rarely `Uncaught TypeError: Cannot Read Property 'name' of undefined` or `Object doesn't support property or method 'getPosts'`. This helps for more efficient debugging.
+* **Less code** - Functional programming takes care of many patterns that would otherwise result in boilerplate code.
 * **Limited options** - With functional programming, you can only do things a certain number of ways.
-* **Better logging** - When you insert a log statement, you know exactly where it is happening in the flow.
+* **Refactoring** - With strong type safety, you refactor "against" the compiler, meaning the red squiggles in your IDE guide the refactoring process and propose helpful suggestions.
 
 _Correctness_
 * **Type safety** - When you use a typed variable, you're defining a constraint on all possible values. This helps ensure that the inputs and outputs of our code work as expected.
 * **Avoid common errors** - Some of the most common JavaScript errors are erradicated when using functional programming. For example, the `0` element of an array being `undefined`.
-* **Error routing** - With functional programming, errors become first class citizens and errors aren't coming from anywhere surprising.
-* **Linear ordering** - No more jumping between `if` this `else` that or getting stuck in an infinitely nested JavaScript `try`/`catch` block.
+* **Error routing** - With functional programming, errors become first class citizens and are propagated to error handlers based on rules.
+* **Linear ordering** - No more jumping between `if` this `else` that or getting stuck in a deep-nested JavaScript `try`/`catch` block.
 
 ### Why we chose the `fp-ts` library
 
-In theory, we could've switched out `fp-ts` for another functional programming library for TypeScript like [Purify](https://gigobyte.github.io/purify/). Both libraries have an `Either` class, a `chain` function and would get the job done. However, `fp-ts` has a couple of unique patterns that we use regularly like [`Reader`](https://gcanti.github.io/fp-ts/modules/Reader.ts.html).
+In theory, we could've switched out `fp-ts` for another functional programming library for TypeScript like [Purify](https://gigobyte.github.io/purify/). Both libraries have similar syntax for common functional patterns like the `Either` class and the `chain` function. However, `fp-ts` has a couple of additional classes that we use regularly like [`Reader`](https://gcanti.github.io/fp-ts/modules/Reader.ts.html) and [`Semigroup`](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html).
 
 If there were terms in that last paragraph that you didn't understand, don't worry! We'll cover those in a [future post](#more-with-fp-ts).
 
@@ -55,7 +55,7 @@ Fortunately for us, the codebase we're working with is still fairly new. The rep
 Some examples:
 * [**Hooks**](https://reactjs.org/docs/hooks-intro.html) as a functional way to manage state dependencies.
 * [**Function components**](https://reactjs.org/docs/components-and-props.html#function-and-class-components) instead of `class` components.
-* [**Arrow function expressions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) whenever possible, which enforces a necessary flow.
+* [**Arrow function expressions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) whenever possible, which, when not used with brackets, enforces a single flow of information.
 
 But taking that next step into the functional programming world was wildly different than we could've imagined. So, to make it more tangible, the rest of this article will focus on one specific function from the `fp-ts` library: `pipe`.
 
@@ -77,7 +77,7 @@ Here's an example of piping written in vanilla JavaScript:
 const examplePipe = (a, b, c) => c(b(a));
 ```
 
-This `examplePipe` function takes in three parameters (`a`, `b`, and `c`). For `examplePipe` to work as expected, `a` should be an independent value, meaning that it doesn't have any dependencies or relies on anything else. Then `b` should be a function that takes `a` as an argument. Finally, `c` should be another function that takes the result of `b` as an argument.
+This `examplePipe` function takes in three parameters (`a`, `b`, and `c`). For `examplePipe` to work as expected, `a` should be a value that can be consumed by `b`. Then `b` should be a function that takes `a` as an argument. Finally, `c` should be another function that takes the result of `b` as an argument.
 
 Let's put in some arguments:
 
@@ -95,7 +95,7 @@ And there you have it, our first pipe 🎉
 
 This was generic example of piping. Next, we'll go step-by-step to see how this would work in a web application. Throughout, we'll use the [`pipe`](https://gcanti.github.io/fp-ts/modules/pipeable.ts.html) function that's available through the `fp-ts` library.  
 
-### Defining the values without dependecies
+### Defining the initial value in a pipe
 
 The first thing that goes into the `pipe` is everything we need for the following functions. As mentioned in the previous section, these values need to be independent. It can be a single value or an object. 
 
@@ -238,4 +238,3 @@ If organized appropriately, `pipe` can contain everything that you would need to
 This article only scratched the surface of what the `fp-ts` library can bring to a web application. There are many more functions and patterns that we use (`Either`, `chain`, `isLeft`, `isRight`, `Reader`). If you'd be interested in learning about these, [tweet at us](https://twitter.com/meeshkan) and let us know! 
 
 In the meantime, check out the [`fp-ts` documentation](https://gcanti.github.io/fp-ts/).
-
