@@ -14,19 +14,19 @@ tags:
 
 tl;dr Here's the source code for our [webapp](https://github.com/meeshkan/webapp).
 
-Like many companies these days, we've had to make some pretty big changes to navigate our company through the current world economic situation. One of them has been transitioning from offline to online sales and delivering our product through online-only channels.
+Like many companies these days, we've had to make big changes to navigate through the current world economic situation. One of those changes has been transitioning from offline to online sales.
 
-To do this, we knew we'd need a webapp, and we began developing one as a closed-source project. Several of us felt a bit strange about this, as it went against our normal tendency of open-sourcing internal projects by default. At the same time, it was not immediately apparent how our webapp could be of interest to anyone other than us. So we kept the closed-source for the first month of its existence.
+To do this, we knew we'd need a web app so we began developing one as a closed-source project. But keeping it closed-source felt strange as it went against our company's open-source by default philosophy. At the same time, it wasn't immediately clear how our web app could be useful to anyone other than us. So we kept it closed.
 
 Within days, it was pretty clear that this repo had several features that our other repos did not. It lacked tests. It had almost no type safety. Credentials were accidentally checked into version control. In short, we were getting sloppy, and all of us felt the lack of public scrutiny was effecting our work on a subconcious level.
 
 For this and other reasons I'll get into below, we made the decision to [open-source the repository](https://github.com/meeshkan/webapp), and we devoted some company time every week towards getting the project to a point where we were comfortable sharing it with the world. In doing so, we found and squashed several bugs, wrote some tests for the most crucial parts of the app, and added type-safety and validation to many core functions. But the main reason we open-sourced the webapp is to hold ourselves accountable to our users, current and future, in terms of transparency and security.
 
-I'm really proud of the result, and in this post, I'd like to share why I feel this decision was important and how I hope it can benefit you as a reader of our blog and supporter of the Meeshkan project.
+I'm proud of the result. And in this post, I'd like to share why this decision was important and how I hope it can benefit you as a reader of our blog and supporter of the Meeshkan project.
 
 ## Meeshkan uses Meeshkan
 
-One consistant piece of feedback we've received is that, as developers get to know our service, it is helpful to see a [live example](https://github.com/meeshkan/webapp) that uses Meeshkan to find and squash bugs. While there are some great open-source projects, like [EDDI](https://github.com/labsai/eddi) and [codesandbox-importers](https://github.com/codesandbox/codesandbox-importers), that use our webapp, it is difficult to find these in the wild. We wanted to release a banner repository where people could see the value Meeshkan was creating for a team. As we were using Meeshkan to test our webapp anyway, it made sense to open-source our webapp so that it could fulfill this objective.
+One consistent piece of feedback we've received is that developers want to see a [live example that uses Meeshkan](https://github.com/meeshkan/webapp) to find and squash bugs. While there are some great open-source projects that use our web app, like [EDDI](https://github.com/labsai/eddi) and [codesandbox-importers](https://github.com/codesandbox/codesandbox-importers), it's difficult to find these in the wild. We wanted to release a banner repository where people could see the value Meeshkan creates for a team. Since we're using Meeshkan to test our web app anyway, it made sense to open-source the web app so that it could fulfill this objective.
 
 If you're developing a service that includes a REST API, GraphQL API, or role-based authentication, we think that the Meeshkan webapp will provide a great example of how these services can benefit from Meeshkan. The bugs Meeshkan finds and the suggestions it makes will help you spend more time building new innovative features and less time finding and fixing bugs.
 
