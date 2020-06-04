@@ -1,6 +1,7 @@
 import React from "react"
 import { SingleSection } from "../organisms/singleSection"
 import {
+  Divider,
   Heading,
   Stack,
   Button,
@@ -10,6 +11,10 @@ import {
   Link as ChakraLink,
   Box,
 } from "@chakra-ui/core"
+import {
+  TwitterShareButton,
+  LinkedInShareButton,
+} from "../molecules/socialShareButtons"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
@@ -107,6 +112,27 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
           </Text>
           <MDXRenderer>{body}</MDXRenderer>
 
+          <Divider borderColor="gray.300" my={6} />
+          <Grid
+            display={["grid", "grid", "flex", "flex"]}
+            justifyContent="left"
+            gap={4}
+          >
+            <Text fontSize="xl" fontWeight={400} color="gray.900" mt={2}>
+              SHARE:
+            </Text>
+            <TwitterShareButton url="https://twitter.com/intent/tweet?text=Check%20out%20this%20comprehensive%20article%20about%20functional%20programming%20for%20web%20applications.%20Excited%20for%20the%20next%20one!%20%40meeshkan%20https%3A%2F%2Fmeeshkan.com%2Fblog%2Ffunctional-programming-for-frontend-pipe" />
+            <LinkedInShareButton
+              url="https://www.linkedin.com/shareArticle
+?mini=true
+&url=https%3A%2F%2Fwww.css-tricks.com%2F
+&title=CSS-Tricks
+&summary=Tips%2C+Tricks%2C+and+Techniques+on+using+Cascading+Style+Sheets.
+&source=CSS-Tricks"
+            />
+          </Grid>
+          <Divider borderColor="gray.300" my={6} />
+
           <Stack isInline spacing={6} justify="center" mt={12} fontWeight="700">
             {next !== null ? (
               <Button
@@ -153,6 +179,7 @@ export const query = graphql`
       excerpt(pruneLength: 80)
       frontmatter {
         title
+        slug
         description
         date(formatString: "Do MMM YYYY")
         pageImage
