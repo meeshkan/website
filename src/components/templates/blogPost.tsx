@@ -26,7 +26,6 @@ type BlogPostProps = {
 const BlogPost = ({ data, pageContext }: BlogPostProps) => {
   const { frontmatter, body } = data.mdx
   const { previous, next } = pageContext
-  console.log(frontmatter.slug)
   return (
     <Layout>
       <MDXProvider components={mdxComponents}>
