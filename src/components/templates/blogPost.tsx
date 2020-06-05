@@ -121,15 +121,8 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
             <Text fontSize="xl" fontWeight={400} color="gray.900" mt={2}>
               SHARE:
             </Text>
-            <TwitterShareButton url="https://twitter.com/intent/tweet?text=Check%20out%20this%20comprehensive%20article%20about%20functional%20programming%20for%20web%20applications.%20Excited%20for%20the%20next%20one!%20%40meeshkan%20https%3A%2F%2Fmeeshkan.com%2Fblog%2Ffunctional-programming-for-frontend-pipe" />
-            <LinkedInShareButton
-              url="https://www.linkedin.com/shareArticle
-?mini=true
-&url=https%3A%2F%2Fwww.css-tricks.com%2F
-&title=CSS-Tricks
-&summary=Tips%2C+Tricks%2C+and+Techniques+on+using+Cascading+Style+Sheets.
-&source=CSS-Tricks"
-            />
+            <TwitterShareButton url={frontmatter.twitterShareUrl} />
+            <LinkedInShareButton url={frontmatter.linkedinShareUrl} />
           </Grid>
           <Divider borderColor="gray.300" my={6} />
 
@@ -183,6 +176,8 @@ export const query = graphql`
         description
         date(formatString: "Do MMM YYYY")
         pageImage
+        twitterShareUrl
+        linkedinShareUrl
         authors {
           avatar {
             childImageSharp {

@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Icon } from "@chakra-ui/core"
+import { Button } from "@chakra-ui/core"
 
 type ShareButtonProps = {
   url: string
