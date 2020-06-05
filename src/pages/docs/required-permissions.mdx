@@ -1,18 +1,20 @@
 # GitHub App Permissions
 
-Below, you'll find a description of the GitHub app permissions we ask for and why we ask for them.
+When you authorize the Meeshkan Github app, a brief dialog appears outlining the permissions we ask for. Each permission has its own name and meaning as described in their [api documentation](https://developer.github.com/v3/apps/permissions/). Below, you'll find a description of the GitHub app permissions we ask for. We'll use the same terminology as the api documentation, and we'll explain why we ask for each permission.
+
+> Throughout this page, "we" indicates work done by our team and "Meeshkan" for tasks carried out by our GitHub app.
 
 **In this section:**
 
-- [Content](#content)
-- [Issues](#issues)
-- [Metadata](#metadata)
-- [Pull requests](#pull-requests)
-- [Commit statuses](#commit-statuses)
+- [Content - read access](#content)
+- [Issues - read and write access](#issues)
+- [Metadata - read access](#metadata)
+- [Pull requests - read access](#pull-requests)
+- [Commit statuses - read and write access](#commit-statuses)
 
 ## Content
 
-Meeshkan needs read-access to the content of repositories in order to run automated builds and tests.
+Meeshkan needs read-access to the content of repositories in order to run [automated builds and tests](./how-meeshkan-works).
 
 ## Issues
 
@@ -24,7 +26,7 @@ We use metadata to display information like your repository's name and your orga
 
 ## Pull requests
 
-For some issues, Meeshkan is able to propose automatic pull requests that will fix them. To do this, we need the ability to submit pull requests to repositories.
+The Meeshkan pull request permission is deprecated and unused. It will be removed in a future version of the application.
 
 ## Commit statuses
 
