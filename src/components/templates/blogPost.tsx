@@ -32,7 +32,11 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
         <SEO
           pageTitle={frontmatter.title}
           pageDescription={frontmatter.description}
-          pageUrl={`/blog/${frontmatter.canonicalURL || frontmatter.slug}/`}
+          pageUrl={
+            frontmatter.canonicalURL
+              ? `${frontmatter.canonicalURL}`
+              : `https://meeshkan.com/blog/${frontmatter.slug}/`
+          }
           pageImage={frontmatter.pageImage}
         />
         <SingleSection>
@@ -165,6 +169,7 @@ export const query = graphql`
           authorLink
         }
         canonicalURL
+        slug
       }
     }
   }
