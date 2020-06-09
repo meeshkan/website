@@ -1,0 +1,23 @@
+---
+title: Three reasons not to use real web APIs in your integration tests
+description: In this post, I'll discuss three gotchyas I've run into using real APIs when testing and the solutions I've used.
+slug: why-not-use-real-apis-in-tests
+date: 2020-06-11
+authors: ["mike"]
+published: true
+tags:
+  - api
+  - testing
+---
+
+Using real web APIs, like REST, gRPC and GraphQL, can be appealing when you're testing your app. It allows you to create an environment as close to production as possible, which can give you high confidence that things will work as expected when they're live. However, there are some good reason not to use web APIs when testing. I'll go over three of those reasons there, motivated by real-world examples, and give you tips on how to avoid these issues while still creating effective tests.
+
+# Security
+
+If you're a user of Google Cloud Platform, you may have created [credentials](https://cloud.google.com/docs/authentication/getting-started) that allow your app to authenticate against Google's services. While these credentials are useful to get up and running fast, they wind up tightly coupling your code base to Google Cloud Platform in ways you do not expect. In this section, we'll explore how that tight coupling may create a security vulnerability in your app.
+
+For example, imagine you are using Google's [Key Management Service](https://cloud.google.com/kms/), or KMS, in a NodeJS app.
+
+# Integrity
+
+# Speed
