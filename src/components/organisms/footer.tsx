@@ -16,10 +16,18 @@ export function Footer() {
     <Box as="footer" bg="gray.50" p={6}>
       <Box maxW="1000px" mx="auto">
         <Flex wrap="wrap" justify="center">
-          <Stack my={4} w={["100%", "50%"]}>
+          <Stack my={4} w={["100%", "33%"]}>
             <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
               Company
             </Heading>
+            <Link
+              // @ts-ignore
+              as={GatsbyLink}
+              to="/about/"
+              aria-label="About the Meeshkan team"
+            >
+              About us
+            </Link>
             <Link
               // @ts-ignore
               as={GatsbyLink}
@@ -39,30 +47,50 @@ export function Footer() {
             <Link
               // @ts-ignore
               as={GatsbyLink}
-              to="/about/"
-              aria-label="About the Meeshkan team"
-            >
-              About us
-            </Link>
-            <Link
-              // @ts-ignore
-              as={GatsbyLink}
               to="/terms-and-conditions/"
               aria-label="Terms and conditions of the Meeshkan product"
               title="terms and conditions"
             >
               T&amp;C
             </Link>
+          </Stack>
+          <Stack my={4} w={["100%", "33%"]}>
+            <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
+              Resources
+            </Heading>
             <Link
               // @ts-ignore
               as={GatsbyLink}
               to="/docs/"
               aria-label="Meeshkan's documentation"
             >
-              Docs
+              Documentation
+            </Link>
+            <Link
+              // @ts-ignore
+              as={GatsbyLink}
+              to="/docs/faq/"
+              aria-label="Frequently asked questions about Meeshkan"
+            >
+              FAQ
+            </Link>
+            <Link
+              // @ts-ignore
+              as={GatsbyLink}
+              to="/blog/"
+              aria-label="Meeshkan's blog"
+            >
+              Blog
+            </Link>
+            <Link
+              isExternal
+              href="https://gitter.im/Meeshkan/community"
+              aria-label="Go to Meeshkan's Gitter community"
+            >
+              Community
             </Link>
           </Stack>
-          <Stack my={4} w={["100%", "50%"]}>
+          <Stack my={4} w={["100%", "33%"]}>
             <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
               Related links
             </Heading>
