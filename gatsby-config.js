@@ -100,6 +100,12 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-transformer-yaml`,
     {
+      resolve: `gatsby-plugin-intercom`,
+      options: {
+        appId: process.env.INTERCOM_APP_ID,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
