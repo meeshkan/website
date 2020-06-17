@@ -14,6 +14,7 @@ import {
   Text,
   Link as ChakraLink,
   Box,
+  DarkMode,
 } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -145,64 +146,78 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
               </Button>
             )}
           </Stack>
-          <Divider borderColor="gray.300" my={14} />
-          <Heading
-            as="h3"
-            fontSize="2xl"
-            textAlign="center"
-            fontWeight={800}
-            mb={6}
-            color="gray.900"
+          <Box
+            maxW="1000px"
+            mx="auto"
+            backgroundColor="gray.900"
+            mt={16}
+            p={8}
+            rounded="sm"
           >
-            Get more from Meeshkan
-          </Heading>
-          <Flex
-            as="form"
-            // @ts-ignore
-            action="/success/"
-            direction={["column", "column", "row"]}
-            justify="center"
-            alignItems="flex-end"
-            name="newsletter"
-            data-netlify="true"
-            method="post"
-            data-netlify-honeypot="bot-field"
-            mb={6}
-          >
-            <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="newsletter" />
-            <FormControl
-              isRequired
-              mr={[0, 0, 4]}
-              mb={[4, 4, 0]}
-              w="100%"
-              maxW={["full", "full", "400px"]}
+            <Heading
+              as="h3"
+              fontSize="3xl"
+              textAlign="center"
+              fontWeight={900}
+              mb={4}
+              color="white"
+              letterSpacing="0.1px"
             >
-              <FormLabel htmlFor="email" fontWeight={700}>
-                Email
-              </FormLabel>
-              <Input
-                type="email"
-                name="email"
-                aria-label="Enter your business email"
+              Don’t miss the next post!
+            </Heading>
+            <Flex
+              as="form"
+              // @ts-ignore
+              action="/success/"
+              direction={["column", "column", "row"]}
+              justify="center"
+              alignItems="flex-end"
+              name="newsletter"
+              data-netlify="true"
+              method="post"
+              data-netlify-honeypot="bot-field"
+              mb={4}
+            >
+              <input type="hidden" name="bot-field" />
+              <input type="hidden" name="form-name" value="newsletter" />
+              <DarkMode>
+                <FormControl
+                  isRequired
+                  mr={[0, 0, 4]}
+                  mb={[4, 4, 0]}
+                  w="100%"
+                  maxW={["full", "full", "400px"]}
+                >
+                  <FormLabel htmlFor="email" fontWeight={700} color="gray.50">
+                    Email
+                  </FormLabel>
+                  <Input
+                    type="email"
+                    name="email"
+                    aria-label="Enter your business email"
+                    borderRadius="sm"
+                    placeholder="Your email"
+                    fontWeight={500}
+                    color="white"
+                    borderColor="gray.500"
+                  />
+                </FormControl>
+              </DarkMode>
+              <Button
+                variantColor="red"
                 borderRadius="sm"
-                placeholder="Your email"
-                fontWeight={500}
-              />
-            </FormControl>
-            <Button
-              variantColor="red"
-              borderRadius="sm"
-              fontWeight={700}
-              type="submit"
-              w={["100%", "100%", "auto"]}
-            >
-              Join our mailing list
-            </Button>
-          </Flex>
-          <Text textAlign="center" mb={6} color="gray.700">
-            Absolutely no spam. Unsubscribe anytime.
-          </Text>
+                fontWeight={900}
+                letterSpacing="wide"
+                type="submit"
+                w={["100%", "100%", "auto"]}
+              >
+                Join our mailing list
+              </Button>
+            </Flex>
+            <Text textAlign="center" color="gray.200">
+              Absolutely no spam. Unsubscribe anytime.
+            </Text>
+          </Box>
         </SingleSection>
       </MDXProvider>
     </Layout>
