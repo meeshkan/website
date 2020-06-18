@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading, Link, Grid, Text, Code } from "@chakra-ui/core"
+import { Box, Heading, Link, Grid, Text, Code, Flex } from "@chakra-ui/core"
 
 type DoubleSectionProps = {
   children: Object
@@ -8,6 +8,7 @@ type DoubleSectionProps = {
   text?: string
   reverse?: boolean
   badge?: string
+  em?: string
 }
 
 export const DoubleSection = ({
@@ -17,6 +18,7 @@ export const DoubleSection = ({
   text,
   reverse,
   badge,
+  em,
   ...props
 }: DoubleSectionProps) => (
   <Box as="section" maxW="1000px" mx="auto" py={12} {...props}>
@@ -63,7 +65,12 @@ export const DoubleSection = ({
                 id={anchor}
                 _hover={{ textDecoration: "none", cursor: "auto" }}
               >
-                {heading}
+                {heading}{" "}
+                {em && (
+                  <Flex d="inline" color="red.500" fontStyle="italic">
+                    {em}
+                  </Flex>
+                )}
               </Link>
             ) : (
               heading

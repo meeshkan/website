@@ -21,7 +21,7 @@ export const SingleSection = ({
       <Heading
         as="h2"
         color="gray.900"
-        fontSize="3xl"
+        fontSize={["3xl", "3xl", "3xl", "4xl"]}
         fontWeight={900}
         textAlign="center"
         mb={6}
