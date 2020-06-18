@@ -11,20 +11,30 @@ import {
   FormLabel,
   Box,
   Link as ChakraLink,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
+import { Card } from "../components/atoms/card"
+import TestSnippet from "../components/organisms/home/testSnippet"
 
 const IndexPage = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        dash: file(relativePath: { eq: "dashboardDark.png" }) {
+        video: file(relativePath: { eq: "video.png" }) {
           childImageSharp {
-            fluid(maxWidth: 1000, quality: 100) {
+            fluid(maxWidth: 300, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -82,6 +92,8 @@ const IndexPage = () => {
     `
   )
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Layout>
       <SEO
@@ -100,14 +112,14 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - PRIVATE ALPHA
+            MEESHKAN - PRIVATE BETA
           </Badge>
         </Flex>
         <Heading
           as="h1"
           fontSize={["3xl", "4xl", "5xl"]}
-          textAlign="center"
           mb={6}
+          textAlign="center"
           color="gray.900"
           fontWeight={900}
           letterSpacing="wide"
@@ -123,8 +135,8 @@ const IndexPage = () => {
           color="gray.700"
         >
           Stop feeling guilty for not writing tests. Meeshkan automatically
-          writes, executes, and reports on a collection of tests guaranteed to
-          squash bugs and improve your code.
+          writes, executes, and reports on a collection of user-mimicking tests,
+          guaranteed to give you confidence in critical flows.
         </Text>
         <Flex
           as="form"
@@ -137,7 +149,7 @@ const IndexPage = () => {
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
-          mb={12}
+          mb={16}
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="request-alpha-1" />
@@ -167,29 +179,70 @@ const IndexPage = () => {
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request alpha access
+            Request beta access
           </Button>
         </Flex>
-        <Img
-          fluid={data.dash.childImageSharp.fluid}
-          alt="A dashboard screenshot of the Meeshkan web app."
-        />
+        <Box maxW="750px" mx="auto">
+          <Card>
+            <Flex justify="space-between" align="center">
+              <Box textAlign="right" mr={8}>
+                <Heading
+                  as="h3"
+                  fontSize="2xl"
+                  fontWeight={900}
+                  letterSpacing="wide"
+                  mb={4}
+                >
+                  Watch this demo
+                </Heading>
+                <Text
+                  fontWeight={500}
+                  lineHeight="tall"
+                  color="gray.700"
+                  fontSize="lg"
+                >
+                  Directly showing where, how, and what Meeshkan does for your
+                  codebase.
+                </Text>
+              </Box>
+              <Box cursor="pointer" onClick={onOpen}>
+                <Img
+                  fluid={data.video.childImageSharp.fluid}
+                  style={{ width: 240, borderRadius: 2 }}
+                  alt="A dependency map with logos of several companies showing how your app uses other code bases."
+                />
+              </Box>
+              <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent backgroundColor="transparent">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/ndMYYxP_Gzs?autoplay=1&cc_load_policy=1"
+                    style={{ borderRadius: 2 }}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; allowfullscreen"
+                  ></iframe>
+                </ModalContent>
+              </Modal>
+            </Flex>
+          </Card>
+        </Box>
       </SingleSection>
 
       <DoubleSection
-        heading="90% of the code used by your app isn’t written by your team"
-        text="Third-party dependencies are the backbone of modern applications. The lack of testing these APIs is a vulnerability."
+        heading="Manually written tests are time consuming and often fragile to code changes"
+        text="Most developers would agree that testing is important. Those same developers will say they should be testing more, but they’re waiting for the codebase to stabilize."
       >
-        <Img
-          fluid={data.map.childImageSharp.fluid}
-          alt="A dependency map with logos of several companies showing how your app uses other code bases."
-        />
+        <TestSnippet />
       </DoubleSection>
 
       <DoubleSection
         reverse={true}
-        heading="Increase the coverage that your developers test."
-        text="Testing with Meeshkan covers parts of your app that aren’t reached with traditional testing infrastructure. QA devs can now be more confident in their coverage."
+        heading="Test generation falls short by focusing on quanity of ‘bugs’ rather than"
+        em="quality"
+        anchor="#quality"
+        text="‘Code coverage’ test metrics are useless. Meeshkan focuses on logic heavy parts of your app such as transactions and auth flows. Confidence not anxiety."
       >
         <Img
           fluid={data.coverage.childImageSharp.fluid}
@@ -198,12 +251,9 @@ const IndexPage = () => {
       </DoubleSection>
 
       <SingleSection
-        heading="Automate resiliency testing with the Meeshkan web app"
-        text="Using targeted, property-based testing and mocking your app’s dependencies - Meeshkan gives you confidence in your app’s resilience."
+        heading="Automate integration testing with the Meeshkan web app"
+        text="Using stateful, property-based testing and mocking your app’s dependencies — Meeshkan gives you confidence in your app’s resilience."
       >
-        <Text textAlign="center" color="gray.500" mb={4}>
-          Getting set up is as fast as authorizing GitHub.
-        </Text>
         <Flex
           as="form"
           // @ts-ignore
@@ -215,7 +265,6 @@ const IndexPage = () => {
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
-          mb={12}
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="request-alpha-2" />
@@ -241,13 +290,17 @@ const IndexPage = () => {
           <Button
             variantColor="red"
             borderRadius="sm"
-            fontWeight={700}
+            fontWeight={900}
+            letterSpacing="wide"
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request alpha access
+            Request beta access
           </Button>
         </Flex>
+        <Text textAlign="center" color="gray.500" mt={4} mb={12}>
+          Getting set up is as fast as authorizing GitHub.
+        </Text>
       </SingleSection>
 
       <DoubleSection
@@ -264,8 +317,8 @@ const IndexPage = () => {
       <DoubleSection
         reverse={true}
         badge="Step 2"
-        heading="Analyze and test your app"
-        text="Confirm the specification we've auto-generated for your service is correct. Then run the targeted property-based tests, automatically generated from that."
+        heading="Commit and continuously test"
+        text="Meeshkan slots into your natural code lifecycle by testing as you push commits to GitHub. The checks link to detailed reports."
       >
         <Img
           fluid={data.test.childImageSharp.fluid}
@@ -275,18 +328,6 @@ const IndexPage = () => {
 
       <DoubleSection
         badge="Step 3"
-        heading="Resolve conflicts"
-        text="In a guided flow, mock any third-party dependencies that couldn’t be auto-mocked by Meeshkan, such as databases."
-      >
-        <Img
-          fluid={data.resolution.childImageSharp.fluid}
-          alt="A screenshot of the resolution dialog from the Meeshkan web app."
-        />
-      </DoubleSection>
-
-      <DoubleSection
-        reverse={true}
-        badge="Step 4"
         heading="Fix vulnerabilities in your app"
         text="When tests fail, your configuration can block a branch from merging and direct a developer to the point of failure. In the future, we’ll provide fix suggestions."
       >
