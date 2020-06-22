@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import SEO from "../components/molecules/seo"
 import {
   Heading,
@@ -17,6 +17,7 @@ import { SingleSection } from "../components/organisms/singleSection"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
+import { useForm } from "react-hook-form"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -82,6 +83,29 @@ const IndexPage = () => {
     `
   )
 
+  const { handleSubmit, register, formState } = useForm()
+  const [formSubmit, setFormSubmit] = useState(false)
+
+  function onSubmit(values) {
+    let data = JSON.stringify({
+      list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
+      contacts: [
+        {
+          email: values.email,
+        },
+      ],
+    })
+
+    fetch("https://api.sendgrid.com/v3/marketing/contacts", {
+      method: "PUT",
+      body: data,
+      headers: {
+        authorization: `Bearer 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`,
+        "content-type": "application/json",
+      },
+    }).then(() => setFormSubmit(true))
+  }
+
   return (
     <Layout>
       <SEO
@@ -128,19 +152,18 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
-          // @ts-ignore
-          action="/success/"
+          onSubmit={handleSubmit(onSubmit)}
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-alpha-1"
-          data-netlify="true"
-          method="post"
-          data-netlify-honeypot="bot-field"
           mb={12}
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-alpha-1" />
+          <input
+            type="hidden"
+            name="formName"
+            value="request-alpha-1"
+            ref={register}
+          />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -154,20 +177,24 @@ const IndexPage = () => {
             <Input
               type="email"
               name="email"
+              ref={register}
               aria-label="Enter your business email"
               borderRadius="sm"
               placeholder="Your email"
+              isDisabled={formSubmit}
               fontWeight={500}
             />
           </FormControl>
           <Button
             variantColor="red"
             borderRadius="sm"
-            fontWeight={700}
+            fontWeight={900}
             type="submit"
+            isLoading={formState.isSubmitting}
+            isDisabled={formSubmit}
             w={["100%", "100%", "auto"]}
           >
-            Request alpha access
+            {formSubmit ? "Submitted" : "Request alpha access"}
           </Button>
         </Flex>
         <Img
