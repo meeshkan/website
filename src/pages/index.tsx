@@ -91,14 +91,14 @@ const IndexPage = () => {
       list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
       contacts: [
         {
-          email: values.email,
+          email: values.email || values.email2,
         },
       ],
     })
 
     let hubspotData = JSON.stringify({
       properties: {
-        email: values.email,
+        email: values.email || values.email2,
         lifecycle_stage: "Subscriber",
         lead_status: "In progress",
       },
@@ -108,19 +108,19 @@ const IndexPage = () => {
       method: "PUT",
       body: sendgridData,
       headers: {
-        authorization: `Bearer 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`,
+        authorization: `Bearer ${process.env.GATSBY_SENDGRID_API_KEY}`,
         "content-type": "application/json",
       },
     }).then(() => setFormSubmit(true))
 
-    // fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
-    //   method: "POST",
-    //   body: hubspotData,
-    //   headers: {
-    //     authorization: `Bearer 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`,
-    //     "content-type": "application/json",
-    //   },
-    // })
+    fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+      method: "POST",
+      body: hubspotData,
+      headers: {
+        authorization: `Bearer ${process.env.GATSBY_HUBSPOT_API_KEY}`,
+        "content-type": "application/json",
+      },
+    })
   }
 
   return (
@@ -274,7 +274,7 @@ const IndexPage = () => {
             </FormLabel>
             <Input
               type="email"
-              name="email"
+              name="email2"
               ref={register}
               aria-label="Enter your business email"
               borderRadius="sm"
