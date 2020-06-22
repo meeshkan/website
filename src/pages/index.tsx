@@ -145,14 +145,14 @@ const IndexPage = () => {
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-alpha-1"
+          name="request-beta-1"
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
           mb={16}
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-alpha-1" />
+          <input type="hidden" name="form-name" value="request-beta-1" />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -261,13 +261,13 @@ const IndexPage = () => {
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-alpha-2"
+          name="request-beta-2"
           data-netlify="true"
           method="post"
           data-netlify-honeypot="bot-field"
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-alpha-2" />
+          <input type="hidden" name="form-name" value="request-beta-2" />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
