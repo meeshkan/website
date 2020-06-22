@@ -96,13 +96,22 @@ const IndexPage = () => {
       ],
     })
 
-    let hubspotData = JSON.stringify({
-      properties: {
-        email: values.email || values.email2,
-        lifecycle_stage: "Subscriber",
-        lead_status: "In progress",
-      },
-    })
+    // let hubspotData = JSON.stringify({
+    //   properties: [
+    //     {
+    //       property: "email",
+    //       value: values.email || values.email2,
+    //     },
+    //     {
+    //       property: "lifecycle_stage",
+    //       value: "Subscriber",
+    //     },
+    //     {
+    //       property: "lead_status",
+    //       value: "In progress",
+    //     },
+    //   ],
+    // })
 
     fetch("https://api.sendgrid.com/v3/marketing/contacts", {
       method: "PUT",
@@ -113,14 +122,16 @@ const IndexPage = () => {
       },
     }).then(() => setFormSubmit(true))
 
-    fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
-      method: "POST",
-      body: hubspotData,
-      headers: {
-        authorization: `Bearer ${process.env.GATSBY_HUBSPOT_API_KEY}`,
-        "content-type": "application/json",
-      },
-    })
+    // fetch(
+    //   `https://api.hubapi.com/crm/v3/objects/contacts?hapikey=${process.env.GATSBY_HUBSPOT_API_KEY}`,
+    //   {
+    //     method: "POST",
+    //     body: hubspotData,
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //   }
+    // )
   }
 
   return (
