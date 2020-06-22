@@ -87,7 +87,7 @@ const IndexPage = () => {
   const [formSubmit, setFormSubmit] = useState(false)
 
   function onSubmit(values) {
-    let data = JSON.stringify({
+    let sendgridData = JSON.stringify({
       list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
       contacts: [
         {
@@ -96,14 +96,31 @@ const IndexPage = () => {
       ],
     })
 
+    let hubspotData = JSON.stringify({
+      properties: {
+        email: values.email,
+        lifecycle_stage: "Subscriber",
+        lead_status: "In progress",
+      },
+    })
+
     fetch("https://api.sendgrid.com/v3/marketing/contacts", {
       method: "PUT",
-      body: data,
+      body: sendgridData,
       headers: {
         authorization: `Bearer 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`,
         "content-type": "application/json",
       },
     }).then(() => setFormSubmit(true))
+
+    // fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+    //   method: "POST",
+    //   body: hubspotData,
+    //   headers: {
+    //     authorization: `Bearer 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`,
+    //     "content-type": "application/json",
+    //   },
+    // })
   }
 
   return (
@@ -233,19 +250,18 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
-          // @ts-ignore
-          action="/success/"
+          onSubmit={handleSubmit(onSubmit)}
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-alpha-2"
-          data-netlify="true"
-          method="post"
-          data-netlify-honeypot="bot-field"
           mb={12}
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-alpha-2" />
+          <input
+            type="hidden"
+            name="formName"
+            ref={register}
+            value="request-alpha-2"
+          />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -259,20 +275,24 @@ const IndexPage = () => {
             <Input
               type="email"
               name="email"
+              ref={register}
               aria-label="Enter your business email"
               borderRadius="sm"
               placeholder="Your email"
+              isDisabled={formSubmit}
               fontWeight={500}
             />
           </FormControl>
           <Button
             variantColor="red"
             borderRadius="sm"
-            fontWeight={700}
+            fontWeight={900}
+            isLoading={formState.isSubmitting}
+            isDisabled={formSubmit}
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request alpha access
+            {formSubmit ? "Submitted" : "Request alpha access"}
           </Button>
         </Flex>
       </SingleSection>
