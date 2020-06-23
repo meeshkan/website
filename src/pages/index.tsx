@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import SEO from "../components/molecules/seo"
 import {
   Heading,
@@ -15,10 +15,12 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
+  Tooltip,
+  Tabs,
+  TabPanels,
+  TabPanel,
+  TabList,
+  Tab,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -32,6 +34,13 @@ const IndexPage = () => {
   const data = useStaticQuery(
     graphql`
       query {
+        dash: file(relativePath: { eq: "dashboardDark.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         video: file(relativePath: { eq: "video.png" }) {
           childImageSharp {
             fluid(maxWidth: 300, quality: 100) {
@@ -46,7 +55,7 @@ const IndexPage = () => {
             }
           }
         }
-        coverage: file(relativePath: { eq: "coverage.png" }) {
+        quality: file(relativePath: { eq: "authQuality.png" }) {
           childImageSharp {
             fluid(maxWidth: 400, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -126,6 +135,22 @@ const IndexPage = () => {
           lineHeight="short"
         >
           Automatic testing for any app
+          <span>
+            <Tooltip
+              label="with a server!"
+              aria-label="with a server!"
+              placement="top"
+              hasArrow
+              p={3}
+              rounded="sm"
+              backgroundColor="gray.900"
+              color="white"
+              fontSize="md"
+              fontWeight={700}
+            >
+              *
+            </Tooltip>
+          </span>
         </Heading>
         <Text
           textAlign="center"
@@ -245,7 +270,7 @@ const IndexPage = () => {
         text="‘Code coverage’ test metrics are useless. Meeshkan focuses on logic heavy parts of your app such as transactions and auth flows. Confidence not anxiety."
       >
         <Img
-          fluid={data.coverage.childImageSharp.fluid}
+          fluid={data.quality.childImageSharp.fluid}
           alt="2 compared bar graphs showing that using Meeshkan covers 95% of your app, and the traditional unit, integration, e2e covers 60%."
         />
       </DoubleSection>
@@ -303,6 +328,134 @@ const IndexPage = () => {
         </Text>
       </SingleSection>
 
+      <SingleSection>
+        <Tabs
+          defaultIndex={0}
+          display="flex"
+          w="100%"
+          justifyContent="space-between"
+          align="start"
+          variant="unstyled"
+        >
+          <Box w="1/3">
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize={["3xl", "3xl", "3xl", "4xl"]}
+              fontWeight={900}
+              textAlign="center"
+              mb={6}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Key Features
+            </Heading>
+            <TabList d="block" borderBottom="none">
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
+                Framework agnostic
+              </Tab>
+
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
+                Auth flows
+              </Tab>
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
+                Continous testing
+              </Tab>
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
+                Premium audits
+              </Tab>
+            </TabList>
+          </Box>
+
+          <TabPanels w="2/3">
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
+                fluid={data.dash.childImageSharp.fluid}
+                alt="A dashboard screenshot of the Meeshkan web app."
+              />
+            </TabPanel>
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
+                fluid={data.testFailure.childImageSharp.fluid}
+                alt="A dashboard screenshot of the Meeshkan web app."
+              />
+            </TabPanel>
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
+                fluid={data.dash.childImageSharp.fluid}
+                alt="A dashboard screenshot of the Meeshkan web app."
+              />
+            </TabPanel>
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
+                fluid={data.testFailure.childImageSharp.fluid}
+                alt="A dashboard screenshot of the Meeshkan web app."
+              />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </SingleSection>
+
+      <Heading
+        as="h2"
+        fontSize={["3xl", "4xl", "5xl"]}
+        mb={6}
+        textAlign="center"
+        color="gray.900"
+        fontWeight={900}
+        letterSpacing="wide"
+        lineHeight="short"
+      >
+        How does Meeshkan work?
+      </Heading>
       <DoubleSection
         badge="Step 1"
         heading="GitHub authorization"
