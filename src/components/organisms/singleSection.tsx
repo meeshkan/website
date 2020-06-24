@@ -16,7 +16,7 @@ export const SingleSection = ({
   text,
   props,
 }: SectionProps) => (
-  <Box as="section" maxW="1000px" mx="auto" py={12} {...props}>
+  <Box as="section" maxW="1000px" mx="auto" py={16} {...props}>
     {heading ? (
       <Heading
         as="h2"

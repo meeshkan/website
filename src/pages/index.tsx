@@ -272,7 +272,7 @@ const IndexPage = () => {
             isDisabled={formSubmit}
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request beta access"}
+            {formSubmit ? "Submitted" : "Request access"}
           </Button>
         </Flex>
         <Box maxW="750px" mx="auto">
@@ -391,7 +391,7 @@ const IndexPage = () => {
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request beta access"}
+            {formSubmit ? "Submitted" : "Request access"}
           </Button>
         </Flex>
         <Text textAlign="center" color="gray.500" mt={4} mb={12}>
