@@ -35,7 +35,7 @@ const IndexPage = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        dash: file(relativePath: { eq: "dashboardDark.png" }) {
+        stack: file(relativePath: { eq: "stack.png" }) {
           childImageSharp {
             fluid(maxWidth: 1000, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -78,6 +78,13 @@ const IndexPage = () => {
           }
         }
         authSpec: file(relativePath: { eq: "authSpec.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        continuous: file(relativePath: { eq: "continuousTests.png" }) {
           childImageSharp {
             fluid(maxWidth: 1000, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -428,6 +435,36 @@ const IndexPage = () => {
                   fontWeight: 900,
                 }}
               >
+                Framework agnostic
+              </Tab>
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
+                Continous testing
+              </Tab>
+              <Tab
+                h="auto"
+                w="100%"
+                fontSize="md"
+                justifyContent="start"
+                fontWeight={600}
+                rounded="sm"
+                _selected={{
+                  color: "gray.900",
+                  bg: "gray.50",
+                  fontWeight: 900,
+                }}
+              >
                 Premium audits
               </Tab>
               <Tab
@@ -445,63 +482,32 @@ const IndexPage = () => {
               >
                 Auth flows
               </Tab>
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
-              >
-                Framework agnostic
-              </Tab>
-
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
-              >
-                Continous testing
-              </Tab>
             </TabList>
           </Box>
 
           <TabPanels w="2/3">
             <TabPanel maxW="644px" w={["644px"]}>
               <Img
+                fluid={data.stack.childImageSharp.fluid}
+                alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."
+              />
+            </TabPanel>
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
+                fluid={data.continuous.childImageSharp.fluid}
+                alt="A screenshot of the meeshkan continous testing workflow with github, and the bugs it points to when clicking details."
+              />
+            </TabPanel>
+            <TabPanel maxW="644px" w={["644px"]}>
+              <Img
                 fluid={data.premium.childImageSharp.fluid}
-                alt="A dashboard screenshot of the Meeshkan web app."
+                alt="A screenshot of a bug premium report"
               />
             </TabPanel>
             <TabPanel maxW="644px" w={["644px"]}>
               <Img
                 fluid={data.authSpec.childImageSharp.fluid}
                 alt="Auth specification UI. Gives a full overview of who can access and endpoint, and what is returned."
-              />
-            </TabPanel>
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.dash.childImageSharp.fluid}
-                alt="A dashboard screenshot of the Meeshkan web app."
-              />
-            </TabPanel>
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.testFailure.childImageSharp.fluid}
-                alt="A dashboard screenshot of the Meeshkan web app."
               />
             </TabPanel>
           </TabPanels>
