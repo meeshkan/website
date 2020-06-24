@@ -76,9 +76,16 @@ const IndexPage = () => {
             }
           }
         }
-        resolution: file(relativePath: { eq: "resolutionDialog.png" }) {
+        authSpec: file(relativePath: { eq: "authSpec.png" }) {
           childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
+            fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        premium: file(relativePath: { eq: "premiumTest.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -271,7 +278,7 @@ const IndexPage = () => {
       >
         <Img
           fluid={data.quality.childImageSharp.fluid}
-          alt="2 compared bar graphs showing that using Meeshkan covers 95% of your app, and the traditional unit, integration, e2e covers 60%."
+          alt="Shows a piece of the auth spec in the Meeshkan UI, stressing our focus on the quality of your app."
         />
       </DoubleSection>
 
@@ -331,7 +338,7 @@ const IndexPage = () => {
       <SingleSection>
         <Tabs
           defaultIndex={0}
-          display="flex"
+          display={["block", "block", "flex"]}
           w="100%"
           justifyContent="space-between"
           align="start"
@@ -364,9 +371,8 @@ const IndexPage = () => {
                   fontWeight: 900,
                 }}
               >
-                Framework agnostic
+                Premium audits
               </Tab>
-
               <Tab
                 h="auto"
                 w="100%"
@@ -395,8 +401,9 @@ const IndexPage = () => {
                   fontWeight: 900,
                 }}
               >
-                Continous testing
+                Framework agnostic
               </Tab>
+
               <Tab
                 h="auto"
                 w="100%"
@@ -410,7 +417,7 @@ const IndexPage = () => {
                   fontWeight: 900,
                 }}
               >
-                Premium audits
+                Continous testing
               </Tab>
             </TabList>
           </Box>
@@ -418,14 +425,14 @@ const IndexPage = () => {
           <TabPanels w="2/3">
             <TabPanel maxW="644px" w={["644px"]}>
               <Img
-                fluid={data.dash.childImageSharp.fluid}
+                fluid={data.premium.childImageSharp.fluid}
                 alt="A dashboard screenshot of the Meeshkan web app."
               />
             </TabPanel>
             <TabPanel maxW="644px" w={["644px"]}>
               <Img
-                fluid={data.testFailure.childImageSharp.fluid}
-                alt="A dashboard screenshot of the Meeshkan web app."
+                fluid={data.authSpec.childImageSharp.fluid}
+                alt="Auth specification UI. Gives a full overview of who can access and endpoint, and what is returned."
               />
             </TabPanel>
             <TabPanel maxW="644px" w={["644px"]}>
