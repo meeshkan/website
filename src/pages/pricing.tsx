@@ -10,6 +10,8 @@ import {
   Input,
   FormControl,
   Link as ChakraLink,
+  Code,
+  Badge,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -19,6 +21,7 @@ import SEO from "../components/molecules/seo"
 
 type PricingProps = {
   title: string
+  subtitle?: string
   price: string
   yesFeatures?: Array<string>
   noFeatures?: Array<string>
@@ -27,6 +30,7 @@ type PricingProps = {
 
 const PricingCard = ({
   title,
+  subtitle,
   price,
   yesFeatures,
   noFeatures,
@@ -39,12 +43,17 @@ const PricingCard = ({
       fontSize="2xl"
       fontWeight={900}
       mb={4}
-      textAlign="center"
+      d="flex"
+      justifyContent="center"
+      alignItems="center"
     >
       {title}
+      <Code variantColor="blue" fontSize="md" ml={3}>
+        {subtitle}
+      </Code>
     </Heading>
-    <Text textAlign="center" fontSize="xl" color="gray.700" fontWeight={500}>
-      {price}
+    <Text textAlign="center" fontSize="xl" color="gray.700" fontWeight={600}>
+      {price} <span style={{ color: "#616E7C", fontWeight: 400 }}>/month</span>
     </Text>
 
     <Stack spacing={2} mt={4}>
@@ -95,7 +104,7 @@ const PricingCard = ({
           type="submit"
           w="full"
         >
-          Request alpha access
+          Request access
         </Button>
       </FormControl>
     )}
@@ -123,38 +132,71 @@ const PricingPage = () => {
         >
           Meeshkan Pricing
         </Heading>
-        <Text fontSize="2xl" textAlign="center" mb={12} lineHeight="short">
-          While we are still in private alpha, Meeshkan is free to use. If you
-          need larger limits,{" "}
-          <ChakraLink as={Link} to="/contact/" color="blue.500">
-            please reach out to explore a custom solution.
-          </ChakraLink>
+        <Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">
+          Meeshkan is the equivialent of 1, 60k+ salaried QA engineer, for every
+          5 engineers hired. While we are still in private beta, Meeshkan is
+          free for fair use.
+          <ChakraLink
+            // @ts-ignore
+            as={Link}
+            color="blue.500"
+          >
+            {" "}
+            Let us know
+          </ChakraLink>{" "}
+          if we can build a plan for you.
         </Text>
-        <SimpleGrid columns={2} spacing={8}>
+        <SimpleGrid columns={3} spacing={8}>
           <PricingCard
-            title="Personal"
+            title="Free"
+            subtitle="for Individuals"
             price="$0"
             yesFeatures={[
-              "Management dashboard",
-              "Public GitHub repositories",
-              "1 test per day",
-              "5 teammates",
+              "1 team member",
+              "2 projects",
+              "Manual project setup",
+              "100 testing hours",
+              "GitHub import",
             ]}
-            noFeatures={["GitLab & Bitbucket", "Mock  & test history"]}
+            // noFeatures={[
+            //   "Concurrent tests",
+            //   "GitLab & Bitbucket",
+            //   "Test history",
+            //   "Audit reports",
+            // ]}
             hasCTA={true}
           />
           <PricingCard
-            title="Professional"
-            price="Coming soon!"
+            title="Pro"
+            subtitle="for Teams"
+            price="$99"
             yesFeatures={[
-              "Management dashboard",
-              "Private GitHub repositories",
-              "Unlimited test hours",
-              "Unlimited teammates",
-              "GitLab & Bitbucket",
-              "Mock  & test history",
+              "8 team members",
+              "Unlimited projects",
+              "1 project set up",
+              "1000 testing hours",
+              "3 concurrent tests",
+              "Weekly audit reporting",
+              "30 day history",
+            ]}
+            hasCTA={false}
+          />
+          <PricingCard
+            title="Business"
+            subtitle="starting at"
+            price="$2000"
+            yesFeatures={[
+              "25 team members",
+              "Unlimited projects",
+              "5 projects set up",
+              "Unlimited testing hours",
+              "10 concurrent tests",
+              "Unlimited history",
+              "GitLab & Bitbucket import",
+              "Auth flow testing UI",
               "Custom build pipelines",
-              "Resolution suggestions",
+              "Role based permissions",
+              "Jira/Linear integration",
             ]}
             hasCTA={false}
           />
