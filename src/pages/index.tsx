@@ -302,7 +302,7 @@ const IndexPage = () => {
                 <Img
                   fluid={data.video.childImageSharp.fluid}
                   style={{ width: 240, borderRadius: 2 }}
-                  alt="A dependency map with logos of several companies showing how your app uses other code bases."
+                  alt="A screen grab from the demo video that pops up when you click it."
                 />
               </Box>
               <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -324,8 +324,8 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Manually written tests are time consuming and often fragile to code changes"
-        text="Most developers would agree that testing is important. Those same developers will say they should be testing more, but they’re waiting for the codebase to stabilize."
+        heading="Manually written tests are time consuming and fragile to code changes"
+        text="Developers would agree that testing is important. Those same developers will say they should be testing more, but they’re waiting for the codebase to stabilize."
       >
         <TestSnippet />
       </DoubleSection>
@@ -582,7 +582,7 @@ const IndexPage = () => {
           ml={[0, 0, 0, 440, 522]}
           textAlign={["center", "center", "center", "end"]}
         >
-          How would automated resiliency testing work for your organization?
+          How would automated testing work for your organization?
         </Heading>
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
@@ -591,10 +591,11 @@ const IndexPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             _hover={{ textDecoration: "none", backgroundColor: "red.600" }}
-            href="https://meetings.hubspot.com/makenna"
+            href="https://meetings.hubspot.com/makenna/consultation-with-meeshkan"
             aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             fontWeight={900}
+            letterSpacing="wide"
             rounded="sm"
           >
             Schedule a demo
