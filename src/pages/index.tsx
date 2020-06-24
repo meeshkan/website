@@ -29,6 +29,7 @@ import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
 import { Card } from "../components/atoms/card"
 import TestSnippet from "../components/organisms/home/testSnippet"
+import { useForm } from "react-hook-form"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -109,6 +110,56 @@ const IndexPage = () => {
   )
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { handleSubmit, register, formState } = useForm()
+  const [formSubmit, setFormSubmit] = useState(false)
+
+  function onSubmit(values) {
+    let sendgridData = JSON.stringify({
+      list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
+      contacts: [
+        {
+          email: values.email || values.email2,
+        },
+      ],
+    })
+
+    // let hubspotData = JSON.stringify({
+    //   properties: [
+    //     {
+    //       property: "email",
+    //       value: values.email || values.email2,
+    //     },
+    //     {
+    //       property: "lifecycle_stage",
+    //       value: "Subscriber",
+    //     },
+    //     {
+    //       property: "lead_status",
+    //       value: "In progress",
+    //     },
+    //   ],
+    // })
+
+    fetch("https://api.sendgrid.com/v3/marketing/contacts", {
+      method: "PUT",
+      body: sendgridData,
+      headers: {
+        authorization: `Bearer ${process.env.GATSBY_SENDGRID_API_KEY}`,
+        "content-type": "application/json",
+      },
+    }).then(() => setFormSubmit(true))
+
+    // fetch(
+    //   `https://api.hubapi.com/crm/v3/objects/contacts?hapikey=${process.env.GATSBY_HUBSPOT_API_KEY}`,
+    //   {
+    //     method: "POST",
+    //     body: hubspotData,
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //   }
+    // )
+  }
 
   return (
     <Layout>
@@ -172,19 +223,18 @@ const IndexPage = () => {
         </Text>
         <Flex
           as="form"
-          // @ts-ignore
-          action="/success/"
+          onSubmit={handleSubmit(onSubmit)}
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-beta-1"
-          data-netlify="true"
-          method="post"
-          data-netlify-honeypot="bot-field"
-          mb={16}
+          mb={12}
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-beta-1" />
+          <input
+            type="hidden"
+            name="formName"
+            value="request-beta-1"
+            ref={register}
+          />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -198,20 +248,24 @@ const IndexPage = () => {
             <Input
               type="email"
               name="email"
+              ref={register}
               aria-label="Enter your business email"
               borderRadius="sm"
               placeholder="Your email"
+              isDisabled={formSubmit}
               fontWeight={500}
             />
           </FormControl>
           <Button
             variantColor="red"
             borderRadius="sm"
-            fontWeight={700}
+            fontWeight={900}
             type="submit"
+            isLoading={formState.isSubmitting}
+            isDisabled={formSubmit}
             w={["100%", "100%", "auto"]}
           >
-            Request beta access
+            {formSubmit ? "Submitted" : "Request beta access"}
           </Button>
         </Flex>
         <Box maxW="750px" mx="auto">
@@ -288,18 +342,18 @@ const IndexPage = () => {
       >
         <Flex
           as="form"
-          // @ts-ignore
-          action="/success/"
+          onSubmit={handleSubmit(onSubmit)}
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          name="request-beta-2"
-          data-netlify="true"
-          method="post"
-          data-netlify-honeypot="bot-field"
+          mb={12}
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="request-beta-2" />
+          <input
+            type="hidden"
+            name="formName"
+            ref={register}
+            value="request-beta-2"
+          />
           <FormControl
             isRequired
             mr={[0, 0, 4]}
@@ -312,10 +366,12 @@ const IndexPage = () => {
             </FormLabel>
             <Input
               type="email"
-              name="email"
+              name="email2"
+              ref={register}
               aria-label="Enter your business email"
               borderRadius="sm"
               placeholder="Your email"
+              isDisabled={formSubmit}
               fontWeight={500}
             />
           </FormControl>
@@ -323,11 +379,12 @@ const IndexPage = () => {
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
-            letterSpacing="wide"
+            isLoading={formState.isSubmitting}
+            isDisabled={formSubmit}
             type="submit"
             w={["100%", "100%", "auto"]}
           >
-            Request beta access
+            {formSubmit ? "Submitted" : "Request beta access"}
           </Button>
         </Flex>
         <Text textAlign="center" color="gray.500" mt={4} mb={12}>
