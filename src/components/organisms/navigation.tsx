@@ -10,6 +10,7 @@ export function Navigation() {
         <Icon name="Logo" color="red.500" h={6} w="auto" />
       </Link>
       <Stack isInline>
+        <NavLink text="Pricing" path="/pricing/" />
         <NavLink text="Blog" path="/blog/" />
         <NavLink text="Docs" path="/docs/" />
       </Stack>
