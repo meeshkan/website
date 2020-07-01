@@ -46,7 +46,7 @@ The speed and ease of cutting out the middleman between your API and database co
 
 At Meeshkan, the way we've solved that in our webapp is using a [mock](https://github.com/meeshkan/webapp/blob/master/mocks/graphql-request.ts) of GraphQL request to divert calls from 8base to a [Jest](https://jestjs.io/) mock function. It allows us to write tests for our app's most sensitive database calls, like creating or deleting projects, without fear of accidentally pinging 8base with one of our own credentials.
 
-# Speed
+## Speed
 
 Network calls are _slow_. Even in the slowest of modern programming languages, an in-memory function call for a function that has no I/O and no heavy-duty algorithms (like FFTs) usually takes no more than 10ms. By contrast, the fastest network call to an external service will be at least 100ms and often take much longer. This problem, compounded over 100s of network calls in tests, can be the difference between a test suite that executes in 30 seconds or 30 minutes. Furthermore, if an external service is behaving erratically for any reason, it could fail your tests even though there's nothing wrong with your code.
 
