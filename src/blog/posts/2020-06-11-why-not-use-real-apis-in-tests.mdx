@@ -15,7 +15,7 @@ Using real web APIs, like REST, gRPC, and GraphQL, can be appealing when you're 
 
 However, there are some good reasons not to use web APIs when testing. I'll go over three of those reasons, motivated by real-world examples, and give you tips on how to avoid these issues while still creating effective tests.
 
-# Security
+## Security
 
 If you're a user of Google Cloud Platform, you may have created [credentials](https://cloud.google.com/docs/authentication/getting-started) that allow your app to authenticate against Google's services. While these credentials are useful to get up and running fast, they wind up tightly coupling your code base to Google Cloud Platform in ways you do not expect. In this section, we'll explore how that tight coupling may create a security vulnerability in your app.
 
