@@ -34,7 +34,7 @@ A great way to avoid all of these problems is to not call APIs from your code th
 
 - **Gate imports with environment variables**: Make sure that third-party libraries like `@google-cloud/kms` are only imported in an enviornment that is supposed to have credentials by using statements like `const kms = process.env._USE_GCP_LIBRARIES ? require('@google-cloud/kms') : require('./mock-kms')`.
 - **Use dependency injection**: Refactor code so that there are very few top-level calls to `process.env`. Instead, pass things like environment variables to your functions as arguments. While this will still require some form of gating between test and other environments, it limits the gating to one place.
-- **Use a mocking library like [hmt](https://github.com/meeshkan/hmt) or [unmock](https://github.com/meeshkan/unmock-js)**: This allows you to intercept HTTP traffic and create stubs for API calls to sensitive methods.  As mocking tools become more and more mature and are able to handle GraphQL and gRPC, I believe this will be the most sustainable option going forward as it does not require changes to code bases. 
+- **Use a mocking library like [HMT](https://github.com/meeshkan/hmt) or [Unmock](https://github.com/meeshkan/unmock-js)**: This allows you to intercept HTTP traffic and create stubs for API calls to sensitive methods. As mocking tools become more mature and are able to handle GraphQL and gRPC, I believe this will be the most sustainable option going forward as it doesn't require changes to codebases. 
 
 # Integrity
 
