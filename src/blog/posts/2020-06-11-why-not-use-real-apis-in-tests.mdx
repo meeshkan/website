@@ -17,7 +17,7 @@ However, there are some good reasons not to use web APIs when testing. I'll go o
 
 ## Security
 
-If you're a user of Google Cloud Platform, you may have created [credentials](https://cloud.google.com/docs/authentication/getting-started) that allow your app to authenticate against Google's services. While these credentials are useful to get up and running fast, they wind up tightly coupling your code base to Google Cloud Platform in ways you do not expect. In this section, we'll explore how that tight coupling may create a security vulnerability in your app.
+If you're a user of Google Cloud Platform, you may have created [credentials](https://cloud.google.com/docs/authentication/getting-started) that allow your app to authenticate against Google's services. While these credentials are useful to get up and running fast, they wind up tightly coupling your codebase to Google Cloud Platform in ways you do not expect. In this section, we'll explore how that tight coupling may create a security vulnerability in your app.
 
 For example, imagine you are using Google's [Key Management Service](https://cloud.google.com/kms/), or KMS, in a NodeJS app. Google's documentation shows that [importing and using kms](https://cloud.google.com/kms/docs/reference/libraries#client-libraries-install-nodejs) is relatively straightforward, requiring less than fifteen lines of code. What they do not tell you is that the line `require('@google-cloud/kms')` triggers several automatic web calls, some of which attempt to authenticate with Google Cloud Platform. If you do not have a valid credential in your project, the authentication will fail and your code will not run. This seems like a pretty hefty price to pay for a require statement!
 
