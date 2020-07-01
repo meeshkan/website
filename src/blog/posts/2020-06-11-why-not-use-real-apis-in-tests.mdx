@@ -38,7 +38,9 @@ A great way to avoid all of these problems is to not call APIs from your code th
 
 # Integrity
 
-At Meeshkan, we use [8base](https://8base.com) as our database _and_ our API. Now some of you may say: "That's OUTRAGEOUS! You're giving your clients programmatic access to your database?" And to that I say: "Yes." I mean, why not?  Projects like [Prisma](https://prisma.io) have been closing the gap between a database and an API for several years already, and 8base is one of numerous companies that are pushing this approach to greater heights.
+At Meeshkan, we use [8base](https://8base.com) as our database _and_ our API. Now some of you may say: "That's OUTRAGEOUS! You're giving your clients programmatic access to your database?" And to that, I say: "Yes." 
+
+I mean, why not? Projects like [Prisma](https://prisma.io) have been closing the gap between a database and an API for several years already. 8base is one of many companies that are pushing this approach to greater heights.
 
 The speed and ease of cutting out the middleman between your API and database comes at a cost, though: it is more difficult to create a level of indirection between your API calls and database read/writes. In a more traditional setup where you are calling an API that then calls a database, you usually have a staging environment or mock of that API that diverts from the production database. Here, that is not an option, which makes testing tricky.
 
