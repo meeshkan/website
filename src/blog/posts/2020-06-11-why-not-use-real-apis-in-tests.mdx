@@ -42,7 +42,7 @@ At Meeshkan, we use [8base](https://8base.com) as our database _and_ our API. No
 
 I mean, why not? Projects like [Prisma](https://prisma.io) have been closing the gap between a database and an API for several years already. 8base is one of many companies that are pushing this approach to greater heights.
 
-The speed and ease of cutting out the middleman between your API and database comes at a cost, though: it is more difficult to create a level of indirection between your API calls and database read/writes. In a more traditional setup where you are calling an API that then calls a database, you usually have a staging environment or mock of that API that diverts from the production database. Here, that is not an option, which makes testing tricky.
+The speed and ease of cutting out the middleman between your API and database comes at a cost, though: it is more difficult to create a level of indirection between your API calls and database read/writes. In a more traditional setup where you are calling an API that then calls a database, you usually have a staging environment or mock of that API that diverts from the production database. Here, that isn't an option, which makes testing tricky.
 
 At Meeshkan, the way we've solved that in our webapp is using a [mock](https://github.com/meeshkan/webapp/blob/master/mocks/graphql-request.ts) of GraphQL request to divert calls from 8base to a [Jest](https://jestjs.io/) mock function. It allows us to write tests for our app's most sensitive database calls, like creating or deleting projects, without fear of accidentally pinging 8base with one of our own credentials.
 
