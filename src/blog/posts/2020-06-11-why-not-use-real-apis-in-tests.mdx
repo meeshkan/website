@@ -28,7 +28,7 @@ Imagine now who is testing your code. You may have local unit tests on developer
 - **Distribution** - some enviroments, like CI/CD, require extra steps to get credentials in the right form (ie a file on a file system or an environment variable), which adds complexity.
 - **Maintenance** - knowing where the credential is, who has access to it, and under what conditions it is protected.
 
-Challenges in both distribution and maintenance increase the risk that a credential will leak (the worst form of security bug!) or that a stale credential will be used where it's not supposed to.
+Challenges in both distribution and maintenance increase the risk that a credential will leak. It also increases the risk that a stale or incorrect credential will be used.
 
 A great way to avoid all of these problems is to not call APIs from your code that requires sensitive credentials. In the case of Google and similar providers, I've solved this problem in three ways:
 
