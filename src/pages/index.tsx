@@ -15,12 +15,13 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  Tooltip,
   Tabs,
   TabPanels,
   TabPanel,
   TabList,
   Tab,
+  SimpleGrid,
+  Code,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -199,23 +200,7 @@ const IndexPage = () => {
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automatic testing for any app
-          <span>
-            <Tooltip
-              label="with a server!"
-              aria-label="with a server!"
-              placement="top"
-              hasArrow
-              p={3}
-              rounded="sm"
-              backgroundColor="gray.900"
-              color="white"
-              fontSize="md"
-              fontWeight={700}
-            >
-              *
-            </Tooltip>
-          </span>
+          Automated tests for your GraphQL APIs dynamically generated
         </Heading>
         <Text
           textAlign="center"
@@ -225,8 +210,10 @@ const IndexPage = () => {
           color="gray.700"
         >
           Stop feeling guilty for not writing tests. Meeshkan automatically
-          writes, executes, and reports on a collection of user-mimicking tests,
-          guaranteed to give you confidence in critical flows.
+          executes and reports on a collection of generated tests that actually
+          keep up with your GraphQL API. Using your schema and a touch of NLP,
+          we test critical flows, guaranteed to give you confidence in your app.
+          Every commit.
         </Text>
         <Flex
           as="form"
@@ -294,8 +281,8 @@ const IndexPage = () => {
                   color="gray.700"
                   fontSize="lg"
                 >
-                  Directly showing where, how, and what Meeshkan does for your
-                  codebase.
+                  Let's explore how Meeshkan can help you squash killer bugs in
+                  your backend services.
                 </Text>
               </Box>
               <Box cursor="pointer" onClick={onOpen}>
@@ -324,10 +311,11 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Manually written tests are time consuming and fragile to code changes"
-        text="Developers would agree that testing is important. Those same developers will say they should be testing more, but they’re waiting for the codebase to stabilize."
+        heading="Keeping up with an ever evolving API is a full-time job"
+        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
-        <TestSnippet />
+        <Box w={460} h={300} backgroundColor="gray.50" />
+        {/* <TestSnippet /> */}
       </DoubleSection>
 
       <DoubleSection
@@ -335,17 +323,18 @@ const IndexPage = () => {
         heading="Test generation falls short by focusing on quanity of ‘bugs’ rather than"
         em="quality"
         anchor="#quality"
-        text="‘Code coverage’ test metrics are useless. Meeshkan focuses on logic heavy parts of your app such as transactions and auth flows. Confidence not anxiety."
+        text="Code coverage metrics aren't meaningful without the quality context, of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
       >
-        <Img
+        <Box w={460} h={300} backgroundColor="gray.50" />
+        {/* <Img
           fluid={data.quality.childImageSharp.fluid}
           alt="Shows a piece of the auth spec in the Meeshkan UI, stressing our focus on the quality of your app."
-        />
+        /> */}
       </DoubleSection>
 
       <SingleSection
-        heading="Automate integration testing with the Meeshkan web app"
-        text="Using stateful, property-based testing and mocking your app’s dependencies — Meeshkan gives you confidence in your app’s resilience."
+        heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
+        text="Fusing together your existing schema introspection, property-based testing and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
       >
         <Flex
           as="form"
@@ -394,7 +383,7 @@ const IndexPage = () => {
             {formSubmit ? "Submitted" : "Request access"}
           </Button>
         </Flex>
-        <Text textAlign="center" color="gray.500" mt={4} mb={12}>
+        <Text textAlign="center" color="gray.500" mt={4}>
           Getting set up is as fast as authorizing GitHub.
         </Text>
       </SingleSection>
@@ -450,7 +439,7 @@ const IndexPage = () => {
                   fontWeight: 900,
                 }}
               >
-                Continous testing
+                Continuous testing
               </Tab>
               <Tab
                 h="auto"
@@ -495,7 +484,7 @@ const IndexPage = () => {
             <TabPanel maxW="644px" w={["644px"]}>
               <Img
                 fluid={data.continuous.childImageSharp.fluid}
-                alt="A screenshot of the meeshkan continous testing workflow with github, and the bugs it points to when clicking details."
+                alt="A screenshot of the meeshkan continuous testing workflow with github, and the bugs it points to when clicking details."
               />
             </TabPanel>
             <TabPanel maxW="644px" w={["644px"]}>
@@ -514,62 +503,123 @@ const IndexPage = () => {
         </Tabs>
       </SingleSection>
 
-      <Heading
-        as="h2"
-        fontSize={["3xl", "4xl", "5xl"]}
-        mb={6}
-        textAlign="center"
-        color="gray.900"
-        fontWeight={900}
-        letterSpacing="wide"
-        lineHeight="short"
-      >
-        How does Meeshkan work?
-      </Heading>
-      <DoubleSection
-        badge="Step 1"
-        heading="GitHub authorization"
-        text="Authorize GitHub, choose a repo to test, and choose your base configuration. All in less time than it takes to drink a cup of coffee."
-      >
-        <Img
-          fluid={data.authorize.childImageSharp.fluid}
-          alt="A screenshot of authorizing Meeshkan with Github"
-        />
-      </DoubleSection>
-
-      <DoubleSection
-        reverse={true}
-        badge="Step 2"
-        heading="Commit and continuously test"
-        text="Meeshkan slots into your natural code lifecycle by testing as you push commits to GitHub. The checks link to detailed reports."
-      >
-        <Img
-          fluid={data.test.childImageSharp.fluid}
-          alt="An illustration of the test log using pieces of the Meeshkan web app."
-        />
-      </DoubleSection>
-
-      <DoubleSection
-        badge="Step 3"
-        heading="Fix vulnerabilities in your app"
-        text="When tests fail, your configuration can block a branch from merging and direct a developer to the point of failure. In the future, we’ll provide fix suggestions."
-      >
-        <Img
-          fluid={data.vulnerability.childImageSharp.fluid}
-          alt="An illustration of a bug found using pieces of the Meeshkan web app."
-        />
-      </DoubleSection>
+      <SingleSection heading="Test automation for your GraphQL app">
+        <SimpleGrid columns={3} gridGap={8}>
+          <Box>
+            <Img
+              fluid={data.authorize.childImageSharp.fluid}
+              alt="A screenshot of authorizing Meeshkan with Github"
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 1
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              GitHub authorization and web app
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              Authorize GitHub, choose a repo to test, and choose your base
+              configuration. All in less time than it takes to drink a cup of
+              coffee.
+            </Text>
+          </Box>
+          <Box>
+            <Img
+              fluid={data.test.childImageSharp.fluid}
+              alt="An illustration of the test log using pieces of the Meeshkan web app."
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 2
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Continuous testing with every commit
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              Meeshkan naturally fits into your existing workflow by testing as
+              you push commits to GitHub. Imagine Netlify, but for automated
+              testing.
+            </Text>
+          </Box>
+          <Box>
+            <Img
+              fluid={data.vulnerability.childImageSharp.fluid}
+              alt="An illustration of a bug found using pieces of the Meeshkan web app."
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 3
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Fix vulnerabilities in your app
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              When tests fail, your configuration can block a branch from
+              merging and direct a developer to the point of failure. In the
+              future, we’ll provide fix suggestions.
+            </Text>
+          </Box>
+        </SimpleGrid>
+      </SingleSection>
 
       <Box
         as="section"
         bg="gray.900"
-        borderRadius="sm"
+        borderRadius="6px"
         my={16}
         mx="auto"
         maxW={1200}
         position="relative"
-        px={6}
-        py={12}
+        px={8}
+        py={8}
       >
         <Heading
           as="h2"
@@ -582,7 +632,8 @@ const IndexPage = () => {
           ml={[0, 0, 0, 440, 522]}
           textAlign={["center", "center", "center", "end"]}
         >
-          How would automated testing work for your organization?
+          How can Meeshkan's automated GraphQL testing save your organization
+          hours of bug fixing?
         </Heading>
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
@@ -596,7 +647,7 @@ const IndexPage = () => {
             variantColor="red"
             fontWeight={900}
             letterSpacing="wide"
-            rounded="sm"
+            borderRadius="6px"
           >
             Schedule a demo
           </Button>
