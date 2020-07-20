@@ -241,9 +241,9 @@ And there you have it, your first property-based test 🎉
 
 ### Examining the generated values
 
-By default, the property check will be run against 100 generated inputs. For many arbitraries, you can also [set a minimum or a maximum number of generated inputs](https://dubzzz.github.io/fast-check/#/1-Guides/Arbitraries). At first, running hundreds of test cases might feel excessive - but these numbers are reasonable (and even considered low) in the property-based testing realm.
+By default, the property check will be run against 100 generated inputs. For many arbitraries, you can also [set a minimum or maximum number of generated inputs](https://dubzzz.github.io/fast-check/#/1-Guides/Arbitraries). At first, running hundreds of test cases might feel excessive - but these numbers are reasonable (and even considered low) in the property-based testing realm.
 
-Going back to the example test, you can peek at the generated input values using fast-check's [`sample` function](https://dubzzz.github.io/fast-check/#/2-API/fast-check/sample_1?id=sample-function). This function takes in an arbitrary or property and the number of values to extract. It then constructs an array containing the values that would be generated in you test.
+Going back to the example test, you can peek at the generated input values using fast-check's [`sample` function](https://dubzzz.github.io/fast-check/#/2-API/fast-check/sample_1?id=sample-function). This function takes in an arbitrary or property and the number of values to extract. It then constructs an array containing the values that would be generated in your test.
 
 ```javascript
 fc.sample(fc.float(), 10)
