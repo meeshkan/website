@@ -15,7 +15,7 @@ tags:
 
 All experienced frontend developers know one thing to be true: _Users are unpredictable._ No matter how much user research you conduct or how thick the font-weight is on your input label, you can never be certain how users will interact with your product. That’s why, as the creators of the interface, we put in constraints. And to ensure that those constraints work properly, we write tests.
 
-But there's a problem with traditional unit and integration tests. 
+But there's a problem with traditional unit and integration tests.
 
 They require us to manually think of and write every scenario that our tests will cover. Not only does this take _a lot_ of time, but it also limits the test coverage to our imaginations. Whereas users, as we know, are unpredictable. So we need a way to test our software to withstand an unlimited number of potential user flows.
 
@@ -119,9 +119,9 @@ And with that, you have a passing example-based test 🎉
 
 ### Recognizing the limitations of example-based testing
 
-There are many situations where an example-based test like this would work well and be enough to cover what you need. 
+There are many situations where an example-based test like this would work well and be enough to cover what you need.
 
-But there can be downsides. 
+But there can be downsides.
 
 When you have to create every test case yourself, you're only able to test as many cases as you're willing to write. The less you write, the more likely it is that your tests will miss catching bugs in your code.
 
@@ -239,21 +239,32 @@ test("turns an input string into a number", () => {
 
 And there you have it, your first property-based test 🎉
 
+### Examining the generated values
+
 By default, the property check will be run against 100 generated inputs. For many arbitraries, you can also [set a minimum or a maximum number of generated inputs](https://dubzzz.github.io/fast-check/#/1-Guides/Arbitraries). At first, running hundreds of test cases might feel excessive - but these numbers are reasonable (and even considered low) in the property-based testing realm.
 
-Going back to the example test, if you add a `console.log(testFloat)` statement, you can peek at the _100 different generated input values_:
+Going back to the example test, you can peek at the generated input values using fast-check's [`sample` function](https://dubzzz.github.io/fast-check/#/2-API/fast-check/sample_1?id=sample-function). This function takes in an arbitrary or property and the number of values to extract. It then constructs an array containing the values that would be generated in you test.
 
+```javascript
+fc.sample(fc.float(), 10)
 ```
+
+If you wrap the previous function in a [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) statement, you'll get something like this:
+
+```bash
 7.1525
 1.3996
 0.8122
 0.0004
 3.5762
 0
-...
+5.9604
+9.5367
+0.1504
+8.3446
 ```
 
-> Note: Your numbers will likely be different - and that's ok. You also might not want to log 100 random numbers in your terminal - and that's ok too. You can take our word for it.
+> Note: Your numbers will likely be different - and that's ok. You also might not want to log a bunch of random numbers in your terminal - and that's ok too. You can take our word for it.
 
 ## Available property-based testing frameworks
 
