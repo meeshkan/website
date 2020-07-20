@@ -109,7 +109,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
             )}
           </Grid>
           <Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
-            {frontmatter.date}
+            {frontmatter.date} {frontmatter.updated ? <Text as="i" color="gray.500" fontWeight="400">Updated on {frontmatter.updated}</Text> : null}
           </Text>
           <MDXRenderer>{body}</MDXRenderer>
 
@@ -233,6 +233,7 @@ export const query = graphql`
         title
         description
         date(formatString: "Do MMM YYYY")
+        updated(formatString: "Do MMM YYYY")
         pageImage
         authors {
           avatar {
