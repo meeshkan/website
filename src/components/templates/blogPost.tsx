@@ -109,7 +109,12 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
             )}
           </Grid>
           <Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
-            {frontmatter.date} {frontmatter.updated ? <Text as="i" color="gray.500" fontWeight="400">Updated on {frontmatter.updated}</Text> : null}
+            {frontmatter.date}{" "}
+            {frontmatter.updated ? (
+              <Text ml={2} color="gray.500" fontWeight="400">
+                Updated on {frontmatter.updated}
+              </Text>
+            ) : null}
           </Text>
           <MDXRenderer>{body}</MDXRenderer>
 
