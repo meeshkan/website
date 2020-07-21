@@ -46,6 +46,7 @@ module.exports = {
         path: `${__dirname}/src/pages/docs/`,
       },
     },
+    `gatsby-transformer-gitinfo`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
