@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import darkTheme from "prism-react-renderer/themes/dracula"
+import darkTheme from "./codeTheme"
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
 import { mdx } from "@mdx-js/react"
 import * as Chakra from "@chakra-ui/core"

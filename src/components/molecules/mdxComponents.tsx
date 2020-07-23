@@ -104,8 +104,10 @@ const components = {
       my={6}
       rounded="sm"
       variant="left-accent"
+      backgroundColor="red.50"
       color="red.600"
-      fontWeight="600"
+      fontWeight="500"
+      fontStyle="italic"
       status="error"
       css={{ "> *:first-of-type": { marginTop: 0 } }}
       {...props}
