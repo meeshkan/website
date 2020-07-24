@@ -11,15 +11,19 @@ tags:
   - webdev
 ---
 
+import { Box, Flex, FormControl, Input, Button } from "@chakra-ui/core"
+
 > This post assumes that you're familiar with [APIs](https://www.programmableweb.com/api-university/what-are-apis-and-how-do-they-work) and have a basic understanding of testing. It's also based on a [presentation by Mike Solomon](https://www.youtube.com/watch?v=KFiSEQtTdpk&t=779s).
 
 Whether you’re working with the latest technologies or fighting against legacy code, you'll likely need to make a call to an API. And even more likely, this will be an API that you don't maintain.
 
-Reliance on external services is becoming more prevalent in our engineering ecosystem. As a result, we need cost-effective, secure, and reliable ways to test these services.
+Reliance on external services is becoming more prevalent in our engineering ecosystem. As a result, we need cost-effective, secure, and reliable ways to test how our app interacts with these services.
 
 In this post, we'll examine some strategies and available tools for testing apps that use third-party integrations.
 
-## Why you should test third-party integrations
+**TL;DR**: If you don't have time to write tests but want to be sure your apps are covered, [use an automated testing tool like Meeshkan](#use-a-service-like-meeshkan-to-test-your-apps).
+
+## Why should you test third-party integrations?
 
 The way we build apps has changed a lot in the past two decades. At the beginning of the 2000s, when you ran into a problem or needed a specific service, you had to build it yourself.
 
@@ -29,7 +33,7 @@ But using a third-party integration that you didn't build and don't maintain is 
 
 You need to be sure that the calls you're making to these APIs are reliable and serving the expected data. That's why you should test them.
 
-There are a few different options for how to test these external services. Let’s start with the... less desirable options.
+There are a few different options for how to test these external services. Let’s start with the most common and walk-through some of the issues they can cause.
 
 ## Three common (but misguided) ways to test APIs
 
@@ -75,7 +79,7 @@ In this case, the mock acts as a replacement for your third-party integration. T
 
 There are some libraries you can use to write your mocks. We recently published a post [comparing two JavaScript mocking libraries - nock and unmock](https://meeshkan.com/blog/unmock-vs-nock/).
 
-We’ve loved and used this approach ourselves (hell, we built [unmock](https://github.com/meeshkan/unmock-js)). There are still issues with this approach though. Namely, that you have to manually write all the tests - even if the input values are generated.
+We’ve loved and used this approach ourselves (I mean, we built [unmock](https://github.com/meeshkan/unmock-js)). There are still issues with this approach though. Namely, that you have to manually write all the tests - even if the input values are generated.
 
 This can be tedious and take a lot of time. So that’s where the second option comes in.
 
@@ -87,4 +91,39 @@ We built [Meeshkan](/) for those of you reading this post and wondering who has 
 
 All you need to do is authorize our GitHub app, choose a repository test, and set up your base configuration.
 
-Sound good? [Get in touch](/contact/).
+Sound good? Request beta access today ⬇️
+
+<FormControl
+  as="form"
+  // @ts-ignore
+  action="/success/"
+  name="request-beta-1"
+  data-netlify="true"
+  method="post"
+  data-netlify-honeypot="bot-field"
+  mt={6}
+  w="100%"
+  maxW={["full", "full", "300px"]}
+>
+  <input type="hidden" name="bot-field" />
+  <input type="hidden" name="form-name" value="request-beta-blog" />
+  <Input
+    type="email"
+    name="email"
+    aria-label="Enter your business email"
+    borderRadius="sm"
+    placeholder="Your email"
+    fontWeight={500}
+    bg="transparent"
+    mb={4}
+  />
+  <Button
+    variantColor="red"
+    borderRadius="sm"
+    fontWeight={700}
+    type="submit"
+    w="100%"
+  >
+    Request beta access
+  </Button>
+</FormControl>
