@@ -14,6 +14,7 @@ import {
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
 import Video from "../atoms/video"
+import RequestAccess from "./requestAccessForm"
 
 type DocsHeadingProps = {
   id: string
@@ -152,6 +153,7 @@ const components = {
   ),
   thematicBreak: props => <Box height={6} {...props} />,
   Video,
+  RequestAccess,
 }
 
 export default components
