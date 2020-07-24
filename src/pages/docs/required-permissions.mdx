@@ -1,3 +1,5 @@
+import { Box, Text } from "@chakra-ui/core"
+
 # GitHub App Permissions
 
 When you authorize the Meeshkan Github app, a brief dialog appears outlining the permissions we ask for. Each permission has its own name and meaning as described in their [api documentation](https://developer.github.com/v3/apps/permissions/). Below, you'll find a description of the GitHub app permissions we ask for. We'll use the same terminology as the api documentation, and we'll explain why we ask for each permission.
@@ -31,3 +33,7 @@ The Meeshkan pull request permission is deprecated and unused. It will be remove
 ## Commit statuses
 
 We use commit statuses to provide useful information directly in the GitHub UI, including on pull requests and on the front page of repositories.
+
+<Box mt={10}>
+  <Text as="i">Last updated: 5th Jun 2020</Text>
+</Box>
