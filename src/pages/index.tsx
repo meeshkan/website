@@ -22,6 +22,12 @@ import {
   Tab,
   SimpleGrid,
   Code,
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionIcon,
+  AccordionPanel,
+  Grid,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -131,23 +137,6 @@ const IndexPage = () => {
       ],
     })
 
-    // let hubspotData = JSON.stringify({
-    //   properties: [
-    //     {
-    //       property: "email",
-    //       value: values.email || values.email2,
-    //     },
-    //     {
-    //       property: "lifecycle_stage",
-    //       value: "Subscriber",
-    //     },
-    //     {
-    //       property: "lead_status",
-    //       value: "In progress",
-    //     },
-    //   ],
-    // })
-
     fetch("https://api.sendgrid.com/v3/marketing/contacts", {
       method: "PUT",
       body: sendgridData,
@@ -156,18 +145,11 @@ const IndexPage = () => {
         "content-type": "application/json",
       },
     }).then(() => setFormSubmit(true))
-
-    // fetch(
-    //   `https://api.hubapi.com/crm/v3/objects/contacts?hapikey=${process.env.GATSBY_HUBSPOT_API_KEY}`,
-    //   {
-    //     method: "POST",
-    //     body: hubspotData,
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //   }
-    // )
   }
+
+  const [showImage, setShowImage] = React.useState(
+    data.stack.childImageSharp.fluid
+  )
 
   return (
     <Layout>
@@ -187,7 +169,7 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - PRIVATE BETA
+            MEESHKAN - PUBLIC BETA
           </Badge>
         </Flex>
         <Heading
@@ -389,118 +371,156 @@ const IndexPage = () => {
       </SingleSection>
 
       <SingleSection>
-        <Tabs
-          defaultIndex={0}
-          display={["block", "block", "flex"]}
-          w="100%"
-          justifyContent="space-between"
-          align="start"
-          variant="unstyled"
-        >
-          <Box w="1/3">
+        <Grid templateColumns="33% 66%" gap={8}>
+          <Box>
             <Heading
               as="h2"
               color="gray.900"
               fontSize={["3xl", "3xl", "3xl", "4xl"]}
               fontWeight={900}
-              textAlign="center"
               mb={6}
               letterSpacing="wide"
               lineHeight="short"
             >
               Key Features
             </Heading>
-            <TabList d="block" borderBottom="none">
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
+            <Accordion allowToggle>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() => setShowImage(data.stack.childImageSharp.fluid)}
               >
-                Framework agnostic
-              </Tab>
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
-              >
-                Continuous testing
-              </Tab>
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
-              >
-                Premium audits
-              </Tab>
-              <Tab
-                h="auto"
-                w="100%"
-                fontSize="md"
-                justifyContent="start"
-                fontWeight={600}
-                rounded="sm"
-                _selected={{
-                  color: "gray.900",
-                  bg: "gray.50",
-                  fontWeight: 900,
-                }}
-              >
-                Auth flows
-              </Tab>
-            </TabList>
-          </Box>
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    REST Compatible
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Meeshkan also works for your REST APIs by generating tests
+                  with an OpenAPI specification and a little NLP. If you don't
+                  have an OpenAPI spec, we'll point you to the resources to
+                  create one.
+                </AccordionPanel>
+              </AccordionItem>
 
-          <TabPanels w="2/3">
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.stack.childImageSharp.fluid}
-                alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."
-              />
-            </TabPanel>
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.continuous.childImageSharp.fluid}
-                alt="A screenshot of the meeshkan continuous testing workflow with github, and the bugs it points to when clicking details."
-              />
-            </TabPanel>
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.premium.childImageSharp.fluid}
-                alt="A screenshot of a bug premium report"
-              />
-            </TabPanel>
-            <TabPanel maxW="644px" w={["644px"]}>
-              <Img
-                fluid={data.authSpec.childImageSharp.fluid}
-                alt="Auth specification UI. Gives a full overview of who can access and endpoint, and what is returned."
-              />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() =>
+                  setShowImage(data.continuous.childImageSharp.fluid)
+                }
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Continuous testing
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Every time you push a commit to GitHub, Meeshkan runs tests to
+                  check for breaking changes. If something does fail, our GitHub
+                  integration will notify you and details will be available in
+                  the Meeshkan webapp.
+                </AccordionPanel>
+              </AccordionItem>
+
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() => setShowImage(data.premium.childImageSharp.fluid)}
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Premium audits
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  If you're on a Pro plan or higher, Meeshkan provides weekly
+                  audit reports through the webapp. These audits include a full
+                  catalog of the bugs found, the failing request, and suggested
+                  fixes - all sorted by priority.
+                </AccordionPanel>
+              </AccordionItem>
+
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() =>
+                  setShowImage(data.authSpec.childImageSharp.fluid)
+                }
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Auth flows
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Our Business plan gives you access to a breakdown of an auth
+                  flow specification for your API. This enables you to visualize
+                  and control who has access to certain queries and test those
+                  endpoints accordingly.
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </Box>
+          <Box minW="300px">
+            <Img
+              fluid={showImage}
+              alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."
+            />
+          </Box>
+        </Grid>
       </SingleSection>
 
       <SingleSection heading="Test automation for your GraphQL app">
