@@ -155,7 +155,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         pageTitle="Home"
-        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in private beta and accepting applications."
+        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in beta and accepting applications."
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>
@@ -169,7 +169,7 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - PUBLIC BETA
+            MEESHKAN - BETA
           </Badge>
         </Flex>
         <Heading
@@ -667,7 +667,7 @@ const IndexPage = () => {
             variantColor="red"
             fontWeight={900}
             letterSpacing="wide"
-            borderRadius="6px"
+            borderRadius="sm"
           >
             Schedule a demo
           </Button>
