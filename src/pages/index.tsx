@@ -200,7 +200,7 @@ const IndexPage = () => {
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automated tests for your GraphQL APIs dynamically generated
+          Automated tests for your GraphQL APIs, dynamically generated
         </Heading>
         <Text
           textAlign="center"
@@ -311,7 +311,7 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Keeping up with an ever evolving API is a full-time job"
+        heading="Keeping up with an ever-evolving API is a full-time job"
         text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
         <Box w={460} h={300} backgroundColor="gray.50" />
@@ -320,10 +320,10 @@ const IndexPage = () => {
 
       <DoubleSection
         reverse={true}
-        heading="Test generation falls short by focusing on quanity of ‘bugs’ rather than"
+        heading="Test generation falls short by focusing on the quanity of ‘bugs’ rather than"
         em="quality"
         anchor="#quality"
-        text="Code coverage metrics aren't meaningful without the quality context, of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
+        text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
       >
         <Box w={460} h={300} backgroundColor="gray.50" />
         {/* <Img
@@ -334,7 +334,7 @@ const IndexPage = () => {
 
       <SingleSection
         heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
-        text="Fusing together your existing schema introspection, property-based testing and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
+        text="By combining your existing schema introspection, property-based testing, and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
       >
         <Flex
           as="form"
@@ -531,12 +531,12 @@ const IndexPage = () => {
               letterSpacing="wide"
               lineHeight="short"
             >
-              GitHub authorization and web app
+              GitHub authorization via our webapp
             </Heading>
             <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
-              Authorize GitHub, choose a repo to test, and choose your base
-              configuration. All in less time than it takes to drink a cup of
-              coffee.
+              Authorize GitHub, choose a repository to test, and set up your
+              base configuration. All in less time than it takes to drink a cup
+              of coffee.
             </Text>
           </Box>
           <Box>
@@ -603,8 +603,8 @@ const IndexPage = () => {
             </Heading>
             <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
               When tests fail, your configuration can block a branch from
-              merging and direct a developer to the point of failure. In the
-              future, we’ll provide fix suggestions.
+              merging and direct you to the point of failure. In the future,
+              we’ll provide fix suggestions.
             </Text>
           </Box>
         </SimpleGrid>
