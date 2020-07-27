@@ -31,7 +31,7 @@ const SideNavContainer = props => (
     left={0}
     width="100%"
     height="100%"
-    top={12}
+    top="3.5rem"
     right={0}
     {...props}
   />
