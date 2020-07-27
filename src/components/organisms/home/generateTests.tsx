@@ -11,12 +11,15 @@ import {
   Flex,
   ListItem,
   List,
-  DarkMode,
+  Collapse,
 } from "@chakra-ui/core"
 import Codeblock from "../../molecules/codeBlock"
 
 const GenerateTests = () => {
+  // Generated tests
   const [isOpen, setIsOpen] = useState(false)
+  // Accordion collapse
+  const [show, setShow] = React.useState(true)
 
   const variants = {
     open: {
@@ -61,7 +64,7 @@ const GenerateTests = () => {
         <Stack
           isInline
           alignItems="center"
-          p={4}
+          p={3}
           spacing={4}
           backgroundColor="white"
           borderRadius="2px"
@@ -114,11 +117,13 @@ const GenerateTests = () => {
         </Stack>
 
         <Stack
-          p={4}
-          spacing={4}
+          px={3}
+          pt={3}
+          spacing={3}
           backgroundColor="white"
           borderRadius="2px"
           justifyContent="space-between"
+          alignItems="center"
         >
           <Flex justify="space-between" w="100%">
             <Flex alignItems="center">
@@ -129,11 +134,17 @@ const GenerateTests = () => {
                 /bank/graphql
               </Text>
             </Flex>
-            <Icon name="chevron-down" color="gray.500" />
+            <IconButton
+              aria-label="toggle the test result"
+              icon="chevron-down"
+              size="sm"
+              variant="ghost"
+              onClick={() => setShow(!show)}
+            />
           </Flex>
-
-          <Codeblock className="graphql" copyButton={false}>
-            {`// request body
+          <Collapse isOpen={show} startingHeight={0}>
+            <Codeblock className="graphql" copyButton={false}>
+              {`// request body
 mutation {
   authenticateAsClient(
     email: "mike@meeshkan.com",
@@ -142,10 +153,10 @@ mutation {
     id
   }
 }`}
-          </Codeblock>
+            </Codeblock>
 
-          <Codeblock className="json" copyButton={false}>
-            {`// response body
+            <Codeblock className="json" copyButton={false}>
+              {`// response body
 {
   "data": {
     "authenticateAsClient": {
@@ -153,7 +164,8 @@ mutation {
     }
   }
 }`}
-          </Codeblock>
+            </Codeblock>
+          </Collapse>
         </Stack>
         <Stack justify="center" my={4}>
           <Text color="white" textAlign="center">

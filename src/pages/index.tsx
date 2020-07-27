@@ -32,6 +32,7 @@ import Layout from "../components/templates/layout"
 import { Card } from "../components/atoms/card"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
+import PrioritizeTests from "../components/organisms/home/prioritizeTests"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -301,11 +302,7 @@ const IndexPage = () => {
         anchor="#quality"
         text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
       >
-        <Box w={460} h={300} backgroundColor="gray.50" />
-        {/* <Img
-          fluid={data.quality.childImageSharp.fluid}
-          alt="Shows a piece of the auth spec in the Meeshkan UI, stressing our focus on the quality of your app."
-        /> */}
+        <PrioritizeTests />
       </DoubleSection>
 
       <SingleSection
