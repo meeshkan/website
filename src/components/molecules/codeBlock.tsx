@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import darkTheme from "prism-react-renderer/themes/dracula"
+import meeshkanTheme from "./codeTheme"
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
 import { mdx } from "@mdx-js/react"
 import * as Chakra from "@chakra-ui/core"
@@ -100,7 +100,7 @@ const CodeBlock = ({
   const { onCopy, hasCopied } = useClipboard(editorCode)
 
   const liveProviderProps = {
-    theme: darkTheme,
+    theme: meeshkanTheme,
     language,
     code: editorCode,
     transformCode: code =>
@@ -126,6 +126,7 @@ const CodeBlock = ({
           <LiveEditor
             onChange={handleCodeChange}
             padding={20}
+            // @ts-ignore
             style={liveEditorStyle}
           />
           <CopyButton onClick={onCopy}>
@@ -133,7 +134,10 @@ const CodeBlock = ({
           </CopyButton>
           <EditableNotice />
         </Box>
-        <LiveError style={liveErrorStyle} />
+        <LiveError
+          // @ts-ignore
+          style={liveErrorStyle}
+        />
       </LiveProvider>
     )
   }

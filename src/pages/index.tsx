@@ -37,6 +37,7 @@ import Layout from "../components/templates/layout"
 import { Card } from "../components/atoms/card"
 import TestSnippet from "../components/organisms/home/testSnippet"
 import { useForm } from "react-hook-form"
+import { motion } from "framer-motion"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -150,6 +151,8 @@ const IndexPage = () => {
   const [showImage, setShowImage] = React.useState(
     data.stack.childImageSharp.fluid
   )
+
+  const MotionBox = motion.custom(Box)
 
   return (
     <Layout>
@@ -296,8 +299,9 @@ const IndexPage = () => {
         heading="Keeping up with an ever-evolving API is a full-time job"
         text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
-        <Box w={460} h={300} backgroundColor="gray.50" />
-        {/* <TestSnippet /> */}
+        <MotionBox w={460} h={300} backgroundColor="gray.50">
+          <TestSnippet />
+        </MotionBox>
       </DoubleSection>
 
       <DoubleSection
