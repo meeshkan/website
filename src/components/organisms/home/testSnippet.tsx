@@ -7,7 +7,7 @@ export const liveEditorStyle = {
   fontFamily: "Fira Code, monospace",
   overflow: "auto",
   borderRadius: 4,
-  maxHeight: 300,
+  maxHeight: 380,
 }
 
 const TestSnippet = () => {

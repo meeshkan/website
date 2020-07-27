@@ -105,15 +105,15 @@ const iconPaths = {
   xmark: {
     path: (
       <path
-        d="M6 12L9 9M9 9L12 6M9 9L12 12M9 9L6 6M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
-        stroke="currentColor"
+        d="M 0 14 L 14 0 M 14 14 L 0 0"
         fill="none"
-        strokeWidth="1.5"
+        strokeWidth="2"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     ),
-    viewBox: "0 0 18 18",
+    viewBox: "0 0 14 14",
   },
 }
 
