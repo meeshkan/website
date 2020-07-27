@@ -3,7 +3,7 @@ title: Property-based testing for JavaScript developers
 description: This guide helps you write your first property-based test in JavaScript using the fast-check framework.
 slug: property-based-testing-javascript
 date: 2020-07-17
-updated: 2020-07-20
+updated: 2020-07-27
 authors: ["carolyn"]
 published: true
 tags:
@@ -164,6 +164,8 @@ Received: NaN
 Turns out the `getNumber` function doesn't work as expected when the input string contains a value or specific characters that `Number()` doesn't recognize. The same error occurs with inputs like `twenty` or `$50`. Maybe you already knew that, but maybe you would've never known that without a specific test case.
 
 🐛🚨 This is one example of how property-based testing can be used to find bugs in your software. Once you realize that any string with a character that `Number()` doesn't recognize will return `NaN` - you might reconsider how you built that input. Adding the attribute `type="number"` to the input restricts the possible values that users can enter and, hopefully, helps reduce bugs.
+
+> In an attempt to minimize confusion, the rest of this post will focus on testing floating-point numbers. If you want to see a solution for the `NaN` error missed in the previous example-based test, check out our [follow-up tutorial](/blog/property-based-testing-bugs).
 
 ## Choosing which properties to test for
 
