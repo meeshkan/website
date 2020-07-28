@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import TestSnippet from "./testSnippet"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
 import {
   Button,
   Box,
@@ -20,8 +20,6 @@ const GenerateTests = () => {
   const [isOpen, setIsOpen] = useState(false)
   // Accordion collapse
   const [show, setShow] = React.useState(true)
-
-  const shouldReduceMotion = useReducedMotion()
 
   const variants = {
     open: {

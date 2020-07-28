@@ -8,16 +8,18 @@ import {
   IconButton,
   DarkMode,
 } from "@chakra-ui/core"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
-const Test = ({ success, testCase, priority, initial, animate, colorMode }) => {
+const Test = ({ success, testCase, priority, animate, colorMode }) => {
   const MotionBox = motion.custom(Box)
+
+  const shouldReduceMotion = useReducedMotion()
 
   const transition = {
     duration: 2,
     ease: "easeInOut",
     times: [0, 0.2, 0.5, 0.8, 1],
-    loop: Infinity,
+    loop: shouldReduceMotion ? null : Infinity,
     repeatDelay: 1,
   }
 
@@ -166,7 +168,6 @@ const PrioritizeTests = () => {
             success={test.success}
             testCase={test.testCase}
             priority={test.priority}
-            initial={test.initial}
             animate={test.animate}
             colorMode={colorMode}
           />
