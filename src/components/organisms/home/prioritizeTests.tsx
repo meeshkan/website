@@ -106,7 +106,7 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
 }
 
 const PrioritizeTests = () => {
-  const [colorMode, setColorMode] = useState("dark" || "light")
+  const [colorMode, setColorMode] = useState("light" || "dark")
   const tests = [
     {
       success: false,
