@@ -52,6 +52,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
             textAlign="center"
             mb={12}
             color="gray.900"
+            fontWeight={900}
           >
             {frontmatter.title}
           </Heading>

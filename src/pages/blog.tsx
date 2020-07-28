@@ -40,6 +40,7 @@ const BlogHome = ({ data }) => {
               body={frontmatter.description}
               link={`/blog/${frontmatter.slug}/`}
               label={`Read the blog: ${frontmatter.title}.`}
+              backgroundColor="gray.50"
             >
               <Flex
                 align="center"
