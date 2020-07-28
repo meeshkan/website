@@ -127,7 +127,7 @@ export function Footer() {
         <Divider borderColor="gray.300" mb={4} mt={4} />
         <Flex justifyContent="space-between" align="center">
           <GatsbyLink to="/" aria-label="Meeshkan homepage">
-            <Icon name="Logo" color="red.500" size="6" w="auto" />
+            <Icon name="Logo" color="gray.900" size="6" w="auto" />
           </GatsbyLink>
           <Stack isInline d={["none", "flex"]}>
             <IconButton

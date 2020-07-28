@@ -173,7 +173,7 @@ const IndexPage = () => {
           as="h1"
           fontSize={["3xl", "4xl", "5xl"]}
           mb={6}
-          textAlign="center"
+          textAlign={["left", "left", "center"]}
           color="gray.900"
           fontWeight={900}
           letterSpacing="wide"
@@ -182,8 +182,8 @@ const IndexPage = () => {
           Automated tests for your GraphQL APIs, dynamically generated
         </Heading>
         <Text
-          textAlign="center"
-          fontSize="2xl"
+          textAlign={["left", "left", "center"]}
+          fontSize={["lg", "xl", "2xl"]}
           lineHeight="short"
           mb={6}
           color="gray.700"
@@ -207,7 +207,7 @@ const IndexPage = () => {
             Create a free account
           </Button>
         </Flex>
-        <Box maxW="750px" mx="auto">
+        {/* <Box maxW="750px" mx="auto">
           <Card>
             <Flex
               justify={["center", "space-between"]}
@@ -256,7 +256,7 @@ const IndexPage = () => {
               </Modal>
             </Flex>
           </Card>
-        </Box>
+        </Box> */}
       </SingleSection>
 
       <DoubleSection
@@ -267,7 +267,7 @@ const IndexPage = () => {
       </DoubleSection>
 
       <DoubleSection
-        // reverse={true}
+        reverse={true}
         heading="Test generation falls short by focusing on the quanity of ‘bugs’ rather than"
         em="quality"
         anchor="#quality"
