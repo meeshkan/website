@@ -7,13 +7,11 @@ import {
   Flex,
   Icon,
   Button,
-  Input,
-  FormControl,
   Link as ChakraLink,
   Code,
-  Badge,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
+import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import { Link } from "gatsby"
@@ -75,38 +73,18 @@ const PricingCard = ({
     </Stack>
 
     {hasCTA && (
-      <FormControl
-        as="form"
-        // @ts-ignore
-        action="/success/"
-        name="request-alpha-1"
-        data-netlify="true"
-        method="post"
-        data-netlify-honeypot="bot-field"
+      <Button
+        as={UniversalLink}
+        href="https://app.meeshkan.com"
+        aria-label="Create a free account on Meeshkan."
+        variantColor="red"
+        borderRadius="sm"
+        fontWeight={700}
+        w="full"
         mt={8}
       >
-        <input type="hidden" name="bot-field" />
-        <input type="hidden" name="form-name" value="pricing-request-alpha" />
-        <Input
-          type="email"
-          name="email"
-          aria-label="Enter your business email"
-          borderRadius="sm"
-          placeholder="Your email"
-          fontWeight={500}
-          bg="transparent"
-          mb={4}
-        />
-        <Button
-          variantColor="red"
-          borderRadius="sm"
-          fontWeight={700}
-          type="submit"
-          w="full"
-        >
-          Request access
-        </Button>
-      </FormControl>
+        Create a free account
+      </Button>
     )}
   </Card>
 )
