@@ -75,38 +75,18 @@ const PricingCard = ({
     </Stack>
 
     {hasCTA && (
-      <FormControl
-        as="form"
-        // @ts-ignore
-        action="/success/"
-        name="request-alpha-1"
-        data-netlify="true"
-        method="post"
-        data-netlify-honeypot="bot-field"
+      <Button
+        as="a"
+        href="https://app.meeshkan.com"
+        variantColor="red"
+        borderRadius="sm"
+        fontWeight={700}
+        type="submit"
+        w="full"
         mt={8}
       >
-        <input type="hidden" name="bot-field" />
-        <input type="hidden" name="form-name" value="pricing-request-alpha" />
-        <Input
-          type="email"
-          name="email"
-          aria-label="Enter your business email"
-          borderRadius="sm"
-          placeholder="Your email"
-          fontWeight={500}
-          bg="transparent"
-          mb={4}
-        />
-        <Button
-          variantColor="red"
-          borderRadius="sm"
-          fontWeight={700}
-          type="submit"
-          w="full"
-        >
-          Request access
-        </Button>
-      </FormControl>
+        Create a free account
+      </Button>
     )}
   </Card>
 )
