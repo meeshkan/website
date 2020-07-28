@@ -27,7 +27,7 @@ export const Card = ({
           // @ts-ignore
           to={link}
           aria-label={label}
-          borderRadius="sm"
+          borderRadius="md"
           backgroundColor={backgroundColor ? backgroundColor : `gray.50`}
           p={6}
           position="relative"
