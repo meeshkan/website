@@ -7,13 +7,11 @@ import {
   Flex,
   Icon,
   Button,
-  Input,
-  FormControl,
   Link as ChakraLink,
   Code,
-  Badge,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
+import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import { Link } from "gatsby"
@@ -76,12 +74,12 @@ const PricingCard = ({
 
     {hasCTA && (
       <Button
-        as="a"
+        as={UniversalLink}
         href="https://app.meeshkan.com"
+        aria-label="Create a free account on Meeshkan."
         variantColor="red"
         borderRadius="sm"
         fontWeight={700}
-        type="submit"
         w="full"
         mt={8}
       >
