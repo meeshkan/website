@@ -286,7 +286,7 @@ const IndexPage = () => {
             as={ChakraLink}
             // @ts-ignore
             href="https://app.meeshkan.com"
-            aria-label="Schedule a demo with the Meeshkan team."
+            aria-label="Create a free Meeshkan account."
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
