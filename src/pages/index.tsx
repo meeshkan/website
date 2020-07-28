@@ -30,6 +30,7 @@ import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
 import { Card } from "../components/atoms/card"
+import { UniversalLink } from "../components/atoms/UniversalLink"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import PrioritizeTests from "../components/organisms/home/prioritizeTests"
@@ -193,51 +194,17 @@ const IndexPage = () => {
           we test critical flows, guaranteed to give you confidence in your app.
           Every commit.
         </Text>
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
-          direction={["column", "column", "row"]}
-          justify="center"
-          alignItems="flex-end"
-          mb={12}
-        >
-          <input
-            type="hidden"
-            name="formName"
-            value="request-beta-1"
-            ref={register}
-          />
-          <FormControl
-            isRequired
-            mr={[0, 0, 4]}
-            mb={[4, 4, 0]}
-            w="100%"
-            maxW={["full", "full", "400px"]}
-          >
-            <FormLabel htmlFor="email" fontWeight={700}>
-              Email
-            </FormLabel>
-            <Input
-              type="email"
-              name="email"
-              ref={register}
-              aria-label="Enter your business email"
-              borderRadius="sm"
-              placeholder="Your email"
-              isDisabled={formSubmit}
-              fontWeight={500}
-            />
-          </FormControl>
+        <Flex justify="center" mb={12}>
           <Button
+            as={ChakraLink}
+            href="https://app.meeshkan.com"
+            aria-label="Create a free Meeshkan account."
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
-            type="submit"
-            isLoading={formState.isSubmitting}
-            isDisabled={formSubmit}
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request access"}
+            Create a free account
           </Button>
         </Flex>
         <Box maxW="750px" mx="auto">
@@ -313,51 +280,17 @@ const IndexPage = () => {
         heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
         text="By combining your existing schema introspection, property-based testing, and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
       >
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
-          direction={["column", "column", "row"]}
-          justify="center"
-          alignItems="flex-end"
-          mb={12}
-        >
-          <input
-            type="hidden"
-            name="formName"
-            ref={register}
-            value="request-beta-2"
-          />
-          <FormControl
-            isRequired
-            mr={[0, 0, 4]}
-            mb={[4, 4, 0]}
-            w="100%"
-            maxW={["full", "full", "400px"]}
-          >
-            <FormLabel htmlFor="email" fontWeight={700}>
-              Email
-            </FormLabel>
-            <Input
-              type="email"
-              name="email2"
-              ref={register}
-              aria-label="Enter your business email"
-              borderRadius="sm"
-              placeholder="Your email"
-              isDisabled={formSubmit}
-              fontWeight={500}
-            />
-          </FormControl>
+        <Flex justify="center" mb={12}>
           <Button
+            as={ChakraLink}
+            href="https://app.meeshkan.com"
+            aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
-            isLoading={formState.isSubmitting}
-            isDisabled={formSubmit}
-            type="submit"
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request access"}
+            Create a free account
           </Button>
         </Flex>
         <Text textAlign="center" color="gray.500" mt={4}>

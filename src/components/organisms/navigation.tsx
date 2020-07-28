@@ -14,10 +14,41 @@ import {
   DrawerFooter,
 } from "@chakra-ui/core"
 import NavLink from "../atoms/navLink"
+import { UniversalLink } from "../atoms/UniversalLink"
 
 export function Navigation() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
+  const signUpLink = (
+    <Button
+      as={UniversalLink}
+      href="https://app.meeshkan.com"
+      aria-label="Log in to the Meeshkan webapp"
+      variantColor="red"
+      borderRadius="sm"
+      fontWeight={600}
+      ml={8}
+      w={["100%", "100%", "auto"]}
+    >
+      Sign up
+    </Button>
+  )
+  const logInLink = (
+    <Button
+      as={UniversalLink}
+      href="https://app.meeshkan.com"
+      aria-label="Log in to the Meeshkan webapp"
+      variant="ghost"
+      color="gray.500"
+      fontWeight={600}
+      lineHeight="normal"
+      rounded="sm"
+      _active={{ color: "gray.900", fontWeight: 900 }}
+      _focus={{ color: "gray.900", fontWeight: 900 }}
+    >
+      Log in <Icon name="arrow-forward" ml={2} />
+    </Button>
+  )
   return (
     <Stack
       as="nav"
@@ -42,6 +73,8 @@ export function Navigation() {
         <NavLink text="Pricing" path="/pricing/" />
         <NavLink text="Blog" path="/blog/" />
         <NavLink text="Docs" path="/docs/" />
+        {signUpLink}
+        {logInLink}
       </Stack>
 
       {/* Mobile */}
@@ -76,8 +109,10 @@ export function Navigation() {
           <DrawerBody py={6}>
             <Stack align="center">
               <NavLink text="Pricing" path="/pricing/" />
-              <NavLink text="Blog" path="/blog/" />
+              <NavLink text="Test" path="/blog/" />
               <NavLink text="Docs" path="/docs/" />
+              {signUpLink}
+              {logInLink}
             </Stack>
           </DrawerBody>
           <DrawerFooter d="flex" justifyContent="center">
