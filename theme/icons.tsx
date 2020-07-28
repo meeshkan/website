@@ -92,15 +92,15 @@ const iconPaths = {
   checkmark: {
     path: (
       <path
-        d="M12 6L8 12L6 9.95604M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+        d="M16.3198 1.28003L6.94482 15.28L1.31982 10.28"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
       />
     ),
-    viewBox: "0 0 18 18",
+    viewBox: "0 0 18 16",
   },
   xmark: {
     path: (

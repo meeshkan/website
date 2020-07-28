@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import TestSnippet from "./testSnippet"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import {
   Button,
   Box,
@@ -21,12 +21,12 @@ const GenerateTests = () => {
   // Accordion collapse
   const [show, setShow] = React.useState(true)
 
+  const shouldReduceMotion = useReducedMotion()
+
   const variants = {
     open: {
       opacity: 1,
-      y: 0,
-      height: 380,
-      width: 460,
+      x: "0%",
       transition: {
         type: "spring",
         stiffness: 500,
@@ -36,7 +36,7 @@ const GenerateTests = () => {
     },
     closed: {
       opacity: 0,
-      y: "-100%",
+      x: "-100%",
       transition: {
         type: "spring",
         stiffness: 500,
@@ -47,6 +47,7 @@ const GenerateTests = () => {
   }
 
   const MotionBox = motion.custom(Box)
+  const MotionButton = motion.custom(Button)
 
   return (
     <>
@@ -56,6 +57,8 @@ const GenerateTests = () => {
         backgroundColor="blackAlpha.300"
         position="absolute"
         zIndex={10}
+        w={460}
+        h={380}
         p={4}
         borderRadius="md"
         style={{ backdropFilter: "blur(6px)" }}
@@ -80,7 +83,7 @@ const GenerateTests = () => {
               alignItems="center"
               justifyContent="center"
             >
-              <Icon name="xmark" color="red.700" />
+              <Icon name="xmark" color="red.500" />
             </Box>
             <Text fontSize="sm" color="gray.500" fontWeight={600}>
               A user is only authorized to see their own data
@@ -187,16 +190,26 @@ mutation {
       </MotionBox>
       <Box w={460} h={380} d="flex" alignItems="center">
         <TestSnippet />
-        <Button
+        <MotionButton
           ml={-20}
           variantColor="red"
           borderRadius="sm"
           fontWeight={900}
           onClick={() => setIsOpen(!isOpen)}
           _focus={{ outline: "none" }}
+          animate={{
+            scale: [1, 1.1, 1, 1.1, 1],
+          }}
+          // @ts-ignore
+          transition={{
+            duration: 5,
+            ease: "easeInOut",
+            times: [0, 0.25, 0.5, 0.75, 1],
+            delay: 10,
+          }}
         >
           {`Generate tests ->`}
-        </Button>
+        </MotionButton>
       </Box>
     </>
   )

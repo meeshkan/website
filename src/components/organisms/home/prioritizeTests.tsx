@@ -1,8 +1,16 @@
-import React from "react"
-import { Stack, Box, Text, Flex, Icon } from "@chakra-ui/core"
+import React, { useState } from "react"
+import {
+  Stack,
+  Box,
+  Text,
+  Flex,
+  Icon,
+  IconButton,
+  DarkMode,
+} from "@chakra-ui/core"
 import { motion } from "framer-motion"
 
-const Test = ({ success, testCase, priority, animate }) => {
+const Test = ({ success, testCase, priority, initial, animate, colorMode }) => {
   const MotionBox = motion.custom(Box)
 
   const transition = {
@@ -12,6 +20,20 @@ const Test = ({ success, testCase, priority, animate }) => {
     loop: Infinity,
     repeatDelay: 1,
   }
+
+  const mark = {
+    light: {
+      success: { stroke: "cyan.500", background: "cyan.50" },
+      failure: { stroke: "red.500", background: "red.50" },
+      text: { cyan: "cyan.500", yellow: "yellow.500", red: "red.500" },
+    },
+    dark: {
+      success: { stroke: "cyan.100", background: "rgba(51, 204, 174, 0.25)" },
+      failure: { stroke: "red.100", background: "rgba(220, 24, 83, 0.25)" },
+      text: { cyan: "cyan.200", yellow: "yellow.200", red: "red.200" },
+    },
+  }
+
   return (
     <MotionBox
       w="100%"
@@ -19,41 +41,77 @@ const Test = ({ success, testCase, priority, animate }) => {
       mb={4}
       mx="auto"
       borderRadius="md"
+      initial={{ y: 0, scale: 1, opacity: 1 }}
       animate={animate}
       // @ts-expect-error
       transition={transition}
-      backgroundColor="gray.900"
+      backgroundColor={colorMode === "light" ? "white" : "gray.900"}
       d="flex"
       alignItems="center"
+      justifyContent="space-between"
+      boxShadow="0px 8px 24px rgba(149, 157, 165, 0.2)"
     >
-      <Box
-        size={8}
-        mr={4}
-        rounded="full"
-        backgroundColor="red.900"
-        d="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Icon name="xmark" color="red.50" />
-      </Box>
-      <Text color="white" fontSize="sm" fontWeight={600}>
-        {testCase}
-      </Text>
+      <Flex alignItems="center">
+        <Box
+          size={8}
+          mr={4}
+          rounded="full"
+          backgroundColor={
+            success
+              ? mark[colorMode].success.background
+              : mark[colorMode].failure.background
+          }
+          d="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Icon
+            name={success ? "checkmark" : "xmark"}
+            color={
+              success
+                ? mark[colorMode].success.stroke
+                : mark[colorMode].failure.stroke
+            }
+          />
+        </Box>
+        <Text
+          color={colorMode === "light" ? "gray.700" : "gray.200"}
+          fontSize="sm"
+          fontWeight={600}
+        >
+          {testCase}
+        </Text>
+      </Flex>
+      {priority && (
+        <Text
+          color={
+            priority >= 4
+              ? mark[colorMode].text.cyan
+              : priority >= 3
+              ? mark[colorMode].text.yellow
+              : priority >= 0
+              ? mark[colorMode].text.red
+              : "gray.500"
+          }
+          fontSize="sm"
+          fontWeight={900}
+        >
+          {`P` + priority}
+        </Text>
+      )}
     </MotionBox>
   )
 }
 
 const PrioritizeTests = () => {
+  const [colorMode, setColorMode] = useState("dark" || "light")
   const tests = [
     {
-      success: true,
-      testCase: "User cannot send negative amt. of currency",
+      success: false,
+      testCase: "User cannot send negative value of currency",
       priority: 3,
       animate: {
-        // scale: [1, 2, 2, 1, 1],
-        // rotate: [0, -2, 2, -1, 0],
-        // borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+        y: [0, 0, 74, 74, 74],
       },
     },
     {
@@ -61,9 +119,34 @@ const PrioritizeTests = () => {
       testCase: "User can only see their own data",
       priority: 1,
       animate: {
-        // scale: [1, 1.2, 2, 1, 1],
-        // rotate: [0, 2, -1, 1, 0],
-        // borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+        y: [0, 0, -64, -64, -64],
+      },
+    },
+    {
+      success: true,
+      testCase: "User authenticated as root can remove client",
+      priority: 5,
+      animate: {
+        y: [0, 0, 10, 10, 10],
+        opacity: [1, 1, 1, 0.5, 0.5],
+      },
+    },
+    {
+      success: true,
+      testCase: "User authenticated can send money to a client.",
+      priority: 5,
+      animate: {
+        y: [0, 0, 10, 10, 10],
+        opacity: [1, 1, 1, 0.5, 0.5],
+      },
+    },
+    {
+      success: false,
+      testCase: "Only root user authenticated can view all client data",
+      priority: 1,
+      animate: {
+        y: [0, -180, -246, -246, -246],
+        scale: [1, 1, 0.95, 0.95, 0.95],
       },
     },
   ]
@@ -72,7 +155,7 @@ const PrioritizeTests = () => {
       <Stack
         w={460}
         h={380}
-        backgroundColor="gray.800"
+        backgroundColor={colorMode === "light" ? "gray.50" : "gray.800"}
         borderRadius="md"
         p={4}
         spacing={4}
@@ -83,9 +166,28 @@ const PrioritizeTests = () => {
             success={test.success}
             testCase={test.testCase}
             priority={test.priority}
+            initial={test.initial}
             animate={test.animate}
+            colorMode={colorMode}
           />
         ))}
+        <DarkMode>
+          <IconButton
+            borderRadius="sm"
+            aria-label="color mode icon"
+            icon={colorMode === "light" ? "moon" : "sun"}
+            color={colorMode === "light" ? "gray.900" : "white"}
+            backgroundColor={colorMode === "light" ? "white" : "gray.900"}
+            _hover={
+              colorMode === "light"
+                ? { backgroundColor: "gray.100" }
+                : { backgroundColor: "gray.700" }
+            }
+            onClick={() => {
+              setColorMode(colorMode === "light" ? "dark" : "light")
+            }}
+          />
+        </DarkMode>
       </Stack>
     </>
   )
