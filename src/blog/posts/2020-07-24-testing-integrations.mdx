@@ -11,7 +11,7 @@ tags:
   - webdev
 ---
 
-import { Box, Flex, FormControl, Input, Button } from "@chakra-ui/core"
+import { Button } from "@chakra-ui/core"
 
 > This post assumes that you're familiar with [APIs](https://www.programmableweb.com/api-university/what-are-apis-and-how-do-they-work) and have a basic understanding of testing. It's also based on a [presentation by Mike Solomon](https://www.youtube.com/watch?v=KFiSEQtTdpk&t=779s).
 
@@ -91,6 +91,17 @@ We built [Meeshkan](/) for those of you reading this post and wondering who has 
 
 All you need to do is authorize our GitHub app, choose a repository test, and set up your base configuration.
 
-Sound good? Request beta access today ⬇️
+Sound good? Create an account today ⬇️
 
-<RequestAccess />
+<Button
+  as="a"
+  mt={4}
+  href="https://app.meeshkan.com"
+  aria-label="Create a free Meeshkan account."
+  variantColor="red"
+  borderRadius="sm"
+  fontWeight={900}
+  w={["100%", "100%", "auto"]}
+>
+  Create a free account
+</Button>
