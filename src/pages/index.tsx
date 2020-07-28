@@ -269,7 +269,7 @@ const IndexPage = () => {
 
       <DoubleSection
         reverse={true}
-        heading="Test generation falls short by focusing on the quanity of ‘bugs’ rather than"
+        heading="Test generation falls short by focusing on the quantity of ‘bugs’ rather than"
         em="quality"
         anchor="#quality"
         text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
