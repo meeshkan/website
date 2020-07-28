@@ -24,10 +24,12 @@ export function Navigation() {
       isInline
       justify="space-between"
       align="center"
-      py={4}
-      pos="sticky"
+      p={4}
+      pos="fixed"
       zIndex={1000}
       top={0}
+      right={0}
+      left={0}
       backgroundColor="whiteAlpha.800"
       style={{ backdropFilter: "blur(4px)" }}
       borderBottom="1px solid"
@@ -62,18 +64,18 @@ export function Navigation() {
         finalFocusRef={btnRef}
         size="sm"
       >
-        <DrawerContent
-          shadow="none"
-          backgroundColor="whiteAlpha.900"
-          style={{ backdropFilter: "blur(4px)" }}
-        >
-          <DrawerCloseButton onClick={onClose} />
-          <DrawerHeader>
+        <DrawerContent shadow="none">
+          <DrawerCloseButton size="md" onClick={onClose} />
+          <DrawerHeader p={4}>
             <Link to="/">
-              <Icon name="Logo" w={32} />
+              <Icon name="Logo" h={6} w="auto" />
             </Link>
           </DrawerHeader>
-          <DrawerBody py={6}>
+          <DrawerBody
+            py={6}
+            backgroundColor="whiteAlpha.300"
+            style={{ backdropFilter: "blur(4px)" }}
+          >
             <Stack align="center">
               <NavLink text="Pricing" path="/pricing/" />
               <NavLink text="Blog" path="/blog/" />
@@ -84,7 +86,6 @@ export function Navigation() {
             <Stack isInline>
               <IconButton
                 as={Link}
-                variant="ghost"
                 isExternal
                 href="https://twitter.com/meeshkan"
                 // @ts-ignore
@@ -94,7 +95,6 @@ export function Navigation() {
               />
               <IconButton
                 as={Link}
-                variant="ghost"
                 isExternal
                 href="https://www.linkedin.com/company/meeshkan/"
                 // @ts-ignore
@@ -104,7 +104,6 @@ export function Navigation() {
               />
               <IconButton
                 as={Link}
-                variant="ghost"
                 isExternal
                 href="https://github.com/meeshkan"
                 // @ts-ignore

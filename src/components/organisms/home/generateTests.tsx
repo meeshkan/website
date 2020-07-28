@@ -189,12 +189,12 @@ mutation {
       <Box
         w={[300, 360, 460]}
         h={380}
-        d={["block", "flex"]}
+        d={["block", "block", "flex"]}
         alignItems="center"
       >
         <TestSnippet />
         <MotionButton
-          ml={[0, -20]}
+          ml={[0, 0, -20]}
           mt={[4, 4, 0]}
           variantColor="red"
           borderRadius="sm"

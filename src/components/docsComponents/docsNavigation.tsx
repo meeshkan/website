@@ -40,7 +40,7 @@ const DocsNavigation = () => {
         aria-label="Meeshkan home"
         style={{ display: "flex", alignContent: "center" }}
       >
-        <Icon name="Logo" color="red.500" h={6} w="auto" />
+        <Icon name="Logo" color="gray.900" h={6} w="auto" />
         <Link to="/docs/">
           <Code ml={3} variantColor="cyan" fontWeight={900}>
             Docs
