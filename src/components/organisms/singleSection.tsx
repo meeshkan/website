@@ -16,12 +16,12 @@ export const SingleSection = ({
   text,
   props,
 }: SectionProps) => (
-  <Box as="section" maxW="1000px" mx="auto" py={12} {...props}>
+  <Box as="section" maxW="1000px" mx="auto" py={16} {...props}>
     {heading ? (
       <Heading
         as="h2"
         color="gray.900"
-        fontSize="3xl"
+        fontSize={["3xl", "3xl", "3xl", "4xl"]}
         fontWeight={900}
         textAlign="center"
         mb={6}

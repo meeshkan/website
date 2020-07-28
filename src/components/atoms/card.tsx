@@ -8,9 +8,17 @@ type CardProps = {
   body?: string
   link?: string
   label?: string
+  backgroundColor?: string
 }
 
-export const Card = ({ children, heading, body, link, label }: CardProps) => {
+export const Card = ({
+  children,
+  heading,
+  body,
+  link,
+  label,
+  backgroundColor = "white",
+}: CardProps) => {
   return (
     <>
       {link ? (
@@ -20,7 +28,7 @@ export const Card = ({ children, heading, body, link, label }: CardProps) => {
           to={link}
           aria-label={label}
           borderRadius="sm"
-          backgroundColor="gray.50"
+          backgroundColor={backgroundColor ? backgroundColor : `gray.50`}
           p={6}
           position="relative"
         >

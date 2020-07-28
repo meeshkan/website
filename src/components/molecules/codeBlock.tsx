@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import darkTheme from "./codeTheme"
+import meeshkanTheme from "./codeTheme"
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
 import { mdx } from "@mdx-js/react"
 import * as Chakra from "@chakra-ui/core"
@@ -11,10 +11,10 @@ const { Box, Button, useClipboard } = Chakra
 export const liveEditorStyle = {
   fontSize: 14,
   fontFamily: "Fira Code, monospace",
-  marginBottom: 32,
-  marginTop: 32,
+  marginBottom: 16,
+  marginTop: 16,
   overflowX: "auto",
-  borderRadius: 2,
+  borderRadius: 4,
 }
 
 export const liveErrorStyle = {
@@ -84,6 +84,7 @@ type CodeBlockProps = {
   isManual?: boolean
   render?: Boolean
   children?: string
+  copyButton?: Boolean
 }
 
 const CodeBlock = ({
@@ -92,6 +93,7 @@ const CodeBlock = ({
   isManual,
   render,
   children,
+  copyButton = true,
   ...props
 }: CodeBlockProps) => {
   const [editorCode, setEditorCode] = useState(children.trim())
@@ -100,7 +102,7 @@ const CodeBlock = ({
   const { onCopy, hasCopied } = useClipboard(editorCode)
 
   const liveProviderProps = {
-    theme: darkTheme,
+    theme: meeshkanTheme,
     language,
     code: editorCode,
     transformCode: code =>
@@ -126,14 +128,21 @@ const CodeBlock = ({
           <LiveEditor
             onChange={handleCodeChange}
             padding={20}
+            // @ts-ignore
             style={liveEditorStyle}
           />
-          <CopyButton onClick={onCopy}>
-            {hasCopied ? "copied" : "copy"}
-          </CopyButton>
+          {copyButton === true ? (
+            <CopyButton onClick={onCopy}>
+              {hasCopied ? "copied" : "copy"}
+            </CopyButton>
+          ) : null}
+
           <EditableNotice />
         </Box>
-        <LiveError style={liveErrorStyle} />
+        <LiveError
+          // @ts-ignore
+          style={liveErrorStyle}
+        />
       </LiveProvider>
     )
   }
@@ -153,9 +162,11 @@ const CodeBlock = ({
       <Box position="relative">
         <LiveEditor padding={20} style={liveEditorStyle} />
 
-        <CopyButton top="1.25em" onClick={onCopy}>
-          {hasCopied ? "copied" : "copy"}
-        </CopyButton>
+        {copyButton === true ? (
+          <CopyButton top="1.25em" onClick={onCopy}>
+            {hasCopied ? "copied" : "copy"}
+          </CopyButton>
+        ) : null}
       </Box>
     </LiveProvider>
   )

@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading, Link, Grid, Text, Code } from "@chakra-ui/core"
+import { Box, Heading, Link, Grid, Text, Code, Flex } from "@chakra-ui/core"
 
 type DoubleSectionProps = {
   children: Object
@@ -8,6 +8,7 @@ type DoubleSectionProps = {
   text?: string
   reverse?: boolean
   badge?: string
+  em?: string
 }
 
 export const DoubleSection = ({
@@ -17,12 +18,14 @@ export const DoubleSection = ({
   text,
   reverse,
   badge,
+  em,
   ...props
 }: DoubleSectionProps) => (
-  <Box as="section" maxW="1000px" mx="auto" py={12} {...props}>
+  <Box as="section" maxW="1000px" mx="auto" py={16} {...props}>
     <Grid
       templateColumns={[
         "repeat(auto-fill, 1fr)",
+        "reapeat(auto-fill, 1fr)",
         "reapeat(auto-fill, 1fr)",
         "repeat(2, 1fr)",
       ]}
@@ -30,9 +33,12 @@ export const DoubleSection = ({
       gridAutoFlow="dense"
     >
       {reverse ? (
-        <Box gridColumn={["1", "1", "2"]}> {children}</Box>
+        <Flex justifyContent="center" gridColumn={["1", "1", "2"]}>
+          {" "}
+          {children}
+        </Flex>
       ) : (
-        <Box>{children}</Box>
+        <Flex justifyContent="center">{children}</Flex>
       )}
       <Box>
         {badge ? (
@@ -52,7 +58,7 @@ export const DoubleSection = ({
           <Heading
             as="h2"
             color="gray.900"
-            fontSize="3xl"
+            fontSize={["xl", "2xl", "3xl"]}
             fontWeight={900}
             mb={4}
             letterSpacing="wide"
@@ -63,7 +69,12 @@ export const DoubleSection = ({
                 id={anchor}
                 _hover={{ textDecoration: "none", cursor: "auto" }}
               >
-                {heading}
+                {heading}{" "}
+                {em && (
+                  <Flex d="inline" color="red.500" fontStyle="italic">
+                    {em}
+                  </Flex>
+                )}
               </Link>
             ) : (
               heading
