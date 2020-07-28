@@ -11,21 +11,44 @@ import {
   FormLabel,
   Box,
   Link as ChakraLink,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  SimpleGrid,
+  Code,
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionIcon,
+  AccordionPanel,
+  Grid,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
+import { Card } from "../components/atoms/card"
+import { UniversalLink } from "../components/atoms/UniversalLink"
 import { useForm } from "react-hook-form"
+import GenerateTests from "../components/organisms/home/generateTests"
+import PrioritizeTests from "../components/organisms/home/prioritizeTests"
 
 const IndexPage = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        dash: file(relativePath: { eq: "dashboardDark.png" }) {
+        stack: file(relativePath: { eq: "stack.png" }) {
           childImageSharp {
             fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        video: file(relativePath: { eq: "video.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 300, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -37,7 +60,7 @@ const IndexPage = () => {
             }
           }
         }
-        coverage: file(relativePath: { eq: "coverage.png" }) {
+        quality: file(relativePath: { eq: "authQuality.png" }) {
           childImageSharp {
             fluid(maxWidth: 400, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -58,9 +81,23 @@ const IndexPage = () => {
             }
           }
         }
-        resolution: file(relativePath: { eq: "resolutionDialog.png" }) {
+        authSpec: file(relativePath: { eq: "authSpec.png" }) {
           childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
+            fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        continuous: file(relativePath: { eq: "continuousTests.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        premium: file(relativePath: { eq: "premiumTest.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -83,6 +120,7 @@ const IndexPage = () => {
     `
   )
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const { handleSubmit, register, formState } = useForm()
   const [formSubmit, setFormSubmit] = useState(false)
 
@@ -96,23 +134,6 @@ const IndexPage = () => {
       ],
     })
 
-    // let hubspotData = JSON.stringify({
-    //   properties: [
-    //     {
-    //       property: "email",
-    //       value: values.email || values.email2,
-    //     },
-    //     {
-    //       property: "lifecycle_stage",
-    //       value: "Subscriber",
-    //     },
-    //     {
-    //       property: "lead_status",
-    //       value: "In progress",
-    //     },
-    //   ],
-    // })
-
     fetch("https://api.sendgrid.com/v3/marketing/contacts", {
       method: "PUT",
       body: sendgridData,
@@ -121,24 +142,17 @@ const IndexPage = () => {
         "content-type": "application/json",
       },
     }).then(() => setFormSubmit(true))
-
-    // fetch(
-    //   `https://api.hubapi.com/crm/v3/objects/contacts?hapikey=${process.env.GATSBY_HUBSPOT_API_KEY}`,
-    //   {
-    //     method: "POST",
-    //     body: hubspotData,
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //   }
-    // )
   }
+
+  const [showImage, setShowImage] = React.useState(
+    data.stack.childImageSharp.fluid
+  )
 
   return (
     <Layout>
       <SEO
         pageTitle="Home"
-        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in private beta and accepting applications."
+        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in beta and accepting applications."
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>
@@ -152,218 +166,417 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - PRIVATE ALPHA
+            MEESHKAN - BETA
           </Badge>
         </Flex>
         <Heading
           as="h1"
           fontSize={["3xl", "4xl", "5xl"]}
-          textAlign="center"
           mb={6}
+          textAlign={["left", "left", "center"]}
           color="gray.900"
           fontWeight={900}
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automatic testing for any app
+          Automated tests for your GraphQL APIs, dynamically generated
         </Heading>
         <Text
-          textAlign="center"
-          fontSize="2xl"
+          textAlign={["left", "left", "center"]}
+          fontSize={["lg", "xl", "2xl"]}
           lineHeight="short"
           mb={6}
           color="gray.700"
         >
           Stop feeling guilty for not writing tests. Meeshkan automatically
-          writes, executes, and reports on a collection of tests guaranteed to
-          squash bugs and improve your code.
+          executes and reports on a collection of generated tests that actually
+          keep up with your GraphQL API. Using your schema and a touch of NLP,
+          we test critical flows, guaranteed to give you confidence in your app.
+          Every commit.
         </Text>
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
-          direction={["column", "column", "row"]}
-          justify="center"
-          alignItems="flex-end"
-          mb={12}
-        >
-          <input
-            type="hidden"
-            name="formName"
-            value="request-alpha-1"
-            ref={register}
-          />
-          <FormControl
-            isRequired
-            mr={[0, 0, 4]}
-            mb={[4, 4, 0]}
-            w="100%"
-            maxW={["full", "full", "400px"]}
-          >
-            <FormLabel htmlFor="email" fontWeight={700}>
-              Email
-            </FormLabel>
-            <Input
-              type="email"
-              name="email"
-              ref={register}
-              aria-label="Enter your business email"
-              borderRadius="sm"
-              placeholder="Your email"
-              isDisabled={formSubmit}
-              fontWeight={500}
-            />
-          </FormControl>
+        <Flex justify="center" mb={12}>
           <Button
+            as={ChakraLink}
+            // @ts-ignore
+            href="https://app.meeshkan.com"
+            aria-label="Create a free Meeshkan account."
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
-            type="submit"
-            isLoading={formState.isSubmitting}
-            isDisabled={formSubmit}
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request alpha access"}
+            Create a free account
           </Button>
         </Flex>
-        <Img
-          fluid={data.dash.childImageSharp.fluid}
-          alt="A dashboard screenshot of the Meeshkan web app."
-        />
+        {/* <Box maxW="750px" mx="auto">
+          <Card>
+            <Flex
+              justify={["center", "space-between"]}
+              align="center"
+              display={["block", "block", "flex"]}
+            >
+              <Box textAlign={["center", "center", "right"]} mr={[0, 0, 8]}>
+                <Heading
+                  as="h3"
+                  fontSize="2xl"
+                  fontWeight={900}
+                  letterSpacing="wide"
+                  mb={4}
+                >
+                  Watch this demo
+                </Heading>
+                <Text
+                  fontWeight={500}
+                  lineHeight="tall"
+                  color="gray.700"
+                  fontSize="lg"
+                >
+                  Let's explore how Meeshkan can help you squash killer bugs in
+                  your backend services.
+                </Text>
+              </Box>
+              <Box cursor="pointer" onClick={onOpen} mt={[4, 4, 0]}>
+                <Img
+                  fluid={data.video.childImageSharp.fluid}
+                  style={{ width: 240, borderRadius: 2, margin: "0 auto" }}
+                  alt="A screen grab from the demo video that pops up when you click it."
+                />
+              </Box>
+              <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent backgroundColor="transparent">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/ndMYYxP_Gzs?autoplay=1&cc_load_policy=1"
+                    style={{ borderRadius: 2 }}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; allowfullscreen"
+                  ></iframe>
+                </ModalContent>
+              </Modal>
+            </Flex>
+          </Card>
+        </Box> */}
       </SingleSection>
 
       <DoubleSection
-        heading="90% of the code used by your app isn’t written by your team"
-        text="Third-party dependencies are the backbone of modern applications. The lack of testing these APIs is a vulnerability."
+        heading="Keeping up with an ever-evolving API is a full-time job"
+        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
-        <Img
-          fluid={data.map.childImageSharp.fluid}
-          alt="A dependency map with logos of several companies showing how your app uses other code bases."
-        />
+        <GenerateTests />
       </DoubleSection>
 
       <DoubleSection
         reverse={true}
-        heading="Increase the coverage that your developers test."
-        text="Testing with Meeshkan covers parts of your app that aren’t reached with traditional testing infrastructure. QA devs can now be more confident in their coverage."
+        heading="Test generation falls short by focusing on the quanity of ‘bugs’ rather than"
+        em="quality"
+        anchor="#quality"
+        text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
       >
-        <Img
-          fluid={data.coverage.childImageSharp.fluid}
-          alt="2 compared bar graphs showing that using Meeshkan covers 95% of your app, and the traditional unit, integration, e2e covers 60%."
-        />
+        <PrioritizeTests />
       </DoubleSection>
 
       <SingleSection
-        heading="Automate resiliency testing with the Meeshkan web app"
-        text="Using targeted, property-based testing and mocking your app’s dependencies - Meeshkan gives you confidence in your app’s resilience."
+        heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
+        text="By combining your existing schema introspection, property-based testing, and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
       >
-        <Text textAlign="center" color="gray.500" mb={4}>
-          Getting set up is as fast as authorizing GitHub.
-        </Text>
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
-          direction={["column", "column", "row"]}
-          justify="center"
-          alignItems="flex-end"
-          mb={12}
-        >
-          <input
-            type="hidden"
-            name="formName"
-            ref={register}
-            value="request-alpha-2"
-          />
-          <FormControl
-            isRequired
-            mr={[0, 0, 4]}
-            mb={[4, 4, 0]}
-            w="100%"
-            maxW={["full", "full", "400px"]}
-          >
-            <FormLabel htmlFor="email" fontWeight={700}>
-              Email
-            </FormLabel>
-            <Input
-              type="email"
-              name="email2"
-              ref={register}
-              aria-label="Enter your business email"
-              borderRadius="sm"
-              placeholder="Your email"
-              isDisabled={formSubmit}
-              fontWeight={500}
-            />
-          </FormControl>
+        <Flex justify="center" mb={12}>
           <Button
+            as={ChakraLink}
+            // @ts-ignore
+            href="https://app.meeshkan.com"
+            aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
-            isLoading={formState.isSubmitting}
-            isDisabled={formSubmit}
-            type="submit"
             w={["100%", "100%", "auto"]}
           >
-            {formSubmit ? "Submitted" : "Request alpha access"}
+            Create a free account
           </Button>
         </Flex>
+        <Text textAlign="center" color="gray.500" mt={4}>
+          Getting set up is as fast as authorizing GitHub.
+        </Text>
       </SingleSection>
 
-      <DoubleSection
-        badge="Step 1"
-        heading="GitHub authorization"
-        text="Authorize GitHub, choose a repo to test, and choose your base configuration. All in less time than it takes to drink a cup of coffee."
-      >
-        <Img
-          fluid={data.authorize.childImageSharp.fluid}
-          alt="A screenshot of authorizing Meeshkan with Github"
-        />
-      </DoubleSection>
+      <SingleSection>
+        <Grid
+          templateColumns={[
+            "reapeat(auto-fill, 1fr)",
+            "reapeat(auto-fill, 1fr)",
+            "33% 66%",
+          ]}
+          gap={8}
+        >
+          <Box>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize={["3xl", "3xl", "3xl", "4xl"]}
+              fontWeight={900}
+              mb={6}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Key Features
+            </Heading>
+            <Accordion allowToggle>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() => setShowImage(data.stack.childImageSharp.fluid)}
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    REST Compatible
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Meeshkan also works for your REST APIs by generating tests
+                  with an OpenAPI specification and a little NLP. If you don't
+                  have an OpenAPI spec, we'll point you to the resources to
+                  create one.
+                </AccordionPanel>
+              </AccordionItem>
 
-      <DoubleSection
-        reverse={true}
-        badge="Step 2"
-        heading="Analyze and test your app"
-        text="Confirm the specification we've auto-generated for your service is correct. Then run the targeted property-based tests, automatically generated from that."
-      >
-        <Img
-          fluid={data.test.childImageSharp.fluid}
-          alt="An illustration of the test log using pieces of the Meeshkan web app."
-        />
-      </DoubleSection>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() =>
+                  setShowImage(data.continuous.childImageSharp.fluid)
+                }
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Continuous testing
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Every time you push a commit to GitHub, Meeshkan runs tests to
+                  check for breaking changes. If something does fail, our GitHub
+                  integration will notify you and details will be available in
+                  the Meeshkan webapp.
+                </AccordionPanel>
+              </AccordionItem>
 
-      <DoubleSection
-        badge="Step 3"
-        heading="Resolve conflicts"
-        text="In a guided flow, mock any third-party dependencies that couldn’t be auto-mocked by Meeshkan, such as databases."
-      >
-        <Img
-          fluid={data.resolution.childImageSharp.fluid}
-          alt="A screenshot of the resolution dialog from the Meeshkan web app."
-        />
-      </DoubleSection>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() => setShowImage(data.premium.childImageSharp.fluid)}
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Premium audits
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  If you're on a Pro plan or higher, Meeshkan provides weekly
+                  audit reports through the webapp. These audits include a full
+                  catalog of the bugs found, the failing request, and suggested
+                  fixes - all sorted by priority.
+                </AccordionPanel>
+              </AccordionItem>
 
-      <DoubleSection
-        reverse={true}
-        badge="Step 4"
-        heading="Fix vulnerabilities in your app"
-        text="When tests fail, your configuration can block a branch from merging and direct a developer to the point of failure. In the future, we’ll provide fix suggestions."
-      >
-        <Img
-          fluid={data.vulnerability.childImageSharp.fluid}
-          alt="An illustration of a bug found using pieces of the Meeshkan web app."
-        />
-      </DoubleSection>
+              <AccordionItem
+                border="none"
+                borderRadius="sm"
+                onClick={() =>
+                  setShowImage(data.authSpec.childImageSharp.fluid)
+                }
+              >
+                <AccordionHeader
+                  roundedTop="sm"
+                  fontSize="md"
+                  fontWeight={600}
+                  _expanded={{
+                    color: "gray.900",
+                    bg: "gray.50",
+                    fontWeight: 900,
+                  }}
+                  _hover={{
+                    bg: "gray.100",
+                  }}
+                >
+                  <Box flex="1" textAlign="left">
+                    Auth flows
+                  </Box>
+                  <AccordionIcon color="gray.300" />
+                </AccordionHeader>
+                <AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+                  Our Business plan gives you access to a breakdown of an auth
+                  flow specification for your API. This enables you to visualize
+                  and control who has access to certain queries and test those
+                  endpoints accordingly.
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </Box>
+          <Box minW="300px">
+            <Img
+              fluid={showImage}
+              alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."
+            />
+          </Box>
+        </Grid>
+      </SingleSection>
+
+      <SingleSection heading="Test automation for your GraphQL app">
+        <SimpleGrid columns={[1, 1, 3]} gridGap={8} flexWrap="wrap">
+          <Box>
+            <Img
+              fluid={data.authorize.childImageSharp.fluid}
+              alt="A screenshot of authorizing Meeshkan with Github"
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 1
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              GitHub authorization via our webapp
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              Authorize GitHub, choose a repository to test, and set up your
+              base configuration. All in less time than it takes to drink a cup
+              of coffee.
+            </Text>
+          </Box>
+          <Box>
+            <Img
+              fluid={data.test.childImageSharp.fluid}
+              alt="An illustration of the test log using pieces of the Meeshkan web app."
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 2
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Continuous testing with every commit
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              Meeshkan naturally fits into your existing workflow by testing as
+              you push commits to GitHub. Imagine Netlify, but for automated
+              testing.
+            </Text>
+          </Box>
+          <Box>
+            <Img
+              fluid={data.vulnerability.childImageSharp.fluid}
+              alt="An illustration of a bug found using pieces of the Meeshkan web app."
+            />
+            <Code
+              variantColor="cyan"
+              fontSize="14px"
+              fontWeight={600}
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mb={2}
+              mt={4}
+            >
+              Step 3
+            </Code>
+            <Heading
+              as="h2"
+              color="gray.900"
+              fontSize="2xl"
+              fontWeight={900}
+              mb={4}
+              letterSpacing="wide"
+              lineHeight="short"
+            >
+              Fix vulnerabilities in your app
+            </Heading>
+            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
+              When tests fail, your configuration can block a branch from
+              merging and direct you to the point of failure. In the future,
+              we’ll provide fix suggestions.
+            </Text>
+          </Box>
+        </SimpleGrid>
+      </SingleSection>
 
       <Box
         as="section"
         bg="gray.900"
-        borderRadius="sm"
+        borderRadius="6px"
         my={16}
         mx="auto"
         maxW={1200}
         position="relative"
-        px={6}
-        py={12}
+        px={8}
+        py={8}
       >
         <Heading
           as="h2"
@@ -376,7 +589,8 @@ const IndexPage = () => {
           ml={[0, 0, 0, 440, 522]}
           textAlign={["center", "center", "center", "end"]}
         >
-          How would automated resiliency testing work for your organization?
+          How can Meeshkan's automated GraphQL testing save your organization
+          hours of bug fixing?
         </Heading>
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
@@ -385,11 +599,12 @@ const IndexPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             _hover={{ textDecoration: "none", backgroundColor: "red.600" }}
-            href="https://meetings.hubspot.com/makenna"
+            href="https://meetings.hubspot.com/makenna/consultation-with-meeshkan"
             aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             fontWeight={900}
-            rounded="sm"
+            letterSpacing="wide"
+            borderRadius="sm"
           >
             Schedule a demo
           </Button>
