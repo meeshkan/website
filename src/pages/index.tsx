@@ -197,6 +197,7 @@ const IndexPage = () => {
         <Flex justify="center" mb={12}>
           <Button
             as={ChakraLink}
+            // @ts-ignore
             href="https://app.meeshkan.com"
             aria-label="Create a free Meeshkan account."
             variantColor="red"
@@ -283,6 +284,7 @@ const IndexPage = () => {
         <Flex justify="center" mb={12}>
           <Button
             as={ChakraLink}
+            // @ts-ignore
             href="https://app.meeshkan.com"
             aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"

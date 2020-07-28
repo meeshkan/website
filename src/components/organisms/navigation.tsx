@@ -12,30 +12,36 @@ import {
   DrawerBody,
   Button,
   DrawerFooter,
+  Flex,
+  Divider,
 } from "@chakra-ui/core"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
 
-export function Navigation() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
-  const signUpLink = (
+function SignUpLink() {
+  return (
     <Button
       as={UniversalLink}
+      // @ts-ignore
       href="https://app.meeshkan.com"
       aria-label="Log in to the Meeshkan webapp"
       variantColor="red"
+      variant="ghost"
       borderRadius="sm"
-      fontWeight={600}
-      ml={8}
+      fontWeight={900}
+      lineHeight="normal"
+      ml={[0, 0, 8]}
       w={["100%", "100%", "auto"]}
     >
       Sign up
     </Button>
   )
-  const logInLink = (
+}
+function LogInLink() {
+  return (
     <Button
       as={UniversalLink}
+      // @ts-ignore
       href="https://app.meeshkan.com"
       aria-label="Log in to the Meeshkan webapp"
       variant="ghost"
@@ -49,6 +55,12 @@ export function Navigation() {
       Log in <Icon name="arrow-forward" ml={2} />
     </Button>
   )
+}
+
+export function Navigation() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
+
   return (
     <Stack
       as="nav"
@@ -75,8 +87,11 @@ export function Navigation() {
         <NavLink text="Pricing" path="/pricing/" />
         <NavLink text="Blog" path="/blog/" />
         <NavLink text="Docs" path="/docs/" />
-        {signUpLink}
-        {logInLink}
+        <Flex>
+          <SignUpLink />
+          <Divider orientation="vertical" borderColor="gray.100" />
+          <LogInLink />
+        </Flex>
       </Stack>
 
       {/* Mobile */}
@@ -113,8 +128,9 @@ export function Navigation() {
               <NavLink text="Pricing" path="/pricing/" />
               <NavLink text="Test" path="/blog/" />
               <NavLink text="Docs" path="/docs/" />
-              {signUpLink}
-              {logInLink}
+              <Divider w="50%" borderColor="gray.100" />
+              <SignUpLink />
+              <LogInLink />
             </Stack>
           </DrawerBody>
           <DrawerFooter d="flex" justifyContent="center">
