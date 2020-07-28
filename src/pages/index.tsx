@@ -240,7 +240,7 @@ const IndexPage = () => {
             {formSubmit ? "Submitted" : "Request access"}
           </Button>
         </Flex>
-        <Box maxW="750px" mx="auto">
+        {/* <Box maxW="750px" mx="auto">
           <Card>
             <Flex
               justify={["center", "space-between"]}
@@ -289,7 +289,7 @@ const IndexPage = () => {
               </Modal>
             </Flex>
           </Card>
-        </Box>
+        </Box> */}
       </SingleSection>
 
       <DoubleSection
