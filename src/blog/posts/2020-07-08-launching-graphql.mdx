@@ -11,9 +11,28 @@ tags:
   - automation
 ---
 
+import { Button } from '@chakra-ui/core'
+
 GraphQL is the future of APIs that we at Meeshkan, are investing in. **Today we are announcing our full focus on automated testing of GraphQL servers.**
 
+![generate graphql tests](https://media.graphcms.com/locUhpIeToGAvxskJoda)
+
 If this is your first time hearing about [Meeshkan](/) — we're an automated testing service for the backend of your app using NLP and property-based testing. This announcement is us focusing deeper on developing future features unique to GraphQL testing. We wholeheartedly believe in the benefits the technology brings, as well as the need for better testing of GraphQL APIs.
+
+*Does this sound interesting to you?*
+
+<Button
+  as="a"
+  mt={4}
+  href="https://app.meeshkan.com"
+  aria-label="Create a free Meeshkan account."
+  variantColor="red"
+  borderRadius="sm"
+  fontWeight={900}
+  w={["100%", "100%", "auto"]}
+>
+  Create a free account
+</Button>
 
 Through-out this post, we'll walk through the warrants that lead us into betting our whole company's future on this technology - and how that affects you and your testing workflow!
 
@@ -43,21 +62,11 @@ The initial prototype of what is now known as GraphQL came to life in 2012 as a 
 
 > **Introspection** | noun | the examination or observation of one's own processes.
 
-Using the query below, we can introspect the GraphQL schema for the name of the types it contains:
+Using an introspection query, we can conclude the GraphQL schema contents and types. With this rule set of how the API should act, and some Natural Language Processing magic — we're able to generate meaningful tests.
 
-```graphql
-{
-  __schema {
-    types {
-      name
-    }
-  }
-}
-```
+For some more history of GraphQL, Honeypot.io has created an insightful documentary.
 
-<!-- For some more history of GraphQL, Honeypot.io has created an insightful documentary.
-
-<Video url="https://www.youtube.com/embed/783ccP__No8" /> -->
+<Video url="https://www.youtube.com/embed/783ccP__No8" />
 
 ## Why we believe GraphQL will become the standard choice for building new APIs
 
@@ -67,17 +76,20 @@ As a company that has been focused on [testing](/blog/what-is-the-testing-pyrami
 
 We as a team are now bought into the GraphQL ecosystem in our own stack using 8base as our database. It's a MySQL DB with a GraphQL API and a beautiful UI - but the preconfigured endpoint that we could query against was the decision settler.
 
-Another fantastic sign that GraphQL will continue to be in the stack-of-choice is the [growing number of software industry leaders](https://graphql.org/users/) making exactly that choice. Recently [Twitter announced](https://twitter.com/twitterdev) version 3 of their API, which has been completely converted to GraphQL.
+Another fantastic sign that GraphQL will continue to be in the stack-of-choice is the [growing number of software industry leaders](https://graphql.org/users/) making exactly that choice. GitHub, one of the largest and most used developer tools — has a great GraphQL API and built in documentation (totally necessary with the sheer mass of it).
 
 ## What does first-class GraphQL server testing look like?
 
 The first thing to clarify is that there are several parts of a GraphQL API that can be tested. The GraphQL query(including queries, mutations, and subscriptions), the GraphQL resolver, and the GraphQL server.
 
-Depending on how you build your GraphQL schema, there are different parts of testing that could serve your team.
+Depending on how you build your GraphQL schema, there are different parts of testing that could serve your team!
 
-If you use a service such as [GraphCMS](https://graphcms.com/) or [8base](https://www.8base.com/) - they take care of building and managing the resolvers and server for you. If this is the case for you, it'd be most helpful to encourage your provider to use Meeshkan as your tests would need to be frontend focused!
+1. If you use a service such as [GraphCMS](https://graphcms.com/) or [8base](https://www.8base.com/) - they take care of building and managing the resolvers and server for you. If this is the case for you, it'd be most helpful to encourage your provider to use Meeshkan as your tests would need to be frontend focused!
+1. If you've built your GraphQL API from scratch using something like [Prisma](https://www.prisma.io/) or [Apollo](https://www.apollographql.com/), you're in charge of maintaining all three parts of the API. Meeshkan currently is currently a tool for the resolvers and the server side of your API by making sure your auth is impenetrable, there aren't loopholes such as data accepted that will crash the server and more.
 
-If you've built your GraphQL API from scratch using something like [Prisma](https://www.prisma.io/) or [Apollo](https://www.apollographql.com/), you're in charge of maintaining all three parts of the API. Meeshkan currently QAs the server side of your API by making sure your auth is impenetrable, there aren't loopholes such as data accepted that will crash the server and more.
+To us at Meeshkan, committing to first class support meant making decisions in regard to data science algorithms, communities to invest in, and testing capabilities — **with GraphQL at the focus**. Quite possibly at the detriment to existing REST focused algorithms, other communities that might be interested in using Meeshkan, and the ability to test other API types. Of course, we keep a close eye on the divergence, but rest _cough 🤷‍♀️_ assured if you're building with a GraphQL API, we're dedicated.
+
+Some things we are [exploring on our roadmap](#next-steps)
 
 ## How automated GraphQL tests work on your server
 
@@ -91,12 +103,29 @@ _Side note, if you're in the middle of a migration from REST to GraphQL or need 
 
 The biggest challenges of automated software testing are dynamically generating tests as the code changes and making sure those tests are meaningful and high quality.
 
+Our approach to this large challenge is to base off of a concrete set of rules (in this case the GraphQL schema) and build from there using Natural Language Processing to generate reasonable inputs for field with names like `email` and `password`. Starting from a sure yet dynamic base assures we know the results are actual, production reproducable scenarios.
+
 ## Benefits of using Meeshkan with your GraphQL API vs your REST API
 
 Alongside the benefits of **_using_** a GraphQL API, there are several benefits of the inherent structure and functionality that make it more compatible for testing.
 
-GraphQL APIs are strongly typed. And while we are big fans of [strongly typed programming](/blog/functional-programming-for-frontend-pipe/) at Meeshkan, I digress. The native feature of a GraphQL schema, called introspection, allows the entire type structure and relationships to be queried on-demand, and dynamically as the API evolves.
+GraphQL APIs are strongly typed. And while we are big fans of [strongly typed patterns in programming](/blog/functional-programming-for-frontend-pipe/) at Meeshkan, I digress. The native feature of a GraphQL schema, called introspection, allows the entire type structure and relationships to be queried on-demand, and dynamically as the API evolves.
 
-## The future of testing GraphQL as Meeshkan sees it
+Another feature that the provides testing value, is the documentation of relationships. One feature we're passionate about at Meeshkan is stateful testing. We believe (amoungst lots of other people) that in order for your tests to be meaningful, they should replicate a user in the wild — also known as your production app.
+
+Most tools that _automatically_ test your app, read the code statically and make inferences. Meeshkan imitates a user with our integration tests. Stateful tests create users with traceable/reproducable steps that center around logic-heavy functions in your app. Some examples where stateful testing is invaluable include authorization, authentication, and transations (currency, databases, etc).
+
+GraphQL stores information about how mutations relate to queries giving confidence to our stateful testing algorithms. For example `tests` can be traced to `createTest` and `createManyTests`. With a REST API, there are common patterns that our NLP algorithms are able to pick up — but assumptions make for a lot less confident tests. For more complex relationships, we support custom GraphQL directives.
+
+## The future of testing GraphQL as Meeshkan see's it
+
+I'm super stoked to finally announce what we've been brewing internally, and working with early adopters. We've got a vision that testing should be intertwined into your dynamic coding workflow, rather than a disconnected, easily skipable step. We're working hard to achieve this, and starting in integration testing.
 
 We're really energized by the GraphQL community and the future that we envision we can help developers achieve. A future where 'to test or not to test' is no longer a difficult decision.
+
+### Next steps
+
+- Allowing you to connect your client to test queries, mutations, and subscriptions used in production.
+- Creating explicit test cases where you define the queries you'd like to run each test
+- Monitoring auth (authentication and authorization) rules, notifiying when a user scope has changed
+- Is there something that you'd like to see in your testing workflow? [We want to hear from you!](/contact/)
