@@ -55,7 +55,7 @@ const GenerateTests = () => {
         backgroundColor="blackAlpha.300"
         position="absolute"
         zIndex={10}
-        w={460}
+        w={[300, 360, 460]}
         h={380}
         p={4}
         borderRadius="md"
@@ -186,10 +186,16 @@ mutation {
           </Button>
         </Stack>
       </MotionBox>
-      <Box w={460} h={380} d="flex" alignItems="center">
+      <Box
+        w={[300, 360, 460]}
+        h={380}
+        d={["block", "flex"]}
+        alignItems="center"
+      >
         <TestSnippet />
         <MotionButton
-          ml={-20}
+          ml={[0, -20]}
+          mt={[4, 4, 0]}
           variantColor="red"
           borderRadius="sm"
           fontWeight={900}

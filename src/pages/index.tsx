@@ -242,8 +242,12 @@ const IndexPage = () => {
         </Flex>
         <Box maxW="750px" mx="auto">
           <Card>
-            <Flex justify="space-between" align="center">
-              <Box textAlign="right" mr={8}>
+            <Flex
+              justify={["center", "space-between"]}
+              align="center"
+              display={["block", "block", "flex"]}
+            >
+              <Box textAlign={["center", "center", "right"]} mr={[0, 0, 8]}>
                 <Heading
                   as="h3"
                   fontSize="2xl"
@@ -263,10 +267,10 @@ const IndexPage = () => {
                   your backend services.
                 </Text>
               </Box>
-              <Box cursor="pointer" onClick={onOpen}>
+              <Box cursor="pointer" onClick={onOpen} mt={[4, 4, 0]}>
                 <Img
                   fluid={data.video.childImageSharp.fluid}
-                  style={{ width: 240, borderRadius: 2 }}
+                  style={{ width: 240, borderRadius: 2, margin: "0 auto" }}
                   alt="A screen grab from the demo video that pops up when you click it."
                 />
               </Box>
@@ -296,7 +300,7 @@ const IndexPage = () => {
       </DoubleSection>
 
       <DoubleSection
-        reverse={true}
+        // reverse={true}
         heading="Test generation falls short by focusing on the quanity of ‘bugs’ rather than"
         em="quality"
         anchor="#quality"
@@ -362,7 +366,14 @@ const IndexPage = () => {
       </SingleSection>
 
       <SingleSection>
-        <Grid templateColumns="33% 66%" gap={8}>
+        <Grid
+          templateColumns={[
+            "reapeat(auto-fill, 1fr)",
+            "reapeat(auto-fill, 1fr)",
+            "33% 66%",
+          ]}
+          gap={8}
+        >
           <Box>
             <Heading
               as="h2"
@@ -515,7 +526,7 @@ const IndexPage = () => {
       </SingleSection>
 
       <SingleSection heading="Test automation for your GraphQL app">
-        <SimpleGrid columns={3} gridGap={8}>
+        <SimpleGrid columns={[1, 1, 3]} gridGap={8} flexWrap="wrap">
           <Box>
             <Img
               fluid={data.authorize.childImageSharp.fluid}

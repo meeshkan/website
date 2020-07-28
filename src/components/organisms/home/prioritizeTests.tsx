@@ -78,7 +78,7 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
         </Box>
         <Text
           color={colorMode === "light" ? "gray.700" : "gray.200"}
-          fontSize="sm"
+          fontSize={["8px", "8px", "sm"]}
           fontWeight={600}
         >
           {testCase}
@@ -155,7 +155,7 @@ const PrioritizeTests = () => {
   return (
     <>
       <Stack
-        w={460}
+        w={[300, 360, 460]}
         h={380}
         backgroundColor={colorMode === "light" ? "gray.50" : "gray.800"}
         borderRadius="md"
