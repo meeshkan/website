@@ -37,7 +37,7 @@ const DocsNavigation = () => {
     >
       <Link
         to="/"
-        aria-label="Meeshkan home"
+        aria-label="Meeshkan homepage"
         style={{ display: "flex", alignContent: "center" }}
       >
         <Icon name="Logo" color="gray.900" h={6} w="auto" />
@@ -68,6 +68,7 @@ const DocsNavigation = () => {
           variant="link"
           // @ts-ignore
           icon="hamburger"
+          aria-label="Open the navigation menu"
           onClick={onOpen}
         />
       </Box>
@@ -81,7 +82,11 @@ const DocsNavigation = () => {
         <DrawerContent bg="gray.900">
           <DrawerHeader>
             <DarkMode>
-              <DrawerCloseButton onClick={onClose} />
+              <DrawerCloseButton
+                color="gray.300"
+                onClick={onClose}
+                aria-label="Close the navigation menu"
+              />
             </DarkMode>
           </DrawerHeader>
           <DrawerBody py={2}>
