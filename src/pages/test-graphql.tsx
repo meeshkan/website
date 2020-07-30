@@ -15,6 +15,11 @@ import {
   Badge,
   FormControl,
   FormLabel,
+  Accordion,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  AccordionHeader,
 } from "@chakra-ui/core"
 import SEO from "../components/molecules/seo"
 import Layout from "../components/templates/layout"
@@ -25,6 +30,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import { object } from "prop-types"
+import CodeBlock from "../components/molecules/codeBlock"
 
 const TestGraphqlPage = () => {
   const data = useStaticQuery(
@@ -223,11 +229,134 @@ const TestGraphqlPage = () => {
         </Text>
       </Stack>
 
-      {testResults && (
-        <pre>
-          <code>{JSON.stringify(testResults, null, 2)}</code>
-        </pre>
-      )}
+      {JSON.stringify(testResults).length > 2 ? (
+        // <pre>
+        //   <code>{JSON.stringify(testResults, null, 2)}</code>
+        // </pre>
+        <>
+          <Box
+            my={8}
+            p={8}
+            backgroundColor="gray.50"
+            borderRadius="4px"
+            maxW="1000px"
+            maxH="700px"
+            overflow="auto"
+            mx="auto"
+          >
+            <Heading mb={4} fontWeight={900} fontSize="xl">
+              Test Results:
+            </Heading>
+            {testResults.commands.map((command, index) => (
+              <Accordion defaultIndex={[0]} allowMultiple>
+                {command.exchange.map((exchange, index) => (
+                  <AccordionItem
+                    key={index}
+                    border="none"
+                    mb={8}
+                    borderRadius="sm"
+                    backgroundColor="white"
+                  >
+                    <Box
+                      key={index}
+                      border="none"
+                      mb={8}
+                      borderRadius="sm"
+                      backgroundColor="white"
+                    >
+                      <AccordionHeader
+                        _hover={{
+                          backgroundColor: "none",
+                        }}
+                        _focus={{
+                          outline: "none",
+                          borderBottom: "1px solid",
+                        }}
+                        _active={{
+                          borderBottom: "1px solid",
+                        }}
+                        borderRadius="sm"
+                        p={4}
+                        justifyContent="space-between"
+                      >
+                        <Flex>
+                          <Text fontWeight={600} mr={2}>
+                            {exchange.meta.apiType === "graphql"
+                              ? JSON.parse(exchange.request.body)[
+                                  "query"
+                                ].startsWith("query")
+                                ? "QUERY"
+                                : JSON.parse(exchange.request.body)[
+                                    "query"
+                                  ].startsWith("mutation")
+                                ? "MUTATION"
+                                : JSON.parse(exchange.request.body)[
+                                    "query"
+                                  ].startsWith("subscription")
+                                ? "SUBSCRIPTION"
+                                : exchange.request.method.toUpperCase()
+                              : exchange.request.method.toUpperCase()}
+                          </Text>
+                          <Text fontWeight={600}>{exchange.meta.path}</Text>
+                        </Flex>
+                        <AccordionIcon />
+                      </AccordionHeader>
+                      <AccordionPanel py={4}>
+                        <Flex>
+                          {exchange.response.statusCode && (
+                            <Code
+                              fontWeight={700}
+                              mb={2}
+                              fontSize="md"
+                              variantColor="gray"
+                            >
+                              HTTP status code: {exchange.response.statusCode}
+                            </Code>
+                          )}
+                        </Flex>
+                        {exchange.request.body && (
+                          <>
+                            <Heading
+                              as="h4"
+                              fontSize="lg"
+                              my={4}
+                              fontWeight={900}
+                            >
+                              Request body:
+                            </Heading>
+                            <CodeBlock className="graphql">
+                              JSON.parse(exchange.request.body)
+                            </CodeBlock>
+                          </>
+                        )}
+                        {exchange.response.body && (
+                          <>
+                            <Heading
+                              as="h4"
+                              fontSize="lg"
+                              my={4}
+                              fontWeight={900}
+                            >
+                              Response body:
+                            </Heading>
+                            <CodeBlock className={"json"}>
+                              {JSON.stringify(
+                                JSON.parse(exchange.response.body),
+                                null,
+                                2
+                              )}
+                            </CodeBlock>
+                          </>
+                        )}
+                      </AccordionPanel>
+                    </Box>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            ))}
+          </Box>
+        </>
+      ) : null}
 
       <DoubleSection
         heading="A GraphQL testing tool that is dynamic to Schema changes"
