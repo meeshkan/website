@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   Box,
   Heading,
@@ -170,8 +170,6 @@ const TestGraphqlPage = () => {
         </Heading>
 
         <Box
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
           mb={12}
           backgroundColor="gray.900"
           p={4}
@@ -180,6 +178,8 @@ const TestGraphqlPage = () => {
           w={["full", "full", "600px"]}
         >
           <Flex
+            as="form"
+            onSubmit={handleSubmit(onSubmit)}
             direction={["column", "column", "row"]}
             justify="center"
             alignItems="flex-end"
@@ -213,7 +213,7 @@ const TestGraphqlPage = () => {
               borderRadius="sm"
               fontWeight={900}
               type="submit"
-              onClick={() => setTesting(true)}
+              // onClick={() => setTesting(true)}
               isLoading={testing}
               loadingText="Testing"
               isDisabled={endpointSubmit}
@@ -222,17 +222,9 @@ const TestGraphqlPage = () => {
               Test Endpoint
             </Button>
           </Flex>
-          {testing === true ? (
-            <Text
-              d="block"
-              color="cyan.400"
-              mt={2}
-              mx="auto"
-              textAlign="center"
-            >
-              Testing takes ~30 seconds
-            </Text>
-          ) : null}
+          <Text d="block" color="cyan.400" mt={2} mx="auto" textAlign="center">
+            Testing takes ~30 seconds
+          </Text>
         </Box>
         <Text
           color="gray.700"
