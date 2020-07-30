@@ -560,8 +560,8 @@ const IndexPage = () => {
             </Heading>
             <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
               When tests fail, your configuration can block a branch from
-              merging and direct you to the point of failure. In the future,
-              we’ll provide fix suggestions.
+              merging, direct a developer to the point of failure, and see the
+              highlight the highest priority bugs to tackle first.
             </Text>
           </Box>
         </SimpleGrid>

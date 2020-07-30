@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   Box,
   Heading,
@@ -12,6 +12,9 @@ import {
   Icon,
   Flex,
   Link as ChakraLink,
+  Badge,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/core"
 import SEO from "../components/molecules/seo"
 import Layout from "../components/templates/layout"
@@ -19,6 +22,7 @@ import { SingleSection } from "../components/organisms/singleSection"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
+import { useForm } from "react-hook-form"
 
 const TestGraphqlPage = () => {
   const data = useStaticQuery(
@@ -55,80 +59,141 @@ const TestGraphqlPage = () => {
       }
     `
   )
+
+  const [endpointSubmit, setEndpointSubmit] = useState(false)
+  const [testResults, setTestResults] = useState({})
+  const { handleSubmit, register, formState } = useForm()
+
+  function onSubmit(values) {
+    let endpointData = JSON.stringify({
+      endpoint: values.endpoint,
+      // headers: {
+      //   cookie: "cookie_header_value",
+      //   authorization: "authorization_header_value",
+      // },
+    })
+    fetch("http://35.228.132.158/runr", {
+      method: "POST",
+      body: endpointData,
+      headers: {
+        "Api-Key": process.env.GATSBY_MINI_TESTER_AUTH,
+      },
+    }).then(res => {
+      setEndpointSubmit(true)
+      setTestResults(res)
+    })
+  }
+
   return (
     <Layout>
       <SEO
-        pageTitle="Contact"
-        pageDescription="Get in contact with us!"
-        pageUrl="https://meeshkan.com/contact/"
+        pageTitle="Testing GraphQL"
+        pageDescription="Meeshkan is a GraphQL dedicated testing tool that automatically triggers on every commit."
+        pageUrl="https://meeshkan.com/test-graphql/"
       />
-      {/* put your code */}
       <SingleSection>
-        <Stack isInline justify="space-between" spacing={64} mt={12}>
-          <Box maxW="750px">
-            <Heading
-              as="h1"
-              fontSize={["3xl", "4xl", "5xl"]}
-              mb={6}
-              color="gray.900"
-              fontWeight={900}
-              letterSpacing="wide"
-              lineHeight="short"
-            >
-              Your search for dynamic GraphQL testing ends here.
-            </Heading>
-            <Text fontSize={["lg", "xl", "2xl"]} lineHeight="short">
-              Meeshkan automatically writes, executes, and reports on a
-              collection of user-mimicking tests, guaranteed to give you
-              confidence in critical flows.
-            </Text>
-          </Box>
-          <Box backgroundColor="gray.50" w="186px" h="268px" />
-        </Stack>
+        <Flex justify="center" mb={3} mt={12}>
+          <Badge
+            variantColor="cyan"
+            letterSpacing="widest"
+            fontSize="14px"
+            fontWeight={600}
+            rounded="sm"
+            padding="0px 4px"
+            minH="auto"
+          >
+            TESTING GRAPHQL
+          </Badge>
+        </Flex>
+        <Heading
+          as="h1"
+          fontSize={["3xl", "4xl", "5xl"]}
+          mb={6}
+          textAlign={["left", "left", "center"]}
+          color="gray.900"
+          fontWeight={900}
+          letterSpacing="wide"
+          lineHeight="short"
+        >
+          Your search for dynamic GraphQL testing ends here.
+        </Heading>
+        <Text
+          textAlign={["left", "left", "center"]}
+          fontSize={["lg", "xl", "2xl"]}
+          lineHeight="short"
+          mb={6}
+          color="gray.700"
+        >
+          Meeshkan automatically writes, executes, and reports on a collection
+          of user-mimicking tests, guaranteed to give you confidence in critical
+          flows.
+        </Text>
       </SingleSection>
+
       <Stack justifyContent="center">
         <Heading
           as="h2"
-          color="gray.900"
+          color="gray.700"
           fontSize="2xl"
           fontWeight={900}
           mb={4}
           letterSpacing="wide"
           lineHeight="short"
           textAlign="center"
-          color="gray.700"
         >
           Try it for yourself.
         </Heading>
-        <Box
-          backgroundColor="gray.800"
-          w="600px"
+
+        <Flex
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
+          direction={["column", "column", "row"]}
+          justify="center"
+          alignItems="flex-end"
+          mb={12}
+          backgroundColor="gray.900"
           p={4}
-          borderRadius="5px"
+          borderRadius="md"
           mx="auto"
-          mt={4}
+          w={["full", "full", "600px"]}
         >
-          <Stack isInline>
-            <DarkMode>
+          <DarkMode>
+            <FormControl
+              isRequired
+              mr={[0, 0, 4]}
+              mb={[4, 4, 0]}
+              w="100%"
+              maxW={["full", "full", "383px"]}
+            >
+              <FormLabel fontWeight={700} color="white">
+                Endpoint
+              </FormLabel>
               <Input
+                name="endpoint"
+                ref={register}
+                aria-label="Your GraphQL Endpoint"
+                borderRadius="sm"
                 placeholder="Your GraphQL Endpoint"
-                size="md"
-                mr={8}
-                maxW="383px"
+                isDisabled={endpointSubmit}
+                fontWeight={500}
                 color="white"
               />
-            </DarkMode>
-            <Button
-              aria-label="Test Endpoint"
-              variantColor="red"
-              borderRadius="sm"
-              fontWeight={900}
-              w={["100%", "100%", "auto"]}
-            >
-              Test Endpoint
-            </Button>
-          </Stack>
-        </Box>
+            </FormControl>
+          </DarkMode>
+          <Button
+            aria-label="Test Endpoint"
+            variantColor="red"
+            borderRadius="sm"
+            fontWeight={900}
+            type="submit"
+            isLoading={formState.isSubmitting}
+            loadingText="Testing"
+            isDisabled={endpointSubmit}
+            w={["100%", "100%", "auto"]}
+          >
+            Test Endpoint
+          </Button>
+        </Flex>
         <Text
           color="gray.700"
           fontStyle="italic"
@@ -141,6 +206,12 @@ const TestGraphqlPage = () => {
           just for you.
         </Text>
       </Stack>
+
+      {testResults && (
+        <pre>
+          <code>{JSON.stringify(testResults)}</code>
+        </pre>
+      )}
 
       <DoubleSection
         heading="A GraphQL testing tool that is dynamic to Schema changes"
@@ -185,12 +256,12 @@ const TestGraphqlPage = () => {
               letterSpacing="wide"
               lineHeight="short"
             >
-              GitHub authorization via our webapp
+              Choose a repository
             </Heading>
             <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
-              Authorize GitHub, choose a repository to test, and set up your
-              base configuration. All in less time than it takes to drink a cup
-              of coffee.
+              Authorize Meeshkan on GitHub, choose a repository to test, and set
+              up your base configuration. That’s all you need to do to get
+              started. Test runs will be triggered on every commit!
             </Text>
           </Box>
           <Box>
@@ -257,8 +328,8 @@ const TestGraphqlPage = () => {
             </Heading>
             <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
               When tests fail, your configuration can block a branch from
-              merging and direct you to the point of failure. In the future,
-              we’ll provide fix suggestions.
+              merging, direct a developer to the point of failure, and see the
+              highlight the highest priority bugs to tackle first.
             </Text>
           </Box>
         </SimpleGrid>
@@ -321,8 +392,8 @@ const TestGraphqlPage = () => {
           ml={[0, 0, 0, 440, 522]}
           textAlign={["center", "center", "center", "end"]}
         >
-          How can Meeshkan's automated GraphQL testing save your organization
-          hours of bug fixing?
+          Tired of API testing that doesn’t keep up? Get started with automated
+          GraphQL testing today.
         </Heading>
         <Flex justify={["center", "center", "center", "flex-end"]}>
           <Button
@@ -349,6 +420,8 @@ const TestGraphqlPage = () => {
           bottom={0}
           boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
           display={["none", "none", "none", "block"]}
+          borderBottomLeftRadius="4px"
+          overflow="hidden"
         >
           <Img
             fluid={data.testFailure.childImageSharp.fluid}
