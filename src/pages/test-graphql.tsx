@@ -69,10 +69,12 @@ const TestGraphqlPage = () => {
   )
 
   const [endpointSubmit, setEndpointSubmit] = useState(false)
+  const [testing, setTesting] = useState(false)
   const [testResults, setTestResults] = useState(JSON)
   const { handleSubmit, register, formState } = useForm()
 
   function onSubmit(values) {
+    setTesting(true)
     let endpointData = JSON.stringify({
       endpoint: values.endpoint,
       // headers: {
@@ -104,6 +106,7 @@ const TestGraphqlPage = () => {
       .catch(error => {
         error.message
       })
+    setTesting(false)
   }
 
   return (
@@ -166,12 +169,9 @@ const TestGraphqlPage = () => {
           Try it for yourself.
         </Heading>
 
-        <Flex
+        <Box
           as="form"
           onSubmit={handleSubmit(onSubmit)}
-          direction={["column", "column", "row"]}
-          justify="center"
-          alignItems="flex-end"
           mb={12}
           backgroundColor="gray.900"
           p={4}
@@ -179,43 +179,61 @@ const TestGraphqlPage = () => {
           mx="auto"
           w={["full", "full", "600px"]}
         >
-          <DarkMode>
-            <FormControl
-              isRequired
-              mr={[0, 0, 4]}
-              mb={[4, 4, 0]}
-              w="100%"
-              maxW={["full", "full", "383px"]}
-            >
-              <FormLabel fontWeight={700} color="white">
-                Endpoint
-              </FormLabel>
-              <Input
-                name="endpoint"
-                ref={register}
-                aria-label="Your GraphQL Endpoint"
-                borderRadius="sm"
-                placeholder="Your GraphQL Endpoint"
-                isDisabled={endpointSubmit}
-                fontWeight={500}
-                color="white"
-              />
-            </FormControl>
-          </DarkMode>
-          <Button
-            aria-label="Test Endpoint"
-            variantColor="red"
-            borderRadius="sm"
-            fontWeight={900}
-            type="submit"
-            isLoading={formState.isSubmitting}
-            loadingText="Testing"
-            isDisabled={endpointSubmit}
-            w={["100%", "100%", "auto"]}
+          <Flex
+            direction={["column", "column", "row"]}
+            justify="center"
+            alignItems="flex-end"
           >
-            Test Endpoint
-          </Button>
-        </Flex>
+            <DarkMode>
+              <FormControl
+                isRequired
+                mr={[0, 0, 4]}
+                mb={[4, 4, 0]}
+                w="100%"
+                maxW={["full", "full", "383px"]}
+              >
+                <FormLabel fontWeight={700} color="white">
+                  Endpoint
+                </FormLabel>
+                <Input
+                  name="endpoint"
+                  ref={register}
+                  aria-label="Your GraphQL Endpoint"
+                  borderRadius="sm"
+                  placeholder="Your GraphQL Endpoint"
+                  isDisabled={endpointSubmit}
+                  fontWeight={500}
+                  color="white"
+                />
+              </FormControl>
+            </DarkMode>
+            <Button
+              aria-label="Test Endpoint"
+              variantColor="red"
+              borderRadius="sm"
+              fontWeight={900}
+              type="submit"
+              onClick={() => setTesting(true)}
+              isLoading={testing}
+              loadingText="Testing"
+              isDisabled={endpointSubmit}
+              w={["100%", "100%", "auto"]}
+            >
+              Test Endpoint
+            </Button>
+          </Flex>
+          {testing === true ? (
+            <Text
+              d="block"
+              color="cyan.400"
+              mt={2}
+              mx="auto"
+              textAlign="center"
+            >
+              Testing takes ~30 seconds
+            </Text>
+          ) : null}
+        </Box>
         <Text
           color="gray.700"
           fontStyle="italic"
@@ -230,9 +248,6 @@ const TestGraphqlPage = () => {
       </Stack>
 
       {JSON.stringify(testResults).length > 2 ? (
-        // <pre>
-        //   <code>{JSON.stringify(testResults, null, 2)}</code>
-        // </pre>
         <>
           <Box
             my={8}
