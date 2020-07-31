@@ -29,8 +29,9 @@ import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
-import { object } from "prop-types"
 import CodeBlock from "../components/molecules/codeBlock"
+import prettier from "prettier/standalone"
+import parserGraphql from "prettier/parser-graphql"
 
 const TestGraphqlPage = () => {
   const data = useStaticQuery(
@@ -71,7 +72,7 @@ const TestGraphqlPage = () => {
   const [endpointSubmit, setEndpointSubmit] = useState(false)
   const [testing, setTesting] = useState(false)
   const [testResults, setTestResults] = useState(JSON)
-  const { handleSubmit, register, formState } = useForm()
+  const { handleSubmit, register } = useForm()
 
   function onSubmit(values) {
     setTesting(true)
@@ -89,7 +90,8 @@ const TestGraphqlPage = () => {
         "Api-Key": process.env.GATSBY_MINI_TESTER_AUTH,
       },
     })
-      .then(res => {
+      .then((res) => {
+        setTesting(true)
         setEndpointSubmit(true)
         if (res.status !== 200) {
           console.log(
@@ -98,15 +100,15 @@ const TestGraphqlPage = () => {
           return
         }
 
-        res.json().then(data => {
+        res.json().then((data) => {
           console.log(data)
           setTestResults(data)
         })
+        setTesting(false)
       })
-      .catch(error => {
+      .catch((error) => {
         error.message
       })
-    setTesting(false)
   }
 
   return (
@@ -192,12 +194,24 @@ const TestGraphqlPage = () => {
                 w="100%"
                 maxW={["full", "full", "383px"]}
               >
-                <FormLabel fontWeight={700} color="white">
-                  Endpoint
-                </FormLabel>
+                <Flex align="baseline">
+                  <FormLabel fontWeight={700} color="white">
+                    Endpoint
+                  </FormLabel>
+                  <Text
+                    fontStyle="italic"
+                    color="gray.500"
+                    fontWeight={400}
+                    ml={2}
+                    fontSize="14px"
+                  >
+                    Don't test with production APIs
+                  </Text>
+                </Flex>
                 <Input
                   name="endpoint"
                   ref={register}
+                  borderColor="gray.500"
                   aria-label="Your GraphQL Endpoint"
                   borderRadius="sm"
                   placeholder="Your GraphQL Endpoint"
@@ -213,7 +227,6 @@ const TestGraphqlPage = () => {
               borderRadius="sm"
               fontWeight={900}
               type="submit"
-              // onClick={() => setTesting(true)}
               isLoading={testing}
               loadingText="Testing"
               isDisabled={endpointSubmit}
@@ -222,8 +235,12 @@ const TestGraphqlPage = () => {
               Test Endpoint
             </Button>
           </Flex>
-          <Text d="block" color="cyan.400" mt={2} mx="auto" textAlign="center">
-            Testing takes ~30 seconds
+          <Text d="block" color="cyan.400" mt={4} mx="auto" textAlign="center">
+            {testing === true
+              ? `Testing takes ~30 seconds`
+              : endpointSubmit === true
+              ? `Your test results are listed below`
+              : null}
           </Text>
         </Box>
         <Text
@@ -332,7 +349,13 @@ const TestGraphqlPage = () => {
                               Request body:
                             </Heading>
                             <CodeBlock className="graphql">
-                              JSON.parse(exchange.request.body)
+                              {prettier.format(
+                                JSON.parse(exchange.request.body)["query"],
+                                {
+                                  parser: "graphql",
+                                  plugins: [parserGraphql],
+                                }
+                              )}
                             </CodeBlock>
                           </>
                         )}
@@ -346,7 +369,7 @@ const TestGraphqlPage = () => {
                             >
                               Response body:
                             </Heading>
-                            <CodeBlock className={"json"}>
+                            <CodeBlock className="json">
                               {JSON.stringify(
                                 JSON.parse(exchange.response.body),
                                 null,

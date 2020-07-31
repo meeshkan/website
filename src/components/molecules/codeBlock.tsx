@@ -9,12 +9,15 @@ import FocusLock from "react-focus-lock"
 const { Box, Button, useClipboard } = Chakra
 
 export const liveEditorStyle = {
-  fontSize: 14,
-  fontFamily: "Fira Code, monospace",
+  fontSize: 16,
+  fontFamily: `'Operator Mono Lig', Fira Code, SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New", monospace`,
   marginBottom: 16,
   marginTop: 16,
-  overflowX: "auto",
+  overflow: "auto",
   borderRadius: 4,
+  maxHeight: 300,
+  lineHeight: "1.5",
+  padding: 8,
 }
 
 export const liveErrorStyle = {
@@ -26,7 +29,7 @@ export const liveErrorStyle = {
   backgroundColor: "red",
 }
 
-const LiveCodePreview = props => (
+const LiveCodePreview = (props) => (
   <Box
     as={LivePreview}
     fontFamily="body"
@@ -39,7 +42,7 @@ const LiveCodePreview = props => (
   />
 )
 
-const CopyButton = props => (
+const CopyButton = (props) => (
   <Button
     size="sm"
     rounded="sm"
@@ -56,7 +59,7 @@ const CopyButton = props => (
   />
 )
 
-const EditableNotice = props => {
+const EditableNotice = (props) => {
   return (
     <Box
       position="absolute"
@@ -85,6 +88,7 @@ type CodeBlockProps = {
   render?: Boolean
   children?: string
   copyButton?: Boolean
+  maxH?: string
 }
 
 const CodeBlock = ({
@@ -94,6 +98,7 @@ const CodeBlock = ({
   render,
   children,
   copyButton = true,
+  maxH,
   ...props
 }: CodeBlockProps) => {
   const [editorCode, setEditorCode] = useState(children.trim())
@@ -105,7 +110,7 @@ const CodeBlock = ({
     theme: meeshkanTheme,
     language,
     code: editorCode,
-    transformCode: code =>
+    transformCode: (code) =>
       "/** @jsx tsx json graphql python bash yaml scheme latex haskell */" +
       code,
     scope: {
@@ -118,7 +123,7 @@ const CodeBlock = ({
     ...props,
   }
 
-  const handleCodeChange = newCode => setEditorCode(newCode.trim())
+  const handleCodeChange = (newCode) => setEditorCode(newCode.trim())
 
   if (language === "jsx" && live === true) {
     return (
@@ -127,7 +132,6 @@ const CodeBlock = ({
         <Box position="relative">
           <LiveEditor
             onChange={handleCodeChange}
-            padding={20}
             // @ts-ignore
             style={liveEditorStyle}
           />
