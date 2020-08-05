@@ -101,6 +101,7 @@ const MachineLearningPage = () => {
             title="Field classifier"
             blurb="Generating realistic fake data from APIs"
             features={[
+              "The business case",
               "Our SPACeY field classifier",
               "A heuristic in Python",
               "Flat-mapping fields",
@@ -110,6 +111,7 @@ const MachineLearningPage = () => {
             title="Grouping bugs"
             blurb="Extracting need-to-know information from 10,000 tests"
             features={[
+              "The business case",
               "A basic grouping algorithm",
               "The dao of grouping",
               "An ungrouped Meeshkan report",
@@ -119,6 +121,7 @@ const MachineLearningPage = () => {
             title="Quantifying priority"
             blurb="Automatically classifying the severity of bugs"
             features={[
+              "The business case",
               "A tale of two bugs: ranking failures",
               "An NLP-based approach to classifying bug severity",
               "Our priority taxonomy",
@@ -128,6 +131,7 @@ const MachineLearningPage = () => {
             title="Auto-CRUD"
             blurb="Linking API calls with underlying CRUD operations"
             features={[
+              "The business case",
               "CRUD, state, and property-based testing",
               "Features and one-hot vectors in CRUD-land",
               "Auto-CRUD in HMT",
@@ -137,6 +141,7 @@ const MachineLearningPage = () => {
             title="Smart fuzzing"
             blurb="Using spectral-graph theory to analyze code execution paths"
             features={[
+              "The business case",
               "The unreasonable effectiveness of spectral-graph theory",
               "Eigenvalues, eigenvectors and code",
               "A Jupyter notebook analyzing code paths using SGT",
