@@ -1,0 +1,30 @@
+---
+title: Reverse engineering the internet
+description: How we represent messy real-world APIs as clean models using machine learning.
+slug: reverse-engineering-the-internet
+date: 2020-08-15
+authors: ["mike"]
+published: true
+tags:
+  - testing
+  - machine learning
+---
+
+Real-world software is messy. Maintainers come and go, contributions are made in different styles, business requirements change, and levels of enthusiasm ebb and flow. This is normal, and it's hard to imagine that the software development process will ever lose this quality.
+
+At Meeshkan, we embrace the mess. We promise our clients high-quality tests of GraphQL and REST APIs, irrespective of how they're put together. There are lots of moving parts to get this right, but it all boils down to one question: what does our client **want**? This probably sounds trite (every business asks this question), but we ask it in earnest at a microscopic level:
+
+- What are the most important outcomes of a client's APIs?
+- What defects would our clients consider emergencies?
+- What behaviors would our client attribute to a single underlying source?
+- What are the access restrictions of each resource that an API serves?
+
+Of course, we could just _ask_ each of our clients these questions. But, if an API has thousands of different outcomes from its endpoints and hundreds of subtle authentication rules, we'd spend three months asking questions just to run our first test. Furthermore, if the API is larger than a few thousand lines of code, chances are that the answers to many of these questions are neither documented nor readable - they are encoded into the complexity of the system and need to be teased out. In short, our client wants their API to behave in a complicated but coherent way that would take too long to express, and they expect us to figure it out.
+
+This is why we use machine learning to guide us in the testing process. We use millions of data points to make reasonable assumptions about how a given API _should_ behave, and then check those assumptions against the actual behavior of our clients APIs. These assumptions touch everything from security to sensitive tranactions to naming conventions. Of course, our assumptions can be off, and we work to make better assumptions all the time. But the value of our company is our ability to make thousands of high-quality, data-driven assumptions automatically and use them to build a _model_ of an API. From that model, testing is the easy part: model based testing has been a solved problem for decades, and there are numerous frameworks (QuickCheck, fast-check, hypothesis) that can be used to execute model-based tests. But getting the model right is _really hard_, and that's what we do.
+
+Meeshkan is a start-up, and because of that, we do not have access to massive amounts of data, nor do we have lots of time to grow our business. As a result, we need to have a laser-focused, precise roadmap to help us decide the most impactful R&D we can do to build a high-quality product in a short amount of time. If you're reading this article, it's likely because you've found it through our roadmap, and we encourage you to read it, learn from it, challenge us about it, and even contribute to it if you yourself are a data-minded developer.
+
+If you're on the market for automated testing software and considering using Meeshkan, we know you have a choice of testing tools and that the competition is pretty fierce. As the CEO and Founder of Meeshkan, I personally guarantee you that we offer the best, most comprehensive and highest quality testing service available at our price point. You simply won't find better. But I also know that, because you don't know me, you may be looking for other ways to evaluate our service. In addition to reading customer testimonials and learning more aobut our features, I very much hope this roadmap helps build trust and confidence in my promise to you as our client. We're here to help you grow your business by helping you build reliable and scalable software, and we like to think that our roadmap paints a picture of the seriousness with which we take that commitment.
+
+Happy reading, and if you have any questions, please feel free to drop us a line!
