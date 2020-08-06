@@ -58,7 +58,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `linear`,
+    {
+      resolve: `linear`,
+      options: {
+        apiKey: process.env.LINEAR_API_KEY, // required
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

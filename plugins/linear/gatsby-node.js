@@ -1,3 +1,5 @@
+const { request, gql } = require("graphql-request")
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
@@ -11,23 +13,37 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs)
 }
 
-exports.createResolvers = ({ createResolvers }) => {
-  const resolvers = {
-    Query: {
-      roadmap: {
-        type: [`RoadmapEpic`],
-        resolve: () => {
-          return [
-            {
-              title: "My awesome roadmap epic",
-            },
-            {
-              title: "Another roadmap epic",
-            },
-          ]
+exports.createResolvers = ({ createResolvers }, pluginOptions) => {
+  const query = gql`
+    {
+      Movie(title: "Inception") {
+        releaseDate
+        actors {
+          name
+        }
+      }
+    }
+  `
+
+  request("https://api.graph.cool/simple/v1/movies", query).then((data) => {
+    console.log(data)
+    const resolvers = {
+      Query: {
+        roadmap: {
+          type: [`RoadmapEpic`],
+          resolve: () => {
+            return [
+              {
+                title: "My awesome roadmap epic",
+              },
+              {
+                title: "Another roadmap epic",
+              },
+            ]
+          },
         },
       },
-    },
-  }
-  createResolvers(resolvers)
+    }
+    createResolvers(resolvers)
+  })
 }
