@@ -3,5 +3,6 @@ const items = [
   "Prioritizing bugs",
   "Required permissions",
   "FAQ",
+  "Terms and conditions",
 ]
 export default items
