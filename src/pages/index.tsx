@@ -2,19 +2,13 @@ import React, { useState } from "react"
 import SEO from "../components/molecules/seo"
 import {
   Heading,
-  Input,
   Button,
   Text,
   Flex,
   Badge,
-  FormControl,
-  FormLabel,
   Box,
   Link as ChakraLink,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
   SimpleGrid,
   Code,
   Accordion,
@@ -24,13 +18,11 @@ import {
   AccordionPanel,
   Grid,
 } from "@chakra-ui/core"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
-import { Card } from "../components/atoms/card"
-import { UniversalLink } from "../components/atoms/UniversalLink"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import PrioritizeTests from "../components/organisms/home/prioritizeTests"
@@ -204,8 +196,26 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "red.600" }}
           >
             Create a free account
+          </Button>
+          <Button
+            ml={4}
+            as={Link}
+            // @ts-ignore
+            to="/test-graphql/"
+            aria-label="Link to the test graphql page"
+            variantColor="gray"
+            backgroundColor="gray.50"
+            color="gray.700"
+            variant="ghost"
+            borderRadius="sm"
+            fontWeight={900}
+            w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "gray.100" }}
+          >
+            Mini GraphQL tester
           </Button>
         </Flex>
         {/* <Box maxW="750px" mx="auto">
@@ -291,6 +301,7 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "red.600" }}
           >
             Create a free account
           </Button>

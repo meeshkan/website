@@ -61,6 +61,14 @@ export function Footer() {
             <Link
               // @ts-ignore
               as={GatsbyLink}
+              to="/test-graphql/"
+              aria-label="A landing page all about testing graphql"
+            >
+              Testing GraphQL
+            </Link>
+            <Link
+              // @ts-ignore
+              as={GatsbyLink}
               to="/docs/"
               aria-label="Meeshkan's documentation"
             >
