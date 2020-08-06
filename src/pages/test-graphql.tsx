@@ -83,7 +83,7 @@ const TestGraphqlPage = () => {
       //   authorization: "authorization_header_value",
       // },
     })
-    fetch("http://35.228.132.158/runr", {
+    fetch("https://8a20f7d6aa58.ngrok.io/runr", {
       method: "POST",
       body: endpointData,
       headers: {
