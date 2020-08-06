@@ -17,10 +17,15 @@ import Layout from "../components/templates/layout"
 import { Link } from "gatsby"
 import SEO from "../components/molecules/seo"
 
+type RoadmapLink = {
+  text: string
+  url: string
+}
+
 type MachineLearningProps = {
   title: string
   blurb: string
-  features: Array<string>
+  features: Array<RoadmapLink>
 }
 
 const MachineLearningCard = ({
@@ -49,9 +54,10 @@ const MachineLearningCard = ({
           <ChakraLink
             // @ts-ignore
             as={Link}
+            href={feature.url}
             color="blue.500"
           >
-            <Text>{feature}</Text>
+            <Text>{feature.text}</Text>
           </ChakraLink>
         </Flex>
       ))}
@@ -89,6 +95,7 @@ const MachineLearningPage = () => {
           <ChakraLink
             // @ts-ignore
             as={Link}
+            href={"/blog/reverse-engineering-the-internet"}
             color="blue.500"
           >
             {" "}
@@ -101,59 +108,74 @@ const MachineLearningPage = () => {
             title="Field classifier"
             blurb="Generating realistic fake data from APIs"
             features={[
-              "The business case",
-              "Our SPACeY field classifier",
-              "A heuristic in Python",
-              "Flat-mapping fields",
+              {
+                text: "The business case",
+                url: "/blog/field-classifier-business-case",
+              },
+              {
+                text: "Our SPACeY field classifier",
+                url: "/blog/word-embeddings/",
+              },
+              { text: "A heuristic in Python", url: "" },
+              { text: "Flat-mapping fields", url: "" },
             ]}
           />
           <MachineLearningCard
             title="Grouping bugs"
             blurb="Extracting need-to-know information from 10,000 tests"
             features={[
-              "The business case",
-              "A basic grouping algorithm",
-              "The dao of grouping",
-              "An ungrouped Meeshkan report",
+              { text: "The business case", url: "" },
+              { text: "A basic grouping algorithm", url: "" },
+              { text: "The dao of grouping", url: "" },
+              { text: "An ungrouped Meeshkan report", url: "" },
             ]}
           />
           <MachineLearningCard
             title="Quantifying priority"
             blurb="Automatically classifying the severity of bugs"
             features={[
-              "The business case",
-              "A tale of two bugs: ranking failures",
-              "An NLP-based approach to classifying bug severity",
-              "Our priority taxonomy",
+              { text: "The business case", url: "" },
+              { text: "A tale of two bugs: ranking failures", url: "" },
+              {
+                text: "An NLP-based approach to classifying bug severity",
+                url: "",
+              },
+              { text: "Our priority taxonomy", url: "" },
             ]}
           />
           <MachineLearningCard
             title="Auto-CRUD"
             blurb="Linking API calls with underlying CRUD operations"
             features={[
-              "The business case",
-              "CRUD, state, and property-based testing",
-              "Features and one-hot vectors in CRUD-land",
-              "Auto-CRUD in HMT",
+              { text: "The business case", url: "" },
+              { text: "CRUD, state, and property-based testing", url: "" },
+              { text: "Features and one-hot vectors in CRUD-land", url: "" },
+              { text: "Auto-CRUD in HMT", url: "" },
             ]}
           />
           <MachineLearningCard
             title="Smart fuzzing"
             blurb="Using spectral-graph theory to analyze code execution paths"
             features={[
-              "The business case",
-              "The unreasonable effectiveness of spectral-graph theory",
-              "Eigenvalues, eigenvectors and code",
-              "A Jupyter notebook analyzing code paths using SGT",
+              { text: "The business case", url: "" },
+              {
+                text: "The unreasonable effectiveness of spectral-graph theory",
+                url: "",
+              },
+              { text: "Eigenvalues, eigenvectors and code", url: "" },
+              {
+                text: "A Jupyter notebook analyzing code paths using SGT",
+                url: "",
+              },
             ]}
           />
           <MachineLearningCard
             title="Collaborating with Meeshkan"
             blurb="Ways to learn from, partner with and even join our team"
             features={[
-              "Meeshkan on Kaggle",
-              "Meeshkan on Udemy",
-              "Working at Meeshkan",
+              { text: "Meeshkan on Kaggle", url: "" },
+              { text: "Meeshkan on Udemy", url: "" },
+              { text: "Working at Meeshkan", url: "" },
             ]}
           />
         </SimpleGrid>
