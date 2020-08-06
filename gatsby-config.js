@@ -58,6 +58,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `linear`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
