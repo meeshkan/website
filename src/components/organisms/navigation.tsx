@@ -96,7 +96,7 @@ export function Navigation() {
 
       {/* Mobile */}
       <IconButton
-        aria-label="mobile menu button"
+        aria-label="Open the navigation menu"
         variant="ghost"
         borderRadius="sm"
         ref={btnRef}
@@ -113,9 +113,9 @@ export function Navigation() {
         size="sm"
       >
         <DrawerContent shadow="none">
-          <DrawerCloseButton size="md" onClick={onClose} />
+          <DrawerCloseButton size="md" onClick={onClose} aria-label="Close the navigation menu" />
           <DrawerHeader p={4}>
-            <Link to="/">
+            <Link to="/" aria-label="Meeshkan homepage">
               <Icon name="Logo" h={6} w="auto" />
             </Link>
           </DrawerHeader>
@@ -126,7 +126,7 @@ export function Navigation() {
           >
             <Stack align="center">
               <NavLink text="Pricing" path="/pricing/" />
-              <NavLink text="Test" path="/blog/" />
+              <NavLink text="Blog" path="/blog/" />
               <NavLink text="Docs" path="/docs/" />
               <Divider w="50%" borderColor="gray.100" />
               <SignUpLink />
@@ -139,6 +139,7 @@ export function Navigation() {
                 as={Link}
                 isExternal
                 href="https://twitter.com/meeshkan"
+                aria-label="Twitter"
                 // @ts-ignore
                 icon="twitter"
                 rounded="sm"
@@ -148,6 +149,7 @@ export function Navigation() {
                 as={Link}
                 isExternal
                 href="https://www.linkedin.com/company/meeshkan/"
+                aria-label="LinkedIn"
                 // @ts-ignore
                 icon="linkedin"
                 rounded="sm"
@@ -157,6 +159,7 @@ export function Navigation() {
                 as={Link}
                 isExternal
                 href="https://github.com/meeshkan"
+                aria-label="GitHub"
                 // @ts-ignore
                 icon="github"
                 rounded="sm"
