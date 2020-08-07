@@ -27,7 +27,7 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
     light: {
       success: { stroke: "cyan.500", background: "cyan.50" },
       failure: { stroke: "red.500", background: "red.50" },
-      text: { cyan: "cyan.800", yellow: "yellow.600", red: "red.500" },
+      text: { cyan: "cyan.500", yellow: "yellow.500", red: "red.500" },
     },
     dark: {
       success: { stroke: "cyan.100", background: "rgba(51, 204, 174, 0.25)" },

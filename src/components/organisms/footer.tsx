@@ -124,12 +124,7 @@ export function Footer() {
             </Link>
           </Stack>
         </Flex>
-        <Divider
-          title="Meeshkan social links"
-          borderColor="gray.300"
-          mb={4}
-          mt={4}
-        />
+        <Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
         <Flex justifyContent="space-between" align="center">
           <GatsbyLink to="/" aria-label="Meeshkan homepage">
             <Icon name="Logo" color="gray.900" size="6" w="auto" />

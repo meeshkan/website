@@ -60,6 +60,7 @@ const DocsNavigation = () => {
           />
         </InputGroup>
       </Stack> */}
+
       {/* Mobile Nav | Button & Menu Drawer */}
       <Box display={["block", "block", "none"]}>
         <IconButton
@@ -81,13 +82,11 @@ const DocsNavigation = () => {
       >
         <DrawerContent bg="gray.900">
           <DrawerHeader>
-            <DarkMode>
-              <DrawerCloseButton
-                color="gray.300"
-                onClick={onClose}
-                aria-label="Close the navigation menu"
-              />
-            </DarkMode>
+            <DrawerCloseButton
+              color="gray.200"
+              onClick={onClose}
+              aria-label="Close the navigation menu"
+            />
           </DrawerHeader>
           <DrawerBody py={2}>
             <Stack justify="center" align="center">
