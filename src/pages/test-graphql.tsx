@@ -83,7 +83,7 @@ const TestGraphqlPage = () => {
       //   authorization: "authorization_header_value",
       // },
     })
-    fetch("https://8a20f7d6aa58.ngrok.io/runr", {
+    fetch("https://meeshkan.io/runr", {
       method: "POST",
       body: endpointData,
       headers: {
@@ -211,6 +211,7 @@ const TestGraphqlPage = () => {
                 <Input
                   name="endpoint"
                   ref={register}
+                  type="url"
                   borderColor="gray.500"
                   aria-label="Your GraphQL Endpoint"
                   borderRadius="sm"
@@ -273,7 +274,7 @@ const TestGraphqlPage = () => {
             </Heading>
             {testResults.commands[0].exchange.length >= 1 ? (
               testResults.commands.map((command, index) => (
-                <Accordion defaultIndex={[0]} allowMultiple>
+                <Accordion defaultIndex={[0]} allowMultiple key={index}>
                   {command.exchange.map((exchange, index) => (
                     <AccordionItem
                       key={index}
@@ -283,7 +284,6 @@ const TestGraphqlPage = () => {
                       backgroundColor="white"
                     >
                       <Box
-                        key={index}
                         border="none"
                         mb={8}
                         borderRadius="sm"
@@ -349,7 +349,7 @@ const TestGraphqlPage = () => {
                               >
                                 Request body:
                               </Heading>
-                              <CodeBlock className="graphql">
+                              <CodeBlock className="graphql" copyButton={false}>
                                 {prettier.format(
                                   JSON.parse(exchange.request.body)["query"],
                                   {
