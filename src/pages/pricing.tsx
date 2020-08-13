@@ -11,6 +11,7 @@ import {
   Code,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
+import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
@@ -24,6 +25,7 @@ type PricingProps = {
   yesFeatures?: Array<string>
   noFeatures?: Array<string>
   hasCTA: boolean
+  mixpanel: any
 }
 
 const PricingCard = ({
@@ -33,6 +35,7 @@ const PricingCard = ({
   yesFeatures,
   noFeatures,
   hasCTA,
+  mixpanel,
 }: PricingProps) => (
   <Card>
     <Heading
@@ -82,6 +85,16 @@ const PricingCard = ({
         fontWeight={700}
         w="full"
         mt={8}
+        onClick={() => {
+          mixpanel.track(
+            "Clicked button",
+            {
+              to: "https://app.meeshkan.com",
+            },
+            { from: "https://meeshkan.com/pricing" },
+            { c2a: `Create an account - ${title}` }
+          )
+        }}
       >
         Create a free account
       </Button>
@@ -90,6 +103,7 @@ const PricingCard = ({
 )
 
 const PricingPage = () => {
+  const mixpanel = useMixpanel()
   return (
     <Layout>
       <SEO
@@ -148,6 +162,7 @@ const PricingPage = () => {
             title="Pro"
             subtitle="for Teams"
             price="$99"
+            mixpanel={mixpanel}
             yesFeatures={[
               "8 team members",
               "Unlimited projects",

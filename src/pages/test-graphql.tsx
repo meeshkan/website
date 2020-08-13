@@ -21,6 +21,8 @@ import {
   AccordionPanel,
   AccordionHeader,
 } from "@chakra-ui/core"
+import { useMixpanel } from "gatsby-plugin-mixpanel"
+
 import SEO from "../components/molecules/seo"
 import Layout from "../components/templates/layout"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -74,7 +76,7 @@ const TestGraphqlPage = () => {
   const [testResults, setTestResults] = useState(JSON)
   const { handleSubmit, register } = useForm()
 
-  function onSubmit(values) {
+  const onSubmit = (mixpanel) => (values) => {
     setTesting(true)
     let endpointData = JSON.stringify({
       endpoint: values.endpoint,
@@ -83,6 +85,15 @@ const TestGraphqlPage = () => {
       //   authorization: "authorization_header_value",
       // },
     })
+    mixpanel.track(
+      "Clicked button",
+      {
+        to: "https://meeshkan.io/runr",
+      },
+      { from: "https://meeshkan.com/test-graphql" },
+      { c2a: "Test endpoint" },
+      { payload: endpointData }
+    )
     fetch("https://meeshkan.io/runr", {
       method: "POST",
       body: endpointData,
@@ -110,6 +121,7 @@ const TestGraphqlPage = () => {
         error.message
       })
   }
+  const mixpanel = useMixpanel()
 
   return (
     <Layout>
@@ -181,7 +193,7 @@ const TestGraphqlPage = () => {
         >
           <Flex
             as="form"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit(mixpanel))}
             direction={["column", "column", "row"]}
             justify="center"
             alignItems="flex-end"

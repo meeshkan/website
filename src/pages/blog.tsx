@@ -54,7 +54,7 @@ const BlogHome = ({ data }) => {
               >
                 {frontmatter.authors.length >= 1 ? (
                   <AvatarGroup max={2} size="sm">
-                    {frontmatter.authors.map(author => (
+                    {frontmatter.authors.map((author) => (
                       <Avatar
                         name={author.name}
                         src={author.avatar.childImageSharp.fluid.src}
