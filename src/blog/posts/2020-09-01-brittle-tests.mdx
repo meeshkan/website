@@ -32,7 +32,7 @@ So, give manual QA a shot. You'll get an fresh perspective, and your app will ge
 
 ...QA engineers can't find _all_ the corner cases. A lot of times, even with detailed instructions, it's not possible to describe all the ins and outs of your app using prose. What if, instead of or in addition to manual QA, you described these ins and outs _in code_. The _code_ part is important - you write a little robot that interacts with your app like a human would based on a set of expected behaviors. Ie "when I call endpoint X with data Y, I expect outcome Z".
 
-This is called property-based testing, and the great thing about it is that a property-based testing framework can auto-generate test cases from a well-defined spec. I've written an [article about this in Kotlin](/blog/kotlin-tests-user-stories/), and as you'll see in the article, property-based tests often times resemble human language. For example, here's a property-based test in Haskell/Purescript/Agda/Idris:
+This is called property-based testing, and the great thing about it is that a property-based testing framework can auto-generate test cases from a well-defined spec. I've written an [article about this in Kotlin](/blog/kotlin-tests-user-stories/), and as you'll see in the article, property-based tests often times resemble human language. For example, here's a property-based test in Haskell/PureScript/Agda/Idris:
 
 ```haskell
 my_plus_function = (+)
@@ -46,11 +46,11 @@ a_plus_b_c_is_a_plus_b_plus_c a b =
     (my_plus_function (my_plus_function a b) c)
 ```
 
-That's all you need to tell purescript about `my_plus_function`. It'll figure out the rest using a framework called [QuickCheck](https://github.com/purescript/purescript-quickcheck). It's like unleashing an army of robot QA engineers on your test - tens of thousands of them (God help us...).
+That's all you need to tell PureScript about `my_plus_function`. It'll figure out the rest using a framework called [QuickCheck](https://github.com/purescript/purescript-quickcheck). It's like unleashing an army of robot QA engineers on your test - tens of thousands of them (God help us...).
 
 In order to do this, you need to keep a running list of properties like the one above. There are some classic ways to do this, like creating a simplified model of the system under test and then making sure the diff between the results of the real system and the results of the model are within some acceptable threshold. This is called [model-based testing](https://en.wikipedia.org/wiki/Model-based_testing), and most property-based testing frameworks ([QuickCheck](), [fast-check](), [hypothesis]()) can do this too.
 
-The problem with property-based tests, though, is that you wind up specifying a metric ton of properties. That takes a lot of time. How can you get all the benefits of a great collection of properties without the time sink? If only we could give a really smart algorithm read-only access to our code so that it could come up with a model, generate test from the model, and...
+The problem with property-based tests, though, is that you wind up specifying a metric ton of properties. That takes a lot of time. How can you get all the benefits of a great collection of properties in a reasonable amount of time? If only we could give a really smart algorithm read-only access to our code so that it could come up with a model, generate test from the model, and...
 
 ## Meeshkan
 
