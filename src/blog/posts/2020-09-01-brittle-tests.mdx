@@ -1,0 +1,52 @@
+---
+title: Three sure-fire ways to avoid writing brittle tests
+description: An article
+date: 2020-09-01
+authors: ["mike"]
+published: true
+slug: brittle-tests
+tags:
+  - testing
+  - apis
+---
+
+Hi! Mike here, the CEO of Meeshkan. You may remember me from serious technical blog posts such as [Testing React-Native Apps]() and [TypeScript Optics](), but today, I'm thrilled to be writing my first piece of clickbait. Clickbait, which comes from the English "Cli" (short for command-line-interface) and "ckbait" (I have no clue what that means) is something with a catchy title that is used to market a product. I plan on writing a lot of these in the future, so as I grow into this role, I'd really appreciate any feedback you have on my first attempt!
+
+## The main idea
+
+Most developers don't write tests. That's totally understandable, as writing tests is super annoying, unless you enjoy writing tests, in which case that's cool too. At Meeshkan, we even bought the domain name `testing.sucks`, which we actually haven't used yet because we wrote the site with a bunch of spaghetti code and then forgot to test it, so it's undeployable.
+
+Most people give up on tests because of a feeling of "Why bother?" Code is brittle, abstractions are leaky, tests are imperfect, life's short, and it'll cost less to clean up the mess later than it'll cost to prevent it. That's a pretty solid argument, and in a lot of cases that's true. Actually, as I re-read this paragraph, I find myself nodding along and wondering why we write tests? Why did I even found a testing company? For your sake and mine, I'll cut off that dark line of thinking right there. It is entirely antithetical to the stated goal of writing high-quality clickbait. So I must press on and give you some answer to "Why bother?" But I can't answer right away, cuz then you'd stop reading, so instead I'll tease it out over several paragraphs, each one ending with...
+
+## Manual QA
+
+...a cliffhanger. One way to make sure tests aren't brittle is to ask a real-life human to test out your code. That's called manual QA, and a few years ago manual QA wasn't cool, but it's cool again. The power of manual QA comes from the thought "I got us into this mess, so why would they pay me to get us out of it?" Having an outsider put your app through the ringer is the only way for someone to find the rough patches that you innocently, without knowing it, swept under the carpet.
+
+Continuing the analogy, if you have ever "cleaned for the cleaning people", manual QA has the same effect - you have to get your repo in a testable shape for outsiders to test it, which winds up in and of itself improving code quality and preventing bugs. And it's not as expensive as you'd think. For a team of ~5, you can usually get high-quality manual QA for around USD 3,000 per month. Ok, so as I was typing the 0's out it didn't feel as cheap as the figure sounded in my head, but production bugs cost even more, so it does save you money.
+
+The bottom line is that manual QA is not "throwing it over the net." It's "serving it over the net" so that the opposite team can spike it back at you. And, in our era of crowdsourcing everything, there are plenty of sites that'll refer you to a great QA engineer for a competitive price. You can even crowdsource your search process (and even crowdsource that, entering a recursive crowdsourcing loop).
+
+So, give manual QA a shot. It's great, you'll get an outsider's perspective, and you'll get someone exercising your app like a real user would. But...
+
+## Property-based testing
+
+QA engineers can't find _all_ the corner cases. A lot of times, even with detailed instructions, they don't know all the ins and outs of your app. What if, instead of or in addition to manual QA, you wrote a user's manual for your app _in code_. The _in code_ part is important - you write a little code robot that interacts with your app like a human would based on the properties they expect from the app. Ie "when I call endpoint X with data Y, I expect outcome Z".
+
+This is called property-based testing, and the great thing about it is that a property-based testing framework can auto-generate test cases from your little code robot. I've written an [article about this in Kotlin](), and property-based tests often times resemble human language. For example, here's a property-based test in purescript:
+
+```purescript
+a_plus_b_is_b_plus_a :: Int -> Int -> Boolean
+a_plus_b_is_b_plus_a a b = a + b == b + a
+```
+
+That's all you need to tell purescript about your function `+`. It'll figure out the rest using a framework called [QuickCheck](). It's like unleashing an army of robot QA engineers on your test - tens of thousands of them (God help us...).
+
+In order to do this, you need to keep a running list of properties like the one above. There are some classic ways to do this, like creating a simplified model of the system under test and then making sure the diff between the results of the real system and the results of the model are within some acceptable threshold. This is called [model-based testing](), and most property-based testing frameworks (QuickCheck, fast-check, hypothesis) can do this too.
+
+The problem with property-based tests, though, is that you wind up writing a mini-version of your service alongside the first one. While this is a thought-clarifying exercise, it takes a lot of time. How can you get all the benefits of a great model without sinking in the time. If only we could give a really smart algorithm read-only access to our code so that it could come up with a model, generate test from the model, and...
+
+## Meeshkan
+
+...save us lots of time and money. That's what [Meeshkan](https://meeshkan.com) does. Our NLP-based algorithms figure out the way you think you wanted your app to work, then auto-generates a bunch of tests based on those assumptions, and reports back the most pertinent reuslts. It's like having a little robot buddy that learns about _and_ tests your app. And the robot is very [reasonably priced]()!
+
+If you don't like testing, Meeshkan is a great fit, and if you do like testing, then Meeshkan is a great fit too! Basically, the tl;dr is that you should use Meeshkan to fix the vicious cycle of brittle tests. To be fair, as this article is clickbait, you didn't think I'd recommend anything less, did you? But now, your thought is confirmed. And if you were _that smart_ to figure out how this would all end, then you are probably the type of sophisticated, discerning, clever developer that would sign up for our [free-forever tier]() and try the service out. I know I would. But then, I'm the CEO of the company, so even if I paid for it, with the taxes that Finland skims off the top and that pesky 5% fee from Skype, I'd slowly bleed myself dry until I have no money left. So _someone_ else needs to pay for it, and perhaps that will be you, when you upgrade from our [free-forever tier]() to our best-in-class paid tier with Premium Augmented AI-Powered Tests, more testing hours, and several filler-features to make the pricing column look slightly longer than the free tier. We know you'll love it, and I'm looking forward to you signing up! And if you liked this article, please let the chariman of our board know and I'll keep my job.
