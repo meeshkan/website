@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
+import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
