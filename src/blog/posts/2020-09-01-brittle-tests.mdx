@@ -50,7 +50,7 @@ That's all you need to tell PureScript about `my_plus_function`. It'll figure ou
 
 In order to do this, you need to keep a running list of properties like the one above. There are some classic ways to do this, like creating a simplified model of the system under test and then making sure the diff between the results of the real system and the results of the model are within some acceptable threshold. This is called [model-based testing](https://en.wikipedia.org/wiki/Model-based_testing), and most property-based testing frameworks ([QuickCheck](), [fast-check](), [hypothesis]()) can do this too.
 
-The problem with property-based tests, though, is that you wind up specifying a metric ton of properties. That takes a lot of time. How can you get all the benefits of a great collection of properties in a reasonable amount of time? If only we could give a really smart algorithm read-only access to our code so that it could come up with a model, generate test from the model, and...
+The problem with property-based and model-based tests, though, is that you wind up specifying a metric ton of properties. That takes a lot of time. How can you get all the benefits of a great collection of properties in a reasonable amount of time? If only we could give a really smart algorithm read-only access to our code so that it could come up with a model, generate test from the model, and...
 
 ## Meeshkan
 
