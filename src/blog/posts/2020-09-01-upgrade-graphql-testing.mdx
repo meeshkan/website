@@ -1,0 +1,98 @@
+---
+title: Seven easy wins for testing your GraphQL API
+description: Tips for resiliency in the era of GraphQL
+date: 2020-09-01
+authors: ["mike"]
+published: true
+slug: brittle-tests
+tags:
+  - testing
+  - apis
+  - graphql
+---
+
+GraphQL is instantly testable. When you spin up a sample project like [The Meeshkan Bank](https://github.com/meeshkan/bank), you get an interactive playground for free. This is a game changer - we get documentation, a sandbox, autocompletion, and human-readable error messages for free.
+
+GraphiQL is one example of how GraphQL is the most testable framework in history. In this article, I'll discuss seven strategies for gaming up your GraphQL testing, all of which are implementable in less than hour.
+
+## Enums and scalars
+
+GraphQL gives you the power to define custom enums, scalars and directives. These make validation easier for your entire team.
+
+Compare the two ways of defining color below.
+
+```graphql
+enum Color {
+  Burnt_sienna
+  Fulvous
+  Mindaro
+  Skobeloff
+  Vermilion
+  Red
+}
+
+type Region0 {
+  color: Color
+}
+
+type Region1 {
+  color: String
+}
+```
+
+I've seen a lot of teams use a well-defined scheme like a color scheme and yet, when it comes time to implement their GraphQL API, they use a `String` instead of an `enum`. This leads to a lot of unnecessary validation burden. Let your GraphQL framework do the heavy lifting for you by using enums!
+
+The same is true for scalars.
+
+```
+scalar Gmail_email
+scalar Other_email
+```
+
+Even though graphql can't validate a `Gmail_email` out of the box, you can write [_one recipe_](https://github.com/absinthe-graphql/absinthe/wiki/Scalar-Recipes) and be done with it instead of validating gmail emails throughout your code base.
+
+I know I promised this article would be about testing, but the **best test is no test at all because someone else wrote it for you**. Using enums and scalars taps leverages GraphQL's well-tested and well-defined behavior to supercharge your APIs.
+
+## Schema linting
+
+While GraphQL schemas are pretty open-ended, there are certain conventions that will leave your colleagues scratching their heads. For example:
+
+```graphql
+type Post {
+  author: String
+  content: String
+  tags: [String]
+}
+```
+
+Let's take a peek at `tags`. We are saying "You may get an array of tags, or you may get null, and inside the array, there will be some strings and some nulls." What?!? What we probably actually wanted was a list of strings that may be empty:
+
+```graphql
+type Post {
+  author: String
+  content: String
+  tags: [String!]!
+}
+```
+
+Just because you _can_ use the type system a certain way in GraphQL doesn't mean you should. Usually, when types are used this way, it is not intentional - it just means someone didn't think it through. That's totally normal, but it leads to a lot of confusion in teams and is totally avoidable by using a _GraphQL schema linter_.
+
+My favorite graphql schema linter is called [`graphql-schema-linter`](https://github.com/cjoudrey/graphql-schema-linter), and it catches this sort of problem and many more! If you're coding in VSCode, you're using a coding linter to add squiggly yellow and/or red lines under your code as your work. Your GraphQL schema should get the same royal treatment! You can add it as part of your deployment pipeline to make sure your schema is nice and tidy before it ships to the world.
+
+Like custom enums and scalars, you get **tests for free** by using a schema linter. Who doesn't like free stuff?!? On that subject, and incidentally, my company is drop shipping a ton of free swag, ask for yours [here]()!
+
+## Type-safe resolvers
+
+Resolvers in most GraphQL frameworks are born type-safe, meaning that it will give you an `String` if you need an `String` and otherwise will throw an error back to the client. But what about the return types? To make sure you're returning the correct types, you can [auto-generate type-safe resolvers](https://graphql-code-generator.com/). You can then use these resolvers as a middle-layer between your business logic and your graphql framework. They will make sure that, however messy the typing is inside your business logic, the value going to the resolver is type-safe at _compile time_. Most GraphQL frameworks will throw a _runtime error_ as well if there is an issue with type safety, but that's exactly the type of breakage you want to avoid in production. Given how easy it is to generate type-safe resolvers from a schema (it literally takes seconds - try the site!), you can use this as an added linting layer in your code.
+
+## Build a contract
+
+Up until now, we haven't talked about a single test that you write. By using type-safety and linting, you're leveraging tests that _other people_ write, which is the best way to test!
+
+## Property-based testing
+
+## Generate a model
+
+## Meeshkan
+
+Imagine that you could record your GraphiQL experience and play it back as your API evolves, making sure important transa
