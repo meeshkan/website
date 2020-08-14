@@ -198,12 +198,11 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track(
-                "Clicked button",
-                { to: "https://app.meeshkan.com" },
-                { from: "https://meeshkan.com" },
-                { c2a: "Create a free account - top" }
-              )
+              mixpanel.track("Clicked button", {
+                to: "https://app.meeshkan.com",
+                from: "https://meeshkan.com",
+                c2a: "Create a free account - top",
+              })
             }}
             w={["100%", "100%", "auto"]}
             _hover={{ textDecor: "none", backgroundColor: "red.600" }}
@@ -223,12 +222,11 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track(
-                "Clicked button",
-                { to: "https://meeshkan.com/test-graphql" },
-                { from: "https://meeshkan.com" },
-                { c2a: "Mini GraphQL tester" }
-              )
+              mixpanel.track("Clicked button", {
+                to: "https://meeshkan.com/test-graphql",
+                from: "https://meeshkan.com",
+                c2a: "Mini GraphQL tester",
+              })
             }}
             w={["100%", "100%", "auto"]}
             _hover={{ textDecor: "none", backgroundColor: "gray.100" }}
@@ -319,12 +317,11 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track(
-                "Clicked button",
-                { to: "https://app.meeshkan.com" },
-                { from: "https://meeshkan.com" },
-                { c2a: "Create a free account - bottom" }
-              )
+              mixpanel.track("Clicked button", {
+                to: "https://app.meeshkan.com",
+                from: "https://meeshkan.com",
+                c2a: "Create a free account - bottom",
+              })
             }}
             w={["100%", "100%", "auto"]}
             _hover={{ textDecor: "none", backgroundColor: "red.600" }}
@@ -641,15 +638,13 @@ const IndexPage = () => {
             variantColor="red"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track(
-                "Clicked button",
-                {
-                  to:
-                    "https://meetings.hubspot.com/makenna/consultation-with-meeshkan",
-                },
-                { from: "https://meeshkan.com" },
-                { c2a: "Schedule a demo" }
-              )
+              mixpanel.track("Clicked button", {
+                to:
+                  "https://meetings.hubspot.com/makenna/consultation-with-meeshkan",
+
+                from: "https://meeshkan.com",
+                c2a: "Schedule a demo",
+              })
             }}
             letterSpacing="wide"
             borderRadius="sm"

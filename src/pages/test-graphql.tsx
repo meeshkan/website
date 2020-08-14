@@ -85,15 +85,12 @@ const TestGraphqlPage = () => {
       //   authorization: "authorization_header_value",
       // },
     })
-    mixpanel.track(
-      "Clicked button",
-      {
-        to: "https://meeshkan.io/runr",
-      },
-      { from: "https://meeshkan.com/test-graphql" },
-      { c2a: "Test endpoint" },
-      { payload: endpointData }
-    )
+    mixpanel.track("Clicked button", {
+      to: "https://meeshkan.io/runr",
+      from: "https://meeshkan.com/test-graphql",
+      c2a: "Test endpoint",
+      payload: endpointData,
+    })
     fetch("https://meeshkan.io/runr", {
       method: "POST",
       body: endpointData,

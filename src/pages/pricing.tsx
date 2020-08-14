@@ -86,14 +86,11 @@ const PricingCard = ({
         w="full"
         mt={8}
         onClick={() => {
-          mixpanel.track(
-            "Clicked button",
-            {
-              to: "https://app.meeshkan.com",
-            },
-            { from: "https://meeshkan.com/pricing" },
-            { c2a: `Create an account - ${title}` }
-          )
+          mixpanel.track("Clicked button", {
+            to: "https://app.meeshkan.com",
+            from: "https://meeshkan.com/pricing",
+            c2a: `Create an account - ${title}`,
+          })
         }}
       >
         Create a free account
@@ -143,6 +140,7 @@ const PricingPage = () => {
             title="Free"
             subtitle="for Individuals"
             price="$0"
+            mixpanel={mixpanel}
             yesFeatures={[
               "1 team member",
               "2 projects",
@@ -177,6 +175,7 @@ const PricingPage = () => {
           <PricingCard
             title="Business"
             subtitle="starting at"
+            mixpanel={mixpanel}
             price="$2000"
             yesFeatures={[
               "25 team members",
