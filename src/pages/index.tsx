@@ -17,6 +17,7 @@ import {
   AccordionIcon,
   AccordionPanel,
   Grid,
+  Stack,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -188,7 +189,12 @@ const IndexPage = () => {
           we test critical flows, guaranteed to give you confidence in your app.
           Every commit.
         </Text>
-        <Flex justify="center" mb={12}>
+        <Stack
+          spacing={[0, 0, 4]}
+          direction="row"
+          justify="center"
+          flexWrap="wrap"
+        >
           <Button
             as={ChakraLink}
             // @ts-ignore
@@ -197,6 +203,7 @@ const IndexPage = () => {
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
+            mb={[4, 4, 0]}
             onClick={() => {
               mixpanel.track("Clicked button", {
                 to: "https://app.meeshkan.com",
@@ -210,7 +217,6 @@ const IndexPage = () => {
             Create a free account
           </Button>
           <Button
-            ml={4}
             as={Link}
             // @ts-ignore
             to="/test-graphql/"
@@ -233,7 +239,7 @@ const IndexPage = () => {
           >
             Mini GraphQL tester
           </Button>
-        </Flex>
+        </Stack>
         {/* <Box maxW="750px" mx="auto">
           <Card>
             <Flex
@@ -287,20 +293,20 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Keeping up with an ever-evolving API is a full-time job"
-        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
+        heading="Static testing falls short by focusing on the quantity of ‘bugs’ rather than"
+        em="quality"
+        anchor="#quality"
+        text="Meeshkan prioritizes and sorts bugs so you know what to tackle first.Code coverage metrics aren't meaningful without the quality context of what's covered."
       >
-        <GenerateTests />
+        <PrioritizeTests />
       </DoubleSection>
 
       <DoubleSection
         reverse={true}
-        heading="Test generation falls short by focusing on the quantity of ‘bugs’ rather than"
-        em="quality"
-        anchor="#quality"
-        text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
+        heading="Keeping up with an ever-evolving API is a full-time job"
+        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
-        <PrioritizeTests />
+        <GenerateTests />
       </DoubleSection>
 
       <SingleSection
