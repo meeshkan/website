@@ -9,12 +9,13 @@ import {
   Button,
   Link as ChakraLink,
   Code,
+  Box,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
 import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
 
 type RoadmapLink = {
@@ -66,6 +67,26 @@ const MachineLearningCard = ({
 )
 
 const MachineLearningPage = () => {
+  const { linear } = useStaticQuery(
+    graphql`
+      query LINEAR_PROJECTS {
+        linear {
+          projects {
+            nodes {
+              name
+              description
+              links {
+                nodes {
+                  label
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  )
   return (
     <Layout>
       <SEO
@@ -103,6 +124,16 @@ const MachineLearningPage = () => {
           </ChakraLink>
           {"."}
         </Text>
+        <SimpleGrid columns={3} spacing={8}>
+          {linear.projects.nodes.map((project, index) => (
+            <Card
+              key={index}
+              heading={project.name}
+              body={project.description}
+            />
+          ))}
+        </SimpleGrid>
+
         <SimpleGrid columns={3} spacing={8}>
           <MachineLearningCard
             title="Field classifier"

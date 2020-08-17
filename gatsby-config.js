@@ -119,5 +119,20 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // Arbitrary name for the remote schema Query type
+        typeName: "Linear",
+        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
+        fieldName: "linear",
+        // Url to query from
+        url: "https://api.linear.app/graphql",
+        // headers
+        headers: {
+          Authorization: process.env.LINEAR_TOKEN,
+        },
+      },
+    },
   ],
 }
