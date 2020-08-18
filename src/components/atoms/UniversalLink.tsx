@@ -5,15 +5,17 @@ import { Link as ChakraLink } from "@chakra-ui/core"
 type UniversalLinkProps = {
   children?: any // string or Object
   to: string
+  color?: string
 }
 
 export const UniversalLink = ({
   children,
   to,
+  color,
   ...props
 }: UniversalLinkProps) => {
-  const isInternal = to => /^\/(?!\/)/.test(to)
-  const isHash = to => /^#/.test(to)
+  const isInternal = (to) => /^\/(?!\/)/.test(to)
+  const isHash = (to) => /^#/.test(to)
 
   // Use Gatsby Link for internal links, and <a> for others
   if (isInternal(to) || isHash(to)) {
@@ -22,7 +24,7 @@ export const UniversalLink = ({
         // @ts-ignore
         as={GatsbyLink}
         to={to}
-        color="inherit"
+        color={color ? color : "inherit"}
         _hover={{ textDecoration: "none" }}
         {...props}
       >
@@ -33,7 +35,7 @@ export const UniversalLink = ({
     return (
       <ChakraLink
         href={to}
-        color="inherit"
+        color={color ? color : "inherit"}
         _hover={{ textDecoration: "none" }}
         {...props}
         // isExternal
