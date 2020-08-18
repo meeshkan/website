@@ -10,6 +10,10 @@ import {
   Stack,
   List,
   ListItem,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
 } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
@@ -246,6 +250,51 @@ const Roadmap = () => {
           This roadmap is directly connected to our project management software.
           Our roadmap is serious, not just for show!
         </Text>
+
+        <Flex
+          as="form"
+          // @ts-expect-error
+          action="/success/"
+          name="roadmap-updates"
+          data-netlify="true"
+          method="post"
+          data-netlify-honeypot="bot-field"
+          direction={["column", "column", "row"]}
+          justify="center"
+          alignItems="flex-end"
+          mb={12}
+        >
+          <input type="hidden" name="bot-field" />
+          <input type="hidden" name="form-name" value="roadmap-updates" />
+          <FormControl
+            isRequired
+            mr={[0, 0, 4]}
+            mb={[4, 4, 0]}
+            w="100%"
+            maxW={["full", "full", "400px"]}
+          >
+            <FormLabel htmlFor="email" fontWeight={700}>
+              Email
+            </FormLabel>
+            <Input
+              type="email"
+              name="email"
+              aria-label="Enter your business email"
+              borderRadius="sm"
+              placeholder="Your email"
+              fontWeight={500}
+            />
+          </FormControl>
+          <Button
+            variantColor="red"
+            borderRadius="sm"
+            fontWeight={900}
+            type="submit"
+            w={["100%", "100%", "auto"]}
+          >
+            Recieve updates
+          </Button>
+        </Flex>
       </SingleSection>
 
       <SingleSection>
