@@ -85,7 +85,7 @@ Like custom enums and scalars, you get **tests for free** by using a schema lint
 
 Resolvers in most GraphQL frameworks are born type-safe, meaning that it will give you an `String` if you need an `String` and otherwise will throw an error back to the client. But what about the return types? To make sure you're returning the correct types, you can [auto-generate type-safe resolvers](https://graphql-code-generator.com/). You can then use these resolvers as a middle-layer between your business logic and your graphql framework. They will make sure that, however messy the typing is inside your business logic, the value going to the resolver is type-safe at _compile time_. Most GraphQL frameworks will throw a _runtime error_ as well if there is an issue with type safety, but that's exactly the type of breakage you want to avoid in production. Given how easy it is to generate type-safe resolvers from a schema (it literally takes seconds - try the site!), you can use this as an added linting layer in your code.
 
-## Build a contract
+## 4. Build a contract
 
 Up until now, I haven't asked you to do any testing in the traditional sense. By using type-safety and linting, you're leveraging tests that _other people_ write, which is the best way to test!
 
