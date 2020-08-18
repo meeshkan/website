@@ -77,7 +77,7 @@ A **mock** is a substitute for a service that mimics the original functionality.
 
 In this case, the mock acts as a replacement for your third-party integration. That way, you don't need to make a network call from your tests. This helps make your test resilient when the network is down or slow and enables you to specify and test corner cases. Plus mocks are often less complicated to access and maintain.
 
-There are some libraries you can use to write your mocks. We recently published a post [comparing two JavaScript mocking libraries - nock and unmock](https://meeshkan.com/blog/unmock-vs-nock/).
+There are some libraries you can use to write your mocks. We recently published a post [comparing two JavaScript mocking libraries - nock and unmock](/blog/unmock-vs-nock/).
 
 We’ve loved and used this approach ourselves (I mean, we built [unmock](https://github.com/meeshkan/unmock-js)). There are still issues with this approach though. Namely, that you have to manually write all the tests - even if the input values are generated.
 

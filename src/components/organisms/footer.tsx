@@ -17,7 +17,7 @@ export function Footer() {
       <Box maxW="1000px" mx="auto">
         <Flex wrap="wrap" justify="center">
           <Stack my={4} w={["100%", "33%"]}>
-            <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
+            <Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
               Company
             </Heading>
             <Link
@@ -47,7 +47,7 @@ export function Footer() {
             <Link
               // @ts-ignore
               as={GatsbyLink}
-              to="/terms-and-conditions/"
+              to="/docs/terms-and-conditions/"
               aria-label="Terms and conditions of the Meeshkan product"
               title="terms and conditions"
             >
@@ -55,9 +55,17 @@ export function Footer() {
             </Link>
           </Stack>
           <Stack my={4} w={["100%", "33%"]}>
-            <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
+            <Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
               Resources
             </Heading>
+            <Link
+              // @ts-ignore
+              as={GatsbyLink}
+              to="/test-graphql/"
+              aria-label="A landing page all about testing graphql"
+            >
+              Testing GraphQL
+            </Link>
             <Link
               // @ts-ignore
               as={GatsbyLink}
@@ -91,7 +99,7 @@ export function Footer() {
             </Link>
           </Stack>
           <Stack my={4} w={["100%", "33%"]}>
-            <Heading as="h4" color="gray.900" fontSize="xl" fontWeight={900}>
+            <Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
               Related links
             </Heading>
             <Link
@@ -124,7 +132,7 @@ export function Footer() {
             </Link>
           </Stack>
         </Flex>
-        <Divider borderColor="gray.300" mb={4} mt={4} />
+        <Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
         <Flex justifyContent="space-between" align="center">
           <GatsbyLink to="/" aria-label="Meeshkan homepage">
             <Icon name="Logo" color="gray.900" size="6" w="auto" />
@@ -135,6 +143,7 @@ export function Footer() {
               variant="ghost"
               isExternal
               href="https://twitter.com/meeshkan"
+              aria-label="Twitter"
               // @ts-ignore
               icon="twitter"
               rounded="sm"
@@ -145,6 +154,7 @@ export function Footer() {
               variant="ghost"
               isExternal
               href="https://www.linkedin.com/company/meeshkan/"
+              aria-label="LinkedIn"
               // @ts-ignore
               icon="linkedin"
               rounded="sm"
@@ -155,6 +165,7 @@ export function Footer() {
               variant="ghost"
               isExternal
               href="https://github.com/meeshkan"
+              aria-label="GitHub"
               // @ts-ignore
               icon="github"
               rounded="sm"

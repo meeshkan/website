@@ -7,7 +7,7 @@ var theme = {
     {
       types: ["comment", "prolog", "doctype", "cdata"],
       style: {
-        color: "#7b8188",
+        color: "#9AA5B1",
         fontStyle: "italic",
       },
     },
@@ -56,7 +56,7 @@ var theme = {
     {
       types: ["function", "class-name"],
       style: {
-        color: "#526ee0",
+        color: "#7D92E8",
         fontStyle: "italic",
       },
     },

@@ -2,19 +2,13 @@ import React, { useState } from "react"
 import SEO from "../components/molecules/seo"
 import {
   Heading,
-  Input,
   Button,
   Text,
   Flex,
   Badge,
-  FormControl,
-  FormLabel,
   Box,
   Link as ChakraLink,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
   SimpleGrid,
   Code,
   Accordion,
@@ -23,14 +17,14 @@ import {
   AccordionIcon,
   AccordionPanel,
   Grid,
+  Stack,
 } from "@chakra-ui/core"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
+import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
-import { Card } from "../components/atoms/card"
-import { UniversalLink } from "../components/atoms/UniversalLink"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import PrioritizeTests from "../components/organisms/home/prioritizeTests"
@@ -147,6 +141,7 @@ const IndexPage = () => {
   const [showImage, setShowImage] = React.useState(
     data.stack.childImageSharp.fluid
   )
+  const mixpanel = useMixpanel()
 
   return (
     <Layout>
@@ -194,7 +189,12 @@ const IndexPage = () => {
           we test critical flows, guaranteed to give you confidence in your app.
           Every commit.
         </Text>
-        <Flex justify="center" mb={12}>
+        <Stack
+          spacing={[0, 0, 4]}
+          direction="row"
+          justify="center"
+          flexWrap="wrap"
+        >
           <Button
             as={ChakraLink}
             // @ts-ignore
@@ -203,11 +203,43 @@ const IndexPage = () => {
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
+            mb={[4, 4, 0]}
+            onClick={() => {
+              mixpanel.track("Clicked button", {
+                to: "https://app.meeshkan.com",
+                from: "https://meeshkan.com",
+                c2a: "Create a free account - top",
+              })
+            }}
             w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "red.600" }}
           >
             Create a free account
           </Button>
-        </Flex>
+          <Button
+            as={Link}
+            // @ts-ignore
+            to="/test-graphql/"
+            aria-label="Link to the test graphql page"
+            variantColor="gray"
+            backgroundColor="gray.50"
+            color="gray.700"
+            variant="ghost"
+            borderRadius="sm"
+            fontWeight={900}
+            onClick={() => {
+              mixpanel.track("Clicked button", {
+                to: "https://meeshkan.com/test-graphql",
+                from: "https://meeshkan.com",
+                c2a: "Mini GraphQL tester",
+              })
+            }}
+            w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "gray.100" }}
+          >
+            Mini GraphQL tester
+          </Button>
+        </Stack>
         {/* <Box maxW="750px" mx="auto">
           <Card>
             <Flex
@@ -261,20 +293,20 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Keeping up with an ever-evolving API is a full-time job"
-        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
+        heading="Static testing falls short by focusing on the quantity of ‘bugs’ rather than"
+        em="quality"
+        anchor="#quality"
+        text="Meeshkan prioritizes and sorts bugs so you know what to tackle first.Code coverage metrics aren't meaningful without the quality context of what's covered."
       >
-        <GenerateTests />
+        <PrioritizeTests />
       </DoubleSection>
 
       <DoubleSection
         reverse={true}
-        heading="Test generation falls short by focusing on the quantity of ‘bugs’ rather than"
-        em="quality"
-        anchor="#quality"
-        text="Code coverage metrics aren't meaningful without the quality context of what's covered. Meeshkan prioritizes and sorts bugs so you know what to tackle first."
+        heading="Keeping up with an ever-evolving API is a full-time job"
+        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
       >
-        <PrioritizeTests />
+        <GenerateTests />
       </DoubleSection>
 
       <SingleSection
@@ -290,7 +322,15 @@ const IndexPage = () => {
             variantColor="red"
             borderRadius="sm"
             fontWeight={900}
+            onClick={() => {
+              mixpanel.track("Clicked button", {
+                to: "https://app.meeshkan.com",
+                from: "https://meeshkan.com",
+                c2a: "Create a free account - bottom",
+              })
+            }}
             w={["100%", "100%", "auto"]}
+            _hover={{ textDecor: "none", backgroundColor: "red.600" }}
           >
             Create a free account
           </Button>
@@ -603,6 +643,15 @@ const IndexPage = () => {
             aria-label="Schedule a demo with the Meeshkan team."
             variantColor="red"
             fontWeight={900}
+            onClick={() => {
+              mixpanel.track("Clicked button", {
+                to:
+                  "https://meetings.hubspot.com/makenna/consultation-with-meeshkan",
+
+                from: "https://meeshkan.com",
+                c2a: "Schedule a demo",
+              })
+            }}
             letterSpacing="wide"
             borderRadius="sm"
           >
