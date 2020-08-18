@@ -244,7 +244,7 @@ const Roadmap = () => {
           textAlign={["left", "left", "center"]}
           fontSize={["lg", "xl", "2xl"]}
           lineHeight="short"
-          mb={6}
+          mb={4}
           color="gray.700"
         >
           This roadmap is directly connected to our project management software.
@@ -262,7 +262,6 @@ const Roadmap = () => {
           direction={["column", "column", "row"]}
           justify="center"
           alignItems="flex-end"
-          mb={12}
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="roadmap-updates" />
