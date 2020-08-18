@@ -1,6 +1,6 @@
 ---
-title: Seven easy wins for testing your GraphQL API
-description: How to upgrade your GraphQL testing past using GraphiQL in 7 easy ways including other tooling.
+title: Seven ways to improve your GraphQL API in less than an hour
+description: You've built a great GraphQL API. Now it's time to give it rock-solid reliability!
 date: 2020-09-01
 authors: ["mike"]
 published: true
@@ -11,9 +11,9 @@ tags:
   - graphql
 ---
 
-GraphQL is instantly testable. When you spin up a sample project like [The Meeshkan Bank](https://github.com/meeshkan/bank), you get an interactive [GraphiQL playground](https://www.electronjs.org/apps/graphiql) for free. This is a game changer - we get documentation, a sandbox, auto-completion, and human-readable error messages for free.
+At Meeshkan, we work with lots of teams building GraphQL APIs. In doing so, we've seen several techniques that have provided high value to teams with minimal effort. These are some amazing force multipliers, and we thought it'd be nice to collect them into one article that you can use as a checklist.
 
-GraphiQL is one example of how GraphQL is the most testable framework in history. In this article, I'll discuss seven strategies for progressing your your GraphQL testing past the GraphiQL, all of which are implementable in less than hour.
+All of the techniques that make the cut below take less than an hour to implement. As we like to brag a bit (can you blame us?) our solution will be one of them, but there are other ones too! They're all complementary, and we think you'll get a lot of milage out of them. Enjoy!
 
 ## 1. Enums and scalars
 
@@ -40,7 +40,7 @@ type Region1 {
 }
 ```
 
-I've seen a lot of teams use a well-defined scheme like a color scheme and yet, when it comes time to implement their GraphQL API, they use a `String` instead of an `enum`. This leads to a lot of unnecessary validation burden. Let your GraphQL framework do the heavy lifting for you by using enums!
+I've seen a lot of teams define very precise business outcomes and yet, when it comes time to represent these outcomes in a GraphQL API, they use a `String` instead of an `enum`. This leads to unnecessary validation burden. Let your GraphQL framework do the heavy lifting for you by using enums!
 
 The same is true for scalars.
 
@@ -49,9 +49,9 @@ scalar Gmail_email
 scalar Other_email
 ```
 
-Even though graphql can't validate a `Gmail_email` out of the box, you can write [_one recipe_](https://github.com/absinthe-graphql/absinthe/wiki/Scalar-Recipes) and be done with it instead of validating gmail emails throughout your code base.
+Even though graphql can't validate a `Gmail_email` out of the box, you can write [_one recipe_](https://github.com/absinthe-graphql/absinthe/wiki/Scalar-Recipes) for your entire codebase.
 
-I know I promised this article would be about testing, but the **best test is no test at all because someone else wrote it for you**. Using enums and scalars taps leverages GraphQL's well-tested and well-defined behavior to supercharge your APIs.
+If you're already well into a GraphQL project, it may be impossible to modify your API, but if you're adding to it or starting a new project, building with an enum-first and scalar-first mindset saves tons of time down the line and takes minutes to set up.
 
 ## 2. Schema linting
 
@@ -77,31 +77,40 @@ type Post {
 
 Just because you _can_ use the type system a certain way in GraphQL doesn't mean you should. Usually, when types are used this way, it is not intentional - it just means someone didn't think it through. That's totally normal, but it leads to a lot of confusion in teams and is totally avoidable by using a _GraphQL schema linter_.
 
-My favorite graphql schema linter is called [`graphql-schema-linter`](https://github.com/cjoudrey/graphql-schema-linter), and it catches this sort of problem and many more! If you're coding in VSCode, you're using a coding linter to add squiggly yellow and/or red lines under your code as your work. Your GraphQL schema should get the same royal treatment! You can add it as part of your deployment pipeline to make sure your schema is nice and tidy before it ships to the world.
+Here are a few linters and validators you can use in your GraphQL pipeline starting today. If you're developing in JavaScript, all it takes is adding a linting step to your `package.json` file and you get automatic linting with every build.
 
-Like custom enums and scalars, you get **tests for free** by using a schema linter. Who doesn't like free stuff?!? On that subject, and incidentally, my company is drop shipping a ton of free swag, ask for yours [here]()!
+- [GraphQL Inspector](https://graphql-inspector.com/)
+- [`graphql-schema-linter`](https://github.com/cjoudrey/graphql-schema-linter)
+
+Also, have a look at [GraphQL config](https://graphql-config.com/introduction) for a nice way to set these things up to run automatically in your IDE so that you can reuse the same linting and validation config in a variety of setups.
 
 ## 3. Type-safe resolvers
 
-Resolvers in most GraphQL frameworks are born type-safe, meaning that it will give you an `String` if you need an `String` and otherwise will throw an error back to the client. But what about the return types? To make sure you're returning the correct types, you can [auto-generate type-safe resolvers](https://graphql-code-generator.com/). You can then use these resolvers as a middle-layer between your business logic and your graphql framework. They will make sure that, however messy the typing is inside your business logic, the value going to the resolver is type-safe at _compile time_. Most GraphQL frameworks will throw a _runtime error_ as well if there is an issue with type safety, but that's exactly the type of breakage you want to avoid in production. Given how easy it is to generate type-safe resolvers from a schema (it literally takes seconds - try the site!), you can use this as an added linting layer in your code.
+Resolvers in most GraphQL frameworks are born type-safe, meaning that it will give you an `String` if you need an `String` and otherwise will throw an error back to the client. But what about the return types? To make sure you're returning the correct types, you can [auto-generate type-safe resolvers](https://graphql-code-generator.com/). You can then use these resolvers as a middle-layer between your business logic and your graphql framework. They will make sure that, however messy the typing is inside your business logic, the value going to the resolver is type-safe at _compile time_. Most GraphQL frameworks will throw a _runtime error_ as well if there is an issue with type safety, but that's exactly the type of breakage you want to avoid in production. Given how easy it is to generate type-safe resolvers from a schema (it literally takes seconds - try the site!), you can use this as an added validation layer in your code.
 
-## 4. Build a contract
+## 4. Meeshkan
 
-Up until now, I haven't asked you to do any testing in the traditional sense. By using type-safety and linting, you're leveraging tests that _other people_ write, which is the best way to test!
+One of the most exciting advancements in software development is the use of AI to learn how software works and generate tests based on those learnings. At [Meeshkan](https://meeshkan.com), we use NLP libraries like [spacy](https://spacy.io/) and property-based testing frameworks like [QuickCheck](https://en.wikipedia.org/wiki/QuickCheck) to automatically understand and test GraphQL APIs.
 
-But at a certain point, situations crop up where writing tests make sense. In my opinion, the most important situation where this comes up is to **enforce a contract**. As a backend GraphQL developer, you've made a contract (explicit or implicit) with the users of your GraphQL API that it will work as expected. While your GraphQL API can be used a lot of different ways, a contract emerges over time of how it is _actually_ used.
+Signing up for Meeshkan takes minutes, and you'll see your first test report within hours. We provide a generous [free tier](https://app.meeshkan.com) that makes use of our most popular AI algorithms, and our paid tier runs over 10,000 tests on each project every day for added security.
+
+## 5. Build a contract
+
+As a backend GraphQL developer, when you launch an API and someone else uses it, a _de facto_ contract emerges around yout API. While your GraphQL API can be used a lot of different ways, this contract represents how it is _actually_ used by your users.
 
 Take, for example, a popular service like [CodeSandbox](https://codesandbox.io). They have a full-featured GraphQL API, but when you use [codesandbox.io](https://codesandbox.io), if you open your network tab, you'll see that the front-end calls the backend GraphQL API in a limited number of pre-defined ways. _This_ is the contract I'm talking about. It won't add much value to their business to polish unused corners of their API, but they really need to make sure they don't break their contract with their front-end.
 
-The good news is that, even here, you don't need to write a single test! Contract-based testing frameworks like [pact.io](https://pact.io) will figure out what this contract is _automatically_ and alert you when it is broken. It will even generate test cases to validate this contract when you build and deploy your code. Deploying a pact server takes 1-2 devs under a day, and you'll gain that time back in a month.
+The good news is that this contract can be enforced automatically with a little bit of setup. Check out [pact.io](https://pact.io), which will figure out what this contract is _automatically_ and alert you when it is broken. It will even generate test cases to validate this contract when you build and deploy your code. Deploying a pact server in a local environment can be done in less than an hour, and you'll be amazed how powerful the idea is!
 
-## 5. Property-based testing
+## 6. Property-based testing
 
 This section is not relevant to all GraphQL backend devs, but if you are considering opening up your GraphQL API to people outside your company or you want to invest in security-testing, read on!
 
-If you open up your GraphQL API to the world, the contract becomes a lot broader because it is defined by potential usage instead of actual usage. While regular usage patterns will emerge, you are always one unexpected use-case away from breakage when your API exists out in the wild.
+If you share your GraphQL API with the world, the contract becomes a lot broader because it is defined as much by potential usage as by actual usage.
 
-Before you advertise your GraphQL API for public use, you should write some property-based tests for it. **Property-based tests** use randomly-generated data to confirm that a set of properties hold for a given system under test. The good news is that, for a GraphQL API, a lot of the properties are pre-defined by virute of the schema. While a lot of the methods I describe above (ie type-safe resolvers) can validate many of these properties without additional tests, nasty corner cases can arise, like having code that implicitly expects a positive integer and crashes otherwise (we see this all the time at Meeshkan!). Property-based tests reveal this type of bug.
+Before you advertise your GraphQL API for public use, you should write some integration tests. While we will cover integration testing GraphQL in a separate article, in this article, I'd like to mention one method because of how powerful it is in very little time. That method is **property-based testing**.
+
+Property-based tests use randomly-generated data to confirm that a set of properties hold for a given system under test. The good news is that, for a GraphQL API, a lot of the properties are pre-defined by virute of the schema. While a lot of the methods I describe above (ie type-safe resolvers) can validate many of these properties without additional tests, nasty corner cases can arise, like having code that implicitly expects a positive integer and crashes otherwise. Property-based tests reveal this type of bug.
 
 The good news is that, to set up basic property-based tests for your graphql API, you don't need to write a single test. You can use a framework like [schemathesis](https://schemathesis.readthedocs.io/en/stable/graphql.html) to **automatically generate property-based tests** for your GraphQL API.
 
@@ -110,26 +119,18 @@ For some more resources on property-based testing, you can check out these artic
 - [Finding and fixing bugs in your tests with fast-check](https://meeshkan.com/blog/property-based-testing-bugs/)
 - [Introduction to property-driven development](https://meeshkan.com/blog/introduction-to-properties-driven-development/)
 
-## 6. Generate a model
+## 7. Generate a model
 
-One of the hardest bugs to catch in testing is the software equivalent of DC-offset. In audio, DC-offset is when you have a little bit of direct current going into a recording system, which makes the microphone more rigid so that it doesn't vibrate as freely. That results in a lower variation of amplitude, which results in poor sound quality. Entire albums have been plagued by DC-offset, and it's super hard to undo once it's done.
+One of the hardest bugs to catch in testing is the software equivalent of DC-offset. In signals like audio, [DC-offset](https://en.wikipedia.org/wiki/DC_bias) is when you have a little bit of direct current going into a system, which makes the receiver (ie microphone) more rigid so that it doesn't vibrate as freely. That results in a lower variation of amplitude, which results in poor signal (sound) quality.
 
-In software, something like DC-offset occurs when a piece of software _should_ return something (ie robust search results) but in reality returns something really limited (ie the 3-4 top results) due to a malformed query. It is super hard to catch that, and it has the same effect as DC-offset on an album: underwhelming performance.
+In software, something like DC-offset occurs when a piece of software _should_ return a range of values (ie robust search results) but in reality returns a subset of this range (ie the 3-4 top results) due to a malformed query. It is super hard to catch this type of bug, and it has the same effect as DC-offset on an album: underwhelming performance.
 
-Software DC-offset has a particularly crippling effect on businesses because it is immediately felt by users and leads to an underwhelming sensation. If you have a menu that accidentally only shows two options, followed by a color palette that accidentally only shows one color, followed by a list of your creations that does not paginate, your users will bounce to a competitor.
+Software DC-offset has a particularly crippling effect on businesses because it is immediately felt by users and leads to churn. If you have a menu that accidentally only shows two options, followed by a color palette that accidentally only shows one color, followed by a list of your creations that does not paginate, your users will bounce.
 
-Fixing DC-offset in software has been one of the hardest problems in testing, but GraphQL makes it much easier to do this than before. Using the same methods as property-based testing, you can generate a _mock GraphQL server_. This is done by generating fake _output data_ instead of measuring fake _input data_.
+Fixing DC-offset in software is one of the hardest problems in testing, but GraphQL makes it much easier to do this than before. Using the same methods as property-based testing, you can generate a _mock GraphQL server_. This is done by generating fake _output data_ instead of measuring fake _input data_.
 
-Meeshkan has a tool called [hmt](https://github.com/meeshkan/hmt) that helps you automatically generate mock servers. If you run them continuously on a server to generate "garbage" data and then compare how this data is distributed compared to your real data, you'll notice when the histogram of the generated data is radically different than the real data. Glancing over 2-3 of these charts once a week can help you nip software DC-offset in the proverbial bud!
-
-## 7. Meeshkan
-
-When I talk about all of the solutions above, I'm doing so with a sort of "ideal GraphQL testing solution" in the back of my head. What would ideal GraphQL testing look like? To me, it is an infinite supply of really fast, really smart QA engineers that can guess what I wanted to do, measure what my service is actually doing, and present the diff in a way I can understand.
-
-That sounds like science fiction, but at Meeshkan, that's what we're in the business of doing. We use artificial intelligence to predict, with high confidence, how we think you wanted your app to behave, and we generate test reports based on this. You can get started on our [free tier](https://app.meeshkan.com) to see how this works for your GraphQL API!
+Projects like [graphql-tools](https://www.graphql-tools.com/docs/mocking/) automatically generate mock servers from a schema in less than a minute. If you compare their output to your production logs, which can be done with tools like Jupyter and matplotlib, you'll notice when the histograms are radically different. Glancing over 2-3 of these charts once a week can help you nip software DC-offset in the proverbial bud!
 
 ## Parting shot
 
-In this article, I promised to offer you seven testing solutions for GraphQL, and you may be surprised to see that I didn't show you how to write a single test. That's because, in 2020, writing tests is no longer the most sure-fire way to test your software, just like writing code is not the most sure-fire way to build software. Of course, you have to write some code, and you probably should write some tests, but so many tools and libraries exist out there that you can get very far just by composing together high-quality services that communicate across well-defined interfaces with limited surface area.
-
-I hope that you get the chance to try out some of the tools and technologies linked in this article. Those who consume your GraphQL API will thank you for it!
+I hope that you get the chance to try out some of the tools and technologies linked in this article. Those who consume your GraphQL API will thank you for it, and you'll have a much more pleasurable experience developing it!
