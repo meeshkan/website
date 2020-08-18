@@ -86,6 +86,7 @@ export function Navigation() {
       <Stack isInline display={["none", "none", "flex"]}>
         <NavLink text="Pricing" path="/pricing/" />
         <NavLink text="Blog" path="/blog/" />
+        <NavLink text="Roadmap" path="/roadmap/" />
         <NavLink text="Docs" path="/docs/" />
         <Flex>
           <SignUpLink />
