@@ -30,8 +30,8 @@ type MilestoneProps = {
   title: string
   description: string
   state: string
-  scopeHistory?: number
-  completedScopeHistory?: number
+  scope?: number
+  completedScope?: number
   link?: Array<LinkProps>
 }
 
@@ -39,13 +39,15 @@ const Milestone = ({
   title,
   description = "",
   state,
-  scopeHistory,
-  completedScopeHistory,
+  scope,
+  completedScope,
   link,
 }: MilestoneProps) => {
-  const complete =
-    (scopeHistory != null ? scopeHistory : 0) -
-    (completedScopeHistory != null ? completedScopeHistory : 0)
+  const complete = Math.round(
+    ((completedScope != null ? completedScope : 0) /
+      (scope != null ? scope : 0)) *
+      100
+  )
   var circumference = Math.PI * (90 * 2)
   let completeAmount = Math.round(((100 - complete) / 100) * circumference)
   return (
@@ -314,10 +316,8 @@ const Roadmap = () => {
                 title={project.name.slice(3)}
                 description={project.description}
                 state={project.state}
-                scopeHistory={project.scopeHistory.slice(-1)[0]}
-                completedScopeHistory={
-                  project.completedScopeHistory.slice(-1)[0]
-                }
+                scope={project.scopeHistory.slice(-1)[0]}
+                completedScope={project.completedScopeHistory.slice(-1)[0]}
                 link={project.links.nodes}
               />
             ))}
