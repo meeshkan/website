@@ -393,13 +393,13 @@ instance wanderFunction :: Wander Function where
   -- wander t = alaF Identity t
 ```
 
-The first optic we get from Kleisli-land is one that acts on the balance of a bank client.
+For example, let's imagine that we got a Kleisli function that lifted a side effect from one operation to another. This is common when, for example, an operation fails for a part of a whole and you need to mark the whole as "failed".
 
 ```haskell
 type Client = { name :: String, balance :: Number}
 
 actOnBalance :: forall f. Applicative f => (Number -> f Number) -> Person -> f Person
-actOnBalance ----
+actOnBalance f p = { name: p.name, balance: _ } <$> (f p.balance)
 ```
 
 When we try using with "The Plus One Server", it will predictably crash.
