@@ -441,17 +441,43 @@ instance forgetChoice :: Monoid r => Choice (Forget r) where
   right (Forget f) = either (Right mempty) (Right <<< f)
 ```
 
-The same trick works for `Wander` but on a functor application level.
+The same trick works for `Wander` but on a functor application level. Again, `r` will be a monoid, and the `Const` functor will "pull an `r` out of thin air" if not provided one.
 
-## Zipping things together
+```purescript
+instance wanderForget :: Monoid r => Wander (Forget r) where
+  wander f (Forget r) = Forget (alaF Const f r)
+
+instance applicativeConst :: Monoid a => Applicative (Const a) where
+  pure _ = Const mempty -- "out of thin air"
+```
+
+So, when you try to preview a value from an empty list using a lens library as we do below, you get `Nothing` because:
+
+- the `Wander` instance of forget uses the `Const` profunctor
+- the `Const` profunctor, when used in List's implementation of `traverse`, starts with a pure const (getting an `mempty`, or a `Nothing` in this case)
+- as there is nothing to smoosh, it returns `Nothing`
+
+```purescript
+preview traversed (Nil :: List Int) -- Nothing
+```
+
+Going back to Kleisli-land, the `Const` functor is the side effect that allows us to `Wander` into a `Star` profunctor (in this case, the function traversal), get its benefits, and bring them back home to our optic.
 
 ## tl;dr
 
-When building a server (when using a profunctor):
+When building a server (when using a profunctor), here are some cool optics:
 
-- A **lens** is 💪 enough to drill down into a value and carry a map so we know how to get back up.
-- A **prism** gives us a 🤷‍♂️ between a value and a sensible default if we can't process the value.
+- An **iso** is just `dimap`.
+- A **lens** is strong 💪 enough to drill down into a value and carry a map so we know how to get back up.
+- A **prism** gives us a choice 🤷‍♂️ between a value and a sensible default if we can't process the value.
+- A **traversal** allows us to wander 🏃‍♀️ into Kleisli-land and back to do our bidding
+- A **grate** allows us to lock 🔒 our optic and unlock it with a key, where the key is a function
 
-We pass the profunctor to the lens/prism/traversal/iso/grate and then use it as we please.
+And as optics are just functions from profunctor to profunctor, here are two profunctors you can use with optics:
 
-In this post, I've tried to build up intuition about what profunctors are and show how lenses are derived from them. Usually, when I use a library like `purescript-profunctor-lenses`, I'm happy just to use the library without understanding what's going on under the hood. However, the concepts used to implement profunctor lenses are so useful/universal that they're worth exploring in their own right. I hope they help you as you look to solve problems!
+- The `Function` profunctor (`a -> b`), which is called `Setter`, and whose magic we've seen in "The Plus One Server."
+- The `Forget` profunctor, that accepts `a`'s and "forgets them" in a sieve called `r`, ignoring the output `b` (`newtype Forget r a b = Forget (a -> r)`). A forget that maps `a` to itself is called a `Getter`. The general operation is called a `Fold`.
+
+Remember, these are just _representations_ of the concept of optics. There are many ways to build up optics, and the profunctor one is one way. It is my favorite way because it gives you an expressive vocabulary to solve problems. At [Meeshkan](https://meeshkan.com), we use custom optics and profunctors all over the place for different business cases, and the nice thing about the PureScript community is that we can share these solutions and get their feedback.
+
+In this post, I've tried to build up intuition about what profunctors are and show how lenses are derived from them. Usually, when I use a library like `purescript-profunctor-lenses`, I'm happy just to use the library without understanding what's going on under the hood. However, the concepts used to implement profunctor lenses are so useful/universal that they're worth exploring in their own right. I hope they help you too as you solve new and exciting challenges!
