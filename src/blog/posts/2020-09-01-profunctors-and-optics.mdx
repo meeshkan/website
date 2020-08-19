@@ -198,7 +198,7 @@ mapBackToUTF8 s = Tuple (fromUTF8 s) toUTF8
 (lens mapBackToUTF8 -- lens 1
   <<< lens mapBackToString) -- lens 2
   ((+) 1.0) -- server
-  (withOctets pack [0xAB, 0xCD]) -- data == "4.1416"
+  (withOctets pack [0xAB, 0xCD]) -- "4.1416"
 ```
 
 Even though lenses allow a different output type, for the purposes of this tutorial, we're using `Lens s s a a`, which is defined as `Lens'` in `purescript-profunctor-lenses`. In general, when you "zoom out" from a lens, you want to get back to where you started, so `Lens'` is enough for most cases.
