@@ -201,9 +201,9 @@ mapBackToUTF8 s = Tuple (fromUTF8 s) toUTF8
   (withOctets pack [0xAB, 0xCD]) -- "4.1416"
 ```
 
-Even though lenses allow a different output type, for the purposes of this tutorial, we're using `Lens s s a a`, which is defined as `Lens'` in `purescript-profunctor-lenses`. In general, when you "zoom out" from a lens, you want to get back to where you started, so `Lens'` is enough for most cases.
+Even though lenses allow a different output type, for the purposes of this tutorial, we're using `Lens s s a a`, which is defined as `Lens'` in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses). In general, when you "zoom out" from a lens, you want to get back to where you started, so `Lens'` is enough for most cases.
 
-Although we're using our hand-rolled lens function above, it is exactly the same one as in `purescript-profunctor-lens` with a slightly different name. They call it `lens'`, and they use `lens` as a helper function to build `lens'`. Try subbing `lens` above out for `Data.Lens.lens'` and see for yourself!
+Although we're using our hand-rolled lens function above, it is exactly the same one as in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses) with a slightly different name. They call it `lens'`, and they use `lens` as a helper function to build `lens'`. Try subbing `lens` above out for `Data.Lens.lens'` and see for yourself!
 
 ## Give us a choice!
 
@@ -449,7 +449,7 @@ dimap (const true) (const 42) (Forget identity) "3.1416" -- Forget true
 
 We catch the input (`true`) and forget about the output.
 
-A **Fold** is a profunctor optic that is evaluated with a `Forget` profunctor. A **Getter** is a special fold that uses the `identity` function as its accumulator. Let's build up `view` defined in `purescript-profunctor-lenses` step by step.
+A **Fold** is a profunctor optic that is evaluated with a `Forget` profunctor. A **Getter** is a special fold that uses the `identity` function as its accumulator. Let's build up `view` defined in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses) step by step.
 
 ```haskell
 dimap (const true) (const 42) (Forget identity) "3.1416" -- Forget true
@@ -460,7 +460,7 @@ view profunctor = forgetForget (profunctor (Forget identity))
 view (iso (const true) (const 42)) "3.1416" -- true
 ```
 
-Our view function below is isomorphic to the one you'll find in `purescript-profunctor-lenses`. It's quite concise!
+Our view function below is isomorphic to the one you'll find in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses). It's quite concise!
 
 The issue with `Forget` is that it can't forget something that doesn't exist. For example, let's try to make `Forget` an instance of `Choice`.
 
@@ -526,4 +526,4 @@ And as optics are just functions from profunctor to profunctor, here are two pro
 
 Remember, these are just _representations_ of the concept of optics. There are many ways to build up optics, and the profunctor one is one way. It is my favorite way because it gives you an expressive vocabulary to solve problems. At [Meeshkan](https://meeshkan.com), we use custom optics and profunctors all over the place for different business cases, and the nice thing about the PureScript community is that we can share these solutions and get their feedback.
 
-In this post, I've tried to build up intuition about what profunctors are and show how lenses are derived from them. Usually, when I use a library like `purescript-profunctor-lenses`, I'm happy just to use the library without understanding what's going on under the hood. However, the concepts used to implement profunctor lenses are so useful/universal that they're worth exploring in their own right. I hope they help you too as you solve new and exciting challenges!
+In this post, I've tried to build up intuition about what profunctors are and show how lenses are derived from them. Usually, when I use a library like [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses), I'm happy just to use the library without understanding what's going on under the hood. However, the concepts used to implement profunctor lenses are so useful/universal that they're worth exploring in their own right. I hope they help you too as you solve new and exciting challenges!
