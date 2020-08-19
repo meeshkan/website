@@ -215,9 +215,17 @@ Aiming to please, we see what we can do!
 
 ```haskell
 -- how I'll use The Plus One Server
-(dimap (\s -> Left (readFloat s)) (either show identity) ((+) 1.0)) "3.1416" -- craaasssshhh
+dimap
+  (\s -> Left (readFloat s))
+  (either show identity)
+  ((+) 1.0)
+  "3.1416" -- craaasssshhh
 -- how my colleague's data will pass through the server
-(dimap (\s -> Right "Hello") (either show identity) ((+) 1.0)) "3.1416" -- craaasssshhh
+dimap
+  (\s -> Right "Hello")
+  (either show identity)
+  ((+) 1.0)
+  "3.1416" -- craaasssshhh
 ```
 
 How do we deal with this? We have a _choice_ between two data types, and our server needs to be a profunctor that can adapt accordingly.
@@ -267,7 +275,11 @@ So prisms give us a _choice_ thanks to the **Choice** profunctor
 Your colleagues scramble to implement a crude form of encryption:
 
 ```haskell
-(dimap (\s password -> readFloat s)) (\locked -> show (locked "passw0rd")) ((+) 1.0)) "3.1416" -- craaasssshhh
+dimap
+  (\s password -> readFloat s))
+  (\locked -> show (locked "passw0rd"))
+  ((+) 1.0)
+  "3.1416" -- craaasssshhh
 ```
 
 So some upstream service "locks" our operation with a password, and they later unlock it with their super-secure password `"passw0rd"`. Of course, we have no clue what to do with a function that takes a password and produces a number. Our humble server can only work with numbers! Unless we are armed with a **Closed** profunctor.
