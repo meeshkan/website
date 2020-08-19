@@ -297,7 +297,7 @@ Back to "The Plus One Server", it can now handle password-protected data:
 (dimap (\s password -> readFloat s)) (\locked -> show (locked "passw0rd")) (lock ((+) 1.0))) "3.1416" -- == "4.1416"
 ```
 
-In functional-programming land, passwords can be anything. So, can passwords be functions? What would that mean? A password "unlocks" our lock, so a function unlocking something would mean that it provides information for a computation to continue. For example, think about image processing. We have a killer algorithm to do something like Gaussian blur or masking, but we don't want to know _how_ the user applies it to their picture. Their _use_ of our algorithm is private, and this use is encoded in a function. We'll call this form of password-protection with a function a **Grate**.
+In functional-programming land, passwords can be anything. Strings, ints, aaannnd..... functions! Yes, passwords can be functions - but why would one do this? A password "unlocks" our lock, so a function unlocking something would mean that it provides information for a computation to continue. For example, think about image processing. We have a killer algorithm to do something like Gaussian blur or masking, but we don't want to know _how_ the user applies it to their picture. Their _use_ of our algorithm is private, and this use is encoded in a function. We'll call this form of password-protection with a function a **Grate**.
 
 ```haskell
 -- Here, (s -> a) will be our "function" password
