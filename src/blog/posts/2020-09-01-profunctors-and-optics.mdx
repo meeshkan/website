@@ -390,7 +390,7 @@ To make this more concrete, let's look at the implementation of Wander for the `
 instance wanderFunction :: Wander Function where
   wander kleisli ourfunc input = unwrap ((kleisli (Identity <<< ourfunc)) input)
   -- you can also use this, which is more concise
-  --   wander t = alaF Identity t
+  -- wander t = alaF Identity t
 ```
 
 The first optic we get from Kleisli-land is one that acts on the balance of a bank client.
