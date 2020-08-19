@@ -109,7 +109,7 @@ iso :: forall p s t a b. Profunctor p => (s -> a) -> (b -> t) -> p a b -> p s t
 iso = dimap
 ```
 
-I'll also rebrand the signature `p a b -> p s t` as an **Iso** so that it's easier to understand the contract. Meaning that if you give me `(s -> a) -> (b -> t)`, and I'll give them a `p a b -> p s t`.
+I'll also rebrand the signature `p a b -> p s t` as an **Iso** so that it's easier to understand the contract. Meaning that if you give me `(s -> a) -> (b -> t)`, I'll give you back a `p a b -> p s t`.
 
 ```haskell
 type Iso s t a b = forall p. Profunctor p => p a b -> p s t
