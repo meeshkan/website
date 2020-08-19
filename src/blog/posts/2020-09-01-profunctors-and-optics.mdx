@@ -421,7 +421,7 @@ The basic contract with something implementing `Traversable` is that, if you hav
 This means that we can create a utility for anything implementing `Traversable`.
 
 ```haskell
-traversal ::
+traversal = wander traverse
 ```
 
 Now, let's use it with our friend `((+) 1.0)`.
