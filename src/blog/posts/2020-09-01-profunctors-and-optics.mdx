@@ -399,7 +399,7 @@ For example, let's imagine that we got a Kleisli function that lifted a side eff
 type Client = { name :: String, balance :: Number}
 
 actOnBalance :: forall f. Applicative f => (Number -> f Number) -> Person -> f Person
-actOnBalance f p = { name: p.name, balance: _ } <$> (f p.balance)
+actOnBalance f p = { name: p.name, balance: _ } <$> f p.balance
 ```
 
 When we try using with "The Plus One Server", it will predictably crash.
