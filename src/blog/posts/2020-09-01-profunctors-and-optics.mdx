@@ -427,13 +427,16 @@ traversal = wander traverse
 Now, let's use it with our friend `((+) 1.0)`.
 
 ```haskell
-traversal ((+) 1.0) [1.0,2.0,3.0] -- == [2.0, 3.0, 4.0]
+traversal ((+) 1.0) [1.0,2.0,3.0] -- [2.0, 3.0, 4.0]
 ```
 
 Remembering that we can compose optics, let's use it with the lens from above:
 
 ```haskell
-(traversal <<< lens (\s -> Tuple (readFloat s) show)) ((+) 1.0) ["1.0","2.0","3.0"] -- == ["2.0", "3.0", "4.0"]
+(traversal
+  <<< lens (\s -> Tuple (readFloat s) show))
+  ((+) 1.0)
+  ["1.0","2.0","3.0"] -- ["2.0", "3.0", "4.0"]
 ```
 
 In summary, a profunctor implementing `Wander` allows us to take a stroll in Kleisli-Land, and it can be used in lots of different contexts. We saw two of them above - `actOnBalance` and the mega-useful `traversal`. Wander will be even more useful when we talk about folds.
