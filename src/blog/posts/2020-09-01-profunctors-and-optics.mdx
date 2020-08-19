@@ -93,7 +93,7 @@ class Profunctor p where
   dimap :: forall s t a b. (s -> a) -> (b -> t) -> p a b -> p s t
 
 instance profunctorFunction :: Profunctor Function where
-  dimap input output function = output <<< function <<< input -- `<<<` is function composition in purescript
+  dimap input output function = output <<< function <<< input
 ```
 
 At [Meeshkan](https://meeshkan.com), we work a lot with IO (we're in the business of testing servers), so having "the server typeclass" (aka `Profunctor`) is invaluable as we build up mock servers from primitives.
