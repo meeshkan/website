@@ -349,7 +349,7 @@ In general, when thinking about password protecting something or, more generally
 
 ## Purification
 
-We've now deemed "The Add One Server" to be so useful that we want to use it with exotic optics that we've never even heard of. So far, we have only been dealing with optics that accept one profunctor - the function. But there are lots of nice profunctors, and we'd like to work with them somehow.
+We've now deemed "The Plus One Server" to be so useful that we want to use it with exotic optics that we've never even heard of. So far, we have only been dealing with optics that accept one profunctor - the function. But there are lots of nice profunctors, and we'd like to work with them somehow.
 
 One such profunctor is the **Kleisli** profunctor. It is a profunctor with a side effect mixed in. For example, like our function, it'll turn an `a -> b`, but it'll also do a little something extra like write to a log, read from an environment or launch a rocket. The signature for a Kleisli profunctor, also called a **Star**, is:
 
