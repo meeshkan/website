@@ -530,7 +530,7 @@ Going back to Kleisli-land, the `Const` functor is the side effect that allows u
 
 When building a server (when using a profunctor), here are some cool optics:
 
-- An **iso** is just `dimap`.
+- An **iso** is a profunctor whose input _and_ output are isometric to some other value.
 - A **lens** is strong 💪 enough to drill down into a value and carry a map so we know how to get back up.
 - A **prism** gives us a choice 🤷‍♂️ between a value and a sensible default if we can't process the value.
 - A **traversal** allows us to wander 🏃‍♀️ into Kleisli-land and back to do our bidding
