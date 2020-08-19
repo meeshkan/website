@@ -53,14 +53,16 @@ Let's say that we've written "The Plus One Server" (aka `((+) 1.0)`) and we now 
 
 ```javascript
 const original = (a) => a + 1.0
-const modified = (a) => `${parseFloat(a + 1)}`
+const modified = (a) => `${original(parseFloat(a))}`
+modified("3.1416") // "4.1416"
 ```
 
 Thinking profunctorially, we can do it like this in PureScript:
 
 ```purescript
 original = ((+) 1.0)
-(dimap readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
+modified = dimap readFloat show original
+modified "3.1416" -- "4.1416"
 ```
 
 `readFloat` changes a string to a number, `show` changes a number to a string, and `((+) 1)` is my profunctor.
