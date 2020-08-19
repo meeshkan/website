@@ -17,38 +17,72 @@ In this article, I'd like to share the intuition I've built up about profunctors
 
 ## What's a profunctor?
 
-In short, a profunctor is something that has input and output.
+In short, a profunctor fulfills three criteria:
 
-For me, I think of a profunctor a generalized way to work with IO (meaning input-output, not the (Galilean moon)[https://en.wikipedia.org/wiki/Galilean_moons])
+- It has input and output.
+- You can bolt on something to the "output" end to modify the output.
+- You can bolt on something to the "input" end to convert input.
 
-Let's say that you have an audio plugin or smart contract or server. You need to get data into the system in a format that it understands (I), and you need to get data out in a format the client understands (O). If IO is on your mind, you're thinking about your system as a **profunctor**.
+If this sounds like a **function**, it's because functions are profunctors! Let's see how.
 
-For example, let's say that I have server called "The Plus One Server" that takes a number and returns the number + 1. In JavaScript, `(a) => a + 1`. In Python `lambda a: a + 1`. In Brainfuck `>+[-<+>]<`. You get the idea. That's all well and good, but how do I get data in and out of my server?
+- A function has input and output. In JavaScript, `(a) => a * 3` has input (ie 5) and output (ie 15).
+- We can bolt something to the output. `(b) => ((a) => a * 3)(b) - 5` takes our original function and, for the same input (5), now returns 10 instead of 15.
+- We can convert input. `(b) => ((a) => a * 3)(b + 1)` takes our original function and, for the same input (5), now returns 18 instead of 15.
+- (bonus) We can convert input _and_ modify output at the same time. `(b) => ((a) => a * 3)(b + 1) - 5`
 
-In PureScript, the function that does this is called `dimap` and it works like this
+Profunctors are not just functions, and this is where the abstraction kicks in. Profunctors are a _general way to conceive of IO_. This is why I find them so useful. As programmers, we deal with IO on a micro-level (ie chaining functions) and a macro-level (ie chaining audio plugins).
+
+In PureScript, the function that performs the operation above is called `dimap` and it works like this:
 
 ```purescript
-dimap input output server == newserver
+dimap input output profunctor == new_profunctor
 ```
 
-Where `input` is a function that changes the input to something our server can understand, `output` is a function that changes the server output to something our client can understand, and `server` is our "plus one" server. What we get is a new server that takes client input and returns client output.
-
-So, for the example above, I could do:
+The four JS examples above can be written as follows:
 
 ```purescript
+dimap identity identity ((*) 3)
+dimap identity (flip (-) 5) ((*) 3)
+dimap ((+) 1) identity ((*) 3)
+dimap ((+) 1) (flip (-) 5) ((*) 3)
+```
+
+For the remainder of the article, we'll focus on one profunctor that I'll affectionately call "The Plus One Server". It takes a number and returns the number + 1. In JavaScript, `(a) => a + 1`. In Python `lambda a: a + 1`. In Brainfuck `>+[-<+>]<`. You get the idea.
+
+Let's say that we've written "The Plus One Server" (aka `((+) 1.0)`) and we now learn that it needs to accept and return a string. The temptation may be to do something like this:
+
+```javascript
+const original = (a) => a + 1.0
+const modified = (a) => `${parseFloat(a + 1)}`
+```
+
+Thinking profunctorially, we can do it like this in PureScript:
+
+```purescript
+original = ((+) 1.0)
 (dimap readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
 ```
 
-`readFloat` changes a string to a number, `show` changes a number to a string, and `((+) 1)` is my profunctor, aka "The Plus One Server". Imagine that the boss comes along and she says "Hey, actually, our server needs to accept UTF8 byte strings and return byte strings." No prob, profunctors to the rescue!
+`readFloat` changes a string to a number, `show` changes a number to a string, and `((+) 1)` is my profunctor.
+
+The difference between the JS and PureScript versions is subtle but important. The first sends us on the path to spaghetti code, and the second leads to organizing things in a clean, maintainable way.
+
+To see why, imagine that the boss comes along and she says "Hey, actually, our server needs to accept UTF8 byte strings and return byte strings." No prob, profunctors to the rescue!
 
 ```purescript
-(dimap fromUTF8 toUTF8 (dimap readFloat show ((+) 1.0)))
+original = ((+) 1.0)
+modified = dimap readFloat show original
+bossMadeMe = dimap fromUTF8 toUTF8 modified
 ```
 
-And because our boss is fickle, she decides to keep the output format as `String` and only change the input format to `ByteString`. No problem!
+In the JS version, we'd have to constantly dip into the internals of the function to make changes, whereas here, we just bolt converters onto both ends and we're done with it.
+
+Let's now imagine that the boss, ever fickle, decides to keep the output format as `String`. No problem!
 
 ```purescript
-(dimap fromUTF8 identity (dimap readFloat show ((+) 1.0)))
+original = ((+) 1.0)
+modified = dimap readFloat show original
+bossMadeMe = dimap fromUTF8 identity modified
 ```
 
 So far, I've glossed over the profunctor-ness (profunctor-iality? profunctor-tude?) of `((+) 1.0)`, but it's time to address that. `((+) 1.0)`, in purescript, is a function that takes a number and adds 1.0 to it. I've been calling it a profunctor because, in purescript, fuctions implement the `Profunctor` typeclass. Let's see how `dimap` is implemented for functions:
