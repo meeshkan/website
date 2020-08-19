@@ -17,17 +17,19 @@ In this article, I'd like to share the intuition I've built up about profunctors
 
 ## What's a profunctor?
 
-For me, I think of a profunctor a generalized way to work with IO (meaning input-output, not the (Galilean moon)[https://en.wikipedia.org/wiki/Galilean_moons]). Let's say that you have a server. You need to get data into the server in a format that it understands (I), and you need to get data out in a format the client understands (O). If the server is a profunctor, you can change the IO format based on the client.
+For me, I think of a profunctor a generalized way to work with IO (meaning input-output, not the (Galilean moon)[https://en.wikipedia.org/wiki/Galilean_moons])
 
-For example, let's say that I have server called "The Plus One Server" that takes a number and returns a number. It's business logic is adding one to the number (needless to say, I'm not getting rich off of this business). If my server is a profunctor, I can take any input (ie a string) as long as I can convert it to a number, and I can route it to any output (ie a string again) as long as I can convert from a number to this format.
+Let's say that you have an audio plugin or smart contract or server. You need to get data into the system in a format that it understands (I), and you need to get data out in a format the client understands (O). If IO is on your mind, you're thinking about your system as a **profunctor**.
 
-In code (purescript), the function that does this is called `dimap` and it works like this
+For example, let's say that I have server called "The Plus One Server" that takes a number and returns the number + 1. In JavaScript, `(a) => a + 1`. In Python `lambda a: a + 1`. In Brainfuck `>+[-<+>]<`. You get the idea. That's all well and good, but how do I get data in and out of my server?
+
+In PureScript, the function that does this is called `dimap` and it works like this
 
 ```purescript
 dimap input output server == newserver
 ```
 
-Where input is a function that changes the input to something our server can understand, output is a function that changes the server output to something our client can understand, and server is our "profunctor" server. What we get is a new server that takes client input and returns client output.
+Where `input` is a function that changes the input to something our server can understand, `output` is a function that changes the server output to something our client can understand, and `server` is our "plus one" server. What we get is a new server that takes client input and returns client output.
 
 So, for the example above, I could do:
 
@@ -47,30 +49,30 @@ And because our boss is fickle, she decides to keep the output format as `String
 (dimap fromUTF8 identity (dimap readFloat show ((+) 1.0)))
 ```
 
-I've glossed over the fact that `((+) 1.0)` is a profunctor, but it's time to address that. `((+) 1.0)`, in purescript, is a function that takes a number and adds 1.0 to it. I've been calling it a profunctor because, in purescript, fuctions implement the `Profunctor` typeclass. Let's see how `dimap` is implemented for functions:
+So far, I've glossed over the profunctor-ness (profunctor-iality? profunctor-tude?) of `((+) 1.0)`, but it's time to address that. `((+) 1.0)`, in purescript, is a function that takes a number and adds 1.0 to it. I've been calling it a profunctor because, in purescript, fuctions implement the `Profunctor` typeclass. Let's see how `dimap` is implemented for functions:
 
 ```purescript
 class Profunctor p where
   dimap :: forall s t a b. (s -> a) -> (b -> t) -> p a b -> p s t
 
 instance profunctorFunction :: Profunctor Function where
-  dimap input output function = output <<< function <<< input -- <<< is function composition in purescript
+  dimap input output function = output <<< function <<< input -- `<<<` is function composition in purescript
 ```
 
-At Meeshkan, we work a lot with IO (we're in the business of testing servers), so having "the server typeclass" (aka `Profunctor`) is invaluable as we build up servers from primitives.
+At Meeshkan, we work a lot with IO (we're in the business of testing servers), so having "the server typeclass" (aka `Profunctor`) is invaluable as we build up mock servers from primitives.
 
 ## Our first profunctor optic - Iso
 
-If you look at the signature of `dimap`, we can read it a few different ways. One way is that it returns a profunctor `p s t`. But another way, and one that is closer to that of `map`, is that it returns a function between profunctors `p a b -> p s t`. When `s == t` and `a == b`, another way to look at `dimap (s -> a) (a -> s)` is that it creates an isomorphism between `s` and `a`. The two can be used interchangeably.
+If you look at the signature of `dimap`, we can read it a few different ways. One way is that it returns a profunctor `p s t`. But another way, and one that is closer to that of `map`, is that it returns a function between profunctors `p a b -> p s t`. When `s == t` and `a == b`, another way to look at `dimap (s -> a) (a -> s)` is that it has the potential to create an isomorphism between `s` and `a`, ie converting a map to a list of tuples and back again. In this case, and if there is no funny business (ie deleting entries), the two can be used interchangeably.
 
-Going back to `((+) 1.0)`, I would like to shop it around and create an API for how to use it. I even distribute a little helper function, so that people can get their data in and out of it. It won't be a strict isomorphism because `b` is not `a` and `t` is not `s`, but as most people will use it when `b == a` and `t == s` (like the examples above with `readFloat` and `show`), I'll call it `iso`.
+In lens-land, `dimap` is called `iso` for this reason.
 
 ```purescript
 iso :: forall p s t a b. Profunctor p => (s -> a) -> (b -> t) -> p a b -> p s t
 iso = dimap
 ```
 
-I'll also rebrand the signature `p a b -> p s t` as an **Iso** so that it's easier to understand the contract. Meaning that folks will see they owe me `(s -> a) -> (b -> t)`, and I'll give them a `p a b -> p s t`.
+I'll also rebrand the signature `p a b -> p s t` as an **Iso** so that it's easier to understand the contract. Meaning that if you give me `(s -> a) -> (b -> t)`, and I'll give them a `p a b -> p s t`.
 
 ```purescript
 type Iso s t a b = forall p. Profunctor p => p a b -> p s t
@@ -81,7 +83,7 @@ iso = dimap
 
 In general, a _profunctor optic_ is a function with the signature `p a b -> p s t`.
 
-So far, I haven't really done anything above and beyond vanilla profunctors, I've just rebranded `dimap` as `iso`, but hey, rebranding is a multi-billion dollar business, and I want my cut!
+So far, I haven't really done anything above and beyond vanilla profunctors. I've just rebranded `dimap` as `iso`.
 
 ```purescript
 (dimap readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
@@ -94,7 +96,11 @@ So far, I haven't really done anything above and beyond vanilla profunctors, I'v
 Now, imagine that "The Plus One Server" is getting used more and, as is natural with servers, we want to hook it up to other services. While other "more sophisticated" services have some sort of logging, our mighty `((+) 1.0)` lacks logging capabilities. So how can "The Plus One Server" take logs from upstream services and pass them to downstream services?
 
 ```purescript
-(dimap (\(Tuple s log) -> Tuple (readFloat s) log) ((Tuple b log) -> Tuple (show b) log) ((+) 1.0)) "3.1416" -- craaasssshhh
+(dimap
+  (\(Tuple s log) -> Tuple (readFloat s) log)
+  ((Tuple b log) -> Tuple (show b) log)
+  ((+) 1.0))
+  "3.1416" -- craaasssshhh
 ```
 
 Wouldn't it be nice if we could just ignore the log and just serve up `((+) 1.0)` goodness? We'd need to beef up our profunctor with a bit more muscle so it can pass through the log in addition to the payload. In short, we need to make our server _stronger_.
@@ -108,7 +114,11 @@ class Profunctor p <= Strong p where
 And now, let's make our server stronger.
 
 ```purescript
-(dimap (\(Tuple s log) -> Tuple (readFloat s) log) ((Tuple b log) -> Tuple (show b) log) (first ((+) 1.0))) "3.1416" -- == Tuple "4.1416" someLog
+dimap
+  (\(Tuple s log) -> Tuple (readFloat s) log)
+  ((Tuple b log) -> Tuple (show b) log)
+  (first ((+) 1.0))
+  "3.1416" -- == Tuple "4.1416" someLog
 ```
 
 The function `first` gives our server the "strength" to carry through the log from one side to the other.
