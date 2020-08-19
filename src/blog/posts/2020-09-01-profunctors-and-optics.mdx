@@ -228,7 +228,7 @@ class Profunctor p <= Choice p where
   right :: forall a b c. p a b -> p (Either c a) (Either c b)
 ```
 
-Armed with choice, we can build a server that can act on our data and pass through our colleague's data
+Armed with `Choice`, we can build a server that can act on our data and pass through our colleague's data:
 
 ```haskell
 -- how i'll use The Plus One Server
