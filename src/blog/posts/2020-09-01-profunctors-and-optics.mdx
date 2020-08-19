@@ -416,7 +416,7 @@ wander actOnBalance ((+) 1.0) { name: "Mike", balance: 0.0 } -- == { name: "Mike
 
 Luckily, there is a whole category of functions that behave like `actOnBalance`. They're called `traverse`, and they work on types that implement the `Traversable` typeclass.
 
-The basic contract with something implementing `Traversable` is that, if you have a container of values and you can produce a side effect for each value, then you can accumulate the side effects. For example, if you have a `List` of `Writer Int` (meaning integers we're keeping some sort of log about), then we can get a `Writer (List Int)` by accumulating the logs for each `Int`.
+The basic contract with something implementing `Traversable` is that, if you have a container of values and you can produce a side effect for each value in the container, then you can accumulate the side effects. For example, if you have a `List` of `Writer Int` (meaning integers we're keeping some sort of log about), then we can get a `Writer (List Int)` by accumulating the logs for each `Int`.
 
 This means that we can create a utility for anything implementing `Traversable`.
 
