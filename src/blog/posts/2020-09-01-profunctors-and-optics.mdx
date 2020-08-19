@@ -408,7 +408,7 @@ When we try using with "The Plus One Server", it will predictably crash.
 actOnBalance ((+) 1.0) { name: "Mike", balance: 0.0 } -- crasssshhhh
 ```
 
-But if we make ((+) 1.0) effectful, ie able to wander into Kleisli-land (by using `Identity` under the hood, as we saw above), we can now use it.
+But if we make ((+) 1.0) effectful, it is able to wander into Kleisli-land by using `Identity` under the hood, as we saw above.
 
 ```haskell
 wander actOnBalance ((+) 1.0) { name: "Mike", balance: 0.0 } -- == { name: "Mike", balance: 0.0 }
