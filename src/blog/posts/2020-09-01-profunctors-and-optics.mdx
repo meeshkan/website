@@ -343,7 +343,7 @@ myFilter = \f -> RGB (f green) (f blue) (f red)
 grate mySecretFilterApplication ((+) 1.0) (RGB 1.0 2.0 3.0) -- == (RGB 4.0 2.0 3.0)
 ```
 
-Our `((+) 1.0)` server did its magic without ever knowing the inner workings of your algorithm. The "passwords" here were `green`, `blue` and `red`, that, mixed with our filter, produced a beautiful new pixel!
+Our `((+) 1.0)` server did its magic without ever knowing the inner workings of your algorithm. The "passwords" here were `green`, `blue` and `red`, that, mixed with our `((+) 1.0)`, produced a beautiful new pixel!
 
 In general, when thinking about password protecting something or, more generally, hiding the application of an algorithm like the one above, closed profunctors and grates are your friend!
 
