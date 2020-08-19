@@ -139,7 +139,7 @@ Now, imagine that "The Plus One Server" is getting used more and, as is natural 
   "3.1416" -- craaasssshhh
 ```
 
-Wouldn't it be nice if we could just ignore the log? We'd need to beef up our profunctor with a bit more muscle so it can pass through the log in addition to the payload. In short, we need to make our server _stronger_.
+Wouldn't it be nice if we could just ignore the log? We'd need to beef up our profunctor with a bit more muscle so it can "carry" the log in addition to the payload. In short, we need to make our server _stronger_.
 
 ```haskell
 class Profunctor p <= Strong p where
