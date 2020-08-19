@@ -86,7 +86,7 @@ modified = dimap readFloat show original
 bossMadeMe = dimap fromUTF8 identity modified
 ```
 
-So far, I've glossed over the profunctor-ness (profunctor-iality? profunctor-tude?) of `((+) 1.0)`, but it's time to address that. `((+) 1.0)`, in purescript, is a function that takes a number and adds 1.0 to it. I've been calling it a profunctor because, in purescript, fuctions implement the `Profunctor` typeclass. Let's see how `dimap` is implemented for functions:
+So far, I've glossed over the profunctor-ness (profunctor-iality? profunctor-tude?) of `((+) 1.0)`, but it's time to address that. Let's see how `dimap` is implemented for functions:
 
 ```haskell
 class Profunctor p where
