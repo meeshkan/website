@@ -13,7 +13,7 @@ tags:
 
 Sometimes, when I learn something new, I feel like it's a game-changer for my skills as a problem solver and programmer. Recently, I learned how to build a lens library using profunctors, and I find that it has helped me in every corner of my programming work. I've noticed that my code is cleaner, easier to test, less buggy, and more self-documenting.
 
-In this article, I'd like to share the intuition I've built up about profunctors. I'll use that to show how to build a lens library, and I'll also relate it to other programming tasks. By the end of reading it, I hope you'll be excited about trying out profunctors in your day-to-day work as programmers!
+In this article, I'd like to share the intuition I've built up about profunctors and optics. By the end of reading it, I hope you'll be excited about trying out profunctors and optics in your day-to-day work as programmers!
 
 ## What's a profunctor?
 
