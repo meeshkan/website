@@ -171,7 +171,7 @@ Although we're using our hand-rolled lens function above, it is exactly the same
 
 ## Give us a choice!
 
-So "The Plus One Server" is the talk of the twon, and other devs are starting to notice. Some are a little bit angry because they never asked for a `((+) 1.0)` and now it is part of their stack. A colleague approaches us and says:
+So "The Plus One Server" is the talk of the town, and other devs are starting to notice. Some are a little bit angry because they never asked for a `((+) 1.0)` and now it is part of their stack. A colleague approaches us and says:
 
 > Congrats on your accomplishment with "The Plus One Server." But now it's everywhere downstream and I don't work with numbers. Can you just ignore my input when you see it?
 
