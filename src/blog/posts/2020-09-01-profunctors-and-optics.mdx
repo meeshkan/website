@@ -170,7 +170,11 @@ In the example above, `show` is our "map back" from `readFloat`. It tells us how
 
 ```haskell
 lens :: forall p s t a b. Strong p => (s -> Tuple a (b -> t)) -> p a b -> p s t
-lens inputWithMap server = dimap inputWithMap ((Tuple b backHome) -> backHome b) server
+lens inputWithMap server =
+  dimap
+    inputWithMap
+    ((Tuple b backHome) -> backHome b)
+    (first server)
 ```
 
 Here's the type of **Lens**.
@@ -183,7 +187,11 @@ So we could have written the above definition as:
 
 ```haskell
 lens :: forall s t a b. Strong p => (s -> Tuple a (b -> t)) -> Lens s t a b
-lens inputWithMap server = dimap inputWithmap ((Tuple b backHome) -> backHome b) server
+lens inputWithMap server =
+  dimap
+    inputWithmap
+    ((Tuple b backHome) -> backHome b)
+    server
 ```
 
 Because optics are functions, we can compose them. Let's see how that works with lenses and our server.
@@ -469,12 +477,12 @@ We catch the input (`true`) and forget about the output.
 A **Fold** is a profunctor optic that is evaluated with a `Forget` profunctor. A **Getter** is a special fold that uses the `identity` function as its accumulator. Let's build up `view` defined in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses) step by step.
 
 ```haskell
-dimap (const true) (const 42) (Forget identity) "3.1416" -- Forget true
-iso (const true) (const 42) (Forget identity) "3.1416" -- Forget true
+lens i = dimap i ((Tuple b f) -> f b) <<< first
+lens (\a -> Tuple (readFloat a) show) (Forget identity) "3.1416" -- Forget 3.1416
 forgetForget (Forget f) = f
-forgetForget $ iso (const true) (const 42) (Forget identity) "3.1416" -- true
+forgetForget $ lens (\a -> Tuple (readFloat a) show) (Forget identity) "3.1416" -- 3.1416
 view profunctor = forgetForget (profunctor (Forget identity))
-view (iso (const true) (const 42)) "3.1416" -- true
+view $ lens (\a -> Tuple (readFloat a) show) (Forget identity) "3.1416" -- 3.1416
 ```
 
 Our view function below is isomorphic to the one you'll find in [`purescript-profunctor-lenses`](https://github.com/purescript-contrib/purescript-profunctor-lenses). It's quite concise!
