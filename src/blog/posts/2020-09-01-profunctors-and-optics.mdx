@@ -159,7 +159,7 @@ dimap
 
 The function `first` upgrades `((+) 1.0)` to carry the log from the input to the output.
 
-So what does this have to do with profunctor optics? What if, in our server, we want to carry a map back to the incoming object?
+So what does this have to do with profunctor optics? What if we want to carry a map back to the incoming object?
 
 ```haskell
 mapBackHome :: String -> Tuple Number (Number -> String)
