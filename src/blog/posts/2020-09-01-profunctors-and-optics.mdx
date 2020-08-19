@@ -33,13 +33,13 @@ Profunctors are not just functions, and this is where the abstraction kicks in. 
 
 In PureScript, the function that performs the operation above is called `dimap` and it works like this:
 
-```purescript
+```haskell
 dimap input output profunctor == new_profunctor
 ```
 
 The four JS examples above can be written as follows:
 
-```purescript
+```haskell
 dimap identity identity ((*) 3)
 dimap identity (flip (-) 5) ((*) 3)
 dimap ((+) 1) identity ((*) 3)
@@ -58,7 +58,7 @@ modified("3.1416") // "4.1416"
 
 Thinking profunctorially, we can do it like this in PureScript:
 
-```purescript
+```haskell
 original = ((+) 1.0)
 modified = dimap readFloat show original
 modified "3.1416" -- "4.1416"
@@ -70,7 +70,7 @@ The difference between the JS and PureScript versions is subtle but important. T
 
 To see why, imagine that the boss comes along and she says "Hey, coder person, your plus-one server needs to accept UTF8 byte strings and return byte strings." No prob, profunctors to the rescue!
 
-```purescript
+```haskell
 original = ((+) 1.0)
 modified = dimap readFloat show original
 bossMadeMe = dimap fromUTF8 toUTF8 modified
@@ -80,7 +80,7 @@ In the JS version, we'd have to constantly dip into the internals of the functio
 
 Let's now imagine that the boss, ever fickle, decides to keep the output format as `String`. No problem!
 
-```purescript
+```haskell
 original = ((+) 1.0)
 modified = dimap readFloat show original
 bossMadeMe = dimap fromUTF8 identity modified
@@ -88,7 +88,7 @@ bossMadeMe = dimap fromUTF8 identity modified
 
 So far, I've glossed over the profunctor-ness (profunctor-iality? profunctor-tude?) of `((+) 1.0)`, but it's time to address that. `((+) 1.0)`, in purescript, is a function that takes a number and adds 1.0 to it. I've been calling it a profunctor because, in purescript, fuctions implement the `Profunctor` typeclass. Let's see how `dimap` is implemented for functions:
 
-```purescript
+```haskell
 class Profunctor p where
   dimap :: forall s t a b. (s -> a) -> (b -> t) -> p a b -> p s t
 
@@ -104,14 +104,14 @@ If you look at the signature of `dimap`, we can read it a few different ways. On
 
 In lens-land, `dimap` is called `iso` for this reason.
 
-```purescript
+```haskell
 iso :: forall p s t a b. Profunctor p => (s -> a) -> (b -> t) -> p a b -> p s t
 iso = dimap
 ```
 
 I'll also rebrand the signature `p a b -> p s t` as an **Iso** so that it's easier to understand the contract. Meaning that if you give me `(s -> a) -> (b -> t)`, and I'll give them a `p a b -> p s t`.
 
-```purescript
+```haskell
 type Iso s t a b = forall p. Profunctor p => p a b -> p s t
 
 iso :: forall s t a b. (s -> a) -> (b -> t) -> Iso s t a b
@@ -122,7 +122,7 @@ In general, a _profunctor optic_ is a function with the signature `p a b -> p s 
 
 So far, I haven't really done anything above and beyond vanilla profunctors. I've just rebranded `dimap` as `iso`.
 
-```purescript
+```haskell
 (dimap readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
 -- after my rebrand
 (iso readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
@@ -132,7 +132,7 @@ So far, I haven't really done anything above and beyond vanilla profunctors. I'v
 
 Now, imagine that "The Plus One Server" is getting used more and, as is natural with servers, we want to hook it up to other services. While other "more sophisticated" services have some sort of logging, our mighty `((+) 1.0)` lacks logging capabilities. So how can "The Plus One Server" take logs from upstream services and pass them to downstream services?
 
-```purescript
+```haskell
 (dimap
   (\(Tuple s log) -> Tuple (readFloat s) log)
   ((Tuple b log) -> Tuple (show b) log)
@@ -142,7 +142,7 @@ Now, imagine that "The Plus One Server" is getting used more and, as is natural 
 
 Wouldn't it be nice if we could just ignore the log and just serve up `((+) 1.0)` goodness? We'd need to beef up our profunctor with a bit more muscle so it can pass through the log in addition to the payload. In short, we need to make our server _stronger_.
 
-```purescript
+```haskell
 class Profunctor p <= Strong p where
   first :: forall a b c. p a b -> p (Tuple a c) (Tuple b c)
   second :: forall a b c. p a b -> p (Tuple c a) (Tuple c b)
@@ -150,7 +150,7 @@ class Profunctor p <= Strong p where
 
 And now, let's make our server stronger.
 
-```purescript
+```haskell
 dimap
   (\(Tuple s log) -> Tuple (readFloat s) log)
   ((Tuple b log) -> Tuple (show b) log)
@@ -162,34 +162,34 @@ The function `first` gives our server the "strength" to carry through the log fr
 
 So what does this have to do with profunctor lenses? What if, in our server, we want to carry a map back to the incoming object?
 
-```purescript
+```haskell
 mapBackHome :: String -> Tuple Number (Number -> String)
 mapBackHome s = Tuple (readFloat s) show
 ```
 
 In the example above, `show` is our "map back" from `readFloat`. It tells us how to convert the input to the output. We call a function between strong profunctors a **Lens** when it carries a map back home.
 
-```purescript
+```haskell
 lens :: forall p s t a b. Strong p => (s -> Tuple a (b -> t)) -> p a b -> p s t
 lens inputWithMap server = dimap inputWithMap ((Tuple b backHome) -> backHome b) server
 ```
 
 Here's the type of **Lens**.
 
-```purescript
+```haskell
 type Lens s t a b = forall p. Strong p => p a b -> p s t
 ```
 
 So we could have written the above definition as:
 
-```purescript
+```haskell
 lens :: forall s t a b. Strong p => (s -> Tuple a (b -> t)) -> Lens s t a b
 lens inputWithMap server = dimap inputWithmap ((Tuple b backHome) -> backHome b) server
 ```
 
 Because optics are functions, we can compose them. Let's see how that works with lenses and our server.
 
-```purescript
+```haskell
 mapBackToString :: String -> Tuple Number (Number -> String)
 mapBackToString s = Tuple (readFloat s) show
 
@@ -214,7 +214,7 @@ So "The Plus One Server" is the talk of the town, and other devs are starting to
 
 Aiming to please, we see what we can do!
 
-```purescript
+```haskell
 -- how I'll use The Plus One Server
 (dimap (\s -> Left (readFloat s)) (either show identity) ((+) 1.0)) "3.1416" -- craaasssshhh
 -- how my colleague's data will pass through the server
@@ -223,7 +223,7 @@ Aiming to please, we see what we can do!
 
 How do we deal with this? We have a _choice_ between two data types, and our server needs to be a profunctor that can adapt accordingly.
 
-```purescript
+```haskell
 class Profunctor p <= Choice p where
   left :: forall a b c. p a b -> p (Either a c) (Either b c)
   right :: forall a b c. p a b -> p (Either c a) (Either c b)
@@ -231,7 +231,7 @@ class Profunctor p <= Choice p where
 
 Armed with choice, we can build a server that can act on our data and pass through our colleague's data
 
-```purescript
+```haskell
 -- how i'll use The Plus One Server
 (dimap (\s -> Left (readFloat s)) (either show identity) (left ((+) 1.0))) "3.1416" -- == "4.1416"
 -- how my colleague will use my server
@@ -240,21 +240,21 @@ Armed with choice, we can build a server that can act on our data and pass throu
 
 Another choice we can make is whether to attempt the computation at all. If our server can process the information, great, and if not, we provide a sensible default.
 
-```purescript
+```haskell
 sensibleDefault :: String -> Either String Number
 sensibleDefault s = if isNaN (readFloat s) then Right s else Left (readFloat s)
 ```
 
 In lens-land, this is called a **Prism**.
 
-```purescript
+```haskell
 prism :: forall p s t a b. Choice p => (s -> Either t a) -> (b -> t) -> p a b -> p s t
 prism to fro server = dimap to (either identity fro) (right server)
 ```
 
 And we can use it for our server like this:
 
-```purescript
+```haskell
 prism sensibleDefault show ((+) 1.0) "3.1416" -- == "4.1416"
 prism sensibleDefault show ((+) 1.0) "not a number" -- == "not a number"
 ```
@@ -267,13 +267,13 @@ So prisms give us a _choice_ thanks to the **Choice** profunctor
 
 Your colleagues scramble to implement a crude form of encryption:
 
-```purescript
+```haskell
 (dimap (\s password -> readFloat s)) (\locked -> show (locked "passw0rd")) ((+) 1.0)) "3.1416" -- craaasssshhh
 ```
 
 So some upstream service "locks" our operation with a password, and they later unlock it with their super-secure password `"passw0rd"`. Of course, we have no clue what to do with a function that takes a password and produces a number. Our humble server can only work with numbers! Unless we are armed with a **Closed** profunctor.
 
-```purescript
+```haskell
 class Profunctor p <= Closed p where
   lock :: forall a b x. p a b -> p (x -> a) (x -> b)
 ```
@@ -282,13 +282,13 @@ A way to think about lock is that it delays application of our function until th
 
 Back to "The Plus One Server", it can now handle password-protected data:
 
-```purescript
+```haskell
 (dimap (\s password -> readFloat s)) (\locked -> show (locked "passw0rd")) (lock ((+) 1.0))) "3.1416" -- == "4.1416"
 ```
 
 In functional-programming land, passwords can be anything. So, can passwords be functions? What would that mean? A password "unlocks" our lock, so a function unlocking something would mean that it provides information for a computation to continue. For example, think about image processing. We have a killer algorithm to do something like Gaussian blur or masking, but we don't want to know _how_ the user applies it to their picture. Their _use_ of our algorithm is private, and this use is encoded in a function. We'll call this form of password-protection with a function a **Grate**.
 
-```purescript
+```haskell
 -- Here, (s -> a) will be our "function" password
 grate :: (((s -> a) -> b) -> t) -> p a b -> p s t
 grate unlock server = dimap (\s f -> f s) unlock (lock server)
@@ -296,13 +296,13 @@ grate unlock server = dimap (\s f -> f s) unlock (lock server)
 
 The types going to `dimap` are a bit hard to follow, so let's write `dimap` just using its types:
 
-```purescript
+```haskell
 dimap (s -> (s -> a) -> a) (((s -> a) -> b) -> t) ((s -> a) -> a) -- == ((s -> a) -> b)
 ```
 
 We see that, all the way through, `(s -> a)` is our password for the closed profunctor. Or, subbing `(s -> a)` into the definition of `Closed`, we have:
 
-```purescript
+```haskell
 class Profunctor p <= Closed p where
 -- remembering that
 -- lock :: forall a b x. p a b -> p (x -> a) (x -> b)
@@ -312,7 +312,7 @@ class Profunctor p <= Closed p where
 
 If your brain is hurting, rest assured that that's as heady as it gets. Now we can actually use our grate to do some password-protected art with the `((+) 1.0)` server.
 
-```purescript
+```haskell
 data RGB = RGB Number Number Number
 
 red :: RGB -> Number
@@ -343,7 +343,7 @@ We've now deemed "The Add One Server" to be so useful that we want to use it wit
 
 One such profunctor is the **Kleisli** profunctor. It is a profunctor with a side effect mixed in. For example, like our function, it'll turn an `a -> b`, but it'll also do a little something extra like write to a log, read from an environment or launch a rocket. The signature for a Kleisli profunctor, also called a **Star**, is:
 
-```purescript
+```haskell
 newtype Star f a b = Star (a -> f b)
 
 instance functorStar :: Functor f => Functor (Star f a) where
@@ -359,7 +359,7 @@ I don't know why they call it **Star**, but it seems like a reasonable choice. I
 
 Anyway, the boss wants to use an optic from Kleisli-Land, and we're responsible for getting it to integrate with our system. Our profunctor that makes a foray into Kleisli-land is called **Wander**.
 
-```purescript
+```haskell
 class Profunctor p <= Wander p where
   wander :: forall s t a b. StarOptic s t a b -> Optic p s t a b
 ```
@@ -368,7 +368,7 @@ The first argument is an optic of star profunctors. The return value is also an 
 
 The actual signature for Wander in purescript is a bit different. I'm not sure why they made it this way, but it is isomorphic to the one above and gets the job done:
 
-```purescript
+```haskell
 -- real signature
 class Profunctor p <= Wander p where
   wander :: forall s t a b. (forall f. (a -> f b) -> s -> f t) -> p a b -> p s t
@@ -376,13 +376,13 @@ class Profunctor p <= Wander p where
 
 To make this more concrete, let's look at the implementation of Wander for the `Function` profunctor.
 
-```purescript
+```haskell
 
 ```
 
 The first optic we get from Kleisli-land is one that acts on the balance of a bank client.
 
-```purescript
+```haskell
 type Client = { name :: String, balance :: Number}
 
 actOnBalance :: forall f. Applicative f => (Number -> f Number) -> Person -> f Person
@@ -391,13 +391,13 @@ actOnBalance ----
 
 When we try using with "The Plus One Server", it will predictably crash.
 
-```purescript
+```haskell
 actOnBalance ((+) 1.0) { name: "Mike", balance: 0.0 } -- crasssshhhh
 ```
 
 But if we make ((+) 1.0) effectful, ie able to wander into Kleisli-land (by using `Identity` under the hood, as we saw above), we can now use it.
 
-```purescript
+```haskell
 wander actOnBalance ((+) 1.0) { name: "Mike", balance: 0.0 } -- == { name: "Mike", balance: 0.0 }
 ```
 
@@ -407,19 +407,19 @@ The basic contract with something implementing `Traversable` is that, if you hav
 
 This means that we can create a utility for anything implementing `Traversable`.
 
-```purescript
+```haskell
 traversal ::
 ```
 
 Now, let's use it with our friend `((+) 1.0)`.
 
-```purescript
+```haskell
 traversal ((+) 1.0) [1.0,2.0,3.0] -- == [2.0, 3.0, 4.0]
 ```
 
 Remembering that we can compose optics, let's use it with the lens from above:
 
-```purescript
+```haskell
 (traversal <<< lens (\s -> Tuple (readFloat s) show)) ((+) 1.0) ["1.0","2.0","3.0"] -- == ["2.0", "3.0", "4.0"]
 ```
 
@@ -433,7 +433,7 @@ While this metaphor is helpful, it is admittedly like a bad monad tutorial (sorr
 
 One thing that comes up a lot with I/O is intentionally suppressing the output. For example, you can ignore the output value and instead return something else. In Purescript, this is called `Forget`.
 
-```purescript
+```haskell
 newtype Forget r a b = Forget (a -> r)
 
 instance forgetfulProfunctor :: Profunctor (Forget r) where
@@ -452,7 +452,7 @@ We catch the input (`true`) and forget about the output.
 
 A **Fold** is a profunctor optic that is evaluated with a `Forget` profunctor. A **Getter** is a special fold that uses the `identity` function as its accumulator. Let's build up `view` defined in `purescript-profunctor-lenses` step by step.
 
-```purescript
+```haskell
 dimap (const true) (const 42) (Forget identity) "3.1416" -- Forget true
 iso (const true) (const 42) (Forget identity) "3.1416" -- Forget true
 forgetForget (Forget f) = f
@@ -465,7 +465,7 @@ Our view function below is isomorphic to the one you'll find in `purescript-prof
 
 The issue with `Forget` is that it can't forget something that doesn't exist. For example, let's try to make `Forget` an instance of `Choice`.
 
-```purescript
+```haskell
 instance forgetChoice :: Choice (Forget r) where
   left (Forget f) = either (Left <<< f) ??? -- craaashhhh
   right (Forget f) = either ??? (Right <<< f)  -- craaashhhh
@@ -473,7 +473,7 @@ instance forgetChoice :: Choice (Forget r) where
 
 The problem is that we can't pass through a `b` because we're forgetting it - we just have `a` and `r`. So how can we get around this? When we don't have an `a` for `(a -> r)`, we need to be able to pull an `r` out of thin air. What is the typeclass of things where you can pull one out of thin air? The monoid! The function to do that is `mempty`
 
-```purescript
+```haskell
 mempty :: String -- == ""
 mempty :: List -- Nil
 mempty :: Array -- []
@@ -482,7 +482,7 @@ mempty :: Maybe Int -- Nothing
 
 So as long as `r` above is a monoid, we can have our `Choice` profunctor.
 
-```purescript
+```haskell
 instance forgetChoice :: Monoid r => Choice (Forget r) where
   left (Forget f) = either (Left <<< f) (Right mempty)
   right (Forget f) = either (Right mempty) (Right <<< f)
@@ -490,7 +490,7 @@ instance forgetChoice :: Monoid r => Choice (Forget r) where
 
 The same trick works for `Wander` but on a functor application level. Again, `r` will be a monoid, and the `Const` functor will "pull an `r` out of thin air" if not provided one.
 
-```purescript
+```haskell
 instance wanderForget :: Monoid r => Wander (Forget r) where
   wander f (Forget r) = Forget (alaF Const f r)
 
@@ -504,7 +504,7 @@ So, when you try to preview a value from an empty list using a lens library as w
 - the `Const` profunctor, when used in List's implementation of `traverse`, starts with a pure const (getting an `mempty`, or a `Nothing` in this case)
 - as there is nothing to smoosh, it returns `Nothing`
 
-```purescript
+```haskell
 preview traversed (Nil :: List Int) -- Nothing
 ```
 
