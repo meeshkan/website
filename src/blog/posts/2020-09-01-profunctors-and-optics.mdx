@@ -100,7 +100,7 @@ At [Meeshkan](https://meeshkan.com), we work a lot with IO (we're in the busines
 
 ## Our first profunctor optic - Iso
 
-If you look at the signature of `dimap`, we can read it a few different ways. One way is that it returns a profunctor `p s t`. But another way, and one that is closer to that of `map`, is that it returns a function between profunctors `p a b -> p s t`. When `s == t` and `a == b`, another way to look at `dimap (s -> a) (a -> s)` is that it has the potential to create an isomorphism between `s` and `a`, ie converting a map to a list of tuples and back again. In this case, and if there is no funny business (ie deleting entries), the two can be used interchangeably.
+If you look at the signature of `dimap`, you can read it a few different ways. One way is that it returns a profunctor `p s t`. But another way, and one that is closer to that of `map`, is that it returns a function between profunctors `p a b -> p s t`. When `s == t` and `a == b`, another way to look at `dimap (s -> a) (a -> s)` is that it has the potential to create an isomorphism between `s` and `a`, ie converting a map to a list of tuples and back again. In this case, and if there is no funny business (ie deleting entries), the two can be used interchangeably.
 
 In lens-land, `dimap` is called `iso` for this reason.
 
