@@ -337,11 +337,8 @@ green (RGB r g b) = g
 blue :: RGB -> Number
 blue (RGB r g b) = b
 
--- Little do they know, I'll scramble the channels...
--- If they only knew the cunning behind my artistry!
--- But they never will, because they use closed profunctors.
-mySecretFilterApplication :: ((RGB -> Number) -> Number) -> RGB
-mySecretFilterApplication = \f -> RGB (f green) (f blue) (f red)
+myFilter :: ((RGB -> Number) -> Number) -> RGB
+myFilter = \f -> RGB (f green) (f blue) (f red)
 
 grate mySecretFilterApplication ((+) 1.0) (RGB 1.0 2.0 3.0) -- == (RGB 4.0 2.0 3.0)
 ```
