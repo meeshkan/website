@@ -154,7 +154,7 @@ dimap
   (\(Tuple s log) -> Tuple (readFloat s) log)
   ((Tuple b log) -> Tuple (show b) log)
   (first ((+) 1.0))
-  "3.1416" -- == Tuple "4.1416" someLog
+  (Tuple "3.1416" "someLog") -- Tuple "4.1416" "someLog"
 ```
 
 The function `first` upgrades `((+) 1.0)` to carry the log from the input to the output.
