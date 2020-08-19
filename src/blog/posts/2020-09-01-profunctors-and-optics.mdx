@@ -120,7 +120,7 @@ iso = dimap
 
 In general, a _profunctor optic_ is a function with the signature `p a b -> p s t`.
 
-So far, I haven't really done anything above and beyond vanilla profunctors. I've just rebranded `dimap` as `iso`.
+You may be wondering, "Why are there two names for that thing profunctors do - `dimap` and `iso`?" The reason is because the profunctor of implementation of optics came about _after_ optics were created other ways. The genius of the profunctor implementation is that one of the classic optics - Iso - is the `dimap` function.
 
 ```haskell
 (dimap readFloat show ((+) 1.0)) "3.1416" -- == "4.1416"
