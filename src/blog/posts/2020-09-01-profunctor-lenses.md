@@ -1,7 +1,7 @@
 ---
 title: Rolling your own profunctor lenses
 description: Building intuition of what profunctors are and how to use them by building a lens library
-slug: announcing-hmt
+slug: profunctor-lenses
 date: 2020-09-01
 updated: 2020-09-01
 authors: ["mike"]
