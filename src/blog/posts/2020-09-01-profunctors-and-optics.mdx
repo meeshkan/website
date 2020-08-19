@@ -195,8 +195,8 @@ mapBackToString s = Tuple (readFloat s) show
 mapBackToUTF8 :: ByteString -> Tuple String (String -> ByteString)
 mapBackToUTF8 s = Tuple (fromUTF8 s) toUTF8
 
-((lens mapBackToUTF8) -- lens 1
-  <<< (lens mapBackToString)) -- lens 2
+(lens mapBackToUTF8 -- lens 1
+  <<< lens mapBackToString) -- lens 2
   ((+) 1.0) -- server
   (withOctets pack [0xAB, 0xCD]) -- data == "4.1416"
 ```
