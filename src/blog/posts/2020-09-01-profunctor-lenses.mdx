@@ -11,11 +11,13 @@ tags:
   - functional programming
 ---
 
-Sometimes, when I learn something new, I feel like it's a game-changer for my skills as a problem solver and programmer. Recently, I learned how to build a lens library using profunctors, and I find that it has helped me in every corner of my programming work. My code is cleaner, easier to test, less buggy, and more self-documenting.
+Profunctors are a _really useful abstraction_. It took me a while to understand what they are, but once I did, I found myself using them in a lot of different situations.
 
-In this article, I'd like to share the intuition I've built up about profunctors and optics. By the end of reading it, I hope you'll be excited about trying out profunctors and optics in your day-to-day work as programmers!
+In this article, I'd like to share the intuition I've built up about profunctors. The way I built up this intuition is by studying how profunctors can be used to create [optics](https://medium.com/@gcanti/introduction-to-optics-lenses-and-prisms-3230e73bfcfe#:~:text=Optics%20are%20a%20very%20useful,values%20in%20a%20data%20type.). By the end of the article, I hope you'll be motivated to use profunctors and optics in your day-to-day work!
 
 ## What's a profunctor?
+
+In short, a profunctor is something that has input and output.
 
 For me, I think of a profunctor a generalized way to work with IO (meaning input-output, not the (Galilean moon)[https://en.wikipedia.org/wiki/Galilean_moons])
 
