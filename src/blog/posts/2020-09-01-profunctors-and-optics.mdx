@@ -320,7 +320,11 @@ grate unlock server = dimap (\s f -> f s) unlock (lock server)
 The types going to `dimap` are a bit hard to follow, so let's write `dimap` just using its types:
 
 ```haskell
-dimap (s -> (s -> a) -> a) (((s -> a) -> b) -> t) ((s -> a) -> a) -- ((s -> a) -> b)
+dimap
+  (s -> (s -> a) -> a) -- input
+  (((s -> a) -> b) -> t) -- output
+  (p ((s -> a) -> a) ((s -> a) -> b)) -- internal profunctor
+  -- yields p s t
 ```
 
 We see that, all the way through, `(s -> a)` is our password for the closed profunctor. Or, subbing `(s -> a)` into the definition of `Closed`, we have:
