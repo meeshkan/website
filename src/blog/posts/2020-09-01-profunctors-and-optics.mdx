@@ -33,13 +33,13 @@ If this sounds like a **function**, it's because functions are profunctors! Let'
 
 Profunctors are _not_ just functions. Profunctors are a _general way to conceive of IO_. This is why I find them so useful. As programmers, we deal with IO on a micro-level (ie chaining functions) and a macro-level (ie chaining audio plugins) all the time.
 
-In PureScript, the function that performs the operation above is called `dimap` and it works like this:
+In [PureScript](https://www.purescript.org), the function that performs the operation above is called `dimap` and it works like this:
 
 ```haskell
 dimap input output profunctor == new_profunctor
 ```
 
-The four JS examples above can be written as follows:
+The four JS examples above can be written in PureScript as follows:
 
 ```haskell
 dimap identity identity ((*) 3)
