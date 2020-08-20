@@ -135,8 +135,8 @@ Now, imagine that "The Plus One Server" is getting used more and, as is natural 
 
 ```haskell
 (dimap
-  (\(Tuple s log) -> Tuple (readFloat s) log)
-  ((Tuple b log) -> Tuple (show b) log)
+  (\(Tuple s myLog) -> Tuple (readFloat s) myLog)
+  ((Tuple b myLog) -> Tuple (show b) myLog)
   ((+) 1.0))
   "3.1416" -- craaasssshhh
 ```
@@ -153,8 +153,8 @@ And now, let's make The Plus One Server strong.
 
 ```haskell
 dimap
-  (\(Tuple s log) -> Tuple (readFloat s) log)
-  ((Tuple b log) -> Tuple (show b) log)
+  (\(Tuple s myLog) -> Tuple (readFloat s) myLog)
+  ((Tuple b myLog) -> Tuple (show b) myLog)
   (first ((+) 1.0))
   (Tuple "3.1416" "someLog") -- Tuple "4.1416" "someLog"
 ```
