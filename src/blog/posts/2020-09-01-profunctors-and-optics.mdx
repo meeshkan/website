@@ -26,9 +26,9 @@ In short, a profunctor fulfills three criteria:
 
 If this sounds like a **function**, it's because functions are profunctors! Let's see how.
 
-- A function has input and output. In JavaScript, `(a) => a * 3` has input (ie 5) and output (ie 15).
-- We can bolt something to the output. `(b) => ((a) => a * 3)(b) - 5` takes our original function and, for the same input (5), now returns 10 instead of 15.
-- We can convert input. `(b) => ((a) => a * 3)(b + 1)` takes our original function and, for the same input (5), now returns 18 instead of 15.
+- A function has input and output. In JavaScript, `(a) => a * 3` maps input, like `5`, to output, like `15`.
+- We can bolt something to the output. `(b) => ((a) => a * 3)(b) - 5` takes our original function and, for the same input `5`, now returns `10` instead of `15`.
+- We can convert input. `(b) => ((a) => a * 3)(b + 1)` takes our original function and, for the same input `5`, now returns `18` instead of `15`.
 - (bonus) We can convert input _and_ modify output at the same time. `(b) => ((a) => a * 3)(b + 1) - 5`
 
 Profunctors are not just functions, and this is where the abstraction kicks in. Profunctors are a _general way to conceive of IO_. This is why I find them so useful. As programmers, we deal with IO on a micro-level (ie chaining functions) and a macro-level (ie chaining audio plugins) all the time.
