@@ -357,7 +357,7 @@ myFilter = \f -> RGB (f green) (f blue) (f red)
 grate mySecretFilterApplication ((+) 1.0) (RGB 1.0 2.0 3.0) -- == (RGB 4.0 2.0 3.0)
 ```
 
-Our `((+) 1.0)` server did its magic without ever knowing the inner workings of your algorithm. The "passwords" here were `green`, `blue` and `red`, that, mixed with our `((+) 1.0)`, produced a beautiful new pixel!
+Our `((+) 1.0)` server did its magic without ever knowing the inner workings of your algorithm. The "passwords" here were `green`, `blue` and `red`. When mixed with our `((+) 1.0)`, they produced a new pixel.
 
 In general, when thinking about password protecting something or, more generally, hiding the application of an algorithm like the one above, closed profunctors and grates are your friend!
 
@@ -365,7 +365,7 @@ In general, when thinking about password protecting something or, more generally
 
 We've now deemed "The Plus One Server" to be so useful that we want to use it with exotic optics that we've never even heard of. So far, we have only been dealing with optics that accept one profunctor - the function. But there are lots of nice profunctors, and we'd like to work with them somehow.
 
-One such profunctor is the **Kleisli** profunctor. It is a profunctor with a side effect mixed in. For example, like our function, it'll turn an `a -> b`, but it'll also do a little something extra like write to a log, read from an environment or launch a rocket. The signature for a Kleisli profunctor, also called a **Star**, is:
+One such profunctor is the **Kleisli** profunctor. It is a profunctor with a side effect mixed in. So if you take the `Function` profunctor we've seen before `a -> b`, a Kleisli profunctor is that with a little something extra like write to a log, read from an environment or launch a rocket. The signature for a Kleisli profunctor, also called a **Star**, is:
 
 ```haskell
 newtype Star f a b = Star (a -> f b)
@@ -388,7 +388,7 @@ class Profunctor p <= Wander p where
   wander :: forall s t a b. StarOptic s t a b -> Optic p s t a b
 ```
 
-The first argument is an optic of star profunctors. The return value is also an optic, but in our "native language". Under the hood, our profunctor will use the Kleisli (Star) optic to do its bidding.
+The first argument is an optic of star profunctors. The return value is also an optic, but one that can be used by _any_ profunctor that implements Wander. Under the hood, our profunctor call the Kleisli (Star) optic. That means that it'll have to know how to add _and_ remove a side effect - adding when it enters Kleisli-land and removing when it leaves.
 
 The actual signature for Wander in purescript is a bit different. I'm not sure why they made it this way, but it is isomorphic to the one above and gets the job done:
 
