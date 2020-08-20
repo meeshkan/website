@@ -432,6 +432,14 @@ Luckily, there is a whole category of functions that behave like `actOnBalance`.
 
 The basic contract with something implementing `Traversable` is that, if you have a container of values and you can produce a side effect for each value in the container, then you can accumulate the side effects. For example, if you have a `List` of `Writer Int` (meaning integers we're keeping some sort of log about), then we can get a `Writer (List Int)` by accumulating the logs for each `Int`.
 
+Let's look at the signature for traverse:
+
+```haskell
+traverse :: forall a b m t. Traversable t => Applicative m => (a -> m b) -> t a -> m (t b)
+```
+
+It is exactly the same as the first argument to `wander`, with `s == t a` and `t == t b`.
+
 This means that we can create a utility for anything implementing `Traversable`.
 
 ```haskell
