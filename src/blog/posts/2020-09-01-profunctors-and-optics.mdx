@@ -48,7 +48,7 @@ dimap ((+) 1) identity ((*) 3)
 dimap ((+) 1) (flip (-) 5) ((*) 3)
 ```
 
-For the remainder of the article, we'll focus on one profunctor that I'll affectionately call "The Plus One Server". It takes a number and returns the number + 1. In JavaScript, `(a) => a + 1`. In Python `lambda a: a + 1`. In Brainfuck `>+[-<+>]<`. You get the idea.
+For the remainder of the article, we'll focus on one profunctor that I'll affectionately call "The Plus One Server". It takes a number and returns the number + 1. In JavaScript, `(a) => a + 1`. In Python `lambda a: a + 1`. In [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) `>+[-<+>]<`. You get the idea.
 
 Let's say that we've written "The Plus One Server" (aka `((+) 1.0)`) and we now learn that it needs to accept and return a string. The temptation may be to do something like this:
 
