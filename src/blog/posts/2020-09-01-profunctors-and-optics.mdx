@@ -561,7 +561,7 @@ When building a server (when using a profunctor), here are some cool optics:
 And as optics are just functions from profunctor to profunctor, here are two profunctors you can use with optics:
 
 - The **Function** profunctor (`a -> b`), which is called `Setter`, and whose magic we've seen in "The Plus One Server."
-- The **Function** profunctor, that accepts `a`'s and "forgets them" in a recepticle called `r`, ignoring the output `b`. A forget that maps `a` to itself is called a `Getter`, aka `Forget identity`. The general operation is called a `Fold`.
+- The **Forget** profunctor, that accepts `a`'s and "forgets them" in a recepticle called `r`, ignoring the output `b`. A forget that maps `a` to itself is called a `Getter`, aka `Forget identity`. The general operation is called a `Fold`.
 
 Remember, these are just _representations_ of the concept of optics. There are many ways to build up optics, and the profunctor one is one way. It is my favorite way because it gives you an expressive vocabulary to solve problems. At [Meeshkan](https://meeshkan.com), we use custom optics and profunctors all over the place for different business cases, and the nice thing about the PureScript community is that we can share these solutions and get their feedback.
 
