@@ -237,7 +237,7 @@ const IndexPage = () => {
             w={["100%", "100%", "auto"]}
             _hover={{ textDecor: "none", backgroundColor: "gray.100" }}
           >
-            Mini GraphQL tester
+            Try the demo
           </Button>
         </Stack>
         {/* <Box maxW="750px" mx="auto">
