@@ -60,8 +60,8 @@ const PricingCard = ({
     <Stack spacing={2} mt={4}>
       {yesFeatures &&
         yesFeatures.map((feature, index) => (
-          <Flex key={index} align="center">
-            <Icon name="checkmark" color="cyan.500" mr={3} />
+          <Flex key={index} align="top">
+            <Icon name="checkmark" color="cyan.500" mr={3} mt={2} />
             <Text>{feature}</Text>
           </Flex>
         ))}
@@ -122,18 +122,9 @@ const PricingPage = () => {
           Meeshkan Pricing
         </Heading>
         <Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">
-          Meeshkan is the equivialent of 1, 60k+ salaried QA engineer, for every
-          5 engineers hired. While we are still in private beta, Meeshkan is
-          free for fair use.
-          <ChakraLink
-            // @ts-ignore
-            as={Link}
-            color="blue.500"
-          >
-            {" "}
-            Let us know
-          </ChakraLink>{" "}
-          if we can build a plan for you.
+          Quality assurance isn't all-or-nothing. Our pricing scales with your
+          need, and we have a generous free tierthat integrates seamlessly into
+          your day-to-day flow as a developer.
         </Text>
         <SimpleGrid columns={3} spacing={8}>
           <PricingCard
@@ -142,11 +133,10 @@ const PricingPage = () => {
             price="$0"
             mixpanel={mixpanel}
             yesFeatures={[
-              "1 team member",
-              "2 projects",
-              "Manual project setup",
+              "Endpoint testing for REST and GraphQL services",
               "100 testing hours",
-              "GitHub import",
+              "Basic reports",
+              "GitHub integration",
             ]}
             // noFeatures={[
             //   "Concurrent tests",
@@ -162,13 +152,12 @@ const PricingPage = () => {
             price="$99"
             mixpanel={mixpanel}
             yesFeatures={[
-              "8 team members",
+              "All free features",
               "Unlimited projects",
-              "1 project set up",
               "1000 testing hours",
               "3 concurrent tests",
-              "Weekly audit reporting",
-              "30 day history",
+              "Premium reports",
+              "30 day history retention",
             ]}
             hasCTA={false}
           />
@@ -178,15 +167,12 @@ const PricingPage = () => {
             mixpanel={mixpanel}
             price="$2000"
             yesFeatures={[
-              "25 team members",
               "Unlimited projects",
-              "5 projects set up",
               "Unlimited testing hours",
-              "10 concurrent tests",
               "Unlimited history",
               "GitLab & Bitbucket import",
-              "Auth flow testing UI",
               "Custom build pipelines",
+              "In-cluster testing for k8s",
               "Role based permissions",
               "Jira/Linear integration",
             ]}

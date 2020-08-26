@@ -161,7 +161,10 @@ const IndexPage = () => {
             padding="0px 4px"
             minH="auto"
           >
-            MEESHKAN - BETA
+            Read our report -{" "}
+            <ChakraLink href={"/blog/thinking-about-qa"}>
+              When to start thinking about QA.
+            </ChakraLink>{" "}
           </Badge>
         </Flex>
         <Heading
@@ -174,7 +177,7 @@ const IndexPage = () => {
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automated tests for your GraphQL APIs, dynamically generated
+          Quality Assurance for GraphQL and REST APIs
         </Heading>
         <Text
           textAlign={["left", "left", "center"]}
@@ -183,11 +186,11 @@ const IndexPage = () => {
           mb={6}
           color="gray.700"
         >
-          Stop feeling guilty for not writing tests. Meeshkan automatically
-          executes and reports on a collection of generated tests that actually
-          keep up with your GraphQL API. Using your schema and a touch of NLP,
-          we test critical flows, guaranteed to give you confidence in your app.
-          Every commit.
+          The faster teams move, the harder it gets to write and maintain tests.
+          Meeshkan fixes that. We automatically execute thousands of tests that
+          keep up with your development veloicty. We detect and test critical
+          logic like authentication and transactions, guaranteed to give you
+          confidence in your API. Every commit.
         </Text>
         <Stack
           spacing={[0, 0, 4]}
@@ -293,10 +296,8 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Static testing falls short by focusing on the quantity of ‘bugs’ rather than"
-        em="quality"
-        anchor="#quality"
-        text="Meeshkan prioritizes and sorts bugs so you know what to tackle first.Code coverage metrics aren't meaningful without the quality context of what's covered."
+        heading="Fix only what matters"
+        text="Meeshkan prioritizes and sorts bugs so that you know what to tackle first, what to put in the backlog, and what to ignore."
       >
         <PrioritizeTests />
       </DoubleSection>
@@ -310,8 +311,8 @@ const IndexPage = () => {
       </DoubleSection>
 
       <SingleSection
-        heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
-        text="By combining your existing schema introspection, property-based testing, and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
+        heading="Assure the quality of your API with with the Meeshkan webapp"
+        text="Meeshkan gives you unparalleled confidence that your backend service is working as expected."
       >
         <Flex justify="center" mb={12}>
           <Button
