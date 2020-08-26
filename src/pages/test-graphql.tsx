@@ -82,7 +82,7 @@ const TestGraphqlPage = () => {
       endpoint: values.endpoint,
       // headers: {
       //   cookie: "cookie_header_value",
-      //   authorization: "authorization_header_value",
+      //   authorization: values.authorization,
       // },
     })
     mixpanel.track("Clicked button", {
@@ -230,6 +230,28 @@ const TestGraphqlPage = () => {
                   color="white"
                 />
               </FormControl>
+              {/* <FormControl
+                isRequired
+                mr={[0, 0, 4]}
+                mb={[4, 4, 0]}
+                w="100%"
+                maxW={["full", "full", "100px"]}
+              >
+                <FormLabel fontWeight={700} color="white">
+                  Authorization
+                </FormLabel>
+                <Input
+                  name="authorization"
+                  ref={register}
+                  borderColor="gray.500"
+                  aria-label="Your GraphQL Endpoint authorization"
+                  borderRadius="sm"
+                  placeholder="Authorization header"
+                  isDisabled={endpointSubmit}
+                  fontWeight={500}
+                  color="white"
+                />
+              </FormControl> */}
             </DarkMode>
             <Button
               aria-label="Test Endpoint"
@@ -379,13 +401,20 @@ const TestGraphqlPage = () => {
                               >
                                 Response body:
                               </Heading>
-                              <CodeBlock className="json">
-                                {JSON.stringify(
-                                  JSON.parse(exchange.response.body),
-                                  null,
-                                  2
-                                )}
-                              </CodeBlock>
+                              {exchange.response.body.startsWith("{") !==
+                              true ? (
+                                <CodeBlock className="html">
+                                  {exchange.response.body}
+                                </CodeBlock>
+                              ) : (
+                                <CodeBlock className="json">
+                                  {JSON.stringify(
+                                    JSON.parse(exchange.response.body),
+                                    null,
+                                    2
+                                  )}
+                                </CodeBlock>
+                              )}
                             </>
                           )}
                         </AccordionPanel>
