@@ -114,6 +114,76 @@ Neato, we get a quarter. But what if we tried to invoke it with something (gasp)
 
 Wow, that compiler is livid. As it should be! We've tried to invoke a function with a value (`3/2`) outside of its domain (`1/2`). Going back to audio, think of all those ears that will be spared from gratuitous clipping. Unless you're into Merzbow, in which case you can make a constraint that the volume should always be _over_ one.
 
+### Adding numbers
+
+Lastly, let's see how `invoke` allows us to specialize functions, like an adder, for specific input.
+
+First, we'll create an adder for numbers between `0` and `1`.
+
+```haskell
+type Gte0lt1
+  = (AndConstraint (NotConstraint (LessThanConstraint Zero)) (LessThanConstraint (PRational P1 P1)))
+
+type Between0And1 = ConstrainedRatioI Gte0lt1
+
+zeroToOneAdder =
+  addConstrainedRationals ::
+    forall (a :: ConstrainedRational).
+    InvokableRational
+      Gte0lt1
+      a =>
+    Between0And1 ->
+    ( forall (b :: ConstrainedRational).
+      InvokableRational
+        Gte0lt1
+        b =>
+      Between0And1 ->
+      ( forall (c :: ConstrainedRational).
+        AddConstraint a b c =>
+        ConstrainedRatioI c
+      )
+    )
+```
+
+Now that that's done, we can create a specialized function called `addTwoHalves` that _only_ accepts values that are `1/2` and, consequentially, returns 1.
+
+```haskell
+
+type IsOneHalf
+  = (AndConstraint (NotConstraint (LessThanConstraint (PRational P1 P2))) (LessThanConstraint (PRational P1 P2)))
+
+type IsOne
+  = (AndConstraint (NotConstraint (LessThanConstraint (PRational P4 P4))) (LessThanConstraint (PRational P4 P4)))
+
+addTwoHalves ::
+  ConstrainedRatioI IsOneHalf ->
+  ConstrainedRatioI IsOneHalf ->
+  ConstrainedRatioI IsOne
+addTwoHalves i0 i1 = finalStep
+  where
+  curryFirstArg ::
+    Between0And1 ->
+    ( forall (c :: ConstrainedRational).
+      AddConstraint
+        IsOneHalf
+        IsOneHalf
+        c =>
+      (ConstrainedRatioI c)
+    )
+  curryFirstArg = invoke zeroToOneAdder i0
+
+  finalStep ::
+    forall (c :: ConstrainedRational).
+    AddConstraint
+      IsOneHalf
+      IsOneHalf
+      c =>
+    ConstrainedRatioI c
+  finalStep = invoke curryFirstArg i1
+```
+
+The amazing thing here is that, when you give the function a signature, the return value _has_ to be specialized to `IsOne`. Otherwise, it won't compile. That means that, by following the types, the PureScript compiler is smart enough to follow two constrained values through the insides of our addition function and know what constrained is supposed to come out the other side.
+
 ## How?
 
 Type-level programming in PureScript is just straight-up programming, no more, no less. All of the things I'm about to show you (kinds, functional constraints, type classes etc) take a while to fully understand, but for the purpose of this blog, the most important thing to grok are the equivalencies in and hand-wavy way.
