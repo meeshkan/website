@@ -81,7 +81,7 @@ oneHalfPrecise = asConstraintedRational 1 2 :: Maybe ExactlyOneHalf
 
 ### invoke
 
-The next important bit is `invoke`. It takes a function from `a -> c` where `a` is a constrained rational and transforms it into a function of type `b -> c` if `b`'s type is a sub-constraint of `a`. For example, `0 <= n < 2` is a sub-constraint of `-1 <= n < 2` but not `-1 <= n < 1`. The constraints and subconstraints can get as wild as you'd like, ie `(0 <= n < 2 & 4 <= n < -5) || n < -42`. `purescript-typeleve-rationals` figures it out.
+The next important bit is `invoke`. It takes a function from `a -> c` where `a`, is a constrained rational, and transforms it into a function of type `b -> c` if `b`'s type is a sub-constraint of `a`. For example, `0 <= n < 2` is a sub-constraint of `-1 <= n < 2` but not `-1 <= n < 1`. The constraints and subconstraints can get as wild as you'd like, ie `(0 <= n < 2 & 4 <= n < -5) || n < -42`. `purescript-typeleve-rationals` figures it out.
 
 To use invoke, let's take the `oneHalfPrecise` we defined above. Now, let's create a function that accepts any value between `0 & 1` and returns `0.25`.
 
