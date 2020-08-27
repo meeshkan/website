@@ -15,7 +15,6 @@ import {
 	Collapse,
 } from "@chakra-ui/core"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
-import { motion } from "framer-motion"
 import SEO from "../components/molecules/seo"
 import Layout from "../components/templates/layout"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -26,7 +25,11 @@ import HowDoesMeeshkanWork from "../components/organisms/home/meeshkanWorks"
 import Callout from "../components/organisms/callout"
 import TestResults from "../components/organisms/testResults"
 
-function ListItem(text) {
+type ItemProp = {
+	text: string
+}
+
+function ListItem({ text }: ItemProp) {
 	return (
 		<Stack isInline mt={6} alignItems="center" spacing={4}>
 			<Icon name="checkmark" color="cyan.500" size="24px" />
@@ -299,6 +302,7 @@ const TestGraphqlPage = () => {
 					// @ts-expect-error
 					exchangeLength={testResults.commands[0].exchange.length}
 					testResults={testResults}
+					test={endpointSubmit}
 				/>
 			) : null}
 
