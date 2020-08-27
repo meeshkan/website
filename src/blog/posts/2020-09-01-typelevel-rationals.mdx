@@ -182,7 +182,7 @@ addTwoHalves i0 i1 = finalStep
   finalStep = invoke curryFirstArg i1
 ```
 
-The amazing thing here is that, when you give the function a signature, the return value _has_ to be specialized to `IsOne`. Otherwise, it won't compile. That means that, by following the types, the PureScript compiler is smart enough to follow two constrained values through the insides of our addition function and know what constrained is supposed to come out the other side.
+The amazing thing here is that, when you give the function a signature, the type of the return value _has_ to be `ConstrainedRatioI IsOne`. Try it out yourself - if you put any other constrained rational as the return value, the program won't compile. That means that, just by solving type constraints supplied by `AddConstraint`, the PureScript compiler is smart enough to follow two constrained values through the insides of our addition function and know what constrained is supposed to come out the other side.
 
 ## How?
 
