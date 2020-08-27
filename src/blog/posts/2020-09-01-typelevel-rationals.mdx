@@ -31,7 +31,7 @@ Here's how I did that in purescript.
 
 The entry point is always defining a number using a constraint. To the right of the colon is a constraint meaning `0 <= n < 1`.
 
-```purescript
+```haskell
 oneHalf =
       asConstraintedRational 1 2 ::
         Maybe
@@ -47,7 +47,7 @@ oneHalf =
 
 This will yield a value of `1/2` with the following type:
 
-```purescript
+```haskell
 Just
   ( ConstrainedRatioI
       ( AndConstraint
@@ -61,7 +61,7 @@ Just
 
 Because our constraint is between 0 and 1, the compiler does not know that it is 1/2, but it does know that it is in an initial acceptable range. Had we tried to do the following, we would have gotten `Nothing` because `3/2` is greater than `1`:
 
-```purescript
+```haskell
 oneHalf =
       asConstraintedRational 3 2 ::
         Maybe
@@ -79,7 +79,7 @@ Traditionally, this type of function is done so that it yields `Maybe Float`. Wh
 
 Of course, a type with that wide of an ambitus only makes sense when you're not sure what the input will be, ie if you're reading from disk. If you know it's `1/2`, just say it!
 
-```purescript
+```haskell
 oneHalfPrecise =
       asConstraintedRational 1 2 ::
         Maybe
@@ -99,7 +99,7 @@ The next important bit is `invoke`. It takes a function from `a -> b` where `c` 
 
 To use invoke, let's take the `oneHalfPrecise` we defined above. Now, let's create a function that accepts any value between `0 & 1` and returns `0.25`.
 
-```purescript
+```haskell
 returnAQuarter ::
   ConstrainedRatioI
     ( AndConstraint
@@ -136,7 +136,7 @@ Above, `resolve` resolves a constraint into a rational if it is a single value (
 
 Now that we have our function, let's invoke it!
 
-```purescript
+```haskell
 myQuarterBack = invoke returnAQuarter <$> oneHalfPrecise
 ```
 
@@ -154,13 +154,13 @@ Type-level programming in PureScript is not that hard if you think of it as norm
 
 In normal-land, this is how you'd define the Peano representation of the integers.
 
-```purescript
+```haskell
 data Peano = Zero | Succ Peano
 ```
 
 In type-level programming, you do the same thing using kinds.
 
-```purescript
+```haskell
 foreign import kind Peano
 foreign import data Zero :: Peano
 foreign import data Succ :: Peano -> Peano
@@ -170,7 +170,7 @@ They do the same thing - the top one in type land, the bottom one in kind land.
 
 Next, onto functions. To define addition on the peanos, you can do (for example):
 
-```purescript
+```haskell
 add :: Peano -> Peano -> Peano
 add Zero x = x
 add (Succ x) y = (Succ (Add x y))
@@ -178,7 +178,7 @@ add (Succ x) y = (Succ (Add x y))
 
 Same thing in type classes:
 
-```purescript
+```haskell
 class Add (a :: Peano) (b :: Peano) (c :: Peano) | a b -> c
 instance addZero :: Add Zero b b
 instance addSucc :: Add a b => Add (Succ a) b (Succ c)
@@ -186,7 +186,7 @@ instance addSucc :: Add a b => Add (Succ a) b (Succ c)
 
 Let's see how we'd implement a series of functions
 
-```purescript
+```haskell
 mul :: Peano -> Peano -> Peano
 mul Zero x = 0
 mul (Succ x) y = Add (Mul x y) y
@@ -194,7 +194,7 @@ mul (Succ x) y = Add (Mul x y) y
 
 Same thing in type classes:
 
-```purescript
+```haskell
 class Mul (a :: Peano) (b :: Peano) (c :: Peano) | a b -> c
 instance mulZero :: Mul Zero b b
 instance mulSuc :: (Mul a b c, Add c b d) => Add (Succ a) b d
