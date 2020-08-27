@@ -74,7 +74,7 @@ export function Navigation() {
       right={0}
       left={0}
       backgroundColor="whiteAlpha.800"
-      style={{ backdropFilter: "blur(4px)" }}
+      style={{ backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
       borderBottom="1px solid"
       borderBottomColor="gray.50"
     >
@@ -114,7 +114,11 @@ export function Navigation() {
         size="sm"
       >
         <DrawerContent shadow="none">
-          <DrawerCloseButton size="md" onClick={onClose} aria-label="Close the navigation menu" />
+          <DrawerCloseButton
+            size="md"
+            onClick={onClose}
+            aria-label="Close the navigation menu"
+          />
           <DrawerHeader p={4}>
             <Link to="/" aria-label="Meeshkan homepage">
               <Icon name="Logo" h={6} w="auto" />
@@ -123,7 +127,10 @@ export function Navigation() {
           <DrawerBody
             py={6}
             backgroundColor="whiteAlpha.300"
-            style={{ backdropFilter: "blur(4px)" }}
+            style={{
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+            }}
           >
             <Stack align="center">
               <NavLink text="Pricing" path="/pricing/" />

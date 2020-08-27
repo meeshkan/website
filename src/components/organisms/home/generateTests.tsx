@@ -52,14 +52,17 @@ const GenerateTests = () => {
       <MotionBox
         animate={isOpen ? "open" : "closed"}
         variants={variants}
-        backgroundColor="blackAlpha.300"
+        backgroundColor="blackAlpha.700"
         position="absolute"
         zIndex={10}
         w={[300, 360, 460]}
         h={380}
         p={4}
         borderRadius="md"
-        style={{ backdropFilter: "blur(6px)" }}
+        style={{
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
         overflow="auto"
       >
         <Stack
@@ -213,7 +216,7 @@ mutation {
           }}
           minW="fit-content"
         >
-          {`Generate tests ->`}
+          Generate tests <Icon name="arrow-forward" ml={2} />
         </MotionButton>
       </Box>
     </>
