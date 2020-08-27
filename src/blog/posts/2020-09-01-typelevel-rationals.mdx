@@ -1,0 +1,205 @@
+---
+title: Type-safe rationals in purescript - why, what, and how
+description: Why I'm using type-safe rationals in my next project and why you should use them too!
+date: 2020-08-27
+authors: ["mike"]
+published: true
+slug: typelevel-rationals-in-purescript
+tags:
+  - purescript
+  - types
+  - graphql
+---
+
+In the era of Corona, I've seen some amazing music come out that's built entirely remotely using technologies like virtual desktops and web audio. As a side project, I'm chipping away at an open-source web-based digital audio workstation that uses [PureScript](https://purescript.org) in the browser as its scripting language.
+
+One of the biggest things I wanted to get right early on was how parameters compound. Even when only one person is putting together audio, there is a temptatoin to pile everything on and fight clipping with compressors and limiters, which leads to subpar-sounding results. Add multiple people, none of whom have the same mix in their head/ears, and it's a recipe for disaster. So, one thing I wanted to get right from the outset was a representation of parameters where people could reason about acceptable ranges.
+
+A lot of user-facing parameters in audio are represented as rational numbers, most often between 0 and 1. So, I wanted to build in purescript a killer library that allowed programmers to reason about numeric parameters their audio programs (or any programs) as they were building them.
+
+Enter [purescript-typelevel-rationals](https://github.com/mikesol/purescript-typelevel-rationals). They allow you to keep track of flows of rational numbers through chains of functions to know exactly what the possible range of output values will be. I hope that it eventually helps musicians make more subtle mixes, and with time, I'll add features like trigonometric functions, natural logarithms, complex numbers, and other things that can be expressed at the typelevel.
+
+That's all well and good, but _what_ is a typelevel-rational. I'm glad you asked!
+
+## Type-level programming
+
+Anyone that uses a strongly typed functional language works with the compiler to some extent as they write their code. The fingers move, the brain starts to wane, and at a certain point you think "ah, whatever, the compiler will catch whatever is off" as you press compile. There are even VSCode extensions for most languages that'll put these warnings in your editor so that you can tidy up right as you code.
+
+Type-level programming, for me, is a way to enhance this experience. It teaches the compiler to catch mistakes based on the types you define. For example, if you find a way to define `PositiveFloat`, (say, if you're working with volume), than the compiler can warn you or downright not compile anytime the volume dips into the negatives.
+
+Here's how I did that in purescript.
+
+The entry point is always defining a number using a constraint. To the right of the colon is a constraint meaning `0 <= n < 1`.
+
+```purescript
+oneHalf =
+      asConstraintedRational 1 2 ::
+        Maybe
+          ( ConstrainedRatioI
+              ( AndConstraint
+                  ( NotConstraint
+                      (LessThanConstraint Zero)
+                  )
+                  (LessThanConstraint (PRational P1 P1))
+              )
+          )
+```
+
+This will yield a value of `1/2` with the following type:
+
+```purescript
+Just
+  ( ConstrainedRatioI
+      ( AndConstraint
+          ( NotConstraint
+              (LessThanConstraint Zero)
+          )
+          (LessThanConstraint (PRational P1 P1))
+      )
+  )
+```
+
+Because our constraint is between 0 and 1, the compiler does not know that it is 1/2, but it does know that it is in an initial acceptable range. Had we tried to do the following, we would have gotten `Nothing` because `3/2` is greater than `1`:
+
+```purescript
+oneHalf =
+      asConstraintedRational 3 2 ::
+        Maybe
+          ( ConstrainedRatioI
+              ( AndConstraint
+                  ( NotConstraint
+                      (LessThanConstraint Zero)
+                  )
+                  (LessThanConstraint (PRational P1 P1))
+              )
+          )
+```
+
+Traditionally, this type of function is done so that it yields `Maybe Float`. While that's all well and good, we lose tons of information by working with a blunt instrument like `Float`. Our type may be a bit verbose (we can stash it in a type variable to save room), but it communicates our intention exactly.
+
+Of course, a type with that wide of an ambitus only makes sense when you're not sure what the input will be, ie if you're reading from disk. If you know it's `1/2`, just say it!
+
+```purescript
+oneHalfPrecise =
+      asConstraintedRational 1 2 ::
+        Maybe
+          ( ConstrainedRatioI
+              ( AndConstraint
+                  ( NotConstraint
+                      (LessThanConstraint (PRational P1 P2))
+                  )
+                  (LessThanOrEqualToConstraint (PRational P1 P2))
+              )
+          )
+```
+
+### invoke
+
+The next important bit is `invoke`. It takes a function from `a -> b` where `c` is a constrained rational and accepts a type `b` if `b`'s type is a sub-constraint of `a`. For example, `0 <= n < 2` is a sub-constraint of `-1 <= n < 2` but not `-1 <= n < 1`. The constraints and subconstraints can get as wild as you'd like, ie `(0 <= n < 2 & 4 <= n < -5) || n < -42`. `purescript-typeleve-rationals` figures it out.
+
+To use invoke, let's take the `oneHalfPrecise` we defined above. Now, let's create a function that accepts any value between `0 & 1` and returns `0.25`.
+
+```purescript
+returnAQuarter ::
+  ConstrainedRatioI
+    ( AndConstraint
+        ( NotConstraint
+            (LessThanConstraint Zero)
+        )
+        (LessThanConstraint (PRational P1 P1))
+    ) ->
+  ConstrainedRatioI
+    ( AndConstraint
+        ( NotConstraint
+            (LessThanConstraint (PRational P1 P4))
+        )
+        (LessThanOrEqualToConstraint (PRational P1 P4))
+    )
+returnAQuarter _ =
+  constConstrained
+    ( resolve
+        ( CRProxy ::
+            CRProxy
+              ( AndConstraint
+                  ( NotConstraint
+                      (LessThanConstraint (PRational P1 P4))
+                  )
+                  (LessThanOrEqualToConstraint (PRational P1 P4))
+              )
+        )
+    )
+```
+
+Above, `resolve` resolves a constraint into a rational if it is a single value (ie `1/4`) and `constConstrained` converts it back to a constrained rational. To see how powerful resolve is, try to mess with it. For example, in my `IDE`, I changed the `NotConstraint (LessThanConstraint (PRational P1 P4))` to `NotConstraint (LessThanConstraint (PRational P1 P5))`. That means that the value is between `1/5` and `1/4`, so we can no longer resolve it to a single value. Sure enough, the IDE gets angry at me. Thanks, PureScript compiler!
+
+[!red compiler resolve](https://ibb.co/rHh3mBD)
+
+Now that we have our function, let's invoke it!
+
+```purescript
+myQuarterBack = invoke returnAQuarter <$> oneHalfPrecise
+```
+
+Neato, we get a quarter. But what if we tried to invoke it with something (gasp) outside of its proscribed range of `0 <= n < 1`? Let's find out!
+
+[!red compiler invoke](https://ibb.co/gWtkSDD)
+
+Wow, that compiler is livid. As it should be! We've tried to invoke a function with a value outside of its domain. Going back to audio, think of all those ears that will be spared from gratuitous clipping. Unless you're into Merzbow, in which case you can make a constraint that the volume should always be _over_ one.
+
+## How?
+
+Type-level programming in PureScript is not that hard if you think of it as normal programming. All of the things I'm about to show you (kinds, functional constraints, type classes etc) are worth follow-up posts in their own right, but for the purpose of this blog, the most important thing to grok are the equivalencies.
+
+### Types vs kinds
+
+In normal-land, this is how you'd define the Peano representation of the integers.
+
+```purescript
+data Peano = Zero | Succ Peano
+```
+
+In type-level programming, you do the same thing using kinds.
+
+```purescript
+foreign import kind Peano
+foreign import data Zero :: Peano
+foreign import data Succ :: Peano -> Peano
+```
+
+They do the same thing - the top one in type land, the bottom one in kind land.
+
+Next, onto functions. To define addition on the peanos, you can do (for example):
+
+```purescript
+add :: Peano -> Peano -> Peano
+add Zero x = x
+add (Succ x) y = (Succ (Add x y))
+```
+
+Same thing in type classes:
+
+```purescript
+class Add (a :: Peano) (b :: Peano) (c :: Peano) | a b -> c
+instance addZero :: Add Zero b b
+instance addSucc :: Add a b => Add (Succ a) b (Succ c)
+```
+
+Let's see how we'd implement a series of functions
+
+```purescript
+mul :: Peano -> Peano -> Peano
+mul Zero x = 0
+mul (Succ x) y = Add (Mul x y) y
+```
+
+Same thing in type classes:
+
+```purescript
+class Mul (a :: Peano) (b :: Peano) (c :: Peano) | a b -> c
+instance mulZero :: Mul Zero b b
+instance mulSuc :: (Mul a b c, Add c b d) => Add (Succ a) b d
+```
+
+So that's it. When doing type-level programming in PureScript, you have access to recursive functions, pattern matching, and data constructors. What more does one need? If it weren't for that pesky varmant I/O, you could write your entire program just using types. But because my audio project will have I/O (ie a microphone and a speaker), you need some form of input validation and coersion to output. As we saw above, that's doable with `invoke`.
+
+Type-level programming is still a bit clunky in PureScript, but the community is implementing helpful things to make it easier all the time. After sprucing up this library a bit and adding more numeric features, the next thing I hope to tackle is JSON schema at the type level. And, of course, my DAW project!
