@@ -8,9 +8,6 @@ import {
   Badge,
   Box,
   Link as ChakraLink,
-  useDisclosure,
-  SimpleGrid,
-  Code,
   Accordion,
   AccordionItem,
   AccordionHeader,
@@ -28,6 +25,8 @@ import Layout from "../components/templates/layout"
 import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import PrioritizeTests from "../components/organisms/home/prioritizeTests"
+import HowDoesMeeshkanWork from "../components/organisms/home/meeshkanWorks"
+import Callout from "../components/organisms/callout"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -61,20 +60,6 @@ const IndexPage = () => {
             }
           }
         }
-        authorize: file(relativePath: { eq: "githubAuthorize.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        test: file(relativePath: { eq: "testLog.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         authSpec: file(relativePath: { eq: "authSpec.png" }) {
           childImageSharp {
             fluid(maxWidth: 1000, quality: 100) {
@@ -96,47 +81,9 @@ const IndexPage = () => {
             }
           }
         }
-        vulnerability: file(relativePath: { eq: "vulnerability.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        testFailure: file(relativePath: { eq: "testFailureDark.png" }) {
-          childImageSharp {
-            fluid(quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
       }
     `
   )
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { handleSubmit, register, formState } = useForm()
-  const [formSubmit, setFormSubmit] = useState(false)
-
-  function onSubmit(values) {
-    let sendgridData = JSON.stringify({
-      list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
-      contacts: [
-        {
-          email: values.email || values.email2,
-        },
-      ],
-    })
-
-    fetch("https://api.sendgrid.com/v3/marketing/contacts", {
-      method: "PUT",
-      body: sendgridData,
-      headers: {
-        authorization: `Bearer ${process.env.GATSBY_SENDGRID_API_KEY}`,
-        "content-type": "application/json",
-      },
-    }).then(() => setFormSubmit(true))
-  }
 
   const [showImage, setShowImage] = React.useState(
     data.stack.childImageSharp.fluid
@@ -500,179 +447,9 @@ const IndexPage = () => {
         </Grid>
       </SingleSection>
 
-      <SingleSection heading="Test automation for your GraphQL app">
-        <SimpleGrid columns={[1, 1, 3]} gridGap={8} flexWrap="wrap">
-          <Box>
-            <Img
-              fluid={data.authorize.childImageSharp.fluid}
-              alt="A screenshot of authorizing Meeshkan with Github"
-            />
-            <Code
-              variantColor="cyan"
-              fontSize="14px"
-              fontWeight={600}
-              rounded="sm"
-              padding="0px 4px"
-              minH="auto"
-              mb={2}
-              mt={4}
-            >
-              Step 1
-            </Code>
-            <Heading
-              as="h2"
-              color="gray.900"
-              fontSize="2xl"
-              fontWeight={900}
-              mb={4}
-              letterSpacing="wide"
-              lineHeight="short"
-            >
-              GitHub authorization via our webapp
-            </Heading>
-            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
-              Authorize GitHub, choose a repository to test, and set up your
-              base configuration. All in less time than it takes to drink a cup
-              of coffee.
-            </Text>
-          </Box>
-          <Box>
-            <Img
-              fluid={data.test.childImageSharp.fluid}
-              alt="An illustration of the test log using pieces of the Meeshkan web app."
-            />
-            <Code
-              variantColor="cyan"
-              fontSize="14px"
-              fontWeight={600}
-              rounded="sm"
-              padding="0px 4px"
-              minH="auto"
-              mb={2}
-              mt={4}
-            >
-              Step 2
-            </Code>
-            <Heading
-              as="h2"
-              color="gray.900"
-              fontSize="2xl"
-              fontWeight={900}
-              mb={4}
-              letterSpacing="wide"
-              lineHeight="short"
-            >
-              Continuous testing with every commit
-            </Heading>
-            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
-              Meeshkan naturally fits into your existing workflow by testing as
-              you push commits to GitHub. Imagine Netlify, but for automated
-              testing.
-            </Text>
-          </Box>
-          <Box>
-            <Img
-              fluid={data.vulnerability.childImageSharp.fluid}
-              alt="An illustration of a bug found using pieces of the Meeshkan web app."
-            />
-            <Code
-              variantColor="cyan"
-              fontSize="14px"
-              fontWeight={600}
-              rounded="sm"
-              padding="0px 4px"
-              minH="auto"
-              mb={2}
-              mt={4}
-            >
-              Step 3
-            </Code>
-            <Heading
-              as="h2"
-              color="gray.900"
-              fontSize="2xl"
-              fontWeight={900}
-              mb={4}
-              letterSpacing="wide"
-              lineHeight="short"
-            >
-              Fix vulnerabilities in your app
-            </Heading>
-            <Text fontSize={["md", "md", "lg"]} lineHeight="tall">
-              When tests fail, your configuration can block a branch from
-              merging, direct a developer to the point of failure, and see the
-              highlight the highest priority bugs to tackle first.
-            </Text>
-          </Box>
-        </SimpleGrid>
-      </SingleSection>
+      <HowDoesMeeshkanWork />
 
-      <Box
-        as="section"
-        bg="gray.900"
-        borderRadius="6px"
-        my={16}
-        mx="auto"
-        maxW={1200}
-        position="relative"
-        px={8}
-        py={8}
-      >
-        <Heading
-          as="h2"
-          color="white"
-          fontSize="3xl"
-          fontWeight={900}
-          mb={6}
-          lineHeight="short"
-          letterSpacing="wide"
-          ml={[0, 0, 0, 440, 522]}
-          textAlign={["center", "center", "center", "end"]}
-        >
-          How can Meeshkan's automated GraphQL testing save your organization
-          hours of bug fixing?
-        </Heading>
-        <Flex justify={["center", "center", "center", "flex-end"]}>
-          <Button
-            as={ChakraLink}
-            // @ts-ignore
-            target="_blank"
-            rel="noopener noreferrer"
-            _hover={{ textDecoration: "none", backgroundColor: "red.600" }}
-            href="https://meetings.hubspot.com/makenna/consultation-with-meeshkan"
-            aria-label="Schedule a demo with the Meeshkan team."
-            variantColor="red"
-            fontWeight={900}
-            onClick={() => {
-              mixpanel.track("Clicked button", {
-                to:
-                  "https://meetings.hubspot.com/makenna/consultation-with-meeshkan",
-
-                from: "https://meeshkan.com",
-                c2a: "Schedule a demo",
-              })
-            }}
-            letterSpacing="wide"
-            borderRadius="sm"
-          >
-            Schedule a demo
-          </Button>
-        </Flex>
-        <Box
-          maxW="550px"
-          pos="absolute"
-          left={0}
-          right={0}
-          bottom={0}
-          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
-          display={["none", "none", "none", "block"]}
-        >
-          <Img
-            fluid={data.testFailure.childImageSharp.fluid}
-            alt="A screenshot of the test failure page in the Meeshkan website."
-          />
-        </Box>
-      </Box>
+      <Callout heading="How can Meeshkan's automated GraphQL testing save your organization hours of bug fixing?" />
     </Layout>
   )
 }
