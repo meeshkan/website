@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import {
   Box,
   Heading,
@@ -20,6 +20,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionHeader,
+  Collapse,
 } from "@chakra-ui/core"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 
@@ -75,15 +76,16 @@ const TestGraphqlPage = () => {
   const [testing, setTesting] = useState(false)
   const [testResults, setTestResults] = useState(JSON)
   const { handleSubmit, register } = useForm()
+  const [show, setShow] = React.useState(false)
 
   const onSubmit = (mixpanel) => (values) => {
     setTesting(true)
     let endpointData = JSON.stringify({
       endpoint: values.endpoint,
-      // headers: {
-      //   cookie: "cookie_header_value",
-      //   authorization: values.authorization,
-      // },
+      headers: {
+        cookie: values.cookie,
+        authorization: values.authorization,
+      },
     })
     mixpanel.track("Clicked button", {
       to: "https://meeshkan.io/runr",
@@ -188,92 +190,136 @@ const TestGraphqlPage = () => {
           mx="auto"
           w={["full", "full", "600px"]}
         >
-          <Flex
-            as="form"
-            onSubmit={handleSubmit(onSubmit(mixpanel))}
-            direction={["column", "column", "row"]}
-            justify="center"
-            alignItems="flex-end"
-          >
-            <DarkMode>
-              <FormControl
-                isRequired
-                mr={[0, 0, 4]}
-                mb={[4, 4, 0]}
-                w="100%"
-                maxW={["full", "full", "383px"]}
-              >
-                <Flex align="baseline">
-                  <FormLabel fontWeight={700} color="white">
-                    Endpoint
-                  </FormLabel>
-                  <Text
-                    fontStyle="italic"
-                    color="gray.500"
-                    fontWeight={400}
-                    ml={2}
-                    fontSize="14px"
-                  >
-                    Don't test with production APIs
-                  </Text>
-                </Flex>
-                <Input
-                  name="endpoint"
-                  ref={register}
-                  type="url"
-                  borderColor="gray.500"
-                  aria-label="Your GraphQL Endpoint"
-                  borderRadius="sm"
-                  placeholder="Your GraphQL Endpoint"
-                  isDisabled={endpointSubmit}
-                  fontWeight={500}
-                  color="white"
-                />
-              </FormControl>
-              {/* <FormControl
-                isRequired
-                mr={[0, 0, 4]}
-                mb={[4, 4, 0]}
-                w="100%"
-                maxW={["full", "full", "100px"]}
-              >
-                <FormLabel fontWeight={700} color="white">
-                  Authorization
-                </FormLabel>
-                <Input
-                  name="authorization"
-                  ref={register}
-                  borderColor="gray.500"
-                  aria-label="Your GraphQL Endpoint authorization"
-                  borderRadius="sm"
-                  placeholder="Authorization header"
-                  isDisabled={endpointSubmit}
-                  fontWeight={500}
-                  color="white"
-                />
-              </FormControl> */}
-            </DarkMode>
-            <Button
-              aria-label="Test Endpoint"
-              variantColor="red"
-              borderRadius="sm"
-              fontWeight={900}
-              type="submit"
-              isLoading={testing}
-              loadingText="Testing"
-              isDisabled={endpointSubmit}
-              w={["100%", "100%", "auto"]}
+          <Stack as="form" onSubmit={handleSubmit(onSubmit(mixpanel))}>
+            <Flex
+              direction={["column", "column", "row"]}
+              justify="center"
+              alignItems="flex-end"
             >
-              Test Endpoint
-            </Button>
-          </Flex>
-          <Text d="block" color="cyan.400" mt={4} mx="auto" textAlign="center">
-            {testing === true
-              ? `Testing takes ~30 seconds`
-              : endpointSubmit === true
-              ? `Your test results are listed below`
-              : null}
-          </Text>
+              <DarkMode>
+                <FormControl
+                  isRequired
+                  mr={[0, 0, 4]}
+                  mb={[4, 4, 0]}
+                  w="100%"
+                  // maxW={["full", "full", "383px"]}
+                >
+                  <Flex align="baseline">
+                    <FormLabel fontWeight={700} color="white">
+                      Endpoint
+                    </FormLabel>
+                    <Text
+                      fontStyle="italic"
+                      color="gray.500"
+                      fontWeight={400}
+                      ml={2}
+                      fontSize="14px"
+                    >
+                      Don't test with production APIs
+                    </Text>
+                  </Flex>
+                  <Input
+                    name="endpoint"
+                    ref={register}
+                    type="url"
+                    borderColor="gray.500"
+                    aria-label="Your GraphQL Endpoint"
+                    borderRadius="sm"
+                    placeholder="Your GraphQL Endpoint"
+                    isDisabled={endpointSubmit}
+                    fontWeight={500}
+                    color="white"
+                  />
+                </FormControl>
+              </DarkMode>
+              <Button
+                aria-label="Test Endpoint"
+                variantColor="red"
+                borderRadius="sm"
+                fontWeight={900}
+                type="submit"
+                isLoading={testing}
+                loadingText="Testing"
+                isDisabled={endpointSubmit}
+                w={["100%", "100%", "auto"]}
+                minW="fit-content"
+              >
+                Test Endpoint
+              </Button>
+            </Flex>
+            <DarkMode>
+              <Button
+                size="sm"
+                color="white"
+                w="fit-content"
+                mx="auto"
+                borderRadius="sm"
+                variant="ghost"
+                onClick={() => setShow(!show)}
+              >
+                {show ? `Less` : `More`} options{" "}
+                <Icon name={show ? "chevron-up" : "chevron-down"} ml={2} />
+              </Button>
+              <Collapse mt={4} isOpen={show}>
+                <Flex
+                  direction={["column", "column", "row"]}
+                  justify="center"
+                  alignItems="flex-end"
+                >
+                  <FormControl
+                    mr={[0, 0, 4]}
+                    mb={[4, 4, 0]}
+                    w="100%"
+                    maxW={["full", "full", "100%"]}
+                  >
+                    <FormLabel fontWeight={700} color="white">
+                      Cookie header
+                    </FormLabel>
+                    <Input
+                      name="cookie"
+                      ref={register}
+                      borderColor="gray.500"
+                      aria-label="Your GraphQL Endpoint cookie header"
+                      borderRadius="sm"
+                      isDisabled={endpointSubmit}
+                      fontWeight={500}
+                      color="white"
+                    />
+                  </FormControl>
+                  <FormControl w="100%" maxW={["full", "full", "100%"]}>
+                    <FormLabel fontWeight={700} color="white">
+                      Authorization header
+                    </FormLabel>
+                    <Input
+                      name="authorization"
+                      ref={register}
+                      borderColor="gray.500"
+                      aria-label="Your GraphQL Endpoint authorization"
+                      borderRadius="sm"
+                      isDisabled={endpointSubmit}
+                      fontWeight={500}
+                      color="white"
+                    />
+                  </FormControl>
+                </Flex>
+              </Collapse>
+            </DarkMode>
+          </Stack>
+          {testing && (
+            <Text
+              d="block"
+              color="cyan.400"
+              mt={4}
+              mx="auto"
+              textAlign="center"
+            >
+              {testing === true
+                ? `Testing takes ~30 seconds`
+                : endpointSubmit === true
+                ? `Your test results are listed below`
+                : null}
+            </Text>
+          )}
         </Box>
         <Text
           color="gray.700"
@@ -403,11 +449,11 @@ const TestGraphqlPage = () => {
                               </Heading>
                               {exchange.response.body.startsWith("{") !==
                               true ? (
-                                <CodeBlock className="html">
+                                <CodeBlock className="html" copyButton={false}>
                                   {exchange.response.body}
                                 </CodeBlock>
                               ) : (
-                                <CodeBlock className="json">
+                                <CodeBlock className="json" copyButton={false}>
                                   {JSON.stringify(
                                     JSON.parse(exchange.response.body),
                                     null,

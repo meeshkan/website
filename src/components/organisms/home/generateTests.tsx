@@ -196,7 +196,7 @@ mutation {
         <MotionButton
           ml={[0, 0, -20]}
           mt={[4, 4, 0]}
-          variantColor="red"
+          variantColor="blue"
           borderRadius="sm"
           fontWeight={900}
           onClick={() => setIsOpen(!isOpen)}
@@ -211,6 +211,7 @@ mutation {
             times: [0, 0.25, 0.5, 0.75, 1],
             delay: 10,
           }}
+          minW="fit-content"
         >
           {`Generate tests ->`}
         </MotionButton>
