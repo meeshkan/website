@@ -47,7 +47,12 @@ export const Card = ({
           {children}
         </Box>
       ) : (
-        <Box borderRadius="sm" backgroundColor="gray.50" p={6}>
+        <Box
+          borderRadius="sm"
+          backgroundColor="gray.50"
+          p={6}
+          position="relative"
+        >
           {heading ? (
             <Heading
               as="h3"

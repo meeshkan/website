@@ -7,15 +7,14 @@ import {
   Flex,
   Icon,
   Button,
-  Link as ChakraLink,
   Code,
+  Box,
 } from "@chakra-ui/core"
 import { Card } from "../components/atoms/card"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
-import { Link } from "gatsby"
 import SEO from "../components/molecules/seo"
 
 type PricingProps = {
@@ -26,6 +25,7 @@ type PricingProps = {
   noFeatures?: Array<string>
   hasCTA: boolean
   mixpanel: any
+  CTA?: string
 }
 
 const PricingCard = ({
@@ -36,6 +36,7 @@ const PricingCard = ({
   noFeatures,
   hasCTA,
   mixpanel,
+  CTA,
 }: PricingProps) => (
   <Card>
     <Heading
@@ -76,25 +77,30 @@ const PricingCard = ({
     </Stack>
 
     {hasCTA && (
-      <Button
-        as={UniversalLink}
-        href="https://app.meeshkan.com"
-        aria-label="Create a free account on Meeshkan."
-        variantColor="red"
-        borderRadius="sm"
-        fontWeight={700}
-        w="full"
-        mt={8}
-        onClick={() => {
-          mixpanel.track("Clicked button", {
-            to: "https://app.meeshkan.com",
-            from: "https://meeshkan.com/pricing",
-            c2a: `Create an account - ${title}`,
-          })
-        }}
-      >
-        Create a free account
-      </Button>
+      <Box mt={8}>
+        <Flex pos="absolute" bottom={4} right={6} left={6}>
+          <Button
+            as={UniversalLink}
+            // @ts-expect-error
+            href="https://app.meeshkan.com"
+            aria-label="Create a free account on Meeshkan."
+            variantColor="red"
+            variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
+            borderRadius="sm"
+            fontWeight={700}
+            w="full"
+            onClick={() => {
+              mixpanel.track(`Create an account - ${title}`, {
+                to: "https://app.meeshkan.com",
+                from: "https://meeshkan.com/pricing",
+                c2a: `Create an account - ${title}`,
+              })
+            }}
+          >
+            {CTA}
+          </Button>
+        </Flex>
+      </Box>
     )}
   </Card>
 )
@@ -138,18 +144,13 @@ const PricingPage = () => {
               "Basic reports",
               "GitHub integration",
             ]}
-            // noFeatures={[
-            //   "Concurrent tests",
-            //   "GitLab & Bitbucket",
-            //   "Test history",
-            //   "Audit reports",
-            // ]}
             hasCTA={true}
+            CTA="Create a free account"
           />
           <PricingCard
             title="Pro"
             subtitle="for Teams"
-            price="$99"
+            price="$199"
             mixpanel={mixpanel}
             yesFeatures={[
               "All free features",
@@ -159,13 +160,14 @@ const PricingPage = () => {
               "Premium reports",
               "30 day history retention",
             ]}
-            hasCTA={false}
+            hasCTA={true}
+            CTA="Sign up for Pro"
           />
           <PricingCard
             title="Business"
             subtitle="starting at"
             mixpanel={mixpanel}
-            price="$2000"
+            price="$2499"
             yesFeatures={[
               "Unlimited projects",
               "Unlimited testing hours",
@@ -176,7 +178,8 @@ const PricingPage = () => {
               "Role based permissions",
               "Jira/Linear integration",
             ]}
-            hasCTA={false}
+            hasCTA={true}
+            CTA="Sign up for Business"
           />
         </SimpleGrid>
       </SingleSection>
