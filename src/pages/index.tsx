@@ -5,7 +5,7 @@ import {
   Button,
   Text,
   Flex,
-  Badge,
+  Icon,
   Box,
   Link as ChakraLink,
   useDisclosure,
@@ -18,6 +18,7 @@ import {
   AccordionPanel,
   Grid,
   Stack,
+  DarkMode,
 } from "@chakra-ui/core"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -151,21 +152,34 @@ const IndexPage = () => {
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>
-        <Flex justify="center" mb={3}>
-          <Badge
-            variantColor="cyan"
-            letterSpacing="widest"
-            fontSize="14px"
-            fontWeight={600}
-            rounded="sm"
-            padding="0px 4px"
-            minH="auto"
-          >
-            Read our report -{" "}
-            <ChakraLink href={"/blog/thinking-about-qa"}>
-              When to start thinking about QA.
-            </ChakraLink>{" "}
-          </Badge>
+        <Flex
+          justify="center"
+          mb={3}
+          mt={12}
+          backgroundColor="gray.900"
+          p={2}
+          maxW="fit-content"
+          mx="auto"
+          borderRadius="md"
+          color="white"
+        >
+          <DarkMode>
+            <Code
+              variantColor="cyan"
+              letterSpacing="widest"
+              rounded="sm"
+              padding="0px 4px"
+              minH="auto"
+              mr={4}
+              d="flex"
+              alignItems="center"
+            >
+              Read our report <Icon name="arrow-forward" ml={2} />
+            </Code>
+          </DarkMode>
+          <ChakraLink href={"/blog/thinking-about-qa"} mr={4}>
+            When to start thinking about QA.
+          </ChakraLink>
         </Flex>
         <Heading
           as="h1"
