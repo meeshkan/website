@@ -71,11 +71,9 @@ Automated QA is _not_ a replacement for manual QA. Someone will always need to g
 
 ## An example
 
-I've seen enough small businesses get started with QA to know, in general, the types of problems crop up that lead to an initial collaboration. As you read this, ask yourself "Does this sound like my business?"
+Your business deploys a new service. Congrats! 🎊 Initially, all of the service's features are in your head, and you're able to manually test the app and write unit tests that give you confidence when you deploy.
 
-A business deploys a webapp that has a few features. Initially, all of the features are in your head, and you're able to manually test the app and write unit tests that give you confidence when you deploy.
-
-Soon, the app grows in complexity as do the underlying services. At a certain point, you start to feel an uneasy feeling when you merge a branch to production. This feeling feels odd: you've tested the service as best you could, all the tests are passing, and still you imagine breakage occurring, although you're not quite sure what. It could be a logged out user accessing logged-in resources. It could be an API sending back. It could be JSON parsing failure leading to serving a `404`. But there is some form of psychological resistance to merging to production.
+Soon, the service grows in complexity. You add authentication, you write to a database, and you start relying on other services. At a certain point, you begin to feel an uneasy feeling when you merge a branch to production. Why do you feel this way? You've tested the service as best you could, all the tests are passing, and still you imagine breakage occurring, although you're not quite sure what. It could be a logged out user accessing logged-in resources. It could be an API sending back. It could be JSON parsing failure leading to serving a `404`. But there is some form of psychological resistance to merging to production.
 
 The day you feel this is the day to kick off a conversation with a potential QA partner. If we're fortunate enough to earn your business, one of the first things we'll do is identify all of the points in your app that are most likely making you feel this way. For example, if you use some form of message passing like an Erlang cluster or Google PubSub and we see you use it in a certain way to tie together your app, we will lean in and test that more because we've identified it is a common source of fragility (and, inversely, a great strength when bug-free!).
 
