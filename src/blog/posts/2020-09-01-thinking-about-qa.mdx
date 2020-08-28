@@ -50,28 +50,28 @@ So, [introduce yourself](./). Say hi. It will take a matter of minutes, and you'
 
 You've now won half the battle. Developing a relationship with a QA professional will aleviate a lot of stress because your trusted partner knows when to step in and when to get out of the way.
 
-The next step, and the other half of the battle, is what happens at the "rehearsal", to use the analogy from above. What are you hoping to get out of it that you wouldn't get out of writing a few unit tests or using stronger typing?
+The next step, and the other half of the battle, is what happens at the "rehearsal", to use the analogy from above. What are you hoping to get out of QA that you wouldn't get out of building a spec, writing a few tests, or using a great linter?
 
-QA is all about business outcomes: it puts itself in the place of the user, looks at the current state of the UX, and assesses if the "diff" between the current UX and the desired UX is on track. If a QA engineer crashes your app by pressing a button five times in rapid succession, they won't elevate the crash unless it is linked to an underlying problem that can affect business outcomes.
+QA is all about business outcomes. It puts itself in the place of the user, looks at the current state of the UX, and assesses if the "diff" between the current UX and the desired UX is on track. If a QA engineer crashes your app by pressing a button five times in rapid succession, they won't bring the crash to your attention unless it is linked to an underlying problem that can effect your bottom line.
 
-We see this all the time at Meeshkan - our algorithms regularly crash servers with very large numbers, negative pagination and other forms of exotic input. If you hear about it from us on a top-level report, it is because we've linked the crashes to some underlying behavior that we think is unsustainable. Otherwise, you won't hear from us because _it's ok if your app crashes in the wild_. Don't let anyone tell you otherwise! What's not OK is for your business to consistently only ever return three out of twenty valid search results to a user. That's not a crash, but if search is a critical feature of your business, then that's a major problem. Great QA brings that to the fore.
+We see this all the time at Meeshkan. Our algorithms regularly crash servers by using very large numbers, negative pagination and other forms of exotic input. If you hear about this type of behavior from us, it is because we've linked the crashes to some underlying issue that we think is unsustainable. Otherwise, you won't hear from us because _it's ok if your app crashes in the wild_. Don't let anyone tell you otherwise! What's not OK is for your business to consistently only ever return three out of twenty valid search results to a user. That's not a crash, but if search is a critical feature of your business, then that's a major problem. Great QA brings that to the fore.
 
-The difference between Meeshkan and traditional manual QA is that we do this automatically. There are several core benefits of automated QA:
+The difference between Meeshkan and traditional QA is that we do this automatically. There are several core benefits of automated QA:
 
-- It explores a _lot_ of cases. This is _quantity_ assurance, which underpins quality assurance because you build a better understanding the more you work with the system under test.
-- It pools data from hundreds of cases to recognize patterns and make the best possible predictions.
+- It explores a _lot_ of cases.
+- It pools data from thousands of tests to recognize patterns and make the best possible predictions.
 - It moves at the speed of your development by testing every change to source code.
 - The price point makes it easy for small businesses to get started.
 
-What automated QA is _not_ a replacement for is manual QA. Someone will always need to give your app or service a spin in the wild. But automated QA leads naturally to manual QA in several respects:
+Automated QA is _not_ a replacement for manual QA. Someone will always need to give your app or service a spin in the wild. Sometimes your most enthusiastic users serve this role. But automated QA leads naturally to manual QA in several respects:
 
-- It gives a tester a machine-built spec, which can act as a map and save them time.
+- It gives a tester a machine-built spec, which can act as a map of the service.
 - It shows what parts of the app are the most trivial/predictable so that the manual tester can focus on the hard stuff.
-- Like drivers in a self-driving car, manual testers provide a valuable source of confirmation to machine-built QA algorithms, creating a feedback loop for unbeatable value.
+- Like drivers in a self-driving car, manual testers provide a valuable source of confirmation to machine-built QA algorithms, creating a positive feedback loop.
 
 ## An example
 
-I've seen enough small businesses get started with QA to know exactly what types of problems crop up and what an initial collaboration looks like. As you read this, ask yourself "Does this sound like my business"? If so, get in touch!
+I've seen enough small businesses get started with QA to know, in general, the types of problems crop up that lead to an initial collaboration. As you read this, ask yourself "Does this sound like my business?"
 
 A business deploys a webapp that has a few features. Initially, all of the features are in your head, and you're able to manually test the app and write unit tests that give you confidence when you deploy.
 
