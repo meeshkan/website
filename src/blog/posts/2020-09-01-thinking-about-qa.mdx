@@ -81,9 +81,7 @@ The day you feel this is the day to kick off a conversation with a potential QA 
 
 These tests don't just bombard the system with garbage input. For example, we will look to see if there are PubSub topics that are written to but never read or topics that are read but never written to. We will also try to find common mispellings of PubSub channels and potential deadlocks of two channels mutually waiting for each other. You may get a report that says the following:
 
-```
-Channel `customerPaid` expects input written to channel `customerRegistered`, but `customerRegistered` expects input to `customerPaid`.
-```
+> Channel `customerPaid` expects input written to channel `customerRegistered`, but `customerRegistered` expects input to `customerPaid`.
 
 We may send you _only_ this in the report _even though_ your app is crashing in other places. This gets back to the rehearsal idea from above - our goal is not to taunt you with the 1,000 ways we made your service crash, but to give you a few pearls of information that will actually make your service _better_.
 
