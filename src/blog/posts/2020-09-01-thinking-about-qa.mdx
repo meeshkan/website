@@ -58,27 +58,54 @@ We see this all the time at Meeshkan - our algorithms regularly crash servers wi
 
 The difference between Meeshkan and traditional manual QA is that we do this automatically. There are several core benefits of automated QA:
 
-- a
-- b
-- c
+- It explores a _lot_ of cases. This is _quantity_ assurance, which underpins quality assurance because you build a better understanding the more you work with the system under test.
+- It pools data from hundreds of cases to recognize patterns and make the best possible predictions.
+- It moves at the speed of your development by testing every change to source code.
+- The price point makes it easy for small businesses to get started.
 
 What automated QA is _not_ a replacement for is manual QA. Someone will always need to give your app or service a spin in the wild. But automated QA leads naturally to manual QA in several respects:
 
-- a
-- b
-- c
+- It gives a tester a machine-built spec, which can act as a map and save them time.
+- It shows what parts of the app are the most trivial/predictable so that the manual tester can focus on the hard stuff.
+- Like drivers in a self-driving car, manual testers provide a valuable source of confirmation to machine-built QA algorithms, creating a feedback loop for unbeatable value.
 
 ## An example
 
+I've seen enough small businesses get started with QA to know exactly what types of problems crop up and what an initial collaboration looks like. As you read this, ask yourself "Does this sound like my business"? If so, get in touch!
+
+A business deploys a webapp that has a few features. Initially, all of the features are in your head, and you're able to manually test the app and write unit tests that give you confidence when you deploy.
+
+Soon, the app grows in complexity as do the underlying services. At a certain point, you start to feel an uneasy feeling when you merge a branch to production. This feeling feels odd: you've tested the service as best you could, all the tests are passing, and still you imagine breakage occurring, although you're not quite sure what. It could be a logged out user accessing logged-in resources. It could be an API sending back. It could be JSON parsing failure leading to serving a `404`. But there is some form of psychological resistance to merging to production.
+
+The day you feel this is the day to kick off a conversation with a potential QA partner. If we're fortunate enough to earn your business, one of the first things we'll do is identify all of the points in your app that are most likely making you feel this way. For example, if you use some form of message passing like an Erlang cluster or Google PubSub and we see you use it in a certain way to tie together your app, we will lean in and test that more because we've identified it is a common source of fragility (and, inversely, a great strength when bug-free!).
+
+These tests don't just bombard the system with garbage input. For example, we will look to see if there are PubSub topics that are written to but never read or topics that are read but never written to. We will also try to find common mispellings of PubSub channels and potential deadlocks of two channels mutually waiting for each other. You may get a report that says the following:
+
+> Channel `customerPaid` expects input written to channel `customerRegistered`, but `customerRegistered` expects input to `customerPaid`.
+
+We may send you _only_ this in the report _even though_ your app is crashing in other places. This gets back to the rehearsal idea from above - our goal is not to taunt you with the 1,000 ways we made your service crash, but to give you a few pearls of information that will actually make your service _better_.
+
+Of course, the danger of giving an example is that it excludes others. PubSub is one of many things we're looking at - CRUD operations, calls to third-party APIs, field names, and unused code paths are all things that may trigger a report.
+
+When you're working with manual QA, you may resist bringing them in because you're still testing out your PubSub (or whatever) implementation and are not sure if it's worth testing yet. _With Meeshkan, we help make your idea, however fragile, worth testing!_
+
 ## How much does this all cost?
 
-- Gets out of the way
-- x
-- x
+I've sat through meetings where engineers are justifying spending money on testing to their boss, and it's interesting to see the giant chasm that exists between technical and non-technical folks here. People that don't build technology _totally_ get that everything needs to be tested, and are usually shocked to learn that there are giant patches of a service that are more or less untested. The general vibe is: "We're paying you to write code that works, so if that means testing it, than test it, but we shouldn't have to pay extra for testing."
+
+The thing is, they're right. They're paying you to write code that works. So conceiving of the cost of QA as a supplement to development is not a good idea. I encourage folks to think of QA as market research with a focus group that mimics _every_ segment you care about. It's like hiring great actors to play the role of your users and, when they get off the stage, report back to you how you could have written the play better.
+
+With this in mind, my rule of thumb is to plan one full-time salary going into some form of QA for every ~6 engineering hires. The math goes like this. Three people can generally develop a robust MVP or feaature in a month, and you want them to be nose down in doing it. As this core team progresses, you want one person observing the development from the vantage point of the entity that will ultimately interact with the service, reporting back so that building stays on track. It will save approximately 1 week of work for the team after launching the feature.
+
+So, one week of work saved for two teams of three equals six weeks of work saved for four weeks of work put in by your QA. Your save exceeds your spend by ~1.5
+
+As mentioned above, the most important thing is developing a relationship with this third-party service early on so that you can scale up and down naturally. At Meeshkan, one of the benefits of automated QA is that the less you have going on, the less you pay, and if there's nothing worth testing then we don't charge.
+
+So, if you're making your budget, plan on 1 full-time salary spent on QA for every ~6 engineers, and if you can use an automated service that scales like SaaS (like Meeshkan!), it is a good way to start small even from 1-2 engineers.
 
 ## How to get started
 
-## What success looks like
+Book a free consultation or subscribe to our newsletter below. You won't regret it!
 
 ## Conclusion
 
