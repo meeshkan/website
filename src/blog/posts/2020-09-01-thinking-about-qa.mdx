@@ -75,15 +75,15 @@ Your business deploys a new service. Congrats! 🎊 Initially, all of the servic
 
 Soon, the service grows in complexity. You add authentication, you write to a database, and you start relying on other services. At a certain point, you begin to feel an uneasy feeling when you merge a branch to production. Why do you feel this way? You've tested the service as best you could, all the tests are passing, and still you fret about bad outcomes. It could be a logged out user accessing logged-in resources. It could be an incorrect sorting algorithm. It could be JSON parsing failure leading to serving a `404`. But there is some form of psychological resistance to merging to production.
 
-The day you feel this is the day to kick off a conversation with a potential QA partner. If we're fortunate enough to earn your business, one of the first things we'll do is identify all of the points in your app that are most likely making you feel this way. For example, if you use some form of message passing like an Erlang cluster or Google PubSub and we see you use it in a certain way to tie together your app, we will lean in and test that more because we've identified it is a common source of fragility (and, inversely, a great strength when bug-free!).
+The day you feel this is the day to kick off a conversation with a potential QA partner. If we're fortunate enough to earn your business, one of the first things we'll do is identify all of the points in your app that are most likely making you feel this way. For example, if you use some form of message passing like an Erlang cluster or Google PubSub, we have a certain category of automated tests that apply to this type of setup.
 
-These tests don't just bombard the system with garbage input. For example, we will look to see if there are PubSub topics that are written to but never read or topics that are read but never written to. We will also try to find common mispellings of PubSub channels and potential deadlocks of two channels mutually waiting for each other. You may get a report that says the following:
+These tests don't just bombard the system with garbage input. For example, we will look to see if there are PubSub topics that are written to but never read. We will also try to find common mispellings of PubSub channels and potential deadlocks. You may get a report that says the following:
 
 > Channel `customerPaid` expects input written to channel `customerRegistered`, but `customerRegistered` expects input to `customerPaid`.
 
-We may send you _only_ this in the report _even though_ your app is crashing in other places. This gets back to the rehearsal idea from above - our goal is not to taunt you with the 1,000 ways we made your service crash, but to give you a few pearls of information that will actually make your service _better_.
+We may send you _only_ this in the report _even though_ your app is crashing in other places. This gets back to the rehearsal idea from above - our goal is not to taunt you with the 1,000 ways we made your service crash, but to give you a few useful pieces of information that will actually be helpful.
 
-Of course, the danger of giving an example is that it excludes others. PubSub is one of many things we're looking at - CRUD operations, calls to third-party APIs, field names, and unused code paths are all things that may trigger a report.
+Of course, the danger of giving an example like PubSub is that it excludes others. We also look at CRUD operations, calls to third-party APIs, field names, and hundreds of other indicators that may trigger a report.
 
 When you're working with manual QA, you may resist bringing them in because you're still testing out your PubSub (or whatever) implementation and are not sure if it's worth testing yet. _With Meeshkan, we help make your idea, however fragile, worth testing!_
 
