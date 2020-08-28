@@ -148,7 +148,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         pageTitle="Home"
-        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in beta and accepting applications."
+        pageDescription="Meeshkan is quality assurance for small businesses.  If you employ more than three engineers, you should sign up for a free Meeshkan account."
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>

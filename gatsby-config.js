@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Meeshkan Website`,
-    description: `Meeshkan is an automated testing service for your GraphQL API that executes and reports on a collection of dynamically generated tests. Create a free account today!`,
+    description: `"Meeshkan is quality assurance for small businesses.  If you employ more than three engineers, you should sign up for a free Meeshkan account."`,
     baseOG: `https://media.graphcms.com/vdCWflSaePa3QyqMPUfQ`,
     siteUrl: `https://meeshkan.com`,
     siteLanguage: `en-US`,
