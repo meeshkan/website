@@ -32,13 +32,7 @@ Type-level programming, for me, is a way to enhance this experience. It teaches 
 To start, I define a number not as a value, but as a _constrained value_. To the right of the colon is a constraint meaning `0 <= n < 1`.
 
 ```haskell
-type Between0And1 = ConstrainedRatioI
-    ( AndConstraint
-        ( NotConstraint
-            (LessThanConstraint Zero)
-        )
-        (LessThanConstraint (PRational P1 P1))
-    )
+type Between0And1 = ConstrainedRatioI ((Nt (Lt Zero)) &&/ (Lt (P1 +/ P1)))
 oneHalf = asConstraintedRational 1 2 :: Maybe Between0And1
 ```
 
@@ -68,13 +62,7 @@ Traditionally, this type of validation function is implemented so that it yields
 Of course, a type with that wide of an ambitus only makes sense when you're not sure what the input will be, ie if you're reading from disk. If you know it's `1/2`, just say it!
 
 ```haskell
-type ExactlyOneHalf = ConstrainedRatioI
-    ( AndConstraint
-        ( NotConstraint
-            (LessThanConstraint (PRational P1 P2))
-        )
-        (LessThanOrEqualToConstraint (PRational P1 P2))
-    )
+type ExactlyOneHalf = ConstrainedRatioI (EqConstraint (P1 +/ P2))
 
 oneHalfPrecise = asConstraintedRational 1 2 :: Maybe ExactlyOneHalf
 ```
@@ -86,13 +74,7 @@ The next important bit is `invoke`. It takes a function from `a -> c`, where `a`
 To use invoke, let's take the `oneHalfPrecise` we defined above. Now, let's create a function that accepts any value between `0 & 1` and returns `0.25`.
 
 ```haskell
-type OneQuarter = ConstrainedRatioI
-    ( AndConstraint
-        ( NotConstraint
-            (LessThanConstraint (PRational P1 P4))
-        )
-        (LessThanOrEqualToConstraint (PRational P1 P4))
-    )
+type OneQuarter = ConstrainedRatioI (EqConstraint (P1 +/ P4))
 
 returnAQuarter :: Between0And1 -> OneQuarter
 returnAQuarter _ = constConstrained $ resolve (CRProxy :: CRProxy OneQuarter)
@@ -121,8 +103,7 @@ Lastly, let's see how `invoke` allows us to specialize functions, like an adder,
 First, we'll create an adder for numbers between `0` and `1`.
 
 ```haskell
-type Gte0lt1
-  = (AndConstraint (NotConstraint (LessThanConstraint Zero)) (LessThanConstraint (PRational P1 P1)))
+type Gte0lt1 = ((Nt (Lt Zero)) &&/ (Lt (P1 +/ P1)))
 
 type Between0And1 = ConstrainedRatioI Gte0lt1
 
@@ -149,11 +130,9 @@ Now that that's done, we can create a specialized function called `addTwoHalves`
 
 ```haskell
 
-type IsOneHalf
-  = (AndConstraint (NotConstraint (LessThanConstraint (PRational P1 P2))) (LessThanConstraint (PRational P1 P2)))
+type IsOneHalf = EqConstraint (P1 +/ P2)
 
-type IsOne
-  = (AndConstraint (NotConstraint (LessThanConstraint (PRational P4 P4))) (LessThanConstraint (PRational P4 P4)))
+type IsOne = EqConstraint (P4 +/ P4)
 
 addTwoHalves ::
   ConstrainedRatioI IsOneHalf ->
