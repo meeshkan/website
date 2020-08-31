@@ -149,7 +149,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         pageTitle="Home"
-        pageDescription="Meeshkan is an automated testing workflow for your project and it's dependencies. We're currently in beta and accepting applications."
+        pageDescription="Meeshkan tests authentication and authorization in your app."
         pageUrl="https://meeshkan.com/"
       />
       <SingleSection>
@@ -192,7 +192,7 @@ const IndexPage = () => {
           letterSpacing="wide"
           lineHeight="short"
         >
-          Automated tests for your GraphQL APIs, dynamically generated
+          Test authentication and authorization for any API
         </Heading>
         <Text
           textAlign={["left", "left", "center"]}
@@ -201,11 +201,10 @@ const IndexPage = () => {
           mb={6}
           color="gray.700"
         >
-          Stop feeling guilty for not writing tests. Meeshkan automatically
-          executes and reports on a collection of generated tests that actually
-          keep up with your GraphQL API. Using your schema and a touch of NLP,
-          we test critical flows, guaranteed to give you confidence in your app.
-          Every commit.
+          All we need is an endpoint, we'll take it from there. Meeshkan uses
+          NLP to automatically generate thousands of machine-generated tests for
+          the most common authentication and authorization errors in GraphQL and
+          REST APIs.
         </Text>
         <Stack
           spacing={[0, 0, 4]}
@@ -232,30 +231,7 @@ const IndexPage = () => {
             w={["100%", "100%", "auto"]}
             _hover={{ textDecor: "none", backgroundColor: "red.600" }}
           >
-            Create a free account
-          </Button>
-          <Button
-            as={Link}
-            // @ts-ignore
-            to="/test-graphql/"
-            aria-label="Link to the test graphql page"
-            variantColor="gray"
-            backgroundColor="gray.50"
-            color="gray.700"
-            variant="ghost"
-            borderRadius="sm"
-            fontWeight={900}
-            onClick={() => {
-              mixpanel.track("Clicked a button", {
-                to: "https://meeshkan.com/test-graphql",
-                from: "https://meeshkan.com",
-                c2a: "Mini GraphQL tester",
-              })
-            }}
-            w={["100%", "100%", "auto"]}
-            _hover={{ textDecor: "none", backgroundColor: "gray.100" }}
-          >
-            Try the demo
+            Test your auth today
           </Button>
         </Stack>
         {/* <Box maxW="750px" mx="auto">
@@ -311,10 +287,10 @@ const IndexPage = () => {
       </SingleSection>
 
       <DoubleSection
-        heading="Static testing falls short by focusing on the quantity of ‘bugs’ rather than"
-        em="quality"
+        heading="We know when somthing is"
+        em="off"
         anchor="#quality"
-        text="Meeshkan prioritizes and sorts bugs so you know what to tackle first.Code coverage metrics aren't meaningful without the quality context of what's covered."
+        text="By analyzing thousands of GraphQL and REST APIs, we know odd behavior when we see it.  This doesn't just mean security bugs.  It means incomplete or incorrect results that cause users to bounce."
       >
         <PrioritizeTests />
       </DoubleSection>
@@ -322,14 +298,14 @@ const IndexPage = () => {
       <DoubleSection
         reverse={true}
         heading="Keeping up with an ever-evolving API is a full-time job"
-        text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
+        text="Someone makes a change to your API, the existing tests become outdated and now you're stuck rewriting your tests. We fix that by measuring changes to authenticated results over time, alerting you with a data-driven decision when a change seems more like a bug than a feature."
       >
         <GenerateTests />
       </DoubleSection>
 
       <SingleSection
-        heading="Automate GraphQL testing of your backend with the Meeshkan webapp"
-        text="By combining your existing schema introspection, property-based testing, and a touch of NLP, Meeshkan gives you the confidence that your backend service is working as expected."
+        heading="Stop stressing out about authorization.  Trust Meeshkan to test critical auth flows."
+        text="By combining Natural Language Processing, GraphQL schemas, OpenAPI specs, and state-of-the-art property-based tests, Meeshkan gives you the confidence that your service is working as expected."
       >
         <Flex justify="center" mb={12}>
           <Button
