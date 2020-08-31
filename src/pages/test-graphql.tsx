@@ -85,7 +85,7 @@ const TestGraphqlPage = () => {
       //   authorization: values.authorization,
       // },
     })
-    mixpanel.track("Clicked button", {
+    mixpanel.track("Clicked a button", {
       to: "https://meeshkan.io/runr",
       from: "https://meeshkan.com/test-graphql",
       c2a: "Test endpoint",

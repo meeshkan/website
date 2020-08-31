@@ -223,7 +223,7 @@ const IndexPage = () => {
             fontWeight={900}
             mb={[4, 4, 0]}
             onClick={() => {
-              mixpanel.track("Clicked button", {
+              mixpanel.track("Clicked a button", {
                 to: "https://app.meeshkan.com",
                 from: "https://meeshkan.com",
                 c2a: "Create a free account - top",
@@ -246,7 +246,7 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track("Clicked button", {
+              mixpanel.track("Clicked a button", {
                 to: "https://meeshkan.com/test-graphql",
                 from: "https://meeshkan.com",
                 c2a: "Mini GraphQL tester",
@@ -341,7 +341,7 @@ const IndexPage = () => {
             borderRadius="sm"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track("Clicked button", {
+              mixpanel.track("Clicked a button", {
                 to: "https://app.meeshkan.com",
                 from: "https://meeshkan.com",
                 c2a: "Create a free account - bottom",
@@ -662,7 +662,7 @@ const IndexPage = () => {
             variantColor="red"
             fontWeight={900}
             onClick={() => {
-              mixpanel.track("Clicked button", {
+              mixpanel.track("Clicked a button", {
                 to:
                   "https://meetings.hubspot.com/makenna/consultation-with-meeshkan",
 
