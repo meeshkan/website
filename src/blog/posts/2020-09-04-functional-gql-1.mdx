@@ -103,13 +103,15 @@ If we hover over it, you'll see that the compiler has "solved" what `forceString
 
 Using `ToString`, we've pulled a type out of thin air. If you look at `forceString`, nowhere in the definition does it say `b` must be a String. The compiler figures it out from the implementation of `ToString`.
 
-In the same way, the compiler will figure out what our GraphQL resolver needs to be from our GraphQL spec.
+In the same way, the compiler will figure out what _type_ our GraphQL resolver needs to be from our GraphQL spec.
 
 ## A slightly-more realistic example
 
-In the following example, we'll use [`purescript-typelevel-parser`](https://github.com/meeshkan/purescript-typelevel-parser) to turn symbols into types. In PureScript, `Symbol` is a kind. A **kind** is just a family of types. The types that inhabit `kind Symbol` are every unicode string. Thankfully, the binary of the PureScript compiler doesn't contain every unicode string (that'd be a pretty big compiler!). The compiler creates, on-the-fly, a type for each unicode String. So the type `"a"` is of `kind Symbol` just like the value `"a"` is of `type String`.
+In the following example, we'll use [`purescript-typelevel-parser`](https://github.com/meeshkan/purescript-typelevel-parser) to turn symbols into types. In PureScript, `Symbol` is a kind. A **kind** is just a family of types. The types that inhabit `kind Symbol` are every unicode string. Thankfully, the binary of the PureScript compiler doesn't contain every unicode string (that'd be a pretty big compiler!). The compiler creates a type for each unicode String on-the-fly. So the type `"a"` is of `kind Symbol` just like the value `"a"` is of `type String`.
 
-Instead of GraphQL, in this example, we'll use a spec called **TypeQL**. This (fabricated) spec is a series of lowercase strings separated by `&`. The general idea is that it defines keys that point to a given type, ie a dictionary of ints or strings with given keys. One example would be `gold&silver&bronze`, another supports keys `earth&wind&fire`. Like a GraphQL spec, it doesn't _mean_ anything. It is just a container of information. Our program will give it meaning, just like a GraphQL resolver gives a spec meaning.
+Instead of GraphQL, in this example, we'll use a spec called **TypeQL**. This (fabricated) spec is a series of lowercase strings separated by `&`. The general idea is that it defines keys that point to a type. Keys of what? Who knows! Perhaps a dictionary, perhaps a database - that's for us to decide when we implement the spec. What type do the keys point to? Who knows! Perhaps `Int`, perhaps `String`.
+
+One example would be `gold&silver&bronze` pointing to `Int`, another would be `earth&wind&fire` pointing to `Boolean`. Like a GraphQL spec, our TypeQL spec doesn't _mean_ anything. It is just a container of information. Our program will give it meaning, just like a GraphQL resolver gives a spec meaning.
 
 An engineer has been tasked with taking a **TypeQL** spec and creating a PureScript implementation that can work for any type. So, for example, if we get a spec `earth&wind&fire`, then we want to be able to automatically generate a type `{ earth :: a, wind :: a, fire :: a }`, where `a` can be any type (`Int`, `String`, etc).
 
@@ -149,7 +151,7 @@ type KeyList
 
 Using the primitives of `purescript-typelevel-parser`, we define a list of lowercase values separated by the separator `&` that accurately describes the TypeQL spec.
 
-Once we have a parser result, we need to define how it is used in our application (continuing in GraphQL-speak, we need to define the type of our resolver). In this case, we will take the parser result and turn it into a row where every key points to something of type `i`. For example, `foo&bar&baz` with type `Int` will turn into a type `{ foo :: Int, bar :: Int, baz :: Int }`.
+Once we have a parser result, we need to define how it translates into a type that our application understands (continuing in GraphQL-speak, we need to define the type of our resolver). In this case, we will take the parser result and turn it into a row where every key points to something of type `i`. For example, `foo&bar&baz` with type `Int` will turn into a type `{ foo :: Int, bar :: Int, baz :: Int }`.
 
 ```haskell
 class TypeQLToRow (p :: ParserResult) (i :: Type) (t :: # Type) | p i -> t
