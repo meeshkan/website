@@ -70,7 +70,7 @@ const toString = (i: any): string => `${i}`
 
 At the type-level (switching to PureScript) this becomes:
 
-```purescript
+```haskell
 class ToString a b | a -> b where
   toString :: a -> b
 
@@ -84,7 +84,7 @@ In the first example, we're guaranteed that any value that goes into `toString` 
 const a = toString(1) // "1"
 ```
 
-```purescript
+```haskell
 forceString :: forall b. ToString Int b => b -> b
 forceString = identity
 
@@ -115,7 +115,7 @@ An engineer has been tasked with taking a **TypeQL** spec and creating a PureScr
 
 Let's start with some imports.
 
-```purescript
+```haskell
 module Test.TypeQL where
 
 import Prelude
@@ -129,7 +129,7 @@ import Type.Parser (class Parse,
 
 Now, we define our spec. In this case, it will be `python&java&javascript`. In the next article, this'll be a full blown GraphQL spec. Notice how `"python&java&javascript"` is a Symbol, not a String, because of the identifier `type`.
 
-```purescript
+```haskell
 -- our spec
 type OurSpec
   = "python&java&javascript"
@@ -137,7 +137,7 @@ type OurSpec
 
 The next step is defining a parser. In most cases, you never have to actually write a parser as it is done for you (ie Apollo parses GraphQL). The same will be true of our GraphQL parser in the next article, but I want to show you how it's done so that you can follow a full example
 
-```purescript
+```haskell
 data Key
 
 data Keys
@@ -151,7 +151,7 @@ Using the primitives of `purescript-typelevel-parser`, we define a list of lower
 
 Once we have a parser result, we need to define how it is used in our application (continuing in GraphQL-speak, we need to define the type of our resolver). In this case, we will take the parser result and turn it into a row where every key points to something of type `i`. For example, `foo&bar&baz` with type `Int` will turn into a type `{ foo :: Int, bar :: Int, baz :: Int }`.
 
-```purescript
+```haskell
 class TypeQLToRow (p :: ParserResult) (i :: Type) (t :: # Type) | p i -> t
 
 instance nqlToRowNil ::
@@ -190,7 +190,7 @@ instance symbolToTypeQLType ::
 
 Now, we can create our typelevel validator. The validator just passes through an object, but in doing so, validates at compile-time that the object conforms to our spec. For example, `{ python: 1, javascript: 2, java: 3 }` conforms to our spec.
 
-```purescript
+```haskell
 intValidator ::
   forall (c :: # Type).
   SymbolToRow OurSpec Int c =>
@@ -209,7 +209,7 @@ languages =
 
 Let's imagine that we now add a language (say purescript). Our spec becomes `python&java&javascript&purescript`. What happens to `languages`? Let's see!
 
-```purescript
+```haskell
 type OurSpec
   = "python&java&javascript&purescript"
 ```
@@ -224,7 +224,7 @@ But, because it deep down the PureScript compiler is nice, it gives us a helpful
 
 Now we can fix it!
 
-```purescript
+```haskell
 languages :: { python :: Int, javascript :: Int, java :: Int, purescript :: Int }
 languages =
   intValidator
