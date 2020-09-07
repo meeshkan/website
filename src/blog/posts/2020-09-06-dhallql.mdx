@@ -152,7 +152,7 @@ One important convention to note in this setup is that the top-level object of t
 Lastly, this code works for queries but not mutations. For mutations, you'd need a `Writer` type with the following signature:
 
 ```
-let Reader: Type = forall (Projection: Type)
+let Writer: Type = forall (Projection: Type)
   -> forall (TransformF: Db -> Db)
   -> forall (ProjectionF: Db -> Projection)
   -> Projection
@@ -224,7 +224,7 @@ The idea of consumers sending code to a server to execute and turn into a result
 
 ### Authorization
 
-In my opinon, the most important aspect of this design is that it gets authorization right. When the first handshake happens and the consumer receives a JSON schema based on their token, they know what _they_ will be allowed to see. They don't know anything about what anyone else can see or an underlying schema. The schema encodes the entirety of their authorization permissions.
+In my opinon, the most important aspect of this design is that it gets authorization right. When the first handshake happens and the consumer receives a JSON schema based on their token, they know what _they_ will be allowed to see. They don't know anything about what anyone else can see or an underlying schema. The JSON encodes the entirety of their authorization permissions.
 
 It could be, for example, that a resource is both viewable (ie someone's name on a list of friends) and not viewable (ie the fact that that person is dating your ex) depending on where it shows up in the JSON schema. In this way, the same resource can have multiple different pointers, and similarly, the same pointer can be referenced recursively (pets-to-owners above), allowing for queries as deeply nested as the consumer wants. What stops a recursive loop is the fact that the consumer's query is not infinitely long, but we do not limit how deep they can nest their data.
 
