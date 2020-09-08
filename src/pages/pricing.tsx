@@ -128,6 +128,7 @@ const PricingPage = () => {
           <ChakraLink
             // @ts-ignore
             as={Link}
+            to="/contact"
             color="blue.500"
           >
             {" "}
