@@ -11,6 +11,8 @@ tags:
   - graphql
 ---
 
+import { Button } from "@chakra-ui/core"
+
 One of the common points of friction in GraphQL-land is making sure resolvers are conformant to specs. There are three main strategies I've seen to do this:
 
 1. Runtime validation of IO like in [Apollo](https://www.apollographql.com/) and [Absinthe](https://github.com/absinthe-graphql/absinthe).
@@ -241,4 +243,19 @@ languages =
 
 In this article, I've shown how typelevel-programming allows you to take a spec (ie TypeQL) and use it to generate a type. We use the type to create a validator that makes sure our code is always conformant with the spec. It's also allowed us to use custom business-logic (in this case, using `Int` as the indexed type of our record).
 
-In the next article in this series, which will come out in mid-September 2020, I'll show how this strategy can be used to build type-safe GraphQL resolvers. In the meantime, if you're building a GraphQL API, you should sign up for [Meeshkan](https://meeshkan.com)! We do automated testing of GraphQL APIs. Our novel approach combines functional programming and machine learning to execute thousands of tests against your GraphQL API and find mission-critical bugs and inconsistencies. Regisration is free, and don't hesitate to reach out - we'd love to learn more about what you're building!
+In the next article in this series, which will come out in mid-September 2020, I'll show how this strategy can be used to build type-safe GraphQL resolvers. In the meantime, if you're building a GraphQL API, you should sign up for [Meeshkan](https://meeshkan.com)! We do automated testing of GraphQL APIs.
+
+<Button
+  as="a"
+  mt={4}
+  href="https://app.meeshkan.com"
+  aria-label="Create a free Meeshkan account."
+  variantColor="red"
+  borderRadius="sm"
+  fontWeight={900}
+  w={["100%", "100%", "auto"]}
+>
+  Create a free account
+</Button>
+
+Our novel approach combines functional programming and machine learning to execute thousands of tests against your GraphQL API and find mission-critical bugs and inconsistencies. Regisration is free, and don't hesitate to reach out - we'd love to learn more about what you're building!
