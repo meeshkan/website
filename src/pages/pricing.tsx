@@ -86,7 +86,7 @@ const PricingCard = ({
         w="full"
         mt={8}
         onClick={() => {
-          mixpanel.track("Clicked button", {
+          mixpanel.track("Clicked a button", {
             to: "https://app.meeshkan.com",
             from: "https://meeshkan.com/pricing",
             c2a: `Create an account - ${title}`,
