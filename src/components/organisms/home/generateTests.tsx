@@ -52,14 +52,17 @@ const GenerateTests = () => {
       <MotionBox
         animate={isOpen ? "open" : "closed"}
         variants={variants}
-        backgroundColor="blackAlpha.300"
+        backgroundColor="blackAlpha.700"
         position="absolute"
         zIndex={10}
         w={[300, 360, 460]}
         h={380}
         p={4}
         borderRadius="md"
-        style={{ backdropFilter: "blur(6px)" }}
+        style={{
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
         overflow="auto"
       >
         <Stack
@@ -196,7 +199,7 @@ mutation {
         <MotionButton
           ml={[0, 0, -20]}
           mt={[4, 4, 0]}
-          variantColor="red"
+          variantColor="blue"
           borderRadius="sm"
           fontWeight={900}
           onClick={() => setIsOpen(!isOpen)}
@@ -211,8 +214,9 @@ mutation {
             times: [0, 0.25, 0.5, 0.75, 1],
             delay: 10,
           }}
+          minW="fit-content"
         >
-          {`Generate tests ->`}
+          Generate tests <Icon name="arrow-forward" ml={2} />
         </MotionButton>
       </Box>
     </>
