@@ -366,7 +366,7 @@ Person(name='Larry', age=25, car='Kia Spectra')
 
 ## Migrating from `TypedDict` to `dataclasses`
 
-You may have guessed by now, but generally, we prefer duck typing over classes. For this reason, we're very enthusiastic about `TypedDict`. That said, in [Meeshkan](https://github.com/meeshkan/meeshkan), we migrated from `TypedDict` to `dataclasses` for several reasons. Throughout the rest of this article, we'll explain why we made the move.
+You may have guessed by now, but generally, we prefer duck typing over classes. For this reason, we're very enthusiastic about Python's `TypedDict`. That said, in our Python project [hmt](https://github.com/meeshkan/hmt), we migrated from `TypedDict` to `dataclasses` for several reasons. Throughout the rest of this article, we'll explain why we made the move.
 
 The two reasons we migrated from `TypedDict` to `dataclasses` are matching and validation:
 
@@ -450,7 +450,7 @@ def to_person(d: dict) -> Person:
  raise ValueError('d is not a Person')
 ```
 
-The above `to_person` will raise an error, whereas the `TypedDict` version won't. This means that, when an error arises, it will happen later down the line. These types of errors are much harder to debug.
+The above `to_person` will raise an error, whereas the `TypedDict` version won't. This means that, when an error arises, it will happen later down the line. Due to the way Python stack traces work, these types of errors are much harder to debug.
 
 When we changed from `TypedDict` to `dataclasses` in [Meeshkan](https://github.com/meeshkan/meeshkan), some tests started to fail. Looking them over, we realized that they never should have succeeded. Their success was due to the use of `cast`, whereas the `class` approach surfaced several bugs.
 
@@ -460,4 +460,19 @@ When we changed from `TypedDict` to `dataclasses` in [Meeshkan](https://github.c
 
 While we love the idea of `TypedDict` and duck typing, it has practical limitations in Python. This makes it a poor choice for most large-scale applications. We would recommend using `TypedDict` in situations where you're already using `dicts`. In these cases, `TypedDict` can add a degree of type safety without having to rewrite your code. For a new project, though, I'd recommend using `dataclasses`. It works better with Python's type system and will lead to more resilient code.
 
-Disagree with us? Are there any strengths or weaknesses of either approach that we're missing? Leave us a comment!
+I should mention that if you're a fan of typing, you've found a happy home on the Internet where we have _tons_ of articles about types in lots of languages. Check out our [blog](https://meeshkan.com/blog). If you're working on an API and using any typing strategy, like OpenAPI or GraphQL, you _definitely_ should sign up for the Meeshkan beta. Meeshkan automatically makes sure your app lives up to its typed contracts 💪.
+
+<Button
+  as="a"
+  mt={4}
+  href="https://app.meeshkan.com"
+  aria-label="Create a free Meeshkan account."
+  variantColor="red"
+  borderRadius="sm"
+  fontWeight={900}
+  w={["100%", "100%", "auto"]}
+>
+  Create a free account
+</Button>
+
+I should also mention that a lot of our Python-based stack is open-sourced on [github](https://github.com/meeshkan), and we also contribute regularly to [PureScript python](http://github.com/purescript-python). If you're hardcore into Python+typing, you should check that project out!
