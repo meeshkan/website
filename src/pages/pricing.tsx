@@ -150,7 +150,7 @@ const PricingPage = () => {
 					<PricingCard
 						title="Pro"
 						subtitle="for Teams"
-						price="$199"
+						price="Coming soon"
 						mixpanel={mixpanel}
 						yesFeatures={[
 							"All free features",
@@ -169,7 +169,7 @@ const PricingPage = () => {
 						hasCTA={true}
 						CTA="Sign up for Business"
 						mixpanel={mixpanel}
-						price="$2499"
+						price="Chat with us"
 						yesFeatures={[
 							"All Pro features",
 							"Unlimited projects",
