@@ -45,6 +45,7 @@ You can find your project's configuration at `https://app.meeshkan.com/{yourTeam
 
 ### Build settings
 
+Please add credentials for your local server, and not your live endpoints. Testing against production credentials can cause permanent data damage.
 - **Root directory**: The path to your app in your repository. For instance, if your app lives in the home directory, then you would use `./` as your root directory. 
 - **Build command**: The command(s) your app framework provides for compiling your code. `npm install && npm start` is an example build command for a repository that uses NPM and provides a "start" script.
 - **OpenAPI location**: The path or endpoint to your repository's *OpenAPI specification* (such as `http://localhost:8000/api/openapi`).
