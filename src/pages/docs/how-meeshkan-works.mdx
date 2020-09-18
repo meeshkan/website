@@ -51,6 +51,12 @@ Please add credentials for your local server, and not your live endpoints. Testi
 - **OpenAPI location**: The path or endpoint to your repository's *OpenAPI specification* (such as `http://localhost:8000/api/openapi`).
 - **GraphQL endpoint**: The path or endpoint to your repository's *GraphQL schema* (such as `http://localhost:8000/api/graphql`).
 
+#### Docker
+
+In several cases, you might want to 'dockerize' your project and provide your `docker-compose up` command (or equivalent) as the Meeshkan *build command*. Here is a list of a few resources that may be useful in the 'dockerization' process:
+- [Docker's *Get Started* Guide](https://docs.docker.com/get-started/)
+- [Node.js's *Dockerizing a Node.js web app* Guide](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+
 ### Slack integration
 
 Our slack app allows you to recieve notifications in the channel of your choosing. Currently notifications are global for any bugs found. In the future we will expose granular controls to allow you to only recieve notifications for high priority bugs.
