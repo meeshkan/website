@@ -1,14 +1,5 @@
 import React from "react"
-import {
-	Flex,
-	Badge,
-	Heading,
-	Text,
-	Stack,
-	Box,
-	Button,
-	Image,
-} from "@chakra-ui/core"
+import { Heading, Text, Flex, Box, Button, Image } from "@chakra-ui/core"
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
@@ -26,8 +17,8 @@ const TestingEnvironmentPage = () => {
 					pageUrl="https://meeshkan.com/testing-environments/"
 				/>
 				<SingleSection hero>
-					<Stack isInline mt={12} spacing={8}>
-						<Box>
+					<Flex direction={["column", "column", "row"]} mt={12}>
+						<Box mr={[0, 0, 8]} mb={[8, 8, 0]}>
 							<Heading
 								as="h1"
 								fontSize={["3xl", "4xl", "5xl"]}
@@ -45,9 +36,8 @@ const TestingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Staging environment platform built for product managers. Cut
-								your manual testing time in half by instantly creating sandboxed
-								staging environments from source control.
+								Cut your manual testing time in half by instantly creating
+								sandboxed staging environments from source control.
 							</Text>
 							<Button
 								aria-label="Sign up"
@@ -60,7 +50,7 @@ const TestingEnvironmentPage = () => {
 							</Button>
 						</Box>
 						<Image src={testingEnvironment} minW={[300, 360, 400]} h="256px" />
-					</Stack>
+					</Flex>
 				</SingleSection>
 
 				<DoubleSection
