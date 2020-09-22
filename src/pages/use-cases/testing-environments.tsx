@@ -36,8 +36,7 @@ const TestingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Cut your manual testing time in half by instantly creating
-								sandboxed staging environments from source control.
+								Cut your manual testing time and your cloud bill in half with sandboxed staging environments.
 							</Text>
 							<Button
 								aria-label="Sign up"
