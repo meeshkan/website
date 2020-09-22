@@ -36,7 +36,7 @@ const TestingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Cut your manual testing time and your cloud bill in half with sandboxed staging environments.
+								Cut your manual testing time and your cloud bill in half with quick-to-deploy staging environments.
 							</Text>
 							<Button
 								aria-label="Sign up"
