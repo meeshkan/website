@@ -12,6 +12,7 @@ import {
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
+import { DoubleSection } from "../../components/organisms/doubleSection"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 
@@ -61,6 +62,28 @@ const TestingEnvironmentPage = () => {
 						<Image src={testingEnvironment} minW={[300, 360, 400]} h="256px" />
 					</Stack>
 				</SingleSection>
+
+				<DoubleSection
+					heading="Test the cases that matter"
+					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test."
+				>
+					<Box backgroundColor="gray.50" size="100%" />
+				</DoubleSection>
+
+				<DoubleSection
+					reverse
+					heading="Powered by Docker"
+					text="Meeshkan builds upon a Docker image of your service, adding the data and integrations needed to simulate the case you are testing. Developers push a Dockerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We take care of the rest."
+				>
+					<Box backgroundColor="gray.50" size="100%" />
+				</DoubleSection>
+
+				<DoubleSection
+					heading="Cut your staging bill in half"
+					text="Don't pay for staging environments you don't need. Meeshkan automatically tears down your staging environment when you're finished with your tests."
+				>
+					<Box backgroundColor="gray.50" size="100%" />
+				</DoubleSection>
 			</Layout>
 		</>
 	)
