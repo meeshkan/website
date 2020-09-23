@@ -110,7 +110,7 @@ const TestingEnvironmentPage = () => {
 						<TabPanel>
 							<DoubleSection
 								heading="Ship a container and we'll take care of the rest"
-								text="Meeshkan builds upon a containerized image of your service, adding the data and integrations needed for PMs to simulate their test cases. Push a containerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We'll take care of getting it ready for your PM's acceptance tests."
+								text="Meeshkan builds staging environments on top of a containerized version of your service, adding the data and integrations needed for PMs to conduct their acceptance tests. Integrates with AWS, Azure DevOps, CircleCI, Travis and Jenkins."
 							>
 								<Box backgroundColor="gray.50" size="100%" />
 							</DoubleSection>
