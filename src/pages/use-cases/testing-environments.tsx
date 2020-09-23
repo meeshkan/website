@@ -66,7 +66,16 @@ const TestingEnvironmentPage = () => {
 				</SingleSection>
 
 				<Tabs variant="unstyled">
-					<Heading textAlign="center" mb={4}>
+					<Heading
+						textAlign="center"
+						mb={4}
+						as="h2"
+						color="gray.700"
+						fontSize={["3xl", "3xl", "3xl", "4xl"]}
+						fontWeight={900}
+						letterSpacing="wide"
+						lineHeight="short"
+					>
 						Staging environments optimized
 					</Heading>
 					<TabList fontFamily="mono" justifyContent="center">
