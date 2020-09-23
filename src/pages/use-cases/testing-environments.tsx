@@ -131,7 +131,11 @@ const TestingEnvironmentPage = () => {
 									p={4}
 									spacing={4}
 								>
-									<Heading fontSize="xl" fontWeight={900}>
+									<Heading
+										fontSize="xl"
+										fontWeight={900}
+										color={colorMode === "light" ? "gray.700" : "white"}
+									>
 										Test cases
 									</Heading>
 									<Test
