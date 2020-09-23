@@ -55,7 +55,7 @@ const TestingEnvironmentPage = () => {
 
 				<DoubleSection
 					heading="Test the cases that matter"
-					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test.  When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
+					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
 				>
 					<Box backgroundColor="gray.50" size="100%" />
 				</DoubleSection>
