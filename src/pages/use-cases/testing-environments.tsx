@@ -118,13 +118,40 @@ const TestingEnvironmentPage = () => {
 					</TabPanels>
 				</Tabs>
 
-				<DoubleSection
-					reverse
-					heading="Cut your staging bill in half"
-					text="Don't pay for staging environments you don't need. Meeshkan automatically tears down your staging environment when you're finished with your tests."
-				>
-					<Box backgroundColor="gray.50" size="100%" />
-				</DoubleSection>
+				<SingleSection>
+					<Box
+						backgroundColor="gray.900"
+						p={8}
+						borderRadius="md"
+						textAlign="center"
+					>
+						<Heading
+							mb={2}
+							color="white"
+							as="h2"
+							fontSize={["3xl", "3xl", "3xl", "4xl"]}
+							fontWeight={900}
+							letterSpacing="wide"
+							lineHeight="short"
+						>
+							Cut your staging bill in half
+						</Heading>
+						<Text mb={4} fontSize="2xl" lineHeight="short" color="gray.200">
+							Don't pay for staging environments you don't need. Meeshkan
+							automatically tears down your staging environment when you're
+							finished with your tests.
+						</Text>
+						<Button
+							aria-label="Sign up"
+							variantColor="red"
+							borderRadius="sm"
+							fontWeight={900}
+							minW="fit-content"
+						>
+							Create your environment
+						</Button>
+					</Box>
+				</SingleSection>
 			</Layout>
 		</>
 	)
