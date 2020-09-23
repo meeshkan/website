@@ -138,7 +138,7 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/testing-environments/"
+							to="/use-cases/testing-environments/"
 							aria-label="Staging environments"
 						>
 							Staging environments
