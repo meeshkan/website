@@ -36,7 +36,8 @@ const TestingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Cut your manual testing time and your cloud bill in half with quick-to-deploy staging environments.
+								Cut your manual testing time and your cloud bill in half with
+								quick-to-deploy staging environments.
 							</Text>
 							<Button
 								aria-label="Sign up"
@@ -54,15 +55,15 @@ const TestingEnvironmentPage = () => {
 
 				<DoubleSection
 					heading="Test the cases that matter"
-					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test."
+					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test.  When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
 				>
 					<Box backgroundColor="gray.50" size="100%" />
 				</DoubleSection>
 
 				<DoubleSection
 					reverse
-					heading="Powered by Docker"
-					text="Meeshkan builds upon a Docker image of your service, adding the data and integrations needed to simulate the case you are testing. Developers push a Dockerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We take care of the rest."
+					heading="Ship a container and we'll take care of the rest"
+					text="Meeshkan builds upon a containerized image of your service, adding the data and integrations needed for PMs to simulate their test cases. Push a containerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We'll take care of getting it ready for your PM's acceptance tests."
 				>
 					<Box backgroundColor="gray.50" size="100%" />
 				</DoubleSection>
