@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
 	Heading,
 	Text,
@@ -11,6 +11,9 @@ import {
 	TabPanels,
 	TabPanel,
 	TabList,
+	Stack,
+	DarkMode,
+	IconButton,
 } from "@chakra-ui/core"
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
@@ -18,8 +21,13 @@ import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
+import Test from "../../components/molecules/test"
+
+type LightOrDark = "light" | "dark"
 
 const TestingEnvironmentPage = () => {
+	const startingColor: LightOrDark = "light"
+	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
 	return (
 		<>
 			<Layout>
@@ -113,7 +121,62 @@ const TestingEnvironmentPage = () => {
 								heading="Test the cases that matter"
 								text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
 							>
-								<Box backgroundColor="gray.50" size="100%" />
+								<Stack
+									w={[300, 360, 460]}
+									h={380}
+									backgroundColor={
+										colorMode === "light" ? "gray.50" : "gray.800"
+									}
+									borderRadius="md"
+									p={4}
+									spacing={4}
+								>
+									<Heading fontSize="xl" fontWeight={900}>
+										Test cases
+									</Heading>
+									<Test
+										testCase="Subscription upgrade triggered free trial"
+										success={true}
+										colorMode={colorMode}
+									/>
+									<Test
+										testCase="`Admin` can edit billing"
+										success={false}
+										colorMode={colorMode}
+									/>
+									<Test
+										testCase="Account successfully deleted"
+										success={false}
+										colorMode={colorMode}
+									/>
+									<Test
+										testCase="`Guest` does not have access to team settings"
+										success={true}
+										colorMode={colorMode}
+									/>
+									<DarkMode>
+										<IconButton
+											mt={4}
+											borderRadius="sm"
+											aria-label="color mode icon"
+											icon={colorMode === "light" ? "moon" : "sun"}
+											color={colorMode === "light" ? "gray.900" : "white"}
+											backgroundColor={
+												colorMode === "light" ? "white" : "gray.900"
+											}
+											_hover={
+												colorMode === "light"
+													? { backgroundColor: "gray.100" }
+													: { backgroundColor: "gray.700" }
+											}
+											onClick={() => {
+												const newColorMode: LightOrDark =
+													colorMode === "light" ? "dark" : "light"
+												setColorMode(newColorMode)
+											}}
+										/>
+									</DarkMode>
+								</Stack>
 							</DoubleSection>
 						</TabPanel>
 						<TabPanel>
