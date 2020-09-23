@@ -1,5 +1,17 @@
 import React from "react"
-import { Heading, Text, Flex, Box, Button, Image } from "@chakra-ui/core"
+import {
+	Heading,
+	Text,
+	Flex,
+	Box,
+	Button,
+	Image,
+	Tabs,
+	Tab,
+	TabPanels,
+	TabPanel,
+	TabList,
+} from "@chakra-ui/core"
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
@@ -53,22 +65,61 @@ const TestingEnvironmentPage = () => {
 					</Flex>
 				</SingleSection>
 
-				<DoubleSection
-					heading="Test the cases that matter"
-					text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test.  When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
-				>
-					<Box backgroundColor="gray.50" size="100%" />
-				</DoubleSection>
+				<Tabs variant="unstyled">
+					<Heading textAlign="center" mb={4}>
+						Staging environments optimized
+					</Heading>
+					<TabList fontFamily="mono" justifyContent="center">
+						<Tab
+							backgroundColor="gray.50"
+							py={2}
+							px={4}
+							borderRadius="md"
+							_selected={{
+								color: "cyan.900",
+								bg: "cyan.100",
+								fontWeight: 700,
+							}}
+							mr={4}
+						>
+							for Product managers
+						</Tab>
+						<Tab
+							backgroundColor="gray.50"
+							py={2}
+							px={4}
+							borderRadius="md"
+							_selected={{
+								color: "cyan.900",
+								bg: "cyan.100",
+								fontWeight: 700,
+							}}
+						>
+							for Developers
+						</Tab>
+					</TabList>
+					<TabPanels>
+						<TabPanel>
+							<DoubleSection
+								heading="Test the cases that matter"
+								text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. Give Meeshkan a Gherkin spec, and it will create separate staging environments for each acceptance test.  When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
+							>
+								<Box backgroundColor="gray.50" size="100%" />
+							</DoubleSection>
+						</TabPanel>
+						<TabPanel>
+							<DoubleSection
+								heading="Ship a container and we'll take care of the rest"
+								text="Meeshkan builds upon a containerized image of your service, adding the data and integrations needed for PMs to simulate their test cases. Push a containerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We'll take care of getting it ready for your PM's acceptance tests."
+							>
+								<Box backgroundColor="gray.50" size="100%" />
+							</DoubleSection>
+						</TabPanel>
+					</TabPanels>
+				</Tabs>
 
 				<DoubleSection
 					reverse
-					heading="Ship a container and we'll take care of the rest"
-					text="Meeshkan builds upon a containerized image of your service, adding the data and integrations needed for PMs to simulate their test cases. Push a containerized version of your service to the Meeshkan container registry using prebuilt connectors from CircleCI, Azure DevOps and Jenkins. We'll take care of getting it ready for your PM's acceptance tests."
-				>
-					<Box backgroundColor="gray.50" size="100%" />
-				</DoubleSection>
-
-				<DoubleSection
 					heading="Cut your staging bill in half"
 					text="Don't pay for staging environments you don't need. Meeshkan automatically tears down your staging environment when you're finished with your tests."
 				>
