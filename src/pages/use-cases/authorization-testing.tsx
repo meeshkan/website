@@ -69,12 +69,10 @@ const AuthorizationCLIPage = () => {
 								fontWeight={900}
 								minW="fit-content"
                                 mb={6}
-                                fontSize={["xl", "1xl", "2xl"]}
-                                p={5}
 							>
 								Get Started
 							</Button>
-                            <Box px={20}>
+                            <Box>
                                 <CodeBlock className="language-bash">
                                     $ npm install --save-dev meeshkan-auth
                                 </CodeBlock>
@@ -104,7 +102,7 @@ const AuthorizationCLIPage = () => {
 							Test your system's access control,
                             <Text display="block">right inside your terminal.</Text>
 						</Heading>
-                        <Box px={12} pb={6}>
+                        <Box>
                             <CodeBlock className="language-bash" copyButton={false}>
                                 {`
 $ meeshkan
@@ -123,7 +121,7 @@ $ meeshkan
                         >
                             <CodeBlock className="language-yaml" copyButton={false}>
                                 {`
-login_endpoint: https://bank.meeshkan.com/api/login
+login_endpoint: http://localhost:3000/login
 users:
 - admin:
     credentials:
