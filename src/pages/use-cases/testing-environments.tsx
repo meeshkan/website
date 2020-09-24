@@ -21,6 +21,8 @@ import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
+// @ts-expect-error
+import devFlow from "../../static/devFlow.png"
 import Test from "../../components/molecules/test"
 
 type LightOrDark = "light" | "dark"
@@ -69,7 +71,7 @@ const TestingEnvironmentPage = () => {
 								Get started
 							</Button>
 						</Box>
-						<Image src={testingEnvironment} minW={[300, 360, 400]} h="256px" />
+						<Image src={testingEnvironment} w="400px" h="256px" mx="auto" />
 					</Flex>
 				</SingleSection>
 
@@ -188,7 +190,7 @@ const TestingEnvironmentPage = () => {
 								heading="Ship a container and we'll take care of the rest"
 								text="Meeshkan builds staging environments on top of a containerized version of your service, adding the data and integrations needed for PMs to conduct their acceptance tests. Integrates with AWS, Azure DevOps, CircleCI, Travis and Jenkins."
 							>
-								<Box backgroundColor="gray.50" size="100%" />
+								<Image src={devFlow} w="400px" h="256px" mx="auto" />
 							</DoubleSection>
 						</TabPanel>
 					</TabPanels>
