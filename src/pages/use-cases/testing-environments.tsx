@@ -43,7 +43,31 @@ const TestingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { handleSubmit, register } = useForm()
 
+	const encode = (data) => {
+		return Object.keys(data)
+			.map(
+				(key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+			)
+			.join("&")
+	}
+
+	const onSubmit = (values) => {
+		let formInfo = encode({
+			"form-name": "staging-signup",
+			name: values.name,
+			email: values.email,
+		})
+
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: formInfo,
+		})
+			.then(() => alert("Success!"))
+			.catch((error) => alert(error))
+	}
 	return (
 		<>
 			<Layout>
@@ -102,7 +126,7 @@ const TestingEnvironmentPage = () => {
 							data-netlify="true"
 							method="post"
 							data-netlify-honeypot="bot-field"
-							action="/success/"
+							onSubmit={handleSubmit(onSubmit)}
 						>
 							<ModalBody>
 								<input type="hidden" name="bot-field" />
@@ -111,6 +135,7 @@ const TestingEnvironmentPage = () => {
 									<FormLabel fontWeight={700}>Name</FormLabel>
 									<Input
 										name="name"
+										ref={register}
 										type="name"
 										aria-label="Your name"
 										borderRadius="sm"
@@ -122,6 +147,7 @@ const TestingEnvironmentPage = () => {
 									<FormLabel fontWeight={700}>Email</FormLabel>
 									<Input
 										name="email"
+										ref={register}
 										type="email"
 										aria-label="email"
 										borderRadius="sm"
