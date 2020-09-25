@@ -14,11 +14,23 @@ import {
 	Stack,
 	DarkMode,
 	IconButton,
+	useDisclosure,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	FormControl,
+	FormLabel,
+	Input,
 } from "@chakra-ui/core"
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
+import { useForm } from "react-hook-form"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
@@ -30,6 +42,8 @@ type LightOrDark = "light" | "dark"
 const TestingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
+	const { isOpen, onOpen, onClose } = useDisclosure()
+
 	return (
 		<>
 			<Layout>
@@ -67,6 +81,7 @@ const TestingEnvironmentPage = () => {
 								borderRadius="sm"
 								fontWeight={900}
 								minW="fit-content"
+								onClick={onOpen}
 							>
 								Get started
 							</Button>
@@ -74,6 +89,62 @@ const TestingEnvironmentPage = () => {
 						<Image src={testingEnvironment} w="400px" h="256px" mx="auto" />
 					</Flex>
 				</SingleSection>
+
+				<Modal onClose={onClose} isOpen={isOpen} isCentered size="xl">
+					<ModalOverlay />
+					<ModalContent borderRadius="md">
+						<ModalHeader fontWeight={900}>Sign up for access</ModalHeader>
+						<ModalCloseButton />
+						<Box
+							as="form"
+							// @ts-expect-error
+							name="staging-signup"
+							data-netlify="true"
+							method="post"
+							data-netlify-honeypot="bot-field"
+							action="/success/"
+						>
+							<ModalBody>
+								<input type="hidden" name="bot-field" />
+								<input type="hidden" name="form-name" value="staging-signup" />
+								<FormControl mb={4} w="100%">
+									<FormLabel fontWeight={700}>Name</FormLabel>
+									<Input
+										name="name"
+										type="name"
+										aria-label="Your name"
+										borderRadius="sm"
+										placeholder="Your name"
+										fontWeight={500}
+									/>
+								</FormControl>
+								<FormControl isRequired mb={4} w="100%">
+									<FormLabel fontWeight={700}>Email</FormLabel>
+									<Input
+										name="email"
+										type="email"
+										aria-label="email"
+										borderRadius="sm"
+										placeholder="Your email"
+										fontWeight={500}
+									/>
+								</FormControl>
+							</ModalBody>
+							<ModalFooter>
+								<Button
+									type="submit"
+									aria-label="sign up"
+									variantColor="red"
+									borderRadius="sm"
+									fontWeight={900}
+									minW="fit-content"
+								>
+									Submit
+								</Button>
+							</ModalFooter>
+						</Box>
+					</ModalContent>
+				</Modal>
 
 				<Tabs variant="unstyled">
 					<Heading
@@ -225,6 +296,7 @@ const TestingEnvironmentPage = () => {
 							borderRadius="sm"
 							fontWeight={900}
 							minW="fit-content"
+							onClick={onOpen}
 						>
 							Create your environment
 						</Button>
