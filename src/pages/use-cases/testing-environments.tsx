@@ -124,7 +124,6 @@ const TestingEnvironmentPage = () => {
 							// @ts-expect-error
 							name="staging-signup"
 							data-netlify="true"
-							method="post"
 							data-netlify-honeypot="bot-field"
 							onSubmit={handleSubmit(onSubmit)}
 						>
@@ -132,24 +131,28 @@ const TestingEnvironmentPage = () => {
 								<input type="hidden" name="bot-field" />
 								<input type="hidden" name="form-name" value="staging-signup" />
 								<FormControl mb={4} w="100%">
-									<FormLabel fontWeight={700}>Name</FormLabel>
+									<FormLabel htmlFor="name" fontWeight={700}>
+										Name
+									</FormLabel>
 									<Input
+										type="text"
 										name="name"
+										id="name"
 										ref={register}
-										type="name"
-										aria-label="Your name"
 										borderRadius="sm"
 										placeholder="Your name"
 										fontWeight={500}
 									/>
 								</FormControl>
 								<FormControl isRequired mb={4} w="100%">
-									<FormLabel fontWeight={700}>Email</FormLabel>
+									<FormLabel htmlFor="email" fontWeight={700}>
+										Email
+									</FormLabel>
 									<Input
-										name="email"
-										ref={register}
 										type="email"
-										aria-label="email"
+										name="email"
+										id="email"
+										ref={register}
 										borderRadius="sm"
 										placeholder="Your email"
 										fontWeight={500}
