@@ -143,6 +143,14 @@ export function Footer() {
 						>
 							Staging environments
 						</Link>
+						<Link
+							// @ts-ignore
+							as={GatsbyLink}
+							to="/use-cases/release-health/"
+							aria-label="Release observability"
+						>
+							Release observability
+						</Link>
 					</Stack>
 				</Flex>
 				<Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
