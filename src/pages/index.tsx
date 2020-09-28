@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import SEO from "../components/molecules/seo"
 import {
 	Heading,
@@ -24,7 +24,6 @@ import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
-import { useForm } from "react-hook-form"
 import GenerateTests from "../components/organisms/home/generateTests"
 import PrioritizeTests from "../components/organisms/home/prioritizeTests"
 import HowDoesMeeshkanWork from "../components/organisms/home/meeshkanWorks"
