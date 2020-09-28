@@ -44,7 +44,7 @@ const TestingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const { handleSubmit, register } = useForm()
+	const { handleSubmit, register } = useForm({mode: "onChange"})
 
 	const encode = (data) => {
 		return Object.keys(data)
@@ -54,22 +54,42 @@ const TestingEnvironmentPage = () => {
 			.join("&")
 	}
 
-	const onSubmit = (values, event) => {
-		event.preventDefault()
+	const onSubmit = (data, e) => {
+		e.preventDefault()
+		// console.log(JSON.stringify(data))
+		// e.target.submit()
 
-		let formInfo = encode({
-			"form-name": "staging-signup",
-			name: values.name,
-			email: values.email,
-		})
+		const form = e.target
+		fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode({
+                'form-name': 'staging-signup',
+                body: data,
+            }),
+        })
+            .then(response => {
+                // reset()
+                navigate(form.getAttribute('action'))
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
-		fetch("/", {
-			method: "POST",
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: formInfo,
-		})
-			.then(() => () => navigate("/success/"))
-			.catch((error) => alert(error))
+	// 	let formInfo = encode({
+	// 		"form-name": "staging-signup",
+	// 		name: values.name,
+	// 		email: values.email,
+	// 	})
+
+	// 	fetch("/", {
+	// 		method: "POST",
+	// 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+	// 		body: formInfo,
+	// 	})
+	// 		.then(() => () => navigate("/success/"))
+	// 		.catch((error) => alert(error))
 	}
 	return (
 		<>
@@ -128,6 +148,9 @@ const TestingEnvironmentPage = () => {
 							name="staging-signup"
 							data-netlify="true"
 							data-netlify-honeypot="bot-field"
+							method="POST"
+							action="/success/"
+							id="staging-signup"
 							onSubmit={handleSubmit(onSubmit)}
 						>
 							<ModalBody>
