@@ -31,6 +31,7 @@ import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
 import { useForm } from "react-hook-form"
+import {navigate} from 'gatsby'
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
@@ -53,7 +54,9 @@ const TestingEnvironmentPage = () => {
 			.join("&")
 	}
 
-	const onSubmit = (values) => {
+	const onSubmit = (values, event) => {
+		event.preventDefault()
+
 		let formInfo = encode({
 			"form-name": "staging-signup",
 			name: values.name,
@@ -65,7 +68,7 @@ const TestingEnvironmentPage = () => {
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			body: formInfo,
 		})
-			.then(() => alert("Success!"))
+			.then(() => () => navigate("/success/"))
 			.catch((error) => alert(error))
 	}
 	return (
