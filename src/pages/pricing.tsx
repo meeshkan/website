@@ -137,7 +137,7 @@ const PricingPage = () => {
 						title="Free"
 						subtitle="for Individuals"
 						CTA="Create a free account"
-						price="$0"
+						price="$0 Forever"
 						mixpanel={mixpanel}
 						yesFeatures={[
 							"Endpoint testing for REST and GraphQL services",
@@ -150,7 +150,7 @@ const PricingPage = () => {
 					<PricingCard
 						title="Pro"
 						subtitle="for Teams"
-						price="Coming soon"
+						price="Free in Beta"
 						mixpanel={mixpanel}
 						yesFeatures={[
 							"All free features",
