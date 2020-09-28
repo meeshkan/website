@@ -83,14 +83,14 @@ const TestingEnvironmentPage = () => {
 						data-netlify-honeypot="bot-field"
 						method="POST"
 						action="/success/"
-						id="staging-signup-1"
+						id="staging-signup"
 						align="flex-end"
 						w={["full", "full", 600]}
 						direction={["column", "column", "row"]}
 						mx="auto"
 					>
 						<input type="hidden" name="bot-field" />
-						<input type="hidden" name="form-name" value="staging-signup-1" />
+						<input type="hidden" name="form-name" value="staging-signup" />
 						<FormControl isRequired mr={[0, 0, 4]} mb={[4, 4, 0]} w="100%">
 							<FormLabel htmlFor="email" fontWeight={700}>
 								Email
@@ -271,7 +271,7 @@ const TestingEnvironmentPage = () => {
 							data-netlify-honeypot="bot-field"
 							method="POST"
 							action="/success/"
-							id="staging-signup"
+							id="staging-signup-2"
 							align="flex-end"
 							w={["full", "full", 600]}
 							direction={["column", "column", "row"]}
