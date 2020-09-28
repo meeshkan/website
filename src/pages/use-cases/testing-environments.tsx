@@ -31,7 +31,7 @@ import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
 import { useForm } from "react-hook-form"
-import {navigate} from 'gatsby'
+import { navigate } from "gatsby"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
@@ -44,7 +44,7 @@ const TestingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const { handleSubmit, register } = useForm({mode: "onChange"})
+	const { handleSubmit, register } = useForm({ mode: "onChange" })
 
 	const encode = (data) => {
 		return Object.keys(data)
@@ -60,36 +60,37 @@ const TestingEnvironmentPage = () => {
 		// e.target.submit()
 
 		const form = e.target
-		fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode({
-                'form-name': 'staging-signup',
-                body: data.email,
-            }),
-        })
-            .then(response => {
-                // reset()
-                navigate(form.getAttribute('action'))
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: encode({
+				"form-name": "staging-signup",
+				name: data.name,
+				email: data.email,
+			}),
+		})
+			.then((response) => {
+				// reset()
+				navigate(form.getAttribute("action"))
+				console.log(response)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 
-	// 	let formInfo = encode({
-	// 		"form-name": "staging-signup",
-	// 		name: values.name,
-	// 		email: values.email,
-	// 	})
+		// 	let formInfo = encode({
+		// 		"form-name": "staging-signup",
+		// 		name: values.name,
+		// 		email: values.email,
+		// 	})
 
-	// 	fetch("/", {
-	// 		method: "POST",
-	// 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
-	// 		body: formInfo,
-	// 	})
-	// 		.then(() => () => navigate("/success/"))
-	// 		.catch((error) => alert(error))
+		// 	fetch("/", {
+		// 		method: "POST",
+		// 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		// 		body: formInfo,
+		// 	})
+		// 		.then(() => () => navigate("/success/"))
+		// 		.catch((error) => alert(error))
 	}
 	return (
 		<>
