@@ -65,7 +65,7 @@ const TestingEnvironmentPage = () => {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: encode({
                 'form-name': 'staging-signup',
-                body: data,
+                body: data.email,
             }),
         })
             .then(response => {
