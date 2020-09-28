@@ -287,6 +287,7 @@ const TestingEnvironmentPage = () => {
 									<Input
 										type="email"
 										name="email"
+										id="email"
 										borderRadius="sm"
 										fontWeight={500}
 										color="gray.100"
