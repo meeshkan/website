@@ -14,14 +14,6 @@ import {
 	Stack,
 	DarkMode,
 	IconButton,
-	useDisclosure,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
 	FormControl,
 	FormLabel,
 	Input,
@@ -30,8 +22,6 @@ import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
 import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
-import { useForm } from "react-hook-form"
-import { navigate } from "gatsby"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
@@ -43,55 +33,6 @@ type LightOrDark = "light" | "dark"
 const TestingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
-	const { isOpen, onOpen, onClose } = useDisclosure()
-	const { handleSubmit, register } = useForm({ mode: "onChange" })
-
-	const encode = (data) => {
-		return Object.keys(data)
-			.map(
-				(key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-			)
-			.join("&")
-	}
-
-	const onSubmit = (data, e) => {
-		e.preventDefault()
-		// console.log(JSON.stringify(data))
-		// e.target.submit()
-
-		const form = e.target
-		fetch("/", {
-			method: "POST",
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: encode({
-				"form-name": "staging-signup",
-				name: data.name,
-				email: data.email,
-			}),
-		})
-			.then((response) => {
-				// reset()
-				navigate(form.getAttribute("action"))
-				console.log(response)
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-
-		// 	let formInfo = encode({
-		// 		"form-name": "staging-signup",
-		// 		name: values.name,
-		// 		email: values.email,
-		// 	})
-
-		// 	fetch("/", {
-		// 		method: "POST",
-		// 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
-		// 		body: formInfo,
-		// 	})
-		// 		.then(() => () => navigate("/success/"))
-		// 		.catch((error) => alert(error))
-	}
 	return (
 		<>
 			<Layout>
@@ -101,7 +42,15 @@ const TestingEnvironmentPage = () => {
 					pageUrl="https://meeshkan.com/testing-environments/"
 				/>
 				<SingleSection hero>
-					<Flex direction={["column", "column", "row"]} mt={12}>
+					<Flex
+						direction={[
+							"column-reverse",
+							"column-reverse",
+							"column-reverse",
+							"row",
+						]}
+						mt={12}
+					>
 						<Box mr={[0, 0, 8]} mb={[8, 8, 0]}>
 							<Heading
 								as="h1"
@@ -123,88 +72,54 @@ const TestingEnvironmentPage = () => {
 								Cut your manual testing time and your cloud bill in half with
 								quick-to-deploy staging environments.
 							</Text>
-							<Button
-								aria-label="Sign up"
-								variantColor="red"
-								borderRadius="sm"
-								fontWeight={900}
-								minW="fit-content"
-								onClick={onOpen}
-							>
-								Get started
-							</Button>
 						</Box>
 						<Image src={testingEnvironment} w="400px" h="256px" mx="auto" />
 					</Flex>
-				</SingleSection>
-
-				<Modal onClose={onClose} isOpen={isOpen} isCentered size="xl">
-					<ModalOverlay />
-					<ModalContent borderRadius="md">
-						<ModalHeader fontWeight={900}>Sign up for access</ModalHeader>
-						<ModalCloseButton />
-						<Box
-							as="form"
-							// @ts-expect-error
-							name="staging-signup"
-							data-netlify="true"
-							data-netlify-honeypot="bot-field"
-							method="POST"
-							action="/success/"
-							id="staging-signup"
-							onSubmit={handleSubmit(onSubmit)}
+					<Flex
+						as="form"
+						// @ts-expect-error
+						name="staging-signup"
+						data-netlify="true"
+						data-netlify-honeypot="bot-field"
+						method="POST"
+						action="/success/"
+						id="staging-signup-1"
+						align="flex-end"
+						w={["full", "full", 600]}
+						direction={["column", "column", "row"]}
+						mx="auto"
+					>
+						<input type="hidden" name="bot-field" />
+						<input type="hidden" name="form-name" value="staging-signup-1" />
+						<FormControl isRequired mr={[0, 0, 4]} mb={[4, 4, 0]} w="100%">
+							<FormLabel htmlFor="email" fontWeight={700}>
+								Email
+							</FormLabel>
+							<Input
+								type="email"
+								name="email"
+								borderRadius="sm"
+								fontWeight={500}
+							/>
+						</FormControl>
+						<Button
+							aria-label="Sign up"
+							variantColor="red"
+							borderRadius="sm"
+							fontWeight={900}
+							type="submit"
+							w={["100%", "100%", "auto"]}
+							minW="fit-content"
 						>
-							<ModalBody>
-								<input type="hidden" name="bot-field" />
-								<input type="hidden" name="form-name" value="staging-signup" />
-								<FormControl mb={4} w="100%">
-									<FormLabel htmlFor="name" fontWeight={700}>
-										Name
-									</FormLabel>
-									<Input
-										type="text"
-										name="name"
-										id="name"
-										ref={register}
-										borderRadius="sm"
-										placeholder="Your name"
-										fontWeight={500}
-									/>
-								</FormControl>
-								<FormControl isRequired mb={4} w="100%">
-									<FormLabel htmlFor="email" fontWeight={700}>
-										Email
-									</FormLabel>
-									<Input
-										type="email"
-										name="email"
-										id="email"
-										ref={register}
-										borderRadius="sm"
-										placeholder="Your email"
-										fontWeight={500}
-									/>
-								</FormControl>
-							</ModalBody>
-							<ModalFooter>
-								<Button
-									type="submit"
-									aria-label="sign up"
-									variantColor="red"
-									borderRadius="sm"
-									fontWeight={900}
-									minW="fit-content"
-								>
-									Submit
-								</Button>
-							</ModalFooter>
-						</Box>
-					</ModalContent>
-				</Modal>
+							Get started
+						</Button>
+					</Flex>
+				</SingleSection>
 
 				<Tabs variant="unstyled">
 					<Heading
 						textAlign="center"
+						mt={8}
 						mb={4}
 						as="h2"
 						color="gray.700"
@@ -324,12 +239,7 @@ const TestingEnvironmentPage = () => {
 				</Tabs>
 
 				<SingleSection>
-					<Box
-						backgroundColor="gray.900"
-						p={8}
-						borderRadius="md"
-						textAlign="center"
-					>
+					<Box backgroundColor="gray.900" p={8} borderRadius="md">
 						<Heading
 							mb={2}
 							color="white"
@@ -338,24 +248,63 @@ const TestingEnvironmentPage = () => {
 							fontWeight={900}
 							letterSpacing="wide"
 							lineHeight="short"
+							textAlign="center"
 						>
 							Cut your staging bill in half
 						</Heading>
-						<Text mb={4} fontSize="2xl" lineHeight="short" color="gray.200">
+						<Text
+							mb={4}
+							fontSize="2xl"
+							lineHeight="short"
+							color="gray.200"
+							textAlign="center"
+						>
 							Don't pay for staging environments you don't need. Meeshkan
 							automatically tears down your staging environment when you're
 							finished with your tests.
 						</Text>
-						<Button
-							aria-label="Sign up"
-							variantColor="red"
-							borderRadius="sm"
-							fontWeight={900}
-							minW="fit-content"
-							onClick={onOpen}
+						<Flex
+							as="form"
+							// @ts-expect-error
+							name="staging-signup-2"
+							data-netlify="true"
+							data-netlify-honeypot="bot-field"
+							method="POST"
+							action="/success/"
+							id="staging-signup"
+							align="flex-end"
+							w={["full", "full", 600]}
+							direction={["column", "column", "row"]}
+							mx="auto"
 						>
-							Create your environment
-						</Button>
+							<input type="hidden" name="bot-field" />
+							<input type="hidden" name="form-name" value="staging-signup-2" />
+							<DarkMode>
+								<FormControl isRequired mr={[0, 0, 4]} mb={[4, 4, 0]} w="100%">
+									<FormLabel htmlFor="email" fontWeight={700} color="white">
+										Email
+									</FormLabel>
+									<Input
+										type="email"
+										name="email"
+										borderRadius="sm"
+										fontWeight={500}
+										color="gray.100"
+									/>
+								</FormControl>
+							</DarkMode>
+							<Button
+								aria-label="Sign up"
+								variantColor="red"
+								borderRadius="sm"
+								fontWeight={900}
+								type="submit"
+								w={["100%", "100%", "auto"]}
+								minW="fit-content"
+							>
+								Create your environment
+							</Button>
+						</Flex>
 					</Box>
 				</SingleSection>
 			</Layout>
