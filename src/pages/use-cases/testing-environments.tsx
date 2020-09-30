@@ -226,6 +226,21 @@ const TestingEnvironmentPage = () => {
 									</DarkMode>
 								</Stack>
 							</DoubleSection>
+
+							<DoubleSection
+								reverse
+								heading="Blah blah blah"
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+							>
+								<Box w={400} h={256} backgroundColor="gray.50" />
+							</DoubleSection>
+
+							<DoubleSection
+								heading="Blah blah blah"
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+							>
+								<Box w={400} h={256} backgroundColor="gray.50" />
+							</DoubleSection>
 						</TabPanel>
 						<TabPanel>
 							<DoubleSection
@@ -233,6 +248,21 @@ const TestingEnvironmentPage = () => {
 								text="Meeshkan builds staging environments on top of a containerized version of your service, adding the data and integrations needed for PMs to conduct their acceptance tests. Integrates with AWS, Azure DevOps, CircleCI, Travis and Jenkins."
 							>
 								<Image src={devFlow} w="400px" h="256px" mx="auto" />
+							</DoubleSection>
+
+							<DoubleSection
+								reverse
+								heading="Blah blah blah"
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+							>
+								<Box w={400} h={256} backgroundColor="gray.50" />
+							</DoubleSection>
+
+							<DoubleSection
+								heading="Blah blah blah"
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+							>
+								<Box w={400} h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 						</TabPanel>
 					</TabPanels>
