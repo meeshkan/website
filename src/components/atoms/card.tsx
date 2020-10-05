@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading, Text } from "@chakra-ui/core"
+import { Box, Heading, Text, Flex } from "@chakra-ui/core"
 import { UniversalLink } from "./UniversalLink"
 
 type CardProps = {
@@ -8,6 +8,7 @@ type CardProps = {
 	body?: string
 	link?: string
 	label?: string
+	feature?: boolean
 	backgroundColor?: string
 }
 
@@ -17,8 +18,26 @@ export const Card = ({
 	body,
 	link,
 	label,
+	feature,
 	backgroundColor = "white",
 }: CardProps) => {
+	if (feature) {
+		return (
+			<Flex
+				align="center"
+				w="100%"
+				h={16}
+				p={4}
+				bg={backgroundColor}
+				rounded="lg"
+				color="gray.700"
+				boxShadow="0px 0px 24px 0px rgba(149, 157, 165, 0.2)"
+			>
+				{children}
+			</Flex>
+		)
+	}
+
 	return (
 		<>
 			{link ? (
