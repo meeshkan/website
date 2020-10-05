@@ -30,16 +30,16 @@ import Test from "../../components/molecules/test"
 
 type LightOrDark = "light" | "dark"
 
-const TestingEnvironmentPage = () => {
+const StagingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
 	return (
 		<>
 			<Layout>
 				<SEO
-					pageTitle="Testing Environments"
-					pageDescription="Meeshkan is creates testing environments that are a ready-made sandbox. Tests, mock services, and mock data are dynamically generated based on the branch specified."
-					pageUrl="https://meeshkan.com/testing-environments/"
+					pageTitle="Staging Environments"
+					pageDescription="Meeshkan is creates staging environments that are a ready-made sandbox. Tests, mock services, and mock data are dynamically generated based on the branch specified."
+					pageUrl="https://meeshkan.com/staging-environments/"
 				/>
 				<SingleSection hero>
 					<Flex
@@ -343,4 +343,4 @@ const TestingEnvironmentPage = () => {
 	)
 }
 
-export default TestingEnvironmentPage
+export default StagingEnvironmentPage
