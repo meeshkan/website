@@ -5,6 +5,7 @@ import {
 	Flex,
 	Box,
 	Button,
+	Grid,
 	Image,
 	Tabs,
 	Tab,
@@ -13,6 +14,7 @@ import {
 	TabList,
 	Stack,
 	DarkMode,
+	Icon,
 	IconButton,
 	FormControl,
 	FormLabel,
@@ -114,6 +116,100 @@ const StagingEnvironmentPage = () => {
 							Get started
 						</Button>
 					</Flex>
+				</SingleSection>
+
+				<SingleSection>
+					<Box m="auto">
+						<Heading
+							textAlign="center"
+							my={8}
+							as="h2"
+							color="gray.900"
+							fontSize={["3xl", "3xl", "3xl", "4xl"]}
+							fontWeight={900}
+							letterSpacing="wide"
+							lineHeight="short"
+						>
+							Designed for the smoothest release cycle you've ever experienced
+						</Heading>
+						<Grid
+							gap={6}
+							templateColumns="repeat(3, 1fr)"
+						>
+							<Flex
+								align="center"
+								w="100%"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="activity" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>Health metrics dashboard</Text>
+							</Flex>
+							<Flex
+								align="center"
+								maxW="sm"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="server" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>Full stack staging</Text>
+							</Flex>
+							<Flex
+								align="center"
+								maxW="sm"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="zap" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>Dynamically generated tests</Text>
+							</Flex>
+							<Flex
+								align="center"
+								maxW="sm"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="crosshair" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>Pinpoint bug introductions</Text>
+							</Flex>
+							<Flex
+								align="center"
+								maxW="sm"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="github-octocat" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>GitHub checks integration</Text>
+							</Flex>
+							<Flex
+								align="center"
+								maxW="sm"
+								h={16}
+								p={4}
+								bg="gray.100"
+								rounded="lg"
+								color="gray.700"
+							>
+								<Icon name="share" color="red.700" w="24px" h="24px" />
+								<Text ml={4}>Unique URLs for sharing</Text>
+							</Flex>
+						</Grid>
+					</Box>
 				</SingleSection>
 
 				<Tabs variant="unstyled">
