@@ -9,7 +9,6 @@ Testing is the core of what Meeshkan does and it's important that we're transpar
 - [Running the tests](#running-the-tests)
 - [Testing frequency](#testing-frequency)
 - [Reporting bugs and issues](#reporting-bugs-and-issues)
-- [Project configuration](#project-configuration)
 - [Suggested fixes](#suggested-fixes)
 
 ## Running the tests
@@ -34,26 +33,6 @@ We're currently experimenting with the most effective way to report bugs. By def
 ![Branch checks on GitHub](https://media.graphcms.com/LN6VPBZQGWwERj6RjeZw)
 
 Other options we're exploring include email digests, Slack notifications, and filing an issue on the registered repository.
-
-## Project configuration
-
-Each project has configuration settings that will allow Meeshkan tests to run automatically. If you'd like tests to run on every commit, please enter your build settings!
-
-![Configuration UI](https://media.graphcms.com/FdmqxNNqT5iWaT31FXEA)
-
-You can find your project's configuration at `https://app.meeshkan.com/{yourTeam}/{yourProject}/configuration`.
-
-### Build settings
-
-Please add credentials for your local server, and not your live endpoints. Testing against production credentials can cause permanent data damage.
-- **Root directory**: The path to your app in your repository. For instance, if your app lives in the home directory, then you would use `./` as your root directory. 
-- **Build command**: The command(s) your app framework provides for compiling your code. `npm install && npm start` is an example build command for a repository that uses NPM and provides a "start" script.
-- **OpenAPI location**: The path or endpoint to your repository's *OpenAPI specification* (such as `http://localhost:8000/api/openapi`).
-- **GraphQL endpoint**: The path or endpoint to your repository's *GraphQL schema* (such as `http://localhost:8000/api/graphql`).
-
-### Slack integration
-
-Our slack app allows you to recieve notifications in the channel of your choosing. Currently notifications are global for any bugs found. In the future we will expose granular controls to allow you to only recieve notifications for high priority bugs.
 
 ## Suggested fixes
 
