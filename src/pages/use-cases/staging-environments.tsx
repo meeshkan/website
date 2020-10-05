@@ -5,7 +5,7 @@ import {
 	Flex,
 	Box,
 	Button,
-	Grid,
+	SimpleGrid,
 	Image,
 	Tabs,
 	Tab,
@@ -29,6 +29,7 @@ import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
 import devFlow from "../../static/devFlow.png"
 import Test from "../../components/molecules/test"
+import { Card } from "../../components/atoms/card";
 
 type LightOrDark = "light" | "dark"
 
@@ -118,97 +119,41 @@ const StagingEnvironmentPage = () => {
 					</Flex>
 				</SingleSection>
 
-				<SingleSection>
-					<Box m="auto">
-						<Heading
-							textAlign="center"
-							my={8}
-							as="h2"
-							color="gray.900"
-							fontSize={["3xl", "3xl", "3xl", "4xl"]}
-							fontWeight={900}
-							letterSpacing="wide"
-							lineHeight="short"
+				<SingleSection
+					heading="Designed for the smoothest release cycle you've ever experienced"
+					bg="gray.50"
+				>
+					<Box m="auto" fontWeight={500} mt={10}>
+						<SimpleGrid
+							spacing={6}
+							columns={[1, 2, 3]}
+							mx={5}
 						>
-							Designed for the smoothest release cycle you've ever experienced
-						</Heading>
-						<Grid
-							gap={6}
-							templateColumns="repeat(3, 1fr)"
-						>
-							<Flex
-								align="center"
-								w="100%"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							<Card feature>
 								<Icon name="activity" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Health metrics dashboard</Text>
-							</Flex>
-							<Flex
-								align="center"
-								maxW="sm"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							</Card>
+							<Card feature>
 								<Icon name="server" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Full stack staging</Text>
-							</Flex>
-							<Flex
-								align="center"
-								maxW="sm"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							</Card>
+							<Card feature>
 								<Icon name="zap" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Dynamically generated tests</Text>
-							</Flex>
-							<Flex
-								align="center"
-								maxW="sm"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							</Card>
+							<Card feature>
 								<Icon name="crosshair" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Pinpoint bug introductions</Text>
-							</Flex>
-							<Flex
-								align="center"
-								maxW="sm"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							</Card>
+							<Card feature>
 								<Icon name="github-octocat" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>GitHub checks integration</Text>
-							</Flex>
-							<Flex
-								align="center"
-								maxW="sm"
-								h={16}
-								p={4}
-								bg="gray.100"
-								rounded="lg"
-								color="gray.700"
-							>
+							</Card>
+							<Card feature>
 								<Icon name="share" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Unique URLs for sharing</Text>
-							</Flex>
-						</Grid>
+							</Card>
+						</SimpleGrid>
 					</Box>
 				</SingleSection>
 
