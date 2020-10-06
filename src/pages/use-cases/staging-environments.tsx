@@ -123,8 +123,14 @@ const StagingEnvironmentPage = () => {
 					heading="Designed for the smoothest release cycle you've ever experienced"
 					bg="gray.50"
 				>
-					<Box m="auto" fontWeight={500} mt={10}>
-						<SimpleGrid spacing={6} columns={[1, 2, 3]} mx={5}>
+					<Box m="auto">
+						<SimpleGrid
+							spacing={8}
+							columns={[1, 2, 3]}
+							mx={5}
+							mt={12}
+							fontWeight={500}
+						>
 							<Card feature>
 								<Icon name="activity" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Health metrics dashboard</Text>
