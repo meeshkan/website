@@ -29,7 +29,7 @@ import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
 import devFlow from "../../static/devFlow.png"
 import Test from "../../components/molecules/test"
-import { Card } from "../../components/atoms/card";
+import { Card } from "../../components/atoms/card"
 
 type LightOrDark = "light" | "dark"
 
@@ -124,11 +124,7 @@ const StagingEnvironmentPage = () => {
 					bg="gray.50"
 				>
 					<Box m="auto" fontWeight={500} mt={10}>
-						<SimpleGrid
-							spacing={6}
-							columns={[1, 2, 3]}
-							mx={5}
-						>
+						<SimpleGrid spacing={6} columns={[1, 2, 3]} mx={5}>
 							<Card feature>
 								<Icon name="activity" color="red.700" w="24px" h="24px" />
 								<Text ml={4}>Health metrics dashboard</Text>
@@ -270,15 +266,15 @@ const StagingEnvironmentPage = () => {
 
 							<DoubleSection
 								reverse
-								heading="Blah blah blah"
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+								heading="UI first generation"
+								text="Staging environments are important for business stakeholders for product learning and manual testing. Meeshkan allows you to spin-up environments on demand, and define test cases — all in the User Interface."
 							>
 								<Box w={400} h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 
 							<DoubleSection
-								heading="Blah blah blah"
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+								heading="Inactive environments shut themselves off"
+								text="When you're focused on shipping as fast as you can, you shouldn't have to look back. Set up an inactive threshold and don't pay for unused environments."
 							>
 								<Box w={400} h={256} backgroundColor="gray.50" />
 							</DoubleSection>
@@ -293,15 +289,15 @@ const StagingEnvironmentPage = () => {
 
 							<DoubleSection
 								reverse
-								heading="Blah blah blah"
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+								heading="Instantly generate environment data"
+								text="Setting up data that can be tested with is repetitive and inefficient. Meeshkan creates a sandbox around your database schema, auto-populating environments with test data."
 							>
 								<Box w={400} h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 
 							<DoubleSection
-								heading="Blah blah blah"
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sodales erat, nec faucibus risus. Vestibulum convallis nibh tortor, in convallis risus sollicitudin ut. Suspendisse potenti. Sed placerat ante in auctor dapibus."
+								heading="Run defined and generated test cases, every commit"
+								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run every commit."
 							>
 								<Box w={400} h={256} backgroundColor="gray.50" />
 							</DoubleSection>
