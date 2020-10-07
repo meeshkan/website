@@ -27,7 +27,6 @@ export const Card = ({
 				d="flex"
 				alignItems="center"
 				w="100%"
-				h={16}
 				p={4}
 				bg={backgroundColor}
 				rounded="lg"
