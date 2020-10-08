@@ -31,7 +31,7 @@ export const Card = ({
 					aria-label={label}
 					borderRadius="md"
 					backgroundColor={backgroundColor}
-					p={6}
+					p={[4, 4, 6]}
 					position="relative"
 					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
 				>
@@ -53,7 +53,7 @@ export const Card = ({
 				<Box
 					borderRadius="md"
 					backgroundColor={backgroundColor}
-					p={6}
+					p={[4, 4, 6]}
 					position="relative"
 					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
 				>
