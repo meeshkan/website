@@ -31,6 +31,27 @@ import devFlow from "../../static/devFlow.png"
 import Test from "../../components/molecules/test"
 import { Card } from "../../components/atoms/card"
 
+type FeatureProps = {
+	children: Object
+}
+
+const FeatureCard = ({
+	children
+}: FeatureProps) => {
+	return (
+		<Card shadow padding={4}>
+			<Stack
+				isInline
+				spacing={4}
+				align="center"
+				h="100%"
+			>
+				{children}
+			</Stack>
+		</Card>
+	)
+}
+
 type LightOrDark = "light" | "dark"
 
 const StagingEnvironmentPage = () => {
@@ -134,47 +155,60 @@ const StagingEnvironmentPage = () => {
 							mt={12}
 							fontWeight={500}
 						>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon name="activity" color="red.700" w="24px" h="24px" />
-									<Text>Health metrics dashboard</Text>
-								</Stack>
-							</Card>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon name="server" color="red.700" w="24px" h="24px" />
-									<Text>Full stack staging</Text>
-								</Stack>
-							</Card>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon name="zap" color="red.700" w="24px" h="24px" />
-									<Text>Dynamically generated tests</Text>
-								</Stack>
-							</Card>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon name="crosshair" color="red.700" w="24px" h="24px" />
-									<Text>Pinpoint bug introductions</Text>
-								</Stack>
-							</Card>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon
-										name="github-octocat"
-										color="red.700"
-										w="24px"
-										h="24px"
-									/>
-									<Text>GitHub checks integration</Text>
-								</Stack>
-							</Card>
-							<Card shadow padding={4}>
-								<Stack isInline spacing={4} align="center" h="100%">
-									<Icon name="share" color="red.700" w="24px" h="24px" />
-									<Text>Unique URLs for sharing</Text>
-								</Stack>
-							</Card>
+							<FeatureCard>
+								<Icon
+									name="activity"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>Health metrics dashboard</Text>
+							</FeatureCard>
+							<FeatureCard>
+								<Icon
+									name="server"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>Full stack staging</Text>
+							</FeatureCard>
+							<FeatureCard>
+								<Icon
+									name="zap"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>Dynamically generated tests</Text>
+							</FeatureCard>
+							<FeatureCard>
+								<Icon
+									name="crosshair"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>Pinpoint bug introductions</Text>
+							</FeatureCard>
+							<FeatureCard>
+								<Icon
+									name="github-octocat"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>GitHub checks integration</Text>
+							</FeatureCard>
+							<FeatureCard>
+								<Icon
+									name="share"
+									color="red.700"
+									w="24px"
+									h="24px"
+								/>
+								<Text>Unique URLs for sharing</Text>
+							</FeatureCard>
 						</SimpleGrid>
 					</SingleSection>
 				</Box>
