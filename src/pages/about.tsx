@@ -96,7 +96,7 @@ const AboutUsPage = () => {
           ]}
           gap={6}
         >
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Mike}
               size={80}
@@ -119,7 +119,7 @@ const AboutUsPage = () => {
               Founder / CEO
             </Text>
           </Card>
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Kenna}
               size={80}
@@ -142,7 +142,7 @@ const AboutUsPage = () => {
               COO
             </Text>
           </Card>
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Nik}
               size={80}
@@ -165,7 +165,7 @@ const AboutUsPage = () => {
               Head of Data Science
             </Text>
           </Card>
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Car}
               size={80}
@@ -188,7 +188,7 @@ const AboutUsPage = () => {
               Software Engineer
             </Text>
           </Card>
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Fredi}
               size={80}
@@ -211,7 +211,7 @@ const AboutUsPage = () => {
               Open Source Engineer
             </Text>
           </Card>
-          <Card>
+          <Card backgroundColor="gray.50">
             <Image
               src={Maria}
               size={80}
@@ -249,26 +249,32 @@ const AboutUsPage = () => {
           <Card
             heading="Experimentation"
             body="We don’t expect things to work the first time. We encourage you to try and fail."
+            backgroundColor="gray.50"
           />
           <Card
             heading="Humility"
             body="Then, build a schema that unifies these various data sources."
+            backgroundColor="gray.50"
           />
           <Card
             heading="Trust"
             body="If we hire you, it’s because we trust that you know your domain. Make decisions."
+            backgroundColor="gray.50"
           />
           <Card
             heading="Educating"
             body="The platform of a company is best used to share knowledge."
+            backgroundColor="gray.50"
           />
           <Card
             heading="Asking tough questions"
             body="We encourage each other to challenge and better the team."
+            backgroundColor="gray.50"
           />
           <Card
             heading="Being bold"
             body="We want to foster a stable environment that encourages bold risks."
+            backgroundColor="gray.50"
           />
         </Grid>
       </SingleSection>

@@ -127,45 +127,55 @@ const StagingEnvironmentPage = () => {
 
 				<Box backgroundColor="gray.50" borderRadius={4} my={12}>
 					<SingleSection heading="Designed for the smoothest release cycle you've ever experienced">
-						<Box m="auto">
-							<SimpleGrid
-								spacing={8}
-								columns={[1, 2, 3]}
-								px={4}
-								mt={12}
-								fontWeight={500}
-							>
-								<Card feature>
+						<SimpleGrid
+							spacing={8}
+							columns={[1, 2, 3]}
+							px={4}
+							mt={12}
+							fontWeight={500}
+						>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon name="activity" color="red.700" w="24px" h="24px" />
-									<Text ml={4}>Health metrics dashboard</Text>
-								</Card>
-								<Card feature>
+									<Text>Health metrics dashboard</Text>
+								</Stack>
+							</Card>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon name="server" color="red.700" w="24px" h="24px" />
-									<Text ml={4}>Full stack staging</Text>
-								</Card>
-								<Card feature>
+									<Text>Full stack staging</Text>
+								</Stack>
+							</Card>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon name="zap" color="red.700" w="24px" h="24px" />
-									<Text ml={4}>Dynamically generated tests</Text>
-								</Card>
-								<Card feature>
+									<Text>Dynamically generated tests</Text>
+								</Stack>
+							</Card>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon name="crosshair" color="red.700" w="24px" h="24px" />
-									<Text ml={4}>Pinpoint bug introductions</Text>
-								</Card>
-								<Card feature>
+									<Text>Pinpoint bug introductions</Text>
+								</Stack>
+							</Card>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon
 										name="github-octocat"
 										color="red.700"
 										w="24px"
 										h="24px"
 									/>
-									<Text ml={4}>GitHub checks integration</Text>
-								</Card>
-								<Card feature>
+									<Text>GitHub checks integration</Text>
+								</Stack>
+							</Card>
+							<Card shadow>
+								<Stack isInline spacing={4} align="center" h="100%">
 									<Icon name="share" color="red.700" w="24px" h="24px" />
-									<Text ml={4}>Unique URLs for sharing</Text>
-								</Card>
-							</SimpleGrid>
-						</Box>
+									<Text>Unique URLs for sharing</Text>
+								</Stack>
+							</Card>
+						</SimpleGrid>
 					</SingleSection>
 				</Box>
 

@@ -8,8 +8,8 @@ type CardProps = {
 	body?: string
 	link?: string
 	label?: string
-	feature?: boolean
 	backgroundColor?: string
+	shadow?: boolean
 }
 
 export const Card = ({
@@ -18,26 +18,9 @@ export const Card = ({
 	body,
 	link,
 	label,
-	feature,
 	backgroundColor = "white",
+	shadow = false,
 }: CardProps) => {
-	if (feature) {
-		return (
-			<Box
-				d="flex"
-				alignItems="center"
-				w="100%"
-				p={4}
-				bg={backgroundColor}
-				rounded="lg"
-				color="gray.700"
-				boxShadow="0px 0px 24px 0px rgba(149, 157, 165, 0.2)"
-			>
-				{children}
-			</Box>
-		)
-	}
-
 	return (
 		<>
 			{link ? (
@@ -47,9 +30,10 @@ export const Card = ({
 					to={link}
 					aria-label={label}
 					borderRadius="md"
-					backgroundColor={backgroundColor ? backgroundColor : `gray.50`}
+					backgroundColor={backgroundColor}
 					p={6}
 					position="relative"
+					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
 				>
 					{heading ? (
 						<Heading
@@ -67,10 +51,11 @@ export const Card = ({
 				</Box>
 			) : (
 				<Box
-					borderRadius="sm"
-					backgroundColor="gray.50"
+					borderRadius="md"
+					backgroundColor={backgroundColor}
 					p={6}
 					position="relative"
+					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
 				>
 					{heading ? (
 						<Heading
