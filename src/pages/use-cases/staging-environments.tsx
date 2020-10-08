@@ -295,14 +295,14 @@ const StagingEnvironmentPage = () => {
 								heading="UI first generation"
 								text="Staging environments are important for business stakeholders for product learning and manual testing. Meeshkan allows you to spin-up environments on demand, and define test cases — all in the User Interface."
 							>
-								<Box w={400} h={256} backgroundColor="gray.50" />
+								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 
 							<DoubleSection
 								heading="Inactive environments shut themselves off"
 								text="When you're focused on shipping as fast as you can, you shouldn't have to look back. Set up an inactive threshold and don't pay for unused environments."
 							>
-								<Box w={400} h={256} backgroundColor="gray.50" />
+								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 						</TabPanel>
 						<TabPanel>
@@ -318,14 +318,14 @@ const StagingEnvironmentPage = () => {
 								heading="Instantly generate environment data"
 								text="Setting up data that can be tested with is repetitive and inefficient. Meeshkan creates a sandbox around your database schema, auto-populating environments with test data."
 							>
-								<Box w={400} h={256} backgroundColor="gray.50" />
+								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 
 							<DoubleSection
 								heading="Run defined and generated test cases, every commit"
 								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run every commit."
 							>
-								<Box w={400} h={256} backgroundColor="gray.50" />
+								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
 						</TabPanel>
 					</TabPanels>
