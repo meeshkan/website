@@ -78,8 +78,8 @@ const StagingEnvironmentPage = () => {
 						</Box>
 						<Image
 							src={testingEnvironment}
-							w="400px"
-							h="256px"
+							w={["400px", "auto"]}
+							h={["auto", "256px"]}
 							mx="auto"
 							mb={[8, 8, 0]}
 						/>
@@ -310,7 +310,7 @@ const StagingEnvironmentPage = () => {
 								heading="Ship a container and we'll take care of the rest"
 								text="Meeshkan builds staging environments on top of a containerized version of your service, adding the data and integrations needed for PMs to conduct their acceptance tests. Integrates with AWS, Azure DevOps, CircleCI, Travis and Jenkins."
 							>
-								<Image src={devFlow} w="400px" h="256px" mx="auto" />
+								<Image src={devFlow} mx="auto" />
 							</DoubleSection>
 
 							<DoubleSection
