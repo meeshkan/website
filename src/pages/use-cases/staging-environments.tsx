@@ -356,8 +356,8 @@ const StagingEnvironmentPage = () => {
 							</DoubleSection>
 
 							<DoubleSection
-								heading="Run defined and generated test cases, every commit"
-								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run every commit."
+								heading="Run defined and generated test cases on every commit"
+								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run on every commit."
 							>
 								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
