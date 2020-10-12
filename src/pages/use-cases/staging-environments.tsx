@@ -19,33 +19,38 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
+	useDisclosure,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	Select,
+	Checkbox,
+	LightMode,
 } from "@chakra-ui/core"
+import { Card } from "../../components/atoms/card"
+import { useForm } from "react-hook-form"
 import SEO from "../../components/molecules/seo"
-import Layout from "../../components/templates/layout"
+import Test from "../../components/molecules/test"
 import { SingleSection } from "../../components/organisms/singleSection"
 import { DoubleSection } from "../../components/organisms/doubleSection"
+import Layout from "../../components/templates/layout"
 // @ts-expect-error
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
 import devFlow from "../../static/devFlow.png"
-import Test from "../../components/molecules/test"
-import { Card } from "../../components/atoms/card"
 
 type FeatureProps = {
 	children: Object
 }
 
-const FeatureCard = ({
-	children
-}: FeatureProps) => {
+const FeatureCard = ({ children }: FeatureProps) => {
 	return (
 		<Card shadow padding={4}>
-			<Stack
-				isInline
-				spacing={4}
-				align="center"
-				h="100%"
-			>
+			<Stack isInline spacing={4} align="center" h="100%">
 				{children}
 			</Stack>
 		</Card>
@@ -57,6 +62,35 @@ type LightOrDark = "light" | "dark"
 const StagingEnvironmentPage = () => {
 	const startingColor: LightOrDark = "light"
 	const [colorMode, setColorMode] = useState<LightOrDark>(startingColor)
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { handleSubmit, register, formState } = useForm()
+	const [formSubmit, setFormSubmit] = useState(false)
+
+	function onSubmit(values) {
+		let requestAccessData = JSON.stringify({
+			text: `${values.name} has requested access to *pre-release testing* Meeshkan. \n You can reach them at: _*${values.email}*_. \n They are the _*${values.position}*_ at their company.`,
+		})
+
+		fetch(
+			"https://hooks.slack.com/services/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",
+			{
+				method: "POST",
+				// mode: "no-cors",
+				body: requestAccessData,
+				headers: { "Content-type": "application/json" },
+			}
+		)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				setFormSubmit(true)
+			})
+			.catch((error) => {
+				console.error("Error:", error)
+			})
+	}
+
 	return (
 		<>
 			<Layout>
@@ -105,46 +139,127 @@ const StagingEnvironmentPage = () => {
 							mb={[8, 8, 0]}
 						/>
 					</Flex>
-					<Flex
-						as="form"
-						// @ts-expect-error
-						name="staging-signup"
-						data-netlify="true"
-						data-netlify-honeypot="bot-field"
-						method="POST"
-						action="/success/"
-						id="staging-signup"
-						align="flex-end"
-						w={["full", "full", 600]}
-						direction={["column", "column", "row"]}
-						mx="auto"
+					<Button
+						aria-label="Request access"
+						variantColor="red"
+						borderRadius="sm"
+						fontWeight={900}
+						type="submit"
+						w={["100%", "100%", "auto"]}
+						minW="fit-content"
+						onClick={onOpen}
 					>
-						<input type="hidden" name="bot-field" />
-						<input type="hidden" name="form-name" value="staging-signup" />
-						<FormControl isRequired mr={[0, 0, 4]} mb={[4, 4, 0]} w="100%">
-							<FormLabel htmlFor="email" fontWeight={700}>
-								Email
-							</FormLabel>
-							<Input
-								type="email"
-								name="email"
-								borderRadius="sm"
-								fontWeight={500}
-							/>
-						</FormControl>
-						<Button
-							aria-label="Sign up"
-							variantColor="red"
-							borderRadius="sm"
-							fontWeight={900}
-							type="submit"
-							w={["100%", "100%", "auto"]}
-							minW="fit-content"
-						>
-							Get started
-						</Button>
-					</Flex>
+						Request access
+					</Button>
 				</SingleSection>
+
+				{/* modal start */}
+				<Modal onClose={onClose} isOpen={isOpen} isCentered>
+					<ModalOverlay />
+					<ModalContent
+						backgroundColor="gray.900"
+						color="white"
+						borderRadius="md"
+						p={4}
+					>
+						<DarkMode>
+							<ModalHeader fontWeight={900} px="0">
+								Request access to Meeshkan
+							</ModalHeader>
+							<ModalCloseButton />
+							<ModalBody px="0">
+								{formSubmit ? (
+									<Stack
+										spacing={4}
+										as="form"
+										onSubmit={handleSubmit(onSubmit)}
+									>
+										<FormControl>
+											<FormLabel htmlFor="name" fontWeight={700}>
+												Name
+											</FormLabel>
+											<Input
+												type="text"
+												name="name"
+												ref={register}
+												aria-label="Enter your name"
+												borderRadius="sm"
+												placeholder="Janet"
+												isDisabled={formSubmit}
+												fontWeight={500}
+												backgroundColor="gray.800"
+												_hover={{
+													backgroundColor: "gray.700",
+												}}
+											/>
+										</FormControl>
+										<FormControl isRequired>
+											<FormLabel htmlFor="email" fontWeight={700}>
+												Email
+											</FormLabel>
+											<Input
+												type="email"
+												name="email"
+												ref={register}
+												aria-label="Enter your business email"
+												borderRadius="sm"
+												placeholder="you@company.com"
+												isDisabled={formSubmit}
+												fontWeight={500}
+												backgroundColor="gray.800"
+												_hover={{
+													backgroundColor: "gray.700",
+												}}
+											/>
+										</FormControl>
+										<FormControl isRequired>
+											<FormLabel htmlFor="position" fontWeight={700}>
+												What is your title?
+											</FormLabel>
+											<Select
+												name="position"
+												placeholder="i.e. CTO, Product manager, etc"
+												backgroundColor="gray.800"
+												_hover={{
+													backgroundColor: "gray.700",
+												}}
+												ref={register}
+											>
+												<option value="CTO / Technical manager">
+													CTO / Technical manager
+												</option>
+												<option value="Product Manager">Product manager</option>
+												<option value="Developer">Developer</option>
+												<option value="Other">Other</option>
+											</Select>
+										</FormControl>
+
+										<LightMode>
+											<Button
+												aria-label="Request access"
+												variantColor="red"
+												borderRadius="sm"
+												fontWeight={900}
+												type="submit"
+												minW="fit-content"
+												w="full"
+												mt={8}
+												isLoading={formState.isSubmitting}
+												loadingText="submitting"
+												isDisabled={formSubmit}
+											>
+												Submit
+											</Button>
+										</LightMode>
+									</Stack>
+								) : (
+									<Text>hey</Text>
+								)}
+							</ModalBody>
+						</DarkMode>
+					</ModalContent>
+				</Modal>
+				{/* modal end */}
 
 				<Box backgroundColor="gray.50" borderRadius={4} my={12}>
 					<SingleSection heading="Designed for the smoothest release cycle you've ever experienced">
@@ -156,57 +271,27 @@ const StagingEnvironmentPage = () => {
 							fontWeight={500}
 						>
 							<FeatureCard>
-								<Icon
-									name="activity"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="activity" color="red.700" w="24px" h="24px" />
 								<Text>Health metrics dashboard</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon
-									name="server"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="server" color="red.700" w="24px" h="24px" />
 								<Text>Full stack staging</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon
-									name="zap"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="zap" color="red.700" w="24px" h="24px" />
 								<Text>Dynamically generated tests</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon
-									name="crosshair"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="crosshair" color="red.700" w="24px" h="24px" />
 								<Text>Pinpoint bug introductions</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon
-									name="github-octocat"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="github-octocat" color="red.700" w="24px" h="24px" />
 								<Text>GitHub checks integration</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon
-									name="share"
-									color="red.700"
-									w="24px"
-									h="24px"
-								/>
+								<Icon name="share" color="red.700" w="24px" h="24px" />
 								<Text>Unique URLs for sharing</Text>
 							</FeatureCard>
 						</SimpleGrid>
@@ -366,7 +451,12 @@ const StagingEnvironmentPage = () => {
 				</Tabs>
 
 				<SingleSection>
-					<Box backgroundColor="gray.900" p={8} borderRadius="md">
+					<Box
+						backgroundColor="gray.900"
+						p={8}
+						borderRadius="md"
+						textAlign="center"
+					>
 						<Heading
 							mb={2}
 							color="white"
@@ -375,64 +465,27 @@ const StagingEnvironmentPage = () => {
 							fontWeight={900}
 							letterSpacing="wide"
 							lineHeight="short"
-							textAlign="center"
 						>
 							Cut your staging bill in half
 						</Heading>
-						<Text
-							mb={4}
-							fontSize="2xl"
-							lineHeight="short"
-							color="gray.200"
-							textAlign="center"
-						>
+						<Text mb={4} fontSize="2xl" lineHeight="short" color="gray.200">
 							Don't pay for staging environments you don't need. Meeshkan
 							automatically tears down your staging environment when you're
 							finished with your tests.
 						</Text>
-						<Flex
-							as="form"
-							// @ts-expect-error
-							name="staging-signup-2"
-							data-netlify="true"
-							data-netlify-honeypot="bot-field"
-							method="POST"
-							action="/success/"
-							id="staging-signup-2"
-							align="flex-end"
-							w={["full", "full", 600]}
-							direction={["column", "column", "row"]}
-							mx="auto"
+
+						<Button
+							aria-label="Sign up"
+							variantColor="red"
+							borderRadius="sm"
+							fontWeight={900}
+							type="submit"
+							w={["100%", "100%", "auto"]}
+							minW="fit-content"
+							onClick={onOpen}
 						>
-							<input type="hidden" name="bot-field" />
-							<input type="hidden" name="form-name" value="staging-signup-2" />
-							<DarkMode>
-								<FormControl isRequired mr={[0, 0, 4]} mb={[4, 4, 0]} w="100%">
-									<FormLabel htmlFor="email" fontWeight={700} color="white">
-										Email
-									</FormLabel>
-									<Input
-										type="email"
-										name="email"
-										id="email"
-										borderRadius="sm"
-										fontWeight={500}
-										color="gray.100"
-									/>
-								</FormControl>
-							</DarkMode>
-							<Button
-								aria-label="Sign up"
-								variantColor="red"
-								borderRadius="sm"
-								fontWeight={900}
-								type="submit"
-								w={["100%", "100%", "auto"]}
-								minW="fit-content"
-							>
-								Create your environment
-							</Button>
-						</Flex>
+							Create your environment
+						</Button>
 					</Box>
 				</SingleSection>
 			</Layout>
