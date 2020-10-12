@@ -93,7 +93,7 @@ const StagingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Cut your manual testing time and your cloud bill in half with
+								Cut your manual testing time and cloud bill in half with
 								quick-to-deploy staging environments.
 							</Text>
 						</Box>
