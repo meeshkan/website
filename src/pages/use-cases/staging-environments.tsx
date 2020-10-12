@@ -85,7 +85,7 @@ const StagingEnvironmentPage = () => {
 								letterSpacing="wide"
 								lineHeight="short"
 							>
-								Faster, cheaper staging environments for pre-release testing
+								Faster &amp; cheaper staging environments for pre-release testing
 							</Heading>
 							<Text
 								fontSize={["lg", "xl", "2xl"]}
