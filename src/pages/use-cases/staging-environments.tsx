@@ -260,7 +260,7 @@ const StagingEnvironmentPage = () => {
 						<TabPanel>
 							<DoubleSection
 								heading="Test the cases that matter"
-								text="Start your staging environment with zero, ten, or a million users. Meeshkan loads your staging environment in a state that reflects your testing acceptance criteria. When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
+								text="Start your staging environment with zero, ten, or a million users. Meeshkan loads your staging environment in a state that reflects your testing acceptance criteria. When you're done testing, the staging environment is saved and stored, saving thousands of dollars off your cloud bill."
 							>
 								<Stack
 									w={[300, 360, 460]}
