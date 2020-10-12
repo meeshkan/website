@@ -240,7 +240,7 @@ const StagingEnvironmentPage = () => {
 							}}
 							mr={4}
 						>
-							for Product managers
+							for Product Managers
 						</Tab>
 						<Tab
 							backgroundColor="gray.50"
