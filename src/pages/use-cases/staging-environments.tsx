@@ -119,7 +119,7 @@ const StagingEnvironmentPage = () => {
 								letterSpacing="wide"
 								lineHeight="short"
 							>
-								Faster, cheaper staging environments for pre-release testing
+								Faster &amp; cheaper staging environments for pre-release testing
 							</Heading>
 							<Text
 								fontSize={["lg", "xl", "2xl"]}
@@ -127,7 +127,7 @@ const StagingEnvironmentPage = () => {
 								mb={6}
 								color="gray.700"
 							>
-								Cut your manual testing time and your cloud bill in half with
+								Cut your manual testing time and cloud bill in half with
 								quick-to-deploy staging environments.
 							</Text>
 						</Box>
@@ -325,7 +325,7 @@ const StagingEnvironmentPage = () => {
 							}}
 							mr={4}
 						>
-							for Product managers
+							for Product Managers
 						</Tab>
 						<Tab
 							backgroundColor="gray.50"
@@ -345,7 +345,7 @@ const StagingEnvironmentPage = () => {
 						<TabPanel>
 							<DoubleSection
 								heading="Test the cases that matter"
-								text="Start your staging environment with 0, 1, or a million users. Meeshkan loads your staging environment in a state that reflects the acceptance criteria you are testing. When you're done testing, the staging environment is saved and stored, saving thousands of dollars on your cloud bill."
+								text="Start your staging environment with zero, ten, or a million users. Meeshkan loads your staging environment in a state that reflects your testing acceptance criteria. When you're done testing, the staging environment is saved and stored, saving thousands of dollars off your cloud bill."
 							>
 								<Stack
 									w={[300, 360, 460]}
@@ -441,8 +441,8 @@ const StagingEnvironmentPage = () => {
 							</DoubleSection>
 
 							<DoubleSection
-								heading="Run defined and generated test cases, every commit"
-								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run every commit."
+								heading="Run defined and generated test cases on every commit"
+								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases for the stateful logic of your app. You can also pre-define specific test cases that are run on every commit."
 							>
 								<Box w="100%" h={256} backgroundColor="gray.50" />
 							</DoubleSection>
