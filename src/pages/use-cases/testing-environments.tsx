@@ -39,7 +39,7 @@ const TestingEnvironmentPage = () => {
 				<SEO
 					pageTitle="Testing Environments"
 					pageDescription="Meeshkan is creates testing environments that are a ready-made sandbox. Tests, mock services, and mock data are dynamically generated based on the branch specified."
-					pageUrl="https://meeshkan.com/testing-environments/"
+					pageUrl="https://meeshkan.com/use-cases/testing-environments/"
 				/>
 				<SingleSection hero>
 					<Flex
