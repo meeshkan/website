@@ -37,9 +37,17 @@ function SEO({
   `)
 
   const title = pageTitle || siteTitle
-  const api = "https://og-cards.meeshkan.com"
-  const cardPath = `/image?title=${encodeURIComponent(title)}`
-  const baseOG = `${api}${cardPath}`
+
+  const pageUrlObject = new URL(pageUrl)
+  const [tag, slug] = pageUrlObject.pathname.split("/").slice(1)
+
+  const cardBaseUrl = "https://og-cards.meeshkan.com"
+  let cardUrl = `${cardBaseUrl}/card?title=${title}`
+  if (slug && slug.length > 0) {
+    cardUrl += `&tag=${tag}`
+  }
+
+  const baseOG = `${cardBaseUrl}/api/${encodeURIComponent(cardUrl)}`
 
   return (
     <React.Fragment>
