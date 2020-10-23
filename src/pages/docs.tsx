@@ -175,6 +175,7 @@ const DocsHome = () => {
 								rounded="sm"
 								fontWeight={900}
 								mt={4}
+								// @ts-ignore
 								to="https://app.meeshkan.com"
 							>
 								Create your free account

@@ -15,7 +15,7 @@ const DocsLayout = ({ pageContext }: LayoutProps) => {
 	return (
 		<MDXProvider components={MDXComponents}>
 			<SEO
-				pageTitle="Docs"
+				pageTitle={`${pageContext.title}`}
 				pageDescription="Documentation to guide you through the Meeshkan core concepts."
 				pageUrl={`https://meeshkan.com/docs/${
 					pageContext ? pageContext.slug + `/` : null
