@@ -10,6 +10,9 @@ exports.createPages = ({ actions, graphql }) => {
 			documentation: allMdx(filter: { fileAbsolutePath: { regex: "/docs/" } }) {
 				totalCount
 				nodes {
+					headings(depth: h1) {
+						value
+					}
 					id
 					body
 					excerpt(pruneLength: 140)
@@ -65,7 +68,12 @@ exports.createPages = ({ actions, graphql }) => {
 			createPage({
 				path: `/docs/${doc.frontmatter.slug}/`,
 				component: docPage,
-				context: { doc, id: doc.id, slug: doc.frontmatter.slug },
+				context: {
+					doc,
+					id: doc.id,
+					title: doc.headings[0].value,
+					slug: doc.frontmatter.slug,
+				},
 			})
 		})
 	})
