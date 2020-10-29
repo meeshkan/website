@@ -187,7 +187,7 @@ const iconPaths = {
 				<path
 					d="M 5 7 C 5 4.791 6.791 3 9 3 C 11.209 3 13 4.791 13 7 C 13 9.209 11.209 11 9 11 C 6.791 11 5 9.209 5 7 Z"
 					fill="none"
-					stroke-width="2"
+					strokeWidth="2"
 					stroke="currentColor"
 					strokeLinecap="round"
 					strokeLinejoin="round"

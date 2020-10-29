@@ -42,6 +42,7 @@ import Layout from "../../components/templates/layout"
 import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
 import devFlow from "../../static/devFlow.png"
+import { motion } from "framer-motion"
 
 type FeatureProps = {
 	children: Object
@@ -68,7 +69,7 @@ const StagingEnvironmentPage = () => {
 
 	function onSubmit(values) {
 		let requestAccessData = JSON.stringify({
-			text: `${values.name} has requested access to *pre-release testing* Meeshkan. \n You can reach them at: _*${values.email}*_. \n They are the _*${values.position}*_ at their company.`,
+			text: `${values.name} has requested access to *pre-release testing* from the staging landing page. \n You can reach them at: _*${values.email}*_. \n They are the _*${values.position}*_ at their company.`,
 		})
 
 		fetch(
@@ -84,11 +85,22 @@ const StagingEnvironmentPage = () => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")
 				}
-				setFormSubmit(true)
 			})
 			.catch((error) => {
 				console.error("Error:", error)
 			})
+		setFormSubmit(true)
+	}
+
+	const pathVariants = {
+		hidden: {
+			opacity: 0,
+			pathLength: 0,
+		},
+		visible: {
+			opacity: 1,
+			pathLength: 1,
+		},
 	}
 
 	return (
@@ -164,12 +176,12 @@ const StagingEnvironmentPage = () => {
 						p={4}
 					>
 						<DarkMode>
-							<ModalHeader fontWeight={900} px="0">
+							<ModalHeader fontWeight={900} px="0" pt={0}>
 								Request access to Meeshkan
 							</ModalHeader>
 							<ModalCloseButton />
 							<ModalBody px="0">
-								{formSubmit ? (
+								{formSubmit === false ? (
 									<Stack
 										spacing={4}
 										as="form"
@@ -254,7 +266,78 @@ const StagingEnvironmentPage = () => {
 										</LightMode>
 									</Stack>
 								) : (
-									<Text>hey</Text>
+									<>
+										<Flex
+											align="center"
+											justify="center"
+											p={4}
+											color="cyan.400"
+										>
+											<motion.svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="32"
+												height="32"
+												viewBox="0 0 24 24"
+											>
+												<motion.path
+													d="M 22 11.08 L 22 12 C 21.997 16.429 19.082 20.328 14.835 21.584 C 10.588 22.84 6.021 21.152 3.611 17.437 C 1.201 13.722 1.521 8.864 4.398 5.497 C 7.276 2.131 12.025 1.058 16.07 2.86"
+													fill="transparent"
+													strokeWidth="2"
+													stroke="currentColor"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													initial="hidden"
+													animate="visible"
+													variants={pathVariants}
+													transition={{
+														default: {
+															duration: 1,
+															ease: "easeInOut",
+															loop: "Infinity",
+															repeatDelay: 1,
+														},
+														fill: {
+															duration: 1,
+															ease: [1, 0, 0.8, 1],
+															loop: "Infinity",
+															repeatDelay: 1,
+														},
+													}}
+												/>
+												<motion.path
+													d="M 22 4 L 12 14.01 L 9 11.01"
+													fill="transparent"
+													strokeWidth="2"
+													stroke="currentColor"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													initial="hidden"
+													animate="visible"
+													variants={pathVariants}
+													transition={{
+														default: {
+															duration: 1,
+															ease: "easeInOut",
+															loop: "Infinity",
+															repeatDelay: 1,
+														},
+														fill: {
+															duration: 1,
+															ease: [1, 0, 0.8, 1],
+															loop: "Infinity",
+															repeatDelay: 1,
+														},
+													}}
+												/>
+											</motion.svg>
+											<Text ml={4} fontSize="xl" color="white" lineHeight="1">
+												Success
+											</Text>
+										</Flex>
+										<Text color="gray.300" textAlign="center">
+											We'll be in touch shortly!
+										</Text>
+									</>
 								)}
 							</ModalBody>
 						</DarkMode>
