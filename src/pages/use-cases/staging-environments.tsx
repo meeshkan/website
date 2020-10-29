@@ -28,7 +28,6 @@ import {
 	Select,
 	LightMode,
 } from "@chakra-ui/core"
-import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import { Card } from "../../components/atoms/card"
 import { useForm } from "react-hook-form"
 import SEO from "../../components/molecules/seo"
@@ -48,6 +47,8 @@ import {
 	CrosshairIcon,
 	UserIcon,
 	ZapIcon,
+	SunIcon,
+	MoonIcon,
 } from "../../../theme/icons"
 
 type FeatureProps = {

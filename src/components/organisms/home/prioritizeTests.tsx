@@ -1,8 +1,12 @@
 import React, { useState } from "react"
 import { Stack, Box, Text, Flex, IconButton, DarkMode } from "@chakra-ui/core"
 import { motion, useReducedMotion } from "framer-motion"
-import { MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { CheckmarkIcon, XmarkIcon } from "../../../../theme/icons"
+import {
+	CheckmarkIcon,
+	XmarkIcon,
+	SunIcon,
+	MoonIcon,
+} from "../../../../theme/icons"
 
 const Test = ({ success, testCase, priority, animate, colorMode }) => {
 	const MotionBox = motion.custom(Box)

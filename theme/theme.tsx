@@ -2,6 +2,22 @@ import { extendTheme } from "@chakra-ui/core"
 import customColors from "./colors"
 
 const customTheme = extendTheme({
+	config: {
+		useSystemColorMode: false,
+		initialColorMode: "light",
+	},
+	styles: {
+		global: (props) => ({
+			"html, body": {
+				scrollBehavior: "smooth",
+				backgroundColor: props.colorMode === "dark" ? "gray.900" : "white",
+			},
+			_selection: {
+				color: "rgba(220, 24, 83, 1)",
+				background: "rgba(220, 24, 83, 0.1)",
+			},
+		}),
+	},
 	colors: {
 		...customColors,
 	},
