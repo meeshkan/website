@@ -43,17 +43,13 @@ module.exports = {
 			resolve: `gatsby-source-filesystem`,
 			options: {
 				name: `docs`,
-				path: `${__dirname}/src/pages/docs/`,
+				path: `${__dirname}/src/docs/`,
 			},
 		},
 		{
 			resolve: `gatsby-plugin-mdx`,
 			options: {
 				extensions: [`.mdx`],
-				rehypePlugins: [require("rehype-slug")],
-				defaultLayouts: {
-					default: require.resolve("./src/components/templates/docsLayout.tsx"),
-				},
 			},
 		},
 		`gatsby-transformer-sharp`,
