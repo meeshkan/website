@@ -4,7 +4,7 @@ import {
 	Heading,
 	Accordion,
 	AccordionItem,
-	AccordionHeader,
+	AccordionButton,
 	Flex,
 	Text,
 	AccordionIcon,
@@ -55,7 +55,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 										borderRadius="sm"
 										backgroundColor="white"
 									>
-										<AccordionHeader
+										<AccordionButton
 											_hover={{
 												backgroundColor: "none",
 											}}
@@ -91,7 +91,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 												<Text fontWeight={600}>{exchange.meta.path}</Text>
 											</Flex>
 											<AccordionIcon />
-										</AccordionHeader>
+										</AccordionButton>
 										<AccordionPanel py={4}>
 											<Flex>
 												{exchange.response.statusCode && (

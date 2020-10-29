@@ -10,7 +10,7 @@ import {
 	Link as ChakraLink,
 	Accordion,
 	AccordionItem,
-	// AccordionHeader,
+	AccordionButton,
 	AccordionIcon,
 	AccordionPanel,
 	Grid,
@@ -327,7 +327,7 @@ const IndexPage = () => {
 								borderRadius="sm"
 								onClick={() => setShowImage(data.stack.childImageSharp.fluid)}
 							>
-								{/* <AccordionHeader
+								<AccordionButton
 									roundedTop="sm"
 									fontSize="md"
 									fontWeight={600}
@@ -344,7 +344,7 @@ const IndexPage = () => {
 										REST Compatible
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader> */}
+								</AccordionButton>
 								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
 									Meeshkan also works for your REST APIs by generating tests
 									with an OpenAPI specification and a little NLP. If you don't
@@ -360,7 +360,7 @@ const IndexPage = () => {
 									setShowImage(data.continuous.childImageSharp.fluid)
 								}
 							>
-								{/* <AccordionHeader
+								<AccordionButton
 									roundedTop="sm"
 									fontSize="md"
 									fontWeight={600}
@@ -377,7 +377,7 @@ const IndexPage = () => {
 										Continuous testing
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader> */}
+								</AccordionButton>
 								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
 									Every time you push a commit to GitHub, Meeshkan runs tests to
 									check for breaking changes. If something does fail, our GitHub
@@ -391,7 +391,7 @@ const IndexPage = () => {
 								borderRadius="sm"
 								onClick={() => setShowImage(data.premium.childImageSharp.fluid)}
 							>
-								{/* <AccordionHeader
+								<AccordionButton
 									roundedTop="sm"
 									fontSize="md"
 									fontWeight={600}
@@ -408,7 +408,7 @@ const IndexPage = () => {
 										Premium audits
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader> */}
+								</AccordionButton>
 								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
 									If you're on a Pro plan or higher, Meeshkan provides weekly
 									audit reports through the webapp. These audits include a full
@@ -424,7 +424,7 @@ const IndexPage = () => {
 									setShowImage(data.authSpec.childImageSharp.fluid)
 								}
 							>
-								{/* <AccordionHeader
+								<AccordionButton
 									roundedTop="sm"
 									fontSize="md"
 									fontWeight={600}
@@ -441,7 +441,7 @@ const IndexPage = () => {
 										Auth flows
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader> */}
+								</AccordionButton>
 								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
 									Our Business plan gives you access to a breakdown of an auth
 									flow specification for your API. This enables you to visualize
