@@ -76,7 +76,7 @@ const StagingEnvironmentPage = () => {
 			"https://hooks.slack.com/services/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",
 			{
 				method: "POST",
-				// mode: "no-cors",
+				mode: "no-cors",
 				body: requestAccessData,
 				headers: { "Content-type": "application/json" },
 			}
