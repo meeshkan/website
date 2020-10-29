@@ -23,6 +23,7 @@ import mdxComponents from "../molecules/mdxComponents"
 import { Link } from "gatsby"
 import SEO from "../molecules/seo"
 import Layout from "./layout"
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 
 type BlogPostProps = {
 	data: any // type of object errors 🤔
@@ -123,15 +124,14 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						{next !== null ? (
 							<Button
 								as={Link}
-								// @ts-ignore
 								to={`/blog/${next.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${next.frontmatter.title}.`}
-								leftIcon="arrow-back"
+								leftIcon={<ArrowBackIcon />}
 							>
 								Newer post
 							</Button>
 						) : (
-							<Button isDisabled leftIcon="arrow-back">
+							<Button isDisabled leftIcon={<ArrowBackIcon />}>
 								Newer post
 							</Button>
 						)}
@@ -142,12 +142,12 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								// @ts-ignore
 								to={`/blog/${previous.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${previous.frontmatter.title}.`}
-								rightIcon="arrow-forward"
+								rightIcon={<ArrowForwardIcon />}
 							>
 								Older post
 							</Button>
 						) : (
-							<Button isDisabled rightIcon="arrow-forward">
+							<Button isDisabled rightIcon={<ArrowForwardIcon />}>
 								Older post
 							</Button>
 						)}
