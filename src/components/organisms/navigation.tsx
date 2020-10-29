@@ -207,8 +207,9 @@ export function Navigation() {
 						<Stack isInline>
 							<IconButton
 								as={Link}
-								isExternal
+								// @ts-ignore
 								href="https://twitter.com/meeshkan"
+								isExternal
 								aria-label="Twitter"
 								icon={<TwitterIcon />}
 								rounded="sm"
@@ -216,8 +217,9 @@ export function Navigation() {
 							/>
 							<IconButton
 								as={Link}
-								isExternal
+								// @ts-ignore
 								href="https://www.linkedin.com/company/meeshkan/"
+								isExternal
 								aria-label="LinkedIn"
 								icon={<LinkedInIcon />}
 								rounded="sm"
@@ -225,8 +227,9 @@ export function Navigation() {
 							/>
 							<IconButton
 								as={Link}
-								isExternal
+								// @ts-ignore
 								href="https://github.com/meeshkan"
+								isExternal
 								aria-label="GitHub"
 								icon={<GitHubIcon />}
 								rounded="sm"

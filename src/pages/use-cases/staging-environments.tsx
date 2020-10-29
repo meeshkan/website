@@ -174,7 +174,12 @@ const StagingEnvironmentPage = () => {
 				</SingleSection>
 
 				{/* modal start */}
-				<Modal onClose={onClose} isOpen={isOpen} isCentered>
+				<Modal
+					motionPreset="slideInBottom"
+					onClose={onClose}
+					isOpen={isOpen}
+					isCentered
+				>
 					<ModalOverlay />
 					<ModalContent
 						backgroundColor="gray.900"

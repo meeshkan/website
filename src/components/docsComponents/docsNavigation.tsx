@@ -2,10 +2,6 @@ import React, { useRef } from "react"
 import { Link } from "gatsby"
 import {
 	Stack,
-	Icon,
-	Input,
-	InputGroup,
-	InputLeftElement,
 	Code,
 	IconButton,
 	Box,
@@ -14,9 +10,7 @@ import {
 	DrawerCloseButton,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter,
 	useDisclosure,
-	DarkMode,
 } from "@chakra-ui/core"
 import { HamburgerIcon, LogoIcon } from "../../../theme/icons"
 import SideNavContent from "../docsComponents/sideNavigation"
