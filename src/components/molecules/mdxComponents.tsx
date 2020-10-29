@@ -8,7 +8,7 @@ import {
 	Box,
 	Divider,
 	Code,
-	Callout,
+	Alert,
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -99,12 +99,12 @@ const components = {
 		</Text>
 	),
 	blockquote: (props) => (
-		<Callout
+		<Alert
 			my={6}
 			rounded="sm"
 			variant="left-accent"
-			backgroundColor="blue.50"
-			color="blue.500"
+			backgroundColor="gray.50"
+			color="gray.500"
 			fontWeight="500"
 			fontStyle="italic"
 			status="info"
@@ -112,7 +112,7 @@ const components = {
 			{...props}
 		>
 			{props.children}
-		</Callout>
+		</Alert>
 	),
 	inlineCode: (props) => (
 		<Code colorScheme="cyan" fontSize="inherit" {...props} />

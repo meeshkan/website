@@ -15,7 +15,6 @@ import {
 	AccordionPanel,
 	Grid,
 	Stack,
-	Icon,
 	DarkMode,
 } from "@chakra-ui/core"
 import { ArrowForwardIcon } from "@chakra-ui/icons"

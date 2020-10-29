@@ -7,7 +7,6 @@ import {
 	Input,
 	Button,
 	DarkMode,
-	Icon,
 	Flex,
 	Badge,
 	FormControl,
@@ -221,11 +220,12 @@ const TestGraphqlPage = () => {
 								borderRadius="sm"
 								variant="ghost"
 								onClick={() => setShow(!show)}
+								mb={4}
 							>
 								{show ? `Less` : `More`} options{" "}
 								{show ? <ChevronUpIcon ml={2} /> : <ChevronDownIcon ml={2} />}
 							</Button>
-							<Collapse mt={4} isOpen={show}>
+							<Collapse in={show}>
 								<Flex
 									direction={["column", "column", "row"]}
 									justify="center"

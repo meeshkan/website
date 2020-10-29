@@ -14,7 +14,6 @@ import {
 import CodeBlock from "../molecules/codeBlock"
 import prettier from "prettier/standalone"
 import parserGraphql from "prettier/parser-graphql"
-import { motion } from "framer-motion"
 
 type TestProps = {
 	testResults: Object

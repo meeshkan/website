@@ -1,13 +1,5 @@
 import React, { useState } from "react"
-import {
-	Stack,
-	Box,
-	Text,
-	Flex,
-	Icon,
-	IconButton,
-	DarkMode,
-} from "@chakra-ui/core"
+import { Stack, Box, Text, Flex, IconButton, DarkMode } from "@chakra-ui/core"
 import { motion, useReducedMotion } from "framer-motion"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import { CheckmarkIcon, XmarkIcon } from "../../../../theme/icons"

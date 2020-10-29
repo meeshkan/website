@@ -5,6 +5,7 @@ import { mdx } from "@mdx-js/react"
 import * as Chakra from "@chakra-ui/core"
 import * as Formik from "formik"
 import FocusLock from "react-focus-lock"
+import { DarkMode } from "@chakra-ui/core"
 
 const { Box, Button, useClipboard } = Chakra
 
@@ -50,7 +51,7 @@ const CopyButton = (props) => (
 		textTransform="uppercase"
 		fontWeight={900}
 		colorScheme="red"
-		variant="solid"
+		variant="ghost"
 		height={6}
 		top={4}
 		zIndex="1"
@@ -167,9 +168,11 @@ const CodeBlock = ({
 				<LiveEditor padding={20} style={liveEditorStyle} />
 
 				{copyButton === true ? (
-					<CopyButton top="1.25em" onClick={onCopy}>
-						{hasCopied ? "copied" : "copy"}
-					</CopyButton>
+					<DarkMode>
+						<CopyButton top="1.25em" onClick={onCopy}>
+							{hasCopied ? "copied" : "copy"}
+						</CopyButton>
+					</DarkMode>
 				) : null}
 			</Box>
 		</LiveProvider>

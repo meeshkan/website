@@ -255,7 +255,6 @@ const Roadmap = () => {
 
 				<Flex
 					as="form"
-					// @ts-expect-error
 					action="/success/"
 					name="roadmap-updates"
 					data-netlify="true"

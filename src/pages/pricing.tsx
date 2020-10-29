@@ -5,7 +5,6 @@ import {
 	Heading,
 	Stack,
 	Flex,
-	Icon,
 	Button,
 	Code,
 	Box,

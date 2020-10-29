@@ -6,12 +6,12 @@ import {
 	Box,
 	Stack,
 	Text,
-	Icon,
 	IconButton,
 	Flex,
 	ListItem,
 	List,
 	Collapse,
+	useDisclosure,
 } from "@chakra-ui/core"
 import Codeblock from "../../molecules/codeBlock"
 import { CloseIcon, ChevronDownIcon, ArrowForwardIcon } from "@chakra-ui/icons"
@@ -19,9 +19,8 @@ import { XmarkIcon } from "../../../../theme/icons"
 
 const GenerateTests = () => {
 	// Generated tests
-	const [isOpen, setIsOpen] = useState(false)
-	// Accordion collapse
-	const [show, setShow] = React.useState(true)
+	const [openTest, setOpenTest] = useState(false)
+	const { isOpen, onToggle } = useDisclosure()
 
 	const variants = {
 		open: {
@@ -52,7 +51,7 @@ const GenerateTests = () => {
 	return (
 		<>
 			<MotionBox
-				animate={isOpen ? "open" : "closed"}
+				animate={openTest ? "open" : "closed"}
 				variants={variants}
 				backgroundColor="blackAlpha.700"
 				position="absolute"
@@ -98,7 +97,7 @@ const GenerateTests = () => {
 						icon={<CloseIcon />}
 						size="xs"
 						variant="ghost"
-						onClick={() => setIsOpen(!isOpen)}
+						onClick={() => setOpenTest(!openTest)}
 					/>
 				</Stack>
 
@@ -146,10 +145,10 @@ const GenerateTests = () => {
 							icon={<ChevronDownIcon />}
 							size="sm"
 							variant="ghost"
-							onClick={() => setShow(!show)}
+							onClick={onToggle}
 						/>
 					</Flex>
-					<Collapse isOpen={show} startingHeight={0}>
+					<Collapse in={isOpen} startingHeight={0}>
 						<Codeblock className="graphql" copyButton={false}>
 							{`// request body
 mutation {
@@ -205,7 +204,7 @@ mutation {
 					colorScheme="blue"
 					borderRadius="sm"
 					fontWeight={900}
-					onClick={() => setIsOpen(!isOpen)}
+					onClick={() => setOpenTest(!openTest)}
 					_focus={{ outline: "none" }}
 					animate={{
 						scale: [1, 1.1, 1, 1.1, 1],
