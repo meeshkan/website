@@ -2,7 +2,7 @@ import { extendTheme } from "@chakra-ui/core"
 import customIcons from "./icons"
 import customColors from "./colors"
 
-const overrides = {
+const customTheme = extendTheme({
 	icons: {
 		...customIcons,
 	},
@@ -72,6 +72,6 @@ const overrides = {
 		"24": "11rem",
 		"32": "16rem",
 	},
-}
+})
 
-const customTheme = extendTheme(overrides)
+export default customTheme
