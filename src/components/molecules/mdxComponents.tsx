@@ -9,7 +9,6 @@ import {
 	Divider,
 	Code,
 	Callout,
-	PseudoBox,
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -43,7 +42,7 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 			{...props}
 		>
 			<a href={`#${id}`}>{children}</a>
-			<PseudoBox
+			<Box
 				aria-label="anchor"
 				as="a"
 				color="blue.500"
@@ -52,11 +51,10 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 				_focus={{ opacity: 1, boxShadow: "outline" }}
 				opacity={0}
 				ml={2}
-				// @ts-ignore
 				href={`#${id}`}
 			>
 				#
-			</PseudoBox>
+			</Box>
 		</Heading>
 	</>
 )

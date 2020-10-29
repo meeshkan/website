@@ -1,4 +1,4 @@
-import { Box, PseudoBox, Heading } from "@chakra-ui/core"
+import { Box, Heading } from "@chakra-ui/core"
 import { Link as GatsbyLink } from "gatsby"
 import React, { forwardRef } from "react"
 import { useLocation } from "@reach/router"
@@ -36,7 +36,8 @@ type SideNavLinkProps = {
 export const SideNavLink = forwardRef(
 	({ children, ...props }: SideNavLinkProps, ref) => {
 		return (
-			<PseudoBox
+			<Box
+				// @ts-expect-error
 				ref={ref}
 				mx={-2}
 				display="flex"
@@ -53,7 +54,7 @@ export const SideNavLink = forwardRef(
 				{...props}
 			>
 				<Box>{children}</Box>
-			</PseudoBox>
+			</Box>
 		)
 	}
 )
