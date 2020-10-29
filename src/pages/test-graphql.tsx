@@ -14,6 +14,8 @@ import {
 	FormLabel,
 	Collapse,
 } from "@chakra-ui/core"
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
+import { CheckmarkIcon, GraphQLSnippetIcon } from "../../theme/icons"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 import SEO from "../components/molecules/seo"
 import Layout from "../components/templates/layout"
@@ -32,7 +34,7 @@ type ItemProp = {
 function ListItem({ text }: ItemProp) {
 	return (
 		<Stack isInline mt={6} alignItems="center" spacing={4}>
-			<Icon name="checkmark" color="cyan.500" size="24px" />
+			<CheckmarkIcon color="cyan.500" size="24px" />
 			<Text fontWeight={500} color="gray.700">
 				{text}
 			</Text>
@@ -221,7 +223,7 @@ const TestGraphqlPage = () => {
 								onClick={() => setShow(!show)}
 							>
 								{show ? `Less` : `More`} options{" "}
-								<Icon name={show ? "chevron-up" : "chevron-down"} ml={2} />
+								{show ? <ChevronUpIcon ml={2} /> : <ChevronDownIcon ml={2} />}
 							</Button>
 							<Collapse mt={4} isOpen={show}>
 								<Flex
@@ -318,7 +320,7 @@ const TestGraphqlPage = () => {
 				heading="Built with the GraphQL community in mind."
 				text="Meeshkan works particularly well if you’ve built your GraphQL API from scratch using tools like Prisma or Apollo. But it’s not limited to that. No matter how many tests you already have or what language your app is written in - Meeshkan fits right into your existing stack."
 			>
-				<Icon name="graphqlSnippet" size="100%" />
+				<GraphQLSnippetIcon size="100%" />
 			</DoubleSection>
 
 			<HowDoesMeeshkanWork />

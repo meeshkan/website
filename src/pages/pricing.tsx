@@ -10,6 +10,7 @@ import {
 	Code,
 	Box,
 } from "@chakra-ui/core"
+import { XmarkIcon, CheckmarkIcon } from "../../theme/icons"
 import { Card } from "../components/atoms/card"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { UniversalLink } from "../components/atoms/UniversalLink"
@@ -62,7 +63,7 @@ const PricingCard = ({
 			{yesFeatures &&
 				yesFeatures.map((feature, index) => (
 					<Flex key={index} align="top">
-						<Icon name="checkmark" color="cyan.500" mr={3} mt={2} />
+						<CheckmarkIcon color="cyan.500" mr={3} mt={2} />
 						<Text>{feature}</Text>
 					</Flex>
 				))}
@@ -70,7 +71,7 @@ const PricingCard = ({
 			{noFeatures &&
 				noFeatures.map((feature, index) => (
 					<Flex key={index} align="center">
-						<Icon name="xmark" color="red.500" mr={3} />
+						<XmarkIcon color="red.500" mr={3} />
 						<Text>{feature}</Text>
 					</Flex>
 				))}

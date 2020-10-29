@@ -18,6 +18,7 @@ import {
 	Icon,
 	DarkMode,
 } from "@chakra-ui/core"
+import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -122,7 +123,7 @@ const IndexPage = () => {
 							alignItems="center"
 							fontWeight={700}
 						>
-							Read our report <Icon name="arrow-forward" ml={2} />
+							Read our report <ArrowForwardIcon ml={2} />
 						</Code>
 					</DarkMode>
 					<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>

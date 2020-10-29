@@ -2,7 +2,6 @@ import React, { useRef } from "react"
 import { Link } from "gatsby"
 import {
 	Stack,
-	Icon,
 	IconButton,
 	useDisclosure,
 	Drawer,
@@ -18,6 +17,14 @@ import {
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
 import { motion } from "framer-motion"
+import {
+	LogoIcon,
+	HamburgerIcon,
+	TwitterIcon,
+	GitHubIcon,
+	LinkedInIcon,
+} from "../../../theme/icons"
+import { ArrowForwardIcon } from "@chakra-ui/icons"
 
 const icon = {
 	hidden: {
@@ -77,7 +84,7 @@ function LogInLink() {
 			_active={{ color: "gray.900", fontWeight: 900 }}
 			_focus={{ color: "gray.900", fontWeight: 900 }}
 		>
-			Log in <Icon name="arrow-forward" ml={2} />
+			Log in <ArrowForwardIcon ml={2} />
 		</Button>
 	)
 }
@@ -104,9 +111,9 @@ export function Navigation() {
 			borderBottomColor="gray.50"
 		>
 			<Link to="/" aria-label="Meeshkan home">
-				{/* <Icon name="Logo" color="gray.900" h={6} w="auto" /> */}
 				<motion.svg
 					viewBox="0 0 125 24"
+					// @ts-ignore
 					style={{ height: 32, width: "auto" }}
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -158,8 +165,7 @@ export function Navigation() {
 				borderRadius="sm"
 				ref={btnRef}
 				onClick={onOpen}
-				// @ts-ignore
-				icon="hamburger"
+				icon={<HamburgerIcon />}
 				display={["block", "block", "none"]}
 			/>
 			<Drawer
@@ -177,7 +183,7 @@ export function Navigation() {
 					/>
 					<DrawerHeader p={4}>
 						<Link to="/" aria-label="Meeshkan homepage">
-							<Icon name="Logo" h={6} w="auto" />
+							<LogoIcon h={6} w="auto" />
 						</Link>
 					</DrawerHeader>
 					<DrawerBody
@@ -204,8 +210,7 @@ export function Navigation() {
 								isExternal
 								href="https://twitter.com/meeshkan"
 								aria-label="Twitter"
-								// @ts-ignore
-								icon="twitter"
+								icon={<TwitterIcon />}
 								rounded="sm"
 								color="gray.500"
 							/>
@@ -214,8 +219,7 @@ export function Navigation() {
 								isExternal
 								href="https://www.linkedin.com/company/meeshkan/"
 								aria-label="LinkedIn"
-								// @ts-ignore
-								icon="linkedin"
+								icon={<LinkedInIcon />}
 								rounded="sm"
 								color="gray.500"
 							/>
@@ -224,8 +228,7 @@ export function Navigation() {
 								isExternal
 								href="https://github.com/meeshkan"
 								aria-label="GitHub"
-								// @ts-ignore
-								icon="github"
+								icon={<GitHubIcon />}
 								rounded="sm"
 								color="gray.500"
 							/>

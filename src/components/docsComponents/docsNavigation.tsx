@@ -18,6 +18,7 @@ import {
 	useDisclosure,
 	DarkMode,
 } from "@chakra-ui/core"
+import { HamburgerIcon, LogoIcon } from "../../../theme/icons"
 import SideNavContent from "../docsComponents/sideNavigation"
 
 const DocsNavigation = () => {
@@ -40,7 +41,7 @@ const DocsNavigation = () => {
 				aria-label="Meeshkan homepage"
 				style={{ display: "flex", alignContent: "center" }}
 			>
-				<Icon name="Logo" color="gray.900" h={6} w="auto" />
+				<LogoIcon color="gray.900" h={6} w="auto" />
 				<Link to="/docs/">
 					<Code ml={3} colorScheme="cyan" fontWeight={900}>
 						Docs
@@ -67,8 +68,7 @@ const DocsNavigation = () => {
 					ref={btnRef}
 					rounded="sm"
 					variant="link"
-					// @ts-ignore
-					icon="hamburger"
+					icon={<HamburgerIcon />}
 					aria-label="Open the navigation menu"
 					onClick={onOpen}
 				/>

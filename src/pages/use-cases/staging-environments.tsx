@@ -14,7 +14,6 @@ import {
 	TabList,
 	Stack,
 	DarkMode,
-	Icon,
 	IconButton,
 	FormControl,
 	FormLabel,
@@ -24,13 +23,12 @@ import {
 	ModalBody,
 	ModalCloseButton,
 	ModalContent,
-	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
 	Select,
-	Checkbox,
 	LightMode,
 } from "@chakra-ui/core"
+import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import { Card } from "../../components/atoms/card"
 import { useForm } from "react-hook-form"
 import SEO from "../../components/molecules/seo"
@@ -43,6 +41,14 @@ import testingEnvironment from "../../static/testingEnvironment.png"
 // @ts-expect-error
 import devFlow from "../../static/devFlow.png"
 import { motion } from "framer-motion"
+import {
+	ActivityIcon,
+	GitHubIcon,
+	StoplightIcon,
+	CrosshairIcon,
+	UserIcon,
+	ZapIcon,
+} from "../../../theme/icons"
 
 type FeatureProps = {
 	children: Object
@@ -359,27 +365,27 @@ const StagingEnvironmentPage = () => {
 							fontWeight={500}
 						>
 							<FeatureCard>
-								<Icon name="activity" color="red.700" w="24px" h="24px" />
+								<ActivityIcon color="red.700" boxSize={6} />
 								<Text>Health metrics dashboard</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="user" color="red.700" w="24px" h="24px" />
+								<UserIcon color="red.700" boxSize={6} />
 								<Text>User generated tests</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="zap" color="red.700" w="24px" h="24px" />
+								<ZapIcon color="red.700" boxSize={6} />
 								<Text>Dynamically generated tests</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="crosshair" color="red.700" w="24px" h="24px" />
+								<CrosshairIcon color="red.700" boxSize={6} />
 								<Text>Pinpoint bug introductions</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="github-octocat" color="red.700" w="24px" h="24px" />
+								<GitHubIcon color="red.700" boxSize={6} />
 								<Text>GitHub checks integration</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="stoplight" color="red.700" w="24px" h="24px" />
+								<StoplightIcon color="red.700" boxSize={6} />
 								<Text>Confidence score</Text>
 							</FeatureCard>
 						</SimpleGrid>
@@ -477,7 +483,7 @@ const StagingEnvironmentPage = () => {
 											mt={4}
 											borderRadius="sm"
 											aria-label="color mode icon"
-											icon={colorMode === "light" ? "moon" : "sun"}
+											icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 											color={colorMode === "light" ? "gray.900" : "white"}
 											backgroundColor={
 												colorMode === "light" ? "white" : "gray.900"
@@ -564,7 +570,7 @@ const StagingEnvironmentPage = () => {
 											mt={4}
 											borderRadius="sm"
 											aria-label="color mode icon"
-											icon={colorMode === "light" ? "moon" : "sun"}
+											icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 											color={colorMode === "light" ? "gray.900" : "white"}
 											backgroundColor={
 												colorMode === "light" ? "white" : "gray.900"

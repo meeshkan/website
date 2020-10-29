@@ -9,6 +9,8 @@ import {
 	DarkMode,
 } from "@chakra-ui/core"
 import { motion, useReducedMotion } from "framer-motion"
+import { MoonIcon, SunIcon } from "@chakra-ui/icons"
+import { CheckmarkIcon, XmarkIcon } from "../../../../theme/icons"
 
 const Test = ({ success, testCase, priority, animate, colorMode }) => {
 	const MotionBox = motion.custom(Box)
@@ -40,6 +42,7 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
 		<MotionBox
 			w="100%"
 			p={3}
+			mt={0}
 			mb={4}
 			mx="auto"
 			borderRadius="md"
@@ -66,14 +69,11 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
 					alignItems="center"
 					justifyContent="center"
 				>
-					<Icon
-						name={success ? "checkmark" : "xmark"}
-						color={
-							success
-								? mark[colorMode].success.stroke
-								: mark[colorMode].failure.stroke
-						}
-					/>
+					{success === true ? (
+						<CheckmarkIcon color={mark[colorMode].success.stroke} />
+					) : (
+						<XmarkIcon color={mark[colorMode].failure.stroke} />
+					)}
 				</Box>
 				<Text
 					color={colorMode === "light" ? "gray.700" : "gray.200"}
@@ -159,7 +159,7 @@ const PrioritizeTests = () => {
 				backgroundColor={colorMode === "light" ? "gray.50" : "gray.800"}
 				borderRadius="md"
 				p={4}
-				spacing={4}
+				spacing="4px"
 			>
 				{tests.map((test, index) => (
 					<Test
@@ -175,7 +175,8 @@ const PrioritizeTests = () => {
 					<IconButton
 						borderRadius="sm"
 						aria-label="color mode icon"
-						icon={colorMode === "light" ? "moon" : "sun"}
+						// @ts-ignore
+						icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 						color={colorMode === "light" ? "gray.900" : "white"}
 						backgroundColor={colorMode === "light" ? "white" : "gray.900"}
 						_hover={

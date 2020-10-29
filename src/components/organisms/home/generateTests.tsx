@@ -14,6 +14,8 @@ import {
 	Collapse,
 } from "@chakra-ui/core"
 import Codeblock from "../../molecules/codeBlock"
+import { CloseIcon, ChevronDownIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+import { XmarkIcon } from "../../../../theme/icons"
 
 const GenerateTests = () => {
 	// Generated tests
@@ -60,6 +62,7 @@ const GenerateTests = () => {
 				p={4}
 				borderRadius="md"
 				style={{
+					// @ts-ignore
 					backdropFilter: "blur(6px)",
 					WebkitBackdropFilter: "blur(6px)",
 				}}
@@ -84,7 +87,7 @@ const GenerateTests = () => {
 							alignItems="center"
 							justifyContent="center"
 						>
-							<Icon name="xmark" color="red.500" />
+							<XmarkIcon color="red.500" />
 						</Box>
 						<Text fontSize="sm" color="gray.500" fontWeight={600}>
 							A user is only authorized to see their own data
@@ -92,7 +95,7 @@ const GenerateTests = () => {
 					</Flex>
 					<IconButton
 						aria-label="close bug"
-						icon="close"
+						icon={<CloseIcon />}
 						size="xs"
 						variant="ghost"
 						onClick={() => setIsOpen(!isOpen)}
@@ -101,7 +104,7 @@ const GenerateTests = () => {
 
 				<Stack mt={4} mb={6}>
 					<Flex alignItems="center">
-						<Icon color="red.500" mr={3} name="xmark" size="12px" />
+						<XmarkIcon color="red.500" mr={3} size="12px" />
 						<Text color="white" mr={4} fontWeight={700}>
 							Test case failed
 						</Text>
@@ -140,7 +143,7 @@ const GenerateTests = () => {
 						</Flex>
 						<IconButton
 							aria-label="toggle the test result"
-							icon="chevron-down"
+							icon={<ChevronDownIcon />}
 							size="sm"
 							variant="ghost"
 							onClick={() => setShow(!show)}
@@ -216,7 +219,7 @@ mutation {
 					}}
 					minW="fit-content"
 				>
-					Generate tests <Icon name="arrow-forward" ml={2} />
+					Generate tests <ArrowForwardIcon ml={2} />
 				</MotionButton>
 			</Box>
 		</>

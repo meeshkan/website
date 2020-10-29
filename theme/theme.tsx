@@ -1,11 +1,7 @@
 import { extendTheme } from "@chakra-ui/core"
-import customIcons from "./icons"
 import customColors from "./colors"
 
 const customTheme = extendTheme({
-	icons: {
-		...customIcons,
-	},
 	colors: {
 		...customColors,
 	},

@@ -7,9 +7,14 @@ import {
 	Stack,
 	Flex,
 	Divider,
-	Icon,
 	IconButton,
 } from "@chakra-ui/core"
+import {
+	GitHubIcon,
+	LinkedInIcon,
+	LogoIcon,
+	TwitterIcon,
+} from "../../../theme/icons"
 
 export function Footer() {
 	return (
@@ -148,7 +153,7 @@ export function Footer() {
 				<Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
 				<Flex justifyContent="space-between" align="center">
 					<GatsbyLink to="/" aria-label="Meeshkan homepage">
-						<Icon name="Logo" color="gray.900" size="6" w="auto" />
+						<LogoIcon color="gray.900" size="6" w="auto" />
 					</GatsbyLink>
 					<Stack isInline d={["none", "flex"]}>
 						<IconButton
@@ -157,8 +162,7 @@ export function Footer() {
 							isExternal
 							href="https://twitter.com/meeshkan"
 							aria-label="Twitter"
-							// @ts-ignore
-							icon="twitter"
+							icon={<TwitterIcon />}
 							rounded="sm"
 							color="gray.500"
 						/>
@@ -168,8 +172,7 @@ export function Footer() {
 							isExternal
 							href="https://www.linkedin.com/company/meeshkan/"
 							aria-label="LinkedIn"
-							// @ts-ignore
-							icon="linkedin"
+							icon={<LinkedInIcon />}
 							rounded="sm"
 							color="gray.500"
 						/>
@@ -179,8 +182,7 @@ export function Footer() {
 							isExternal
 							href="https://github.com/meeshkan"
 							aria-label="GitHub"
-							// @ts-ignore
-							icon="github"
+							icon={<GitHubIcon />}
 							rounded="sm"
 							color="gray.500"
 						/>
