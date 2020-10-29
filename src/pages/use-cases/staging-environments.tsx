@@ -119,7 +119,8 @@ const StagingEnvironmentPage = () => {
 								letterSpacing="wide"
 								lineHeight="short"
 							>
-								Faster &amp; cheaper staging environments for pre-release testing
+								Faster &amp; cheaper staging environments for pre-release
+								testing
 							</Heading>
 							<Text
 								fontSize={["lg", "xl", "2xl"]}
@@ -262,7 +263,10 @@ const StagingEnvironmentPage = () => {
 				{/* modal end */}
 
 				<Box backgroundColor="gray.50" borderRadius={4} my={12}>
-					<SingleSection heading="Designed for the smoothest release cycle you've ever experienced">
+					<SingleSection
+						heading="Designed for the smoothest release cycle you've ever experienced"
+						text="Bring your staging environment, we'll help you merge to production."
+					>
 						<SimpleGrid
 							spacing={8}
 							columns={[1, 2, 3]}
@@ -275,8 +279,8 @@ const StagingEnvironmentPage = () => {
 								<Text>Health metrics dashboard</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="server" color="red.700" w="24px" h="24px" />
-								<Text>Full stack staging</Text>
+								<Icon name="user" color="red.700" w="24px" h="24px" />
+								<Text>User generated tests</Text>
 							</FeatureCard>
 							<FeatureCard>
 								<Icon name="zap" color="red.700" w="24px" h="24px" />
@@ -291,8 +295,8 @@ const StagingEnvironmentPage = () => {
 								<Text>GitHub checks integration</Text>
 							</FeatureCard>
 							<FeatureCard>
-								<Icon name="share" color="red.700" w="24px" h="24px" />
-								<Text>Unique URLs for sharing</Text>
+								<Icon name="stoplight" color="red.700" w="24px" h="24px" />
+								<Text>Confidence score</Text>
 							</FeatureCard>
 						</SimpleGrid>
 					</SingleSection>
