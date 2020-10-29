@@ -340,10 +340,8 @@ const Roadmap = () => {
 								title={project.name.slice(3)}
 								description={project.description}
 								state={project.state}
-								scopeHistory={project.scopeHistory.slice(-1)[0]}
-								completedScopeHistory={
-									project.completedScopeHistory.slice(-1)[0]
-								}
+								scope={project.scopeHistory.slice(-1)[0]}
+								completedScope={project.completedScopeHistory.slice(-1)[0]}
 								link={project.links.nodes}
 							/>
 						))}
@@ -367,10 +365,8 @@ const Roadmap = () => {
 								title={project.name.slice(3)}
 								description={project.description}
 								state={project.state}
-								scopeHistory={project.scopeHistory.slice(-1)[0]}
-								completedScopeHistory={
-									project.completedScopeHistory.slice(-1)[0]
-								}
+								scope={project.scopeHistory.slice(-1)[0]}
+								completedScope={project.completedScopeHistory.slice(-1)[0]}
 								link={project.links.nodes}
 							/>
 						))}
@@ -394,10 +390,8 @@ const Roadmap = () => {
 								title={project.name}
 								description={project.description}
 								state={project.state}
-								scopeHistory={project.scopeHistory.slice(-1)[0]}
-								completedScopeHistory={
-									project.completedScopeHistory.slice(-1)[0]
-								}
+								scope={project.scopeHistory.slice(-1)[0]}
+								completedScope={project.completedScopeHistory.slice(-1)[0]}
 								link={project.links.nodes}
 							/>
 						))}
