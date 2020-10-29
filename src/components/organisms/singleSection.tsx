@@ -16,7 +16,7 @@ export const SingleSection = ({
 	anchor,
 	text,
 	hero,
-	props,
+	...props
 }: SectionProps) => (
 	<Box
 		as="section"

@@ -38,7 +38,7 @@ const PricingCard = ({
 	mixpanel,
 	CTA,
 }: PricingProps) => (
-	<Card>
+	<Card backgroundColor="gray.50">
 		<Heading
 			as="h3"
 			color="gray.900"
