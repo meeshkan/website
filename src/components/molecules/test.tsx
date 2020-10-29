@@ -42,7 +42,7 @@ const TestComponent = ({
 			>
 				<Flex alignItems="center">
 					<Box
-						size={8}
+						boxSize={8}
 						mr={4}
 						rounded="full"
 						backgroundColor={
