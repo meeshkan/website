@@ -112,7 +112,7 @@ const IndexPage = () => {
 				>
 					<DarkMode>
 						<Code
-							variantColor="cyan"
+							colorScheme="cyan"
 							letterSpacing="widest"
 							rounded="sm"
 							padding="0px 4px"
@@ -170,7 +170,7 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						variantColor="red"
+						colorScheme="red"
 						borderRadius="sm"
 						fontWeight={900}
 						mb={[4, 4, 0]}
@@ -191,7 +191,7 @@ const IndexPage = () => {
 						// @ts-ignore
 						to="/test-graphql/"
 						aria-label="Link to the test graphql page"
-						variantColor="gray"
+						colorScheme="gray"
 						backgroundColor="gray.50"
 						color="gray.700"
 						variant="ghost"
@@ -287,7 +287,7 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						variantColor="red"
+						colorScheme="red"
 						borderRadius="sm"
 						fontWeight={900}
 						onClick={() => {

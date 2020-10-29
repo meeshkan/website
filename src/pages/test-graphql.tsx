@@ -101,7 +101,7 @@ const TestGraphqlPage = () => {
 			<SingleSection>
 				<Flex justify="center" mb={3} mt={12}>
 					<Badge
-						variantColor="cyan"
+						colorScheme="cyan"
 						letterSpacing="widest"
 						fontSize="14px"
 						fontWeight={600}
@@ -197,7 +197,7 @@ const TestGraphqlPage = () => {
 							</DarkMode>
 							<Button
 								aria-label="Test Endpoint"
-								variantColor="red"
+								colorScheme="red"
 								borderRadius="sm"
 								fontWeight={900}
 								type="submit"

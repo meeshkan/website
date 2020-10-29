@@ -50,7 +50,7 @@ const PricingCard = ({
 			alignItems="center"
 		>
 			{title}
-			<Code variantColor="blue" fontSize="md" ml={3}>
+			<Code colorScheme="blue" fontSize="md" ml={3}>
 				{subtitle}
 			</Code>
 		</Heading>
@@ -84,7 +84,7 @@ const PricingCard = ({
 						// @ts-expect-error
 						href="https://app.meeshkan.com"
 						aria-label="Create a free account on Meeshkan."
-						variantColor="red"
+						colorScheme="red"
 						variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
 						borderRadius="sm"
 						fontWeight={700}

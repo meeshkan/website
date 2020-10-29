@@ -155,7 +155,7 @@ const StagingEnvironmentPage = () => {
 					</Flex>
 					<Button
 						aria-label="Request access"
-						variantColor="red"
+						colorScheme="red"
 						borderRadius="sm"
 						fontWeight={900}
 						type="submit"
@@ -251,7 +251,7 @@ const StagingEnvironmentPage = () => {
 										<LightMode>
 											<Button
 												aria-label="Request access"
-												variantColor="red"
+												colorScheme="red"
 												borderRadius="sm"
 												fontWeight={900}
 												type="submit"
@@ -612,7 +612,7 @@ const StagingEnvironmentPage = () => {
 
 						<Button
 							aria-label="Sign up"
-							variantColor="red"
+							colorScheme="red"
 							borderRadius="sm"
 							fontWeight={900}
 							type="submit"

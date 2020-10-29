@@ -99,7 +99,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 														fontWeight={700}
 														mb={2}
 														fontSize="md"
-														variantColor="gray"
+														colorScheme="gray"
 													>
 														HTTP status code: {exchange.response.statusCode}
 													</Code>

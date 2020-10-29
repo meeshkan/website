@@ -92,7 +92,7 @@ const ContactPage = () => (
 				<Button
 					mt={4}
 					fontWeight={700}
-					variantColor="red"
+					colorScheme="red"
 					type="submit"
 					rounded="sm"
 					isFullWidth

@@ -171,7 +171,7 @@ const DocsHome = () => {
 							</DocsText>
 							<Button
 								as={UniversalLink}
-								variantColor="red"
+								colorScheme="red"
 								rounded="sm"
 								fontWeight={900}
 								mt={4}
@@ -182,7 +182,7 @@ const DocsHome = () => {
 							</Button>
 							<DocsText>
 								From there, click on{" "}
-								<Code variantColor="cyan" fontSize="inherit">
+								<Code colorScheme="cyan" fontSize="inherit">
 									Sign up
 								</Code>{" "}
 								and you'll be guided through the authorization flow. We use{" "}
@@ -229,7 +229,7 @@ const DocsHome = () => {
 							</DocsText>
 							<DocsText>
 								Here's what that'll look like if you substitute{" "}
-								<Code variantColor="cyan" fontSize="inherit">
+								<Code colorScheme="cyan" fontSize="inherit">
 									Unmock
 								</Code>{" "}
 								for your organization name:
@@ -278,7 +278,7 @@ const DocsHome = () => {
 							/>
 							<DocsText>
 								You can find your project's configuration at
-								<Code variantColor="cyan" fontSize="inherit">
+								<Code colorScheme="cyan" fontSize="inherit">
 									{`https://app.meeshkan.com/{yourTeam}/{yourProject}
 									/configuration`}
 								</Code>
@@ -309,7 +309,7 @@ const DocsHome = () => {
 									<strong>Build command</strong>: The command(s) your app
 									framework provides for compiling your code.{" "}
 									<Code
-										variantColor="cyan"
+										colorScheme="cyan"
 										fontSize="inherit"
 									>{`npm install && npm start`}</Code>{" "}
 									is an example build command for a repository that uses NPM and
@@ -318,7 +318,7 @@ const DocsHome = () => {
 								<ListItem>
 									<strong>OpenAPI location</strong>: The path or endpoint to
 									your repository's <em>OpenAPI specification</em> (such as{" "}
-									<Code variantColor="cyan" fontSize="inherit">
+									<Code colorScheme="cyan" fontSize="inherit">
 										http://localhost:8000/api/openapi
 									</Code>
 									).
@@ -326,7 +326,7 @@ const DocsHome = () => {
 								<ListItem>
 									<strong>GraphQL endpoint</strong>: The path or endpoint to
 									your repository's <em>GraphQL schema</em> (such as{" "}
-									<Code variantColor="cyan" fontSize="inherit">
+									<Code colorScheme="cyan" fontSize="inherit">
 										http://localhost:8000/api/graphql
 									</Code>
 									).
@@ -345,7 +345,7 @@ const DocsHome = () => {
 							<DocsText>
 								In several cases, you might want to 'dockerize' your project and
 								provide your{" "}
-								<Code variantColor="cyan" fontSize="inherit">
+								<Code colorScheme="cyan" fontSize="inherit">
 									docker-compose up
 								</Code>{" "}
 								command (or equivalent) as the Meeshkan <em>build command</em>.

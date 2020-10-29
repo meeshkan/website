@@ -117,7 +117,7 @@ const components = {
 		</Callout>
 	),
 	inlineCode: (props) => (
-		<Code variantColor="cyan" fontSize="inherit" {...props} />
+		<Code colorScheme="cyan" fontSize="inherit" {...props} />
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
 	a: (props) => <UniversalLink color="blue.500" {...props} />,

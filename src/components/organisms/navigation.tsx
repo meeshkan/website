@@ -50,7 +50,7 @@ function SignUpLink() {
 			// @ts-ignore
 			href="https://app.meeshkan.com"
 			aria-label="Log in to the Meeshkan webapp"
-			variantColor="red"
+			colorScheme="red"
 			variant="ghost"
 			borderRadius="sm"
 			fontWeight={900}
