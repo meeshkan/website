@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading, Text } from "@chakra-ui/core"
+import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/core"
 import { UniversalLink } from "./UniversalLink"
 
 type CardProps = {
@@ -19,7 +19,7 @@ export const Card = ({
 	body,
 	link,
 	label,
-	backgroundColor = "white",
+	backgroundColor,
 	shadow = false,
 	padding = 6,
 }: CardProps) => {
@@ -32,19 +32,19 @@ export const Card = ({
 					to={link}
 					aria-label={label}
 					borderRadius="md"
-					backgroundColor={backgroundColor}
+					backgroundColor={
+						backgroundColor
+							? backgroundColor
+							: useColorModeValue("gray.50", "gray.800")
+					}
 					p={padding}
 					position="relative"
-					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
+					boxShadow={
+						shadow ? "0px 0px 24px 0px rgba(149, 157, 165, 0.2)" : "none"
+					}
 				>
 					{heading ? (
-						<Heading
-							as="h3"
-							color="gray.900"
-							fontSize="xl"
-							fontWeight={900}
-							mb={4}
-						>
+						<Heading as="h3" textStyle="h4" mb={4}>
 							{heading}
 						</Heading>
 					) : null}
@@ -54,19 +54,19 @@ export const Card = ({
 			) : (
 				<Box
 					borderRadius="md"
-					backgroundColor={backgroundColor}
+					backgroundColor={
+						backgroundColor
+							? backgroundColor
+							: useColorModeValue("gray.50", "gray.800")
+					}
 					p={padding}
 					position="relative"
-					boxShadow={shadow ? '0px 0px 24px 0px rgba(149, 157, 165, 0.2)' : 'none'}
+					boxShadow={
+						shadow ? "0px 0px 24px 0px rgba(149, 157, 165, 0.2)" : "none"
+					}
 				>
 					{heading ? (
-						<Heading
-							as="h3"
-							color="gray.900"
-							fontSize="2xl"
-							fontWeight={900}
-							mb={4}
-						>
+						<Heading as="h3" textStyle="h4" mb={4}>
 							{heading}
 						</Heading>
 					) : null}

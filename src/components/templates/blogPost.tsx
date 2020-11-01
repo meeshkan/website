@@ -47,14 +47,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 					pageImage={frontmatter.pageImage}
 				/>
 				<SingleSection>
-					<Heading
-						as="h1"
-						fontSize={["3xl", "4xl", "5xl"]}
-						textAlign="center"
-						mb={12}
-						color="gray.900"
-						fontWeight={900}
-					>
+					<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
 						{frontmatter.title}
 					</Heading>
 					<Grid
@@ -160,15 +153,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						p={8}
 						rounded="sm"
 					>
-						<Heading
-							as="h3"
-							fontSize="3xl"
-							textAlign="center"
-							fontWeight={900}
-							mb={4}
-							color="white"
-							letterSpacing="0.1px"
-						>
+						<Heading as="h3" textStyle="h3" textAlign="center" mb={4}>
 							Don’t miss the next post!
 						</Heading>
 						<Flex

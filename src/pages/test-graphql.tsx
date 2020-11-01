@@ -34,9 +34,7 @@ function ListItem({ text }: ItemProp) {
 	return (
 		<Stack isInline mt={6} alignItems="center" spacing={4}>
 			<CheckmarkIcon color="cyan.500" size="24px" />
-			<Text fontWeight={500} color="gray.700">
-				{text}
-			</Text>
+			<Text fontWeight={500}>{text}</Text>
 		</Stack>
 	)
 }
@@ -115,13 +113,9 @@ const TestGraphqlPage = () => {
 				</Flex>
 				<Heading
 					as="h1"
-					fontSize={["3xl", "4xl", "5xl"]}
+					textStyle="h1"
 					mb={6}
 					textAlign={["left", "left", "center"]}
-					color="gray.900"
-					fontWeight={900}
-					letterSpacing="wide"
-					lineHeight="short"
 				>
 					Your search for dynamic GraphQL testing ends here.
 				</Heading>
@@ -130,7 +124,6 @@ const TestGraphqlPage = () => {
 					fontSize={["lg", "xl", "2xl"]}
 					lineHeight="short"
 					mb={6}
-					color="gray.700"
 				>
 					Meeshkan automatically writes, executes, and reports on a collection
 					of user-mimicking tests, guaranteed to give you confidence in critical
@@ -139,16 +132,7 @@ const TestGraphqlPage = () => {
 			</SingleSection>
 
 			<Stack justifyContent="center">
-				<Heading
-					as="h2"
-					color="gray.700"
-					fontSize="2xl"
-					fontWeight={900}
-					my={4}
-					letterSpacing="wide"
-					lineHeight="short"
-					textAlign="center"
-				>
+				<Heading as="h2" textStyle="h2" my={4} textAlign="center">
 					Try it for yourself.
 				</Heading>
 
@@ -287,7 +271,6 @@ const TestGraphqlPage = () => {
 					)}
 				</Box>
 				<Text
-					color="gray.700"
 					fontStyle="italic"
 					maxW="500px"
 					textAlign="center"

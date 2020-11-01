@@ -131,13 +131,9 @@ const IndexPage = () => {
 				</Flex>
 				<Heading
 					as="h1"
-					fontSize={["3xl", "4xl", "5xl"]}
+					textStyle="h1"
 					mb={6}
 					textAlign={["left", "left", "center"]}
-					color="gray.900"
-					fontWeight={900}
-					letterSpacing="wide"
-					lineHeight="short"
 				>
 					Dynamically generated QA for your product's GraphQL and REST APIs
 				</Heading>
@@ -146,7 +142,6 @@ const IndexPage = () => {
 					fontSize={["md", "lg", "xl"]}
 					lineHeight="short"
 					mb={6}
-					color="gray.700"
 				>
 					The faster teams move, the harder it gets to write and maintain tests.
 					Meeshkan fixes that by on-commit executing thousands of tests on your
@@ -310,15 +305,7 @@ const IndexPage = () => {
 					gap={8}
 				>
 					<Box>
-						<Heading
-							as="h2"
-							color="gray.900"
-							fontSize={["3xl", "3xl", "3xl", "4xl"]}
-							fontWeight={900}
-							mb={6}
-							letterSpacing="wide"
-							lineHeight="short"
-						>
+						<Heading as="h2" textStyle="h2" mb={6}>
 							Key Features
 						</Heading>
 						<Accordion allowToggle>

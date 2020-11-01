@@ -55,15 +55,7 @@ export const DoubleSection = ({
 					</Code>
 				) : null}
 				{heading ? (
-					<Heading
-						as="h2"
-						color="gray.900"
-						fontSize={["xl", "2xl", "3xl"]}
-						fontWeight={900}
-						mb={4}
-						letterSpacing="wide"
-						lineHeight="short"
-					>
+					<Heading as="h2" textStyle="h3" mb={4}>
 						{anchor ? (
 							<Link
 								id={anchor}
@@ -82,7 +74,7 @@ export const DoubleSection = ({
 					</Heading>
 				) : null}
 				{text ? (
-					<Text fontSize={["lg", "xl", "2xl"]} lineHeight="short">
+					<Text textAlign="left" fontSize={["md", "lg", "xl"]} lineHeight="1.4">
 						{text}
 					</Text>
 				) : null}

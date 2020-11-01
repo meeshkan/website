@@ -50,14 +50,7 @@ const DocsHome = () => {
 							px={5}
 						>
 							{/* CONTENT START */}
-							<Heading
-								as="h1"
-								fontSize={["3xl", "4xl", "5xl"]}
-								mb={12}
-								color="gray.900"
-								fontWeight={900}
-								mt={4}
-							>
+							<Heading as="h1" textStyle="h1" mb={12} mt={4}>
 								Getting started
 							</Heading>
 							<DocsText>
@@ -133,8 +126,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="what-does-meeshkan-do"
 							>
 								What does Meeshkan do?
@@ -152,8 +144,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="creating-your-meeshkan-account"
 							>
 								Creating your Meeshkan account
@@ -209,8 +200,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="authorizing-meeshkan-on-github"
 							>
 								Authorizing Meeshkan on GitHub
@@ -260,8 +250,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="configuring-your-projects"
 							>
 								Configuring your projects
@@ -288,8 +277,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h3"
-								fontSize="2xl"
-								fontWeight="800"
+								textStyle="h3"
 								id="build-settings"
 							>
 								Build settings
@@ -336,8 +324,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h4"
-								fontSize="lg"
-								fontWeight="700"
+								textStyle="h4"
 								id="docker"
 							>
 								Docker
@@ -374,8 +361,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="how-meeshkan-reports-bugs"
 							>
 								How Meeshkan reports bugs
@@ -424,8 +410,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="deleting-your-account"
 							>
 								Deleting your account

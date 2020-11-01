@@ -66,7 +66,7 @@ const Milestone = ({
 					: "gray.500"
 			}
 		>
-			<Heading as="h3" fontSize="lg" color="gray.700" mb={2}>
+			<Heading as="h3" textStyle="h3" mb={2}>
 				{title}
 			</Heading>
 			<Stack isInline mb={4} spacing={4} alignItems="center">
@@ -129,18 +129,14 @@ const Milestone = ({
 								style={{ stroke: "#33CCAE", strokeWidth: "1em" }}
 							></circle>
 						</svg>
-						<Text ml={2} color="gray.500">
-							{complete}%
-						</Text>
+						<Text ml={2}>{complete}%</Text>
 					</Flex>
 				) : null}
 			</Stack>
-			<Text color="gray.500" mb={4}>
-				{description}
-			</Text>
+			<Text mb={4}>{description}</Text>
 			{link.length > 1 ? (
 				<>
-					<Heading as="h4" fontSize="md" mb={2}>
+					<Heading as="h4" textStyle="h4" mb={2}>
 						Resources:
 					</Heading>
 					<List styleType="disc">
@@ -232,13 +228,9 @@ const Roadmap = () => {
 				</Flex>
 				<Heading
 					as="h1"
-					fontSize={["3xl", "4xl", "5xl"]}
+					textStyle="h1"
 					mb={6}
 					textAlign={["left", "left", "center"]}
-					color="gray.900"
-					fontWeight={900}
-					letterSpacing="wide"
-					lineHeight="short"
 				>
 					We’ve got a lot planned!
 				</Heading>
@@ -247,7 +239,6 @@ const Roadmap = () => {
 					fontSize={["lg", "xl", "2xl"]}
 					lineHeight="short"
 					mb={4}
-					color="gray.700"
 				>
 					This roadmap is directly connected to our project management software.
 					Our roadmap is serious, not just for show!
@@ -299,13 +290,7 @@ const Roadmap = () => {
 
 			<SingleSection>
 				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
-					<Heading
-						as="h2"
-						fontSize="2xl"
-						mb={4}
-						fontFamily="mono"
-						color="gray.500"
-					>
+					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q3 2020
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
@@ -324,13 +309,7 @@ const Roadmap = () => {
 				</Box>
 
 				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
-					<Heading
-						as="h2"
-						fontSize="2xl"
-						mb={4}
-						fontFamily="mono"
-						color="gray.500"
-					>
+					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q4 2020
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
@@ -349,13 +328,7 @@ const Roadmap = () => {
 				</Box>
 
 				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
-					<Heading
-						as="h2"
-						fontSize="2xl"
-						mb={4}
-						fontFamily="mono"
-						color="gray.500"
-					>
+					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q1 2021
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
@@ -374,13 +347,7 @@ const Roadmap = () => {
 				</Box>
 
 				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
-					<Heading
-						as="h2"
-						fontSize="2xl"
-						mb={4}
-						fontFamily="mono"
-						color="gray.500"
-					>
+					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Backlog
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>

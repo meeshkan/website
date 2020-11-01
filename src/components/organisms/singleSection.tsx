@@ -26,16 +26,7 @@ export const SingleSection = ({
 		{...props}
 	>
 		{heading ? (
-			<Heading
-				as="h2"
-				color="gray.900"
-				fontSize={["3xl", "3xl", "3xl", "4xl"]}
-				fontWeight={900}
-				textAlign="center"
-				mb={6}
-				letterSpacing="wide"
-				lineHeight="short"
-			>
+			<Heading as="h2" textStyle="h2" textAlign="center" mb={6}>
 				{anchor ? (
 					<Link id={anchor} _hover={{ textDecoration: "none", cursor: "auto" }}>
 						{heading}

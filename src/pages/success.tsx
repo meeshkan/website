@@ -13,14 +13,7 @@ const SuccessPage = () => (
 			pageUrl="https://meeshkan.com/success/"
 		/>
 		<SingleSection>
-			<Heading
-				as="h1"
-				fontSize={["3xl", "4xl", "5xl"]}
-				textAlign="center"
-				mb={12}
-				fontWeight={900}
-				color="gray.900"
-			>
+			<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
 				Success!
 			</Heading>
 			<Text textAlign="center" mb={6}>

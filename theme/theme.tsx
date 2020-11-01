@@ -1,22 +1,39 @@
 import { extendTheme } from "@chakra-ui/core"
 import customColors from "./colors"
+import globalStyles from "./global"
+import customComponents from "./components"
 
 const customTheme = extendTheme({
 	config: {
 		useSystemColorMode: false,
 		initialColorMode: "light",
 	},
+	...customComponents,
+	textStyles: {
+		h1: {
+			fontSize: ["3xl", "4xl", "5xl"],
+			fontWeight: 900,
+			letterSpacing: "0.025em",
+			lineHeight: "1.4",
+		},
+		h2: {
+			fontSize: ["2xl", "3xl", "4xl"],
+			fontWeight: 900,
+			lineHeight: "1.6",
+		},
+		h3: {
+			fontSize: ["xl", "2xl", "3xl"],
+			fontWeight: 800,
+			lineHeight: "1.6",
+		},
+		h4: {
+			fontSize: ["lg", "xl", "2xl"],
+			fontWeight: 700,
+			lineHeight: "1.6",
+		},
+	},
 	styles: {
-		global: (props) => ({
-			"html, body": {
-				scrollBehavior: "smooth",
-				backgroundColor: props.colorMode === "dark" ? "gray.900" : "white",
-			},
-			_selection: {
-				color: "rgba(220, 24, 83, 1)",
-				background: "rgba(220, 24, 83, 0.1)",
-			},
-		}),
+		...globalStyles,
 	},
 	colors: {
 		...customColors,
@@ -24,7 +41,7 @@ const customTheme = extendTheme({
 	fonts: {
 		body: `Inter, sans-serif`,
 		heading: `Inter, sans-serif`,
-		mono: "Fira Code, monospace",
+		mono: "Jet Brains Mono, Fira Code, monospace",
 	},
 	fontSizes: {
 		xs: "8px",

@@ -36,12 +36,8 @@ const Callout = ({ heading }: CalloutProps) => {
 			>
 				<Heading
 					as="h2"
-					color="white"
-					fontSize="3xl"
-					fontWeight={900}
+					textStyle="h2"
 					mb={6}
-					lineHeight="short"
-					letterSpacing="wide"
 					ml={[0, 0, 0, 440, 522]}
 					textAlign={["center", "center", "center", "end"]}
 				>

@@ -61,37 +61,30 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 
 const components = {
 	h1: (props) => (
-		<Heading
-			{...props}
-			as="h1"
-			fontSize={["3xl", "4xl", "5xl"]}
-			mb={12}
-			color="gray.900"
-			fontWeight={900}
-			mt={4}
-		>
+		<Heading {...props} as="h1" textStyle="h1" mb={12} mt={4}>
 			{props.children}
 		</Heading>
 	),
-	h2: (props) => (
-		<DocsHeading
-			as="h2"
-			fontSize="3xl"
-			fontWeight="900"
-			{...props}
-		></DocsHeading>
-	),
-	h3: (props) => (
-		<DocsHeading as="h3" fontSize="2xl" fontWeight="800" {...props} />
-	),
-	h4: (props) => (
-		<DocsHeading as="h4" fontSize="lg" fontWeight="700" {...props} />
-	),
+	h2: (props) => <DocsHeading as="h2" textStyle="h2" {...props}></DocsHeading>,
+	h3: (props) => <DocsHeading as="h3" textStyle="h3" {...props} />,
+	h4: (props) => <DocsHeading as="h4" textStyle="h4" {...props} />,
 	h5: (props) => (
-		<DocsHeading as="h5" fontSize="md" fontWeight="600" {...props} />
+		<DocsHeading
+			as="h5"
+			textStyle="h5"
+			fontSize="md"
+			fontWeight="600"
+			{...props}
+		/>
 	),
 	h6: (props) => (
-		<DocsHeading as="h6" fontSize="sm" fontWeight="500" {...props} />
+		<DocsHeading
+			as="h6"
+			textStyle="h6"
+			fontSize="sm"
+			fontWeight="500"
+			{...props}
+		/>
 	),
 	p: (props) => (
 		<Text as="p" mt={4} lineHeight="tall" {...props}>
