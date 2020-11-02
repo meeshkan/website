@@ -11,6 +11,7 @@
     "@emotion/styled": "^10.0.27",
     "@mdx-js/mdx": "^1.5.8",
     "@mdx-js/react": "^1.5.8",
+    "@meeshkanml/gatsby-plugin-meeshkan-recorder": "^1.0.1",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
     "framer-motion": "^2.2.0",

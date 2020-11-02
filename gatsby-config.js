@@ -144,5 +144,11 @@ module.exports = {
 				sv: 6,
 			},
 		},
+		{
+			resolve: `@meeshkanml/gatsby-plugin-meeshkan-recorder`,
+			options: {
+				clientId: "meeshkan_website",
+			},
+		},
 	],
 }
