@@ -154,6 +154,7 @@ const components = {
 	thematicBreak: (props) => <Box height={6} {...props} />,
 	Video,
 	RequestAccess,
+	Script: (props) => <script {...props} />,
 }
 
 export default components
