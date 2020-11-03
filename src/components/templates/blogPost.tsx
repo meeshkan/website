@@ -15,6 +15,7 @@ import {
 	Link as ChakraLink,
 	Box,
 	DarkMode,
+	Code,
 } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -47,6 +48,36 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 					pageImage={frontmatter.pageImage}
 				/>
 				<SingleSection>
+					<Flex
+						justify="center"
+						mb={3}
+						mt={12}
+						backgroundColor="gray.900"
+						p={2}
+						maxW="fit-content"
+						mx="auto"
+						borderRadius="md"
+						color="white"
+					>
+						<DarkMode>
+							<Code
+								colorScheme="cyan"
+								letterSpacing="widest"
+								rounded="sm"
+								padding="0px 4px"
+								minH="auto"
+								mr={4}
+								d="flex"
+								alignItems="center"
+								fontWeight={700}
+							>
+								Attend our webinar <ArrowForwardIcon ml={2} />
+							</Code>
+						</DarkMode>
+						<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
+							How to release from staging to production
+						</ChakraLink>
+					</Flex>
 					<Heading
 						as="h1"
 						fontSize={["3xl", "4xl", "5xl"]}

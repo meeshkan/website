@@ -122,11 +122,11 @@ const IndexPage = () => {
 							alignItems="center"
 							fontWeight={700}
 						>
-							Read our report <ArrowForwardIcon ml={2} />
+							Attend our webinar <ArrowForwardIcon ml={2} />
 						</Code>
 					</DarkMode>
 					<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
-						When to start thinking about QA.
+					How to release from staging to production
 					</ChakraLink>
 				</Flex>
 				<Heading
