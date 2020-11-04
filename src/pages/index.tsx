@@ -160,9 +160,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						colorScheme="red"
-						borderRadius="sm"
-						fontWeight={900}
 						mb={[4, 4, 0]}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
@@ -172,7 +169,6 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "red.600" }}
 					>
 						Create a free account
 					</Button>
@@ -181,12 +177,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						to="/test-graphql/"
 						aria-label="Link to the test graphql page"
-						colorScheme="gray"
-						backgroundColor="gray.50"
-						color="gray.700"
-						variant="ghost"
-						borderRadius="sm"
-						fontWeight={900}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
 								to: "https://meeshkan.com/test-graphql",
@@ -195,7 +185,7 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "gray.100" }}
+						colorScheme="gray"
 					>
 						Try the demo
 					</Button>
@@ -277,9 +267,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						colorScheme="red"
-						borderRadius="sm"
-						fontWeight={900}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
 								to: "https://app.meeshkan.com",
@@ -288,7 +275,6 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "red.600" }}
 					>
 						Test your project
 					</Button>

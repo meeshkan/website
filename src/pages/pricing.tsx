@@ -49,7 +49,7 @@ const PricingCard = ({
 			alignItems="center"
 		>
 			{title}
-			<Code colorScheme="blue" fontSize="md" ml={3}>
+			<Code colorScheme="blue" fontSize="md" ml={3} lineHeight="initial">
 				{subtitle}
 			</Code>
 		</Heading>

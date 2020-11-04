@@ -38,8 +38,6 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
 		<MotionBox
 			w="100%"
 			p={3}
-			mt={0}
-			mb={4}
 			mx="auto"
 			borderRadius="md"
 			initial={{ y: 0, scale: 1, opacity: 1 }}
@@ -155,7 +153,7 @@ const PrioritizeTests = () => {
 				backgroundColor={colorMode === "light" ? "gray.50" : "gray.800"}
 				borderRadius="md"
 				p={4}
-				spacing="4px"
+				spacing={4}
 			>
 				{tests.map((test, index) => (
 					<Test

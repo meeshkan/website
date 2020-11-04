@@ -8,7 +8,32 @@ const customTheme = extendTheme({
 		useSystemColorMode: false,
 		initialColorMode: "light",
 	},
-	...customComponents,
+	components: {
+		// ...customComponents,
+		Button: {
+			baseStyle: {
+				borderRadius: "md",
+				fontWeight: 900,
+				lineHeight: "1.2",
+				_focus: {
+					boxShadow: "outline",
+				},
+				_disabled: {
+					opacity: 0.4,
+					cursor: "not-allowed",
+					boxShadow: "none",
+				},
+				_hover: {
+					_disabled: {
+						bg: "initial",
+					},
+				},
+			},
+			defaultProps: {
+				colorScheme: "red",
+			},
+		},
+	},
 	textStyles: {
 		h1: {
 			fontSize: ["3xl", "4xl", "5xl"],
