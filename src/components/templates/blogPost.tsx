@@ -120,11 +120,18 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								to={`/blog/${next.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${next.frontmatter.title}.`}
 								leftIcon={<ArrowBackIcon />}
+								colorScheme="gray"
+								variant="ghost"
 							>
 								Newer post
 							</Button>
 						) : (
-							<Button isDisabled leftIcon={<ArrowBackIcon />}>
+							<Button
+								colorScheme="gray"
+								variant="ghost"
+								isDisabled
+								leftIcon={<ArrowBackIcon />}
+							>
 								Newer post
 							</Button>
 						)}
@@ -136,11 +143,18 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								to={`/blog/${previous.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${previous.frontmatter.title}.`}
 								rightIcon={<ArrowForwardIcon />}
+								colorScheme="gray"
+								variant="ghost"
 							>
 								Older post
 							</Button>
 						) : (
-							<Button isDisabled rightIcon={<ArrowForwardIcon />}>
+							<Button
+								isDisabled
+								rightIcon={<ArrowForwardIcon />}
+								variant="ghost"
+								colorScheme="gray"
+							>
 								Older post
 							</Button>
 						)}
@@ -186,22 +200,13 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 										type="email"
 										name="email"
 										aria-label="Enter your business email"
-										borderRadius="sm"
 										placeholder="Your email"
-										fontWeight={500}
 										color="white"
 										borderColor="gray.500"
 									/>
 								</FormControl>
 							</DarkMode>
-							<Button
-								colorScheme="red"
-								borderRadius="sm"
-								fontWeight={900}
-								letterSpacing="wide"
-								type="submit"
-								w={["100%", "100%", "auto"]}
-							>
+							<Button type="submit" w={["100%", "100%", "auto"]}>
 								Join our mailing list
 							</Button>
 						</Flex>

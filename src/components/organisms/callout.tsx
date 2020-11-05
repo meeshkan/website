@@ -1,5 +1,12 @@
 import React from "react"
-import { Box, Heading, Flex, Button, Link as ChakraLink } from "@chakra-ui/core"
+import {
+	Box,
+	Heading,
+	Flex,
+	Button,
+	Link as ChakraLink,
+	DarkMode,
+} from "@chakra-ui/core"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
 
@@ -36,7 +43,8 @@ const Callout = ({ heading }: CalloutProps) => {
 			>
 				<Heading
 					as="h2"
-					textStyle="h2"
+					textStyle="h3"
+					color="white"
 					mb={6}
 					ml={[0, 0, 0, 440, 522]}
 					textAlign={["center", "center", "center", "end"]}
@@ -46,16 +54,10 @@ const Callout = ({ heading }: CalloutProps) => {
 				<Flex justify={["center", "center", "center", "flex-end"]}>
 					<Button
 						as={ChakraLink}
-						// @ts-ignore
 						target="_blank"
 						rel="noopener noreferrer"
-						_hover={{ textDecoration: "none", backgroundColor: "red.600" }}
 						href="https://meetings.hubspot.com/makenna/consultation-with-meeshkan"
 						aria-label="Schedule a demo with the Meeshkan team."
-						colorScheme="red"
-						fontWeight={900}
-						letterSpacing="wide"
-						borderRadius="sm"
 					>
 						Schedule a demo
 					</Button>

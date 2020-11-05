@@ -1,5 +1,13 @@
 import React, { useState } from "react"
-import { Stack, Box, Text, Flex, IconButton, DarkMode } from "@chakra-ui/core"
+import {
+	Stack,
+	Box,
+	Text,
+	Flex,
+	IconButton,
+	DarkMode,
+	useColorMode,
+} from "@chakra-ui/core"
 import { motion, useReducedMotion } from "framer-motion"
 import {
 	CheckmarkIcon,
@@ -99,7 +107,8 @@ const Test = ({ success, testCase, priority, animate, colorMode }) => {
 }
 
 const PrioritizeTests = () => {
-	const [colorMode, setColorMode] = useState("light" || "dark")
+	// const [colorMode, setColorMode] = useState("light" || "dark")
+	const { colorMode, toggleColorMode } = useColorMode()
 	const tests = [
 		{
 			success: false,
@@ -165,24 +174,13 @@ const PrioritizeTests = () => {
 						colorMode={colorMode}
 					/>
 				))}
-				<DarkMode>
-					<IconButton
-						borderRadius="sm"
-						aria-label="color mode icon"
-						// @ts-ignore
-						icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-						color={colorMode === "light" ? "gray.900" : "white"}
-						backgroundColor={colorMode === "light" ? "white" : "gray.900"}
-						_hover={
-							colorMode === "light"
-								? { backgroundColor: "gray.100" }
-								: { backgroundColor: "gray.700" }
-						}
-						onClick={() => {
-							setColorMode(colorMode === "light" ? "dark" : "light")
-						}}
-					/>
-				</DarkMode>
+				<IconButton
+					aria-label="color mode icon"
+					// @ts-ignore
+					icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+					onClick={toggleColorMode}
+					colorScheme="gray"
+				/>
 			</Stack>
 		</>
 	)

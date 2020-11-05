@@ -9,52 +9,29 @@ const customTheme = extendTheme({
 		initialColorMode: "light",
 	},
 	components: {
-		// ...customComponents,
-		Button: {
-			baseStyle: {
-				borderRadius: "md",
-				fontWeight: 900,
-				lineHeight: "1.2",
-				_focus: {
-					boxShadow: "outline",
-				},
-				_disabled: {
-					opacity: 0.4,
-					cursor: "not-allowed",
-					boxShadow: "none",
-				},
-				_hover: {
-					_disabled: {
-						bg: "initial",
-					},
-				},
-			},
-			defaultProps: {
-				colorScheme: "red",
-			},
-		},
+		...customComponents,
 	},
 	textStyles: {
 		h1: {
 			fontSize: ["3xl", "4xl", "5xl"],
 			fontWeight: 900,
 			letterSpacing: "0.025em",
-			lineHeight: "1.4",
+			lineHeight: "1.2",
 		},
 		h2: {
 			fontSize: ["2xl", "3xl", "4xl"],
 			fontWeight: 900,
-			lineHeight: "1.6",
+			lineHeight: "1.4",
 		},
 		h3: {
 			fontSize: ["xl", "2xl", "3xl"],
 			fontWeight: 800,
-			lineHeight: "1.6",
+			lineHeight: "1.4",
 		},
 		h4: {
 			fontSize: ["lg", "xl", "2xl"],
 			fontWeight: 700,
-			lineHeight: "1.6",
+			lineHeight: "1.4",
 		},
 	},
 	styles: {

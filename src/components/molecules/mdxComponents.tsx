@@ -9,6 +9,7 @@ import {
 	Divider,
 	Code,
 	Alert,
+	useColorModeValue,
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -45,7 +46,7 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 			<Box
 				aria-label="anchor"
 				as="a"
-				color="blue.500"
+				color={useColorModeValue("gray.200", "gray.700")}
 				fontWeight="normal"
 				outline="none"
 				_focus={{ opacity: 1, boxShadow: "outline" }}
@@ -111,21 +112,37 @@ const components = {
 		<Code colorScheme="cyan" fontSize="inherit" {...props} />
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
-	a: (props) => <UniversalLink color="blue.500" {...props} />,
-	img: (props) => <Image {...props} rounded="sm" />,
+	a: (props) => (
+		<UniversalLink
+			color={useColorModeValue("blue.500", "blue.200")}
+			{...props}
+		/>
+	),
+	img: (props) => <Image {...props} rounded="md" />,
 	pre: (props) => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
 	code: CodeBlock,
 	ul: (props) => (
-		<List styleType="disc" my={4} spacing={2} {...props}>
+		<List styleType="disc" stylePosition="inside" my={8} spacing={3} {...props}>
 			{props.children}
 		</List>
 	),
 	ol: (props) => (
-		<List as="ol" styleType="decimal" my={4} spacing={2} {...props}>
+		<List
+			as="ol"
+			styleType="decimal"
+			stylePosition="inside"
+			my={8}
+			spacing={3}
+			{...props}
+		>
 			{props.children}
 		</List>
 	),
-	li: (props) => <ListItem {...props}>{props.children}</ListItem>,
+	li: (props) => (
+		<ListItem lineHeight="1.6" {...props}>
+			{props.children}
+		</ListItem>
+	),
 	table: (props) => (
 		<Box as="table" textAlign="left" mt={6} width="full" {...props} />
 	),

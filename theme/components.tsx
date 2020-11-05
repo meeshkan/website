@@ -1,10 +1,17 @@
 const customComponents = {
+	Text: {
+		baseStyle: {
+			fontSize: "16px",
+			lineHeight: "1.6",
+			fontFamily: "body",
+		},
+	},
 	Button: {
 		baseStyle: {
-			colorScheme: "red",
 			borderRadius: "md",
 			fontWeight: 900,
 			lineHeight: "1.2",
+			minW: "fit-content",
 			_focus: {
 				boxShadow: "outline",
 			},
@@ -14,10 +21,14 @@ const customComponents = {
 				boxShadow: "none",
 			},
 			_hover: {
+				textDecoration: "none",
 				_disabled: {
 					bg: "initial",
 				},
 			},
+		},
+		defaultProps: {
+			colorScheme: "red",
 		},
 	},
 }

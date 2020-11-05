@@ -11,12 +11,20 @@ import {
 	DrawerHeader,
 	DrawerBody,
 	useDisclosure,
+	useColorMode,
 } from "@chakra-ui/core"
-import { HamburgerIcon, LogoIcon } from "../../../theme/icons"
+import {
+	HamburgerIcon,
+	LogoIcon,
+	MoonIcon,
+	SunIcon,
+} from "../../../theme/icons"
 import SideNavContent from "../docsComponents/sideNavigation"
+import { AnimatedLogo } from "../molecules/animatedLogo"
 
 const DocsNavigation = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { colorMode, toggleColorMode } = useColorMode()
 	const btnRef = useRef()
 	return (
 		<Stack
@@ -24,18 +32,18 @@ const DocsNavigation = () => {
 			isInline
 			justify="space-between"
 			align="center"
-			bg="white"
+			bg={colorMode === "light" ? "whiteAlpha.800" : "blackAlpha.800"}
 			py={4}
 			px={6}
-			pos="sticky"
+			position="sticky"
 			top={0}
 		>
 			<Link
 				to="/"
 				aria-label="Meeshkan homepage"
-				style={{ display: "flex", alignContent: "center" }}
+				style={{ display: "flex", alignItems: "center" }}
 			>
-				<LogoIcon color="gray.900" h={6} w="auto" />
+				<AnimatedLogo />
 				<Link to="/docs/">
 					<Code ml={3} colorScheme="cyan" fontWeight={900}>
 						Docs
@@ -57,14 +65,23 @@ const DocsNavigation = () => {
       </Stack> */}
 
 			{/* Mobile Nav | Button & Menu Drawer */}
-			<Box display={["block", "block", "none"]}>
+			<Box>
 				<IconButton
+					icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+					onClick={toggleColorMode}
+					aria-label="Color mode toggle"
+					colorScheme="gray"
+					size="xs"
+					mr={2}
+				/>
+				<IconButton
+					display={["inline-block", "inline-block", "none"]}
 					ref={btnRef}
-					rounded="sm"
-					variant="link"
+					colorScheme="gray"
 					icon={<HamburgerIcon />}
 					aria-label="Open the navigation menu"
 					onClick={onOpen}
+					size="xs"
 				/>
 			</Box>
 			<Drawer

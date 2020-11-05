@@ -14,6 +14,8 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
+	useColorModeValue,
+	useColorMode,
 } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
@@ -52,7 +54,7 @@ const Milestone = ({
 	let completeAmount = Math.round(((100 - complete) / 100) * circumference)
 	return (
 		<Box
-			backgroundColor="white"
+			backgroundColor={useColorModeValue("white", "gray.900")}
 			borderRadius="md"
 			p={4}
 			borderLeft="4px solid"
@@ -82,12 +84,12 @@ const Milestone = ({
 					}
 					color={
 						state === "started"
-							? "cyan.600"
+							? useColorModeValue("cyan.600", "cyan.300")
 							: state === "completed"
-							? "red.600"
+							? useColorModeValue("red.600", "red.300")
 							: state === "planned"
-							? "blue.600"
-							: "gray.600"
+							? useColorModeValue("blue.600", "blue.300")
+							: useColorModeValue("gray.600", "gray.300")
 					}
 					fontWeight={700}
 					h="max-content"
@@ -271,25 +273,23 @@ const Roadmap = () => {
 							type="email"
 							name="email"
 							aria-label="Enter your business email"
-							borderRadius="sm"
 							placeholder="Your email"
 							fontWeight={500}
 						/>
 					</FormControl>
-					<Button
-						colorScheme="red"
-						borderRadius="sm"
-						fontWeight={900}
-						type="submit"
-						w={["100%", "100%", "auto"]}
-					>
+					<Button type="submit" w={["100%", "100%", "auto"]}>
 						Recieve updates
 					</Button>
 				</Flex>
 			</SingleSection>
 
 			<SingleSection>
-				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
+				<Box
+					padding={8}
+					backgroundColor={useColorModeValue("gray.50", "gray.800")}
+					borderRadius="md"
+					mb={8}
+				>
 					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q3 2020
 					</Heading>
@@ -308,7 +308,12 @@ const Roadmap = () => {
 					</SimpleGrid>
 				</Box>
 
-				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
+				<Box
+					padding={8}
+					backgroundColor={useColorModeValue("gray.50", "gray.800")}
+					borderRadius="md"
+					mb={8}
+				>
 					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q4 2020
 					</Heading>
@@ -327,7 +332,12 @@ const Roadmap = () => {
 					</SimpleGrid>
 				</Box>
 
-				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
+				<Box
+					padding={8}
+					backgroundColor={useColorModeValue("gray.50", "gray.800")}
+					borderRadius="md"
+					mb={8}
+				>
 					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q1 2021
 					</Heading>
@@ -346,7 +356,12 @@ const Roadmap = () => {
 					</SimpleGrid>
 				</Box>
 
-				<Box padding={8} backgroundColor="gray.50" borderRadius="4px" mb={8}>
+				<Box
+					padding={8}
+					backgroundColor={useColorModeValue("gray.50", "gray.800")}
+					borderRadius="md"
+					mb={8}
+				>
 					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Backlog
 					</Heading>

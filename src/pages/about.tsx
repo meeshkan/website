@@ -1,5 +1,13 @@
 import React from "react"
-import { Heading, Grid, Text, Image, Box, Link } from "@chakra-ui/core"
+import {
+	Heading,
+	Grid,
+	Text,
+	Image,
+	Box,
+	Link,
+	useColorModeValue,
+} from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection"
 import SEO from "../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
@@ -9,10 +17,10 @@ import Layout from "../components/templates/layout"
 
 import Mike from "../../data/avatars/mike.png"
 import Kenna from "../../data/avatars/kenna.png"
-import Car from "../../data/avatars/carolyn.png"
-import Nik from "../../data/avatars/nikolay.png"
+import Kolya from "../../data/avatars/nikolay.png"
 import Fredi from "../../data/avatars/fredrik.png"
 import Maria from "../../data/avatars/maria.png"
+import Nick from "../../data/avatars/nikolaos.png"
 
 import systemOne from "../static/System.One_Moderat_Wordmark.svg"
 
@@ -67,7 +75,7 @@ const AboutUsPage = () => {
 					alt=""
 					fluid={data.team.childImageSharp.fluid}
 					style={{
-						borderRadius: 2,
+						borderRadius: 6,
 						height: 350,
 					}}
 				/>
@@ -87,12 +95,13 @@ const AboutUsPage = () => {
 					]}
 					gap={6}
 				>
-					<Card backgroundColor="gray.50">
+					<Card>
 						<Image
 							src={Mike}
-							size={80}
+							maxW="80px"
+							maxH="80px"
 							alt="Mike's headshot"
-							rounded="sm"
+							rounded="md"
 							mx="auto"
 							mb={4}
 						/>
@@ -109,12 +118,13 @@ const AboutUsPage = () => {
 							Founder / CEO
 						</Text>
 					</Card>
-					<Card backgroundColor="gray.50">
+					<Card>
 						<Image
 							src={Kenna}
-							size={80}
+							maxW="80px"
+							maxH="80px"
 							alt="Makenna's headshot"
-							rounded="sm"
+							rounded="md"
 							mx="auto"
 							mb={4}
 						/>
@@ -128,15 +138,16 @@ const AboutUsPage = () => {
 							Makenna Smutz
 						</Text>
 						<Text fontWeight={500} textAlign="center">
-							COO
+							Cofounder / COO
 						</Text>
 					</Card>
-					<Card backgroundColor="gray.50">
+					<Card>
 						<Image
-							src={Nik}
-							size={80}
+							src={Kolya}
+							maxW="80px"
+							maxH="80px"
 							alt="Nikolay's headshot"
-							rounded="sm"
+							rounded="md"
 							mx="auto"
 							mb={4}
 						/>
@@ -153,12 +164,13 @@ const AboutUsPage = () => {
 							Head of Data Science
 						</Text>
 					</Card>
-					<Card backgroundColor="gray.50">
+					<Card>
 						<Image
 							src={Fredi}
-							size={80}
+							maxW="80px"
+							maxH="80px"
 							alt="Fredrik's headshot"
-							rounded="sm"
+							rounded="md"
 							mx="auto"
 							mb={4}
 						/>
@@ -172,15 +184,16 @@ const AboutUsPage = () => {
 							Fredrik Fornwall
 						</Text>
 						<Text fontWeight={500} textAlign="center">
-							Open Source Engineer
+							Software Engineer
 						</Text>
 					</Card>
-					<Card backgroundColor="gray.50">
+					<Card>
 						<Image
 							src={Maria}
-							size={80}
+							maxW="80px"
+							maxH="80px"
 							alt="Maria's headshot"
-							rounded="sm"
+							rounded="md"
 							mx="auto"
 							mb={4}
 						/>
@@ -195,6 +208,29 @@ const AboutUsPage = () => {
 						</Text>
 						<Text fontWeight={500} textAlign="center">
 							Data Scientist
+						</Text>
+					</Card>
+					<Card>
+						<Image
+							src={Nick}
+							maxW="80px"
+							maxH="80px"
+							alt="Maria's headshot"
+							rounded="md"
+							mx="auto"
+							mb={4}
+						/>
+						<Text
+							fontSize="xl"
+							fontWeight={900}
+							letterSpacing="wide"
+							textAlign="center"
+							mb={2}
+						>
+							Nikolaos Kamarinakis
+						</Text>
+						<Text fontWeight={500} textAlign="center">
+							Software Engineer
 						</Text>
 					</Card>
 				</Grid>
@@ -212,32 +248,26 @@ const AboutUsPage = () => {
 					<Card
 						heading="Experimentation"
 						body="We don’t expect things to work the first time. We encourage you to try and fail."
-						backgroundColor="gray.50"
 					/>
 					<Card
 						heading="Humility"
 						body="Then, build a schema that unifies these various data sources."
-						backgroundColor="gray.50"
 					/>
 					<Card
 						heading="Trust"
 						body="If we hire you, it’s because we trust that you know your domain. Make decisions."
-						backgroundColor="gray.50"
 					/>
 					<Card
 						heading="Educating"
 						body="The platform of a company is best used to share knowledge."
-						backgroundColor="gray.50"
 					/>
 					<Card
 						heading="Asking tough questions"
 						body="We encourage each other to challenge and better the team."
-						backgroundColor="gray.50"
 					/>
 					<Card
 						heading="Being bold"
 						body="We want to foster a stable environment that encourages bold risks."
-						backgroundColor="gray.50"
 					/>
 				</Grid>
 			</SingleSection>
@@ -253,9 +283,11 @@ const AboutUsPage = () => {
 				>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://connectventures.co/"
 						aria-label="connect ventures website"
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						<Img
 							fluid={data.connect.childImageSharp.fluid}
@@ -264,17 +296,21 @@ const AboutUsPage = () => {
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="http://www.systemone.vc/"
 						aria-label="System One VC website"
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						<Image src={systemOne} alt="system one vc logo" maxW="200px" />
 					</Box>
 					<Box
 						as={Link}
 						aria-label="Nordic web website"
-						// @ts-ignore
 						href="https://thenordicweb.com/"
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						<Img
 							fluid={data.nordic.childImageSharp.fluid}
@@ -283,9 +319,11 @@ const AboutUsPage = () => {
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://tiny.vc/"
 						aria-label="Tiny VC website"
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						<Img
 							fluid={data.tiny.childImageSharp.fluid}
@@ -294,71 +332,85 @@ const AboutUsPage = () => {
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://www.nordicmakers.vc/"
 						aria-label="Nordic makers website"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Nordic Makers
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="http://www.firstfellow.com/"
 						aria-label="First fellow partners website"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						First Fellow Partners
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://www.linkedin.com/in/aliomar/?originalSubdomain=fi"
 						aria-label="Angel Ali Omar's linkedin"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Ali Omar
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://futuristic.vc/"
 						aria-label="Futuristic VC website"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Futuristic.vc
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://www.linkedin.com/in/aribackholm"
 						aria-label="Angel Ari Backholm's linkedin"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Ari Backholm
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://www.linkedin.com/in/okitag"
 						aria-label="Angel Oki Tåg's linkedin"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Oki Tåg
 					</Box>
 					<Box
 						as={Link}
-						// @ts-ignore
 						href="https://www.linkedin.com/in/jermyap/"
 						aria-label="Angel Jeremy Yap's linkedin"
 						fontSize="xl"
 						fontWeight={900}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						p={4}
 					>
 						Jeremy Yap
 					</Box>

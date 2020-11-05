@@ -3,27 +3,27 @@ import meeshkanTheme from "../../molecules/codeTheme"
 import { LiveProvider, LiveEditor } from "react-live"
 
 export const liveEditorStyle = {
-  fontSize: 14,
-  fontFamily: "Fira Code, monospace",
-  overflow: "auto",
-  borderRadius: 4,
-  maxHeight: 380,
+	fontSize: 14,
+	fontFamily: "Fira Code, monospace",
+	overflow: "auto",
+	borderRadius: 6,
+	maxHeight: 380,
 }
 
 const TestSnippet = () => {
-  return (
-    <>
-      <LiveProvider
-        disabled
-        // @ts-ignore
-        theme={meeshkanTheme}
-        className="language-javascript"
-      >
-        <LiveEditor
-          // @ts-ignore
-          padding={20}
-          style={liveEditorStyle}
-          code={`const typeDefs = gql\`
+	return (
+		<>
+			<LiveProvider
+				disabled
+				// @ts-ignore
+				theme={meeshkanTheme}
+				className="language-javascript"
+			>
+				<LiveEditor
+					// @ts-ignore
+					padding={20}
+					style={liveEditorStyle}
+					code={`const typeDefs = gql\`
   """
   A user in the Meeshkan Bank
   """
@@ -114,10 +114,10 @@ const TestSnippet = () => {
   }
 \`;
 `}
-        />
-      </LiveProvider>
-    </>
-  )
+				/>
+			</LiveProvider>
+		</>
+	)
 }
 
 export default TestSnippet

@@ -88,7 +88,7 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/docs/faq/"
+							to="/docs/frequently-asked-questions/"
 							aria-label="Frequently asked questions about Meeshkan"
 						>
 							FAQ
@@ -172,6 +172,7 @@ export function Footer() {
 							variant="ghost"
 							leftIcon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 							onClick={toggleColorMode}
+							colorScheme="gray"
 						>
 							{colorMode === "light" ? "dark" : "light"} mode
 						</Button>
@@ -182,8 +183,8 @@ export function Footer() {
 							href="https://twitter.com/meeshkan"
 							aria-label="Twitter"
 							icon={<TwitterIcon />}
-							color="gray.500"
 							size="sm"
+							colorScheme="gray"
 						/>
 						<IconButton
 							as={Link}
@@ -192,7 +193,7 @@ export function Footer() {
 							href="https://www.linkedin.com/company/meeshkan/"
 							aria-label="LinkedIn"
 							icon={<LinkedInIcon />}
-							color="gray.500"
+							colorScheme="gray"
 							size="sm"
 						/>
 						<IconButton
@@ -202,7 +203,7 @@ export function Footer() {
 							href="https://github.com/meeshkan"
 							aria-label="GitHub"
 							icon={<GitHubIcon />}
-							color="gray.500"
+							colorScheme="gray"
 							size="sm"
 						/>
 					</Stack>

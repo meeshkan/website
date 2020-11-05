@@ -83,10 +83,7 @@ const PricingCard = ({
 						// @ts-expect-error
 						href="https://app.meeshkan.com"
 						aria-label="Create a free account on Meeshkan."
-						colorScheme="red"
 						variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
-						borderRadius="sm"
-						fontWeight={700}
 						w="full"
 						onClick={() => {
 							mixpanel.track(`Create an account - ${title}`, {

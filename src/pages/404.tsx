@@ -24,9 +24,6 @@ const NotFoundPage = () => (
 					as={Link}
 					// @ts-ignore
 					to="/"
-					rounded="sm"
-					colorScheme="red"
-					fontWeight={900}
 				>
 					Go back home
 				</Button>

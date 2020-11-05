@@ -64,9 +64,6 @@ const RequestAccessForm = () => {
 					/>
 				</FormControl>
 				<Button
-					colorScheme="red"
-					borderRadius="sm"
-					fontWeight={900}
 					type="submit"
 					isLoading={formState.isSubmitting}
 					isDisabled={formSubmit}

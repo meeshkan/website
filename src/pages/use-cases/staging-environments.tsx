@@ -149,12 +149,8 @@ const StagingEnvironmentPage = () => {
 					</Flex>
 					<Button
 						aria-label="Request access"
-						colorScheme="red"
-						borderRadius="sm"
-						fontWeight={900}
 						type="submit"
 						w={["100%", "100%", "auto"]}
-						minW="fit-content"
 						onClick={onOpen}
 					>
 						Request access
@@ -250,11 +246,7 @@ const StagingEnvironmentPage = () => {
 										<LightMode>
 											<Button
 												aria-label="Request access"
-												colorScheme="red"
-												borderRadius="sm"
-												fontWeight={900}
 												type="submit"
-												minW="fit-content"
 												w="full"
 												mt={8}
 												isLoading={formState.isSubmitting}
@@ -593,12 +585,8 @@ const StagingEnvironmentPage = () => {
 
 						<Button
 							aria-label="Sign up"
-							colorScheme="red"
-							borderRadius="sm"
-							fontWeight={900}
 							type="submit"
 							w={["100%", "100%", "auto"]}
-							minW="fit-content"
 							onClick={onOpen}
 						>
 							Merge with confidence
