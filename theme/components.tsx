@@ -28,7 +28,7 @@ const customComponents = {
 			},
 		},
 		defaultProps: {
-			colorScheme: "red",
+			colorScheme: "blue",
 		},
 	},
 }

@@ -186,7 +186,7 @@ mutation {
 					<Button
 						as="a"
 						href="https://app.meeshkan.com/"
-						colorScheme="blue"
+						colorScheme="red"
 						w="100%"
 					>
 						Sign up
@@ -203,7 +203,7 @@ mutation {
 				<MotionButton
 					ml={[0, 0, -20]}
 					mt={[4, 4, 0]}
-					colorScheme="blue"
+					colorScheme="red"
 					onClick={() => setOpenTest(!openTest)}
 					animate={{
 						scale: [1, 1.1, 1, 1.1, 1],
