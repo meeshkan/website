@@ -95,7 +95,7 @@ const components = {
 	blockquote: (props) => (
 		<Alert
 			my={6}
-			rounded="sm"
+			rounded="md"
 			variant="left-accent"
 			backgroundColor="gray.50"
 			color="gray.500"
