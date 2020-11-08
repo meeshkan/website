@@ -187,7 +187,8 @@ const TestGraphqlPage = () => {
 									isLoading={testing}
 									loadingText="Testing"
 									isDisabled={endpointSubmit}
-									w={["100%", "100%", "auto"]}
+									w={["100%", "100%", "inherit"]}
+									minW='fit-content'
 								>
 									Test Endpoint
 								</Button>
@@ -258,8 +259,8 @@ const TestGraphqlPage = () => {
 							{testing === true
 								? `Testing takes ~30 seconds`
 								: endpointSubmit === true
-								? `Your test results are listed below`
-								: null}
+									? `Your test results are listed below`
+									: null}
 						</Text>
 					)}
 				</Box>

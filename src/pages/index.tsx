@@ -114,7 +114,6 @@ const IndexPage = () => {
 					<DarkMode>
 						<Code
 							colorScheme="cyan"
-							letterSpacing="widest"
 							rounded="sm"
 							padding="0px 4px"
 							minH="auto"

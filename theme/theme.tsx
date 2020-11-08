@@ -2,6 +2,16 @@ import { extendTheme } from "@chakra-ui/core"
 import customColors from "./colors"
 import globalStyles from "./global"
 import customComponents from "./components"
+import { mode, getColor, transparentize } from "@chakra-ui/theme-tools"
+
+type Dict = Record<string, any>
+
+function getBg(props: Dict) {
+	const { theme, colorScheme: c } = props
+	const lightBg = getColor(theme, `${c}.100`, c)
+	const darkBg = transparentize(`${c}.200`, 0.16)(theme)
+	return mode(lightBg, darkBg)(props)
+}
 
 const customTheme = extendTheme({
 	config: {
