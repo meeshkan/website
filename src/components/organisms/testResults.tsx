@@ -106,12 +106,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 											</Flex>
 											{exchange.request.body && (
 												<>
-													<Heading
-														as="h4"
-														fontSize="lg"
-														my={4}
-														fontWeight={900}
-													>
+													<Heading as="h4" textStyle="h4" my={4}>
 														Request body:
 													</Heading>
 													<CodeBlock className="graphql" copyButton={false}>
@@ -127,12 +122,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 											)}
 											{exchange.response.body && (
 												<>
-													<Heading
-														as="h4"
-														fontSize="lg"
-														my={4}
-														fontWeight={900}
-													>
+													<Heading as="h4" textStyle="h4" my={4}>
 														Response body:
 													</Heading>
 													{exchange.response.body.startsWith("{") !== true ? (

@@ -32,7 +32,6 @@ const TestComponent = ({
 			<Box
 				w="100%"
 				p={3}
-				mb={4}
 				mx="auto"
 				borderRadius="md"
 				backgroundColor={colorMode === "light" ? "white" : "gray.900"}

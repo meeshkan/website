@@ -44,8 +44,8 @@ export const SideNavLink = forwardRef(
 				cursor="pointer"
 				alignItems="center"
 				fontSize="lg"
-				px={2}
-				py="1"
+				px={4}
+				py={3}
 				transition="all 0.2s"
 				fontWeight={700}
 				outline="none"
@@ -130,7 +130,7 @@ export const ItemLink = forwardRef(
 						}}
 						{...(isActive && {
 							bg: activeBg.dark,
-							rounded: "sm",
+							rounded: "md",
 							color: activeColor.dark,
 							_hover: {
 								transform: "translateX(2px)",

@@ -79,12 +79,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						</ChakraLink>
 					</Flex>
 					<Heading
-						as="h1"
-						fontSize={["3xl", "4xl", "5xl"]}
-						textAlign="center"
-						mb={12}
-						color="gray.900"
-						fontWeight={900}
+						as="h1" textStyle="h1" textAlign="center" mb={12}
 					>
 						{frontmatter.title}
 					</Heading>
@@ -119,27 +114,27 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								</Stack>
 							))
 						) : (
-							<Stack isInline align="center" justify="center" spacing={4}>
-								<Avatar
-									name={frontmatter.authors[0].name}
-									src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
-									size="md"
-								/>
-								<Box>
-									<Text
-										as={ChakraLink}
-										// @ts-ignore
-										href={frontmatter.authors[0].authorLink}
-										target="_blank"
-										rel="noopener noreferrer"
-										fontWeight={700}
-									>
-										{frontmatter.authors[0].name}
-									</Text>
-									<Text>{frontmatter.authors[0].bio}</Text>
-								</Box>
-							</Stack>
-						)}
+								<Stack isInline align="center" justify="center" spacing={4}>
+									<Avatar
+										name={frontmatter.authors[0].name}
+										src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
+										size="md"
+									/>
+									<Box>
+										<Text
+											as={ChakraLink}
+											// @ts-ignore
+											href={frontmatter.authors[0].authorLink}
+											target="_blank"
+											rel="noopener noreferrer"
+											fontWeight={700}
+										>
+											{frontmatter.authors[0].name}
+										</Text>
+										<Text>{frontmatter.authors[0].bio}</Text>
+									</Box>
+								</Stack>
+							)}
 					</Grid>
 					<Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
 						{frontmatter.date}{" "}
@@ -158,14 +153,21 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								to={`/blog/${next.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${next.frontmatter.title}.`}
 								leftIcon={<ArrowBackIcon />}
+								colorScheme="gray"
+								variant="ghost"
 							>
 								Newer post
 							</Button>
 						) : (
-							<Button isDisabled leftIcon={<ArrowBackIcon />}>
-								Newer post
-							</Button>
-						)}
+								<Button
+									colorScheme="gray"
+									variant="ghost"
+									isDisabled
+									leftIcon={<ArrowBackIcon />}
+								>
+									Newer post
+								</Button>
+							)}
 
 						{previous !== null ? (
 							<Button
@@ -174,14 +176,21 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								to={`/blog/${previous.frontmatter.slug}/`}
 								aria-label={`Read the blog: ${previous.frontmatter.title}.`}
 								rightIcon={<ArrowForwardIcon />}
+								colorScheme="gray"
+								variant="ghost"
 							>
 								Older post
 							</Button>
 						) : (
-							<Button isDisabled rightIcon={<ArrowForwardIcon />}>
-								Older post
-							</Button>
-						)}
+								<Button
+									isDisabled
+									rightIcon={<ArrowForwardIcon />}
+									variant="ghost"
+									colorScheme="gray"
+								>
+									Older post
+								</Button>
+							)}
 					</Stack>
 					<Box
 						maxW="1000px"
@@ -191,15 +200,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						p={8}
 						rounded="sm"
 					>
-						<Heading
-							as="h3"
-							fontSize="3xl"
-							textAlign="center"
-							fontWeight={900}
-							mb={4}
-							color="white"
-							letterSpacing="0.1px"
-						>
+						<Heading as="h3" textStyle="h3" textAlign="center" mb={4}>
 							Don’t miss the next post!
 						</Heading>
 						<Flex
@@ -232,22 +233,13 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 										type="email"
 										name="email"
 										aria-label="Enter your business email"
-										borderRadius="sm"
 										placeholder="Your email"
-										fontWeight={500}
 										color="white"
 										borderColor="gray.500"
 									/>
 								</FormControl>
 							</DarkMode>
-							<Button
-								colorScheme="red"
-								borderRadius="sm"
-								fontWeight={900}
-								letterSpacing="wide"
-								type="submit"
-								w={["100%", "100%", "auto"]}
-							>
+							<Button type="submit" w={["100%", "100%", "auto"]}>
 								Join our mailing list
 							</Button>
 						</Flex>

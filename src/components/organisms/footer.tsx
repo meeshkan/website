@@ -8,21 +8,27 @@ import {
 	Flex,
 	Divider,
 	IconButton,
+	Button,
+	useColorMode,
+	useColorModeValue,
 } from "@chakra-ui/core"
 import {
 	GitHubIcon,
 	LinkedInIcon,
 	LogoIcon,
+	MoonIcon,
+	SunIcon,
 	TwitterIcon,
 } from "../../../theme/icons"
 
 export function Footer() {
+	const { colorMode, toggleColorMode } = useColorMode()
 	return (
-		<Box as="footer" bg="gray.50" p={6}>
+		<Box as="footer" bg={useColorModeValue("gray.50", "gray.800")} p={6}>
 			<Box maxW="1000px" mx="auto">
 				<Flex wrap="wrap" justify="center">
 					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
+						<Heading as="h4" size="md">
 							Company
 						</Heading>
 						<Link
@@ -60,7 +66,7 @@ export function Footer() {
 						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
+						<Heading as="h4" size="md">
 							Resources
 						</Heading>
 						<Link
@@ -82,7 +88,7 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/docs/faq/"
+							to="/docs/frequently-asked-questions/"
 							aria-label="Frequently asked questions about Meeshkan"
 						>
 							FAQ
@@ -104,7 +110,7 @@ export function Footer() {
 						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
+						<Heading as="h4" size="md">
 							Related Projects
 						</Heading>
 						<Link
@@ -137,7 +143,7 @@ export function Footer() {
 						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h3" color="gray.900" fontSize="xl" fontWeight={900}>
+						<Heading as="h4" size="md">
 							Use cases
 						</Heading>
 						<Link
@@ -153,9 +159,23 @@ export function Footer() {
 				<Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
 				<Flex justifyContent="space-between" align="center">
 					<GatsbyLink to="/" aria-label="Meeshkan homepage">
-						<LogoIcon color="gray.900" size="6" w="auto" />
+						<LogoIcon
+							color={useColorModeValue("gray.900", "white")}
+							size="6"
+							w="auto"
+						/>
 					</GatsbyLink>
 					<Stack isInline d={["none", "flex"]}>
+						<Button
+							ml={4}
+							size="sm"
+							variant="ghost"
+							leftIcon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+							onClick={toggleColorMode}
+							colorScheme="gray"
+						>
+							{colorMode === "light" ? "dark" : "light"} mode
+						</Button>
 						<IconButton
 							as={Link}
 							variant="ghost"
@@ -163,8 +183,8 @@ export function Footer() {
 							href="https://twitter.com/meeshkan"
 							aria-label="Twitter"
 							icon={<TwitterIcon />}
-							rounded="sm"
-							color="gray.500"
+							size="sm"
+							colorScheme="gray"
 						/>
 						<IconButton
 							as={Link}
@@ -173,8 +193,8 @@ export function Footer() {
 							href="https://www.linkedin.com/company/meeshkan/"
 							aria-label="LinkedIn"
 							icon={<LinkedInIcon />}
-							rounded="sm"
-							color="gray.500"
+							colorScheme="gray"
+							size="sm"
 						/>
 						<IconButton
 							as={Link}
@@ -183,8 +203,8 @@ export function Footer() {
 							href="https://github.com/meeshkan"
 							aria-label="GitHub"
 							icon={<GitHubIcon />}
-							rounded="sm"
-							color="gray.500"
+							colorScheme="gray"
+							size="sm"
 						/>
 					</Stack>
 				</Flex>

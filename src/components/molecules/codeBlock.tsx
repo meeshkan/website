@@ -15,7 +15,7 @@ export const liveEditorStyle = {
 	marginBottom: 16,
 	marginTop: 16,
 	overflow: "auto",
-	borderRadius: 4,
+	borderRadius: 6,
 	maxHeight: 300,
 	lineHeight: "1.5",
 	padding: 8,
@@ -46,11 +46,8 @@ const LiveCodePreview = (props) => (
 const CopyButton = (props) => (
 	<Button
 		size="sm"
-		rounded="sm"
 		position="absolute"
 		textTransform="uppercase"
-		fontWeight={900}
-		colorScheme="red"
 		variant="ghost"
 		height={6}
 		top={4}
@@ -66,7 +63,7 @@ const EditableNotice = (props) => {
 			position="absolute"
 			width="full"
 			top="0.5em"
-			rounded="sm"
+			rounded="md"
 			zIndex="0"
 			letterSpacing="wide"
 			color="gray.500"

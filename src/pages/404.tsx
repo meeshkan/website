@@ -13,14 +13,7 @@ const NotFoundPage = () => (
 			pageUrl="https://meeshkan.com/404/"
 		/>
 		<SingleSection>
-			<Heading
-				as="h1"
-				fontSize={["3xl", "4xl", "5xl"]}
-				textAlign="center"
-				mb={12}
-				color="gray.900"
-				fontWeight={900}
-			>
+			<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
 				Not found.
 			</Heading>
 			<Text textAlign="center" mb={6}>
@@ -31,9 +24,6 @@ const NotFoundPage = () => (
 					as={Link}
 					// @ts-ignore
 					to="/"
-					rounded="sm"
-					colorScheme="red"
-					fontWeight={900}
 				>
 					Go back home
 				</Button>

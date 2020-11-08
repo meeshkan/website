@@ -12,6 +12,8 @@ import {
 	FormControl,
 	FormLabel,
 	Collapse,
+	useColorModeValue,
+	LightMode,
 } from "@chakra-ui/core"
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
 import { CheckmarkIcon, GraphQLSnippetIcon } from "../../theme/icons"
@@ -34,9 +36,7 @@ function ListItem({ text }: ItemProp) {
 	return (
 		<Stack isInline mt={6} alignItems="center" spacing={4}>
 			<CheckmarkIcon color="cyan.500" size="24px" />
-			<Text fontWeight={500} color="gray.700">
-				{text}
-			</Text>
+			<Text fontWeight={500}>{text}</Text>
 		</Stack>
 	)
 }
@@ -115,13 +115,9 @@ const TestGraphqlPage = () => {
 				</Flex>
 				<Heading
 					as="h1"
-					fontSize={["3xl", "4xl", "5xl"]}
+					textStyle="h1"
 					mb={6}
 					textAlign={["left", "left", "center"]}
-					color="gray.900"
-					fontWeight={900}
-					letterSpacing="wide"
-					lineHeight="short"
 				>
 					Your search for dynamic GraphQL testing ends here.
 				</Heading>
@@ -130,7 +126,6 @@ const TestGraphqlPage = () => {
 					fontSize={["lg", "xl", "2xl"]}
 					lineHeight="short"
 					mb={6}
-					color="gray.700"
 				>
 					Meeshkan automatically writes, executes, and reports on a collection
 					of user-mimicking tests, guaranteed to give you confidence in critical
@@ -138,26 +133,16 @@ const TestGraphqlPage = () => {
 				</Text>
 			</SingleSection>
 
-			<Stack justifyContent="center">
-				<Heading
-					as="h2"
-					color="gray.700"
-					fontSize="2xl"
-					fontWeight={900}
-					my={4}
-					letterSpacing="wide"
-					lineHeight="short"
-					textAlign="center"
-				>
+			<Stack justify="center" align="center">
+				<Heading as="h2" textStyle="h2" my={4} textAlign="center">
 					Try it for yourself.
 				</Heading>
 
 				<Box
-					mb={12}
-					backgroundColor="gray.900"
+					mb={4}
+					backgroundColor={useColorModeValue("gray.900", "gray.800")}
 					p={4}
 					borderRadius="md"
-					mx="auto"
 					w={["full", "full", "600px"]}
 				>
 					<Stack as="form" onSubmit={handleSubmit(onSubmit(mixpanel))}>
@@ -188,7 +173,6 @@ const TestGraphqlPage = () => {
 										type="url"
 										borderColor="gray.500"
 										aria-label="Your GraphQL Endpoint"
-										borderRadius="sm"
 										placeholder="Your GraphQL Endpoint"
 										isDisabled={endpointSubmit}
 										fontWeight={500}
@@ -196,28 +180,24 @@ const TestGraphqlPage = () => {
 									/>
 								</FormControl>
 							</DarkMode>
-							<Button
-								aria-label="Test Endpoint"
-								colorScheme="red"
-								borderRadius="sm"
-								fontWeight={900}
-								type="submit"
-								isLoading={testing}
-								loadingText="Testing"
-								isDisabled={endpointSubmit}
-								w={["100%", "100%", "auto"]}
-								minW="fit-content"
-							>
-								Test Endpoint
-							</Button>
+							<LightMode>
+								<Button
+									aria-label="Test Endpoint"
+									type="submit"
+									isLoading={testing}
+									loadingText="Testing"
+									isDisabled={endpointSubmit}
+									w={["100%", "100%", "inherit"]}
+									minW='fit-content'
+								>
+									Test Endpoint
+								</Button>
+							</LightMode>
 						</Flex>
 						<DarkMode>
 							<Button
 								size="sm"
-								color="white"
-								w="fit-content"
-								mx="auto"
-								borderRadius="sm"
+								colorScheme="gray"
 								variant="ghost"
 								onClick={() => setShow(!show)}
 								mb={4}
@@ -245,7 +225,6 @@ const TestGraphqlPage = () => {
 											ref={register}
 											borderColor="gray.500"
 											aria-label="Your GraphQL Endpoint cookie header"
-											borderRadius="sm"
 											isDisabled={endpointSubmit}
 											fontWeight={500}
 											color="white"
@@ -260,7 +239,6 @@ const TestGraphqlPage = () => {
 											ref={register}
 											borderColor="gray.500"
 											aria-label="Your GraphQL Endpoint authorization"
-											borderRadius="sm"
 											isDisabled={endpointSubmit}
 											fontWeight={500}
 											color="white"
@@ -281,19 +259,12 @@ const TestGraphqlPage = () => {
 							{testing === true
 								? `Testing takes ~30 seconds`
 								: endpointSubmit === true
-								? `Your test results are listed below`
-								: null}
+									? `Your test results are listed below`
+									: null}
 						</Text>
 					)}
 				</Box>
-				<Text
-					color="gray.700"
-					fontStyle="italic"
-					maxW="500px"
-					textAlign="center"
-					mx="auto"
-					mt={4}
-				>
+				<Text fontStyle="italic" maxW="500px" textAlign="center" mb={8}>
 					Enter your GraphQL endpoint. We’ll return dynamically generated tests
 					just for you.
 				</Text>
@@ -320,7 +291,7 @@ const TestGraphqlPage = () => {
 				heading="Built with the GraphQL community in mind."
 				text="Meeshkan works particularly well if you’ve built your GraphQL API from scratch using tools like Prisma or Apollo. But it’s not limited to that. No matter how many tests you already have or what language your app is written in - Meeshkan fits right into your existing stack."
 			>
-				<GraphQLSnippetIcon size="100%" />
+				<GraphQLSnippetIcon w="100%" h="auto" />
 			</DoubleSection>
 
 			<HowDoesMeeshkanWork />

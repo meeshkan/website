@@ -53,15 +53,7 @@ const HowDoesMeeshkanWork = () => {
 						>
 							Step 1
 						</Code>
-						<Heading
-							as="h2"
-							color="gray.900"
-							fontSize="2xl"
-							fontWeight={900}
-							mb={4}
-							letterSpacing="wide"
-							lineHeight="short"
-						>
+						<Heading as="h4" textStyle="h4" mb={4}>
 							Choose a repository
 						</Heading>
 						<Text fontSize={["md", "md", "lg"]} lineHeight="tall">
@@ -87,15 +79,7 @@ const HowDoesMeeshkanWork = () => {
 						>
 							Step 2
 						</Code>
-						<Heading
-							as="h2"
-							color="gray.900"
-							fontSize="2xl"
-							fontWeight={900}
-							mb={4}
-							letterSpacing="wide"
-							lineHeight="short"
-						>
+						<Heading as="h4" textStyle="h4" mb={4}>
 							Continuous testing with every commit
 						</Heading>
 						<Text fontSize={["md", "md", "lg"]} lineHeight="tall">
@@ -121,15 +105,7 @@ const HowDoesMeeshkanWork = () => {
 						>
 							Step 3
 						</Code>
-						<Heading
-							as="h2"
-							color="gray.900"
-							fontSize="2xl"
-							fontWeight={900}
-							mb={4}
-							letterSpacing="wide"
-							lineHeight="short"
-						>
+						<Heading as="h4" textStyle="h4" mb={4}>
 							Fix vulnerabilities in your app
 						</Heading>
 						<Text fontSize={["md", "md", "lg"]} lineHeight="tall">

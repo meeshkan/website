@@ -38,10 +38,9 @@ const PricingCard = ({
 	mixpanel,
 	CTA,
 }: PricingProps) => (
-	<Card backgroundColor="gray.50">
+	<Card>
 		<Heading
 			as="h3"
-			color="gray.900"
 			fontSize="2xl"
 			fontWeight={900}
 			mb={4}
@@ -50,11 +49,11 @@ const PricingCard = ({
 			alignItems="center"
 		>
 			{title}
-			<Code colorScheme="blue" fontSize="md" ml={3}>
+			<Code colorScheme="cyan" fontSize="md" ml={3} lineHeight="initial">
 				{subtitle}
 			</Code>
 		</Heading>
-		<Text textAlign="center" fontSize="xl" color="gray.700" fontWeight={600}>
+		<Text textAlign="center" fontSize="xl" fontWeight={600}>
 			{price} <span style={{ color: "#616E7C", fontWeight: 400 }}>/month</span>
 		</Text>
 
@@ -84,10 +83,7 @@ const PricingCard = ({
 						// @ts-expect-error
 						href="https://app.meeshkan.com"
 						aria-label="Create a free account on Meeshkan."
-						colorScheme="red"
 						variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
-						borderRadius="sm"
-						fontWeight={700}
 						w="full"
 						onClick={() => {
 							mixpanel.track(`Create an account - ${title}`, {
@@ -115,16 +111,7 @@ const PricingPage = () => {
 				pageUrl="https://meeshkan.com/pricing/"
 			/>
 			<SingleSection>
-				<Heading
-					as="h1"
-					color="gray.900"
-					fontSize="3xl"
-					fontWeight={900}
-					textAlign="center"
-					mb={6}
-					letterSpacing="wide"
-					lineHeight="short"
-				>
+				<Heading as="h1" textStyle="h1" textAlign="center" mb={6}>
 					Meeshkan Pricing
 				</Heading>
 				<Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">

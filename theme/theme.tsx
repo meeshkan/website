@@ -1,14 +1,59 @@
 import { extendTheme } from "@chakra-ui/core"
 import customColors from "./colors"
+import globalStyles from "./global"
+import customComponents from "./components"
+import { mode, getColor, transparentize } from "@chakra-ui/theme-tools"
+
+type Dict = Record<string, any>
+
+function getBg(props: Dict) {
+	const { theme, colorScheme: c } = props
+	const lightBg = getColor(theme, `${c}.100`, c)
+	const darkBg = transparentize(`${c}.200`, 0.16)(theme)
+	return mode(lightBg, darkBg)(props)
+}
 
 const customTheme = extendTheme({
+	config: {
+		useSystemColorMode: false,
+		initialColorMode: "light",
+	},
+	components: {
+		...customComponents,
+	},
+	textStyles: {
+		h1: {
+			fontSize: ["3xl", "4xl", "5xl"],
+			fontWeight: 900,
+			letterSpacing: "0.025em",
+			lineHeight: "1.2",
+		},
+		h2: {
+			fontSize: ["2xl", "3xl", "4xl"],
+			fontWeight: 900,
+			lineHeight: "1.4",
+		},
+		h3: {
+			fontSize: ["xl", "2xl", "3xl"],
+			fontWeight: 800,
+			lineHeight: "1.4",
+		},
+		h4: {
+			fontSize: ["lg", "xl", "2xl"],
+			fontWeight: 700,
+			lineHeight: "1.4",
+		},
+	},
+	styles: {
+		...globalStyles,
+	},
 	colors: {
 		...customColors,
 	},
 	fonts: {
 		body: `Inter, sans-serif`,
 		heading: `Inter, sans-serif`,
-		mono: "Fira Code, monospace",
+		mono: "Jet Brains Mono, Fira Code, monospace",
 	},
 	fontSizes: {
 		xs: "8px",

@@ -8,6 +8,7 @@ import {
 	Button,
 	Code,
 	Image,
+	useColorModeValue,
 } from "@chakra-ui/core"
 import SEO from "../components/molecules/seo"
 import { MDXProvider } from "@mdx-js/react"
@@ -39,7 +40,11 @@ const DocsHome = () => {
 						maxWidth="18rem"
 						width="full"
 					/>
-					<Box pl={[0, null, "18rem"]} backgroundColor="gray.50" py={2}>
+					<Box
+						pl={[0, null, "18rem"]}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						py={2}
+					>
 						<Box
 							as="main"
 							minH="92.5vh"
@@ -50,14 +55,7 @@ const DocsHome = () => {
 							px={5}
 						>
 							{/* CONTENT START */}
-							<Heading
-								as="h1"
-								fontSize={["3xl", "4xl", "5xl"]}
-								mb={12}
-								color="gray.900"
-								fontWeight={900}
-								mt={4}
-							>
+							<Heading as="h1" textStyle="h1" mb={12} mt={4}>
 								Getting started
 							</Heading>
 							<DocsText>
@@ -71,7 +69,10 @@ const DocsHome = () => {
 							</DocsText>
 							<DocsText>
 								If you have any questions, you can always{" "}
-								<UniversalLink to="/contact/" color="blue.500">
+								<UniversalLink
+									to="/contact/"
+									color={useColorModeValue("blue.500", "blue.200")}
+								>
 									contact us for support
 								</UniversalLink>
 								.
@@ -80,51 +81,60 @@ const DocsHome = () => {
 								<strong>In this section:</strong>
 							</DocsText>
 
-							<List styleType="disc" my={4} spacing={2}>
-								<ListItem>
-									<UniversalLink color="blue.500" to="#what-does-meeshkan-do">
+							<List styleType="disc" stylePosition="inside" my={4} spacing={3}>
+								<ListItem lineHeight='1.6'>
+									<UniversalLink
+										color={useColorModeValue("blue.500", "blue.200")}
+										to="#what-does-meeshkan-do"
+									>
 										What does Meeshkan do?
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="#creating-your-meeshkan-account"
 									>
 										Creating your Meeshkan account
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="#authorizing-meeshkan-on-github"
 									>
 										Authorizing Meeshkan on GitHub
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="#configuring-your-projects"
 									>
 										Configuring your projects
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="#how-meeshkan-reports-bugs"
 									>
 										How Meeshkan reports bugs
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
-									<UniversalLink color="blue.500" to="#revoking-access">
+								<ListItem lineHeight='1.6'>
+									<UniversalLink
+										color={useColorModeValue("blue.500", "blue.200")}
+										to="#revoking-access"
+									>
 										Revoking access
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
-									<UniversalLink color="blue.500" to="#deleting-your-account">
+								<ListItem lineHeight='1.6'>
+									<UniversalLink
+										color={useColorModeValue("blue.500", "blue.200")}
+										to="#deleting-your-account"
+									>
 										Deleting your account
 									</UniversalLink>
 								</ListItem>
@@ -133,8 +143,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="what-does-meeshkan-do"
 							>
 								What does Meeshkan do?
@@ -152,8 +161,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="creating-your-meeshkan-account"
 							>
 								Creating your Meeshkan account
@@ -161,7 +169,10 @@ const DocsHome = () => {
 							<DocsText>
 								Almost everything regarding your Meeshkan account (configuration
 								settings, test reports, etc.) will be handled in the{" "}
-								<UniversalLink color="blue.500" to="https://app.meeshkan.com">
+								<UniversalLink
+									color={useColorModeValue("blue.500", "blue.200")}
+									to="https://app.meeshkan.com"
+								>
 									Meeshkan webapp
 								</UniversalLink>
 								.
@@ -169,15 +180,7 @@ const DocsHome = () => {
 							<DocsText>
 								The following link will take you to the webapp's homepage:
 							</DocsText>
-							<Button
-								as={UniversalLink}
-								colorScheme="red"
-								rounded="sm"
-								fontWeight={900}
-								mt={4}
-								// @ts-ignore
-								to="https://app.meeshkan.com"
-							>
+							<Button as={UniversalLink} mt={4} to="https://app.meeshkan.com">
 								Create your free account
 							</Button>
 							<DocsText>
@@ -186,13 +189,16 @@ const DocsHome = () => {
 									Sign up
 								</Code>{" "}
 								and you'll be guided through the authorization flow. We use{" "}
-								<UniversalLink color="blue.500" to="https://auth0.com/">
+								<UniversalLink
+									color={useColorModeValue("blue.500", "blue.200")}
+									to="https://auth0.com/"
+								>
 									Auth0
 								</UniversalLink>{" "}
 								for authentication, so you'll be routed to one of their pages
 								first before{" "}
 								<UniversalLink
-									color="blue.500"
+									color={useColorModeValue("blue.500", "blue.200")}
 									to="#authorizing-meeshkan-on-github"
 								>
 									continuing with GitHub
@@ -209,8 +215,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="authorizing-meeshkan-on-github"
 							>
 								Authorizing Meeshkan on GitHub
@@ -219,7 +224,7 @@ const DocsHome = () => {
 								To run the tests, Meeshkan must gain permission to access your
 								repository code. To do this, we use a{" "}
 								<UniversalLink
-									color="blue.500"
+									color={useColorModeValue("blue.500", "blue.200")}
 									to="https://developer.github.com/apps/differences-between-apps/"
 								>
 									Github App
@@ -249,7 +254,7 @@ const DocsHome = () => {
 								For more detailed information about the permissions we require,
 								please read our{" "}
 								<UniversalLink
-									color="blue.500"
+									color={useColorModeValue("blue.500", "blue.200")}
 									to="/docs/required-permissions/"
 								>
 									Required permissions
@@ -260,8 +265,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="configuring-your-projects"
 							>
 								Configuring your projects
@@ -288,8 +292,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h3"
-								fontSize="2xl"
-								fontWeight="800"
+								textStyle="h3"
 								id="build-settings"
 							>
 								Build settings
@@ -299,13 +302,13 @@ const DocsHome = () => {
 								endpoints. Testing against production credentials can cause
 								permanent data damage.
 							</DocsText>
-							<List styleType="disc" my={4} spacing={2}>
-								<ListItem>
+							<List styleType="disc" stylePosition="inside" my={4} spacing={3}>
+								<ListItem lineHeight='1.6'>
 									<strong>Root directory</strong>: The path to your app in your
 									repository. For instance, if your app lives in the home
 									directory, then you would use `./` as your root directory.
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<strong>Build command</strong>: The command(s) your app
 									framework provides for compiling your code.{" "}
 									<Code
@@ -315,7 +318,7 @@ const DocsHome = () => {
 									is an example build command for a repository that uses NPM and
 									provides a "start" script.
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<strong>OpenAPI location</strong>: The path or endpoint to
 									your repository's <em>OpenAPI specification</em> (such as{" "}
 									<Code colorScheme="cyan" fontSize="inherit">
@@ -323,7 +326,7 @@ const DocsHome = () => {
 									</Code>
 									).
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<strong>GraphQL endpoint</strong>: The path or endpoint to
 									your repository's <em>GraphQL schema</em> (such as{" "}
 									<Code colorScheme="cyan" fontSize="inherit">
@@ -336,8 +339,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h4"
-								fontSize="lg"
-								fontWeight="700"
+								textStyle="h4"
 								id="docker"
 							>
 								Docker
@@ -352,18 +354,18 @@ const DocsHome = () => {
 								Here is a list of a few resources that may be useful in the
 								'dockerization' process:
 							</DocsText>
-							<List styleType="disc" my={4} spacing={2}>
-								<ListItem>
+							<List styleType="disc" stylePosition="inside" my={4} spacing={3}>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="https://docs.docker.com/get-started/"
 									>
 										Docker's <em>Get Started</em> Guide
 									</UniversalLink>
 								</ListItem>
-								<ListItem>
+								<ListItem lineHeight='1.6'>
 									<UniversalLink
-										color="blue.500"
+										color={useColorModeValue("blue.500", "blue.200")}
 										to="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/"
 									>
 										Node.js's <em>Dockerizing a Node.js web app</em> Guide
@@ -374,8 +376,7 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="how-meeshkan-reports-bugs"
 							>
 								How Meeshkan reports bugs
@@ -383,7 +384,7 @@ const DocsHome = () => {
 							<DocsText>
 								Meeshkan runs{" "}
 								<UniversalLink
-									color="blue.500"
+									color={useColorModeValue("blue.500", "blue.200")}
 									to="/docs/faq/#what-is-property-based-testing"
 								>
 									property-based tests
@@ -399,7 +400,7 @@ const DocsHome = () => {
 								will link to the test in question. This issue will outline which
 								command found the bug, the response, and, in some cases, a{" "}
 								<UniversalLink
-									color="blue.500"
+									color={useColorModeValue("blue.500", "blue.200")}
 									to="/docs/how-meeshkan-works/#suggested-fixes"
 								>
 									suggestion for how to resolve it
@@ -424,21 +425,21 @@ const DocsHome = () => {
 							<DocsHeading
 								// @ts-expect-error
 								as="h2"
-								fontSize="3xl"
-								fontWeight="900"
+								textStyle="h2"
 								id="deleting-your-account"
 							>
 								Deleting your account
 							</DocsHeading>
 							<DocsText>
 								If you'd like to delete your Meeshkan account, please{" "}
-								<UniversalLink color="blue.500" to="/contact/">
+								<UniversalLink
+									color={useColorModeValue("blue.500", "blue.200")}
+									to="/contact/"
+								>
 									contact our team
 								</UniversalLink>
 								.
 							</DocsText>
-
-							<DocsText>Last updated: 28th Jul 2020</DocsText>
 
 							{/* CONTENT END */}
 						</Box>

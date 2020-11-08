@@ -9,6 +9,7 @@ import {
 	Divider,
 	Code,
 	Alert,
+	useColorModeValue,
 } from "@chakra-ui/core"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -45,7 +46,7 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 			<Box
 				aria-label="anchor"
 				as="a"
-				color="blue.500"
+				color={useColorModeValue("gray.200", "gray.700")}
 				fontWeight="normal"
 				outline="none"
 				_focus={{ opacity: 1, boxShadow: "outline" }}
@@ -61,37 +62,30 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 
 const components = {
 	h1: (props) => (
-		<Heading
-			{...props}
-			as="h1"
-			fontSize={["3xl", "4xl", "5xl"]}
-			mb={12}
-			color="gray.900"
-			fontWeight={900}
-			mt={4}
-		>
+		<Heading {...props} as="h1" textStyle="h1" mb={12} mt={4}>
 			{props.children}
 		</Heading>
 	),
-	h2: (props) => (
-		<DocsHeading
-			as="h2"
-			fontSize="3xl"
-			fontWeight="900"
-			{...props}
-		></DocsHeading>
-	),
-	h3: (props) => (
-		<DocsHeading as="h3" fontSize="2xl" fontWeight="800" {...props} />
-	),
-	h4: (props) => (
-		<DocsHeading as="h4" fontSize="lg" fontWeight="700" {...props} />
-	),
+	h2: (props) => <DocsHeading as="h2" textStyle="h2" {...props}></DocsHeading>,
+	h3: (props) => <DocsHeading as="h3" textStyle="h3" {...props} />,
+	h4: (props) => <DocsHeading as="h4" textStyle="h4" {...props} />,
 	h5: (props) => (
-		<DocsHeading as="h5" fontSize="md" fontWeight="600" {...props} />
+		<DocsHeading
+			as="h5"
+			textStyle="h5"
+			fontSize="md"
+			fontWeight="600"
+			{...props}
+		/>
 	),
 	h6: (props) => (
-		<DocsHeading as="h6" fontSize="sm" fontWeight="500" {...props} />
+		<DocsHeading
+			as="h6"
+			textStyle="h6"
+			fontSize="sm"
+			fontWeight="500"
+			{...props}
+		/>
 	),
 	p: (props) => (
 		<Text as="p" mt={4} lineHeight="tall" {...props}>
@@ -101,12 +95,7 @@ const components = {
 	blockquote: (props) => (
 		<Alert
 			my={6}
-			rounded="sm"
-			variant="left-accent"
-			backgroundColor="gray.50"
-			color="gray.500"
-			fontWeight="500"
-			fontStyle="italic"
+			variant='left-accent'
 			status="info"
 			css={{ "> *:first-of-type": { marginTop: 0 } }}
 			{...props}
@@ -118,21 +107,37 @@ const components = {
 		<Code colorScheme="cyan" fontSize="inherit" {...props} />
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
-	a: (props) => <UniversalLink color="blue.500" {...props} />,
-	img: (props) => <Image {...props} rounded="sm" />,
+	a: (props) => (
+		<UniversalLink
+			color={useColorModeValue("blue.500", "blue.200")}
+			{...props}
+		/>
+	),
+	img: (props) => <Image {...props} rounded="md" />,
 	pre: (props) => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
 	code: CodeBlock,
 	ul: (props) => (
-		<List styleType="disc" my={4} spacing={2} {...props}>
+		<List styleType="disc" stylePosition="inside" my={8} spacing={3} {...props}>
 			{props.children}
 		</List>
 	),
 	ol: (props) => (
-		<List as="ol" styleType="decimal" my={4} spacing={2} {...props}>
+		<List
+			as="ol"
+			styleType="decimal"
+			stylePosition="inside"
+			my={8}
+			spacing={3}
+			{...props}
+		>
 			{props.children}
 		</List>
 	),
-	li: (props) => <ListItem {...props}>{props.children}</ListItem>,
+	li: (props) => (
+		<ListItem lineHeight="1.6" {...props}>
+			{props.children}
+		</ListItem>
+	),
 	table: (props) => (
 		<Box as="table" textAlign="left" mt={6} width="full" {...props} />
 	),

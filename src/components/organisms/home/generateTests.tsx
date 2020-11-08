@@ -12,15 +12,15 @@ import {
 	List,
 	Collapse,
 	useDisclosure,
+	LightMode,
 } from "@chakra-ui/core"
 import Codeblock from "../../molecules/codeBlock"
 import { CloseIcon, ChevronDownIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 import { XmarkIcon } from "../../../../theme/icons"
 
 const GenerateTests = () => {
-	// Generated tests
 	const [openTest, setOpenTest] = useState(false)
-	const { isOpen, onToggle } = useDisclosure()
+	const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
 
 	const variants = {
 		open: {
@@ -92,13 +92,16 @@ const GenerateTests = () => {
 							A user is only authorized to see their own data
 						</Text>
 					</Flex>
-					<IconButton
-						aria-label="close bug"
-						icon={<CloseIcon />}
-						size="xs"
-						variant="ghost"
-						onClick={() => setOpenTest(!openTest)}
-					/>
+					<LightMode>
+						<IconButton
+							aria-label="close bug"
+							icon={<CloseIcon />}
+							size="xs"
+							variant="ghost"
+							onClick={() => setOpenTest(!openTest)}
+							colorScheme="gray"
+						/>
+					</LightMode>
 				</Stack>
 
 				<Stack mt={4} mb={6}>
@@ -140,13 +143,16 @@ const GenerateTests = () => {
 								/bank/graphql
 							</Text>
 						</Flex>
-						<IconButton
-							aria-label="toggle the test result"
-							icon={<ChevronDownIcon />}
-							size="sm"
-							variant="ghost"
-							onClick={onToggle}
-						/>
+						<LightMode>
+							<IconButton
+								aria-label="toggle the test result"
+								icon={<ChevronDownIcon />}
+								size="sm"
+								variant="ghost"
+								onClick={onToggle}
+								colorScheme="gray"
+							/>
+						</LightMode>
 					</Flex>
 					<Collapse in={isOpen} startingHeight={0}>
 						<Codeblock className="graphql" copyButton={false}>
@@ -174,18 +180,14 @@ mutation {
 					</Collapse>
 				</Stack>
 				<Stack justify="center" my={4}>
-					<Text color="white" textAlign="center">
+					<Text color="white" textAlign="center" mb={8}>
 						Sign up to see the rest of the test.
 					</Text>
 					<Button
 						as="a"
-						// @ts-ignore
 						href="https://app.meeshkan.com/"
-						borderRadius="sm"
-						fontWeight={900}
-						colorScheme="blue"
-						mt={4}
-						mx="auto"
+						colorScheme="red"
+						w="100%"
 					>
 						Sign up
 					</Button>
@@ -201,11 +203,8 @@ mutation {
 				<MotionButton
 					ml={[0, 0, -20]}
 					mt={[4, 4, 0]}
-					colorScheme="blue"
-					borderRadius="sm"
-					fontWeight={900}
+					colorScheme="red"
 					onClick={() => setOpenTest(!openTest)}
-					_focus={{ outline: "none" }}
 					animate={{
 						scale: [1, 1.1, 1, 1.1, 1],
 					}}
@@ -216,7 +215,6 @@ mutation {
 						times: [0, 0.25, 0.5, 0.75, 1],
 						delay: 10,
 					}}
-					minW="fit-content"
 				>
 					Generate tests <ArrowForwardIcon ml={2} />
 				</MotionButton>
