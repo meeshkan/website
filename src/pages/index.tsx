@@ -10,14 +10,15 @@ import {
 	Link as ChakraLink,
 	Accordion,
 	AccordionItem,
-	AccordionHeader,
+	AccordionButton,
 	AccordionIcon,
 	AccordionPanel,
 	Grid,
 	Stack,
-	Icon,
 	DarkMode,
+	useColorModeValue,
 } from "@chakra-ui/core"
+import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -112,8 +113,7 @@ const IndexPage = () => {
 				>
 					<DarkMode>
 						<Code
-							variantColor="cyan"
-							letterSpacing="widest"
+							colorScheme="cyan"
 							rounded="sm"
 							padding="0px 4px"
 							minH="auto"
@@ -122,27 +122,18 @@ const IndexPage = () => {
 							alignItems="center"
 							fontWeight={700}
 						>
-							Read our report <Icon name="arrow-forward" ml={2} />
+							Read our report <ArrowForwardIcon ml={2} />
 						</Code>
 					</DarkMode>
-					<ChakraLink
-						// @ts-expect-error
-						as={Link}
-						to="/blog/thinking-about-qa/"
-						mr={4}
-					>
+					<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
 						When to start thinking about QA.
 					</ChakraLink>
 				</Flex>
 				<Heading
 					as="h1"
-					fontSize={["3xl", "4xl", "5xl"]}
+					textStyle="h1"
 					mb={6}
 					textAlign={["left", "left", "center"]}
-					color="gray.900"
-					fontWeight={900}
-					letterSpacing="wide"
-					lineHeight="short"
 				>
 					Dynamically generated QA for your product's GraphQL and REST APIs
 				</Heading>
@@ -151,7 +142,6 @@ const IndexPage = () => {
 					fontSize={["md", "lg", "xl"]}
 					lineHeight="short"
 					mb={6}
-					color="gray.700"
 				>
 					The faster teams move, the harder it gets to write and maintain tests.
 					Meeshkan fixes that by on-commit executing thousands of tests on your
@@ -170,9 +160,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						variantColor="red"
-						borderRadius="sm"
-						fontWeight={900}
 						mb={[4, 4, 0]}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
@@ -182,7 +169,6 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "red.600" }}
 					>
 						Create a free account
 					</Button>
@@ -191,12 +177,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						to="/test-graphql/"
 						aria-label="Link to the test graphql page"
-						variantColor="gray"
-						backgroundColor="gray.50"
-						color="gray.700"
-						variant="ghost"
-						borderRadius="sm"
-						fontWeight={900}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
 								to: "https://meeshkan.com/test-graphql",
@@ -205,7 +185,7 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "gray.100" }}
+						colorScheme="gray"
 					>
 						Try the demo
 					</Button>
@@ -287,9 +267,6 @@ const IndexPage = () => {
 						// @ts-ignore
 						href="https://app.meeshkan.com"
 						aria-label="Create a free Meeshkan account."
-						variantColor="red"
-						borderRadius="sm"
-						fontWeight={900}
 						onClick={() => {
 							mixpanel.track("Clicked a button", {
 								to: "https://app.meeshkan.com",
@@ -298,7 +275,6 @@ const IndexPage = () => {
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						_hover={{ textDecor: "none", backgroundColor: "red.600" }}
 					>
 						Test your project
 					</Button>
@@ -315,42 +291,40 @@ const IndexPage = () => {
 					gap={8}
 				>
 					<Box>
-						<Heading
-							as="h2"
-							color="gray.900"
-							fontSize={["3xl", "3xl", "3xl", "4xl"]}
-							fontWeight={900}
-							mb={6}
-							letterSpacing="wide"
-							lineHeight="short"
-						>
+						<Heading as="h2" textStyle="h2" mb={6}>
 							Key Features
 						</Heading>
-						<Accordion allowToggle>
+						<Accordion allowToggle defaultIndex={[0]}>
 							<AccordionItem
 								border="none"
-								borderRadius="sm"
 								onClick={() => setShowImage(data.stack.childImageSharp.fluid)}
 							>
-								<AccordionHeader
-									roundedTop="sm"
+								<AccordionButton
+									p={4}
+									rounded="md"
 									fontSize="md"
 									fontWeight={600}
 									_expanded={{
-										color: "gray.900",
-										bg: "gray.50",
+										color: useColorModeValue("gray.900", "white"),
+										bg: useColorModeValue("gray.50", "gray.800"),
 										fontWeight: 900,
+										roundedBottom: 0,
 									}}
 									_hover={{
-										bg: "gray.100",
+										bg: useColorModeValue("gray.100", "gray.700"),
 									}}
 								>
 									<Box flex="1" textAlign="left">
 										REST Compatible
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader>
-								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+								</AccordionButton>
+								<AccordionPanel
+									pb={4}
+									bg={useColorModeValue("gray.50", "gray.800")}
+									roundedBottom="md"
+									lineHeight="1.4"
+								>
 									Meeshkan also works for your REST APIs by generating tests
 									with an OpenAPI specification and a little NLP. If you don't
 									have an OpenAPI spec, we'll point you to the resources to
@@ -360,30 +334,36 @@ const IndexPage = () => {
 
 							<AccordionItem
 								border="none"
-								borderRadius="sm"
 								onClick={() =>
 									setShowImage(data.continuous.childImageSharp.fluid)
 								}
 							>
-								<AccordionHeader
-									roundedTop="sm"
+								<AccordionButton
+									p={4}
+									rounded="md"
 									fontSize="md"
 									fontWeight={600}
 									_expanded={{
-										color: "gray.900",
-										bg: "gray.50",
+										color: useColorModeValue("gray.900", "white"),
+										bg: useColorModeValue("gray.50", "gray.800"),
 										fontWeight: 900,
+										roundedBottom: 0,
 									}}
 									_hover={{
-										bg: "gray.100",
+										bg: useColorModeValue("gray.100", "gray.700"),
 									}}
 								>
 									<Box flex="1" textAlign="left">
 										Continuous testing
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader>
-								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+								</AccordionButton>
+								<AccordionPanel
+									pb={4}
+									bg={useColorModeValue("gray.50", "gray.800")}
+									roundedBottom="md"
+									lineHeight="1.4"
+								>
 									Every time you push a commit to GitHub, Meeshkan runs tests to
 									check for breaking changes. If something does fail, our GitHub
 									integration will notify you and details will be available in
@@ -393,28 +373,34 @@ const IndexPage = () => {
 
 							<AccordionItem
 								border="none"
-								borderRadius="sm"
 								onClick={() => setShowImage(data.premium.childImageSharp.fluid)}
 							>
-								<AccordionHeader
-									roundedTop="sm"
+								<AccordionButton
+									p={4}
+									rounded="md"
 									fontSize="md"
 									fontWeight={600}
 									_expanded={{
-										color: "gray.900",
-										bg: "gray.50",
+										color: useColorModeValue("gray.900", "white"),
+										bg: useColorModeValue("gray.50", "gray.800"),
 										fontWeight: 900,
+										roundedBottom: 0,
 									}}
 									_hover={{
-										bg: "gray.100",
+										bg: useColorModeValue("gray.100", "gray.700"),
 									}}
 								>
 									<Box flex="1" textAlign="left">
 										Premium audits
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader>
-								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+								</AccordionButton>
+								<AccordionPanel
+									pb={4}
+									bg={useColorModeValue("gray.50", "gray.800")}
+									roundedBottom="md"
+									lineHeight="1.4"
+								>
 									If you're on a Pro plan or higher, Meeshkan provides weekly
 									audit reports through the webapp. These audits include a full
 									catalog of the bugs found, the failing request, and suggested
@@ -424,30 +410,36 @@ const IndexPage = () => {
 
 							<AccordionItem
 								border="none"
-								borderRadius="sm"
 								onClick={() =>
 									setShowImage(data.authSpec.childImageSharp.fluid)
 								}
 							>
-								<AccordionHeader
-									roundedTop="sm"
+								<AccordionButton
+									p={4}
+									rounded="md"
 									fontSize="md"
 									fontWeight={600}
 									_expanded={{
-										color: "gray.900",
-										bg: "gray.50",
+										color: useColorModeValue("gray.900", "white"),
+										bg: useColorModeValue("gray.50", "gray.800"),
 										fontWeight: 900,
+										roundedBottom: 0,
 									}}
 									_hover={{
-										bg: "gray.100",
+										bg: useColorModeValue("gray.100", "gray.700"),
 									}}
 								>
 									<Box flex="1" textAlign="left">
 										Auth flows
 									</Box>
 									<AccordionIcon color="gray.300" />
-								</AccordionHeader>
-								<AccordionPanel pb={4} bg="gray.50" roundedBottom="sm">
+								</AccordionButton>
+								<AccordionPanel
+									pb={4}
+									bg={useColorModeValue("gray.50", "gray.800")}
+									roundedBottom="md"
+									lineHeight="1.4"
+								>
 									Our Business plan gives you access to a breakdown of an auth
 									flow specification for your API. This enables you to visualize
 									and control who has access to certain queries and test those
@@ -456,7 +448,7 @@ const IndexPage = () => {
 							</AccordionItem>
 						</Accordion>
 					</Box>
-					<Box minW="300px">
+					<Box minW="300px" bg="gray.50" borderRadius="md">
 						<Img
 							fluid={showImage}
 							alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."

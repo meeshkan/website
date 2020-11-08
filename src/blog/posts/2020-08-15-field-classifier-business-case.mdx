@@ -14,10 +14,10 @@ When a machine communicates with another machine, they often "speak" in a way th
 
 ```json
 {
-  "type": "bid",
-  "auction_id": 302,
-  "object_id": "bicycle-30457",
-  "price": "80.03USD"
+	"type": "bid",
+	"auction_id": 302,
+	"object_id": "bicycle-30457",
+	"price": "80.03USD"
 }
 ```
 
@@ -25,9 +25,9 @@ and another machine may respond:
 
 ```json
 {
-  "result": "won",
-  "seller_email": "kim@bikeguru.co.uk",
-  "seller_image": "https://bikeguru.co.uk/about-us/kim.jpg"
+	"result": "won",
+	"seller_email": "kim@bikeguru.co.uk",
+	"seller_image": "https://bikeguru.co.uk/about-us/kim.jpg"
 }
 ```
 
@@ -55,9 +55,9 @@ In our imaginary API, Meeshkan will first test fields whose values are correct. 
 
 ```json
 {
-  "seller_email": "makenna@meeshkan.com",
-  "buyer_id": "A08B763_FI",
-  "amount_in_dollar_cents": 2999
+	"seller_email": "makenna@meeshkan.com",
+	"buyer_id": "A08B763_FI",
+	"amount_in_dollar_cents": 2999
 }
 ```
 
@@ -71,7 +71,7 @@ So when we run the test above and hundreds like it with different correct values
 
 ```json
 {
-  "error": "makenna@meeshkan.com is not a valid e-mail address"
+	"error": "makenna@meeshkan.com is not a valid e-mail address"
 }
 ```
 
@@ -83,9 +83,9 @@ Our field classifier doesn't just differentiate between correct and incorrect in
 
 ```json
 {
-  "seller_email": "makenna@meeshkan.cm",
-  "buyer_id": "A08B763FI",
-  "amount_in_dollar_cents": 0
+	"seller_email": "makenna@meeshkan.cm",
+	"buyer_id": "A08B763FI",
+	"amount_in_dollar_cents": 0
 }
 ```
 
@@ -99,8 +99,8 @@ One _very_ common bug in software is for slightly-off data to produce positive r
 
 ```json
 {
-  "status": "success",
-  "message_to_display": "0.00 USD has been sent to null from your account makenna@meeshkan.cm"
+	"status": "success",
+	"message_to_display": "0.00 USD has been sent to null from your account makenna@meeshkan.cm"
 }
 ```
 
@@ -112,9 +112,9 @@ Usually, APIs fail when data is completely incorrect, but the way they fail is n
 
 ```json
 {
-  "seller_email": "3.1416",
-  "buyer_id": true,
-  "amount_in_dollar_cents": -100000
+	"seller_email": "3.1416",
+	"buyer_id": true,
+	"amount_in_dollar_cents": -100000
 }
 ```
 

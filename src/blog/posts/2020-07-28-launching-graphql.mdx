@@ -11,7 +11,7 @@ tags:
   - automation
 ---
 
-import { Button } from '@chakra-ui/core'
+import { Button } from "@chakra-ui/core"
 
 GraphQL is the future of APIs that we at Meeshkan, are investing in. **Today we are announcing our full focus on automated testing of GraphQL servers.**
 
@@ -19,19 +19,16 @@ GraphQL is the future of APIs that we at Meeshkan, are investing in. **Today we 
 
 If this is your first time hearing about [Meeshkan](/) — we're an automated testing service for the backend of your app using NLP and property-based testing. This announcement is us focusing deeper on developing future features unique to GraphQL testing. We wholeheartedly believe in the benefits the technology brings, as well as the need for better testing of GraphQL APIs.
 
-*Does this sound interesting to you?*
+_Does this sound interesting to you?_
 
 <Button
-  as="a"
-  mt={4}
-  href="https://app.meeshkan.com"
-  aria-label="Create a free Meeshkan account."
-  variantColor="red"
-  borderRadius="sm"
-  fontWeight={900}
-  w={["100%", "100%", "auto"]}
+	as="a"
+	mt={4}
+	href="https://app.meeshkan.com"
+	aria-label="Create a free Meeshkan account."
+	w={["100%", "100%", "auto"]}
 >
-  Create a free account
+	Create a free account
 </Button>
 
 In this post, we'll walk through what led us to bet our whole company's future on this technology - and how that affects you and your testing workflow!
@@ -59,19 +56,19 @@ In the same year, [Roy Fielding](https://blog.readme.com/the-history-of-rest-api
 
 The motivation was to give APIs a common set of standards to rally around and improve as a singular community. The vast majority of production APIs today were originally built following the REST specification (and most are still).
 
-There are several challenges that the REST APIs afford. One of those challenges relates to testing — the lack of generated documentation. 
+There are several challenges that the REST APIs afford. One of those challenges relates to testing — the lack of generated documentation.
 
 Documentation is important for developers (internal or external) using the API. Many teams with REST APIs use [OpenAPI](https://swagger.io/specification/) or [Swagger](https://swagger.io/) as a set of rules that describes the format of their REST API. This is great for understanding what the API is capable of without reading the code. It also provides the structure to create mock APIs to test against. OpenAPI specifications have [great tooling](https://stoplight.io/) but are brittle to API changes if manually created — which is common practice.
 
 ### GraphQL
 
-The initial prototype of GraphQL came to life in 2012 as a side project by a few Facebook developers. These developers were facing challenges with their existing Newsfeed REST API. The static [specification](https://spec.graphql.org/) draft was released in 2015 and warmly embraced by the development community. The API specification was designed for the developer who'd be using the API at the core focus and dealing with the technology to make it work after. 
+The initial prototype of GraphQL came to life in 2012 as a side project by a few Facebook developers. These developers were facing challenges with their existing Newsfeed REST API. The static [specification](https://spec.graphql.org/) draft was released in 2015 and warmly embraced by the development community. The API specification was designed for the developer who'd be using the API at the core focus and dealing with the technology to make it work after.
 
 Following the design, the features that the GraphQL specification landed include:
 
 - **Hierarchical nesting**: Deeply defining the association of the data stored.
 - **Strongly typed**: GraphQL types allow the client to predict what the query will return without knowing that much about the server.
-- **Introspection**: Access to the entire type system/specification of a schema based on its endpoint. 
+- **Introspection**: Access to the entire type system/specification of a schema based on its endpoint.
 
 Remember GraphQL introspection. It will become important when speaking about automated testing of GraphQL APIs.
 
@@ -114,7 +111,7 @@ First, when importing a project into Meeshkan, you're asked for either the locat
 
 ![Screenshot of the build settings from the Meeshkan webapp. At the bottom, there is an input for your GraphQL endpoint.](https://media.graphcms.com/vIthC9RqTUycJUhffO7c)
 
-> If you're in the middle of a migration from REST to GraphQL or need to authenticate in REST but work with GraphQL, we support testing with both APIs in tandem! 
+> If you're in the middle of a migration from REST to GraphQL or need to authenticate in REST but work with GraphQL, we support testing with both APIs in tandem!
 
 The biggest challenges of automated software testing are dynamically generating tests as the code changes and making sure those tests are meaningful and high quality.
 
@@ -130,7 +127,7 @@ Another feature that provides testing value, is the documentation of relationshi
 
 Most tools that _automatically_ test your app, read the code statically and make inferences. Meeshkan imitates a user with our integration tests. Stateful tests create users with traceable/reproducible steps that center around logic-heavy functions in your app. Some examples where stateful testing is invaluable include authorization, authentication, and transactions (currency, databases, etc).
 
-GraphQL stores information about how mutations relate to queries. This gives confidence to our stateful testing algorithms. 
+GraphQL stores information about how mutations relate to queries. This gives confidence to our stateful testing algorithms.
 
 For example, `tests` can be traced to `createTest` and `createManyTests`. With a REST API, there are common patterns that our NLP algorithms can pick up — but assumptions make for a lot less confident tests. For more complex relationships, we support custom GraphQL directives.
 

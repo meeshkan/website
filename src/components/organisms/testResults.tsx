@@ -4,7 +4,7 @@ import {
 	Heading,
 	Accordion,
 	AccordionItem,
-	AccordionHeader,
+	AccordionButton,
 	Flex,
 	Text,
 	AccordionIcon,
@@ -14,7 +14,6 @@ import {
 import CodeBlock from "../molecules/codeBlock"
 import prettier from "prettier/standalone"
 import parserGraphql from "prettier/parser-graphql"
-import { motion } from "framer-motion"
 
 type TestProps = {
 	testResults: Object
@@ -55,7 +54,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 										borderRadius="sm"
 										backgroundColor="white"
 									>
-										<AccordionHeader
+										<AccordionButton
 											_hover={{
 												backgroundColor: "none",
 											}}
@@ -91,7 +90,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 												<Text fontWeight={600}>{exchange.meta.path}</Text>
 											</Flex>
 											<AccordionIcon />
-										</AccordionHeader>
+										</AccordionButton>
 										<AccordionPanel py={4}>
 											<Flex>
 												{exchange.response.statusCode && (
@@ -99,7 +98,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 														fontWeight={700}
 														mb={2}
 														fontSize="md"
-														variantColor="gray"
+														colorScheme="gray"
 													>
 														HTTP status code: {exchange.response.statusCode}
 													</Code>
@@ -107,12 +106,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 											</Flex>
 											{exchange.request.body && (
 												<>
-													<Heading
-														as="h4"
-														fontSize="lg"
-														my={4}
-														fontWeight={900}
-													>
+													<Heading as="h4" textStyle="h4" my={4}>
 														Request body:
 													</Heading>
 													<CodeBlock className="graphql" copyButton={false}>
@@ -128,12 +122,7 @@ const TestResults = ({ testResults, exchangeLength, test }: TestProps) => {
 											)}
 											{exchange.response.body && (
 												<>
-													<Heading
-														as="h4"
-														fontSize="lg"
-														my={4}
-														fontWeight={900}
-													>
+													<Heading as="h4" textStyle="h4" my={4}>
 														Response body:
 													</Heading>
 													{exchange.response.body.startsWith("{") !== true ? (

@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Flex, Icon, Text } from "@chakra-ui/core"
+import { Box, Flex, Text } from "@chakra-ui/core"
+import { CheckmarkIcon, XmarkIcon } from "../../../theme/icons"
 
 type TestProps = {
 	success: boolean
@@ -31,7 +32,6 @@ const TestComponent = ({
 			<Box
 				w="100%"
 				p={3}
-				mb={4}
 				mx="auto"
 				borderRadius="md"
 				backgroundColor={colorMode === "light" ? "white" : "gray.900"}
@@ -42,7 +42,7 @@ const TestComponent = ({
 			>
 				<Flex alignItems="center">
 					<Box
-						size={8}
+						boxSize={8}
 						mr={4}
 						rounded="full"
 						backgroundColor={
@@ -54,14 +54,11 @@ const TestComponent = ({
 						alignItems="center"
 						justifyContent="center"
 					>
-						<Icon
-							name={success ? "checkmark" : "xmark"}
-							color={
-								success
-									? mark[colorMode].success.stroke
-									: mark[colorMode].failure.stroke
-							}
-						/>
+						{success === true ? (
+							<CheckmarkIcon color={mark[colorMode].success.stroke} />
+						) : (
+							<XmarkIcon color={mark[colorMode].failure.stroke} />
+						)}
 					</Box>
 					<Text
 						color={colorMode === "light" ? "gray.700" : "gray.200"}

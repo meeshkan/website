@@ -5,11 +5,11 @@ import {
 	Heading,
 	Stack,
 	Flex,
-	Icon,
 	Button,
 	Code,
 	Box,
 } from "@chakra-ui/core"
+import { XmarkIcon, CheckmarkIcon } from "../../theme/icons"
 import { Card } from "../components/atoms/card"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { UniversalLink } from "../components/atoms/UniversalLink"
@@ -38,10 +38,9 @@ const PricingCard = ({
 	mixpanel,
 	CTA,
 }: PricingProps) => (
-	<Card backgroundColor="gray.50">
+	<Card>
 		<Heading
 			as="h3"
-			color="gray.900"
 			fontSize="2xl"
 			fontWeight={900}
 			mb={4}
@@ -50,11 +49,11 @@ const PricingCard = ({
 			alignItems="center"
 		>
 			{title}
-			<Code variantColor="blue" fontSize="md" ml={3}>
+			<Code colorScheme="cyan" fontSize="md" ml={3} lineHeight="initial">
 				{subtitle}
 			</Code>
 		</Heading>
-		<Text textAlign="center" fontSize="xl" color="gray.700" fontWeight={600}>
+		<Text textAlign="center" fontSize="xl" fontWeight={600}>
 			{price} <span style={{ color: "#616E7C", fontWeight: 400 }}>/month</span>
 		</Text>
 
@@ -62,7 +61,7 @@ const PricingCard = ({
 			{yesFeatures &&
 				yesFeatures.map((feature, index) => (
 					<Flex key={index} align="top">
-						<Icon name="checkmark" color="cyan.500" mr={3} mt={2} />
+						<CheckmarkIcon color="cyan.500" mr={3} mt={2} />
 						<Text>{feature}</Text>
 					</Flex>
 				))}
@@ -70,7 +69,7 @@ const PricingCard = ({
 			{noFeatures &&
 				noFeatures.map((feature, index) => (
 					<Flex key={index} align="center">
-						<Icon name="xmark" color="red.500" mr={3} />
+						<XmarkIcon color="red.500" mr={3} />
 						<Text>{feature}</Text>
 					</Flex>
 				))}
@@ -84,10 +83,7 @@ const PricingCard = ({
 						// @ts-expect-error
 						href="https://app.meeshkan.com"
 						aria-label="Create a free account on Meeshkan."
-						variantColor="red"
 						variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
-						borderRadius="sm"
-						fontWeight={700}
 						w="full"
 						onClick={() => {
 							mixpanel.track(`Create an account - ${title}`, {
@@ -115,16 +111,7 @@ const PricingPage = () => {
 				pageUrl="https://meeshkan.com/pricing/"
 			/>
 			<SingleSection>
-				<Heading
-					as="h1"
-					color="gray.900"
-					fontSize="3xl"
-					fontWeight={900}
-					textAlign="center"
-					mb={6}
-					letterSpacing="wide"
-					lineHeight="short"
-				>
+				<Heading as="h1" textStyle="h1" textAlign="center" mb={6}>
 					Meeshkan Pricing
 				</Heading>
 				<Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">

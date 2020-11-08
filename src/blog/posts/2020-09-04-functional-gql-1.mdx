@@ -33,24 +33,24 @@ This strategy is possible in any strongly-typed language. For example, in TypeSc
 
 ```graphql
 schema {
-  query: Query
+	query: Query
 }
 
 type Query {
-  me: String!
+	me: String!
 }
 ```
 
 ```typescript
 export type QueryResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
+	ContextType = any,
+	ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  me?: Resolver<ResolversTypes["String"], ParentType, ContextType>
+	me?: Resolver<ResolversTypes["String"], ParentType, ContextType>
 }
 
 export type Resolvers<ContextType = any> = {
-  Query?: QueryResolvers<ContextType>
+	Query?: QueryResolvers<ContextType>
 }
 ```
 
@@ -246,16 +246,13 @@ In this article, I've shown how typelevel-programming allows you to take a spec 
 In the next article in this series, which will come out in mid-September 2020, I'll show how this strategy can be used to build type-safe GraphQL resolvers. In the meantime, if you're building a GraphQL API, you should sign up for [Meeshkan](https://meeshkan.com)! We do automated testing of GraphQL APIs.
 
 <Button
-  as="a"
-  mt={4}
-  href="https://app.meeshkan.com"
-  aria-label="Create a free Meeshkan account."
-  variantColor="red"
-  borderRadius="sm"
-  fontWeight={900}
-  w={["100%", "100%", "auto"]}
+	as="a"
+	mt={4}
+	href="https://app.meeshkan.com"
+	aria-label="Create a free Meeshkan account."
+	w={["100%", "100%", "auto"]}
 >
-  Create a free account
+	Create a free account
 </Button>
 
 Our novel approach combines functional programming and machine learning to execute thousands of tests against your GraphQL API and find mission-critical bugs and inconsistencies. Regisration is free, and don't hesitate to reach out - we'd love to learn more about what you're building!

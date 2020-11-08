@@ -22,14 +22,7 @@ const ContactPage = () => (
 			pageUrl="https://meeshkan.com/contact/"
 		/>
 		<SingleSection>
-			<Heading
-				as="h1"
-				fontSize={["3xl", "4xl", "5xl"]}
-				textAlign="center"
-				mb={12}
-				fontWeight={900}
-				color="gray.900"
-			>
+			<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
 				Get in contact with us!
 			</Heading>
 			<Box
@@ -50,14 +43,14 @@ const ContactPage = () => (
 					<FormLabel htmlFor="name" fontWeight={700}>
 						Name
 					</FormLabel>
-					<Input type="text" name="name" id="name" mb={4} rounded="sm" />
+					<Input type="text" name="name" id="name" mb={4} />
 				</FormControl>
 
 				<FormControl isRequired w="100%">
 					<FormLabel htmlFor="email" fontWeight={700}>
 						Email
 					</FormLabel>
-					<Input type="email" name="email" id="email" mb={4} rounded="sm" />
+					<Input type="email" name="email" id="email" mb={4} />
 				</FormControl>
 
 				<FormControl w="100%">
@@ -65,10 +58,8 @@ const ContactPage = () => (
 						Which company are you from?
 					</FormLabel>
 					<InputGroup mb={4}>
-						<InputLeftAddon children="https://" rounded="sm" />
+						<InputLeftAddon children="https://" />
 						<Input
-							roundedRight="sm"
-							roundedLeft="0"
 							type="url"
 							name="website"
 							id="website"
@@ -80,23 +71,10 @@ const ContactPage = () => (
 					<FormLabel htmlFor="message" fontWeight={700}>
 						Message
 					</FormLabel>
-					<Textarea
-						id="message"
-						name="message"
-						resize="none"
-						mb={4}
-						rounded="sm"
-					/>
+					<Textarea id="message" name="message" resize="none" mb={4} />
 				</FormControl>
 
-				<Button
-					mt={4}
-					fontWeight={700}
-					variantColor="red"
-					type="submit"
-					rounded="sm"
-					isFullWidth
-				>
+				<Button mt={4} type="submit" isFullWidth>
 					Submit
 				</Button>
 			</Box>

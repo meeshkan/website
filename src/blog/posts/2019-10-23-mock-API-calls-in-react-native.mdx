@@ -58,16 +58,16 @@ The `refreshFact` function refreshes the cat fact shown to the user:
 
 ```tsx
 const refreshFact = async () => {
-  try {
-    setLoading(true)
-    const fact = await fetchFact()
-    setFact(fact)
-    setError(null)
-  } catch (err) {
-    setError(err)
-  } finally {
-    setLoading(false)
-  }
+	try {
+		setLoading(true)
+		const fact = await fetchFact()
+		setFact(fact)
+		setError(null)
+	} catch (err) {
+		setError(err)
+	} finally {
+		setLoading(false)
+	}
 }
 ```
 
@@ -75,16 +75,16 @@ This function sets the component state and uses `fetchFact` function for the net
 
 ```tsx
 const CAT_FACT_URL =
-  "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1"
+	"https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1"
 
 const fetchFact = async () => {
-  const fetchResult = await fetch(CAT_FACT_URL)
-  if (!fetchResult.ok) {
-    throw Error(`Failed fetching cat fact with code: ${fetchResult.status}`)
-  }
-  const body = await fetchResult.json()
-  const fact = body.text
-  return fact
+	const fetchResult = await fetch(CAT_FACT_URL)
+	if (!fetchResult.ok) {
+		throw Error(`Failed fetching cat fact with code: ${fetchResult.status}`)
+	}
+	const body = await fetchResult.json()
+	const fact = body.text
+	return fact
 }
 ```
 
@@ -94,19 +94,19 @@ The app component renders content based on the values of `loading` and `err`:
 
 ```tsx
 {
-  loading ? (
-    <Text style={styles.loading} testID="loading">
-      Loading...
-    </Text>
-  ) : err ? (
-    <Text style={{ ...styles.fact, ...styles.error }} testID="error">
-      Something went horribly wrong, please try again!
-    </Text>
-  ) : (
-    <Text style={styles.fact} testID="fact">
-      {shownFact}
-    </Text>
-  )
+	loading ? (
+		<Text style={styles.loading} testID="loading">
+			Loading...
+		</Text>
+	) : err ? (
+		<Text style={{ ...styles.fact, ...styles.error }} testID="error">
+			Something went horribly wrong, please try again!
+		</Text>
+	) : (
+		<Text style={styles.fact} testID="fact">
+			{shownFact}
+		</Text>
+	)
 }
 ```
 
@@ -131,12 +131,12 @@ In the `beforeAll` block, we switch on Unmock with `unmock.on()`. Then we add ru
 
 ```tsx
 beforeAll(() => {
-  unmock.on()
-  unmock
-    .nock("https://cat-fact.herokuapp.com", "catFactApi")
-    .get("/facts/random?animal_type=cat&amount=1")
-    .reply(200, { text: u.string("lorem.sentence") })
-    .reply(500, "Internal server error")
+	unmock.on()
+	unmock
+		.nock("https://cat-fact.herokuapp.com", "catFactApi")
+		.get("/facts/random?animal_type=cat&amount=1")
+		.reply(200, { text: u.string("lorem.sentence") })
+		.reply(500, "Internal server error")
 })
 ```
 
@@ -148,7 +148,7 @@ Before each test, we reset the state of `unmock` so that the tests remain decoup
 
 ```tsx
 beforeEach(() => {
-  unmock.reset()
+	unmock.reset()
 })
 ```
 
@@ -158,13 +158,13 @@ The first React Native test ensures that when the API returns a cat fact, the ap
 
 ```tsx
 it("renders the fact block when API succeeds", async () => {
-  const api = unmock.services["catFactApi"]
-  api.state(transform.withCodes(200))
-  const renderApi: RenderAPI = render(<App />)
+	const api = unmock.services["catFactApi"]
+	api.state(transform.withCodes(200))
+	const renderApi: RenderAPI = render(<App />)
 
-  await waitForElement(() => {
-    return renderApi.getByTestId("fact")
-  })
+	await waitForElement(() => {
+		return renderApi.getByTestId("fact")
+	})
 })
 ```
 
@@ -174,18 +174,18 @@ The second test for success ensures that when user clicks the button, the app fe
 
 ```tsx
 it("renders new fact after clicking the button", async () => {
-  const api = unmock.services["catFactApi"]
-  api.state(transform.withCodes(200))
+	const api = unmock.services["catFactApi"]
+	api.state(transform.withCodes(200))
 
-  const renderApi: RenderAPI = render(<App />)
+	const renderApi: RenderAPI = render(<App />)
 
-  fireEvent.press(renderApi.getByText("Get me a new one"))
+	fireEvent.press(renderApi.getByText("Get me a new one"))
 
-  await waitForElement(() => {
-    const secondCall = api.spy.secondCall
-    const secondFact = secondCall.returnValue.bodyAsJson
-    return renderApi.getByText(secondFact.text)
-  })
+	await waitForElement(() => {
+		const secondCall = api.spy.secondCall
+		const secondFact = secondCall.returnValue.bodyAsJson
+		return renderApi.getByText(secondFact.text)
+	})
 })
 ```
 
@@ -197,14 +197,14 @@ Test for failure proceeds as the test for success. We change the API to return s
 
 ```tsx
 it("renders error when the API fails", async () => {
-  const api = unmock.services["catFactApi"]
-  api.state(transform.withCodes(500))
+	const api = unmock.services["catFactApi"]
+	api.state(transform.withCodes(500))
 
-  const renderApi: RenderAPI = render(<App />)
+	const renderApi: RenderAPI = render(<App />)
 
-  await waitForElement(() => {
-    return renderApi.getByTestId("error")
-  })
+	await waitForElement(() => {
+		return renderApi.getByTestId("error")
+	})
 })
 ```
 
@@ -217,16 +217,13 @@ Note that `unmock` currently only supports Node.js environment. If you would lik
 To automatically test your apps interactions with APIs, we recommend signing up for the React Native beta on the Meeshkan Webapp.
 
 <Button
-  as="a"
-  mt={4}
-  href="https://app.meeshkan.com"
-  aria-label="Create a free Meeshkan account."
-  variantColor="red"
-  borderRadius="sm"
-  fontWeight={900}
-  w={["100%", "100%", "auto"]}
+	as="a"
+	mt={4}
+	href="https://app.meeshkan.com"
+	aria-label="Create a free Meeshkan account."
+	w={["100%", "100%", "auto"]}
 >
-  Create a free account
+	Create a free account
 </Button>
 
 Thanks a lot for reading, as always we appreciate any feedback and comments!
