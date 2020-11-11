@@ -62,7 +62,7 @@ const ConfidenceWebinarPage = () => {
 
 				<Image
 					as={Img}
-					mt={6}
+					my={6}
 					alt="Setup background image"
 					// @ts-ignore
 					fluid={data.setup.childImageSharp.fluid}
@@ -71,6 +71,27 @@ const ConfidenceWebinarPage = () => {
 					height="400px"
 					objectFit="cover"
 				/>
+				<Text fontStyle="italic">Hosted by:</Text>
+				<Flex align="center" justify="space-between">
+					<Flex align="center">
+						<Avatar size="md" src={makenna} mr={4} />
+						<Box>
+							<Text fontWeight={600} lineHeight="1" mb={2}>
+								Makenna Smutz
+							</Text>
+							<Text lineHeight="1">COO @ Meeshkan</Text>
+						</Box>
+					</Flex>
+					<Box textAlign="right">
+						<Text
+							fontWeight={600}
+							color={useColorModeValue("red.500", "red.300")}
+						>
+							November 25th
+						</Text>
+						<Text>2020</Text>
+					</Box>
+				</Flex>
 			</SingleSection>
 
 			<Box as="section" maxW="1000px" mx="auto" pt={12} pb={16}>
@@ -85,29 +106,9 @@ const ConfidenceWebinarPage = () => {
 					gridAutoFlow="dense"
 				>
 					<Box>
-						<Heading as="h2" textStyle="h3" mb={2}>
+						<Heading as="h2" textStyle="h3" mb={4}>
 							"But it worked in staging!"
 						</Heading>
-						<Flex align="center" justify="space-between" mb={4}>
-							<Flex align="center">
-								<Avatar size="md" src={makenna} mr={4} />
-								<Box>
-									<Text fontWeight={600} lineHeight="1" mb={2}>
-										Makenna Smutz
-									</Text>
-									<Text lineHeight="1">COO @ Meeshkan</Text>
-								</Box>
-							</Flex>
-							<Box textAlign="right">
-								<Text
-									fontWeight={600}
-									color={useColorModeValue("red.500", "red.300")}
-								>
-									November 25th
-								</Text>
-								<Text>2020</Text>
-							</Box>
-						</Flex>
 						<Text textAlign="justify" fontSize="md" lineHeight="1.4" mb={4}>
 							During this 30-min webinar, we'll share industry-leading
 							strategies for making sure that the features you ship work in
