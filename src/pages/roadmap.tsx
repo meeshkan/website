@@ -15,6 +15,9 @@ import {
 	FormLabel,
 	Input,
 	useColorModeValue,
+	CircularProgress,
+	CircularProgressLabel,
+	useColorMode,
 } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
@@ -49,8 +52,7 @@ const Milestone = ({
 			(scope != null ? scope : 0)) *
 			100
 	)
-	var circumference = Math.PI * (90 * 2)
-	let completeAmount = Math.round(((100 - complete) / 100) * circumference)
+
 	return (
 		<Box
 			backgroundColor={useColorModeValue("white", "gray.900")}
@@ -102,35 +104,16 @@ const Milestone = ({
 						: "Backlog"}
 				</Code>
 				{complete >= 1 && state !== "completed" ? (
-					<Flex align="center" justify="center">
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 200 200"
-							version="1.1"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<circle
-								r="90"
-								cx="100"
-								cy="100"
-								fill="transparent"
-								strokeDasharray="565.48"
-								strokeDashoffset="0"
-								style={{ stroke: "#E9FBF8", strokeWidth: "1em" }}
-							></circle>
-							<circle
-								id="bar"
-								r="90"
-								cx="100"
-								cy="100"
-								fill="transparent"
-								strokeDasharray="565.48"
-								strokeDashoffset={`${completeAmount}px`}
-								style={{ stroke: "#33CCAE", strokeWidth: "1em" }}
-							></circle>
-						</svg>
-						<Text ml={2}>{complete}%</Text>
+					<Flex align="center">
+						<CircularProgress
+							value={complete}
+							color="cyan.500"
+							trackColor={useColorModeValue("cyan.100", "cyan.900")}
+							size="20px"
+							thickness="16px"
+							mr={2}
+						/>
+						<Text>{complete + "%"}</Text>
 					</Flex>
 				) : null}
 			</Stack>
