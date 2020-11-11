@@ -36,9 +36,9 @@ const ConfidenceWebinarPage = () => {
 	return (
 		<Layout>
 			<SEO
-				pageTitle="QA testing for GraphQL and REST APIs"
-				pageDescription="Meeshkan is an automated testing workflow for your product's GraphQL and REST APIs and it's dependencies."
-				pageUrl="https://meeshkan.com/"
+				pageTitle="Releasing with confidence: Practical tips for merging to production"
+				pageDescription="During this 30-min webinar, we'll share industry-leading strategies for making sure that the features you ship work in production as well as they work in staging."
+				pageUrl="https://meeshkan.com/events/confidence-in-your-merge-to-production/"
 			/>
 
 			<SingleSection>
