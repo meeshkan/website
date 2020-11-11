@@ -83,13 +83,13 @@ const ConfidenceWebinarPage = () => {
 						</Box>
 					</Flex>
 					<Box textAlign="right">
+						<Text>5:00pm CET</Text>
 						<Text
 							fontWeight={600}
 							color={useColorModeValue("red.500", "red.300")}
 						>
 							November 25th
 						</Text>
-						<Text>2020</Text>
 					</Box>
 				</Flex>
 			</SingleSection>
