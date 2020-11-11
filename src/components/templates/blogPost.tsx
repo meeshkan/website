@@ -200,7 +200,13 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						p={8}
 						rounded="sm"
 					>
-						<Heading as="h3" textStyle="h3" textAlign="center" mb={4}>
+						<Heading
+							as="h3"
+							textStyle="h3"
+							color="white"
+							textAlign="center"
+							mb={4}
+						>
 							Don’t miss the next post!
 						</Heading>
 						<Flex
