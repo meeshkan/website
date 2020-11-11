@@ -73,7 +73,7 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/resources/confidence-in-your-merge-to-production/"
+							to="/events/confidence-in-your-merge-to-production/"
 							aria-label="A landing page for the webinar about confidence merging to production"
 						>
 							Webinar - Merging to prod
