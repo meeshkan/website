@@ -69,13 +69,14 @@ export function Footer() {
 						<Heading as="h4" size="md">
 							Resources
 						</Heading>
+
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/test-graphql/"
-							aria-label="A landing page all about testing graphql"
+							to="/events/confidence-in-your-merge-to-production/"
+							aria-label="A landing page for the webinar about confidence merging to production"
 						>
-							Testing GraphQL
+							Webinar - Merging to prod
 						</Link>
 						<Link
 							// @ts-ignore
@@ -153,6 +154,14 @@ export function Footer() {
 							aria-label="Staging environments"
 						>
 							Staging environments
+						</Link>
+						<Link
+							// @ts-ignore
+							as={GatsbyLink}
+							to="/test-graphql/"
+							aria-label="A landing page all about testing graphql"
+						>
+							Testing GraphQL
 						</Link>
 					</Stack>
 				</Flex>
