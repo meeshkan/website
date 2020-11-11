@@ -15,7 +15,6 @@ import {
 	FormLabel,
 	Input,
 	useColorModeValue,
-	useColorMode,
 } from "@chakra-ui/core"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
@@ -170,11 +169,6 @@ const Roadmap = () => {
 								targetDate
 								scopeHistory
 								completedScopeHistory
-								teams {
-									nodes {
-										name
-									}
-								}
 								links {
 									nodes {
 										label
@@ -189,22 +183,41 @@ const Roadmap = () => {
 		`
 	)
 
-	const Q3 = linear.team.projects.nodes.filter((project) =>
-		project.name.startsWith("Q3 ")
+	// (Q1) starts on January 1 to March 3
+	// (Q2) goes through April 4 to June 6
+	// (Q3) is from July 7 to September 9
+	// (Q4) is from October 10 to December 12
+
+	const Q4_2020 = linear.team.projects.nodes.filter((project) =>
+		project.targetDate !== null
+			? project.targetDate.startsWith("2020-10") ||
+			  project.targetDate.startsWith("2020-11") ||
+			  project.targetDate.startsWith("2020-12")
+			: null
 	)
-	const Q4 = linear.team.projects.nodes.filter((project) =>
-		project.name.startsWith("Q4 ")
+	const Q1_2021 = linear.team.projects.nodes.filter((project) =>
+		project.targetDate !== null
+			? project.targetDate.startsWith("2021-01") ||
+			  project.targetDate.startsWith("2021-02") ||
+			  project.targetDate.startsWith("2021-03")
+			: null
 	)
-	const Q1 = linear.team.projects.nodes.filter((project) =>
-		project.name.startsWith("Q1 ")
+	const Q2_2021 = linear.team.projects.nodes.filter((project) =>
+		project.targetDate !== null
+			? project.targetDate.startsWith("2021-04") ||
+			  project.targetDate.startsWith("2021-05") ||
+			  project.targetDate.startsWith("2021-06")
+			: null
+	)
+	const Q3_2021 = linear.team.projects.nodes.filter((project) =>
+		project.targetDate !== null
+			? project.targetDate.startsWith("2021-07") ||
+			  project.targetDate.startsWith("2021-08") ||
+			  project.targetDate.startsWith("2021-09")
+			: null
 	)
 	const backlog = linear.team.projects.nodes.filter(
-		(project) =>
-			project.name.startsWith("Q3 ") === false &&
-			project.name.startsWith("Q4 ") === false &&
-			project.name.startsWith("Q1 ") === false &&
-			project.state !== "completed" &&
-			project.name !== "Improve testing"
+		(project) => project.targetDate === null && project.state !== "canceled"
 	)
 
 	return (
@@ -291,82 +304,10 @@ const Roadmap = () => {
 					mb={8}
 				>
 					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-						Q3 2020
-					</Heading>
-					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-						{Q3.map((project, index) => (
-							<Milestone
-								key={index}
-								title={project.name.slice(3)}
-								description={project.description}
-								state={project.state}
-								scope={project.scopeHistory.slice(-1)[0]}
-								completedScope={project.completedScopeHistory.slice(-1)[0]}
-								link={project.links.nodes}
-							/>
-						))}
-					</SimpleGrid>
-				</Box>
-
-				<Box
-					padding={8}
-					backgroundColor={useColorModeValue("gray.50", "gray.800")}
-					borderRadius="md"
-					mb={8}
-				>
-					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
 						Q4 2020
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-						{Q4.map((project, index) => (
-							<Milestone
-								key={index}
-								title={project.name.slice(3)}
-								description={project.description}
-								state={project.state}
-								scope={project.scopeHistory.slice(-1)[0]}
-								completedScope={project.completedScopeHistory.slice(-1)[0]}
-								link={project.links.nodes}
-							/>
-						))}
-					</SimpleGrid>
-				</Box>
-
-				<Box
-					padding={8}
-					backgroundColor={useColorModeValue("gray.50", "gray.800")}
-					borderRadius="md"
-					mb={8}
-				>
-					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-						Q1 2021
-					</Heading>
-					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-						{Q1.map((project, index) => (
-							<Milestone
-								key={index}
-								title={project.name.slice(3)}
-								description={project.description}
-								state={project.state}
-								scope={project.scopeHistory.slice(-1)[0]}
-								completedScope={project.completedScopeHistory.slice(-1)[0]}
-								link={project.links.nodes}
-							/>
-						))}
-					</SimpleGrid>
-				</Box>
-
-				<Box
-					padding={8}
-					backgroundColor={useColorModeValue("gray.50", "gray.800")}
-					borderRadius="md"
-					mb={8}
-				>
-					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-						Backlog
-					</Heading>
-					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-						{backlog.map((project, index) => (
+						{Q4_2020.map((project, index) => (
 							<Milestone
 								key={index}
 								title={project.name}
@@ -379,6 +320,110 @@ const Roadmap = () => {
 						))}
 					</SimpleGrid>
 				</Box>
+
+				{Q1_2021.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
+							Q1 2021
+						</Heading>
+						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+							{Q1_2021.map((project, index) => (
+								<Milestone
+									key={index}
+									title={project.name}
+									description={project.description}
+									state={project.state}
+									scope={project.scopeHistory.slice(-1)[0]}
+									completedScope={project.completedScopeHistory.slice(-1)[0]}
+									link={project.links.nodes}
+								/>
+							))}
+						</SimpleGrid>
+					</Box>
+				) : null}
+
+				{Q2_2021.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
+							Q2 2021
+						</Heading>
+						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+							{Q2_2021.map((project, index) => (
+								<Milestone
+									key={index}
+									title={project.name}
+									description={project.description}
+									state={project.state}
+									scope={project.scopeHistory.slice(-1)[0]}
+									completedScope={project.completedScopeHistory.slice(-1)[0]}
+									link={project.links.nodes}
+								/>
+							))}
+						</SimpleGrid>
+					</Box>
+				) : null}
+
+				{Q3_2021.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
+							Q3 2020
+						</Heading>
+						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+							{Q3_2021.map((project, index) => (
+								<Milestone
+									key={index}
+									title={project.name}
+									description={project.description}
+									state={project.state}
+									scope={project.scopeHistory.slice(-1)[0]}
+									completedScope={project.completedScopeHistory.slice(-1)[0]}
+									link={project.links.nodes}
+								/>
+							))}
+						</SimpleGrid>
+					</Box>
+				) : null}
+
+				{backlog.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
+							Backlog
+						</Heading>
+						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+							{backlog.map((project, index) => (
+								<Milestone
+									key={index}
+									title={project.name}
+									description={project.description}
+									state={project.state}
+									scope={project.scopeHistory.slice(-1)[0]}
+									completedScope={project.completedScopeHistory.slice(-1)[0]}
+									link={project.links.nodes}
+								/>
+							))}
+						</SimpleGrid>
+					</Box>
+				) : null}
 			</SingleSection>
 		</Layout>
 	)
