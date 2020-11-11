@@ -16,12 +16,23 @@ import {
 import { SingleSection } from "../../components/organisms/singleSection"
 import SEO from "../../components/molecules/seo"
 import Layout from "../../components/templates/layout"
-// @ts-expect-error
-import setup from "../../static/setup.jpg"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 // @ts-expect-error
 import makenna from "../../../data/avatars/kenna.png"
 
 const ConfidenceWebinarPage = () => {
+	const data = useStaticQuery(graphql`
+		query {
+			setup: file(relativePath: { eq: "setup.jpg" }) {
+				childImageSharp {
+					fluid(maxWidth: 1000, quality: 100) {
+						...GatsbyImageSharpFluid
+					}
+				}
+			}
+		}
+	`)
 	return (
 		<Layout>
 			<SEO
@@ -50,13 +61,15 @@ const ConfidenceWebinarPage = () => {
 				</Heading>
 
 				<Image
+					as={Img}
 					mt={6}
 					alt="Setup background image"
+					// @ts-ignore
+					fluid={data.setup.childImageSharp.fluid}
 					borderRadius="lg"
 					width="100%"
 					height="400px"
 					objectFit="cover"
-					src={setup}
 				/>
 			</SingleSection>
 
