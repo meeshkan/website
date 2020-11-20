@@ -5,7 +5,6 @@ import {
 	Button,
 	Text,
 	Flex,
-	Code,
 	Box,
 	Link as ChakraLink,
 	Accordion,
@@ -15,10 +14,8 @@ import {
 	AccordionPanel,
 	Grid,
 	Stack,
-	DarkMode,
 	useColorModeValue,
 } from "@chakra-ui/core"
-import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -100,35 +97,6 @@ const IndexPage = () => {
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
-				<Flex
-					justify="center"
-					mb={3}
-					mt={12}
-					backgroundColor="gray.900"
-					p={2}
-					maxW="fit-content"
-					mx="auto"
-					borderRadius="md"
-					color="white"
-				>
-					<DarkMode>
-						<Code
-							colorScheme="cyan"
-							rounded="sm"
-							padding="0px 4px"
-							minH="auto"
-							mr={4}
-							d="flex"
-							alignItems="center"
-							fontWeight={700}
-						>
-							Attend our webinar <ArrowForwardIcon ml={2} />
-						</Code>
-					</DarkMode>
-					<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
-					How to release from staging to production
-					</ChakraLink>
-				</Flex>
 				<Heading
 					as="h1"
 					textStyle="h1"

@@ -1,7 +1,6 @@
 import React from "react"
 import { SingleSection } from "../organisms/singleSection"
 import {
-	Divider,
 	Flex,
 	FormControl,
 	FormLabel,
@@ -15,7 +14,6 @@ import {
 	Link as ChakraLink,
 	Box,
 	DarkMode,
-	Code,
 } from "@chakra-ui/core"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -48,39 +46,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 					pageImage={frontmatter.pageImage}
 				/>
 				<SingleSection>
-					<Flex
-						justify="center"
-						mb={3}
-						mt={12}
-						backgroundColor="gray.900"
-						p={2}
-						maxW="fit-content"
-						mx="auto"
-						borderRadius="md"
-						color="white"
-					>
-						<DarkMode>
-							<Code
-								colorScheme="cyan"
-								letterSpacing="widest"
-								rounded="sm"
-								padding="0px 4px"
-								minH="auto"
-								mr={4}
-								d="flex"
-								alignItems="center"
-								fontWeight={700}
-							>
-								Attend our webinar <ArrowForwardIcon ml={2} />
-							</Code>
-						</DarkMode>
-						<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
-							How to release from staging to production
-						</ChakraLink>
-					</Flex>
-					<Heading
-						as="h1" textStyle="h1" textAlign="center" mb={12}
-					>
+					<Heading as="h1" textStyle="h1" textAlign="center" my={12}>
 						{frontmatter.title}
 					</Heading>
 					<Grid
@@ -114,27 +80,27 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								</Stack>
 							))
 						) : (
-								<Stack isInline align="center" justify="center" spacing={4}>
-									<Avatar
-										name={frontmatter.authors[0].name}
-										src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
-										size="md"
-									/>
-									<Box>
-										<Text
-											as={ChakraLink}
-											// @ts-ignore
-											href={frontmatter.authors[0].authorLink}
-											target="_blank"
-											rel="noopener noreferrer"
-											fontWeight={700}
-										>
-											{frontmatter.authors[0].name}
-										</Text>
-										<Text>{frontmatter.authors[0].bio}</Text>
-									</Box>
-								</Stack>
-							)}
+							<Stack isInline align="center" justify="center" spacing={4}>
+								<Avatar
+									name={frontmatter.authors[0].name}
+									src={frontmatter.authors[0].avatar.childImageSharp.fluid.src}
+									size="md"
+								/>
+								<Box>
+									<Text
+										as={ChakraLink}
+										// @ts-ignore
+										href={frontmatter.authors[0].authorLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										fontWeight={700}
+									>
+										{frontmatter.authors[0].name}
+									</Text>
+									<Text>{frontmatter.authors[0].bio}</Text>
+								</Box>
+							</Stack>
+						)}
 					</Grid>
 					<Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
 						{frontmatter.date}{" "}
@@ -159,15 +125,15 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								Newer post
 							</Button>
 						) : (
-								<Button
-									colorScheme="gray"
-									variant="ghost"
-									isDisabled
-									leftIcon={<ArrowBackIcon />}
-								>
-									Newer post
-								</Button>
-							)}
+							<Button
+								colorScheme="gray"
+								variant="ghost"
+								isDisabled
+								leftIcon={<ArrowBackIcon />}
+							>
+								Newer post
+							</Button>
+						)}
 
 						{previous !== null ? (
 							<Button
@@ -182,15 +148,15 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 								Older post
 							</Button>
 						) : (
-								<Button
-									isDisabled
-									rightIcon={<ArrowForwardIcon />}
-									variant="ghost"
-									colorScheme="gray"
-								>
-									Older post
-								</Button>
-							)}
+							<Button
+								isDisabled
+								rightIcon={<ArrowForwardIcon />}
+								variant="ghost"
+								colorScheme="gray"
+							>
+								Older post
+							</Button>
+						)}
 					</Stack>
 					<Box
 						maxW="1000px"
@@ -198,7 +164,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						backgroundColor="gray.900"
 						mt={16}
 						p={8}
-						rounded="sm"
+						rounded="lg"
 					>
 						<Heading
 							as="h3"
