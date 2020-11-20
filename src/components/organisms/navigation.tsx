@@ -92,7 +92,10 @@ export function Navigation() {
 						Attend our webinar <ArrowForwardIcon ml={2} />
 					</Code>
 				</DarkMode>
-				<UniversalLink to="/blog/webinar-releasing-with-confidence/" mr={4}>
+				<UniversalLink
+					to="/events/confidence-in-your-merge-to-production/"
+					mr={4}
+				>
 					How to release from staging to production
 				</UniversalLink>
 			</Flex>
@@ -121,17 +124,17 @@ export function Navigation() {
 
 				{/* Desktop & Tablet */}
 				<Stack isInline display={["none", "none", "flex"]}>
-					<NavLink text="Pricing" path="/pricing/" />
+					{/* <NavLink text="Pricing" path="/pricing/" /> */}
 					<NavLink text="Blog" path="/blog/" />
 					<NavLink text="Roadmap" path="/roadmap/" />
 					<NavLink text="Docs" path="/docs/" />
 					<Flex>
-						<SignUpLink />
+						{/* <SignUpLink />
 						<Divider
 							orientation="vertical"
 							borderColor={useColorModeValue("gray.100", "gray.700")}
 						/>
-						<LogInLink />
+						<LogInLink /> */}
 					</Flex>
 				</Stack>
 
@@ -175,8 +178,8 @@ export function Navigation() {
 								<NavLink text="Blog" path="/blog/" />
 								<NavLink text="Docs" path="/docs/" />
 								<Divider w="50%" borderColor="gray.100" />
-								<SignUpLink />
-								<LogInLink />
+								{/* <SignUpLink /> */}
+								{/* <LogInLink /> */}
 							</Stack>
 						</DrawerBody>
 						<DrawerFooter d="flex" justifyContent="center">

@@ -500,6 +500,7 @@ const StagingEnvironmentPage = () => {
 							</DoubleSection>
 
 							<DoubleSection
+								reverse
 								heading="Run defined and generated test cases on every commit"
 								text="Remove the risk of sloppy regression bugs from slipping through. Using Machine Learning, Meeshkan generates 10,000+ test cases from the flows your actual users take in production. You can also pre-define specific test cases that are run on every commit."
 							>
