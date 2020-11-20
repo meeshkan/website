@@ -5,7 +5,6 @@ import {
 	Button,
 	Text,
 	Flex,
-	Code,
 	Box,
 	Link as ChakraLink,
 	Accordion,
@@ -15,10 +14,8 @@ import {
 	AccordionPanel,
 	Grid,
 	Stack,
-	DarkMode,
 	useColorModeValue,
 } from "@chakra-ui/core"
-import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -100,38 +97,10 @@ const IndexPage = () => {
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
-				<Flex
-					justify="center"
-					mb={3}
-					mt={12}
-					backgroundColor="gray.900"
-					p={2}
-					maxW="fit-content"
-					mx="auto"
-					borderRadius="md"
-					color="white"
-				>
-					<DarkMode>
-						<Code
-							colorScheme="cyan"
-							rounded="sm"
-							padding="0px 4px"
-							minH="auto"
-							mr={4}
-							d="flex"
-							alignItems="center"
-							fontWeight={700}
-						>
-							Read our report <ArrowForwardIcon ml={2} />
-						</Code>
-					</DarkMode>
-					<ChakraLink as={Link} to="/blog/thinking-about-qa/" mr={4}>
-						When to start thinking about QA.
-					</ChakraLink>
-				</Flex>
 				<Heading
 					as="h1"
 					textStyle="h1"
+					mt={12}
 					mb={6}
 					textAlign={["left", "left", "center"]}
 				>
@@ -156,36 +125,18 @@ const IndexPage = () => {
 					flexWrap="wrap"
 				>
 					<Button
-						as={ChakraLink}
-						// @ts-ignore
-						href="https://app.meeshkan.com"
-						aria-label="Create a free Meeshkan account."
-						mb={[4, 4, 0]}
-						onClick={() => {
-							mixpanel.track("Clicked a button", {
-								to: "https://app.meeshkan.com",
-								from: "https://meeshkan.com",
-								c2a: "Create a free account - top",
-							})
-						}}
-						w={["100%", "100%", "auto"]}
-					>
-						Create a free account
-					</Button>
-					<Button
 						as={Link}
 						// @ts-ignore
 						to="/test-graphql/"
 						aria-label="Link to the test graphql page"
 						onClick={() => {
-							mixpanel.track("Clicked a button", {
-								to: "https://meeshkan.com/test-graphql",
+							mixpanel.track("Mini GraphQL tester", {
+								to: "https://meeshkan.com/test-graphql/",
 								from: "https://meeshkan.com",
 								c2a: "Mini GraphQL tester",
 							})
 						}}
 						w={["100%", "100%", "auto"]}
-						colorScheme="gray"
 					>
 						Try the demo
 					</Button>
@@ -263,15 +214,15 @@ const IndexPage = () => {
 			>
 				<Flex justify="center">
 					<Button
-						as={ChakraLink}
+						as={Link}
 						// @ts-ignore
-						href="https://app.meeshkan.com"
-						aria-label="Create a free Meeshkan account."
+						to="/test-graphql/"
+						aria-label="Link to the test graphql page"
 						onClick={() => {
-							mixpanel.track("Clicked a button", {
-								to: "https://app.meeshkan.com",
+							mixpanel.track("Mini GraphQL tester", {
+								to: "https://meeshkan.com/test-graphql",
 								from: "https://meeshkan.com",
-								c2a: "Create a free account - bottom",
+								c2a: "Mini GraphQL tester",
 							})
 						}}
 						w={["100%", "100%", "auto"]}

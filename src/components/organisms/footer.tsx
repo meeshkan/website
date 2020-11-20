@@ -50,14 +50,6 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/pricing/"
-							aria-label="Meeshkan product pricing"
-						>
-							Pricing
-						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
 							to="/docs/terms-and-conditions/"
 							aria-label="Terms and conditions of the Meeshkan product"
 							title="terms and conditions"

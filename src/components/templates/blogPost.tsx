@@ -1,7 +1,6 @@
 import React from "react"
 import { SingleSection } from "../organisms/singleSection"
 import {
-	Divider,
 	Flex,
 	FormControl,
 	FormLabel,
@@ -47,7 +46,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 					pageImage={frontmatter.pageImage}
 				/>
 				<SingleSection>
-					<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
+					<Heading as="h1" textStyle="h1" textAlign="center" my={12}>
 						{frontmatter.title}
 					</Heading>
 					<Grid
@@ -165,7 +164,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						backgroundColor="gray.900"
 						mt={16}
 						p={8}
-						rounded="sm"
+						rounded="lg"
 					>
 						<Heading
 							as="h3"
