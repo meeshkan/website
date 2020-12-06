@@ -34,10 +34,18 @@ export function Footer() {
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
-							to="/about/"
+							to="/about-us/"
 							aria-label="About the Meeshkan team"
 						>
 							About us
+						</Link>
+						<Link
+							// @ts-ignore
+							as={GatsbyLink}
+							to="/about-us/jobs/"
+							aria-label="Careers the Meeshkan team is hiring for."
+						>
+							Careers
 						</Link>
 						<Link
 							// @ts-ignore
