@@ -67,38 +67,6 @@ export function Navigation() {
 
 	return (
 		<>
-			<Flex
-				justify="center"
-				backgroundColor="gray.900"
-				p={2}
-				color="white"
-				pos="fixed"
-				zIndex={1000}
-				top={0}
-				right={0}
-				left={0}
-			>
-				<DarkMode>
-					<Code
-						colorScheme="cyan"
-						rounded="sm"
-						padding="0px 4px"
-						minH="auto"
-						mr={4}
-						d="flex"
-						alignItems="center"
-						fontWeight={700}
-					>
-						Attend our webinar <ArrowForwardIcon ml={2} />
-					</Code>
-				</DarkMode>
-				<UniversalLink
-					to="/events/confidence-in-your-merge-to-production/"
-					mr={4}
-				>
-					How to release from staging to production
-				</UniversalLink>
-			</Flex>
 			<Stack
 				as="nav"
 				isInline
@@ -107,7 +75,7 @@ export function Navigation() {
 				p={4}
 				pos="fixed"
 				zIndex={1000}
-				top={5}
+				top={0}
 				right={0}
 				left={0}
 				backgroundColor={useColorModeValue("whiteAlpha.800", "blackAlpha.800")}
