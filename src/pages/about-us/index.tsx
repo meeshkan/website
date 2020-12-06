@@ -17,13 +17,19 @@ import Img from "gatsby-image"
 import { Card } from "../../components/atoms/card"
 import Layout from "../../components/templates/layout"
 
+// @ts-ignore
 import Mike from "../../../data/avatars/mike.png"
+// @ts-ignore
 import Kenna from "../../../data/avatars/kenna.png"
-import Kolya from "../../../data/avatars/kolya.jpg"
+// @ts-ignore
+import Kolya from "../../../data/avatars/Kolya.jpg"
+// @ts-ignore
 import Fredi from "../../../data/avatars/fredrik.png"
+// @ts-ignore
 import Maria from "../../../data/avatars/maria.png"
+// @ts-ignore
 import Nick from "../../../data/avatars/nikolaos.png"
-
+// @ts-ignore
 import systemOne from "../../static/System.One_Moderat_Wordmark.svg"
 import { UniversalLink } from "../../components/atoms/UniversalLink"
 
