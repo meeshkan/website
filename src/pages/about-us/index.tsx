@@ -7,22 +7,31 @@ import {
 	Box,
 	Link,
 	useColorModeValue,
+	Button,
+	Flex,
 } from "@chakra-ui/core"
-import { SingleSection } from "../components/organisms/singleSection"
-import SEO from "../components/molecules/seo"
+import { SingleSection } from "../../components/organisms/singleSection"
+import SEO from "../../components/molecules/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
-import { Card } from "../components/atoms/card"
-import Layout from "../components/templates/layout"
+import { Card } from "../../components/atoms/card"
+import Layout from "../../components/templates/layout"
 
-import Mike from "../../data/avatars/mike.png"
-import Kenna from "../../data/avatars/kenna.png"
-import Kolya from "../../data/avatars/nikolay.png"
-import Fredi from "../../data/avatars/fredrik.png"
-import Maria from "../../data/avatars/maria.png"
-import Nick from "../../data/avatars/nikolaos.png"
-
-import systemOne from "../static/System.One_Moderat_Wordmark.svg"
+// @ts-ignore
+import Mike from "../../../data/avatars/mike.png"
+// @ts-ignore
+import Kenna from "../../../data/avatars/kenna.png"
+// @ts-ignore
+import Kolya from "../../../data/avatars/Kolya.jpg"
+// @ts-ignore
+import Fredi from "../../../data/avatars/fredrik.png"
+// @ts-ignore
+import Maria from "../../../data/avatars/maria.png"
+// @ts-ignore
+import Nick from "../../../data/avatars/nikolaos.png"
+// @ts-ignore
+import systemOne from "../../static/System.One_Moderat_Wordmark.svg"
+import { UniversalLink } from "../../components/atoms/UniversalLink"
 
 const AboutUsPage = () => {
 	const data = useStaticQuery(
@@ -71,6 +80,13 @@ const AboutUsPage = () => {
 					About the Meeshkan team
 				</Heading>
 
+				<Text mb={4} lineHeight="tall">
+					Our product has changed a few times, but our vision of building a fake
+					version of the internet, hasn't. We began as a group of researchers,
+					and that is still heavily engrained into our culture despite also now
+					considering ourselves a software company.
+				</Text>
+
 				<Img
 					alt=""
 					fluid={data.team.childImageSharp.fluid}
@@ -79,12 +95,6 @@ const AboutUsPage = () => {
 						height: 350,
 					}}
 				/>
-				<Text mt={4} lineHeight="tall">
-					Our product has changed a few times, but our vision of building a fake
-					version of the internet, hasn't. We began as a group of researchers,
-					and that is still heavily engrained into our culture despite also now
-					considering ourselves a software company.
-				</Text>
 			</SingleSection>
 			<SingleSection heading="Our team">
 				<Grid
@@ -234,6 +244,16 @@ const AboutUsPage = () => {
 						</Text>
 					</Card>
 				</Grid>
+
+				<Text fontSize="xl" fontWeight={700} textAlign="center" mt={8} mb={4}>
+					Interested in joining our small but mighty team?
+				</Text>
+
+				<Flex justify="center">
+					<Button as={UniversalLink} to="/about-us/jobs/">
+						Visit our job openings
+					</Button>
+				</Flex>
 			</SingleSection>
 
 			<SingleSection heading="Values">
