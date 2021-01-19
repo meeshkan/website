@@ -4,81 +4,74 @@ import {
 	Heading,
 	Flex,
 	Button,
-	Link as ChakraLink,
-	DarkMode,
+	useColorModeValue,
+	LightMode,
+	Input,
 } from "@chakra-ui/react"
-import Img from "gatsby-image"
-import { graphql, useStaticQuery } from "gatsby"
 
 type CalloutProps = {
 	heading: string
 }
 
 const Callout = ({ heading }: CalloutProps) => {
-	const data = useStaticQuery(
-		graphql`
-			query {
-				testFailure: file(relativePath: { eq: "testFailureDark.png" }) {
-					childImageSharp {
-						fluid(quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-			}
-		`
-	)
 	return (
 		<>
-			<Box
-				as="section"
-				bg="gray.900"
-				borderRadius="6px"
-				my={16}
+			<Flex
+				maxW="1200px"
 				mx="auto"
-				maxW={1200}
+				justifyContent="center"
+				gridColumn={["1", "1", "2"]}
 				position="relative"
-				px={8}
-				py={8}
 			>
-				<Heading
-					as="h2"
-					textStyle="h3"
-					color="white"
-					mb={6}
-					ml={[0, 0, 0, 440, 522]}
-					textAlign={["center", "center", "center", "end"]}
-				>
-					{heading}
-				</Heading>
-				<Flex justify={["center", "center", "center", "flex-end"]}>
-					<Button
-						as={ChakraLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						href="https://meetings.hubspot.com/makenna/consultation-with-meeshkan"
-						aria-label="Schedule a demo with the Meeshkan team."
-					>
-						Schedule a demo
-					</Button>
-				</Flex>
 				<Box
-					maxW="550px"
-					pos="absolute"
-					left={0}
-					right={0}
-					bottom={0}
-					boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
-					display={["none", "none", "none", "block"]}
-					borderBottomLeftRadius="4px"
-					overflow="hidden"
+					as="section"
+					w="100%"
+					h="100%"
+					bg={useColorModeValue("gray.100", "gray.900")}
+					borderRadius="lg"
+					mx="auto"
+					maxW={1200}
+					p={8}
+					zIndex="1"
 				>
-					<Img
-						fluid={data.testFailure.childImageSharp.fluid}
-						alt="A screenshot of the test failure page in the Meeshkan website."
-					/>
+					<Heading as="h2" textStyle="h2" mb={6} textAlign="center">
+						{heading}
+					</Heading>
+					<Flex
+						maxW="600px"
+						mx="auto"
+						border="1px solid"
+						borderColor={useColorModeValue("gray.300", "gray.700")}
+						borderRadius="xl"
+						p={2}
+						transition="all 0.2s"
+						_hover={{ borderColor: useColorModeValue("gray.400", "gray.600") }}
+						_focusWithin={{
+							borderColor: useColorModeValue("blue.400", "blue.600"),
+						}}
+					>
+						<Input
+							placeholder="shipit@meeshkan.com"
+							mr={4}
+							border="none"
+							_focus={{}}
+						/>
+						<LightMode>
+							<Button minW="fit-content">Get early access</Button>
+						</LightMode>
+					</Flex>
 				</Box>
-			</Box>
+				<Box
+					w="100%"
+					h="100%"
+					borderRadius="lg"
+					background="conic-gradient(from 180deg at 50% 50%, #526EE0 0deg, #52E0C4 139.2deg, #DC1853 285.11deg, #526EE0 360deg)"
+					filter="blur(150px)"
+					position="absolute"
+					top={0}
+					left={0}
+				/>
+			</Flex>
 		</>
 	)
 }

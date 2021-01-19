@@ -6,87 +6,34 @@ import {
 	Text,
 	Flex,
 	Box,
-	Link as ChakraLink,
-	Accordion,
-	AccordionItem,
-	AccordionButton,
-	AccordionIcon,
-	AccordionPanel,
 	Grid,
-	Stack,
 	useColorModeValue,
+	LightMode,
+	Spacer,
+	Input,
+	List,
+	ListItem,
+	ListIcon,
+	SimpleGrid,
+	Stack,
 } from "@chakra-ui/react"
-import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { DoubleSection } from "../components/organisms/doubleSection"
-import Img from "gatsby-image"
 import Layout from "../components/templates/layout"
-import GenerateTests from "../components/organisms/home/generateTests"
-import PrioritizeTests from "../components/organisms/home/prioritizeTests"
-import HowDoesMeeshkanWork from "../components/organisms/home/meeshkanWorks"
+import {
+	ActivityIcon,
+	CheckSquareIcon,
+	CrosshairIcon,
+	GitHubIcon,
+	StoplightIcon,
+	UserIcon,
+	ZapIcon,
+} from "../../theme/icons"
+import FeatureCard from "../components/molecules/featureCard"
 import Callout from "../components/organisms/callout"
 
 const IndexPage = () => {
-	const data = useStaticQuery(
-		graphql`
-			query {
-				stack: file(relativePath: { eq: "stack.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 1000, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				video: file(relativePath: { eq: "video.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 300, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				map: file(relativePath: { eq: "dependencyMap.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 400, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				quality: file(relativePath: { eq: "authQuality.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 400, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				authSpec: file(relativePath: { eq: "authSpec.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 1000, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				continuous: file(relativePath: { eq: "continuousTests.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 1000, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-				premium: file(relativePath: { eq: "premiumTest.png" }) {
-					childImageSharp {
-						fluid(maxWidth: 1000, quality: 100) {
-							...GatsbyImageSharpFluid
-						}
-					}
-				}
-			}
-		`
-	)
-
-	const [showImage, setShowImage] = React.useState(
-		data.stack.childImageSharp.fluid
-	)
 	const mixpanel = useMixpanel()
 
 	return (
@@ -100,317 +47,251 @@ const IndexPage = () => {
 				<Heading
 					as="h1"
 					textStyle="h1"
-					mt={12}
+					mt={20}
 					mb={6}
 					textAlign={["left", "left", "center"]}
 				>
-					Dynamically generated QA for your product's GraphQL and REST APIs
+					Stop{" "}
+					<Box
+						as="span"
+						bgGradient={`linear(to-b, ${useColorModeValue(
+							"cyan.300",
+							"cyan.500"
+						)}, ${useColorModeValue("gray.900", "white")})`}
+						bgClip="text"
+						fontStyle="italic"
+					>
+						guessing.
+					</Box>
+					<br />
+					Test what matters. <br />
+					Release with confidence.
 				</Heading>
 				<Text
 					textAlign={["left", "left", "center"]}
 					fontSize={["md", "lg", "xl"]}
-					lineHeight="short"
+					lineHeight="mid"
+					maxW="600px"
+					mx="auto"
+					color={useColorModeValue("gray.600", "gray.300")}
 					mb={6}
 				>
-					The faster teams move, the harder it gets to write and maintain tests.
-					Meeshkan fixes that by on-commit executing thousands of tests on your
-					GraphQL/REST API's to keep up with your development team's velocity.
-					Using your schema and a touch of NLP, we test critical flows,
-					guaranteed to give you confidence in your app. Every commit.
+					Think the only way to ensure a smooth release is to pretend to be a
+					user? Think again.
 				</Text>
-				<Stack
-					spacing={[0, 0, 4]}
-					direction="row"
-					justify="center"
-					flexWrap="wrap"
+				<Flex
+					maxW="600px"
+					mx="auto"
+					border="1px solid"
+					borderColor={useColorModeValue("gray.300", "gray.700")}
+					borderRadius="xl"
+					p={2}
+					transition="all 0.2s"
+					_hover={{ borderColor: useColorModeValue("gray.400", "gray.600") }}
+					_focusWithin={{
+						borderColor: useColorModeValue("blue.400", "blue.600"),
+					}}
 				>
-					<Button
-						as={Link}
-						// @ts-ignore
-						to="/test-graphql/"
-						aria-label="Link to the test graphql page"
-						onClick={() => {
-							mixpanel.track("Mini GraphQL tester", {
-								to: "https://meeshkan.com/test-graphql/",
-								from: "https://meeshkan.com",
-								c2a: "Mini GraphQL tester",
-							})
-						}}
-						w={["100%", "100%", "auto"]}
-					>
-						Try the demo
-					</Button>
-				</Stack>
-				{/* <Box maxW="750px" mx="auto">
-          <Card>
-            <Flex
-              justify={["center", "space-between"]}
-              align="center"
-              display={["block", "block", "flex"]}
-            >
-              <Box textAlign={["center", "center", "right"]} mr={[0, 0, 8]}>
-                <Heading
-                  as="h3"
-                  fontSize="2xl"
-                  fontWeight={900}
-                  letterSpacing="wide"
-                  mb={4}
-                >
-                  Watch this demo
-                </Heading>
-                <Text
-                  fontWeight={500}
-                  lineHeight="tall"
-                  color="gray.700"
-                  fontSize="lg"
-                >
-                  Let's explore how Meeshkan can help you squash killer bugs in
-                  your backend services.
-                </Text>
-              </Box>
-              <Box cursor="pointer" onClick={onOpen} mt={[4, 4, 0]}>
-                <Img
-                  fluid={data.video.childImageSharp.fluid}
-                  style={{ width: 240, borderRadius: 2, margin: "0 auto" }}
-                  alt="A screen grab from the demo video that pops up when you click it."
-                />
-              </Box>
-              <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                <ModalOverlay />
-                <ModalContent backgroundColor="transparent">
-                  <iframe
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/ndMYYxP_Gzs?autoplay=1&cc_load_policy=1"
-                    style={{ borderRadius: 2 }}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; allowfullscreen"
-                  ></iframe>
-                </ModalContent>
-              </Modal>
-            </Flex>
-          </Card>
-        </Box> */}
-			</SingleSection>
-
-			<DoubleSection
-				heading="Prioritize your development efforts with filtered bug reports"
-				text="Meeshkan prioritizes and sorts bugs so that your engineers know what to tackle first, what to put in the backlog, and what to ignore. Code coverage metrics aren't meaningful without the quality context of what's covered."
-			>
-				<PrioritizeTests />
-			</DoubleSection>
-
-			<DoubleSection
-				reverse={true}
-				heading="Keeping up with an ever-evolving API is a full-time job"
-				text="Someone makes a change to your GraphQL schema, the existing tests become outdated and now you're stuck rewriting your tests. We know because we've been there. Meeshkan uses GraphQL introspection to dynamically generate tests based on your schema."
-			>
-				<GenerateTests />
-			</DoubleSection>
-
-			<SingleSection
-				heading="Automate QA testing for GraphQL and REST APIs"
-				text="By combining schema introspection, property-based testing, and Natural Language Processing, Meeshkan gives you the confidence that your product's GraphQL or REST APIs are working as expected."
-			>
-				<Flex justify="center">
-					<Button
-						as={Link}
-						// @ts-ignore
-						to="/test-graphql/"
-						aria-label="Link to the test graphql page"
-						onClick={() => {
-							mixpanel.track("Mini GraphQL tester", {
-								to: "https://meeshkan.com/test-graphql",
-								from: "https://meeshkan.com",
-								c2a: "Mini GraphQL tester",
-							})
-						}}
-						w={["100%", "100%", "auto"]}
-					>
-						Test your project
-					</Button>
+					<Input
+						placeholder="shipit@meeshkan.com"
+						mr={4}
+						border="none"
+						_focus={{}}
+					/>
+					<LightMode>
+						<Button minW="fit-content">Get early access</Button>
+					</LightMode>
 				</Flex>
 			</SingleSection>
 
-			<SingleSection>
+			<Spacer h={32} />
+
+			<DoubleSection
+				heading="Everyone loves UI tests but...they suck at finding real bugs"
+				text="Your users are your best testers, but when you make them unwitting guinea pigs, they stop being your users and become your competitor’s users. "
+			>
+				<Box backgroundColor="gray.800" w="100%" h="300px" borderRadius="lg" />
+			</DoubleSection>
+
+			<Spacer h={32} />
+
+			<Box
+				as="section"
+				maxW="1200px"
+				mx="auto"
+				py={12}
+				pl={6}
+				backgroundColor={useColorModeValue("gray.100", "gray.800")}
+				borderRadius="lg"
+				overflow="hidden"
+			>
 				<Grid
 					templateColumns={[
+						"repeat(auto-fill, 1fr)",
 						"reapeat(auto-fill, 1fr)",
 						"reapeat(auto-fill, 1fr)",
-						"33% 66%",
+						"repeat(2, 1fr)",
 					]}
-					gap={8}
+					gap={16}
+					gridAutoFlow="dense"
 				>
-					<Box>
-						<Heading as="h2" textStyle="h2" mb={6}>
-							Key Features
-						</Heading>
-						<Accordion allowToggle defaultIndex={[0]}>
-							<AccordionItem
-								border="none"
-								onClick={() => setShowImage(data.stack.childImageSharp.fluid)}
-							>
-								<AccordionButton
-									p={4}
-									rounded="md"
-									fontSize="md"
-									fontWeight={600}
-									_expanded={{
-										color: useColorModeValue("gray.900", "white"),
-										bg: useColorModeValue("gray.50", "gray.800"),
-										fontWeight: 900,
-										roundedBottom: 0,
-									}}
-									_hover={{
-										bg: useColorModeValue("gray.100", "gray.700"),
-									}}
-								>
-									<Box flex="1" textAlign="left">
-										REST Compatible
-									</Box>
-									<AccordionIcon color="gray.300" />
-								</AccordionButton>
-								<AccordionPanel
-									pb={4}
-									bg={useColorModeValue("gray.50", "gray.800")}
-									roundedBottom="md"
-									lineHeight="1.4"
-								>
-									Meeshkan also works for your REST APIs by generating tests
-									with an OpenAPI specification and a little NLP. If you don't
-									have an OpenAPI spec, we'll point you to the resources to
-									create one.
-								</AccordionPanel>
-							</AccordionItem>
-
-							<AccordionItem
-								border="none"
-								onClick={() =>
-									setShowImage(data.continuous.childImageSharp.fluid)
-								}
-							>
-								<AccordionButton
-									p={4}
-									rounded="md"
-									fontSize="md"
-									fontWeight={600}
-									_expanded={{
-										color: useColorModeValue("gray.900", "white"),
-										bg: useColorModeValue("gray.50", "gray.800"),
-										fontWeight: 900,
-										roundedBottom: 0,
-									}}
-									_hover={{
-										bg: useColorModeValue("gray.100", "gray.700"),
-									}}
-								>
-									<Box flex="1" textAlign="left">
-										Continuous testing
-									</Box>
-									<AccordionIcon color="gray.300" />
-								</AccordionButton>
-								<AccordionPanel
-									pb={4}
-									bg={useColorModeValue("gray.50", "gray.800")}
-									roundedBottom="md"
-									lineHeight="1.4"
-								>
-									Every time you push a commit to GitHub, Meeshkan runs tests to
-									check for breaking changes. If something does fail, our GitHub
-									integration will notify you and details will be available in
-									the Meeshkan webapp.
-								</AccordionPanel>
-							</AccordionItem>
-
-							<AccordionItem
-								border="none"
-								onClick={() => setShowImage(data.premium.childImageSharp.fluid)}
-							>
-								<AccordionButton
-									p={4}
-									rounded="md"
-									fontSize="md"
-									fontWeight={600}
-									_expanded={{
-										color: useColorModeValue("gray.900", "white"),
-										bg: useColorModeValue("gray.50", "gray.800"),
-										fontWeight: 900,
-										roundedBottom: 0,
-									}}
-									_hover={{
-										bg: useColorModeValue("gray.100", "gray.700"),
-									}}
-								>
-									<Box flex="1" textAlign="left">
-										Premium audits
-									</Box>
-									<AccordionIcon color="gray.300" />
-								</AccordionButton>
-								<AccordionPanel
-									pb={4}
-									bg={useColorModeValue("gray.50", "gray.800")}
-									roundedBottom="md"
-									lineHeight="1.4"
-								>
-									If you're on a Pro plan or higher, Meeshkan provides weekly
-									audit reports through the webapp. These audits include a full
-									catalog of the bugs found, the failing request, and suggested
-									fixes - all sorted by priority.
-								</AccordionPanel>
-							</AccordionItem>
-
-							<AccordionItem
-								border="none"
-								onClick={() =>
-									setShowImage(data.authSpec.childImageSharp.fluid)
-								}
-							>
-								<AccordionButton
-									p={4}
-									rounded="md"
-									fontSize="md"
-									fontWeight={600}
-									_expanded={{
-										color: useColorModeValue("gray.900", "white"),
-										bg: useColorModeValue("gray.50", "gray.800"),
-										fontWeight: 900,
-										roundedBottom: 0,
-									}}
-									_hover={{
-										bg: useColorModeValue("gray.100", "gray.700"),
-									}}
-								>
-									<Box flex="1" textAlign="left">
-										Auth flows
-									</Box>
-									<AccordionIcon color="gray.300" />
-								</AccordionButton>
-								<AccordionPanel
-									pb={4}
-									bg={useColorModeValue("gray.50", "gray.800")}
-									roundedBottom="md"
-									lineHeight="1.4"
-								>
-									Our Business plan gives you access to a breakdown of an auth
-									flow specification for your API. This enables you to visualize
-									and control who has access to certain queries and test those
-									endpoints accordingly.
-								</AccordionPanel>
-							</AccordionItem>
-						</Accordion>
-					</Box>
-					<Box minW="300px" bg="gray.50" borderRadius="md">
-						<Img
-							fluid={showImage}
-							alt="Meeshkan is framework agnostic testing. Showing logos of backend technologies supported such as python, django, elixir, scala, graphql, REST, node.js, ruby on rails, java and more."
+					<Flex
+						justifyContent="center"
+						gridColumn={["1", "1", "2"]}
+						position="relative"
+					>
+						<Box
+							w="100%"
+							h="100%"
+							borderRadius="lg"
+							mr="-8px"
+							background="conic-gradient(from 180deg at 50% 50%, #526EE0 0deg, #52E0C4 139.2deg, #DC1853 285.11deg, #526EE0 320deg)"
+							filter="blur(150px)"
+							position="absolute"
+							top={0}
+							left={0}
 						/>
+						<Box
+							backgroundColor={useColorModeValue("white", "gray.900")}
+							w="100%"
+							h="400px"
+							borderRadius="lg"
+							mr="-8px"
+							zIndex="1"
+						/>
+					</Flex>
+					<Box>
+						<Heading as="h2" textStyle="h3" mb={6}>
+							Focus on creating, <wbr /> not troubleshooting
+						</Heading>
+						<Text
+							textAlign="left"
+							fontSize={["md", "lg", "xl"]}
+							lineHeight="tall"
+							mb={4}
+						>
+							No one tests better than a user. So let us create some for you.
+							Join the first innovation in QA since 1991.
+						</Text>
+
+						<List spacing={4} mb={10} fontSize="lg">
+							<ListItem>
+								<ListIcon
+									color={useColorModeValue(`cyan.600`, `cyan.200`)}
+									as={CheckSquareIcon}
+									lineHeight="tall"
+								/>
+								Real User Flows to recreate in Staging
+							</ListItem>
+							<ListItem>
+								<ListIcon
+									color={useColorModeValue(`cyan.600`, `cyan.200`)}
+									as={CheckSquareIcon}
+									lineHeight="tall"
+								/>
+								Quantify your confidence to merge with an M-score
+							</ListItem>
+							<ListItem>
+								<ListIcon
+									color={useColorModeValue(`cyan.600`, `cyan.200`)}
+									as={CheckSquareIcon}
+									lineHeight="tall"
+								/>
+								Machine Learning enabled test runs
+							</ListItem>
+						</List>
+						<LightMode>
+							<Button>Start gathering insights</Button>
+						</LightMode>
 					</Box>
 				</Grid>
+			</Box>
+
+			<Spacer h={32} />
+
+			<SingleSection
+				heading="Release on-time, every time"
+				text="Here are some of the other ways Meeshkan guarentees the smoothest release cycle you’ll ever experience."
+			>
+				<SimpleGrid
+					spacing={8}
+					columns={[1, 2, 3]}
+					px={4}
+					mt={12}
+					fontWeight={500}
+				>
+					<FeatureCard>
+						<ActivityIcon color="cyan.400" boxSize={6} />
+						<Text>Health metrics dashboard</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<UserIcon color="cyan.400" boxSize={6} />
+						<Text>User generated tests</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<ZapIcon color="cyan.400" boxSize={6} />
+						<Text>ML grouped user flows</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<CrosshairIcon color="cyan.400" boxSize={6} />
+						<Text>Pinpoint bug introductions</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<GitHubIcon color="cyan.400" boxSize={6} />
+						<Text>GitHub checks integration</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<StoplightIcon color="cyan.400" boxSize={6} />
+						<Text>Confidence score</Text>
+					</FeatureCard>
+				</SimpleGrid>
 			</SingleSection>
 
-			<HowDoesMeeshkanWork />
+			<Spacer h={32} />
 
-			<Callout heading="How can Meeshkan's automated GraphQL testing save your organization hours of bug fixing?" />
+			<SingleSection
+				heading="Cut testing time by 80% and ship higher quality products"
+				text="Make your whole userbase your QA team. Run comprehensive tests in minutes."
+			>
+				<Stack direction="row" justify="space-between" spacing={8}>
+					<Box
+						backgroundColor="blackAlpha.300"
+						w="100%"
+						h="24px"
+						borderRadius="lg"
+					/>
+					<Box
+						backgroundColor="blackAlpha.300"
+						w="100%"
+						h="24px"
+						borderRadius="lg"
+					/>
+					<Box
+						backgroundColor="blackAlpha.300"
+						w="100%"
+						h="24px"
+						borderRadius="lg"
+					/>
+					<Box
+						backgroundColor="blackAlpha.300"
+						w="100%"
+						h="24px"
+						borderRadius="lg"
+					/>
+					<Box
+						backgroundColor="blackAlpha.300"
+						w="100%"
+						h="24px"
+						borderRadius="lg"
+					/>
+				</Stack>
+			</SingleSection>
+
+			<Spacer h={32} />
+
+			<Callout heading="Start using Meeshkan today to test in staging like your real users do in production" />
+
+			<Spacer h="24rem" />
 		</Layout>
 	)
 }

@@ -21,7 +21,7 @@ export const DoubleSection = ({
 	em,
 	...props
 }: DoubleSectionProps) => (
-	<Box as="section" maxW="1000px" mx="auto" py={16} {...props}>
+	<Box as="section" maxW="1200px" mx="auto" py={16} {...props}>
 		<Grid
 			templateColumns={[
 				"repeat(auto-fill, 1fr)",
@@ -29,7 +29,7 @@ export const DoubleSection = ({
 				"reapeat(auto-fill, 1fr)",
 				"repeat(2, 1fr)",
 			]}
-			gap={14}
+			gap={16}
 			gridAutoFlow="dense"
 		>
 			{reverse ? (

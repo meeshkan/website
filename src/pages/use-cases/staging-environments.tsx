@@ -28,7 +28,6 @@ import {
 	Select,
 	LightMode,
 } from "@chakra-ui/react"
-import { Card } from "../../components/atoms/card"
 import { useForm } from "react-hook-form"
 import SEO from "../../components/molecules/seo"
 import Test from "../../components/molecules/test"
@@ -50,20 +49,7 @@ import {
 	SunIcon,
 	MoonIcon,
 } from "../../../theme/icons"
-
-type FeatureProps = {
-	children: Object
-}
-
-const FeatureCard = ({ children }: FeatureProps) => {
-	return (
-		<Card shadow padding={4}>
-			<Stack isInline spacing={4} align="center" h="100%">
-				{children}
-			</Stack>
-		</Card>
-	)
-}
+import FeatureCard from "../../components/molecules/featureCard"
 
 type LightOrDark = "light" | "dark"
 
