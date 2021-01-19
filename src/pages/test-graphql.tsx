@@ -14,7 +14,7 @@ import {
 	Collapse,
 	useColorModeValue,
 	LightMode,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
 import { CheckmarkIcon, GraphQLSnippetIcon } from "../../theme/icons"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -188,7 +188,7 @@ const TestGraphqlPage = () => {
 									loadingText="Testing"
 									isDisabled={endpointSubmit}
 									w={["100%", "100%", "inherit"]}
-									minW='fit-content'
+									minW="fit-content"
 								>
 									Test Endpoint
 								</Button>
@@ -259,8 +259,8 @@ const TestGraphqlPage = () => {
 							{testing === true
 								? `Testing takes ~30 seconds`
 								: endpointSubmit === true
-									? `Your test results are listed below`
-									: null}
+								? `Your test results are listed below`
+								: null}
 						</Text>
 					)}
 				</Box>

@@ -15,7 +15,7 @@ import {
 	Grid,
 	Stack,
 	useColorModeValue,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { SingleSection } from "../components/organisms/singleSection"
 import { useMixpanel } from "gatsby-plugin-mixpanel"

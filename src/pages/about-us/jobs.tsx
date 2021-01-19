@@ -8,7 +8,7 @@ import {
 	List,
 	ListItem,
 	Code,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import { SingleSection } from "../../components/organisms/singleSection"
 import Layout from "../../components/templates/layout"
 import SEO from "../../components/molecules/seo"

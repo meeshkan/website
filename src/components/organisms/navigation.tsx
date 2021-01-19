@@ -16,7 +16,7 @@ import {
 	useColorModeValue,
 	DarkMode,
 	Code,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
 import {
