@@ -16,6 +16,7 @@ import {
 	useColorModeValue,
 	DarkMode,
 	Code,
+	Box,
 } from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -78,38 +79,30 @@ export function Navigation() {
 				top={0}
 				right={0}
 				left={0}
-				backgroundColor={useColorModeValue("whiteAlpha.800", "blackAlpha.800")}
-				style={{
-					backdropFilter: "blur(4px)",
-					WebkitBackdropFilter: "blur(4px)",
-				}}
+				backgroundColor={useColorModeValue("white", "gray.900")}
 				borderBottom="1px solid"
-				borderBottomColor={useColorModeValue("gray.50", "gray.900")}
+				borderBottomColor={useColorModeValue("gray.100", "gray.800")}
 			>
-				<Link to="/" aria-label="Meeshkan home">
-					<AnimatedLogo />
-				</Link>
+				<Flex>
+					<Link to="/" aria-label="Meeshkan home">
+						<AnimatedLogo />
+					</Link>
 
-				{/* Desktop & Tablet */}
-				<Stack isInline display={["none", "none", "flex"]}>
-					{/* <NavLink text="Pricing" path="/pricing/" /> */}
-					<NavLink text="Blog" path="/blog/" />
-					<NavLink text="Roadmap" path="/roadmap/" />
-					<NavLink text="Docs" path="/docs/" />
-					<Flex>
-						{/* <SignUpLink />
-						<Divider
-							orientation="vertical"
-							borderColor={useColorModeValue("gray.100", "gray.700")}
-						/>
-						<LogInLink /> */}
-					</Flex>
-				</Stack>
+					{/* Desktop & Tablet */}
+					<Stack isInline display={["none", "none", "flex"]} ml={8}>
+						<NavLink text="Blog" path="/blog/" />
+						<NavLink text="Roadmap" path="/roadmap/" />
+					</Stack>
+				</Flex>
+				<Box display={["none", "none", "flex"]}>
+					<LogInLink />
+				</Box>
 
 				{/* Mobile */}
 				<IconButton
 					aria-label="Open the navigation menu"
 					variant="ghost"
+					colorScheme="gray"
 					ref={btnRef}
 					onClick={onOpen}
 					icon={<HamburgerIcon />}
@@ -122,32 +115,32 @@ export function Navigation() {
 					finalFocusRef={btnRef}
 					size="sm"
 				>
-					<DrawerContent shadow="none">
-						<DrawerCloseButton
-							size="md"
-							onClick={onClose}
-							aria-label="Close the navigation menu"
-						/>
-						<DrawerHeader p={4}>
+					<DrawerContent
+						backgroundColor={useColorModeValue("white", "gray.900")}
+					>
+						<DrawerHeader p={4} mt={3}>
+							<DrawerCloseButton
+								mt={4}
+								size="md"
+								onClick={onClose}
+								aria-label="Close the navigation menu"
+							/>
 							<Link to="/" aria-label="Meeshkan homepage">
 								<LogoIcon h={6} w="auto" />
 							</Link>
 						</DrawerHeader>
 						<DrawerBody
 							py={6}
-							backgroundColor="whiteAlpha.300"
 							style={{
 								backdropFilter: "blur(4px)",
 								WebkitBackdropFilter: "blur(4px)",
 							}}
 						>
 							<Stack align="center">
-								<NavLink text="Pricing" path="/pricing/" />
+								<NavLink text="Roadmap" path="/roadmap/" />
 								<NavLink text="Blog" path="/blog/" />
-								<NavLink text="Docs" path="/docs/" />
 								<Divider w="50%" borderColor="gray.100" />
-								{/* <SignUpLink /> */}
-								{/* <LogInLink /> */}
+								<LogInLink />
 							</Stack>
 						</DrawerBody>
 						<DrawerFooter d="flex" justifyContent="center">
@@ -159,8 +152,9 @@ export function Navigation() {
 									isExternal
 									aria-label="Twitter"
 									icon={<TwitterIcon />}
-									rounded="sm"
-									color="gray.500"
+									rounded="lg"
+									colorScheme="gray"
+									variant="ghost"
 								/>
 								<IconButton
 									as={Link}
@@ -169,8 +163,9 @@ export function Navigation() {
 									isExternal
 									aria-label="LinkedIn"
 									icon={<LinkedInIcon />}
-									rounded="sm"
-									color="gray.500"
+									rounded="lg"
+									colorScheme="gray"
+									variant="ghost"
 								/>
 								<IconButton
 									as={Link}
@@ -179,8 +174,9 @@ export function Navigation() {
 									isExternal
 									aria-label="GitHub"
 									icon={<GitHubIcon />}
-									rounded="sm"
-									color="gray.500"
+									rounded="lg"
+									colorScheme="gray"
+									variant="ghost"
 								/>
 							</Stack>
 						</DrawerFooter>

@@ -1,6 +1,6 @@
 import React from "react"
 import { Link as GatsbyLink } from "gatsby"
-import { Button } from "@chakra-ui/react"
+import { Button, useColorModeValue } from "@chakra-ui/react"
 
 type NavLinkProps = {
 	text: string
@@ -11,8 +11,8 @@ const NavLink = ({ text, path, ...props }: NavLinkProps) => (
 	<Button
 		{...props}
 		variant="ghost"
+		color={useColorModeValue("gray.500", "gray.400")}
 		as={GatsbyLink}
-		// @ts-ignore
 		to={path}
 		colorScheme="gray"
 		fontWeight={600}

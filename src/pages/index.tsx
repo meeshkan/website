@@ -15,10 +15,10 @@ import {
 	ListItem,
 	ListIcon,
 	SimpleGrid,
-	Stack,
+	Code,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
-import { useMixpanel } from "gatsby-plugin-mixpanel"
+// import { useMixpanel } from "gatsby-plugin-mixpanel"
 import { DoubleSection } from "../components/organisms/doubleSection"
 import Layout from "../components/templates/layout"
 import {
@@ -34,7 +34,7 @@ import FeatureCard from "../components/molecules/featureCard"
 import Callout from "../components/organisms/callout"
 
 const IndexPage = () => {
-	const mixpanel = useMixpanel()
+	// const mixpanel = useMixpanel()
 
 	return (
 		<Layout>
@@ -91,12 +91,15 @@ const IndexPage = () => {
 					_focusWithin={{
 						borderColor: useColorModeValue("blue.400", "blue.600"),
 					}}
+					direction={["column", "column", "row"]}
 				>
 					<Input
 						placeholder="shipit@meeshkan.com"
+						_placeholder={{ color: useColorModeValue("gray.500", "gray.400") }}
 						mr={4}
 						border="none"
 						_focus={{}}
+						mb={[4, 4, 0]}
 					/>
 					<LightMode>
 						<Button minW="fit-content">Get early access</Button>
@@ -107,8 +110,8 @@ const IndexPage = () => {
 			<Spacer h={32} />
 
 			<DoubleSection
-				heading="Everyone loves UI tests but...they suck at finding real bugs"
-				text="Your users are your best testers, but when you make them unwitting guinea pigs, they stop being your users and become your competitor’s users. "
+				heading="Your users are your best testers"
+				text="Classic UI tests suck at finding real bugs. But when you make them  guinea pigs, they stop being your users and become your competitor’s users. Ship with uncrossed fingers 🤞✌️, Test like a your real users."
 			>
 				<Box backgroundColor="gray.800" w="100%" h="300px" borderRadius="lg" />
 			</DoubleSection>
@@ -144,7 +147,7 @@ const IndexPage = () => {
 							w="100%"
 							h="100%"
 							borderRadius="lg"
-							mr="-8px"
+							mr={[0, 0, "-8px"]}
 							background="conic-gradient(from 180deg at 50% 50%, #526EE0 0deg, #52E0C4 139.2deg, #DC1853 285.11deg, #526EE0 320deg)"
 							filter="blur(150px)"
 							position="absolute"
@@ -162,7 +165,7 @@ const IndexPage = () => {
 					</Flex>
 					<Box>
 						<Heading as="h2" textStyle="h3" mb={6}>
-							Focus on creating, <wbr /> not troubleshooting
+							Focus on creating, not troubleshooting
 						</Heading>
 						<Text
 							textAlign="left"
@@ -213,13 +216,7 @@ const IndexPage = () => {
 				heading="Release on-time, every time"
 				text="Here are some of the other ways Meeshkan guarentees the smoothest release cycle you’ll ever experience."
 			>
-				<SimpleGrid
-					spacing={8}
-					columns={[1, 2, 3]}
-					px={4}
-					mt={12}
-					fontWeight={500}
-				>
+				<SimpleGrid spacing={8} columns={[1, 2, 3]} mt={12} fontWeight={500}>
 					<FeatureCard>
 						<ActivityIcon color="cyan.400" boxSize={6} />
 						<Text>Health metrics dashboard</Text>
@@ -253,45 +250,102 @@ const IndexPage = () => {
 				heading="Cut testing time by 80% and ship higher quality products"
 				text="Make your whole userbase your QA team. Run comprehensive tests in minutes."
 			>
-				<Stack direction="row" justify="space-between" spacing={8}>
-					<Box
-						backgroundColor="blackAlpha.300"
-						w="100%"
-						h="24px"
-						borderRadius="lg"
-					/>
-					<Box
-						backgroundColor="blackAlpha.300"
-						w="100%"
-						h="24px"
-						borderRadius="lg"
-					/>
-					<Box
-						backgroundColor="blackAlpha.300"
-						w="100%"
-						h="24px"
-						borderRadius="lg"
-					/>
-					<Box
-						backgroundColor="blackAlpha.300"
-						w="100%"
-						h="24px"
-						borderRadius="lg"
-					/>
-					<Box
-						backgroundColor="blackAlpha.300"
-						w="100%"
-						h="24px"
-						borderRadius="lg"
-					/>
-				</Stack>
+				<SimpleGrid minChildWidth="250px" spacing={8}>
+					<Box w="100%">
+						<Code
+							colorScheme="cyan"
+							fontSize="14px"
+							fontWeight={600}
+							rounded="md"
+							p={2}
+							minH="auto"
+							mb={2}
+							mt={4}
+						>
+							Step 1
+						</Code>
+						<Heading as="h4" textStyle="h4" mb={4}>
+							Record user behavior in production
+						</Heading>
+						<Text>
+							Visualize precisely how your software is used, by tracking &amp;
+							recording every user interaction in production.
+						</Text>
+					</Box>
+					<Box w="100%">
+						<Code
+							colorScheme="cyan"
+							fontSize="14px"
+							fontWeight={600}
+							rounded="md"
+							p={2}
+							minH="auto"
+							mb={2}
+							mt={4}
+						>
+							Step 2
+						</Code>
+						<Heading as="h4" textStyle="h4" mb={4}>
+							Validate grouped user flows
+						</Heading>
+						<Text>
+							Recordings are grouped to show you the most (and least) common
+							ways your app is used. Simply verify the flows you want checked
+							before merging.
+						</Text>
+					</Box>
+					<Box w="100%">
+						<Code
+							colorScheme="cyan"
+							fontSize="14px"
+							fontWeight={600}
+							rounded="md"
+							p={2}
+							minH="auto"
+							mb={2}
+							mt={4}
+						>
+							Step 3
+						</Code>
+						<Heading as="h4" textStyle="h4" mb={4}>
+							Meeshkan creates fake users
+						</Heading>
+						<Text>
+							We'll create "users" from your grouped flows, and they're keen to
+							get testing! Daily, or per commit, they'll ensure that no core
+							systems are down.
+						</Text>
+					</Box>
+					<Box w="100%">
+						<Code
+							colorScheme="cyan"
+							fontSize="14px"
+							fontWeight={600}
+							rounded="md"
+							p={2}
+							minH="auto"
+							mb={2}
+							mt={4}
+						>
+							Step 4
+						</Code>
+
+						<Heading as="h4" textStyle="h4" mb={4}>
+							Merge confidently with the Dashboard
+						</Heading>
+						<Text>
+							Get a full overview of your test coverage, with a Confidence Score
+							that will tell you if you're ready to merge.
+						</Text>
+					</Box>
+				</SimpleGrid>
 			</SingleSection>
 
 			<Spacer h={32} />
 
 			<Callout heading="Start using Meeshkan today to test in staging like your real users do in production" />
 
-			<Spacer h="24rem" />
+			<Spacer h={[32, 32, "24rem"]} />
 		</Layout>
 	)
 }

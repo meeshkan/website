@@ -8,23 +8,24 @@ import {
 	Flex,
 	Divider,
 	IconButton,
-	Button,
-	useColorMode,
 	useColorModeValue,
 } from "@chakra-ui/react"
 import {
 	GitHubIcon,
 	LinkedInIcon,
 	LogoIcon,
-	MoonIcon,
-	SunIcon,
 	TwitterIcon,
 } from "../../../theme/icons"
 
 export function Footer() {
-	const { colorMode, toggleColorMode } = useColorMode()
 	return (
-		<Box as="footer" bg={useColorModeValue("gray.50", "gray.800")} p={6}>
+		<Box
+			as="footer"
+			bg={useColorModeValue("white", "gray.900")}
+			borderTop="1px solid"
+			borderTopColor={useColorModeValue("gray.100", "gray.800")}
+			p={6}
+		>
 			<Box maxW="1000px" mx="auto">
 				<Flex wrap="wrap" justify="center">
 					<Stack my={4} w={["100%", "25%"]}>
@@ -32,7 +33,6 @@ export function Footer() {
 							Company
 						</Heading>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/about-us/"
 							aria-label="About the Meeshkan team"
@@ -40,7 +40,6 @@ export function Footer() {
 							About us
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/about-us/jobs/"
 							aria-label="Careers the Meeshkan team is hiring for."
@@ -48,7 +47,6 @@ export function Footer() {
 							Careers
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/contact/"
 							aria-label="Contact the Meeshkan team"
@@ -56,7 +54,6 @@ export function Footer() {
 							Contact
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/docs/terms-and-conditions/"
 							aria-label="Terms and conditions of the Meeshkan product"
@@ -71,7 +68,6 @@ export function Footer() {
 						</Heading>
 
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/events/confidence-in-your-merge-to-production/"
 							aria-label="A landing page for the webinar about confidence merging to production"
@@ -175,16 +171,7 @@ export function Footer() {
 						/>
 					</GatsbyLink>
 					<Stack isInline d={["none", "flex"]}>
-						<Button
-							ml={4}
-							size="sm"
-							variant="ghost"
-							leftIcon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-							onClick={toggleColorMode}
-							colorScheme="gray"
-						>
-							{colorMode === "light" ? "dark" : "light"} mode
-						</Button>
+						{/* @ts-ignore */}
 						<IconButton
 							as={Link}
 							variant="ghost"

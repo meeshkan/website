@@ -31,7 +31,7 @@ const Callout = ({ heading }: CalloutProps) => {
 					borderRadius="lg"
 					mx="auto"
 					maxW={1200}
-					p={8}
+					p={[4, 4, 8]}
 					zIndex="1"
 				>
 					<Heading as="h2" textStyle="h2" mb={6} textAlign="center">
@@ -49,15 +49,20 @@ const Callout = ({ heading }: CalloutProps) => {
 						_focusWithin={{
 							borderColor: useColorModeValue("blue.400", "blue.600"),
 						}}
+						direction={["column", "column", "row"]}
 					>
 						<Input
 							placeholder="shipit@meeshkan.com"
+							_placeholder={{
+								color: useColorModeValue("gray.500", "gray.400"),
+							}}
 							mr={4}
 							border="none"
 							_focus={{}}
+							mb={[4, 4, 0]}
 						/>
 						<LightMode>
-							<Button minW="fit-content">Get early access</Button>
+							<Button minW="fit-content">Get a consultation</Button>
 						</LightMode>
 					</Flex>
 				</Box>
