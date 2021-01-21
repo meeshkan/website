@@ -3,25 +3,9 @@ const path = require(`path`)
 exports.createPages = ({ actions, graphql }) => {
 	const { createPage } = actions
 	const blogPost = path.resolve("src/components/templates/blogPost.tsx")
-	const docPage = path.resolve(`src/components/templates/docsLayout.tsx`)
 
 	return graphql(`
 		{
-			documentation: allMdx(filter: { fileAbsolutePath: { regex: "/docs/" } }) {
-				totalCount
-				nodes {
-					headings(depth: h1) {
-						value
-					}
-					id
-					body
-					excerpt(pruneLength: 140)
-					slug
-					frontmatter {
-						slug
-					}
-				}
-			}
 			blog: allMdx(
 				filter: { frontmatter: { published: { eq: true } } }
 				sort: { fields: [frontmatter___date], order: DESC }
@@ -45,7 +29,6 @@ exports.createPages = ({ actions, graphql }) => {
 		}
 
 		const posts = result.data.blog.nodes
-		const docs = result.data.documentation.nodes
 
 		// create page for each mdx file
 		posts.forEach((post, index) => {
@@ -60,19 +43,6 @@ exports.createPages = ({ actions, graphql }) => {
 					slug: post.frontmatter.slug,
 					previous,
 					next,
-				},
-			})
-		})
-
-		docs.forEach((doc, index) => {
-			createPage({
-				path: `/docs/${doc.frontmatter.slug}/`,
-				component: docPage,
-				context: {
-					doc,
-					id: doc.id,
-					title: doc.headings[0].value,
-					slug: doc.frontmatter.slug,
 				},
 			})
 		})

@@ -53,14 +53,6 @@ export function Footer() {
 						>
 							Contact
 						</Link>
-						<Link
-							as={GatsbyLink}
-							to="/docs/terms-and-conditions/"
-							aria-label="Terms and conditions of the Meeshkan product"
-							title="terms and conditions"
-						>
-							T&amp;C
-						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
@@ -74,22 +66,7 @@ export function Footer() {
 						>
 							Webinar - Merging to prod
 						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/docs/"
-							aria-label="Meeshkan's documentation"
-						>
-							Documentation
-						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/docs/frequently-asked-questions/"
-							aria-label="Frequently asked questions about Meeshkan"
-						>
-							FAQ
-						</Link>
+
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
