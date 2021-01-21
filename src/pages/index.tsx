@@ -43,8 +43,8 @@ const IndexPage = () => {
 	return (
 		<Layout>
 			<SEO
-				pageTitle="QA testing for GraphQL and REST APIs"
-				pageDescription="Meeshkan is an automated testing workflow for your product's GraphQL and REST APIs and it's dependencies."
+				pageTitle="Automated pre-release testing and QA with real user data"
+				pageDescription="Always release confidently. Meeshkan uses real user flows from Production to automate testing for PMs and engineers, finding bugs before your users do."
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
