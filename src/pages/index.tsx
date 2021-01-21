@@ -117,7 +117,7 @@ const IndexPage = () => {
 
 			<DoubleSection
 				heading="Your users are your best testers"
-				text="Classic UI tests suck at finding real bugs. But when you make them  guinea pigs, they stop being your users and become your competitor’s users. Ship with uncrossed fingers 🤞✌️, Test like a your real users."
+				text="But when you make them guinea pigs, they stop being your users and become your competitor’s users. Classic UI tests suck at finding real bugs - test like your real users, and ship with uncrossed fingers 🤞✌️"
 			>
 				<MockDashboard />
 			</DoubleSection>
@@ -245,8 +245,8 @@ const IndexPage = () => {
 							lineHeight="tall"
 							mb={4}
 						>
-							No one tests better than a user. So let us create some for you.
-							Join the first innovation in QA since 1991.
+							No one tests better than a user. So let us make some for you. Join
+							the first innovation in QA since 1991.
 						</Text>
 
 						<List spacing={4} mb={10} fontSize={["sm", "md", "lg"]}>
@@ -286,7 +286,7 @@ const IndexPage = () => {
 
 			<SingleSection
 				heading="Release on-time, every time"
-				text="Here are some of the other ways Meeshkan guarentees the smoothest release cycle you’ll ever experience."
+				text="Here are some of the other ways Meeshkan guarantees the smoothest release cycle you’ll ever experience."
 			>
 				<SimpleGrid spacing={8} columns={[1, 2, 3]} mt={12} fontWeight={500}>
 					<FeatureCard>
