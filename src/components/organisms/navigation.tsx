@@ -93,6 +93,7 @@ export function Navigation() {
 					{/* Desktop & Tablet */}
 					<Stack isInline display={["none", "none", "flex"]} ml={6}>
 						<NavLink text="Blog" path="/blog/" />
+						<NavLink text="Product" path="/product/" />
 						<NavLink text="Roadmap" path="/roadmap/" />
 					</Stack>
 				</Flex>
@@ -139,8 +140,9 @@ export function Navigation() {
 							}}
 						>
 							<Stack align="center">
-								<NavLink text="Roadmap" path="/roadmap/" />
 								<NavLink text="Blog" path="/blog/" />
+								<NavLink text="Product" path="/product/" />
+								<NavLink text="Roadmap" path="/roadmap/" />
 								<Divider w="50%" borderColor="gray.100" />
 								<Button
 									variant="ghost"

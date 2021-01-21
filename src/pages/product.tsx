@@ -27,17 +27,18 @@ import {
 	ModalOverlay,
 	Select,
 	LightMode,
+	useColorModeValue,
 } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
-import SEO from "../../components/molecules/seo"
-import Test from "../../components/molecules/test"
-import { SingleSection } from "../../components/organisms/singleSection"
-import { DoubleSection } from "../../components/organisms/doubleSection"
-import Layout from "../../components/templates/layout"
+import SEO from "../components/molecules/seo"
+import Test from "../components/molecules/test"
+import { SingleSection } from "../components/organisms/singleSection"
+import { DoubleSection } from "../components/organisms/doubleSection"
+import Layout from "../components/templates/layout"
 // @ts-expect-error
-import testingEnvironment from "../../static/testingEnvironment.png"
+import testingEnvironment from "../static/testingEnvironment.png"
 // @ts-expect-error
-import devFlow from "../../static/devFlow.png"
+import devFlow from "../static/devFlow.png"
 import { motion } from "framer-motion"
 import {
 	ActivityIcon,
@@ -48,8 +49,9 @@ import {
 	ZapIcon,
 	SunIcon,
 	MoonIcon,
-} from "../../../theme/icons"
-import FeatureCard from "../../components/molecules/featureCard"
+} from "../../theme/icons"
+import FeatureCard from "../components/molecules/featureCard"
+import { transparentize } from "@chakra-ui/theme-tools"
 
 type LightOrDark = "light" | "dark"
 
@@ -101,8 +103,8 @@ const StagingEnvironmentPage = () => {
 			<Layout>
 				<SEO
 					pageTitle="Staging Environments"
-					pageDescription="Meeshkan is creates staging environments that are a ready-made sandbox. Tests, mock services, and mock data are dynamically generated based on the branch specified."
-					pageUrl="https://meeshkan.com/staging-environments/"
+					pageDescription="Meeshkan helps PMs and engineers test in staging environments for great releases."
+					pageUrl="https://meeshkan.com/product/"
 				/>
 				<SingleSection hero>
 					<Flex
@@ -133,14 +135,16 @@ const StagingEnvironmentPage = () => {
 							mb={[8, 8, 0]}
 						/>
 					</Flex>
-					<Button
-						aria-label="Request access"
-						type="submit"
-						w={["100%", "100%", "auto"]}
-						onClick={onOpen}
-					>
-						Request access
-					</Button>
+					<LightMode>
+						<Button
+							aria-label="Request access"
+							type="submit"
+							w={["100%", "100%", "auto"]}
+							onClick={onOpen}
+						>
+							Request access
+						</Button>
+					</LightMode>
 				</SingleSection>
 
 				{/* modal start */}
@@ -154,7 +158,7 @@ const StagingEnvironmentPage = () => {
 					<ModalContent
 						backgroundColor="gray.900"
 						color="white"
-						borderRadius="md"
+						borderRadius="xl"
 						p={4}
 					>
 						<DarkMode>
@@ -165,12 +169,12 @@ const StagingEnvironmentPage = () => {
 							<ModalBody px="0">
 								{formSubmit === false ? (
 									<Stack
-										spacing={4}
+										spacing={8}
 										as="form"
 										onSubmit={handleSubmit(onSubmit)}
 									>
 										<FormControl>
-											<FormLabel htmlFor="name" fontWeight={700}>
+											<FormLabel htmlFor="name" fontWeight={700} mt={4}>
 												Name
 											</FormLabel>
 											<Input
@@ -178,7 +182,7 @@ const StagingEnvironmentPage = () => {
 												name="name"
 												ref={register}
 												aria-label="Enter your name"
-												borderRadius="sm"
+												borderRadius="md"
 												placeholder="Janet"
 												isDisabled={formSubmit}
 												fontWeight={500}
@@ -197,7 +201,7 @@ const StagingEnvironmentPage = () => {
 												name="email"
 												ref={register}
 												aria-label="Enter your business email"
-												borderRadius="sm"
+												borderRadius="md"
 												placeholder="you@company.com"
 												isDisabled={formSubmit}
 												fontWeight={500}
@@ -207,7 +211,7 @@ const StagingEnvironmentPage = () => {
 												}}
 											/>
 										</FormControl>
-										<FormControl isRequired>
+										<FormControl isRequired mb={8}>
 											<FormLabel htmlFor="position" fontWeight={700}>
 												What is your title?
 											</FormLabel>
@@ -234,7 +238,7 @@ const StagingEnvironmentPage = () => {
 												aria-label="Request access"
 												type="submit"
 												w="full"
-												mt={8}
+												mt={12}
 												isLoading={formState.isSubmitting}
 												loadingText="submitting"
 												isDisabled={formSubmit}
@@ -323,7 +327,11 @@ const StagingEnvironmentPage = () => {
 				</Modal>
 				{/* modal end */}
 
-				<Box backgroundColor="gray.50" borderRadius={4} my={12}>
+				<Box
+					backgroundColor={useColorModeValue("gray.100", "gray.800")}
+					borderRadius="lg"
+					my={12}
+				>
 					<SingleSection
 						heading="Designed for the smoothest release cycle you've ever experienced"
 						text="Bring your staging environment, we'll help you merge to production."
@@ -369,13 +377,16 @@ const StagingEnvironmentPage = () => {
 					</Heading>
 					<TabList fontFamily="mono" justifyContent="center">
 						<Tab
-							backgroundColor="gray.50"
+							backgroundColor={useColorModeValue("gray.50", "gray.700")}
 							py={2}
 							px={4}
 							borderRadius="md"
 							_selected={{
-								color: "cyan.900",
-								bg: "cyan.100",
+								color: useColorModeValue("cyan.900", "cyan.100"),
+								bg: useColorModeValue(
+									"cyan.100",
+									transparentize("cyan.500", 0.2)
+								),
 								fontWeight: 700,
 							}}
 							mr={4}
@@ -383,13 +394,16 @@ const StagingEnvironmentPage = () => {
 							for Product Managers
 						</Tab>
 						<Tab
-							backgroundColor="gray.50"
+							backgroundColor={useColorModeValue("gray.50", "gray.700")}
 							py={2}
 							px={4}
 							borderRadius="md"
 							_selected={{
-								color: "cyan.900",
-								bg: "cyan.100",
+								color: useColorModeValue("cyan.900", "cyan.100"),
+								bg: useColorModeValue(
+									"cyan.100",
+									transparentize("cyan.500", 0.2)
+								),
 								fontWeight: 700,
 							}}
 						>
@@ -565,19 +579,21 @@ const StagingEnvironmentPage = () => {
 						<Heading as="h2" textStyle="h2" mb={2} color="white">
 							Have confidence in your next merge to production
 						</Heading>
-						<Text mb={4} fontSize="2xl" lineHeight="short" color="gray.200">
+						<Text mb={8} fontSize="2xl" lineHeight="short" color="gray.200">
 							Bring your staging environment and we'll give you all the tools
 							you need (including your fake users) to merge to production.
 						</Text>
 
-						<Button
-							aria-label="Sign up"
-							type="submit"
-							w={["100%", "100%", "auto"]}
-							onClick={onOpen}
-						>
-							Merge with confidence
-						</Button>
+						<LightMode>
+							<Button
+								aria-label="Sign up"
+								type="submit"
+								w={["100%", "100%", "auto"]}
+								onClick={onOpen}
+							>
+								Merge with confidence
+							</Button>
+						</LightMode>
 					</Box>
 				</SingleSection>
 			</Layout>

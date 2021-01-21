@@ -8,7 +8,7 @@ type FeatureProps = {
 
 const FeatureCard = ({ children }: FeatureProps) => {
 	return (
-		<Card padding={4}>
+		<Card shadow padding={4}>
 			<Stack isInline spacing={4} align="center" h="100%">
 				{children}
 			</Stack>
