@@ -24,6 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
 				borderLeftRadius="0"
 				size="lg"
 				zIndex={10}
+				display={["none", "none", "flex"]}
 			/>
 			<Box minH="90vh" px={[4, 4, 6, 8]}>
 				<Navigation />

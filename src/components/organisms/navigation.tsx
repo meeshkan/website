@@ -15,15 +15,17 @@ import {
 	Divider,
 	useColorModeValue,
 	Box,
+	useColorMode,
 } from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
 import {
-	LogoIcon,
 	HamburgerIcon,
 	TwitterIcon,
 	GitHubIcon,
 	LinkedInIcon,
+	SunIcon,
+	MoonIcon,
 } from "../../../theme/icons"
 import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { AnimatedLogo } from "../molecules/animatedLogo"
@@ -62,6 +64,7 @@ function LogInLink() {
 
 export function Navigation() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { colorMode, toggleColorMode } = useColorMode()
 	const btnRef = useRef()
 
 	return (
@@ -139,6 +142,18 @@ export function Navigation() {
 								<NavLink text="Roadmap" path="/roadmap/" />
 								<NavLink text="Blog" path="/blog/" />
 								<Divider w="50%" borderColor="gray.100" />
+								<Button
+									variant="ghost"
+									colorScheme="gray"
+									onClick={() => toggleColorMode()}
+									title={`Toggle ${
+										colorMode === "dark" ? "light" : "dark"
+									} mode`}
+									aria-label="Light/Dark mode toggle"
+									leftIcon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+								>
+									{colorMode === "dark" ? "light" : "dark"} mode
+								</Button>
 								<LogInLink />
 							</Stack>
 						</DrawerBody>
