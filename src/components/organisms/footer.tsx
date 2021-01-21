@@ -28,7 +28,7 @@ export function Footer() {
 		>
 			<Box maxW="1000px" mx="auto">
 				<Flex wrap="wrap" justify="center">
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Company
 						</Heading>
@@ -62,7 +62,7 @@ export function Footer() {
 							T&amp;C
 						</Link>
 					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Resources
 						</Heading>
@@ -106,40 +106,7 @@ export function Footer() {
 							Community
 						</Link>
 					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h4" size="md">
-							Related Projects
-						</Heading>
-						<Link
-							isExternal
-							href="https://www.unmock.io/"
-							aria-label="Go to the Unmock website"
-						>
-							Unmock
-						</Link>
-						<Link
-							isExternal
-							href="https://jaymock.now.sh/"
-							aria-label="Go to the Jaymock website"
-						>
-							Jaymock
-						</Link>
-						<Link
-							isExternal
-							href="https://vanity.dev"
-							aria-label="Go to the Vanity.dev website"
-						>
-							Vanity.dev
-						</Link>
-						<Link
-							isExternal
-							href="https://not-salesforce.com"
-							aria-label="Go to the Not salesforce website."
-						>
-							Not salesforce
-						</Link>
-					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Use cases
 						</Heading>
@@ -161,7 +128,11 @@ export function Footer() {
 						</Link>
 					</Stack>
 				</Flex>
-				<Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
+				<Divider
+					title="Meeshkan social links"
+					borderColor={useColorModeValue("gray.200", "gray.700")}
+					my={4}
+				/>
 				<Flex justifyContent="space-between" align="center">
 					<GatsbyLink to="/" aria-label="Meeshkan homepage">
 						<LogoIcon

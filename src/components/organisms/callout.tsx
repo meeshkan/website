@@ -62,7 +62,7 @@ const Callout = ({ heading }: CalloutProps) => {
 							mb={[4, 4, 0]}
 						/>
 						<LightMode>
-							<Button minW="fit-content">Get a consultation</Button>
+							<Button minW="fit-content">Get early access</Button>
 						</LightMode>
 					</Flex>
 				</Box>

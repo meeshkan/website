@@ -23,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
 				colorScheme="gray"
 				borderLeftRadius="0"
 				size="lg"
+				zIndex={10}
 			/>
 			<Box minH="90vh" px={[4, 4, 6, 8]}>
 				<Navigation />

@@ -14,8 +14,6 @@ import {
 	Flex,
 	Divider,
 	useColorModeValue,
-	DarkMode,
-	Code,
 	Box,
 } from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
@@ -73,7 +71,8 @@ export function Navigation() {
 				isInline
 				justify="space-between"
 				align="center"
-				p={4}
+				px={4}
+				py={3}
 				pos="fixed"
 				zIndex={1000}
 				top={0}
@@ -83,13 +82,13 @@ export function Navigation() {
 				borderBottom="1px solid"
 				borderBottomColor={useColorModeValue("gray.100", "gray.800")}
 			>
-				<Flex>
+				<Flex align="center">
 					<Link to="/" aria-label="Meeshkan home">
 						<AnimatedLogo />
 					</Link>
 
 					{/* Desktop & Tablet */}
-					<Stack isInline display={["none", "none", "flex"]} ml={8}>
+					<Stack isInline display={["none", "none", "flex"]} ml={6}>
 						<NavLink text="Blog" path="/blog/" />
 						<NavLink text="Roadmap" path="/roadmap/" />
 					</Stack>
@@ -126,7 +125,7 @@ export function Navigation() {
 								aria-label="Close the navigation menu"
 							/>
 							<Link to="/" aria-label="Meeshkan homepage">
-								<LogoIcon h={6} w="auto" />
+								<AnimatedLogo />
 							</Link>
 						</DrawerHeader>
 						<DrawerBody

@@ -16,6 +16,7 @@ import {
 	ListIcon,
 	SimpleGrid,
 	Code,
+	Badge,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 // import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -28,10 +29,13 @@ import {
 	GitHubIcon,
 	StoplightIcon,
 	UserIcon,
+	VideoIcon,
 	ZapIcon,
 } from "../../theme/icons"
 import FeatureCard from "../components/molecules/featureCard"
 import Callout from "../components/organisms/callout"
+import { StoryStep } from "../components/molecules/sideStep"
+import { MockDashboard } from "../components/organisms/home/mockDashboard"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -47,7 +51,7 @@ const IndexPage = () => {
 				<Heading
 					as="h1"
 					textStyle="h1"
-					mt={20}
+					mt={8}
 					mb={6}
 					textAlign={["left", "left", "center"]}
 				>
@@ -68,11 +72,11 @@ const IndexPage = () => {
 					Release with confidence.
 				</Heading>
 				<Text
-					textAlign={["left", "left", "center"]}
 					fontSize={["md", "lg", "xl"]}
+					textAlign={["left", "left", "center"]}
 					lineHeight="mid"
 					maxW="600px"
-					mx="auto"
+					mx={["none", "none", "auto"]}
 					color={useColorModeValue("gray.600", "gray.300")}
 					mb={6}
 				>
@@ -81,7 +85,7 @@ const IndexPage = () => {
 				</Text>
 				<Flex
 					maxW="600px"
-					mx="auto"
+					mx={["none", "none", "auto"]}
 					border="1px solid"
 					borderColor={useColorModeValue("gray.300", "gray.700")}
 					borderRadius="xl"
@@ -95,7 +99,9 @@ const IndexPage = () => {
 				>
 					<Input
 						placeholder="shipit@meeshkan.com"
-						_placeholder={{ color: useColorModeValue("gray.500", "gray.400") }}
+						_placeholder={{
+							color: useColorModeValue("gray.500", "gray.400"),
+						}}
 						mr={4}
 						border="none"
 						_focus={{}}
@@ -113,7 +119,7 @@ const IndexPage = () => {
 				heading="Your users are your best testers"
 				text="Classic UI tests suck at finding real bugs. But when you make them  guinea pigs, they stop being your users and become your competitor’s users. Ship with uncrossed fingers 🤞✌️, Test like a your real users."
 			>
-				<Box backgroundColor="gray.800" w="100%" h="300px" borderRadius="lg" />
+				<MockDashboard />
 			</DoubleSection>
 
 			<Spacer h={32} />
@@ -124,9 +130,10 @@ const IndexPage = () => {
 				mx="auto"
 				py={12}
 				pl={6}
+				pr={[6, 0]}
 				backgroundColor={useColorModeValue("gray.100", "gray.800")}
 				borderRadius="lg"
-				overflow="hidden"
+				overflowX="auto"
 			>
 				<Grid
 					templateColumns={[
@@ -142,6 +149,7 @@ const IndexPage = () => {
 						justifyContent="center"
 						gridColumn={["1", "1", "2"]}
 						position="relative"
+						w={["56%", "auto"]}
 					>
 						<Box
 							w="100%"
@@ -157,14 +165,78 @@ const IndexPage = () => {
 						<Box
 							backgroundColor={useColorModeValue("white", "gray.900")}
 							w="100%"
-							h="400px"
+							h="100%"
+							maxH="500px"
 							borderRadius="lg"
-							mr="-8px"
+							mr={[0, 0, "-8px"]}
 							zIndex="1"
-						/>
+							p={4}
+							overflow="hidden"
+						>
+							<Flex align="baseline" pb={8}>
+								<Text fontSize="lg" fontWeight={900} mr={4} whiteSpace="nowrap">
+									User can schedule pickup
+								</Text>
+								<Badge
+									fontWeight={700}
+									fontSize="md"
+									mr={2}
+									textTransform="capitalize"
+									borderRadius="md"
+									py={1}
+									px={2}
+								>
+									<VideoIcon mr={2} />
+									User
+								</Badge>
+								<Badge
+									colorScheme="cyan"
+									fontWeight={700}
+									fontSize="md"
+									textTransform="capitalize"
+									borderRadius="md"
+									p={1}
+								>
+									Expected behavior
+								</Badge>
+							</Flex>
+
+							<StoryStep
+								stepName="Load `home` path"
+								stepNumber={1}
+								subSteps={["Navigate to `/{projectName}/dashboard`"]}
+							/>
+							<StoryStep
+								stepName="Click on add new collection button"
+								stepNumber={2}
+								subSteps={[
+									"Select `div.calendar-create-collect`",
+									"Click button.innerText = New Collection",
+								]}
+							/>
+							<StoryStep
+								stepName="Request collection"
+								stepNumber={3}
+								subSteps={[
+									"Input date (0-25 days from today)",
+									"Click button.innerText = New Collection",
+									"Submit form",
+								]}
+							/>
+							<StoryStep
+								stepName="Successful submission"
+								stepNumber={4}
+								subSteps={["HTTP status code 200", "Return new collect query"]}
+							/>
+						</Box>
 					</Flex>
 					<Box>
-						<Heading as="h2" textStyle="h3" mb={6}>
+						<Heading
+							as="h2"
+							textStyle="h3"
+							mb={6}
+							fontSize={["xl", "2xl", "3xl"]}
+						>
 							Focus on creating, not troubleshooting
 						</Heading>
 						<Text
@@ -177,7 +249,7 @@ const IndexPage = () => {
 							Join the first innovation in QA since 1991.
 						</Text>
 
-						<List spacing={4} mb={10} fontSize="lg">
+						<List spacing={4} mb={10} fontSize={["sm", "md", "lg"]}>
 							<ListItem>
 								<ListIcon
 									color={useColorModeValue(`cyan.600`, `cyan.200`)}
