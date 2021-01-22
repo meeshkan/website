@@ -1,5 +1,6 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
+import { Link as GatsbyLink } from "gatsby"
 import {
 	Heading,
 	Button,
@@ -10,7 +11,6 @@ import {
 	useColorModeValue,
 	LightMode,
 	Spacer,
-	Input,
 	List,
 	ListItem,
 	ListIcon,
@@ -36,6 +36,7 @@ import FeatureCard from "../components/molecules/featureCard"
 import Callout from "../components/organisms/callout"
 import { StoryStep } from "../components/molecules/sideStep"
 import { MockDashboard } from "../components/organisms/home/mockDashboard"
+import LeadForm from "../components/molecules/leadForm"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -83,34 +84,7 @@ const IndexPage = () => {
 					Think the only way to ensure a smooth release is to pretend to be a
 					user? Think again.
 				</Text>
-				<Flex
-					maxW="600px"
-					mx={["none", "none", "auto"]}
-					border="1px solid"
-					borderColor={useColorModeValue("gray.300", "gray.700")}
-					borderRadius="xl"
-					p={2}
-					transition="all 0.2s"
-					_hover={{ borderColor: useColorModeValue("gray.400", "gray.600") }}
-					_focusWithin={{
-						borderColor: useColorModeValue("blue.400", "blue.600"),
-					}}
-					direction={["column", "column", "row"]}
-				>
-					<Input
-						placeholder="shipit@meeshkan.com"
-						_placeholder={{
-							color: useColorModeValue("gray.500", "gray.400"),
-						}}
-						mr={4}
-						border="none"
-						_focus={{}}
-						mb={[4, 4, 0]}
-					/>
-					<LightMode>
-						<Button minW="fit-content">Get early access</Button>
-					</LightMode>
-				</Flex>
+				<LeadForm formName="Hero" />
 			</SingleSection>
 
 			<Spacer h={32} />
@@ -276,7 +250,9 @@ const IndexPage = () => {
 							</ListItem>
 						</List>
 						<LightMode>
-							<Button>Start gathering insights</Button>
+							<Button as={GatsbyLink} to="/#callout">
+								Start gathering insights
+							</Button>
 						</LightMode>
 					</Box>
 				</Grid>
