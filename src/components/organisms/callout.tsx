@@ -1,13 +1,6 @@
 import React from "react"
-import {
-	Box,
-	Heading,
-	Flex,
-	Button,
-	useColorModeValue,
-	LightMode,
-	Input,
-} from "@chakra-ui/react"
+import { Box, Heading, Flex, useColorModeValue } from "@chakra-ui/react"
+import LeadForm from "../molecules/leadForm"
 
 type CalloutProps = {
 	heading: string
@@ -34,37 +27,16 @@ const Callout = ({ heading }: CalloutProps) => {
 					p={[4, 4, 8]}
 					zIndex="1"
 				>
-					<Heading as="h2" textStyle="h2" mb={6} textAlign="center">
+					<Heading
+						as="h2"
+						textStyle="h2"
+						id="callout"
+						mb={6}
+						textAlign="center"
+					>
 						{heading}
 					</Heading>
-					<Flex
-						maxW="600px"
-						mx="auto"
-						border="1px solid"
-						borderColor={useColorModeValue("gray.300", "gray.700")}
-						borderRadius="xl"
-						p={2}
-						transition="all 0.2s"
-						_hover={{ borderColor: useColorModeValue("gray.400", "gray.600") }}
-						_focusWithin={{
-							borderColor: useColorModeValue("blue.400", "blue.600"),
-						}}
-						direction={["column", "column", "row"]}
-					>
-						<Input
-							placeholder="shipit@meeshkan.com"
-							_placeholder={{
-								color: useColorModeValue("gray.500", "gray.400"),
-							}}
-							mr={4}
-							border="none"
-							_focus={{}}
-							mb={[4, 4, 0]}
-						/>
-						<LightMode>
-							<Button minW="fit-content">Get early access</Button>
-						</LightMode>
-					</Flex>
+					<LeadForm formName="callout" />
 				</Box>
 				<Box
 					w="100%"
