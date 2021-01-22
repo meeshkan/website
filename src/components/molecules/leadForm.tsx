@@ -17,20 +17,20 @@ const LeadForm = ({ formName }: LeadFormProps) => {
 	const [formSubmit, setFormSubmit] = useState(false)
 
 	function onSubmit(values) {
-		let sendgridData = JSON.stringify({
-			list_ids: ["065bb90b-9652-4905-85df-a6c49fb825cd"],
-			contacts: [
+		let hubspotData = JSON.stringify({
+			properties: [
 				{
-					email: values.email,
+					property: "email",
+					value: values.email,
 				},
 			],
 		})
 
-		fetch("https://api.sendgrid.com/v3/marketing/contacts", {
-			method: "PUT",
-			body: sendgridData,
+		fetch(" https://api.hubapi.com/contacts/v1/contact", {
+			method: "POST",
+			body: hubspotData,
 			headers: {
-				authorization: `Bearer ${process.env.GATSBY_SENDGRID_API_KEY}`,
+				Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
 				"content-type": "application/json",
 			},
 		}).then(() => setFormSubmit(true))
