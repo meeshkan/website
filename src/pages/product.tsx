@@ -383,6 +383,7 @@ const StagingEnvironmentPage = () => {
 							borderRadius="md"
 							_selected={{
 								color: useColorModeValue("cyan.900", "cyan.100"),
+								// @ts-ignore
 								bg: useColorModeValue(
 									"cyan.100",
 									transparentize("cyan.500", 0.2)
@@ -400,6 +401,7 @@ const StagingEnvironmentPage = () => {
 							borderRadius="md"
 							_selected={{
 								color: useColorModeValue("cyan.900", "cyan.100"),
+								// @ts-ignore
 								bg: useColorModeValue(
 									"cyan.100",
 									transparentize("cyan.500", 0.2)

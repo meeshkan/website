@@ -43,7 +43,7 @@ const IndexPage = () => {
 	return (
 		<Layout>
 			<SEO
-				pageTitle="Automated pre-release testing and QA with real user data"
+				pageTitle="Automate pre-release QA with Machine Learning. UI Testing Tool"
 				pageDescription="Always release confidently. Meeshkan uses real user flows from Production to automate testing for PMs and engineers, finding bugs before your users do."
 				pageUrl="https://meeshkan.com/"
 			/>
@@ -84,6 +84,7 @@ const IndexPage = () => {
 					user? Think again.
 				</Text>
 				<Flex
+					as="form"
 					maxW="600px"
 					mx={["none", "none", "auto"]}
 					border="1px solid"
@@ -108,7 +109,9 @@ const IndexPage = () => {
 						mb={[4, 4, 0]}
 					/>
 					<LightMode>
-						<Button minW="fit-content">Get early access</Button>
+						<Button minW="fit-content" type="submit">
+							Get early access
+						</Button>
 					</LightMode>
 				</Flex>
 			</SingleSection>
