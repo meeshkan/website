@@ -27,7 +27,6 @@ const ContactPage = () => (
 			</Heading>
 			<Box
 				as="form"
-				// @ts-ignore
 				action="/success/"
 				maxW="750px"
 				mx="auto"

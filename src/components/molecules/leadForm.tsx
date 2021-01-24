@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { useForm } from "react-hook-form"
 import {
 	Button,
 	Flex,
+	FormControl,
 	Input,
 	LightMode,
 	useColorModeValue,
@@ -13,32 +13,16 @@ type LeadFormProps = {
 }
 
 const LeadForm = ({ formName }: LeadFormProps) => {
-	const { handleSubmit, register, formState } = useForm()
 	const [formSubmit, setFormSubmit] = useState(false)
 
-	function onSubmit(values) {
-		let hubspotData = JSON.stringify({
-			properties: [
-				{
-					property: "email",
-					value: values.email,
-				},
-			],
-		})
-
-		fetch(" https://api.hubapi.com/contacts/v1/contact", {
-			method: "POST",
-			body: hubspotData,
-			headers: {
-				Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
-				"content-type": "application/json",
-			},
-		}).then(() => setFormSubmit(true))
-	}
 	return (
 		<Flex
 			as="form"
-			onSubmit={handleSubmit(onSubmit)}
+			name={formName}
+			data-netlify="true"
+			method="post"
+			action="/success/"
+			data-netlify-honeypot="bot-field"
 			maxW="600px"
 			mx={["none", "none", "auto"]}
 			border="1px solid"
@@ -52,19 +36,27 @@ const LeadForm = ({ formName }: LeadFormProps) => {
 			}}
 			direction={["column", "column", "row"]}
 		>
-			<input type="hidden" name="formName" value={formName} ref={register} />
-			<Input
-				placeholder="shipit@meeshkan.com"
-				_placeholder={{
-					color: useColorModeValue("gray.500", "gray.400"),
-				}}
-				mr={4}
-				border="none"
-				_focus={{}}
-				mb={[4, 4, 0]}
-			/>
+			<input type="hidden" name="bot-field" />
+			<input type="hidden" name="form-name" value={formName} />
+			<FormControl isRequired>
+				<Input
+					type="email"
+					name="email"
+					id="email"
+					placeholder="shipit@meeshkan.com"
+					_placeholder={{
+						color: useColorModeValue("gray.500", "gray.400"),
+					}}
+					mr={4}
+					border="none"
+					_focus={{}}
+					mb={[4, 4, 0]}
+				/>
+			</FormControl>
 			<LightMode>
-				<Button minW="fit-content">Get early access</Button>
+				<Button minW="fit-content" type="submit">
+					Get early access
+				</Button>
 			</LightMode>
 		</Flex>
 	)
