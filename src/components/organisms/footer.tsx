@@ -8,31 +8,31 @@ import {
 	Flex,
 	Divider,
 	IconButton,
-	Button,
-	useColorMode,
 	useColorModeValue,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import {
 	GitHubIcon,
 	LinkedInIcon,
 	LogoIcon,
-	MoonIcon,
-	SunIcon,
 	TwitterIcon,
 } from "../../../theme/icons"
 
 export function Footer() {
-	const { colorMode, toggleColorMode } = useColorMode()
 	return (
-		<Box as="footer" bg={useColorModeValue("gray.50", "gray.800")} p={6}>
+		<Box
+			as="footer"
+			bg={useColorModeValue("white", "gray.900")}
+			borderTop="1px solid"
+			borderTopColor={useColorModeValue("gray.100", "gray.800")}
+			p={6}
+		>
 			<Box maxW="1000px" mx="auto">
 				<Flex wrap="wrap" justify="center">
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Company
 						</Heading>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/about-us/"
 							aria-label="About the Meeshkan team"
@@ -40,7 +40,6 @@ export function Footer() {
 							About us
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/about-us/jobs/"
 							aria-label="Careers the Meeshkan team is hiring for."
@@ -48,52 +47,26 @@ export function Footer() {
 							Careers
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/contact/"
 							aria-label="Contact the Meeshkan team"
 						>
 							Contact
 						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/docs/terms-and-conditions/"
-							aria-label="Terms and conditions of the Meeshkan product"
-							title="terms and conditions"
-						>
-							T&amp;C
-						</Link>
 					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Resources
 						</Heading>
 
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/events/confidence-in-your-merge-to-production/"
 							aria-label="A landing page for the webinar about confidence merging to production"
 						>
 							Webinar - Merging to prod
 						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/docs/"
-							aria-label="Meeshkan's documentation"
-						>
-							Documentation
-						</Link>
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/docs/frequently-asked-questions/"
-							aria-label="Frequently asked questions about Meeshkan"
-						>
-							FAQ
-						</Link>
+
 						<Link
 							// @ts-ignore
 							as={GatsbyLink}
@@ -110,40 +83,7 @@ export function Footer() {
 							Community
 						</Link>
 					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
-						<Heading as="h4" size="md">
-							Related Projects
-						</Heading>
-						<Link
-							isExternal
-							href="https://www.unmock.io/"
-							aria-label="Go to the Unmock website"
-						>
-							Unmock
-						</Link>
-						<Link
-							isExternal
-							href="https://jaymock.now.sh/"
-							aria-label="Go to the Jaymock website"
-						>
-							Jaymock
-						</Link>
-						<Link
-							isExternal
-							href="https://vanity.dev"
-							aria-label="Go to the Vanity.dev website"
-						>
-							Vanity.dev
-						</Link>
-						<Link
-							isExternal
-							href="https://not-salesforce.com"
-							aria-label="Go to the Not salesforce website."
-						>
-							Not salesforce
-						</Link>
-					</Stack>
-					<Stack my={4} w={["100%", "25%"]}>
+					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
 							Use cases
 						</Heading>
@@ -165,7 +105,11 @@ export function Footer() {
 						</Link>
 					</Stack>
 				</Flex>
-				<Divider title="Meeshkan social links" borderColor="gray.300" my={4} />
+				<Divider
+					title="Meeshkan social links"
+					borderColor={useColorModeValue("gray.200", "gray.700")}
+					my={4}
+				/>
 				<Flex justifyContent="space-between" align="center">
 					<GatsbyLink to="/" aria-label="Meeshkan homepage">
 						<LogoIcon
@@ -175,16 +119,7 @@ export function Footer() {
 						/>
 					</GatsbyLink>
 					<Stack isInline d={["none", "flex"]}>
-						<Button
-							ml={4}
-							size="sm"
-							variant="ghost"
-							leftIcon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-							onClick={toggleColorMode}
-							colorScheme="gray"
-						>
-							{colorMode === "light" ? "dark" : "light"} mode
-						</Button>
+						{/* @ts-ignore */}
 						<IconButton
 							as={Link}
 							variant="ghost"

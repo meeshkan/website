@@ -1,5 +1,12 @@
 import React from "react"
-import { Heading, Grid, Avatar, AvatarGroup, Text, Flex } from "@chakra-ui/core"
+import {
+	Heading,
+	Grid,
+	Avatar,
+	AvatarGroup,
+	Text,
+	Flex,
+} from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 import { graphql } from "gatsby"
 import { Card } from "../components/atoms/card"

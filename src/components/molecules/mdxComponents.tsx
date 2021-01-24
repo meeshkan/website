@@ -10,7 +10,7 @@ import {
 	Code,
 	Alert,
 	useColorModeValue,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
 import Video from "../atoms/video"
@@ -95,7 +95,7 @@ const components = {
 	blockquote: (props) => (
 		<Alert
 			my={6}
-			variant='left-accent'
+			variant="left-accent"
 			status="info"
 			css={{ "> *:first-of-type": { marginTop: 0 } }}
 			{...props}
