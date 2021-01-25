@@ -76,13 +76,14 @@ const IndexPage = () => {
 					fontSize={["md", "lg", "xl"]}
 					textAlign={["left", "left", "center"]}
 					lineHeight="mid"
-					maxW="600px"
+					maxW="800px"
 					mx={["none", "none", "auto"]}
 					color={useColorModeValue("gray.600", "gray.300")}
 					mb={6}
 				>
-					Think the only way to ensure a smooth release is to pretend to be a
-					user? Think again.
+					Generate UI tests from the production behavior of your customers, and
+					objectively validate quality and user experience before releasing
+					changes into production.
 				</Text>
 				<LeadForm formName="Hero" />
 			</SingleSection>
