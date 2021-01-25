@@ -89,25 +89,15 @@ const IndexPage = () => {
 
 			<Spacer h={32} />
 
-			<DoubleSection
-				heading="Your users are your best testers"
-				text="But when you make them guinea pigs, they stop being your users and become your competitor’s users. Classic UI tests suck at finding real bugs - test like your real users, and ship with uncrossed fingers 🤞✌️"
-			>
-				<MockDashboard />
-			</DoubleSection>
-
-			<Spacer h={32} />
-
 			<Box
 				as="section"
 				maxW="1200px"
 				mx="auto"
 				py={12}
-				pl={6}
-				pr={[6, 0]}
+				px={6}
 				backgroundColor={useColorModeValue("gray.100", "gray.800")}
 				borderRadius="lg"
-				overflowX="auto"
+				overflow="hidden"
 			>
 				<Grid
 					templateColumns={[
@@ -123,13 +113,13 @@ const IndexPage = () => {
 						justifyContent="center"
 						gridColumn={["1", "1", "2"]}
 						position="relative"
-						w={["56%", "auto"]}
+						w="auto"
 					>
 						<Box
 							w="100%"
 							h="100%"
 							borderRadius="lg"
-							mr={[0, 0, "-8px"]}
+							mr="-72px"
 							background="conic-gradient(from 180deg at 50% 50%, #526EE0 0deg, #52E0C4 139.2deg, #DC1853 285.11deg, #526EE0 320deg)"
 							filter="blur(150px)"
 							position="absolute"
@@ -142,7 +132,7 @@ const IndexPage = () => {
 							h="100%"
 							maxH="500px"
 							borderRadius="lg"
-							mr={[0, 0, "-8px"]}
+							mr="-72px"
 							zIndex="1"
 							p={4}
 							overflow="hidden"
@@ -204,12 +194,13 @@ const IndexPage = () => {
 							/>
 						</Box>
 					</Flex>
-					<Box>
+					<Box maxWidth={["min-content", "100%"]}>
 						<Heading
 							as="h2"
 							textStyle="h3"
 							mb={6}
 							fontSize={["xl", "2xl", "3xl"]}
+							mr={[4, 8, 0]}
 						>
 							Focus on creating, not troubleshooting
 						</Heading>
@@ -218,6 +209,7 @@ const IndexPage = () => {
 							fontSize={["md", "lg", "xl"]}
 							lineHeight="tall"
 							mb={4}
+							mr={[4, 8, 0]}
 						>
 							No one tests better than a user. So let us make some for you. Join
 							the first innovation in QA since 1991.
@@ -257,6 +249,15 @@ const IndexPage = () => {
 					</Box>
 				</Grid>
 			</Box>
+
+			<Spacer h={32} />
+
+			<DoubleSection
+				heading="Your users are your best testers"
+				text="But when you make them guinea pigs, they stop being your users and become your competitor’s users. Classic UI tests suck at finding real bugs - test like your real users, and ship with uncrossed fingers 🤞✌️"
+			>
+				<MockDashboard />
+			</DoubleSection>
 
 			<Spacer h={32} />
 
