@@ -252,49 +252,6 @@ const IndexPage = () => {
 
 			<Spacer h={32} />
 
-			<DoubleSection
-				heading="Your users are your best testers"
-				text="But when you make them guinea pigs, they stop being your users and become your competitor’s users. Classic UI tests suck at finding real bugs - test like your real users, and ship with uncrossed fingers 🤞✌️"
-			>
-				<MockDashboard />
-			</DoubleSection>
-
-			<Spacer h={32} />
-
-			<SingleSection
-				heading="Release on-time, every time"
-				text="Here are some of the other ways Meeshkan guarantees the smoothest release cycle you’ll ever experience."
-			>
-				<SimpleGrid spacing={8} columns={[1, 2, 3]} mt={12} fontWeight={500}>
-					<FeatureCard>
-						<ActivityIcon color="cyan.400" boxSize={6} />
-						<Text>Health metrics dashboard</Text>
-					</FeatureCard>
-					<FeatureCard>
-						<UserIcon color="cyan.400" boxSize={6} />
-						<Text>User generated tests</Text>
-					</FeatureCard>
-					<FeatureCard>
-						<ZapIcon color="cyan.400" boxSize={6} />
-						<Text>ML grouped user flows</Text>
-					</FeatureCard>
-					<FeatureCard>
-						<CrosshairIcon color="cyan.400" boxSize={6} />
-						<Text>Pinpoint bug introductions</Text>
-					</FeatureCard>
-					<FeatureCard>
-						<GitHubIcon color="cyan.400" boxSize={6} />
-						<Text>GitHub checks integration</Text>
-					</FeatureCard>
-					<FeatureCard>
-						<StoplightIcon color="cyan.400" boxSize={6} />
-						<Text>Confidence score</Text>
-					</FeatureCard>
-				</SimpleGrid>
-			</SingleSection>
-
-			<Spacer h={32} />
-
 			<SingleSection
 				heading="Cut testing time by 80% and ship higher quality products"
 				text="Make your whole userbase your QA team. Run comprehensive tests in minutes."
@@ -387,6 +344,49 @@ const IndexPage = () => {
 							that will tell you if you're ready to merge.
 						</Text>
 					</Box>
+				</SimpleGrid>
+			</SingleSection>
+
+			<Spacer h={32} />
+
+			<DoubleSection
+				heading="Your users are your best testers"
+				text="But when they find bugs, they stop being your users and become your competitor’s users. Classic internally run UI tests suck at finding the dealbreaker bugs - test like your real users, and ship with uncrossed fingers 🤞✌️"
+			>
+				<MockDashboard />
+			</DoubleSection>
+
+			<Spacer h={32} />
+
+			<SingleSection
+				heading="Release on-time, every time"
+				text="Here are some of the other ways Meeshkan guarantees the smoothest release cycle you’ll ever experience."
+			>
+				<SimpleGrid spacing={8} columns={[1, 2, 3]} mt={12} fontWeight={500}>
+					<FeatureCard>
+						<ActivityIcon color="cyan.400" boxSize={6} />
+						<Text>Health metrics dashboard</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<UserIcon color="cyan.400" boxSize={6} />
+						<Text>User generated tests</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<ZapIcon color="cyan.400" boxSize={6} />
+						<Text>ML grouped user flows</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<CrosshairIcon color="cyan.400" boxSize={6} />
+						<Text>Pinpoint bug introductions</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<GitHubIcon color="cyan.400" boxSize={6} />
+						<Text>GitHub checks integration</Text>
+					</FeatureCard>
+					<FeatureCard>
+						<StoplightIcon color="cyan.400" boxSize={6} />
+						<Text>Confidence score</Text>
+					</FeatureCard>
 				</SimpleGrid>
 			</SingleSection>
 
