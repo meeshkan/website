@@ -2,7 +2,7 @@ import React from "react"
 import { Box, Heading, Link, Text, useColorModeValue } from "@chakra-ui/react"
 
 type SectionProps = {
-	children: Object
+	children?: Object
 	heading?: string
 	anchor?: string
 	text?: string
@@ -43,6 +43,6 @@ export const SingleSection = ({
 				{text}
 			</Text>
 		) : null}
-		{children}
+		{children != null ? children : null}
 	</Box>
 )

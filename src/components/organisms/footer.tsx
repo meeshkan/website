@@ -66,14 +66,15 @@ export function Footer() {
 						>
 							Webinar - Merging to prod
 						</Link>
-
-						<Link
-							// @ts-ignore
-							as={GatsbyLink}
-							to="/blog/"
-							aria-label="Meeshkan's blog"
-						>
+						<Link as={GatsbyLink} to="/blog/" aria-label="Meeshkan's blog">
 							Blog
+						</Link>
+						<Link
+							as={GatsbyLink}
+							to="/FAQ/"
+							aria-label="Frequently asked questions"
+						>
+							FAQ
 						</Link>
 						<Link
 							isExternal
@@ -88,7 +89,6 @@ export function Footer() {
 							Use cases
 						</Heading>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/use-cases/staging-environments/"
 							aria-label="Staging environments"
@@ -96,7 +96,6 @@ export function Footer() {
 							Staging environments
 						</Link>
 						<Link
-							// @ts-ignore
 							as={GatsbyLink}
 							to="/test-graphql/"
 							aria-label="A landing page all about testing graphql"
