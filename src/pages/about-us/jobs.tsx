@@ -8,6 +8,7 @@ import {
 	List,
 	ListItem,
 	Code,
+	LightMode,
 } from "@chakra-ui/react"
 import { SingleSection } from "../../components/organisms/singleSection"
 import Layout from "../../components/templates/layout"
@@ -29,19 +30,21 @@ const JobsPage = () => {
 					align="center"
 					p={3}
 					borderRadius="md"
-					backgroundColor={useColorModeValue("gray.50", "gray.800")}
+					backgroundColor={useColorModeValue("gray.100", "gray.800")}
 				>
-					<Text fontWeight={500}>Growth marketer</Text>
-					<Button
-						size="sm"
-						as={UniversalLink}
-						to="https://meeshkan.join.com/jobs/1650857-growth-marketer-technical-ml-product"
-						// @ts-ignore
-						target="_blank"
-						rel="nofollow noopener"
-					>
-						Apply now
-					</Button>
+					<Text fontWeight={500}>Data pipeline engineer</Text>
+					<LightMode>
+						<Button
+							size="sm"
+							as={UniversalLink}
+							to="https://meeshkan.join.com/jobs/1779440-data-pipeline-engineer"
+							// @ts-ignore
+							target="_blank"
+							rel="nofollow noopener"
+						>
+							Apply now
+						</Button>
+					</LightMode>
 				</Stack>
 			</SingleSection>
 			<SingleSection heading="Progression at Meeshkan">

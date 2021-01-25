@@ -30,6 +30,8 @@ import Maria from "../../../data/avatars/maria.png"
 // @ts-ignore
 import Nick from "../../../data/avatars/nikolaos.png"
 // @ts-ignore
+import Ben from "../../../data/avatars/ben.png"
+// @ts-ignore
 import systemOne from "../../static/System.One_Moderat_Wordmark.svg"
 import { UniversalLink } from "../../components/atoms/UniversalLink"
 
@@ -176,29 +178,6 @@ const AboutUsPage = () => {
 					</Card>
 					<Card>
 						<Image
-							src={Fredi}
-							maxW="80px"
-							maxH="80px"
-							alt="Fredrik's headshot"
-							rounded="md"
-							mx="auto"
-							mb={4}
-						/>
-						<Text
-							fontSize="xl"
-							fontWeight={900}
-							letterSpacing="wide"
-							textAlign="center"
-							mb={2}
-						>
-							Fredrik Fornwall
-						</Text>
-						<Text fontWeight={500} textAlign="center">
-							Software Engineer
-						</Text>
-					</Card>
-					<Card>
-						<Image
 							src={Maria}
 							maxW="80px"
 							maxH="80px"
@@ -241,6 +220,29 @@ const AboutUsPage = () => {
 						</Text>
 						<Text fontWeight={500} textAlign="center">
 							Software Engineer
+						</Text>
+					</Card>
+					<Card>
+						<Image
+							src={Ben}
+							maxW="80px"
+							maxH="80px"
+							alt="Ben's headshot"
+							rounded="md"
+							mx="auto"
+							mb={4}
+						/>
+						<Text
+							fontSize="xl"
+							fontWeight={900}
+							letterSpacing="wide"
+							textAlign="center"
+							mb={2}
+						>
+							Ben Snyder
+						</Text>
+						<Text fontWeight={500} textAlign="center">
+							Growth Marketer
 						</Text>
 					</Card>
 				</Grid>
