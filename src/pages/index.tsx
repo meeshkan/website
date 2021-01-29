@@ -17,6 +17,8 @@ import {
 	SimpleGrid,
 	Code,
 	Badge,
+	Avatar,
+	Link,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 // import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -30,6 +32,7 @@ import {
 	StoplightIcon,
 	UserIcon,
 	VideoIcon,
+	WingLogo,
 	ZapIcon,
 } from "../../theme/icons"
 import FeatureCard from "../components/molecules/featureCard"
@@ -37,6 +40,7 @@ import Callout from "../components/organisms/callout"
 import { StoryStep } from "../components/molecules/sideStep"
 import { MockDashboard } from "../components/organisms/home/mockDashboard"
 import LeadForm from "../components/molecules/leadForm"
+import { VimodjiLogo } from "../components/atoms/vimodjiLogo"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -344,6 +348,74 @@ const IndexPage = () => {
 							Get a full overview of your test coverage, with a Confidence Score
 							that will tell you if you're ready to merge.
 						</Text>
+					</Box>
+				</SimpleGrid>
+			</SingleSection>
+
+			<Spacer h={32} />
+
+			<SingleSection
+				heading="Don't just take our word for it!"
+				text="See what people have to say about using Meeshkan."
+			>
+				<SimpleGrid minChildWidth="300px" spacing={8}>
+					<Box
+						p={4}
+						borderRadius="lg"
+						backgroundColor={useColorModeValue("gray.100", "gray.800")}
+					>
+						<Text fontStyle="italic" fontSize="lg">
+							"Meeshkan relieves the constant stress of releasing. No more
+							manually writing Cypress tests — my team can just focus on writing
+							more productive code.”
+						</Text>
+						<Flex
+							direction={["column", "column", "row"]}
+							justify="space-between"
+							align="center"
+							mt={8}
+						>
+							<Flex align="center" mr={4}>
+								<Avatar
+									src="https://media.graphcms.com/sWTxkz1TQ76iV9GEga6l"
+									size="sm"
+									mr={4}
+									borderRadius="md"
+								/>
+								<Text color="gray.500">
+									Alexandre Briclot — Product Manager
+								</Text>
+							</Flex>
+							<WingLogo w={32} />
+						</Flex>
+					</Box>
+					<Box
+						p={4}
+						borderRadius="lg"
+						backgroundColor={useColorModeValue("gray.100", "gray.800")}
+					>
+						<Text fontStyle="italic" fontSize="lg">
+							"I don’t have to go through time-consuming, manual checklists or
+							test writing anymore. With Meeshkan UI tests are created and run
+							automatically for me.”
+						</Text>
+						<Flex
+							direction={["column", "column", "row"]}
+							justify={["flex-start", "space-between"]}
+							align="center"
+							mt={8}
+						>
+							<Flex align="center" mr={4}>
+								<Avatar
+									src="https://media.graphcms.com/7H1zpANmQcinYDAXxZVb"
+									size="sm"
+									mr={4}
+									borderRadius="md"
+								/>
+								<Text color="gray.500">Georgios Spanos — CTO</Text>
+							</Flex>
+							<VimodjiLogo />
+						</Flex>
 					</Box>
 				</SimpleGrid>
 			</SingleSection>
