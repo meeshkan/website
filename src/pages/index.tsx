@@ -386,7 +386,9 @@ const IndexPage = () => {
 									Alexandre Briclot — Product Manager
 								</Text>
 							</Flex>
-							<WingLogo w={32} />
+							<Link href="https://wing.eu" isExternal>
+								<WingLogo w={32} />
+							</Link>
 						</Flex>
 					</Box>
 					<Box
@@ -414,7 +416,9 @@ const IndexPage = () => {
 								/>
 								<Text color="gray.500">Georgios Spanos — CTO</Text>
 							</Flex>
-							<VimodjiLogo />
+							<Link href="https://vimodji.com/" isExternal>
+								<VimodjiLogo />
+							</Link>
 						</Flex>
 					</Box>
 				</SimpleGrid>
