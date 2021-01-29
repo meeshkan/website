@@ -32,12 +32,12 @@ const JobsPage = () => {
 					borderRadius="md"
 					backgroundColor={useColorModeValue("gray.100", "gray.800")}
 				>
-					<Text fontWeight={500}>Data pipeline engineer</Text>
+					<Text fontWeight={500}>Backend engineer (Data science interest)</Text>
 					<LightMode>
 						<Button
 							size="sm"
 							as={UniversalLink}
-							to="https://meeshkan.join.com/jobs/1779440-data-pipeline-engineer"
+							to="https://meeshkan.join.com/jobs/1834590-backend-engineer-data-science-interest"
 							// @ts-ignore
 							target="_blank"
 							rel="nofollow noopener"
@@ -103,9 +103,9 @@ const JobsPage = () => {
 					compare your numbers to ours, please e-mail{" "}
 					<UniversalLink
 						color={useColorModeValue("blue.500", "blue.300")}
-						to="mailto:hr@meeshkan.com"
+						to="mailto:contact@meeshkan.com"
 					>
-						hr@meeshkan.com
+						contact@meeshkan.com
 					</UniversalLink>
 					.
 				</Text>
