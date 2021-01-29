@@ -396,7 +396,7 @@ const IndexPage = () => {
 					>
 						<Text fontStyle="italic" fontSize="lg">
 							"I don’t have to go through time-consuming, manual checklists or
-							test writing anymore. With Meeshkan UI tests are created and run
+							test writing anymore. With Meeshkan — UI tests are created and run
 							automatically for me.”
 						</Text>
 						<Flex
