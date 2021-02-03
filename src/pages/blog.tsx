@@ -23,8 +23,8 @@ const BlogHome = ({ data }) => {
 			/>
 			<SingleSection>
 				<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
-					We're experts in taking a data science approach to testing. Here we
-					share our experience and knowledge!
+					Learn from the developers who are creating Meeshkan’s revolutionary UI
+					testing tool
 				</Heading>
 				<Grid
 					templateColumns={[
