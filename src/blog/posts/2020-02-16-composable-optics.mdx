@@ -4,7 +4,7 @@ description: With io-ts, Elvis and Metallica.
 slug: intro-to-composable-optics-with-monocle-ts
 authors: ["kimmo"]
 date: 2020-02-16
-published: true
+published: false
 tags:
   - typescript
   - functional
@@ -27,7 +27,7 @@ The code for this tutorial can be found in the [monocle-ts](https://github.com/k
 
 ```tsx
 interface HobbyI {
-  name: string
+	name: string
 }
 ```
 
@@ -47,12 +47,12 @@ I use the `T` extension to mark `io-ts` types. It's important to notice that the
 
 ```ts
 it("accepts an valid hobby object as HobbyT", () => {
-  const isHobby = HobbyT.is({ name: "Photographing corgis" })
-  expect(isHobby).toBe(true)
+	const isHobby = HobbyT.is({ name: "Photographing corgis" })
+	expect(isHobby).toBe(true)
 })
 it("does not accept an invalid hobby object as HobbyT", () => {
-  const isHobby = HobbyT.is({ name: 66 })
-  expect(isHobby).toBe(false)
+	const isHobby = HobbyT.is({ name: 66 })
+	expect(isHobby).toBe(false)
 })
 ```
 
@@ -62,12 +62,12 @@ For more stringent validation and error messages, you can use `decode`:
 import { isLeft, isRight } from "fp-ts/lib/Either"
 
 it("can decode a hobby from valid input", () => {
-  const maybeHobby = HobbyT.decode({ name: "Petting corgis" })
-  expect(isRight(maybeHobby)).toBe(true)
+	const maybeHobby = HobbyT.decode({ name: "Petting corgis" })
+	expect(isRight(maybeHobby)).toBe(true)
 })
 it("does not decode a hobby from invalid input", () => {
-  const maybeHobby = HobbyT.decode({ name: 67 })
-  expect(isLeft(maybeHobby)).toBe(true)
+	const maybeHobby = HobbyT.decode({ name: 67 })
+	expect(isLeft(maybeHobby)).toBe(true)
 })
 ```
 
@@ -83,9 +83,9 @@ Here are the rest of the types we'll need:
 
 ```tsx
 const PersonT = t.interface({
-  firstName: t.string,
-  age: t.number,
-  hobbies: t.array(HobbyT),
+	firstName: t.string,
+	age: t.number,
+	hobbies: t.array(HobbyT),
 })
 type Person = t.TypeOf<typeof PersonT>
 
@@ -99,39 +99,39 @@ We also define a few objects we'll work with:
 
 ```tsx
 const elvis: Person = {
-  firstName: "Elvis",
-  age: 100,
-  hobbies: [
-    {
-      name: "singing",
-    },
-  ],
+	firstName: "Elvis",
+	age: 100,
+	hobbies: [
+		{
+			name: "singing",
+		},
+	],
 }
 
 const metallica: Band = {
-  name: "Metallica",
-  members: [
-    {
-      firstName: "James",
-      hobbies: [],
-      age: 56,
-    },
-    {
-      firstName: "Lars",
-      hobbies: [],
-      age: 55,
-    },
-    {
-      firstName: "Kirk",
-      hobbies: [],
-      age: 57,
-    },
-    {
-      firstName: "Robert",
-      hobbies: [],
-      age: 55,
-    },
-  ],
+	name: "Metallica",
+	members: [
+		{
+			firstName: "James",
+			hobbies: [],
+			age: 56,
+		},
+		{
+			firstName: "Lars",
+			hobbies: [],
+			age: 55,
+		},
+		{
+			firstName: "Kirk",
+			hobbies: [],
+			age: 57,
+		},
+		{
+			firstName: "Robert",
+			hobbies: [],
+			age: 55,
+		},
+	],
 }
 ```
 
@@ -182,7 +182,7 @@ With the `modify` method you can create a setter that modifies fields with the g
 ```tsx
 const upperCase = (s: string): string => s.toUpperCase()
 const upperCasePersonName: (p: Person) => Person = personToName.modify(
-  upperCase
+	upperCase
 )
 const elvisUpperCased = upperCasePersonName(elvis)
 expect(elvisUpperCased).toHaveProperty("firstName", "ELVIS")
@@ -211,8 +211,8 @@ Remember we defined our band type as follows:
 
 ```tsx
 type Band = {
-  name: string
-  members: Person[]
+	name: string
+	members: Person[]
 }
 ```
 
@@ -222,7 +222,7 @@ Assume that we already have our `members` field of type `Band`, and now we want 
 import { some, none } from "fp-ts/lib/Option"
 
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
-  personArray.length === 0 ? none : some(personArray[0])
+	personArray.length === 0 ? none : some(personArray[0])
 ```
 
 The helper functions `none` and `some` allow creating options with empty and non-empty values, respectively.
@@ -231,7 +231,7 @@ Now we need to define the `set` function for our `Optional<Array<Person>, Person
 
 ```tsx
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
-  ps: Person[]
+	ps: Person[]
 ) => (ps.length === 0 ? [] : [p, ...ps.slice(1)])
 ```
 
@@ -251,13 +251,13 @@ Now we're ready to define `head` zooming into the first value of an array of per
 
 ```tsx
 const getOption: (ps: Person[]) => Option<Person> = (personArray: Person[]) =>
-  personArray.length === 0 ? none : some(personArray[0])
+	personArray.length === 0 ? none : some(personArray[0])
 const set: (p: Person) => (ps: Person[]) => Person[] = (p: Person) => (
-  ps: Person[]
+	ps: Person[]
 ) => (ps.length === 0 ? [] : [p, ...ps.slice(1)])
 const head: Optional<Array<Person>, Person> = new Optional<
-  Array<Person>,
-  Person
+	Array<Person>,
+	Person
 >(getOption, set)
 ```
 
@@ -267,7 +267,7 @@ To apply our new Optional on a band, let's compose it with the `members` Lens:
 const membersLens = Lens.fromProp<Band>()("members")
 
 const bandToFirstMember: Optional<Band, Person> = membersLens.composeOptional(
-  head
+	head
 )
 ```
 
@@ -277,11 +277,11 @@ Let's ensure our composed optic works as a getter for a band containing members:
 
 ```tsx
 expect(bandToFirstMember.getOption(metallica)).toEqual(
-  some(
-    expect.objectContaining({
-      firstName: "James",
-    })
-  )
+	some(
+		expect.objectContaining({
+			firstName: "James",
+		})
+	)
 )
 ```
 
@@ -289,8 +289,8 @@ The `getOption` returns the first member of the band wrapped in `Option` as expe
 
 ```tsx
 const bandWithNoMembers: Band = {
-  name: "Unknown",
-  members: [],
+	name: "Unknown",
+	members: [],
 }
 expect(bandToFirstMember.getOption(bandWithNoMembers)).toEqual(none)
 ```
@@ -300,7 +300,7 @@ In this case `getOption` returns a `none` as expected. Let's go even further and
 ```tsx
 const nameLens = Lens.fromProp<Person>()("firstName")
 const nameOptional: Optional<Band, string> = bandToFirstMember.composeLens(
-  nameLens
+	nameLens
 )
 
 const upperCase = (s: string): string => s.toUpperCase()
@@ -308,9 +308,9 @@ const upperCase = (s: string): string => s.toUpperCase()
 const upperCaseFirstBandMemberName = nameOptional.modify(upperCase)
 
 expect(upperCaseFirstBandMemberName(metallica).members).toContainEqual(
-  expect.objectContaining({
-    firstName: "JAMES",
-  })
+	expect.objectContaining({
+		firstName: "JAMES",
+	})
 )
 ```
 

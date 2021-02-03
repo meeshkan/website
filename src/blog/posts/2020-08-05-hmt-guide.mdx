@@ -3,7 +3,7 @@ title: Create a mock server for any REST API
 description: A step-by-step tutorial for building a mock server using the HTTP Mocking Toolkit (HMT).
 date: 2020-08-05
 authors: ["carolyn"]
-published: true
+published: false
 slug: create-a-mock-server
 tags:
   - tutorial
@@ -11,13 +11,13 @@ tags:
   - apis
 ---
 
-If you make a REST API call from your codebase then there's a good chance that, at some point, you'll want to write a test for that integration. Instead of calling the real API, it might make sense to use a mock. But manually stubbing data can be time-consuming and doesn't lead to a high level of confidence. 
+If you make a REST API call from your codebase then there's a good chance that, at some point, you'll want to write a test for that integration. Instead of calling the real API, it might make sense to use a mock. But manually stubbing data can be time-consuming and doesn't lead to a high level of confidence.
 
 That's where this tutorial comes in.
 
-In this tutorial, you'll learn how to create a mock server for any REST API. This mock server will generate dynamic, type-based response data that you can use in your tests. You'll do this using the [HTTP Mocking Toolkit (HMT)](https:github.com/meeshkan/hmt), a tool that mocks HTTP APIs for use in automated and exploratory testing. 
+In this tutorial, you'll learn how to create a mock server for any REST API. This mock server will generate dynamic, type-based response data that you can use in your tests. You'll do this using the [HTTP Mocking Toolkit (HMT)](https:github.com/meeshkan/hmt), a tool that mocks HTTP APIs for use in automated and exploratory testing.
 
-As an example, this tutorial uses the [Studio Ghibli API](https://ghibliapi.herokuapp.com/), which catalogs the worlds created by Japanese anime studio [Studio Ghibli](http://www.ghibli.jp/). Why Studio Ghibli? Because they RULE! 
+As an example, this tutorial uses the [Studio Ghibli API](https://ghibliapi.herokuapp.com/), which catalogs the worlds created by Japanese anime studio [Studio Ghibli](http://www.ghibli.jp/). Why Studio Ghibli? Because they RULE!
 
 ✅ **Steps**:
 
@@ -32,7 +32,7 @@ As an example, this tutorial uses the [Studio Ghibli API](https://ghibliapi.hero
 - Comfort using the [command-line](https://www.davidbaumgold.com/tutorials/command-line/)
 
 💻 **References**: <br />
-There's a [GitHub repository](https://github.com/meeshkan/studio-ghibli-mock-server) that contains a completed Studio Ghibli mock server. You can use it as a reference for this tutorial. 
+There's a [GitHub repository](https://github.com/meeshkan/studio-ghibli-mock-server) that contains a completed Studio Ghibli mock server. You can use it as a reference for this tutorial.
 
 ## Initial setup
 
@@ -47,7 +47,7 @@ cd studio-ghibli-mock-server
 
 ### (Optional) Create a virtual environment
 
-Using a [virtual environment](https://towardsdatascience.com/why-you-should-use-a-virtual-environment-for-every-python-project-c17dab3b0fd0) can help keep your packages organized and ensure that you have the correct Python version. For this example, you'll name yours `.aichienv` based on [the location of the new Studio Ghibli theme park](https://www.japantimes.co.jp/news/2020/07/28/national/studio-ghibli-theme-park-construction/). 
+Using a [virtual environment](https://towardsdatascience.com/why-you-should-use-a-virtual-environment-for-every-python-project-c17dab3b0fd0) can help keep your packages organized and ensure that you have the correct Python version. For this example, you'll name yours `.aichienv` based on [the location of the new Studio Ghibli theme park](https://www.japantimes.co.jp/news/2020/07/28/national/studio-ghibli-theme-park-construction/).
 
 First, run the following script to set up a [venv](https://docs.python.org/3/library/venv.html) directory:
 
@@ -149,11 +149,11 @@ curl http://localhost:8000/https://ghibliapi.herokuapp.com/vehicles/923d70c9-8f1
 
 ### Check the recordings file
 
-Running `hmt record` will automatically generate two directories: `logs` and `specs`. 
+Running `hmt record` will automatically generate two directories: `logs` and `specs`.
 
 By default, HMT records all traffic to the `logs` directory in a file called `{hostname}-recordings.jsonl`. `{hostname}` refers to your API's host URL and in this case, that's `ghibliapi.herokuapp.com`.
 
-How it works is that HMT takes the recorded server traffic and serializes them as JSON objects in the [`http-types`](https://github.com/meeshkan/http-types) format. Then, this is written to a [JSON Lines](http://jsonlines.org/) file. 
+How it works is that HMT takes the recorded server traffic and serializes them as JSON objects in the [`http-types`](https://github.com/meeshkan/http-types) format. Then, this is written to a [JSON Lines](http://jsonlines.org/) file.
 
 This specific formatting and file type is required for HMT to be able to build an OpenAPI specification in the next step.
 
@@ -173,7 +173,7 @@ By default, HMT builds a new OpenAPI specification (called `openapi.json`) in th
 
 ## 3. Mock server traffic using your specification
 
-Now you can use your `openapi.json` and a different HMT command to create a mock server. 
+Now you can use your `openapi.json` and a different HMT command to create a mock server.
 
 All it takes is `hmt mock` followed by the path to the directory or file where your OpenAPI specification is (for this example, that's `specs/`):
 
@@ -189,27 +189,27 @@ curl http://localhost:8000/https://ghibliapi.herokuapp.com/people/08ffbce4-7f94-
 
 > Yes, you read that right - it's almost identical to the command that you ran earlier after launching `hmt record`.
 
-This is the same command we ran in the second step for Granny from My Neighbor Totoro. But our server won't return Granny's exact data. Instead, it'll return the same character response fields from the Studio Ghibli API with mock data for the values based on their types. 
+This is the same command we ran in the second step for Granny from My Neighbor Totoro. But our server won't return Granny's exact data. Instead, it'll return the same character response fields from the Studio Ghibli API with mock data for the values based on their types.
 
 Here's an example of what this response could look like:
 
 ```bash
 {
   "id": "Bradley Joseph",
-  "name": "Jeremy Vasquez", 
-  "gender": "Jodi Francis", 
-  "age": "Karen Booth", 
-  "eye_color": "Andre Mcclure", 
-  "hair_color": "Brandon Freeman", 
+  "name": "Jeremy Vasquez",
+  "gender": "Jodi Francis",
+  "age": "Karen Booth",
+  "eye_color": "Andre Mcclure",
+  "hair_color": "Brandon Freeman",
   "films": [
-    "Stephanie Campbell", 
-    "Paul Young", 
-    "Catherine Gonzalez DDS", 
-    "Charles Dean", 
-    "Jackson Smith", 
-    "Alexander Manning", 
+    "Stephanie Campbell",
+    "Paul Young",
+    "Catherine Gonzalez DDS",
+    "Charles Dean",
+    "Jackson Smith",
+    "Alexander Manning",
     "Anthony Reed"
-  ], 
+  ],
   "species": "Jasmine Davis",
   "url": "David Olson"
   }

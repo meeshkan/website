@@ -5,7 +5,7 @@ slug: comparing-prism-hoverfly-and-hmt-part-2
 authors: ["mike"]
 date: 2020-02-18
 updated: 2020-05-05
-published: true
+published: false
 tags:
   - api
   - web
@@ -59,10 +59,10 @@ Unfortunately, this is where I ran into difficulties, as Prism serves the respon
 
 ```json
 {
-  "type": "https://stoplight.io/prism/errors#UNKNOWN",
-  "title": "Your schema contains $ref. You must provide specification in the third parameter.",
-  "status": 500,
-  "detail": ""
+	"type": "https://stoplight.io/prism/errors#UNKNOWN",
+	"title": "Your schema contains $ref. You must provide specification in the third parameter.",
+	"status": 500,
+	"detail": ""
 }
 ```
 
@@ -76,14 +76,14 @@ Now, when we query `/pets`, we get the following result.
 
 ```json
 [
-  {
-    "id": -9223372036854776000,
-    "properties": {
-      "isCat": true
-    },
-    "name": "string",
-    "tag": "string"
-  }
+	{
+		"id": -9223372036854776000,
+		"properties": {
+			"isCat": true
+		},
+		"name": "string",
+		"tag": "string"
+	}
 ]
 ```
 
@@ -203,10 +203,10 @@ Let's follow its suggestion and add a glob wildcard to `stripe-simulation.json`.
 
 ```json
 [
-  {
-    "matcher": "exact",
-    "value": "/v1/customers/cus_GhmV4PbooARHhM"
-  }
+	{
+		"matcher": "exact",
+		"value": "/v1/customers/cus_GhmV4PbooARHhM"
+	}
 ]
 ```
 
@@ -214,10 +214,10 @@ And now, we will change it to this.
 
 ```json
 [
-  {
-    "matcher": "glob",
-    "value": "/v1/customers/*"
-  }
+	{
+		"matcher": "glob",
+		"value": "/v1/customers/*"
+	}
 ]
 ```
 

@@ -4,7 +4,7 @@ description: Build type-safe web apps using plzwrk, Asterius, and Haskell.
 slug: introducing-plzwrk
 date: 2020-05-14
 authors: ["mike"]
-published: true
+published: false
 tags:
   - haskell
   - webdev
@@ -21,7 +21,7 @@ Table of Contents
 
 I really like programming in Haskell. Recently, I learned about [Asterius](https://github.com/tweag/asterius), a Haskell-to-WebAssembly compiler. So I thought it'd be fun to create a small frontend library to build websites that are compiled with Asterius.
 
-Voilà [`plzwrk`](https://github.com/meeshkan/plzwrk). 
+Voilà [`plzwrk`](https://github.com/meeshkan/plzwrk).
 
 I've used it to build a couple [toy websites](https://github.com/meeshkan/plzwrk) and I must say the process has been quite delightful. In this article, I'd like to present a brief overview of `plzwrk`. If you're a frontend developer and interested in Haskell, I hope that you'll give it a try!
 
@@ -44,7 +44,7 @@ main = do
 
 Let's unpack what's going on.
 
-On the first line of the `main` function, we are creating a browser.  `plzwrk` ships with two browser representations - one backed by [Asterius](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/Asterius.hs#L34) (which we use above) - and a [mock](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/MockJSVal.hs#L648) one that is useful for testing.
+On the first line of the `main` function, we are creating a browser. `plzwrk` ships with two browser representations - one backed by [Asterius](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/Asterius.hs#L34) (which we use above) - and a [mock](https://github.com/meeshkan/plzwrk/blob/6ccee37d5190873d455b4d648d78dfda9ad59edc/src/Web/Framework/Plzwrk/MockJSVal.hs#L648) one that is useful for testing.
 
 On the second line of `main`, we create our element to be inserted into the DOM. `plzwrk` has two ways to insert elements into the DOM:
 
@@ -160,6 +160,7 @@ main = do
   |]) <$> _name <*> _age
   plzwrk' bigger (Person "Joe" 42) browser
 ```
+
 You can see the above example live [here](https://plzwrk-hello-world-repeat.surge.sh).
 
 In the above example, the phrase "You just turned 42. Congrats!" will be printed 42 times.

@@ -5,7 +5,7 @@ slug: comparing-prism-hoverfly-and-hmt-part-1
 authors: ["mike"]
 date: 2020-02-18
 updated: 2020-05-05
-published: true
+published: false
 tags:
   - api
   - web
@@ -75,13 +75,13 @@ HMT ingests recordings in the [`http-types`](https://github.com/meeshkan/http-ty
 
 ```javascript
 app.use(
-  hmt({
-    transport: S3Transport({
-      bucket: "my-recording-bucket",
-      key: "/ myservice",
-      prefix: "recording_",
-    }),
-  })
+	hmt({
+		transport: S3Transport({
+			bucket: "my-recording-bucket",
+			key: "/ myservice",
+			prefix: "recording_",
+		}),
+	})
 )
 ```
 

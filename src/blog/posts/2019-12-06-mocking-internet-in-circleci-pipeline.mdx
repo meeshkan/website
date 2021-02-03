@@ -4,7 +4,7 @@ description: How to test code with network calls in CircleCI.
 slug: mocking-the-internet
 authors: ["mike"]
 date: 2019-12-06
-published: true
+published: false
 tags:
   - unmock
   - circleci
@@ -38,42 +38,42 @@ const { withCodes } = transform
 const axios = require("axios")
 
 function fetchDataFromService() {
-  return axios.get("https://api.unmock.io").then(res => res.data)
+	return axios.get("https://api.unmock.io").then((res) => res.data)
 }
 
 unmock
-  .nock("https://api.unmock.io", "hello")
-  .get("/")
-  .reply(200, {
-    id: u.number({ minimum: 0 }),
-    username: u.opt(u.string()),
-  })
-  .reply(400, "Not Authorized")
+	.nock("https://api.unmock.io", "hello")
+	.get("/")
+	.reply(200, {
+		id: u.number({ minimum: 0 }),
+		username: u.opt(u.string()),
+	})
+	.reply(400, "Not Authorized")
 
 describe("hello endpoint", () => {
-  let helloService
+	let helloService
 
-  beforeAll(() => {
-    helloService = unmock.on().services.hello
-  })
+	beforeAll(() => {
+		helloService = unmock.on().services.hello
+	})
 
-  afterAll(() => {
-    unmock.off()
-  })
+	afterAll(() => {
+		unmock.off()
+	})
 
-  beforeEach(() => {
-    helloService.reset()
-  })
+	beforeEach(() => {
+		helloService.reset()
+	})
 
-  test(
-    "should return valid JSON",
-    runner(async () => {
-      helloService.state.transform(withCodes(200))
-      const responseBody = await fetchDataFromService()
-      expect(responseBody.id).toBeDefined()
-      expect(typeof responseBody.hello === "number").toBe(true)
-    })
-  )
+	test(
+		"should return valid JSON",
+		runner(async () => {
+			helloService.state.transform(withCodes(200))
+			const responseBody = await fetchDataFromService()
+			expect(responseBody.id).toBeDefined()
+			expect(typeof responseBody.hello === "number").toBe(true)
+		})
+	)
 })
 ```
 

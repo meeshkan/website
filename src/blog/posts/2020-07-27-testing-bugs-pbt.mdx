@@ -4,7 +4,7 @@ description: A follow-up to our JavaScript guide that solves a testing bug with 
 slug: property-based-testing-bugs
 date: 2020-07-27
 authors: ["carolyn"]
-published: true
+published: false
 tags:
   - testing
   - javascript
@@ -29,13 +29,13 @@ We've been told that this is unsatisfying, so consider this post our redemption.
 Imagine you have an input where users write in a price - but this input is `type="text"` rather than `type="number"`. So you need to create a function (`getNumber`) that converts the input string into a number and an accompanying test:
 
 ```javascript
-const getNumber = inputString => {
-  const numberFromInputString = Number(inputString)
-  return numberFromInputString
+const getNumber = (inputString) => {
+	const numberFromInputString = Number(inputString)
+	return numberFromInputString
 }
 
 test("turns input string into a number", () => {
-  expect(getNumber("59.99")).toBe(59.99)
+	expect(getNumber("59.99")).toBe(59.99)
 })
 ```
 
@@ -47,10 +47,10 @@ So you add another test case to address this:
 
 ```javascript
 test("turns input string into a number", () => {
-  // English test case
-  expect(getNumber("59.99")).toBe(59.99)
-  // German test case
-  expect(getNumber("19,95")).toBe(19.95)
+	// English test case
+	expect(getNumber("59.99")).toBe(59.99)
+	// German test case
+	expect(getNumber("19,95")).toBe(19.95)
 })
 ```
 
@@ -85,21 +85,21 @@ Here's a peek at what our test will look like by the end of this post:
 
 ```javascript
 test("turns any valid input string into a number, regardless of locale", () => {
-  fc.assert(
-    fc.property(
-      fc.float(),
-      fc.option(fc.constantFrom("de-DE", "fr-FR")),
-      (testFloat, locale) => {
-        const fixedFloat = parseFloat(testFloat.toFixed(2))
+	fc.assert(
+		fc.property(
+			fc.float(),
+			fc.option(fc.constantFrom("de-DE", "fr-FR")),
+			(testFloat, locale) => {
+				const fixedFloat = parseFloat(testFloat.toFixed(2))
 
-        const floatString = locale
-          ? new Intl.NumberFormat(locale).format(fixedFloat)
-          : fixedFloat.toString()
+				const floatString = locale
+					? new Intl.NumberFormat(locale).format(fixedFloat)
+					: fixedFloat.toString()
 
-        expect(getNumber(floatString)).toBe(fixedFloat)
-      }
-    )
-  )
+				expect(getNumber(floatString)).toBe(fixedFloat)
+			}
+		)
+	)
 })
 ```
 
@@ -134,8 +134,8 @@ The second is also a combination of sorts. To start, we need to write a [`consta
 
 ```javascript
 fc.constantFrom(
-  "de-DE"
-  /* This is where you'd pass another locale */
+	"de-DE"
+	/* This is where you'd pass another locale */
 )
 ```
 
@@ -161,12 +161,12 @@ Altogether, our `property` function will look like this so far:
 
 ```javascript
 fc.property(
-  fc.float(),
-  fc.option(fc.constantFrom("de-DE")),
-  (testFloat, locale) => {
-    const fixedFloat = parseFloat(testFloat.toFixed(2))
-    // More to come!
-  }
+	fc.float(),
+	fc.option(fc.constantFrom("de-DE")),
+	(testFloat, locale) => {
+		const fixedFloat = parseFloat(testFloat.toFixed(2))
+		// More to come!
+	}
 )
 ```
 
@@ -196,8 +196,8 @@ The resulting `floatString` variable:
 
 ```javascript
 const floatString = locale
-  ? new Intl.NumberFormat(locale).format(fixedFloat)
-  : fixedFloat.toString()
+	? new Intl.NumberFormat(locale).format(fixedFloat)
+	: fixedFloat.toString()
 ```
 
 ### Adding your assertion
@@ -216,21 +216,21 @@ After all that, you're back to that final result:
 
 ```javascript
 test("turns any valid input string into a number, regardless of locale", () => {
-  fc.assert(
-    fc.property(
-      fc.float(),
-      fc.option(fc.constantFrom("de-DE", "fr-FR")),
-      (testFloat, locale) => {
-        const fixedFloat = parseFloat(testFloat.toFixed(2))
+	fc.assert(
+		fc.property(
+			fc.float(),
+			fc.option(fc.constantFrom("de-DE", "fr-FR")),
+			(testFloat, locale) => {
+				const fixedFloat = parseFloat(testFloat.toFixed(2))
 
-        const floatString = locale
-          ? new Intl.NumberFormat(locale).format(fixedFloat)
-          : fixedFloat.toString()
+				const floatString = locale
+					? new Intl.NumberFormat(locale).format(fixedFloat)
+					: fixedFloat.toString()
 
-        expect(getNumber(floatString)).toBe(fixedFloat)
-      }
-    )
-  )
+				expect(getNumber(floatString)).toBe(fixedFloat)
+			}
+		)
+	)
 })
 ```
 

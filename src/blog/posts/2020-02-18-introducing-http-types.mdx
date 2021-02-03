@@ -4,7 +4,7 @@ description: A standard for recording HTTP requests and responses
 slug: introducing-http-types
 authors: ["mike"]
 date: 2020-02-18
-published: true
+published: false
 tags:
   - javascript
   - python
@@ -32,27 +32,27 @@ The following is an example of a request and response stored in the `HttpExchang
 
 ```json
 {
-  "request": {
-    "method": "get",
-    "protocol": "http",
-    "host": "example.com",
-    "headers": {
-      "accept": "*/*",
-      "user-agent": "Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/3.0.8"
-    },
-    "pathname": "/user/repos",
-    "query": { "param": "value" },
-    "timestamp": "2018-11-13T20:20:39+01:00"
-  },
-  "response": {
-    "statusCode": 200,
-    "body": "(response body string)",
-    "headers": {
-      "content-length": "1999",
-      "content-type": "text/html; charset=utf-8"
-    },
-    "timestamp": "2018-11-13T20:20:39+02:00"
-  }
+	"request": {
+		"method": "get",
+		"protocol": "http",
+		"host": "example.com",
+		"headers": {
+			"accept": "*/*",
+			"user-agent": "Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/3.0.8"
+		},
+		"pathname": "/user/repos",
+		"query": { "param": "value" },
+		"timestamp": "2018-11-13T20:20:39+01:00"
+	},
+	"response": {
+		"statusCode": 200,
+		"body": "(response body string)",
+		"headers": {
+			"content-length": "1999",
+			"content-type": "text/html; charset=utf-8"
+		},
+		"timestamp": "2018-11-13T20:20:39+02:00"
+	}
 }
 ```
 

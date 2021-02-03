@@ -4,7 +4,7 @@ description: Here's why Dhall is a great contender for superseding REST and Grap
 slug: dhall-api
 date: 2020-09-06
 authors: ["mike"]
-published: true
+published: false
 tags:
   - functional
   - dhall
@@ -60,31 +60,31 @@ In our example, the return value will look something like this:
 
 ```json
 {
-  "nonce": "wjsmcpmpiyvpwqba",
-  "schema": {
-    "$ref": "#/definitions/user",
-    "definitions": {
-      "user": {
-        "id": { "type": "integer" },
-        "name": { "type": "string" },
-        "pets": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/pet" }
-        }
-      },
-      "pet": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "integer" },
-          "name": { "type": "string" },
-          "owner": {
-            "$ref": "#/definitions/user",
-            "items": { "type": "object" }
-          }
-        }
-      }
-    }
-  }
+	"nonce": "wjsmcpmpiyvpwqba",
+	"schema": {
+		"$ref": "#/definitions/user",
+		"definitions": {
+			"user": {
+				"id": { "type": "integer" },
+				"name": { "type": "string" },
+				"pets": {
+					"type": "array",
+					"items": { "$ref": "#/definitions/pet" }
+				}
+			},
+			"pet": {
+				"type": "object",
+				"properties": {
+					"id": { "type": "integer" },
+					"name": { "type": "string" },
+					"owner": {
+						"$ref": "#/definitions/user",
+						"items": { "type": "object" }
+					}
+				}
+			}
+		}
+	}
 }
 ```
 
