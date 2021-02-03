@@ -140,7 +140,7 @@ module.exports = {
 		{
 			resolve: `@meeshkanml/gatsby-plugin-meeshkan-recorder`,
 			options: {
-				clientId: "meeshkan_website",
+				clientId: "ckkp89za900yv07l66yxw1jb6",
 			},
 		},
 	],
