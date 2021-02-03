@@ -18,12 +18,13 @@ const BlogHome = ({ data }) => {
 		<Layout>
 			<SEO
 				pageTitle="Blog"
-				pageDescription="We’re experts in Automated Testing and APIs. Why keep it to ourselves?"
+				pageDescription="We're experts in taking a data science approach to testing. Here we share our experience and knowledge!"
 				pageUrl="https://meeshkan.com/blog/"
 			/>
 			<SingleSection>
 				<Heading as="h1" textStyle="h1" textAlign="center" mb={12}>
-					We’re experts in Automated Testing and APIs. Why keep it to ourselves?
+					We're experts in taking a data science approach to testing. Here we
+					share our experience and knowledge!
 				</Heading>
 				<Grid
 					templateColumns={[
