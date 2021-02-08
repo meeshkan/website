@@ -274,7 +274,7 @@ const Roadmap = () => {
 						/>
 					</FormControl>
 					<Button type="submit" w={["100%", "100%", "auto"]}>
-						Recieve updates
+						Receive updates
 					</Button>
 				</Flex>
 			</SingleSection>
