@@ -76,13 +76,6 @@ export function Footer() {
 						>
 							FAQ
 						</Link>
-						<Link
-							isExternal
-							href="https://gitter.im/Meeshkan/community"
-							aria-label="Go to Meeshkan's Gitter community"
-						>
-							Community
-						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
