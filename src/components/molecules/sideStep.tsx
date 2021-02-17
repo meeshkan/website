@@ -1,12 +1,5 @@
 import React from "react"
-import {
-	Box,
-	Flex,
-	Text,
-	List,
-	ListItem,
-	useColorModeValue,
-} from "@chakra-ui/react"
+import { Box, Flex, Text, List, ListItem } from "@chakra-ui/react"
 
 type StoryStepProps = {
 	stepNumber: number
@@ -20,14 +13,7 @@ export const StoryStep = ({
 	subSteps,
 }: StoryStepProps) => {
 	return (
-		<Box
-			px={8}
-			pt={stepNumber === 1 ? 4 : 0}
-			borderRadius="md"
-			// _hover={{
-			// 	backgroundColor: useColorModeValue("gray.100", "gray.800"),
-			// }}
-		>
+		<Box px={8} pt={stepNumber === 1 ? 4 : 0} borderRadius="md">
 			{stepNumber === 1 ? null : (
 				<Box borderLeft="1px solid" borderColor="gray.300" h={4} ml="11.5px" />
 			)}
