@@ -18,12 +18,16 @@ import {
 	CircularProgress,
 	CircularProgressLabel,
 	useColorMode,
+	useDisclosure,
+	IconButton,
+	Collapse,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
 import { UniversalLink } from "../components/atoms/UniversalLink"
+import { ChevronDownIcon } from "@chakra-ui/icons"
 
 type LinkProps = {
 	url: string
@@ -45,8 +49,8 @@ const Milestone = ({
 	state,
 	scope,
 	completedScope,
-	link,
-}: MilestoneProps) => {
+}: // link,
+MilestoneProps) => {
 	const complete = Math.round(
 		((completedScope != null ? completedScope : 0) /
 			(scope != null ? scope : 0)) *
@@ -118,7 +122,7 @@ const Milestone = ({
 				) : null}
 			</Stack>
 			<Text mb={4}>{description}</Text>
-			{link.length > 1 ? (
+			{/* {link.length > 1 ? (
 				<>
 					<Heading as="h4" textStyle="h4" mb={2}>
 						Resources:
@@ -133,7 +137,7 @@ const Milestone = ({
 						))}
 					</List>
 				</>
-			) : null}
+			) : null} */}
 		</Box>
 	)
 }
@@ -141,7 +145,7 @@ const Milestone = ({
 const Roadmap = () => {
 	const { linear } = useStaticQuery(
 		graphql`
-			query LINEAR_PROJECTS {
+			query LINEAR_MILESTONES {
 				linear {
 					team(id: "e8fdda78-0d24-4610-8a79-da08cf64afb6") {
 						projects {
@@ -149,14 +153,10 @@ const Roadmap = () => {
 								name
 								description
 								state
-								targetDate
 								scopeHistory
 								completedScopeHistory
-								links {
-									nodes {
-										label
-										url
-									}
+								milestone {
+									name
 								}
 							}
 						}
@@ -171,37 +171,38 @@ const Roadmap = () => {
 	// (Q3) is from July 7 to September 9
 	// (Q4) is from October 10 to December 12
 
-	const Q4_2020 = linear.team.projects.nodes.filter((project) =>
-		project.targetDate !== null
-			? project.targetDate.startsWith("2020-10") ||
-			  project.targetDate.startsWith("2020-11") ||
-			  project.targetDate.startsWith("2020-12")
-			: null
-	)
 	const Q1_2021 = linear.team.projects.nodes.filter((project) =>
-		project.targetDate !== null
-			? project.targetDate.startsWith("2021-01") ||
-			  project.targetDate.startsWith("2021-02") ||
-			  project.targetDate.startsWith("2021-03")
+		project.milestone !== null
+			? project.milestone.name.startsWith("Q1 2021")
 			: null
 	)
 	const Q2_2021 = linear.team.projects.nodes.filter((project) =>
-		project.targetDate !== null
-			? project.targetDate.startsWith("2021-04") ||
-			  project.targetDate.startsWith("2021-05") ||
-			  project.targetDate.startsWith("2021-06")
+		project.milestone !== null
+			? project.milestone.name.startsWith("Q2 2021")
 			: null
 	)
 	const Q3_2021 = linear.team.projects.nodes.filter((project) =>
-		project.targetDate !== null
-			? project.targetDate.startsWith("2021-07") ||
-			  project.targetDate.startsWith("2021-08") ||
-			  project.targetDate.startsWith("2021-09")
+		project.milestone !== null
+			? project.milestone.name.startsWith("Q3 2021")
+			: null
+	)
+	const Q4_2021 = linear.team.projects.nodes.filter((project) =>
+		project.milestone !== null
+			? project.milestone.name.startsWith("Q4 2021")
 			: null
 	)
 	const backlog = linear.team.projects.nodes.filter(
-		(project) => project.targetDate === null && project.state !== "canceled"
+		(project) =>
+			project.milestone === null &&
+			project.state !== "canceled" &&
+			project.state !== "completed"
 	)
+
+	const pastCompletion = linear.team.projects.nodes.filter(
+		(project) => project.milestone === null && project.state === "completed"
+	)
+
+	const { isOpen, onToggle } = useDisclosure()
 
 	return (
 		<Layout>
@@ -280,7 +281,7 @@ const Roadmap = () => {
 			</SingleSection>
 
 			<SingleSection>
-				<Box
+				{/* <Box
 					padding={8}
 					backgroundColor={useColorModeValue("gray.50", "gray.800")}
 					borderRadius="md"
@@ -290,6 +291,7 @@ const Roadmap = () => {
 						Q4 2020
 					</Heading>
 					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+
 						{Q4_2020.map((project, index) => (
 							<Milestone
 								key={index}
@@ -302,7 +304,7 @@ const Roadmap = () => {
 							/>
 						))}
 					</SimpleGrid>
-				</Box>
+				</Box> */}
 
 				{Q1_2021.length >= 1 ? (
 					<Box
@@ -323,7 +325,6 @@ const Roadmap = () => {
 									state={project.state}
 									scope={project.scopeHistory.slice(-1)[0]}
 									completedScope={project.completedScopeHistory.slice(-1)[0]}
-									link={project.links.nodes}
 								/>
 							))}
 						</SimpleGrid>
@@ -349,7 +350,6 @@ const Roadmap = () => {
 									state={project.state}
 									scope={project.scopeHistory.slice(-1)[0]}
 									completedScope={project.completedScopeHistory.slice(-1)[0]}
-									link={project.links.nodes}
 								/>
 							))}
 						</SimpleGrid>
@@ -375,7 +375,31 @@ const Roadmap = () => {
 									state={project.state}
 									scope={project.scopeHistory.slice(-1)[0]}
 									completedScope={project.completedScopeHistory.slice(-1)[0]}
-									link={project.links.nodes}
+								/>
+							))}
+						</SimpleGrid>
+					</Box>
+				) : null}
+
+				{Q4_2021.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
+							Q3 2020
+						</Heading>
+						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
+							{Q4_2021.map((project, index) => (
+								<Milestone
+									key={index}
+									title={project.name}
+									description={project.description}
+									state={project.state}
+									scope={project.scopeHistory.slice(-1)[0]}
+									completedScope={project.completedScopeHistory.slice(-1)[0]}
 								/>
 							))}
 						</SimpleGrid>
@@ -401,10 +425,45 @@ const Roadmap = () => {
 									state={project.state}
 									scope={project.scopeHistory.slice(-1)[0]}
 									completedScope={project.completedScopeHistory.slice(-1)[0]}
-									link={project.links.nodes}
 								/>
 							))}
 						</SimpleGrid>
+					</Box>
+				) : null}
+
+				{pastCompletion.length >= 1 ? (
+					<Box
+						padding={8}
+						backgroundColor={useColorModeValue("gray.50", "gray.800")}
+						borderRadius="md"
+						mb={8}
+					>
+						<Flex
+							onClick={onToggle}
+							justify="space-between"
+							align="center"
+							_hover={{ cursor: "pointer" }}
+						>
+							<Heading as="h2" fontSize="2xl" fontFamily="mono">
+								A peek into the past
+							</Heading>
+							<ChevronDownIcon />
+						</Flex>
+
+						<Collapse in={isOpen} animateOpacity>
+							<SimpleGrid columns={[1, 1, 2]} spacing={8} mt={4}>
+								{pastCompletion.map((project, index) => (
+									<Milestone
+										key={index}
+										title={project.name}
+										description={project.description}
+										state={project.state}
+										scope={project.scopeHistory.slice(-1)[0]}
+										completedScope={project.completedScopeHistory.slice(-1)[0]}
+									/>
+								))}
+							</SimpleGrid>
+						</Collapse>
 					</Box>
 				) : null}
 			</SingleSection>

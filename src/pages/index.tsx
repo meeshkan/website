@@ -180,17 +180,13 @@ const IndexPage = () => {
 								stepNumber={2}
 								subSteps={[
 									"Select `div.calendar-create-collect`",
-									"Click button.innerText = New Collection",
+									"Click Button with the innerText of `New Collection`",
 								]}
 							/>
 							<StoryStep
 								stepName="Request collection"
 								stepNumber={3}
-								subSteps={[
-									"Input date (0-25 days from today)",
-									"Click button.innerText = New Collection",
-									"Submit form",
-								]}
+								subSteps={["Input date (0-25 days from today)", "Submit form"]}
 							/>
 							<StoryStep
 								stepName="Successful submission"
