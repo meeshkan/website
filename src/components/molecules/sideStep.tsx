@@ -24,9 +24,9 @@ export const StoryStep = ({
 			px={8}
 			pt={stepNumber === 1 ? 4 : 0}
 			borderRadius="md"
-			_hover={{
-				backgroundColor: useColorModeValue("gray.100", "gray.800"),
-			}}
+			// _hover={{
+			// 	backgroundColor: useColorModeValue("gray.100", "gray.800"),
+			// }}
 		>
 			{stepNumber === 1 ? null : (
 				<Box borderLeft="1px solid" borderColor="gray.300" h={4} ml="11.5px" />
