@@ -8,25 +8,19 @@ import {
 	Box,
 	Code,
 	Stack,
-	List,
-	ListItem,
 	Button,
 	FormControl,
 	FormLabel,
 	Input,
 	useColorModeValue,
 	CircularProgress,
-	CircularProgressLabel,
-	useColorMode,
 	useDisclosure,
-	IconButton,
 	Collapse,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
-import { UniversalLink } from "../components/atoms/UniversalLink"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 
 type LinkProps = {
@@ -49,8 +43,7 @@ const Milestone = ({
 	state,
 	scope,
 	completedScope,
-}: // link,
-MilestoneProps) => {
+}: MilestoneProps) => {
 	const complete = Math.round(
 		((completedScope != null ? completedScope : 0) /
 			(scope != null ? scope : 0)) *
@@ -122,22 +115,6 @@ MilestoneProps) => {
 				) : null}
 			</Stack>
 			<Text mb={4}>{description}</Text>
-			{/* {link.length > 1 ? (
-				<>
-					<Heading as="h4" textStyle="h4" mb={2}>
-						Resources:
-					</Heading>
-					<List styleType="disc">
-						{link.map((link, index) => (
-							<ListItem key={index}>
-								<UniversalLink to={link.url} color="blue.500">
-									{link.label}
-								</UniversalLink>
-							</ListItem>
-						))}
-					</List>
-				</>
-			) : null} */}
 		</Box>
 	)
 }
@@ -281,31 +258,6 @@ const Roadmap = () => {
 			</SingleSection>
 
 			<SingleSection>
-				{/* <Box
-					padding={8}
-					backgroundColor={useColorModeValue("gray.50", "gray.800")}
-					borderRadius="md"
-					mb={8}
-				>
-					<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-						Q4 2020
-					</Heading>
-					<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-
-						{Q4_2020.map((project, index) => (
-							<Milestone
-								key={index}
-								title={project.name}
-								description={project.description}
-								state={project.state}
-								scope={project.scopeHistory.slice(-1)[0]}
-								completedScope={project.completedScopeHistory.slice(-1)[0]}
-								link={project.links.nodes}
-							/>
-						))}
-					</SimpleGrid>
-				</Box> */}
-
 				{Q1_2021.length >= 1 ? (
 					<Box
 						padding={8}
