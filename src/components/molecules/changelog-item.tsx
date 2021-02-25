@@ -7,61 +7,73 @@ import {
 	Stack,
 	List,
 	ListItem,
+	useColorModeValue,
 } from "@chakra-ui/react"
 
 type ChangelogItemProps = {
 	version: string
+	date: string
+	title?: string
 	intro: string
-	updates: [string]
+	updates: Array<string>
 }
 
-const ChangelogItem = ({ version, intro, updates }: ChangelogItemProps) => {
+const ChangelogItem = ({
+	version,
+	date,
+	title,
+	intro,
+	updates,
+}: ChangelogItemProps) => {
 	return (
 		<Stack
 			as="article"
 			direction="row"
 			spacing={12}
 			maxW="800px"
-			my={16}
+			mt={16}
+			pb={16}
 			mx="auto"
+			_notLast={{
+				borderBottom: "1px solid",
+				borderBottomColor: useColorModeValue("gray.200", "gray.700"),
+			}}
 		>
 			<Box>
-				<Code colorScheme="cyan" fontWeight="700" p={2} borderRadius="md">
-					v0.5.1
+				<Code
+					colorScheme="cyan"
+					fontWeight="700"
+					p={2}
+					borderRadius="md"
+					mb={2}
+				>
+					v{version}
 				</Code>
-				<Text>Feb 18, 2021</Text>
+				<Text>{date}</Text>
 			</Box>
 
 			<Box flex="1">
-				<Heading as="h2" pb={3}>
-					Release v{version}
-				</Heading>
+				{title ? (
+					<Heading as="h2" pb={3}>
+						{title}
+					</Heading>
+				) : (
+					<Heading as="h2" pb={3}>
+						Release v{version}
+					</Heading>
+				)}
+
 				<Text>{intro}</Text>
 				<List
-					spacing={2}
+					spacing={4}
 					pt={6}
 					listStylePosition="outside"
 					colorScheme="cyan"
-					listStyleType="hebrew"
+					listStyleType="lower-roman"
 				>
 					{updates.map((item) => (
 						<ListItem lineHeight="1.6">{item}</ListItem>
 					))}
-					<ListItem lineHeight="1.6">
-						Add filtering and sorting to the user stories table
-					</ListItem>
-					<ListItem lineHeight="1.6">
-						Update styling of user stories page to be consistent with test runs
-					</ListItem>
-					<ListItem lineHeight="1.6">
-						Add the project picker into settings sidebar for context of the
-						project you're in. Especially helpful if you have several projects.
-					</ListItem>
-					<ListItem lineHeight="1.6">
-						New user story description field is added. Use this to add context
-						to the outcome of an individual user story, or documentation for
-						what to watch for with it.
-					</ListItem>
 				</List>
 			</Box>
 		</Stack>
