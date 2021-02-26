@@ -16,10 +16,11 @@ import {
 	CircularProgress,
 	useDisclosure,
 	Collapse,
+	Link as ChakraLink,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 
@@ -255,6 +256,17 @@ const Roadmap = () => {
 						Receive updates
 					</Button>
 				</Flex>
+
+				<Text textAlign="center" mt={8}>
+					Looking for what's completed?{" "}
+					<ChakraLink
+						color={useColorModeValue("blue.500", "blue.200")}
+						as={Link}
+						to="/changelog/"
+					>
+						Check out the changelog
+					</ChakraLink>
+				</Text>
 			</SingleSection>
 
 			<SingleSection>
