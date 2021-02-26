@@ -85,15 +85,19 @@ const BlogHome = ({ data }) => {
 export const query = graphql`
 	query SITE_INDEX_QUERY {
 		allMdx(
-			filter: { frontmatter: { published: { eq: true } } }
+			filter: {
+				fileAbsolutePath: { regex: "/blog/" }
+				frontmatter: { published: { eq: true } }
+			}
 			sort: { fields: [frontmatter___date], order: DESC }
 		) {
+			totalCount
 			nodes {
 				id
 				frontmatter {
 					title
 					description
-					date(formatString: "Do MMM")
+					date
 					slug
 					published
 					authors {

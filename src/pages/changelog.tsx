@@ -1,49 +1,76 @@
 import React from "react"
-import { Box, Code, Divider, Heading, Stack, Text } from "@chakra-ui/react"
+import { Divider } from "@chakra-ui/react"
 import Layout from "../components/templates/layout"
 import SEO from "../components/molecules/seo"
 import { SingleSection } from "../components/organisms/singleSection"
 import ChangelogItem from "../components/molecules/changelog-item"
+import { graphql } from "gatsby"
+import { MDXProvider } from "@mdx-js/react"
+import mdxComponents from "../components/molecules/mdxComponents"
 
-const ChangelogPage = () => {
+const ChangelogPage = ({ data }) => {
 	return (
 		<Layout>
-			<SEO
-				pageTitle="Meeshkan Changelog"
-				pageDescription="The Meeshkan changelog communicating what we've accomplished as a team."
-				pageUrl="https://meeshkan.com/changelog/"
-			/>
-			<SingleSection
-				heading="Changelog"
-				text="Updates from the developement of the Meeshkan product."
-			>
-				<Divider />
+			<MDXProvider components={mdxComponents}>
+				<SEO
+					pageTitle="Meeshkan Changelog"
+					pageDescription="The Meeshkan changelog communicating what we've accomplished as a team."
+					pageUrl="https://meeshkan.com/changelog/"
+				/>
+				<SingleSection
+					heading="Changelog"
+					text="Updates from the developement of the Meeshkan product."
+				>
+					<Divider />
 
-				<ChangelogItem
-					version="0.5.2"
-					date="Feb 25, 2021"
-					intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-					updates={[
-						"Add filtering and sorting to the user stories table",
-						"Update styling of user stories page to be consistent with test runs",
-						"Add the project picker into settings sidebar for context of the project you're in. Especially helpful if you have several projects.",
-						"New user story description field is added. Use this to add context to the outcome of an individual user story, or documentation for what to watch for with it.",
-					]}
-				/>
-				<ChangelogItem
-					version="0.5.1"
-					date="Feb 18, 2021"
-					intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-					updates={[
-						"Add filtering and sorting to the user stories table",
-						"Update styling of user stories page to be consistent with test runs",
-						"Add the project picker into settings sidebar for context of the project you're in. Especially helpful if you have several projects.",
-						"New user story description field is added. Use this to add context to the outcome of an individual user story, or documentation for what to watch for with it.",
-					]}
-				/>
-			</SingleSection>
+					{data.allMdx.nodes.map((changelogItem) => {
+						const day = changelogItem.frontmatter.date.slice(0, 2)
+						const month = changelogItem.frontmatter.date.slice(4, 5) - 1
+						const year = changelogItem.frontmatter.date.slice(6, 10)
+						const date = new Date(year, month, day).toLocaleDateString(
+							"en-US",
+							{
+								month: "short",
+								year: "numeric",
+								day: "numeric",
+							}
+						)
+						return (
+							<ChangelogItem
+								key={changelogItem.id}
+								version={changelogItem.frontmatter.version}
+								date={date}
+								body={changelogItem.body}
+								slug={changelogItem.frontmatter.date}
+							/>
+						)
+					})}
+				</SingleSection>
+			</MDXProvider>
 		</Layout>
 	)
 }
+
+export const query = graphql`
+	query GET_CHANGELOG_ITEMS {
+		allMdx(
+			filter: {
+				fileAbsolutePath: { regex: "/changelog/" }
+				frontmatter: { published: { eq: true } }
+			}
+			sort: { fields: [frontmatter___date], order: DESC }
+		) {
+			totalCount
+			nodes {
+				id
+				frontmatter {
+					version
+					date
+				}
+				body
+			}
+		}
+	}
+`
 
 export default ChangelogPage

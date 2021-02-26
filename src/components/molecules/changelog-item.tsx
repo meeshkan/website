@@ -2,29 +2,22 @@ import React from "react"
 import {
 	Box,
 	Code,
-	Heading,
-	Text,
+	Link as ChakraLink,
 	Stack,
-	List,
-	ListItem,
 	useColorModeValue,
+	Text,
 } from "@chakra-ui/react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { Link } from "gatsby"
 
 type ChangelogItemProps = {
 	version: string
 	date: string
-	title?: string
-	intro: string
-	updates: Array<string>
+	slug: string
+	body: any
 }
 
-const ChangelogItem = ({
-	version,
-	date,
-	title,
-	intro,
-	updates,
-}: ChangelogItemProps) => {
+const ChangelogItem = ({ version, date, slug, body }: ChangelogItemProps) => {
 	return (
 		<Stack
 			as="article"
@@ -49,32 +42,15 @@ const ChangelogItem = ({
 				>
 					v{version}
 				</Code>
-				<Text>{date}</Text>
+				<Text>
+					<ChakraLink to={`/changelog/${slug}`} as={Link}>
+						{date}
+					</ChakraLink>
+				</Text>
 			</Box>
 
 			<Box flex="1">
-				{title ? (
-					<Heading as="h2" pb={3}>
-						{title}
-					</Heading>
-				) : (
-					<Heading as="h2" pb={3}>
-						Release v{version}
-					</Heading>
-				)}
-
-				<Text>{intro}</Text>
-				<List
-					spacing={4}
-					pt={6}
-					listStylePosition="outside"
-					colorScheme="cyan"
-					listStyleType="lower-roman"
-				>
-					{updates.map((item) => (
-						<ListItem lineHeight="1.6">{item}</ListItem>
-					))}
-				</List>
+				<MDXRenderer>{body}</MDXRenderer>
 			</Box>
 		</Stack>
 	)

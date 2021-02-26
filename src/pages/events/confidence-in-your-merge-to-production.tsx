@@ -39,7 +39,6 @@ const ConfidenceWebinarPage = () => {
 				pageTitle="Releasing with confidence: Practical tips for merging to production"
 				pageDescription="During this 30-min webinar, we'll share industry-leading strategies for making sure that the features you ship work in production as well as they work in staging."
 				pageUrl="https://meeshkan.com/events/confidence-in-your-merge-to-production/"
-				pageImage="https://media.graphcms.com/cLBS43twTPy61suT7Zo4"
 			/>
 
 			<SingleSection>

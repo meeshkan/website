@@ -38,12 +38,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 				<SEO
 					pageTitle={frontmatter.title}
 					pageDescription={frontmatter.description}
-					pageUrl={
-						frontmatter.canonicalURL
-							? `${frontmatter.canonicalURL}`
-							: `https://meeshkan.com/blog/${frontmatter.slug}/`
-					}
-					pageImage={frontmatter.pageImage}
+					pageUrl={`https://meeshkan.com/blog/${frontmatter.slug}/`}
 				/>
 				<SingleSection>
 					<Heading as="h1" textStyle="h1" textAlign="center" my={12}>
@@ -233,9 +228,8 @@ export const query = graphql`
 			frontmatter {
 				title
 				description
-				date(formatString: "Do MMM YYYY")
-				updated(formatString: "Do MMM YYYY")
-				pageImage
+				date
+				updated
 				authors {
 					avatar {
 						childImageSharp {
@@ -248,7 +242,6 @@ export const query = graphql`
 					bio
 					authorLink
 				}
-				canonicalURL
 				slug
 			}
 		}
