@@ -143,5 +143,12 @@ module.exports = {
 				clientId: "ckkp89za900yv07l66yxw1jb6",
 			},
 		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `changelog`,
+				path: `${__dirname}/src/changelog/`,
+			},
+		},
 	],
 }
