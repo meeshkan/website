@@ -32,18 +32,23 @@ type BlogPostProps = {
 const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 	const { frontmatter, body } = data.mdx
 	const { previous, next } = pageContext
+
+	const prettyDate = (date) => {
+		const rawDate = new Date(date)
+		return rawDate.toLocaleDateString("en-US", {
+			month: "short",
+			year: "numeric",
+			day: "numeric",
+		})
+	}
+
 	return (
 		<Layout>
 			<MDXProvider components={mdxComponents}>
 				<SEO
 					pageTitle={frontmatter.title}
 					pageDescription={frontmatter.description}
-					pageUrl={
-						frontmatter.canonicalURL
-							? `${frontmatter.canonicalURL}`
-							: `https://meeshkan.com/blog/${frontmatter.slug}/`
-					}
-					pageImage={frontmatter.pageImage}
+					pageUrl={`https://meeshkan.com/blog/${frontmatter.slug}/`}
 				/>
 				<SingleSection>
 					<Heading as="h1" textStyle="h1" textAlign="center" my={12}>
@@ -103,10 +108,10 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						)}
 					</Grid>
 					<Text textAlign="center" color="red.500" fontWeight={700} mb={6}>
-						{frontmatter.date}{" "}
+						{prettyDate(frontmatter.date)}{" "}
 						{frontmatter.updated ? (
 							<Text ml={2} color="gray.500" fontWeight="400">
-								Updated on {frontmatter.updated}
+								Updated on {prettyDate(frontmatter.updated)}
 							</Text>
 						) : null}
 					</Text>
@@ -233,9 +238,8 @@ export const query = graphql`
 			frontmatter {
 				title
 				description
-				date(formatString: "Do MMM YYYY")
-				updated(formatString: "Do MMM YYYY")
-				pageImage
+				date
+				updated
 				authors {
 					avatar {
 						childImageSharp {
@@ -248,7 +252,6 @@ export const query = graphql`
 					bio
 					authorLink
 				}
-				canonicalURL
 				slug
 			}
 		}

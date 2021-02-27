@@ -24,8 +24,8 @@ type DocsHeadingProps = {
 export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 	<>
 		<Heading
+			_notFirst={{ mt: 8 }}
 			mb={4}
-			mt={8}
 			letterSpacing="wide"
 			id={id}
 			// @ts-ignore

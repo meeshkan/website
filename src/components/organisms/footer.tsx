@@ -53,6 +53,13 @@ export function Footer() {
 						>
 							Contact
 						</Link>
+						<Link
+							as={GatsbyLink}
+							to="/changelog/"
+							aria-label="Updates on the development of Meeshkan"
+						>
+							Changelog
+						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
