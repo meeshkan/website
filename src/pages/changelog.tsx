@@ -58,7 +58,7 @@ export const query = graphql`
 				fileAbsolutePath: { regex: "/changelog/" }
 				frontmatter: { published: { eq: true } }
 			}
-			sort: { fields: [frontmatter___date], order: DESC }
+			sort: { fields: [frontmatter___date], order: ASC }
 		) {
 			totalCount
 			nodes {

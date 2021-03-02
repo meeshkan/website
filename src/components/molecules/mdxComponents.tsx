@@ -10,6 +10,8 @@ import {
 	Code,
 	Alert,
 	useColorModeValue,
+	UnorderedList,
+	OrderedList,
 } from "@chakra-ui/react"
 import CodeBlock from "./codeBlock"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -104,7 +106,7 @@ const components = {
 		</Alert>
 	),
 	inlineCode: (props) => (
-		<Code colorScheme="cyan" fontSize="inherit" {...props} />
+		<Code colorScheme="cyan" fontSize="inherit" borderRadius="md" {...props} />
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
 	a: (props) => (
@@ -117,24 +119,17 @@ const components = {
 	pre: (props) => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
 	code: CodeBlock,
 	ul: (props) => (
-		<List styleType="disc" stylePosition="inside" my={8} spacing={3} {...props}>
+		<UnorderedList mt={4} spacing={3} {...props}>
 			{props.children}
-		</List>
+		</UnorderedList>
 	),
 	ol: (props) => (
-		<List
-			as="ol"
-			styleType="decimal"
-			stylePosition="inside"
-			my={8}
-			spacing={3}
-			{...props}
-		>
+		<OrderedList my={8} spacing={3} {...props}>
 			{props.children}
-		</List>
+		</OrderedList>
 	),
 	li: (props) => (
-		<ListItem lineHeight="1.6" {...props}>
+		<ListItem _last={{ mb: 8 }} lineHeight="1.6" {...props}>
 			{props.children}
 		</ListItem>
 	),
