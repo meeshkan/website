@@ -9,16 +9,15 @@ published: true
 tags:
   - changelog
 ---
-## Release 0.5.4
-### 💃 Performance upgrades _everywhere_!
+## 💃 Performance upgrades _everywhere_!
 Following from the upgrades to our recording script last week, we've made some system-wide improvements to both frontend and backend elements that **decrease loading times by 10x** and **improve the performance your webapp** if the script is installed.
 
 **Here's the magic that made it happen:**
 
 - We merged our "mutation observer diff" that continues to improve script performance
 - Improvements in type-safety and integrity of the data pipeline
-- Less frequent running of the data processing pipeline
-- Switching to JSON blobs makes User Story steps appear instantly
+- More groups of user flows are being created due to a larger window of data in context
+- User Story steps appear instantly after a Chrome extension recording is completed
 - Fixed bug that added quotation marks to certain string values
 
 **Here's everything else we've been up to in the last week:**
@@ -26,9 +25,10 @@ Following from the upgrades to our recording script last week, we've made some s
 - To ensure that User Stories usefully illustrate how your software is used, we've filtered out rare events, so that the ones with less than 1 flow aren't shown in the User Story menu.
 - Resize events have been added to User Stories
 - Step numbers in User Stories bring clarity to the flow of actions
-- Graceful failure 🎩 when a drag and drop doesn't have destination coordinates. No more scary error screens!
+- 
 
 **Fixes:**
 
+- **Now, graceful failure 🎩 when a drag and drop doesn't have destination coordinates.** No more scary error screens!
 - **Now, new releases to the Meeshkan Recorder Chrome extension update automatically.** Before, scripts were cached, preventing automatic updates.
 - **Now, just receive relevant notifications from the Meeshkan Recorder.** Before, there was a bug for Windows users that sent them repeat notifications.
