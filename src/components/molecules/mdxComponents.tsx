@@ -19,19 +19,18 @@ import Video from "../atoms/video"
 import RequestAccess from "./requestAccessForm"
 
 type DocsHeadingProps = {
-	id: string
+	id?: string
 	children: Object
 }
 
 export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 	<>
 		<Heading
-			_notFirst={{ mt: 8 }}
 			mb={4}
+			mt={8}
 			letterSpacing="wide"
 			id={id}
-			// @ts-ignore
-			css={{
+			sx={{
 				"&[id]:before": {
 					display: "block",
 					height: " 6rem",
@@ -64,7 +63,7 @@ export const DocsHeading = ({ id, children, ...props }: DocsHeadingProps) => (
 
 const components = {
 	h1: (props) => (
-		<Heading {...props} as="h1" textStyle="h1" mb={12} mt={4}>
+		<Heading {...props} as="h1" textStyle="h1" mb={12}>
 			{props.children}
 		</Heading>
 	),
