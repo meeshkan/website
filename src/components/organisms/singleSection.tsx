@@ -1,5 +1,12 @@
 import React from "react"
-import { Box, Heading, Link, Text, useColorModeValue } from "@chakra-ui/react"
+import {
+	Box,
+	BoxProps,
+	Heading,
+	Link,
+	Text,
+	useColorModeValue,
+} from "@chakra-ui/react"
 
 type SectionProps = {
 	children?: Object
@@ -17,7 +24,7 @@ export const SingleSection = ({
 	text,
 	hero,
 	...props
-}: SectionProps) => (
+}: SectionProps & BoxProps) => (
 	<Box as="section" maxW="1200px" mx="auto" py={16} {...props}>
 		{heading ? (
 			<Heading as="h2" textStyle="h2" textAlign="center" mb={6}>

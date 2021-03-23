@@ -105,7 +105,15 @@ const components = {
 		</Alert>
 	),
 	inlineCode: (props) => (
-		<Code colorScheme="cyan" fontSize="inherit" borderRadius="md" {...props} />
+		<Code
+			colorScheme="cyan"
+			fontSize="inherit"
+			borderRadius="md"
+			px={2}
+			py={0}
+			fontWeight="500"
+			{...props}
+		/>
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
 	a: (props) => (

@@ -77,7 +77,7 @@ const customTheme = extendTheme({
 	fonts: {
 		body: `Inter, sans-serif`,
 		heading: `Inter, sans-serif`,
-		mono: "Jet Brains Mono, Fira Code, monospace",
+		mono: "JetBrains Mono, Fira Code, monospace",
 	},
 	fontSizes: {
 		xs: "8px",

@@ -50,7 +50,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 					pageDescription={frontmatter.description}
 					pageUrl={`https://meeshkan.com/blog/${frontmatter.slug}/`}
 				/>
-				<SingleSection>
+				<SingleSection maxWidth="880px">
 					<Heading as="h1" textStyle="h1" textAlign="center" my={12}>
 						{frontmatter.title}
 					</Heading>
