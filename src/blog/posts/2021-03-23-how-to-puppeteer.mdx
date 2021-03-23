@@ -161,11 +161,171 @@ jobs:
           node ./tests/set-a-new-authentication-token.js
 ```
 
-Now what we did locally will run per commit via GitHub actions.
+Now, what we previously did locally will run per-commit via GitHub actions.
 
-This is still light on the assertions though. In the next step we'll look into defining more rules in order for the test to succeed.
+This is still light on the assertions though. In the next step we'll look into defining more conditions in order for the test to succeed.
 
 ### 3. Writing assertions with Jest
+
+[Jest](https://jestjs.io/) is a super popular JavaScript testing framework that allows you to write tests simply. This is the option that Meeshkan internally chose. We already had Jest installed in our repo, so it was an easy extension for us.
+
+In order to extend Jest with Puppeteer, we will use [jest-puppeteer](https://github.com/smooth-code/jest-puppeteer). I'd suggest following the setup details in this repository. The important bits I found:
+
+- Your `jest.config.js` should now define the preset as `jest-puppeteer`.
+- Make sure you don't have a testEnvironment set from a previous or default configuration, the package will take care of this.
+- If you're using TypeScript, check out [this documentation](https://datacadamia.com/web/javascript/jest_puppeteer) as well.
+
+Writing assertions are strait forward functions. We'll be describing a user story which Jest will call a test suite, declaring it's expectations at certain points. I will be breaking the suite up into logical steps via assertions. First let's look at one step.
+
+```js
+// This + the jest-puppeteer preset will handle our environment and expose some new functionality like '.toMatch()'
+import "expect-puppeteer"
+
+describe('Save an authentication token', () => {
+// Setup & steps
+	it('clicks submit on the form', async () => {
+		await page.click('button', { text: 'Save token' });
+		await expect(page).toClick('button', { text: 'Save token' });
+
+		await new Promise((r) => setTimeout(r, 5000));
+	}, 100000);
+// More steps
+}
+```
+
+Describe expects it statements and succeeds or fails depending on each individual assertion. Let's make sure this works locally before moving on. The full file we're operating with is:
+
+```js
+// meeshkan-exports.test.js
+import "expect-puppeteer"
+
+describe("Save an authentication token", () => {
+	jest.setTimeout(100000)
+
+	beforeAll(async () => {
+		await page.setCookie({
+			name: "a0:session",
+			value: process.env.COOKIE,
+			domain: process.env.TEST_URL.startsWith("localhost")
+				? "localhost"
+				: process.env.TEST_URL,
+		})
+		await page.goto(
+			`${
+				process.env.TEST_URL.startsWith("localhost") ? "http://" : "https://"
+			}${process.env.TEST_URL}/meeshkan-webapp`
+		)
+		await page.setViewport({
+			width: 1813,
+			height: 1057,
+			deviceScaleFactor: 1,
+		})
+		await new Promise((r) => setTimeout(r, 10000))
+	})
+
+	it("loads the dashboard", async () => {
+		await expect(page).toMatch("Confidence score")
+	})
+
+	it("should navigate to the settings page", async () => {
+		const button = await page.$x(
+			"/html/body/div[1]/div/nav/div/div[4]/div/button[2]"
+		)
+		await button[0].click()
+		await page.waitForNavigation()
+		await new Promise((r) => setTimeout(r, 1000))
+	}, 100000)
+
+	it("fills out the form", async () => {
+		// Navigate to the details section
+		const link = await page.$x(
+			"/html/body/div[1]/div/nav/div/div[2]/div[2]/div/div[2]/a[3]"
+		)
+		await link[0].click()
+
+		// Fill in the key input
+		const input1 = await page.$x(
+			"/html/body/div[1]/div/div/div/div[6]/form/div[2]/input"
+		)
+		await input1[0].click()
+		await (
+			await page.$x("/html/body/div[1]/div/div/div/div[6]/form/div[2]/input")
+		)[0].type("test", { delay: 100 })
+
+		// Fill in the value input
+		const input2 = await page.$x(
+			"/html/body/div[1]/div/div/div/div[6]/form/div[2]/input"
+		)
+		await input2[0].click()
+		await (
+			await page.$x("/html/body/div[1]/div/div/div/div[6]/form/div[3]/input")
+		)[0].type("hello-world", { delay: 100 })
+
+		// Asserts the form should be filled
+		await expect(page).toFillForm('form[name="createAnAuthenticationToken"]', {
+			key: "test",
+			value: "hello-world",
+		})
+	}, 100000)
+
+	it("clicks submit on the form", async () => {
+		await page.click("button", { text: "Save token" })
+		await expect(page).toClick("button", { text: "Save token" })
+
+		await new Promise((r) => setTimeout(r, 5000))
+	}, 100000)
+
+	it("deletes the token", async () => {
+		const button1 = await page.$x(
+			"/html/body/div[1]/div/div/div/div[6]/div[5]/button"
+		)
+		await button1[0].click()
+
+		await new Promise((r) => setTimeout(r, 5000))
+		await expect(page).not.toMatch("hello-world")
+	}, 100000)
+})
+```
+
+The frontend team Meeshkan uses [NX](https://nx.dev/latest/react/getting-started/getting-started) as a set of devtools to manage our monorepo. It makes it super slick to run tests, deploy incrementally, share resources (called libs), etc.
+
+![jest](https://media.graphcms.com/Upz4kRbJTyhaGu2mflW7)
+
+So our test command is not likely how you'd do it. Depending on your set up, you'll run something like:
+
+```bash
+jest
+```
+
+This is where you would take the time to swap out your base URL (process.env.TEST_URL), and add cookies if your service/user story requires you to be signed up.
+
+Once you've verified the behavior locally, we'll implement this new found functionality in our GitHub action!
+
+![Green checks on GitHub](https://media.graphcms.com/n0fMVuMRThmkPM6bOEwo)
+
+Now in order to get the green checks on a GitHub PR, more specific conditons will need to be met. The file will now read:
+
+```yaml
+#  main.yaml
+name: Meeshkan tests
+
+on: push
+
+jobs:
+  run-jest-puppeteer-scripts:
+  name: Run the puppeteer scripts generated by Meeshkan
+  runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install dependencies & Run test
+        run: |
+          yarn install --prefer-offline --frozen-lockfile
+          jest
+```
 
 ### 4. Bonus — using await-vercel
 
