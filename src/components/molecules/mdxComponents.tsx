@@ -98,6 +98,7 @@ const components = {
 			my={6}
 			variant="left-accent"
 			status="info"
+			borderRadius="lg"
 			css={{ "> *:first-of-type": { marginTop: 0 } }}
 			{...props}
 		>
@@ -122,7 +123,7 @@ const components = {
 			{...props}
 		/>
 	),
-	img: (props) => <Image {...props} rounded="md" />,
+	img: (props) => <Image {...props} rounded="lg" />,
 	pre: (props) => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
 	code: CodeBlock,
 	ul: (props) => (

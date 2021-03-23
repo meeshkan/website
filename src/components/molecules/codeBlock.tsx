@@ -15,7 +15,7 @@ export const liveEditorStyle = {
 	marginBottom: 16,
 	marginTop: 16,
 	overflow: "auto",
-	borderRadius: 6,
+	borderRadius: 8,
 	maxHeight: 500,
 	lineHeight: "1.5",
 	padding: 8,
