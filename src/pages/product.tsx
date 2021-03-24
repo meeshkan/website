@@ -67,15 +67,12 @@ const StagingEnvironmentPage = () => {
 			text: `${values.name} has requested access to *pre-release testing* from the staging landing page. \n You can reach them at: _*${values.email}*_. \n They are the _*${values.position}*_ at their company.`,
 		})
 
-		fetch(
-			"https://hooks.slack.com/services/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",
-			{
-				method: "POST",
-				mode: "no-cors",
-				body: requestAccessData,
-				headers: { "Content-type": "application/json" },
-			}
-		)
+		fetch(process.env.SLACK_WEBHOOK, {
+			method: "POST",
+			mode: "no-cors",
+			body: requestAccessData,
+			headers: { "Content-type": "application/json" },
+		})
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")
