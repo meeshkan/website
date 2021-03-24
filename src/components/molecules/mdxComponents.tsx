@@ -98,6 +98,7 @@ const components = {
 			my={6}
 			variant="left-accent"
 			status="info"
+			borderRadius="lg"
 			css={{ "> *:first-of-type": { marginTop: 0 } }}
 			{...props}
 		>
@@ -105,7 +106,15 @@ const components = {
 		</Alert>
 	),
 	inlineCode: (props) => (
-		<Code colorScheme="cyan" fontSize="inherit" borderRadius="md" {...props} />
+		<Code
+			colorScheme="cyan"
+			fontSize="inherit"
+			borderRadius="md"
+			px={2}
+			py={0}
+			fontWeight="500"
+			{...props}
+		/>
 	),
 	hr: (props) => <Divider borderColor="gray.100" my={6} {...props} />,
 	a: (props) => (
@@ -114,7 +123,7 @@ const components = {
 			{...props}
 		/>
 	),
-	img: (props) => <Image {...props} rounded="md" />,
+	img: (props) => <Image {...props} rounded="lg" />,
 	pre: (props) => <Box my="2em" fontSize="inherit" rounded="sm" {...props} />,
 	code: CodeBlock,
 	ul: (props) => (
