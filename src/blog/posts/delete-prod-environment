@@ -1,0 +1,84 @@
+How we wound up deleting our production environment#
+
+On Monday, the 1st of March at 5:45 PM, one of our engineers noticed that an HTTPS request to one of our backend endpoints was returning a net::ERR_FAILED error.
+
+This was odd, because net::ERR_FAILED is the error one receives when an online resource doesn't exist. But surely, our production backend existed, so that couldn't be the issue, right? Wrong.
+Minutes before, I had accidentally deleted our production backend. 
+The whole thing. 30 microservices, 5 API endpoints, and 3 cron jobs had disappeared, literally at the click of a button. 
+How could this have happened? Why did this happen? And how did we bounce back from the incident hours later without any noticeable service disruption?
+The answer to these questions has a surprising, if not uncanny, homologue in our own story as a company. 
+In the summer of 2020, our entire company went off the map for several months and, with hard work and an open mind, we were able to resume operations in December 2020. 
+Our investors probably asked themselves the same questions I asked after deleting production: How could this have happened? Why did this happen? And how did Meeshkan bounce back so quickly, and with a product that will revolutionize how software is shipped?
+So in this article, I'd like to tell you the lessons I've learned from (almost) deleting a production environment and (almost) deleting a company. I hope they prove useful for you on your journey. 
+At some point, you too will inadvertently, if not intentionally, delete something that's meaningful to you, and I hope this serves as a blueprint for how to retrieve what you've lost in a better shape than it was before.
+Pressing the big green button
+In comic books, video games, and toys, something bad usually happens when you press a big red button. But in the case of Meeshkan, our story of deletion starts with a big green button. The GitHub merge button, that is.
+
+Enticing, isn't it? Few can resist green buttons this big, especially with all of those green checkmarks. Alas, this was my fate when I pressed Merge Pull Request on that fateful Monday  (meaning two days ago). What I didn't realize at the time was:
+I was merging our main branch into our staging branch.
+Our main branch had recently lost branch protection.
+All branches without branch protection, when merged, get deleted.
+All branches that get deleted have their resources automatically deleted on AWS as well.
+Q.E.D., my action resulted in our whole production stack being deleted. Talk about a bad day at work...
+Rewinding to August of 2020, I recall a meeting where we sat down to make an important decision that also revolved around a big green button, albeit in SendGrid. At the time, we were testing backend services and trying to transform that into a SaaS business. The thinking went like this:
+Booting up our users' backend stack in a test environment is too demanding and takes us away from our core competency, which is creating and executing automated tests.
+Let's prepare an email to go out to all of our clients who need custom backend builds, telling them that they have to migrate from our service or wait a while. That'll suck, but that way we can focus on those whose services are Docker-ized and can be started out-of-the-box.
+We'll use SendGrid to put the e-mail together & send it.
+Incidentally, we should see how many users remain after we send that email.
+Zero. 
+We had 0 clients left. We thought that automated builds were a peripheral, unimportant aspect of our service because our clients never talked much about it and we never advertised it as a major feature. 
+It turns out that automated builds were actually a sine qua non for everyone using the service. Without automated builds, there was no one left to serve, and with automated builds, we would never get across the finishing line as each one proved to be too laborious and cumbersome.
+In our case, deleting a production environment and deleting a company had a lot in common. 
+They both involved innocent calculations that, because of a confluence of external circumstances and logic bombs, resulted in wiping the slate clean. So, how did we get out of this mess?
+Trying slow for a change
+In action movies, when situations get really intense, time usually slows down before it speeds up again. This was my impression of time as well when I deleted our production backend. 
+We were in a crisis mode, but we had also designed our production backend so that none of our web services were tightly coupled to it. 
+This meant that our web dashboard would slowly experience service degradation as it fell out of sync with our (nonexistent) backend, but in general, the show could go on for hours before someone noticed the service degradation of the asphyxiated web app.
+In the eye of this hurricane, and even though we were in the midst of a five-alarm fire, I found that the easiest thing to do was take advantage of the time we had to slowly put the pieces back together. To do that, rather than calling an all-hands-on-deck panic-fest, I slowly and methodically proceeded with our Hellenic engineer Nick until all systems were back online.
+The strategy worked - we patiently checked every system, made modifications to scripts and config files where needed, and pushed services one-by-one to production until they were all back. The incident was over in four hours and we all went to sleep to the peaceful hum of our newly-minted production environment churning out fresh user stories, videos, and test results. 
+Our users had been able to keep generating test cases from their automatically triggered and grouped aggregated user session recordings, or manually with the Chrome extension, and hadn’t noticed a thing.
+
+In September and October 2020, we were in a similar boat with Meeshkan the company. 
+We knew that we needed new clients, and we knew that our traditional method of prospecting - flying around Europe - was not in the cards for the foreseeable future. So we took time out to find a client base that was truly underserved in the testing space and, after a lot of hard work, found one.
+The initial intuition came from our COO Makenna, who herself is intensely product-minded and has felt the pain of testing products before they go live in many different contexts. 
+From her intuition, we started developing a hypothesis around the profile of a product manager who needs to sign off on a release. This individual needs absolute confidence that their product won't break in production, and is scouring the market for tools and services that can help them and their team build this confidence.
+For over a month, we methodically interviewed PMs until we found one, then two, then three, then n who so very much wanted a piece of automated pre-release testing software that they agreed to hundreds of collective hours of calls, meetings, and whiteboarding with us as we prototyped the new product. 
+After going dark for a month and after changing our go-to-market, staying calm and starting small proved to be a winning strategy for getting back on track: we had the POC of a product that could radically improve how software in SaaS companies is tested and shipped, and hence radically improve the lives of any stakeholder in a release (i.e., almost everyone who works in a SaaS company)
+CTA: Find out how Meeshkan works (link to product page)
+Going live
+Back when Meeshkan was still my side project in early 2018, Risto Siilasmaa (who was at the time Chairman of the Board of Nokia) told me:
+You'll probably get rid of everything you're building now and start something new. You'll probably do that ten times. That's fine. Save it all, come back to it periodically, and at some point, you'll find something and realize it's the exact thing you need to get moving again.
+Granted, when Risto was talking about this, he probably wasn't imagining me deleting our production stack at 5pm on a Monday, but the advice was as pertinent for that situation as for any other.
+Our stack uses several infrastructure-as-code tools to describe how to build and deploy our code. These are, in rough order of usage:
+serverless
+GitHub Actions
+spago
+pip
+npm
+Combining these together, we have a fully-deterministic stack that is entirely spun up "at the push of a button" (the button is red, incidentally...). This is because, as a company, we have made Risto's advice actionable. 
+Everything can be retrieved and deployed more-or-less instantly, and all of it is highly decoupled from our client-facing stack. This means that we can make changes in a reasonable timeframe without anyone noticing. 
+So getting production live again was a matter of methodically pushing the red button many times, switching over endpoints, and watching services spin up one after the other until they were all live.
+
+The same can be said of our algorithm circa September 2020. At that point, we had accumulated a wealth of knowledge of how to use tools like pytorch, tensorflow and scikit-learn to process millions of web-based interactions, like API-to-API communication, and use machine learning to create simulations of these phenomena. 
+We have been on a mission to build A Fake Version of the Internet™ since our inception. In Meeshkan 2.0, what's changed is what we're simulating. 
+Instead of simulating the behavior of a mesh of interconnected machines exchanging data (a.k.a.:  "the internet"), we've started simulating the behavior of the users of those machines. Meeshkan user story recordings are used to generate “fake users,” who probe your staging environment after each commit.
+This decision was a natural result of our new orientation. Product managers care deeply about their users and want them to have the best experience imaginable while using their product. To do this, they have to get their product into shape where their users will love it. 
+But how do PMs know what their users want? The ingredients list goes roughly as follows:
+10% visionary.
+10% intuition about their users.
+80% scrupulously and meticulously hanging onto any morsel of available information in any form possible, to build an immaculate profile of exactly what their users want.
+We realized that our algorithms could help with that 80%. By taking traditional telemetric information from a representative sample of users, our algorithms have been able to generate automatic acceptance tests straight from user behavior.
+Risto's advice reminds me that, like many things in life, technical R&D compounds over time. Analyzing billions of pieces of user-generated data in a safe and anonymous fashion to create automatic tests simply would not have been possible had we not built a set of solid technical foundations and practices over three years. 
+Broadly speaking, our cutting edge tech and company vision stayed the same, but found a new lease on life with a value-adding, commercial application. I am delighted that this technology has found a way to help with one of the major frustrations of the product-management process: pre-release testing.
+CTA: See how it works (link to product page)
+Where we are now
+Our current product is world-class, powered by cutting-edge deep tech, and could not have possibly been created ex nihilo. It relies on concepts that have always been fundamental to Meeshkan. But the advantage of this product is that it is built on the graveyard of dead ideas that, like all decaying organisms, provides Grade-A fertilizer.
+
+This fertilizer is the culmination of years of research & development into how to accurately mock components of the internet. And now, the sprout of a side-project to learn machine-learning has blossomed into an essential tool for release processes: that conjures up users out of thin air to take UI testing off of the plates of PMs, software engineers, and customer representatives. 
+
+With a no-code alternative to test writing, and tests that seamlessly slot into your existing processes, Meeshkan users save time spent on test writing & running, while producing reliable, accurate tests.
+
+We’ve always been about algorithms. But now they serve to provide a data-driven quality benchmark for your production environment, taking the pressure off the final stages of every release, and letting you ship with confidence.
+We’re currently accepting sign-ups to our beta on https://meeshkan.com. If you're a product manager, or simply want to see the awe and splendor of automatic tests generated for your website, I'd encourage you to sign up. 
+And the day you do, I promise there will be a production environment waiting for you 😅
+CTA: Get early access now (email capture field: Name; Email; Company)
