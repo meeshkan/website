@@ -10,7 +10,7 @@ module.exports = {
 		siteUrl: `https://meeshkan.com`,
 		siteLanguage: `en-US`,
 		siteLocale: `en_us`,
-		author: `@meeshkanML`,
+		author: `@meeshkan`,
 	},
 	mapping: {
 		"Mdx.frontmatter.authors": "AuthorYaml",
@@ -40,8 +40,18 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `changelog`,
+				path: `${__dirname}/src/changelog/`,
+			},
+		},
+		{
 			resolve: `gatsby-plugin-mdx`,
 			options: {
+				defaultLayouts: {
+					default: require.resolve("./src/components/templates/layout-mdx.tsx"),
+				},
 				extensions: [`.mdx`],
 			},
 		},
@@ -141,13 +151,6 @@ module.exports = {
 			resolve: `@meeshkanml/gatsby-plugin-meeshkan-recorder`,
 			options: {
 				clientId: "ckkp89za900yv07l66yxw1jb6",
-			},
-		},
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				name: `changelog`,
-				path: `${__dirname}/src/changelog/`,
 			},
 		},
 	],
