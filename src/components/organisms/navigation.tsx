@@ -95,6 +95,7 @@ export function Navigation() {
 						<NavLink text="Blog" path="/blog/" />
 						<NavLink text="Product" path="/product/" />
 						<NavLink text="Roadmap" path="/roadmap/" />
+						<NavLink text="Changelog" path="/changelog/" />
 					</Stack>
 				</Flex>
 				<Box display={["none", "none", "flex"]}>
