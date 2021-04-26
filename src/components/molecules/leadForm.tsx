@@ -54,15 +54,17 @@ const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 					mb={[4, 4, 0]}
 				/>
 			</FormControl>
-			<LightMode>
-				<Button
-					minW="fit-content"
-					type="submit"
-					variant={subtle ? "subtle" : "solid"}
-				>
+			{subtle ? (
+				<Button minW="fit-content" type="submit" variant="subtle">
 					{CTA || "Get early access"}
 				</Button>
-			</LightMode>
+			) : (
+				<LightMode>
+					<Button minW="fit-content" type="submit">
+						{CTA || "Get early access"}
+					</Button>
+				</LightMode>
+			)}
 		</Flex>
 	)
 }
