@@ -20,6 +20,7 @@ import SEO from "../components/molecules/seo"
 import { CheckSquareIcon } from "../../theme/icons"
 import SegmentedControl from "../components/molecules/segmented-control"
 import LeadForm from "../components/molecules/leadForm"
+import { UniversalLink } from "../components/atoms/UniversalLink"
 
 export const Plans = {
 	free: {
@@ -168,7 +169,15 @@ const PricingPage = () => {
 								</List>
 								<Flex direction="column" justify="center" align="center" mt={8}>
 									<LightMode>
-										<Button w="full">Choose the Feedback plan</Button>
+										<Button
+											w="full"
+											as={UniversalLink}
+											// @ts-ignore
+											href="https://app.meeshkan.com"
+											aria-label="Go to the Meeshkan webapp to sign up"
+										>
+											Choose the Feedback plan
+										</Button>
 									</LightMode>
 								</Flex>
 							</Box>
@@ -213,7 +222,15 @@ const PricingPage = () => {
 									))}
 								</List>
 							</Box>
-							<Button variant="subtle" mt={8} w="full">
+							<Button
+								as={UniversalLink}
+								// @ts-ignore
+								href="https://app.meeshkan.com"
+								aria-label="Go to the Meeshkan webapp to sign up"
+								variant="subtle"
+								mt={8}
+								w="full"
+							>
 								Choose the Business plan
 							</Button>
 						</Box>
