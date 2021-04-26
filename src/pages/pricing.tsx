@@ -1,6 +1,5 @@
-import React from "react"
+import React, { useState } from "react"
 import {
-	SimpleGrid,
 	Text,
 	Heading,
 	Stack,
@@ -8,106 +7,86 @@ import {
 	Button,
 	Code,
 	Box,
+	ListItem,
+	ListIcon,
+	List,
+	LightMode,
+	useColorModeValue,
 } from "@chakra-ui/react"
-import { XmarkIcon, CheckmarkIcon } from "../../theme/icons"
-import { Card } from "../components/atoms/card"
 import { useMixpanel } from "gatsby-plugin-mixpanel"
-import { UniversalLink } from "../components/atoms/UniversalLink"
 import { SingleSection } from "../components/organisms/singleSection"
 import Layout from "../components/templates/layout"
 import SEO from "../components/molecules/seo"
+import { CheckSquareIcon } from "../../theme/icons"
+import SegmentedControl from "../components/molecules/segmented-control"
 
-type PricingProps = {
-	title: string
-	subtitle?: string
-	price: string
-	yesFeatures?: Array<string>
-	noFeatures?: Array<string>
-	hasCTA: boolean
-	mixpanel: any
-	CTA?: string
+export const Plans = {
+	free: {
+		monthlyPrice: "0€",
+		yearlyPrice: "0€",
+		description: "Wait and be notified when a free plan is available.",
+		monthlyPriceId: `price_1IhzoRA2WCpbIMtYoVejfHkS`,
+		yearlyPriceId: `price_1IgRElA2WCpbIMtYvllLMJzH`,
+		features: [""],
+	},
+
+	feedback: {
+		monthlyPrice: "45€",
+		yearlyPrice: "432€",
+		// All feedback plans are free
+		discountedMonthly: "0€",
+		discountedYearly: "0€",
+		description:
+			"Have a 30 minute call fortnightly with the Meeshkan team to offer insight into your workflow.",
+		monthlyPriceId: `price_1IfZ4BA2WCpbIMtY7s89W6J2`,
+		yearlyPriceId: `price_1IfZ4ZA2WCpbIMtYVPbGvJGc`,
+		features: [
+			"User generated tests",
+			"30 test runs per month",
+			"No-code test creation",
+			"Unlimited team members",
+			"5 Concurrent Tests",
+			"3 month data retention",
+		],
+	},
+
+	business: {
+		monthlyPrice: "75€",
+		yearlyPrice: "720€",
+		description:
+			"This is the perfect plan if you’re a team looking to get some serious UI-testing done.",
+		// 29.99
+		monthlyPriceId: `price_1IfZ2jA2WCpbIMtYL4iWIbvg`,
+		// 20% discount 288.00
+		yearlyPriceId: `price_1IfZ2yA2WCpbIMtYJludWHEh`,
+		features: [
+			"User generated tests",
+			"100+ test runs per month",
+			"No-code test creation",
+			"Unlimited team members",
+			"30+ Concurrent Tests",
+			"9 month data retention",
+			"Video of test cases and outcomes",
+		],
+	},
 }
 
-const PricingCard = ({
-	title,
-	subtitle,
-	price,
-	yesFeatures,
-	noFeatures,
-	hasCTA,
-	mixpanel,
-	CTA,
-}: PricingProps) => (
-	<Card>
-		<Heading
-			as="h3"
-			fontSize="2xl"
-			fontWeight={900}
-			mb={4}
-			d="flex"
-			justifyContent="center"
-			alignItems="center"
-		>
-			{title}
-			<Code colorScheme="cyan" fontSize="md" ml={3} lineHeight="initial">
-				{subtitle}
-			</Code>
-		</Heading>
-		<Text textAlign="center" fontSize="xl" fontWeight={600}>
-			{price} <span style={{ color: "#616E7C", fontWeight: 400 }}>/month</span>
-		</Text>
-
-		<Stack spacing={2} mt={4}>
-			{yesFeatures &&
-				yesFeatures.map((feature, index) => (
-					<Flex key={index} align="top">
-						<CheckmarkIcon color="cyan.500" mr={3} mt={2} />
-						<Text>{feature}</Text>
-					</Flex>
-				))}
-
-			{noFeatures &&
-				noFeatures.map((feature, index) => (
-					<Flex key={index} align="center">
-						<XmarkIcon color="red.500" mr={3} />
-						<Text>{feature}</Text>
-					</Flex>
-				))}
-		</Stack>
-
-		{hasCTA && (
-			<Box mt={8}>
-				<Flex pos="absolute" bottom={4} right={6} left={6}>
-					<Button
-						as={UniversalLink}
-						// @ts-expect-error
-						href="https://app.meeshkan.com"
-						aria-label="Create a free account on Meeshkan."
-						variant={CTA === `Sign up for Pro` ? "solid" : "outline"}
-						w="full"
-						onClick={() => {
-							mixpanel.track(`Create an account - ${title}`, {
-								to: "https://app.meeshkan.com",
-								from: "https://meeshkan.com/pricing",
-								c2a: `Create an account - ${title}`,
-							})
-						}}
-					>
-						{CTA}
-					</Button>
-				</Flex>
-			</Box>
-		)}
-	</Card>
-)
-
 const PricingPage = () => {
+	// Represents billing interval — 0=monthly, 1=yearly
+	const [toggleIndex, setToggleIndex] = useState(0)
+	const { free, feedback, business } = Plans
+
 	const mixpanel = useMixpanel()
+
+	const iconBlue = useColorModeValue("blue.500", "blue.300")
+	const codeBg = useColorModeValue("blue.50", "gray.800")
+	const borderGray = useColorModeValue("gray.100", "gray.800")
+	const tertiaryText = useColorModeValue("gray.300", "gray.700")
 	return (
 		<Layout>
 			<SEO
 				pageTitle="Pricing"
-				pageDescription="Pricing tiers for using the automated testing tool, Meeshkan."
+				pageDescription="Pricing tiers for using the automated UI-testing tool, Meeshkan."
 				pageUrl="https://meeshkan.com/pricing/"
 			/>
 			<SingleSection>
@@ -119,57 +98,156 @@ const PricingPage = () => {
 					team's need, and we have a generous free tier that integrates
 					seamlessly into your software engineer's day-to-day flow.
 				</Text>
-				<SimpleGrid columns={3} spacing={8}>
-					<PricingCard
-						title="Free"
-						subtitle="for Individuals"
-						CTA="Create a free account"
-						price="$0 Forever"
-						mixpanel={mixpanel}
-						yesFeatures={[
-							"Endpoint testing for REST and GraphQL services",
-							"Basic reports",
-							"100 testing hours",
-							"GitHub integration",
-						]}
-						hasCTA={true}
-					/>
-					<PricingCard
-						title="Pro"
-						subtitle="for Teams"
-						price="Free in Beta"
-						mixpanel={mixpanel}
-						yesFeatures={[
-							"All free features",
-							"Unlimited projects",
-							"1000 testing hours",
-							"3 concurrent tests",
-							"Premium reports",
-							"30 day history retention",
-						]}
-						hasCTA={true}
-						CTA="Sign up for Pro"
-					/>
-					<PricingCard
-						title="Business"
-						subtitle="starting at"
-						hasCTA={true}
-						CTA="Sign up for Business"
-						mixpanel={mixpanel}
-						price="Chat with us"
-						yesFeatures={[
-							"All Pro features",
-							"Unlimited projects",
-							"Unlimited testing hours",
-							"Unlimited history",
-							"GitLab & Bitbucket import",
-							"Custom build pipelines",
-							"In-cluster testing for k8s",
-							"Role based permissions",
-							"Jira/Linear integration",
-						]}
-					/>
-				</SimpleGrid>
+
+				<>
+					<Flex justify="center" align="center" mb={6}>
+						<Text mr={4} fontWeight="600">
+							Billing
+						</Text>
+						<SegmentedControl
+							values={["Monthly", "Yearly -20%"]}
+							selectedIndex={toggleIndex}
+							setSelectedIndex={setToggleIndex}
+						/>
+					</Flex>
+					<Stack direction="row" w="full" spacing={8}>
+						<Flex direction="column" align="center" w="full">
+							<Code
+								variant="outline"
+								background={codeBg}
+								h="20px"
+								borderRadius="md"
+								py={2}
+								px={4}
+								colorScheme="blue"
+								maxW="fit-content"
+								mb="-10px"
+								zIndex="1"
+								fontWeight="700"
+							>
+								Most popular
+							</Code>
+							<Box
+								p={4}
+								w="full"
+								borderRadius="lg"
+								border="1px solid"
+								borderColor={iconBlue}
+								boxShadow="0px 8px 24px 0px rgba(149,157,165,0.2)"
+							>
+								<Flex justify="space-between" mb={4}>
+									<Text fontSize="24px" fontWeight="800">
+										Feedback
+									</Text>
+									<Flex>
+										<Text
+											fontWeight="800"
+											fontSize="24px"
+											mr={4}
+											textDecor="line-through"
+											color={tertiaryText}
+										>
+											{toggleIndex === 0
+												? feedback.monthlyPrice
+												: feedback.yearlyPrice}
+										</Text>
+										<Text fontWeight="800" fontSize="24px">
+											{toggleIndex === 0
+												? feedback.discountedMonthly
+												: feedback.discountedYearly}
+										</Text>
+									</Flex>
+								</Flex>
+								<Text textAlign="center" color="gray.500" mb={8}>
+									{feedback.description}
+								</Text>
+
+								<List
+									spacing={2}
+									sx={{ WebkitColumns: "2", MozColumns: "2", columns: 2 }}
+								>
+									{feedback.features.map((feature) => (
+										<ListItem lineHeight="1.2" fontSize="14px">
+											<ListIcon as={CheckSquareIcon} color={iconBlue} />
+											{feature}
+										</ListItem>
+									))}
+								</List>
+								<Flex direction="column" justify="center" align="center" mt={8}>
+									<LightMode>
+										<Button w="full">Choose the Feedback plan</Button>
+									</LightMode>
+								</Flex>
+							</Box>
+						</Flex>
+
+						<Box
+							d="flex"
+							flexDirection="column"
+							justifyContent="space-between"
+							p={4}
+							w="full"
+							borderRadius="lg"
+							border="1px solid"
+							borderColor="transparent"
+							boxShadow="0px 8px 24px 0px rgba(149,157,165,0.2)"
+						>
+							<Box>
+								<Flex justify="space-between" mb={4}>
+									<Text fontSize="24px" fontWeight="800">
+										Business
+									</Text>
+									<Flex>
+										<Text fontWeight="800" fontSize="24px">
+											{toggleIndex === 0
+												? business.monthlyPrice
+												: business.yearlyPrice}
+										</Text>
+									</Flex>
+								</Flex>
+								<Text textAlign="center" color="gray.500" mb={8}>
+									{business.description}
+								</Text>
+								<List
+									spacing={2}
+									sx={{ WebkitColumns: "2", MozColumns: "2", columns: 2 }}
+								>
+									{business.features.map((feature) => (
+										<ListItem lineHeight="1.2" fontSize="14px">
+											<ListIcon as={CheckSquareIcon} color={iconBlue} />
+											{feature}
+										</ListItem>
+									))}
+								</List>
+							</Box>
+							<Button variant="subtle" mt={8} w="full">
+								Choose the Business plan
+							</Button>
+						</Box>
+					</Stack>
+					<Stack
+						w="full"
+						direction="row"
+						align="center"
+						justifyContent="space-between"
+						p={4}
+						mt={8}
+						borderRadius="lg"
+						border="1px solid"
+						borderColor={borderGray}
+					>
+						<Flex align="baseline">
+							<Text fontSize="24px" fontWeight="800" mr={4}>
+								Free
+							</Text>
+							<Text color="gray.500">{free.description}</Text>
+						</Flex>
+
+						<Button minW="fit-content" type="submit" variant="subtle">
+							Subscribe to updates
+						</Button>
+					</Stack>
+				</>
 			</SingleSection>
 		</Layout>
 	)
