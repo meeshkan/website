@@ -19,14 +19,13 @@ import Layout from "../components/templates/layout"
 import SEO from "../components/molecules/seo"
 import { CheckSquareIcon } from "../../theme/icons"
 import SegmentedControl from "../components/molecules/segmented-control"
+import LeadForm from "../components/molecules/leadForm"
 
 export const Plans = {
 	free: {
 		monthlyPrice: "0€",
 		yearlyPrice: "0€",
 		description: "Wait and be notified when a free plan is available.",
-		monthlyPriceId: `price_1IhzoRA2WCpbIMtYoVejfHkS`,
-		yearlyPriceId: `price_1IgRElA2WCpbIMtYvllLMJzH`,
 		features: [""],
 	},
 
@@ -38,8 +37,6 @@ export const Plans = {
 		discountedYearly: "0€",
 		description:
 			"Have a 30 minute call fortnightly with the Meeshkan team to offer insight into your workflow.",
-		monthlyPriceId: `price_1IfZ4BA2WCpbIMtY7s89W6J2`,
-		yearlyPriceId: `price_1IfZ4ZA2WCpbIMtYVPbGvJGc`,
 		features: [
 			"User generated tests",
 			"30 test runs per month",
@@ -55,10 +52,6 @@ export const Plans = {
 		yearlyPrice: "720€",
 		description:
 			"This is the perfect plan if you’re a team looking to get some serious UI-testing done.",
-		// 29.99
-		monthlyPriceId: `price_1IfZ2jA2WCpbIMtYL4iWIbvg`,
-		// 20% discount 288.00
-		yearlyPriceId: `price_1IfZ2yA2WCpbIMtYJludWHEh`,
 		features: [
 			"User generated tests",
 			"100+ test runs per month",
@@ -110,7 +103,7 @@ const PricingPage = () => {
 							setSelectedIndex={setToggleIndex}
 						/>
 					</Flex>
-					<Stack direction="row" w="full" spacing={8}>
+					<Stack direction={["column", "column", "row"]} w="full" spacing={8}>
 						<Flex direction="column" align="center" w="full">
 							<Code
 								variant="outline"
@@ -227,7 +220,7 @@ const PricingPage = () => {
 					</Stack>
 					<Stack
 						w="full"
-						direction="row"
+						direction={["column", "column", "row"]}
 						align="center"
 						justifyContent="space-between"
 						p={4}
@@ -236,16 +229,18 @@ const PricingPage = () => {
 						border="1px solid"
 						borderColor={borderGray}
 					>
-						<Flex align="baseline">
+						<Flex align="baseline" direction={["column", "row"]}>
 							<Text fontSize="24px" fontWeight="800" mr={4}>
 								Free
 							</Text>
 							<Text color="gray.500">{free.description}</Text>
 						</Flex>
 
-						<Button minW="fit-content" type="submit" variant="subtle">
-							Subscribe to updates
-						</Button>
+						<LeadForm
+							formName="Pricing"
+							subtle={true}
+							CTA="Subscribe to updates"
+						/>
 					</Stack>
 				</>
 			</SingleSection>
