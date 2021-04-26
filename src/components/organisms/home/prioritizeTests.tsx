@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import {
 	Stack,
 	Box,
 	Text,
 	Flex,
 	IconButton,
-	DarkMode,
 	useColorMode,
 } from "@chakra-ui/react"
 import { motion, useReducedMotion } from "framer-motion"
