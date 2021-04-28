@@ -88,9 +88,7 @@ const PricingPage = () => {
 					Meeshkan Pricing
 				</Heading>
 				<Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">
-					Quality assurance isn't all-or-nothing. Our pricing scales with your
-					team's need, and we have a generous free tier that integrates
-					seamlessly into your software engineer's day-to-day flow.
+					Quality assurance isn't all-or-nothing. Our plans scale with your team's needs: for all budgets, any volume of tests, and in as much detail as you need. Everyone deserves more confidence in each release.
 				</Text>
 
 				<>
