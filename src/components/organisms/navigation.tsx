@@ -130,10 +130,8 @@ export function Navigation() {
 												p={4}
 												borderRadius="md"
 												_hover={{
-													backgroundColor: useColorModeValue(
-														"gray.50",
-														"gray.800"
-													),
+													color: "cyan.600",
+													backgroundColor: "transparentCyan.100",
 												}}
 											>
 												<StarIcon size={6} mr={4} />
@@ -146,7 +144,10 @@ export function Navigation() {
 													>
 														Features
 													</Text>
-													<Text fontSize="sm">
+													<Text
+														fontSize="sm"
+														color={useColorModeValue("gray.700", "gray.300")}
+													>
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
@@ -157,10 +158,8 @@ export function Navigation() {
 												p={4}
 												borderRadius="md"
 												_hover={{
-													backgroundColor: useColorModeValue(
-														"gray.50",
-														"gray.800"
-													),
+													color: "cyan.600",
+													backgroundColor: "transparentCyan.100",
 												}}
 											>
 												<StarIcon size={6} mr={4} />
@@ -173,7 +172,10 @@ export function Navigation() {
 													>
 														Roadmap
 													</Text>
-													<Text fontSize="sm">
+													<Text
+														fontSize="sm"
+														color={useColorModeValue("gray.700", "gray.300")}
+													>
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
@@ -185,10 +187,8 @@ export function Navigation() {
 												p={4}
 												borderRadius="md"
 												_hover={{
-													backgroundColor: useColorModeValue(
-														"gray.50",
-														"gray.800"
-													),
+													color: "cyan.600",
+													backgroundColor: "transparentCyan.100",
 												}}
 											>
 												<StarIcon size={6} mr={4} />
@@ -201,7 +201,10 @@ export function Navigation() {
 													>
 														Changelog
 													</Text>
-													<Text fontSize="sm">
+													<Text
+														fontSize="sm"
+														color={useColorModeValue("gray.700", "gray.300")}
+													>
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
