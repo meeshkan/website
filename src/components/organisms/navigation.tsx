@@ -16,6 +16,11 @@ import {
 	useColorModeValue,
 	Box,
 	useColorMode,
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+	PopoverBody,
+	Text,
 } from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -26,8 +31,10 @@ import {
 	LinkedInIcon,
 	SunIcon,
 	MoonIcon,
+	VideoIcon,
+	EmailIcon,
 } from "../../../theme/icons"
-import { ArrowForwardIcon } from "@chakra-ui/icons"
+import { ArrowForwardIcon, ChevronDownIcon, StarIcon } from "@chakra-ui/icons"
 import { AnimatedLogo } from "../molecules/animatedLogo"
 
 function SignUpLink() {
@@ -35,7 +42,7 @@ function SignUpLink() {
 		<Button
 			as={UniversalLink}
 			// @ts-ignore
-			href="https://app.meeshkan.com"
+			href="https://app.meeshkan.com/login"
 			aria-label="Log in to the Meeshkan webapp"
 			variant="ghost"
 			lineHeight="normal"
@@ -93,13 +100,151 @@ export function Navigation() {
 					{/* Desktop & Tablet */}
 					<Stack isInline display={["none", "none", "flex"]} ml={6}>
 						<NavLink text="Blog" path="/blog/" />
-						<NavLink text="Product" path="/product/" />
-						<NavLink text="Roadmap" path="/roadmap/" />
-						<NavLink text="Changelog" path="/changelog/" />
+						{/* <NavLink text="Product" path="/product/" /> */}
+						<Popover placement="bottom" trigger="hover" openDelay={0}>
+							{({ isOpen, onClose }) => (
+								<>
+									<PopoverTrigger>
+										<Button
+											isActive={isOpen}
+											variant="ghost"
+											colorScheme="gray"
+											rightIcon={<ChevronDownIcon />}
+											fontWeight="600"
+											color={useColorModeValue("gray.500", "gray.400")}
+										>
+											Product
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent
+										borderTopRadius="0"
+										borderBottomRadius="lg"
+										boxShadow="0px 8px 24px rgba(149, 157, 165, 0.2)"
+									>
+										<PopoverBody
+											px={4}
+											pt={4}
+											backgroundColor={useColorModeValue("white", "gray.900")}
+										>
+											<Flex
+												p={4}
+												borderRadius="md"
+												_hover={{
+													backgroundColor: useColorModeValue(
+														"gray.50",
+														"gray.800"
+													),
+												}}
+											>
+												<StarIcon size={6} mr={4} />
+												<Box>
+													<Text
+														lineHeight="base"
+														fontWeight="600"
+														color={useColorModeValue("gray.900", "white")}
+														mb={1}
+													>
+														Features
+													</Text>
+													<Text fontSize="sm">
+														Get a better understanding of where your traffic is
+														coming from.
+													</Text>
+												</Box>
+											</Flex>
+
+											<Flex
+												p={4}
+												borderRadius="md"
+												_hover={{
+													backgroundColor: useColorModeValue(
+														"gray.50",
+														"gray.800"
+													),
+												}}
+											>
+												<StarIcon size={6} mr={4} />
+												<Box>
+													<Text
+														lineHeight="base"
+														fontWeight="600"
+														color={useColorModeValue("gray.900", "white")}
+														mb={1}
+													>
+														Roadmap
+													</Text>
+													<Text fontSize="sm">
+														Get a better understanding of where your traffic is
+														coming from.
+													</Text>
+												</Box>
+											</Flex>
+
+											<Flex
+												mb={3}
+												p={4}
+												borderRadius="md"
+												_hover={{
+													backgroundColor: useColorModeValue(
+														"gray.50",
+														"gray.800"
+													),
+												}}
+											>
+												<StarIcon size={6} mr={4} />
+												<Box>
+													<Text
+														lineHeight="base"
+														fontWeight="600"
+														color={useColorModeValue("gray.900", "white")}
+														mb={1}
+													>
+														Changelog
+													</Text>
+													<Text fontSize="sm">
+														Get a better understanding of where your traffic is
+														coming from.
+													</Text>
+												</Box>
+											</Flex>
+										</PopoverBody>
+										<Flex
+											w="full"
+											justify="space-between"
+											backgroundColor="gray.50"
+											p={4}
+											borderBottomRadius="lg"
+										>
+											<Button
+												size="sm"
+												leftIcon={<VideoIcon />}
+												variant="ghost"
+												colorScheme="gray"
+												fontWeight="600"
+											>
+												Demo video
+											</Button>
+											<Button
+												size="sm"
+												leftIcon={<EmailIcon />}
+												variant="ghost"
+												colorScheme="gray"
+												fontWeight="600"
+											>
+												Contact sales
+											</Button>
+										</Flex>
+									</PopoverContent>
+								</>
+							)}
+						</Popover>
+
+						<NavLink text="Pricing" path="/pricing/" />
 					</Stack>
 				</Flex>
 				<Box display={["none", "none", "flex"]}>
 					<LogInLink />
+					<SignUpLink />
 				</Box>
 
 				{/* Mobile */}
