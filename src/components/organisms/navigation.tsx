@@ -300,7 +300,9 @@ export function Navigation() {
 							<Stack align="center">
 								<NavLink text="Blog" path="/blog/" />
 								<NavLink text="Product" path="/product/" />
+								<NavLink text="Pricing" path="/pricing/" />
 								<NavLink text="Roadmap" path="/roadmap/" />
+								<NavLink text="Changelog" path="/changelog/" />
 								<Divider w="50%" borderColor="gray.100" />
 								<Button
 									variant="ghost"
@@ -315,6 +317,7 @@ export function Navigation() {
 									{colorMode === "dark" ? "light" : "dark"} mode
 								</Button>
 								<LogInLink />
+								<SignUpLink />
 							</Stack>
 						</DrawerBody>
 						<DrawerFooter d="flex" justifyContent="center">
