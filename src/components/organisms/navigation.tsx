@@ -102,7 +102,7 @@ export function Navigation() {
 						<NavLink text="Blog" path="/blog/" />
 						{/* <NavLink text="Product" path="/product/" /> */}
 						<Popover placement="bottom" trigger="hover" openDelay={0}>
-							{({ isOpen, onClose }) => (
+							{({ isOpen }) => (
 								<>
 									<PopoverTrigger>
 										<Button
@@ -112,6 +112,13 @@ export function Navigation() {
 											rightIcon={<ChevronDownIcon />}
 											fontWeight="600"
 											color={useColorModeValue("gray.500", "gray.400")}
+											_active={{
+												backgroundColor: useColorModeValue(
+													"gray.100",
+													"gray.800"
+												),
+												color: useColorModeValue("gray.700", "white"),
+											}}
 										>
 											Product
 										</Button>
@@ -119,7 +126,11 @@ export function Navigation() {
 									<PopoverContent
 										borderTopRadius="0"
 										borderBottomRadius="lg"
-										boxShadow="0px 8px 24px rgba(149, 157, 165, 0.2)"
+										boxShadow={useColorModeValue(
+											"0px 8px 24px rgba(149, 157, 165, 0.2)",
+											"none"
+										)}
+										borderColor={useColorModeValue("gray.100", "gray.800")}
 									>
 										<PopoverBody
 											px={4}
@@ -127,14 +138,15 @@ export function Navigation() {
 											backgroundColor={useColorModeValue("white", "gray.900")}
 										>
 											<Flex
+												as={UniversalLink}
+												to="/product/"
 												p={4}
 												borderRadius="md"
 												_hover={{
-													color: "cyan.600",
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon size={6} mr={4} />
+												<StarIcon size={6} mr={4} color="cyan.500" />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -144,10 +156,7 @@ export function Navigation() {
 													>
 														Features
 													</Text>
-													<Text
-														fontSize="sm"
-														color={useColorModeValue("gray.700", "gray.300")}
-													>
+													<Text fontSize="sm">
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
@@ -155,14 +164,15 @@ export function Navigation() {
 											</Flex>
 
 											<Flex
+												as={UniversalLink}
+												to="/roadmap/"
 												p={4}
 												borderRadius="md"
 												_hover={{
-													color: "cyan.600",
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon size={6} mr={4} />
+												<StarIcon color="cyan.500" size={6} mr={4} />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -172,10 +182,7 @@ export function Navigation() {
 													>
 														Roadmap
 													</Text>
-													<Text
-														fontSize="sm"
-														color={useColorModeValue("gray.700", "gray.300")}
-													>
+													<Text fontSize="sm">
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
@@ -183,15 +190,16 @@ export function Navigation() {
 											</Flex>
 
 											<Flex
+												as={UniversalLink}
+												to="/changelog/"
 												mb={3}
 												p={4}
 												borderRadius="md"
 												_hover={{
-													color: "cyan.600",
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon size={6} mr={4} />
+												<StarIcon size={6} mr={4} color="cyan.500" />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -201,10 +209,7 @@ export function Navigation() {
 													>
 														Changelog
 													</Text>
-													<Text
-														fontSize="sm"
-														color={useColorModeValue("gray.700", "gray.300")}
-													>
+													<Text fontSize="sm">
 														Get a better understanding of where your traffic is
 														coming from.
 													</Text>
@@ -214,11 +219,12 @@ export function Navigation() {
 										<Flex
 											w="full"
 											justify="space-between"
-											backgroundColor="gray.50"
+											backgroundColor={useColorModeValue("gray.50", "gray.800")}
 											p={4}
 											borderBottomRadius="lg"
 										>
 											<Button
+												isDisabled
 												size="sm"
 												leftIcon={<VideoIcon />}
 												variant="ghost"
@@ -228,6 +234,8 @@ export function Navigation() {
 												Demo video
 											</Button>
 											<Button
+												as={UniversalLink}
+												to="/contact/"
 												size="sm"
 												leftIcon={<EmailIcon />}
 												variant="ghost"
