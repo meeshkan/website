@@ -21,6 +21,7 @@ import {
 	PopoverContent,
 	PopoverBody,
 	Text,
+	LightMode,
 } from "@chakra-ui/react"
 import NavLink from "../atoms/navLink"
 import { UniversalLink } from "../atoms/UniversalLink"
@@ -42,16 +43,18 @@ import { AnimatedLogo } from "../molecules/animatedLogo"
 
 function SignUpLink() {
 	return (
-		<Button
-			as={UniversalLink}
-			// @ts-ignore
-			href="https://app.meeshkan.com/login"
-			aria-label="Log in to the Meeshkan webapp"
-			lineHeight="normal"
-			ml={[0, 0, 8]}
-		>
-			Sign up
-		</Button>
+		<LightMode>
+			<Button
+				as={UniversalLink}
+				// @ts-ignore
+				href="https://app.meeshkan.com/login"
+				aria-label="Log in to the Meeshkan webapp"
+				lineHeight="normal"
+				ml={[0, 0, 8]}
+			>
+				Sign up
+			</Button>
+		</LightMode>
 	)
 }
 function LogInLink() {
@@ -184,8 +187,8 @@ export function Navigation() {
 														Roadmap
 													</Text>
 													<Text fontSize="sm">
-														Get a better understanding of where the Meeshkan
-														product is developing.
+														Get a better understanding of where the product is
+														developing.
 													</Text>
 												</Box>
 											</Flex>
