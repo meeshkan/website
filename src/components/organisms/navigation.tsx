@@ -32,9 +32,12 @@ import {
 	SunIcon,
 	MoonIcon,
 	VideoIcon,
-	EmailIcon,
+	FeaturesIcon,
+	TimerIcon,
+	ChatIcon,
+	RocketshipIcon,
 } from "../../../theme/icons"
-import { ArrowForwardIcon, ChevronDownIcon, StarIcon } from "@chakra-ui/icons"
+import { ArrowForwardIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { AnimatedLogo } from "../molecules/animatedLogo"
 
 function SignUpLink() {
@@ -44,7 +47,6 @@ function SignUpLink() {
 			// @ts-ignore
 			href="https://app.meeshkan.com/login"
 			aria-label="Log in to the Meeshkan webapp"
-			variant="ghost"
 			lineHeight="normal"
 			ml={[0, 0, 8]}
 		>
@@ -146,7 +148,7 @@ export function Navigation() {
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon size={6} mr={4} color="cyan.500" />
+												<FeaturesIcon size={6} mr={4} color="cyan.500" />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -157,8 +159,7 @@ export function Navigation() {
 														Features
 													</Text>
 													<Text fontSize="sm">
-														Get a better understanding of where your traffic is
-														coming from.
+														What can no-code UI testing do for your team?
 													</Text>
 												</Box>
 											</Flex>
@@ -172,7 +173,7 @@ export function Navigation() {
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon color="cyan.500" size={6} mr={4} />
+												<RocketshipIcon color="cyan.500" size={6} mr={4} />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -183,8 +184,8 @@ export function Navigation() {
 														Roadmap
 													</Text>
 													<Text fontSize="sm">
-														Get a better understanding of where your traffic is
-														coming from.
+														Get a better understanding of where the Meeshkan
+														product is developing.
 													</Text>
 												</Box>
 											</Flex>
@@ -199,7 +200,7 @@ export function Navigation() {
 													backgroundColor: "transparentCyan.100",
 												}}
 											>
-												<StarIcon size={6} mr={4} color="cyan.500" />
+												<TimerIcon size={6} mr={4} color="cyan.500" />
 												<Box>
 													<Text
 														lineHeight="base"
@@ -210,8 +211,8 @@ export function Navigation() {
 														Changelog
 													</Text>
 													<Text fontSize="sm">
-														Get a better understanding of where your traffic is
-														coming from.
+														See what we've developed recently. We ship often and
+														iteratively.
 													</Text>
 												</Box>
 											</Flex>
@@ -237,7 +238,7 @@ export function Navigation() {
 												as={UniversalLink}
 												to="/contact/"
 												size="sm"
-												leftIcon={<EmailIcon />}
+												leftIcon={<ChatIcon />}
 												variant="ghost"
 												colorScheme="gray"
 												fontWeight="600"
