@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import {
 	Stack,
 	Box,
 	Text,
 	Flex,
 	IconButton,
-	DarkMode,
 	useColorMode,
 } from "@chakra-ui/react"
 import { motion, useReducedMotion } from "framer-motion"
@@ -17,7 +16,7 @@ import {
 } from "../../../../theme/icons"
 
 const Test = ({ success, testCase, priority, animate, colorMode }) => {
-	const MotionBox = motion.custom(Box)
+	const MotionBox = motion(Box)
 
 	const shouldReduceMotion = useReducedMotion()
 

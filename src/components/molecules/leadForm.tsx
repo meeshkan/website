@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
 	Button,
 	Flex,
@@ -10,11 +10,11 @@ import {
 
 type LeadFormProps = {
 	formName: string
+	subtle?: boolean
+	CTA?: string
 }
 
-const LeadForm = ({ formName }: LeadFormProps) => {
-	const [formSubmit, setFormSubmit] = useState(false)
-
+const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 	return (
 		<Flex
 			as="form"
@@ -24,6 +24,7 @@ const LeadForm = ({ formName }: LeadFormProps) => {
 			action="/success/"
 			data-netlify-honeypot="bot-field"
 			maxW="600px"
+			w="full"
 			mx={["none", "none", "auto"]}
 			border="1px solid"
 			borderColor={useColorModeValue("gray.300", "gray.700")}
@@ -53,11 +54,17 @@ const LeadForm = ({ formName }: LeadFormProps) => {
 					mb={[4, 4, 0]}
 				/>
 			</FormControl>
-			<LightMode>
-				<Button minW="fit-content" type="submit">
-					Get early access
+			{subtle ? (
+				<Button minW="fit-content" type="submit" variant="subtle">
+					{CTA || "Get early access"}
 				</Button>
-			</LightMode>
+			) : (
+				<LightMode>
+					<Button minW="fit-content" type="submit">
+						{CTA || "Get early access"}
+					</Button>
+				</LightMode>
+			)}
 		</Flex>
 	)
 }
