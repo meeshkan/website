@@ -61,13 +61,20 @@ function LogInLink() {
 	return (
 		<Button
 			as={UniversalLink}
-			// @ts-ignore
-			href="https://app.meeshkan.com"
+			to="https://app.meeshkan.com"
 			aria-label="Log in to the Meeshkan webapp"
 			variant="ghost"
+			colorScheme="gray"
+			_hover={{
+				backgroundColor: useColorModeValue("gray.100", "gray.800"),
+				color: useColorModeValue("gray.700", "white"),
+			}}
+			_active={{
+				backgroundColor: useColorModeValue("gray.100", "gray.800"),
+				color: useColorModeValue("gray.700", "white"),
+			}}
 			fontWeight={600}
 			lineHeight="normal"
-			colorScheme="gray"
 		>
 			Log in <ArrowForwardIcon ml={2} />
 		</Button>
@@ -259,7 +266,7 @@ export function Navigation() {
 				</Flex>
 				<Box display={["none", "none", "flex"]}>
 					<LogInLink />
-					<SignUpLink />
+					{/* <SignUpLink /> */}
 				</Box>
 
 				{/* Mobile */}

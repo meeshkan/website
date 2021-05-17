@@ -19,6 +19,7 @@ import {
 	Badge,
 	Avatar,
 	Link,
+	Center,
 } from "@chakra-ui/react"
 import { SingleSection } from "../components/organisms/singleSection"
 // import { useMixpanel } from "gatsby-plugin-mixpanel"
@@ -41,6 +42,8 @@ import { StoryStep } from "../components/molecules/sideStep"
 import { MockDashboard } from "../components/organisms/home/mockDashboard"
 import LeadForm from "../components/molecules/leadForm"
 import { VimodjiLogo } from "../components/atoms/vimodjiLogo"
+import { UniversalLink } from "../components/atoms/UniversalLink"
+import ScheduleDemo from "../components/molecules/schedule-modal"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -89,7 +92,14 @@ const IndexPage = () => {
 					objectively validate quality and user experience before releasing
 					changes into production.
 				</Text>
-				<LeadForm formName="Hero" />
+				<Center>
+					<ScheduleDemo />
+					<LightMode>
+						<Button as={UniversalLink} to="https://app.meeshkan.com">
+							Sign up now
+						</Button>
+					</LightMode>
+				</Center>
 			</SingleSection>
 
 			<Spacer h={32} />
