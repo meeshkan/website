@@ -30,7 +30,7 @@ const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 			location: rawData.location,
 		})
 
-		fetch("https://webapp-git-staging-meeshkanml.vercel.app/api/lead", {
+		fetch("https://app.meeshkan.com/api/lead", {
 			method: "POST",
 			body: formData,
 			headers: {
