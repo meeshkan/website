@@ -88,7 +88,9 @@ const PricingPage = () => {
 					Meeshkan Pricing
 				</Heading>
 				<Text fontSize="2xl" textAlign="center" mb={12} lineHeight="tall">
-					Quality assurance isn't all-or-nothing. Our plans scale with your team's needs: for all budgets, any volume of tests, and in as much detail as you need. Everyone deserves more confidence in each release.
+					Quality assurance isn't all-or-nothing. Our plans scale with your
+					team's needs: for all budgets, any volume of tests, and in as much
+					detail as you need. Everyone deserves more confidence in each release.
 				</Text>
 
 				<>
@@ -252,7 +254,7 @@ const PricingPage = () => {
 						</Flex>
 
 						<LeadForm
-							formName="Pricing"
+							formName="pricing"
 							subtle={true}
 							CTA="Subscribe to updates"
 						/>
