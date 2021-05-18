@@ -7,6 +7,8 @@ import {
 	LightMode,
 	useColorModeValue,
 } from "@chakra-ui/react"
+import { useForm } from "react-hook-form"
+import SuccessAnimation from "../atoms/success-animation"
 
 type LeadFormProps = {
 	formName: string
@@ -14,15 +16,36 @@ type LeadFormProps = {
 	CTA?: string
 }
 
+type IntercomLead = {
+	email: string
+	location: string
+}
+
 const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
+	const { handleSubmit, register, formState } = useForm<IntercomLead>()
+
+	const onSubmit = (rawData: IntercomLead) => {
+		let formData = JSON.stringify({
+			email: rawData.email,
+			location: rawData.location,
+		})
+
+		fetch("https://app.meeshkan.com/api/lead", {
+			method: "POST",
+			body: formData,
+			headers: {
+				"Content-type": "text/plain",
+			},
+		})
+	}
+
 	return (
 		<Flex
 			as="form"
+			onSubmit={handleSubmit(onSubmit)}
 			name={formName}
-			data-netlify="true"
-			method="post"
-			action="/success/"
-			data-netlify-honeypot="bot-field"
+			action="https://webapp-q8jw8hz7o-meeshkanml.vercel.app/api/lead"
+			method="POST"
 			maxW="600px"
 			w="full"
 			mx={["none", "none", "auto"]}
@@ -37,13 +60,23 @@ const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 			}}
 			direction={["column", "column", "row"]}
 		>
-			<input type="hidden" name="bot-field" />
-			<input type="hidden" name="form-name" value={formName} />
+			<input
+				type="hidden"
+				name="location"
+				id="location"
+				ref={register}
+				value={formName}
+			/>
+
 			<FormControl isRequired>
 				<Input
+					isDisabled={formState.isSubmitted}
 					type="email"
 					name="email"
 					id="email"
+					ref={register({
+						required: true,
+					})}
 					placeholder="shipit@meeshkan.com"
 					_placeholder={{
 						color: useColorModeValue("gray.500", "gray.400"),
@@ -55,13 +88,30 @@ const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 				/>
 			</FormControl>
 			{subtle ? (
-				<Button minW="fit-content" type="submit" variant="subtle">
-					{CTA || "Get early access"}
+				<Button
+					minW="fit-content"
+					type="submit"
+					variant="subtle"
+					isDisabled={formState.isSubmitted}
+					isLoading={formState.isSubmitting}
+					loadingText="Submitting"
+				>
+					{!formState.isSubmitted ? CTA || "Sign up now" : <SuccessAnimation />}
 				</Button>
 			) : (
 				<LightMode>
-					<Button minW="fit-content" type="submit">
-						{CTA || "Get early access"}
+					<Button
+						minW="fit-content"
+						type="submit"
+						isDisabled={formState.isSubmitted}
+						isLoading={formState.isSubmitting}
+						loadingText="Submitting"
+					>
+						{!formState.isSubmitted ? (
+							CTA || "Sign up now"
+						) : (
+							<SuccessAnimation />
+						)}
 					</Button>
 				</LightMode>
 			)}

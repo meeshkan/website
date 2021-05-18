@@ -23,7 +23,10 @@ exports.createPages = ({ actions, graphql }) => {
 				}
 			}
 			blog: allMdx(
-				filter: { frontmatter: { published: { eq: true } } }
+				filter: {
+					frontmatter: { published: { eq: true } }
+					fileAbsolutePath: { regex: "/blog/" }
+				}
 				sort: { fields: [frontmatter___date], order: DESC }
 			) {
 				totalCount

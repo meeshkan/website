@@ -23,6 +23,7 @@ import Layout from "../components/templates/layout"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
 import { ChevronDownIcon } from "@chakra-ui/icons"
+import LeadForm from "../components/molecules/leadForm"
 
 type LinkProps = {
 	url: string
@@ -194,8 +195,8 @@ const Roadmap = () => {
 						letterSpacing="widest"
 						fontSize="14px"
 						fontWeight={600}
-						rounded="sm"
-						padding="0px 4px"
+						rounded="md"
+						padding={2}
 						minH="auto"
 					>
 						MEESHKAN - ROADMAP
@@ -219,41 +220,7 @@ const Roadmap = () => {
 					Our roadmap is serious, not just for show!
 				</Text>
 
-				<Flex
-					as="form"
-					action="/success/"
-					name="roadmap-updates"
-					data-netlify="true"
-					method="post"
-					data-netlify-honeypot="bot-field"
-					direction={["column", "column", "row"]}
-					justify="center"
-					alignItems="flex-end"
-				>
-					<input type="hidden" name="bot-field" />
-					<input type="hidden" name="form-name" value="roadmap-updates" />
-					<FormControl
-						isRequired
-						mr={[0, 0, 4]}
-						mb={[4, 4, 0]}
-						w="100%"
-						maxW={["full", "full", "400px"]}
-					>
-						<FormLabel htmlFor="email" fontWeight={700}>
-							Email
-						</FormLabel>
-						<Input
-							type="email"
-							name="email"
-							aria-label="Enter your business email"
-							placeholder="Your email"
-							fontWeight={500}
-						/>
-					</FormControl>
-					<Button type="submit" w={["100%", "100%", "auto"]}>
-						Receive updates
-					</Button>
-				</Flex>
+				<LeadForm formName="roadmap" CTA="Receive updates" />
 
 				<Text textAlign="center" mt={8}>
 					Looking for what's completed?{" "}
