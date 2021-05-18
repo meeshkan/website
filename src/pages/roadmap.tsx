@@ -23,6 +23,7 @@ import Layout from "../components/templates/layout"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import SEO from "../components/molecules/seo"
 import { ChevronDownIcon } from "@chakra-ui/icons"
+import LeadForm from "../components/molecules/leadForm"
 
 type LinkProps = {
 	url: string
@@ -149,11 +150,6 @@ const Roadmap = () => {
 	// (Q3) is from July 7 to September 9
 	// (Q4) is from October 10 to December 12
 
-	const Q1_2021 = linear.team.projects.nodes.filter((project) =>
-		project.milestone !== null
-			? project.milestone.name.startsWith("Q1 2021")
-			: null
-	)
 	const Q2_2021 = linear.team.projects.nodes.filter((project) =>
 		project.milestone !== null
 			? project.milestone.name.startsWith("Q2 2021")
@@ -177,7 +173,10 @@ const Roadmap = () => {
 	)
 
 	const pastCompletion = linear.team.projects.nodes.filter(
-		(project) => project.milestone === null && project.state === "completed"
+		(project) =>
+			(project.milestone === null && project.state === "completed") ||
+			(project.milestone !== null &&
+				project.milestone.name.startsWith("Q1 2021"))
 	)
 
 	const { isOpen, onToggle } = useDisclosure()
@@ -196,8 +195,8 @@ const Roadmap = () => {
 						letterSpacing="widest"
 						fontSize="14px"
 						fontWeight={600}
-						rounded="sm"
-						padding="0px 4px"
+						rounded="md"
+						padding={2}
 						minH="auto"
 					>
 						MEESHKAN - ROADMAP
@@ -221,41 +220,7 @@ const Roadmap = () => {
 					Our roadmap is serious, not just for show!
 				</Text>
 
-				<Flex
-					as="form"
-					action="/success/"
-					name="roadmap-updates"
-					data-netlify="true"
-					method="post"
-					data-netlify-honeypot="bot-field"
-					direction={["column", "column", "row"]}
-					justify="center"
-					alignItems="flex-end"
-				>
-					<input type="hidden" name="bot-field" />
-					<input type="hidden" name="form-name" value="roadmap-updates" />
-					<FormControl
-						isRequired
-						mr={[0, 0, 4]}
-						mb={[4, 4, 0]}
-						w="100%"
-						maxW={["full", "full", "400px"]}
-					>
-						<FormLabel htmlFor="email" fontWeight={700}>
-							Email
-						</FormLabel>
-						<Input
-							type="email"
-							name="email"
-							aria-label="Enter your business email"
-							placeholder="Your email"
-							fontWeight={500}
-						/>
-					</FormControl>
-					<Button type="submit" w={["100%", "100%", "auto"]}>
-						Receive updates
-					</Button>
-				</Flex>
+				<LeadForm formName="roadmap" CTA="Receive updates" />
 
 				<Text textAlign="center" mt={8}>
 					Looking for what's completed?{" "}
@@ -270,31 +235,6 @@ const Roadmap = () => {
 			</SingleSection>
 
 			<SingleSection>
-				{Q1_2021.length >= 1 ? (
-					<Box
-						padding={8}
-						backgroundColor={useColorModeValue("gray.50", "gray.800")}
-						borderRadius="md"
-						mb={8}
-					>
-						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-							Q1 2021
-						</Heading>
-						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-							{Q1_2021.map((project, index) => (
-								<Milestone
-									key={index}
-									title={project.name}
-									description={project.description}
-									state={project.state}
-									scope={project.scopeHistory.slice(-1)[0]}
-									completedScope={project.completedScopeHistory.slice(-1)[0]}
-								/>
-							))}
-						</SimpleGrid>
-					</Box>
-				) : null}
-
 				{Q2_2021.length >= 1 ? (
 					<Box
 						padding={8}

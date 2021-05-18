@@ -1,5 +1,5 @@
 import React from "react"
-import { Divider } from "@chakra-ui/react"
+import { Divider, Spacer } from "@chakra-ui/react"
 import Layout from "../components/templates/layout"
 import SEO from "../components/molecules/seo"
 import { SingleSection } from "../components/organisms/singleSection"
@@ -7,6 +7,7 @@ import ChangelogItem from "../components/molecules/changelog-item"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import mdxComponents from "../components/molecules/mdxComponents"
+import LeadForm from "../components/molecules/leadForm"
 
 const ChangelogPage = ({ data }) => {
 	return (
@@ -21,6 +22,8 @@ const ChangelogPage = ({ data }) => {
 					heading="Changelog"
 					text="Updates from the developement of the Meeshkan product."
 				>
+					<LeadForm formName="changelog" CTA="Receive updates" />
+					<Spacer h={8} />
 					<Divider />
 
 					{data.allMdx.nodes.map((changelogItem) => {

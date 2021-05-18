@@ -23,6 +23,7 @@ import { Link } from "gatsby"
 import SEO from "../molecules/seo"
 import Layout from "./layout"
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+import LeadForm from "../molecules/leadForm"
 
 type BlogPostProps = {
 	data: any // type of object errors 🤔
@@ -180,46 +181,7 @@ const BlogPost = ({ data, pageContext }: BlogPostProps) => {
 						>
 							Don’t miss the next post!
 						</Heading>
-						<Flex
-							as="form"
-							// @ts-ignore
-							action="/success/"
-							direction={["column", "column", "row"]}
-							justify="center"
-							alignItems="flex-end"
-							name="newsletter"
-							data-netlify="true"
-							method="post"
-							data-netlify-honeypot="bot-field"
-							mb={4}
-						>
-							<input type="hidden" name="bot-field" />
-							<input type="hidden" name="form-name" value="newsletter" />
-							<DarkMode>
-								<FormControl
-									isRequired
-									mr={[0, 0, 4]}
-									mb={[4, 4, 0]}
-									w="100%"
-									maxW={["full", "full", "400px"]}
-								>
-									<FormLabel htmlFor="email" fontWeight={700} color="gray.50">
-										Email
-									</FormLabel>
-									<Input
-										type="email"
-										name="email"
-										aria-label="Enter your business email"
-										placeholder="Your email"
-										color="white"
-										borderColor="gray.500"
-									/>
-								</FormControl>
-							</DarkMode>
-							<Button type="submit" w={["100%", "100%", "auto"]}>
-								Join our mailing list
-							</Button>
-						</Flex>
+						<LeadForm formName="blog" CTA="Join our mailing list" />
 						<Text textAlign="center" color="gray.200">
 							Absolutely no spam. Unsubscribe anytime.
 						</Text>

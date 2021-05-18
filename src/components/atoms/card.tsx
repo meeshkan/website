@@ -43,7 +43,13 @@ export const Card = ({
 					}
 				>
 					{heading ? (
-						<Heading as="h3" textStyle="h4" mb={4}>
+						<Heading
+							as="h3"
+							fontSize="2xl"
+							fontWeight="800"
+							lineHeight="1.4"
+							mb={4}
+						>
 							{heading}
 						</Heading>
 					) : null}
@@ -65,7 +71,13 @@ export const Card = ({
 					}
 				>
 					{heading ? (
-						<Heading as="h3" textStyle="h4" mb={4}>
+						<Heading
+							as="h3"
+							fontSize="2xl"
+							fontWeight="800"
+							lineHeight="1.4"
+							mb={4}
+						>
 							{heading}
 						</Heading>
 					) : null}
