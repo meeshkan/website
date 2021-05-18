@@ -252,7 +252,7 @@ const IndexPage = () => {
 							</ListItem>
 						</List>
 						<LightMode>
-							<Button as={GatsbyLink} to="/#callout">
+							<Button as={UniversalLink} to="https://app.meeshkan.com">
 								Start gathering insights
 							</Button>
 						</LightMode>
@@ -280,7 +280,13 @@ const IndexPage = () => {
 						>
 							Step 1
 						</Code>
-						<Heading as="h4" textStyle="h4" mb={4}>
+						<Heading
+							as="h4"
+							fontSize={["lg", "xl", "2xl"]}
+							fontWeight="700"
+							lineHeight="1.4"
+							mb={4}
+						>
 							Record user behavior in production
 						</Heading>
 						<Text>
@@ -301,7 +307,13 @@ const IndexPage = () => {
 						>
 							Step 2
 						</Code>
-						<Heading as="h4" textStyle="h4" mb={4}>
+						<Heading
+							as="h4"
+							fontSize={["lg", "xl", "2xl"]}
+							fontWeight="700"
+							lineHeight="1.4"
+							mb={4}
+						>
 							Validate grouped user flows
 						</Heading>
 						<Text>
@@ -323,7 +335,13 @@ const IndexPage = () => {
 						>
 							Step 3
 						</Code>
-						<Heading as="h4" textStyle="h4" mb={4}>
+						<Heading
+							as="h4"
+							fontSize={["lg", "xl", "2xl"]}
+							fontWeight="700"
+							lineHeight="1.4"
+							mb={4}
+						>
 							Meeshkan creates fake users
 						</Heading>
 						<Text>
@@ -346,7 +364,13 @@ const IndexPage = () => {
 							Step 4
 						</Code>
 
-						<Heading as="h4" textStyle="h4" mb={4}>
+						<Heading
+							as="h4"
+							fontSize={["lg", "xl", "2xl"]}
+							fontWeight="700"
+							lineHeight="1.4"
+							mb={4}
+						>
 							Merge confidently with the Dashboard
 						</Heading>
 						<Text>

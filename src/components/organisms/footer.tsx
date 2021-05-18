@@ -53,13 +53,6 @@ export function Footer() {
 						>
 							Contact
 						</Link>
-						<Link
-							as={GatsbyLink}
-							to="/changelog/"
-							aria-label="Updates on the development of Meeshkan"
-						>
-							Changelog
-						</Link>
 					</Stack>
 					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
@@ -78,6 +71,13 @@ export function Footer() {
 						</Link>
 						<Link
 							as={GatsbyLink}
+							to="/pricing/"
+							aria-label="How much does Meeshkan cost?"
+						>
+							Pricing
+						</Link>
+						<Link
+							as={GatsbyLink}
 							to="/FAQ/"
 							aria-label="Frequently asked questions"
 						>
@@ -86,21 +86,24 @@ export function Footer() {
 					</Stack>
 					<Stack my={4} w={["100%", "33%"]}>
 						<Heading as="h4" size="md">
-							Use cases
+							Product
 						</Heading>
-						<Link
-							as={GatsbyLink}
-							to="/use-cases/staging-environments/"
-							aria-label="Staging environments"
-						>
-							Staging environments
+						<Link as={GatsbyLink} to="/product/" aria-label="Product features">
+							Features
 						</Link>
 						<Link
 							as={GatsbyLink}
-							to="/test-graphql/"
-							aria-label="A landing page all about testing graphql"
+							to="/changelog/"
+							aria-label="Updates on the development of Meeshkan"
 						>
-							Testing GraphQL
+							Changelog
+						</Link>
+						<Link
+							as={GatsbyLink}
+							to="/roadmap/"
+							aria-label="Where Meeshkan as a product is developing"
+						>
+							Roadmap
 						</Link>
 					</Stack>
 				</Flex>
