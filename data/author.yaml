@@ -43,3 +43,13 @@
   avatar: avatars/ben.png
   authorLink: https://www.linkedin.com/in/bsnydr/
   bio: Growth Marketer
+- id: vince
+  name: Vincent Orr
+  avatar: avatars/vincent.png
+  authorLink: https://twitter.com/_cmdv_
+  bio: Purescript Engineer
+- id: muse
+  name: Musé Mekuria
+  avatar: avatars/muse.png
+  authorLink: https://www.linkedin.com/in/muse-mekuria-7467733/
+  bio: Purescript Engineer
