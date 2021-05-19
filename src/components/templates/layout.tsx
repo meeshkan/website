@@ -55,12 +55,12 @@ const Layout = ({ children }: LayoutProps) => {
 						We're on Product Hunt! 🎉
 					</Text>
 					<a
-						// href="https://www.producthunt.com/posts/pegboard-synth?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-pegboard-synth"
+						href="https://www.producthunt.com/posts/write-a-ui-test-by-recording-your-screen?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-write-a-ui-test-by-recording-your-screen"
 						target="_blank"
 					>
 						<img
-							src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=296386&amp;theme=light"
-							alt="Write UI tests by recording your screen | Product Hunt"
+							src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=296495&amp;theme=light"
+							alt="Write a UI test by recording your screen - The fastest way to test your user's experience | Product Hunt"
 							style={{
 								width: "auto",
 								height: "32px",
