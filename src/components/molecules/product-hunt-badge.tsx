@@ -1,11 +1,12 @@
+import React from 'react'
 import {
 	Link,
 	Image,
 	useColorMode,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
 const ProductHuntBadge = () => {
-	const { colorMode } = useColorMode();
+	const { colorMode } = useColorMode()
 	return (
 		<Link
 			href="https://www.producthunt.com/posts/meeshkan-ui-test-recorder?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-meeshkan-ui-test-recorder"
@@ -20,7 +21,7 @@ const ProductHuntBadge = () => {
 				height="54px"
 			/>
 		</Link>
-	);
-};
+	)
+}
 
-export default ProductHuntBadge;
+export default ProductHuntBadge
