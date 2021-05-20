@@ -10,7 +10,7 @@ const ProductHuntBadge = () => {
 	const badgeProps = { w: "250px", h: "54px" }
 	return (
 		<Link
-			href="https://www.producthunt.com/posts/meeshkan-ui-test-recorder?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-meeshkan-ui-test-recorder"
+			href="https://www.producthunt.com/posts/meeshkan-ui-test-recorder?utm_source=badge-featured&amp;utm_medium=badge&amp;utm_souce=badge-meeshkan-ui-test-recorder"
 			isExternal
 			textDecoration="none"
 			_hover={{ textDecoration: "none" }}
