@@ -13,6 +13,7 @@ const ProductHuntBadge = () => {
 			isExternal
 			textDecoration="none"
 			_hover={{ textDecoration: 'none' }}
+			textAlign="center"
 		>
 			<Image
 				src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=296495&theme=${colorMode}`}
