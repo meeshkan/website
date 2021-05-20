@@ -56,12 +56,13 @@ const IndexPage = () => {
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
-				<Flex justify="center" align="center" mt={8} mb={4}>
+				<Flex justify="center" align="center" mt={3}>
 					<ProductHuntBadge />
 				</Flex>
 				<Heading
 					as="h1"
 					textStyle="h1"
+					mt={8}
 					mb={6}
 					textAlign={["left", "left", "center"]}
 				>
