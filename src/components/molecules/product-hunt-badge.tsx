@@ -18,6 +18,7 @@ const ProductHuntBadge = () => {
 			isExternal
 			textDecoration="none"
 			_hover={{ textDecoration: 'none' }}
+			aria-label="Meeshkan UI Test Recorder - No-code test writing that speeds up your release cycle | Product Hunt"
 			textAlign="center"
 		>
 			<Image
