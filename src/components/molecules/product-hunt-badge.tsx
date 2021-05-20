@@ -18,6 +18,7 @@ const ProductHuntBadge = () => {
 			<Image
 				src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=296495&theme=${colorMode}`}
 				alt="Meeshkan UI Test Recorder - No-code test writing that speeds up your release cycle | Product Hunt"
+                loading="lazy"
 				width="250px"
 				height="54px"
 			/>
