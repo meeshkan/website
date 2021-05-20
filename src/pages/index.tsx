@@ -1,6 +1,5 @@
 import React from "react"
 import SEO from "../components/molecules/seo"
-import { Link as GatsbyLink } from "gatsby"
 import {
 	Heading,
 	Button,
