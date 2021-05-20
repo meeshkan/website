@@ -19,23 +19,17 @@ const ProductHuntBadge = () => {
 			textDecoration="none"
 			_hover={{ textDecoration: 'none' }}
 			textAlign="center"
-			position="relative"
 		>
-			{!isLoaded && (
-				colorMode === 'light' ? (
-					<ProductHuntLightBadge {...badgeProps} />
-				) : (
-					<ProductHuntDarkBadge {...badgeProps} />
-				)
-			)}
 			<Image
 				src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=296495&theme=${colorMode}`}
 				alt="Meeshkan UI Test Recorder - No-code test writing that speeds up your release cycle | Product Hunt"
-				display={isLoaded ? 'block' : 'none'}
-				onLoad={() => setLoaded(true)}
-				position="absolute"
-				bottom="0"
-				left="0"
+				fallback={
+					colorMode === 'light' ? (
+						<ProductHuntLightBadge {...badgeProps} />
+					) : (
+						<ProductHuntDarkBadge {...badgeProps} />
+					)
+				}
 				width="250px"
 				height="54px"
 			/>
