@@ -43,6 +43,7 @@ import { MockDashboard } from "../components/organisms/home/mockDashboard"
 import { VimodjiLogo } from "../components/atoms/vimodjiLogo"
 import { UniversalLink } from "../components/atoms/UniversalLink"
 import ScheduleDemo from "../components/molecules/schedule-modal"
+import ProductHuntBadge from "../components/molecules/product-hunt-badge"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -55,6 +56,9 @@ const IndexPage = () => {
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
+				<Flex justify="center" align="center" mt={3}>
+					<ProductHuntBadge />
+				</Flex>
 				<Heading
 					as="h1"
 					textStyle="h1"
