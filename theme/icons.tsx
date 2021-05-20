@@ -814,7 +814,7 @@ export const ProductHuntDarkBadge = createIcon({
 								// lineSpacing="20"
 							>
 								<tspan x="12.4" y="27">
-									-
+									—
 								</tspan>
 							</text>
 						</g>
@@ -881,7 +881,7 @@ export const ProductHuntLightBadge = createIcon({
 								lineSpacing="20"
 							>
 								<tspan x="12.4" y="27">
-									-
+									—
 								</tspan>
 							</text>
 						</g>
