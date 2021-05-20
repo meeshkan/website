@@ -56,9 +56,9 @@ const IndexPage = () => {
 				pageUrl="https://meeshkan.com/"
 			/>
 			<SingleSection>
-				<Box mt={8} mb={2}>
+				<Flex justify="center" align="center" mt={8} mb={4}>
 					<ProductHuntBadge />
-				</Box>
+				</Flex>
 				<Heading
 					as="h1"
 					textStyle="h1"
