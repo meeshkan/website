@@ -11,6 +11,7 @@ import {
 
 const ProductHuntBadge = () => {
 	const { colorMode } = useColorMode()
+	const badgeProps = { w: '250px', h: '54px' }
 	return (
 		<Link
 			href="https://www.producthunt.com/posts/meeshkan-ui-test-recorder?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-meeshkan-ui-test-recorder"
@@ -21,9 +22,9 @@ const ProductHuntBadge = () => {
 			textAlign="center"
 		>
 			{colorMode === 'light' ? (
-				<ProductHuntLightBadge />
+				<ProductHuntLightBadge {...badgeProps} />
 			) : (
-				<ProductHuntDarkBadge />
+				<ProductHuntDarkBadge {...badgeProps} />
 			)}
 		</Link>
 	)
