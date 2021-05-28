@@ -76,15 +76,6 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-algolia-docsearch`,
-			options: {
-				apiKey: process.env.ALGOLIA_SEARCH_API_KEY, // required
-				indexName: "meeshkan", // required
-				inputSelector: ".algolia-search-bar", // required
-				debug: false, // (bool) Optional. Default `false`
-			},
-		},
-		{
 			resolve: `gatsby-plugin-gtag`,
 			options: {
 				trackingId: `${process.env.GOOGLE_ANALYTICS_TOKEN}`,

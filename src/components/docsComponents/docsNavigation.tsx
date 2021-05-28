@@ -50,19 +50,6 @@ const DocsNavigation = () => {
 					</Code>
 				</Link>
 			</Link>
-			{/* Search bar - temporarily removed until functionality is fixed */}
-			{/* <Stack isInline display={["none", "none", "block"]}>
-        <InputGroup size="sm" minW={200}>
-          <InputLeftElement
-            children={<Icon name="search" color="gray.300" />}
-          />
-          <Input
-            type="search"
-            placeholder="Search"
-            className="algolia-search-bar"
-          />
-        </InputGroup>
-      </Stack> */}
 
 			{/* Mobile Nav | Button & Menu Drawer */}
 			<Box>
