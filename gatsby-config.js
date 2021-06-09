@@ -76,18 +76,26 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-gtag`,
+			resolve: `gatsby-plugin-google-gtag`,
 			options: {
-				trackingId: `${process.env.GOOGLE_ANALYTICS_TOKEN}`,
-				head: true,
-				anonymize: true,
+				// You can add multiple tracking ids and a pageview event will be fired for all of them.
+				trackingIds: [
+					`${process.env.GOOGLE_ANALYTICS_TOKEN}`, // Google Analytics / GA
+					`${process.env.GOOGLE_ADWORDS_TOKEN}`, // Google Ads / Adwords / AW
+				],
+				pluginConfig: {
+					// Puts tracking script in the head instead of the body
+					head: true,
+					// Setting this parameter is also optional
+					respectDNT: true,
+				},
 			},
 		},
 		{
 			resolve: `gatsby-plugin-google-fonts`,
 			options: {
 				fonts: [
-					`Fira Code\:400,700`,
+					`JetBrains mono\:400,700`,
 					`Inter\:100,200,300,400,500,600,700,800,900`,
 				],
 				display: "swap",

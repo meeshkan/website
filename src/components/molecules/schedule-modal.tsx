@@ -33,7 +33,12 @@ const ScheduleDemo = () => {
 					backgroundColor: hoverBackground,
 					color: textColor,
 				}}
-				onClick={onOpen}
+				onClick={() => {
+					onOpen()
+					window.gtag("event", "conversion", {
+						send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+					})
+				}}
 			>
 				Schedule demo
 			</Button>

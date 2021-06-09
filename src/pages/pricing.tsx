@@ -175,6 +175,11 @@ const PricingPage = () => {
 											// @ts-ignore
 											href="https://app.meeshkan.com"
 											aria-label="Go to the Meeshkan webapp to sign up"
+											onClick={() =>
+												window.gtag("event", "conversion", {
+													send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+												})
+											}
 										>
 											Choose the Feedback plan
 										</Button>
@@ -226,6 +231,11 @@ const PricingPage = () => {
 								as={UniversalLink}
 								// @ts-ignore
 								href="https://app.meeshkan.com"
+								onClick={() =>
+									window.gtag("event", "conversion", {
+										send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+									})
+								}
 								aria-label="Go to the Meeshkan webapp to sign up"
 								variant="subtle"
 								mt={8}

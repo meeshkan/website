@@ -93,7 +93,15 @@ const IndexPage = () => {
 				<Center>
 					<ScheduleDemo />
 					<LightMode>
-						<Button as={UniversalLink} to="https://app.meeshkan.com">
+						<Button
+							as={UniversalLink}
+							to="https://app.meeshkan.com"
+							onClick={() =>
+								window.gtag("event", "conversion", {
+									send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+								})
+							}
+						>
 							Sign up now
 						</Button>
 					</LightMode>
@@ -251,7 +259,15 @@ const IndexPage = () => {
 							</ListItem>
 						</List>
 						<LightMode>
-							<Button as={UniversalLink} to="https://app.meeshkan.com">
+							<Button
+								as={UniversalLink}
+								to="https://app.meeshkan.com"
+								onClick={() =>
+									window.gtag("event", "conversion", {
+										send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+									})
+								}
+							>
 								Start gathering insights
 							</Button>
 						</LightMode>
