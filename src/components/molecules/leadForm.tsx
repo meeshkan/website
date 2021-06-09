@@ -30,6 +30,10 @@ const LeadForm = ({ formName, subtle, CTA }: LeadFormProps) => {
 			location: rawData.location,
 		})
 
+		window.gtag("event", "conversion", {
+			send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+		})
+
 		fetch("https://app.meeshkan.com/api/lead", {
 			method: "POST",
 			body: formData,
