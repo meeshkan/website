@@ -30,8 +30,6 @@ import Nick from "../../../data/avatars/nikolaos.png"
 // @ts-ignore
 import Ben from "../../../data/avatars/ben.png"
 // @ts-ignore
-import Vincent from "../../../data/avatars/vincent.png"
-// @ts-ignore
 import Muse from "../../../data/avatars/muse.png"
 // @ts-ignore
 import systemOne from "../../static/System.One_Moderat_Wordmark.svg"
@@ -245,29 +243,6 @@ const AboutUsPage = () => {
 						</Text>
 						<Text fontWeight={500} textAlign="center">
 							Growth Marketer
-						</Text>
-					</Card>
-					<Card>
-						<Image
-							src={Vincent}
-							maxW="80px"
-							maxH="80px"
-							alt="Vincent's headshot"
-							rounded="md"
-							mx="auto"
-							mb={4}
-						/>
-						<Text
-							fontSize="xl"
-							fontWeight={900}
-							letterSpacing="wide"
-							textAlign="center"
-							mb={2}
-						>
-							Vincent Orr
-						</Text>
-						<Text fontWeight={500} textAlign="center">
-							Purescript Engineer
 						</Text>
 					</Card>
 					<Card>
