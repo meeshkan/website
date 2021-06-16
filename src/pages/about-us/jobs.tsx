@@ -32,12 +32,12 @@ const JobsPage = () => {
 					borderRadius="md"
 					backgroundColor={useColorModeValue("gray.100", "gray.800")}
 				>
-					<Text fontWeight={500}>Backend engineer (Data science interest)</Text>
+					<Text fontWeight={500}>Frontend engineer (DOM API focus)</Text>
 					<LightMode>
 						<Button
 							size="sm"
 							as={UniversalLink}
-							to="https://meeshkan.join.com/jobs/1834590-backend-engineer-data-science-interest"
+							to="https://meeshkan.crew.work/jobs/60b9e5336860fca958331fce"
 							// @ts-ignore
 							target="_blank"
 							rel="nofollow noopener"
