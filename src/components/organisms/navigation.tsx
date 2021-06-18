@@ -40,6 +40,7 @@ import {
 } from "../../../theme/icons"
 import { ArrowForwardIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { AnimatedLogo } from "../molecules/animatedLogo"
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 
 function SignUpLink() {
 	return (
@@ -60,8 +61,8 @@ function SignUpLink() {
 function LogInLink() {
 	return (
 		<Button
-			as={UniversalLink}
-			to="https://app.meeshkan.com"
+			as={OutboundLink}
+			href="https://app.meeshkan.com"
 			aria-label="Log in to the Meeshkan webapp"
 			variant="ghost"
 			colorScheme="gray"
