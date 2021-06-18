@@ -21,6 +21,7 @@ import { CheckSquareIcon } from "../../theme/icons"
 import SegmentedControl from "../components/molecules/segmented-control"
 import LeadForm from "../components/molecules/leadForm"
 import { UniversalLink } from "../components/atoms/UniversalLink"
+import { OutboundLink } from "gatsby-plugin-google-analytics"
 
 export const Plans = {
 	free: {
@@ -171,15 +172,14 @@ const PricingPage = () => {
 									<LightMode>
 										<Button
 											w="full"
-											as={UniversalLink}
-											// @ts-ignore
+											as={OutboundLink}
 											href="https://app.meeshkan.com"
 											aria-label="Go to the Meeshkan webapp to sign up"
-											onClick={() =>
-												window.gtag("event", "conversion", {
-													send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
-												})
-											}
+											// onClick={() =>
+											// 	window.gtag("event", "conversion", {
+											// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
+											// 	})
+											// }
 										>
 											Choose the Feedback plan
 										</Button>
@@ -228,14 +228,13 @@ const PricingPage = () => {
 								</List>
 							</Box>
 							<Button
-								as={UniversalLink}
-								// @ts-ignore
+								as={OutboundLink}
 								href="https://app.meeshkan.com"
-								onClick={() =>
-									window.gtag("event", "conversion", {
-										send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
-									})
-								}
+								// onClick={() =>
+								// 	window.gtag("event", "conversion", {
+								// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
+								// 	})
+								// }
 								aria-label="Go to the Meeshkan webapp to sign up"
 								variant="subtle"
 								mt={8}

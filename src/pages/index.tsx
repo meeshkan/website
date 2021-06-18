@@ -42,6 +42,7 @@ import { MockDashboard } from "../components/organisms/home/mockDashboard"
 import { VimodjiLogo } from "../components/atoms/vimodjiLogo"
 import { UniversalLink } from "../components/atoms/UniversalLink"
 import ScheduleDemo from "../components/molecules/schedule-modal"
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 
 const IndexPage = () => {
 	// const mixpanel = useMixpanel()
@@ -94,13 +95,13 @@ const IndexPage = () => {
 					<ScheduleDemo />
 					<LightMode>
 						<Button
-							as={UniversalLink}
-							to="https://app.meeshkan.com"
-							onClick={() =>
-								window.gtag("event", "conversion", {
-									send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
-								})
-							}
+							as={OutboundLink}
+							href="https://app.meeshkan.com"
+							// onClick={() =>
+							// 	window.gtag("event", "conversion", {
+							// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
+							// 	})
+							// }
 						>
 							Sign up now
 						</Button>
@@ -260,13 +261,13 @@ const IndexPage = () => {
 						</List>
 						<LightMode>
 							<Button
-								as={UniversalLink}
-								to="https://app.meeshkan.com"
-								onClick={() =>
-									window.gtag("event", "conversion", {
-										send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
-									})
-								}
+								as={OutboundLink}
+								href="https://app.meeshkan.com"
+								// onClick={() =>
+								// 	window.gtag("event", "conversion", {
+								// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
+								// 	})
+								// }
 							>
 								Start gathering insights
 							</Button>
