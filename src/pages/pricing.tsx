@@ -20,8 +20,7 @@ import SEO from "../components/molecules/seo"
 import { CheckSquareIcon } from "../../theme/icons"
 import SegmentedControl from "../components/molecules/segmented-control"
 import LeadForm from "../components/molecules/leadForm"
-import { UniversalLink } from "../components/atoms/UniversalLink"
-import { OutboundLink } from "gatsby-plugin-google-analytics"
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 
 export const Plans = {
 	free: {

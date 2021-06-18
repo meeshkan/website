@@ -40,7 +40,6 @@ import Callout from "../components/organisms/callout"
 import { StoryStep } from "../components/molecules/sideStep"
 import { MockDashboard } from "../components/organisms/home/mockDashboard"
 import { VimodjiLogo } from "../components/atoms/vimodjiLogo"
-import { UniversalLink } from "../components/atoms/UniversalLink"
 import ScheduleDemo from "../components/molecules/schedule-modal"
 import { OutboundLink } from "gatsby-plugin-google-gtag"
 
