@@ -98,7 +98,7 @@ const IndexPage = () => {
 							to="https://app.meeshkan.com"
 							onClick={() =>
 								window.gtag("event", "conversion", {
-									send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+									send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
 								})
 							}
 						>
@@ -264,7 +264,7 @@ const IndexPage = () => {
 								to="https://app.meeshkan.com"
 								onClick={() =>
 									window.gtag("event", "conversion", {
-										send_to: process.env.GOOGLE_ADWORDS_TOKEN,
+										send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
 									})
 								}
 							>
