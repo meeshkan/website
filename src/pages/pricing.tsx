@@ -49,18 +49,20 @@ export const Plans = {
 	},
 
 	business: {
-		monthlyPrice: "75€",
-		yearlyPrice: "720€",
+		monthlyPrice: "99€",
+		yearlyPrice: "950€",
 		description:
 			"This is the perfect plan if you’re a team looking to get some serious UI-testing done.",
 		features: [
+			"Dedicated support channel",
 			"User generated tests",
-			"100+ test runs per month",
 			"No-code test creation",
-			"Unlimited team members",
-			"30+ Concurrent Tests",
-			"9 month data retention",
+			"200 test runs per month",
+			"15 Concurrent Tests",
 			"Video of test cases and outcomes",
+			"Unlimited test cases",
+			"Unlimited team members",
+			"Unlimited history",
 		],
 	},
 }
@@ -174,11 +176,11 @@ const PricingPage = () => {
 											as={OutboundLink}
 											href="https://app.meeshkan.com"
 											aria-label="Go to the Meeshkan webapp to sign up"
-											// onClick={() =>
-											// 	window.gtag("event", "conversion", {
-											// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
-											// 	})
-											// }
+										// onClick={() =>
+										// 	window.gtag("event", "conversion", {
+										// 		send_to: "AW-439714858/Y1dVCI_fgrkCEKqI1tEB",
+										// 	})
+										// }
 										>
 											Choose the Feedback plan
 										</Button>
