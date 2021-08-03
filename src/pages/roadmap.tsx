@@ -68,7 +68,13 @@ const Milestone = ({
 					: "gray.500"
 			}
 		>
-			<Heading as="h3" textStyle="h3" mb={2}>
+			<Heading
+				as="h3"
+				fontSize={["xl", "2xl", "3xl"]}
+				fontWeight="800"
+				lineHeight="1.4"
+				mb={2}
+			>
 				{title}
 			</Heading>
 			<Stack isInline mb={4} spacing={4} alignItems="center">
@@ -150,11 +156,6 @@ const Roadmap = () => {
 	// (Q3) is from July 7 to September 9
 	// (Q4) is from October 10 to December 12
 
-	const Q2_2021 = linear.team.projects.nodes.filter((project) =>
-		project.milestone !== null
-			? project.milestone.name.startsWith("Q2 2021")
-			: null
-	)
 	const Q3_2021 = linear.team.projects.nodes.filter((project) =>
 		project.milestone !== null
 			? project.milestone.name.startsWith("Q3 2021")
@@ -176,7 +177,9 @@ const Roadmap = () => {
 		(project) =>
 			(project.milestone === null && project.state === "completed") ||
 			(project.milestone !== null &&
-				project.milestone.name.startsWith("Q1 2021"))
+				project.milestone.name.startsWith("Q1 2021")) ||
+			(project.milestone !== null &&
+				project.milestone.name.startsWith("Q2 2021"))
 	)
 
 	const { isOpen, onToggle } = useDisclosure()
@@ -235,31 +238,6 @@ const Roadmap = () => {
 			</SingleSection>
 
 			<SingleSection>
-				{Q2_2021.length >= 1 ? (
-					<Box
-						padding={8}
-						backgroundColor={useColorModeValue("gray.50", "gray.800")}
-						borderRadius="md"
-						mb={8}
-					>
-						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-							Q2 2021
-						</Heading>
-						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
-							{Q2_2021.map((project, index) => (
-								<Milestone
-									key={index}
-									title={project.name}
-									description={project.description}
-									state={project.state}
-									scope={project.scopeHistory.slice(-1)[0]}
-									completedScope={project.completedScopeHistory.slice(-1)[0]}
-								/>
-							))}
-						</SimpleGrid>
-					</Box>
-				) : null}
-
 				{Q3_2021.length >= 1 ? (
 					<Box
 						padding={8}
