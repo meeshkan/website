@@ -246,7 +246,7 @@ const Roadmap = () => {
 						mb={8}
 					>
 						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-							Q3 2020
+							Q3 2021
 						</Heading>
 						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
 							{Q3_2021.map((project, index) => (
@@ -271,7 +271,7 @@ const Roadmap = () => {
 						mb={8}
 					>
 						<Heading as="h2" fontSize="2xl" mb={4} fontFamily="mono">
-							Q3 2020
+							Q4 2021
 						</Heading>
 						<SimpleGrid columns={[1, 1, 2]} spacing={8}>
 							{Q4_2021.map((project, index) => (
